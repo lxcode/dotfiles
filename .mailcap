@@ -1,0 +1,46 @@
+text/html; w3m -T text/html %s
+text/html; w3m -T text/html -dump %s; copiousoutput
+
+text/calendar; icalview.rb; copiousoutput
+application/octet-stream; less %s
+application/excel;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/excel;  xlhtml %s |w3m -T text/html
+application/msexcel;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/msexcel;  xlhtml %s |w3m -T text/html
+application/x-msexcel;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/x-msexcel;  xlhtml %s |w3m -T text/html
+application/vnd.openxml;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/vnd.openxmlformats-officedocument.wordprocessingml.template;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/msword;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/x-msword;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/msword;   antiword %s; copiousoutput
+application/vnd.ms-excel;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/vnd.ms-excel;  xlhtml %s |w3m -T text/html
+application/vnd.ms-powerpoint;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/x-mspowerpoint;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/vnd.openxmlformats-officedocument.presentationml.presentation;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/vnd.ms-powerpoint;  ppthtml %s |w3m -T text/html
+application/vnd.openxmlformats-officedocument.wordprocessingml.document;   mutt_bgrun libreoffice %s; test=test -n "$DISPLAY"
+application/pdf;	mutt_bgrun evince %s 2>/dev/null; test=test -n "$DISPLAY"
+application/pdf; pdftotext -htmlmeta %s - |w3m -T text/html; copiousoutput
+
+audio/x-pn-mp3; 	mutt_bgrun vlc %s; test=test -n "$DISPLAY"
+
+audio/mpeg;    mutt_bgrun vlc %s; test=test -n "$DISPLAY"
+audio/mpegurl; mutt_bgrun vlc %s; test=test -n "$DISPLAY"
+audio/mpeg;    mutt_bgrun vlc -q %s
+audio/*; mutt_bgrun vlc %s;
+
+image/*; mutt_bgrun feh %s >/dev/null 2>&1 ; test=test -n "$DISPLAY"
+image/*;  (anytopnm %s | pnmscale -xysize 80 46 | ppmtopgm | pgmtopbm | pbmtoascii -1x2 ) 2>&1 ; copiousoutput
+
+video/*; mplayer -xy 2 %s >/dev/null; test=test -n "$DISPLAY"
+
+application/x-cpio; cpio -tvF --quiet %s; copiousoutput
+application/x-tar; tar tvf %s; copiousoutput
+application/x-tar-gz; tar tvfz %s; copiousoutput
+application/x-zip-compressed; unzip -v %s; copiousoutput
+application/zip; unzip -v %s; copiousoutput
+
+#text/calendar; ical2html %s

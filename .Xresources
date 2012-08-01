@@ -1,0 +1,64 @@
+XTerm*reverseVideo:   	    on
+XTerm*visualBell:   	    off
+XTerm*scrollLines:   	    10000
+XTerm*faceName: DejaVu Sans Mono
+XTerm*faceSize: 9
+XTerm*termName:         xterm-256color
+Xft*antialias: 1
+Xft*dpi: 96
+Xft*hinting: 1
+Xft*hintstyle: hintfull
+Xft*rgba: rgba
+URxvt*reverseVideo:   	    on
+URxvt*visualBell:   	    off
+URxvt*scrollLines:   	    10000
+URxvt*scrollBar:   	    0
+URxvt*urlLauncher:	/usr/local/bin/firefox
+!URxvt.perl-lib: /home/lx/.urxvt/
+!URxvt*perl-ext: selection,mark-yank-urls,matcher
+!URxvt*keysym.Mod4-y: perl:mark-yank-urls:activate_mark_mode
+URxvt*underlineURLs: true
+URxvt*transparent:	off
+URxvt*shading:	10
+URxvt*matcher.button:	3
+URxvt.font:             xft:Inconsolata-13:Medium xft:Meiryo Normal-13
+URxvt.boldfont:         xft:Inconsolata-13:Bold xft:Meiryo Bold-13
+URxvt.imLocale: ja_JP.UTF-8
+URxvt.preeditType: OnTheSpot,None
+URxvt.urgentOnBell:         true
+URxvt.cursorBlink:         true
+URxvt.scrollTtyOutput:        false
+URxvt.termName: xterm-256color
+URxvt.fading: 25
+URxvt.keysym.S-Insert: builtin:
+
+urxvt*foreground:		#000000
+!urxvt*background:		#FFFFFF
+urxvt*background:		#dbded6
+urxvt*cursorColor:		#729fcf
+urxvt*pointerColorBackground:	#2e3436
+urxvt*pointerColorForeground:	#eeeeec
+urxvt*color0:			#2e3436
+urxvt*color1:			#cc0000
+urxvt*color2:			#4e9a06
+urxvt*color3:			#c4a000
+urxvt*color4:			#3465a4
+urxvt*color5:			#75507b
+urxvt*color6:			#06989a
+urxvt*color7:			#d3d7cf
+urxvt*color8:			#555753
+urxvt*color9:			#ef2929
+urxvt*color10:			#8ae234
+urxvt*color11:			#fce94f
+urxvt*color12:			#729fcf
+urxvt*color13:			#ad7fa8
+urxvt*color14:			#34e2e2
+urxvt*color15:			#eeeeec
+
+
+xmessage*background:            black
+xmessage*foreground:            white
+xmessage*borderWidth:           0
+xmessage*Text*background:       black
+xmessage*Text*foreground:       white
+xmessage*Text.borderColor:      black

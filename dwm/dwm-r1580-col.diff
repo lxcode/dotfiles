@@ -1,0 +1,60 @@
+diff -r cfcfa05033e3 config.def.h
+--- a/config.def.h	Fri Oct 28 23:45:12 2011 +0100
++++ b/config.def.h	Fri Oct 28 18:57:59 2011 -0700
+@@ -32,6 +32,7 @@
+ 	{ "[]=",      tile },    /* first entry is default */
+ 	{ "><>",      NULL },    /* no layout function means floating behavior */
+ 	{ "[M]",      monocle },
++	{ "|||",      col },
+ };
+ 
+ /* key definitions */
+@@ -66,6 +67,7 @@
+ 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+ 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+ 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
++	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[3]} },
+ 	{ MODKEY,                       XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+ 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+diff -r cfcfa05033e3 dwm.c
+--- a/dwm.c	Fri Oct 28 23:45:12 2011 +0100
++++ b/dwm.c	Fri Oct 28 18:57:59 2011 -0700
+@@ -165,6 +165,7 @@
+ static void cleanupmon(Monitor *mon);
+ static void clearurgent(Client *c);
+ static void clientmessage(XEvent *e);
++static void col(Monitor *);
+ static void configure(Client *c);
+ static void configurenotify(XEvent *e);
+ static void configurerequest(XEvent *e);
+@@ -1658,6 +1659,29 @@
+ }
+ 
+ void
++col(Monitor *m) {
++	unsigned int i, n, h, w, x, y;
++	Client *c;
++
++	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
++	if(n == 0)
++		return;
++
++	for(i = x = y = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
++		if(i < m->nmaster) {
++			w = (m->ww - x) / (MIN(n, m->nmaster) + (n > m->nmaster) - i);
++			resize(c, x + m->wx, m->wy, w - (2*c->bw), m->wh - (2*c->bw), False);
++			x += WIDTH(c);
++		}
++		else {
++			h = (m->wh - y) / (n - i);
++			resize(c, x + m->wx, m->wy + y, m->ww - x  - (2*c->bw), h - (2*c->bw), False);
++			y += HEIGHT(c);
++		}
++	}
++}
++
++void
+ tile(Monitor *m) {
+ 	unsigned int i, n, h, mw, my, ty;
+ 	Client *c;

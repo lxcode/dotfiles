@@ -1,0 +1,4 @@
+set cedit=
+set filec=
+set searchinc
+map ** {!}par}

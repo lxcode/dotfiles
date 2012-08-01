@@ -1,0 +1,7 @@
+remove Lock = Caps_Lock
+keysym Caps_Lock = Control_L
+add Control = Control_L
+keycode 117 = Super_R
+!keycode 116 = SunPaste
+!keycode 106 = SunPaste
+!keycode 113 = Tab
