@@ -163,7 +163,7 @@ bindkey '^R' history-incremental-search-backward
 
 
 autoload -U compinit
-compinit
+compinit -u
 
 # Completion Styles
 
