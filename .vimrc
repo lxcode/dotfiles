@@ -24,7 +24,7 @@ set formatoptions=nwrtql
 set comments=s1:/*,mb:*,ex:*/,://,b:#,b:-,b:+,:%,:XCOMM,n:>,fb:-,b:\\item
 set diffopt+=iwhite
 set cursorline
-set gfn=Inconsolata\ 13
+set gfn=Inconsolata\ 15
 set t_Co=256    "use 256 colors
 set novb
 set number
