@@ -191,11 +191,16 @@ let g:SuperTabContextFileTypeExclusions = ['make']
 let g:tex_no_error=1
 
 " Indentguides
-let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_guide_size = 1
 
 let s:line1 = getline(1)
 " Don't have eclim on by default
 "let g:EclimDisabled = 1
+
+" statline
+let g:statline_fugitive=1
+let g:statline_trailing_space=0
+let g:statline_mixed_indent=0
 
 set ballooneval
