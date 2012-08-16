@@ -15,6 +15,10 @@ map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
 map <buffer> K :execute "!pydoc " . expand("<cword>")<CR>
 map <F11> :set paste<CR>i<CR>%---<CR>\vtitle{}<CR>\vid{}<CR>\vclass{}<CR>\vseverity{}<CR>\vdifficulty{}<CR>\vuln<CR><CR>\vtargets<CR><CR>\vdesc<CR><CR>\vscenario<CR><CR>\vshortterm<CR><CR>\vlongterm<CR>  :set nopaste<CR>
 
+" save my pinky
+nore ; :
+nore , ;
+
 syntax on
 set et          "expand tabs
 "this is a bunch of goofy auto-format stuff for bulleted lists, etc
