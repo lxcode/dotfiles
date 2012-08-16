@@ -193,3 +193,5 @@ let g:indent_guides_guide_size = 1
 let s:line1 = getline(1)
 " Don't have eclim on by default
 "let g:EclimDisabled = 1
+
+set ballooneval
