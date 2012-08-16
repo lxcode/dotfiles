@@ -52,7 +52,7 @@ helptags ~/.vim/doc
 
 set cpoptions=BFst
 set printoptions=syntax:n
-set tags=./tags
+set tags=tags;/ "use first tags file in a directory tree
 
 set nobackup
 set nowritebackup
