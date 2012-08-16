@@ -27,6 +27,7 @@ alias vpn='sudo openvpn /usr/local/etc/openvpn.conf'
 alias wu='svstat /service/* /service/*/log'
 alias rmsvn="find . -type d -name '\.svn' |xargs rm -rf"
 alias rmgit="find . -type d -name '\.git' |xargs rm -rf"
+alias pm="portmaster"
 
 # List only directories and symbolic
 # links that point to directories
