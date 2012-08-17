@@ -28,6 +28,7 @@ set formatoptions=nwrtql
 set comments=s1:/*,mb:*,ex:*/,://,b:#,b:-,b:+,:%,:XCOMM,n:>,fb:-,b:\\item
 set diffopt+=iwhite
 set cursorline
+set ballooneval
 set gfn=Inconsolata\ 15
 set t_Co=256    "use 256 colors
 set novb
@@ -84,6 +85,27 @@ if $TERM == 'vt100'
   set noincsearch nottyfast
 endif
 
+"latex
+imap <buffer> [[ \begin{
+imap <buffer> ]] <Plug>LatexCloseCurEnv
+
+" supertab
+let g:SuperTabContextFileTypeExclusions = ['make']
+
+" Indentguides
+let g:indent_guides_enable_on_vim_startup = 0
+let g:indent_guides_guide_size = 1
+
+let s:line1 = getline(1)
+" Don't have eclim on by default
+"let g:EclimDisabled = 1
+
+" statline
+let g:statline_fugitive=1
+let g:statline_trailing_space=0
+let g:statline_mixed_indent=0
+
+" augroups 
 augroup c
 	au!
 "   autocmd BufEnter *.[Cchly] set cindent cinoptions+=n2,t0,(0,p0 cinwords={
@@ -140,67 +162,3 @@ augroup misc
 	au BufNewFile,BufRead *.notes setf notes
 	au BufNewFile,BufRead *.notes set spell
 augroup end
-
-func PreviewWord()
-  if &previewwindow			" don't do this in the preview window
-    return
-  endif
-  let w = expand("<cword>")		" get the word under cursor
-  if w != ""				" if there is one ":ptag" to it
-
-" Delete any existing highlight before showing another tag
-    silent! wincmd P			" jump to preview window
-    if &previewwindow			" if we really get there...
-      match none			" delete existing highlight
-      wincmd p			" back to old window
-    endif
-
-" Try displaying a matching tag for the word under the cursor
-    let v:errmsg = ""
-    exe "silent! ptag " . w
-    if v:errmsg =~ "tag not found"
-      return
-    endif
-
-    silent! wincmd P			" jump to preview window
-    if &previewwindow		" if we really get there...
-	 if has("folding")
-	   silent! .foldopen		" don't want a closed fold
-	 endif
-	 call search("$", "b")		" to end of previous line
-	 let w = substitute(w, '\\', '\\\\', "")
-	 call search('\<\V' . w . '\>')	" position cursor on match
-" Add a match highlight to the word at this position
-      hi previewWord term=bold ctermbg=green guibg=green
-	 exe 'match previewWord "\%' . line(".") . 'l\%' . col(".") . 'c\k*"'
-      wincmd p			" back to old window
-    endif
-  endif
-endfun
-
-" vim-latex options
-let g:Tex_ViewRule_pdf = 'evince 2>/dev/null'
-let g:Tex_DefaultTargetFormat = 'pdf'
-let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 -interaction=nonstopmode $*'
-let g:Imap_UsePlaceHolders = 0
-let g:Tex_UseMakefile = 0
-let g:Tex_GotoError = 0
-let g:Tex_ShowErrorContext = 0
-let g:Tex_FoldedSections = 'part,chapter,section,subsection,subsubsection,paragraph,vtitle'
-let g:SuperTabContextFileTypeExclusions = ['make']
-let g:tex_no_error=1
-
-" Indentguides
-let g:indent_guides_enable_on_vim_startup = 0
-let g:indent_guides_guide_size = 1
-
-let s:line1 = getline(1)
-" Don't have eclim on by default
-"let g:EclimDisabled = 1
-
-" statline
-let g:statline_fugitive=1
-let g:statline_trailing_space=0
-let g:statline_mixed_indent=0
-
-set ballooneval
