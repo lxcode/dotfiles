@@ -29,10 +29,11 @@ set comments=s1:/*,mb:*,ex:*/,://,b:#,b:-,b:+,:%,:XCOMM,n:>,fb:-,b:\\item
 set diffopt+=iwhite
 set cursorline
 set ballooneval
-set gfn=Inconsolata\ 15
+set gfn=Inconsolata\ 14
 set t_Co=256    "use 256 colors
 set novb
 set number
+set viewdir=$HOME/.views
 set mouse=nv     " Turn this off for console-only mode
 set selectmode+=mouse
 set guioptions=aegit
@@ -88,6 +89,8 @@ endif
 "latex
 imap <buffer> [[ \begin{
 imap <buffer> ]] <Plug>LatexCloseCurEnv
+let g:LatexBox_latexmk_options = "-xelatex"
+let g:LatexBox_viewer = "evince"
 
 " supertab
 let g:SuperTabContextFileTypeExclusions = ['make']

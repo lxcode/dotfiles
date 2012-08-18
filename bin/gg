@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# search for something with w3m and google.
+
+w3m www.google.com/search\?hl=en\&q=`echo $* | tr ' ' '+'`
