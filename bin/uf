@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# try to fix paragraphs of quoted text from morons who don't wrap lines.
+# used from vi like !}fmt.
+
+sed 's/^> $//g' |fmt|sed -e 's/^/> /g' -e 's/^> >/>/g' -e 's/ > / /g'

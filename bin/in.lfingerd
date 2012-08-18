@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+# hacked up from https://github.com/dlitz/lfingerd
+# MIT License
+
+import re, sys, os, pwd, errno, exceptions
+
+def mysafeopen(homedir, filename):
+	if os.path.split(filename)[0] != "":
+		raise ValueError, "Filename contained path information"
+	flags = os.O_RDONLY
+	flags |= os.O_NOFOLLOW
+	fd = os.open(os.path.join(homedir, filename), flags, 0)
+	file = os.fdopen(fd, "rb")
+	return file
+
+CRLF = "\x0d\x0a"
+RequestError = "finger: sorry, no information available."
+
+request = re.split(r"\s", sys.stdin.readline()) 
+
+try:
+	if not request:
+		raise RequestError, "Blank request."
+	if request[0] == "/W":
+		request = request[1:]	# ignore verbose switch
+	if not request:
+		raise RequestError, "Blank request after option parsing."
+	
+	username = request[0]
+
+	# Split out the "+extra" part of "username+extra"
+	tmp = username.split("+",1)
+	extra = ""
+	username = tmp[0]
+	if len(tmp) > 1:
+		extra = "-" + tmp[1]
+	
+	homedir = "/var/service/fingerd"
+	
+	file = None
+	# Look for .plan-username, .plan-blob-username, or a default .plan
+	for filename in ("sadfasdf", ".plan" + "-" + username + extra, ".plan"):
+		try:
+			file = mysafeopen(homedir, filename)
+			break
+		except (IOError, OSError, ValueError):
+			pass
+	if file is None:
+		raise RequestError, "No information found."
+		
+	# Send the file, converting newlines
+	blob = file.read().replace("\n", CRLF)
+	sys.stdout.write(blob)
+	
+	# Ensure there is a trailing newline
+	if blob[-2:] != CRLF:
+		sys.stdout.write(CRLF)
+	
+	file.close()
+	sys.exit(0)
+except:
+	if sys.exc_info()[0] == exceptions.SystemExit:
+		raise
+	else:
+		sys.stdout.write(RequestError + CRLF)
+		sys.exit(0)
