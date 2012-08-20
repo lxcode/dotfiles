@@ -20,12 +20,11 @@ nore ; :
 nore , ;
 
 syntax on
+filetype plugin on
+filetype indent on
+helptags ~/.vim/doc
+
 set et          "expand tabs
-"this is a bunch of goofy auto-format stuff for bulleted lists, etc
-set formatoptions=nwrtql 
-" This is the default comments string setting, with - added so it can be used 
-" in bulletted lists.
-set comments=s1:/*,mb:*,ex:*/,://,b:#,b:-,b:+,:%,:XCOMM,n:>,fb:-,b:\\item
 set diffopt+=iwhite
 set cursorline
 set ballooneval
@@ -45,21 +44,18 @@ set wildmode=list:longest "shows a list of possible values when tab-completing
 set shortmess=a
 set hlsearch    "highlight all search matches
 set nojoinspaces "don't allow two spaces after a period when reformatting
-colorscheme tir_black
-
-filetype plugin on
-filetype indent on
+"this is a bunch of goofy auto-format stuff for bulleted lists, etc
+set formatoptions=nwrtql 
+" This is the default comments string setting, with - added so it can be used 
+" in bulletted lists.
+set comments=s1:/*,mb:*,ex:*/,://,b:#,b:-,b:+,:%,:XCOMM,n:>,fb:-,b:\\item
 set grepprg=grep\ -nH\ $*
-helptags ~/.vim/doc
-
 set cpoptions=BFst
 set printoptions=syntax:n
 set tags=tags;/ "use first tags file in a directory tree
-
 set nobackup
 set nowritebackup
 set directory=/tmp "litter up /tmp, not the CWD
-"set noswapfile
 set nomodeline
 set showmode
 set ts=4        "tabstop
@@ -70,21 +66,22 @@ set notitle icon
 set helpheight=0
 set incsearch
 set showmatch
-"set errorformat=%f:%l:%m,\"%f\"\\,\ line\ %l\:\ %m
 set suffixes=.bak,~,.o,.info,.aux,.dvi,.bbl,.log,.blg,
 set scrolloff=2
 set shortmess=otix
 set showcmd
 set sidescroll=1
-"set updatecount=100 updatetime=3600000		" saves power on notebooks
 set lazyredraw ttyfast
 set errorfile=/tmp/errors.vim
+"set updatecount=100 updatetime=3600000		" saves power on notebooks
 
 "   Settings for vt100
 if $TERM == 'vt100'
 " makes vim a bit more responsive when on slow terminal
   set noincsearch nottyfast
 endif
+
+colorscheme tir_black
 
 "latex
 imap <buffer> [[ \begin{
@@ -162,6 +159,7 @@ augroup misc
 	au BufWinEnter *mutt-*, set spell
 "	au BufWinEnter *mutt-*, UniCycleOn
     au BufEnter *.nse set filetype=lua
-	au BufNewFile,BufRead *.notes setf notes
-	au BufNewFile,BufRead *.notes set spell
+	au BufNewFile,BufRead *.md set spell
+	au BufWinLeave *.md, mkview
+	au BufWinEnter *.md, silent loadview
 augroup end
