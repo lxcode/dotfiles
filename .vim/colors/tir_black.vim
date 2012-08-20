@@ -19,8 +19,8 @@ hi NonText guifg=#070707 guibg=black ctermfg=232 ctermbg=0
 hi Cursor guifg=black guibg=white ctermfg=0 ctermbg=15
 hi LineNr guifg=#3D3D3D guibg=black ctermfg=239 ctermbg=NONE
 
-hi VertSplit guifg=#202020 guibg=#202020 ctermfg=235 ctermbg=235 
-hi StatusLine guifg=#CCCCCC guibg=#202020 gui=italic ctermfg=235 ctermbg=254
+hi VertSplit guifg=#202020 guibg=#202020 ctermfg=235 ctermbg=60 
+hi StatusLine guifg=#202020 guibg=#808080 ctermfg=235 ctermbg=60
 hi StatusLineNC guifg=black guibg=#202020 ctermfg=240 ctermbg=235 
 
 hi Folded guifg=#a0a8b0 guibg=#384048 ctermfg=grey ctermbg=60
