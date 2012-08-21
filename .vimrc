@@ -28,7 +28,7 @@ set et          "expand tabs
 set diffopt+=iwhite
 set cursorline
 set ballooneval
-set gfn=Inconsolata\ 14
+set gfn=Inconsolata\ 15
 set t_Co=256    "use 256 colors
 set novb
 set number
@@ -157,6 +157,8 @@ augroup misc
 	au BufWinLeave *.conf, mkview
 	au BufWinEnter *.conf, silent loadview
 	au BufWinEnter *mutt-*, set spell
+    " complete words from the dictionary when writing emails
+	au BufWinEnter *mutt-*, set complete+=k
 "	au BufWinEnter *mutt-*, UniCycleOn
     au BufEnter *.nse set filetype=lua
 	au BufNewFile,BufRead *.md set spell
