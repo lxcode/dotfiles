@@ -24,6 +24,7 @@ hi StatusLine guifg=#202020 guibg=#808080 ctermfg=235 ctermbg=60
 hi StatusLineNC guifg=#080808 guibg=#808080 ctermfg=240 ctermbg=235 
 
 hi Folded guifg=#a0a8b0 guibg=#384048 ctermfg=grey ctermbg=60
+hi FoldColumn guibg=#202020 guifg=darkgrey
 hi Title guifg=#f6f3e8 gui=bold ctermfg=187 cterm=bold
 hi Visual guibg=#262D51 ctermbg=60
 

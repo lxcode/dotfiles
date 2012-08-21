@@ -107,6 +107,13 @@ let g:statline_fugitive=1
 let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
 
+" taglist
+let g:Tlist_Show_One_File=1
+let g:Tlist_Enable_Fold_Column=0
+let g:Tlist_Display_Tag_Scope=1
+let g:tlist_objc_settings = 'ObjectiveC;i:interface;c:class;m:method;p:property;I:implementation;f:function;v:variable;F:field;p:protocol'
+let g:tlist_tex_settings='latex;l:labels;s:sections;t:subsections;u:subsubsections;v:vulns'
+
 " augroups 
 augroup c
 	au!
