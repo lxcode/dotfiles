@@ -27,7 +27,9 @@ helptags ~/.vim/doc
 set et          "expand tabs
 set diffopt+=iwhite
 set cursorline
-set ballooneval
+if has('gui_running')
+    set ballooneval
+endif
 set gfn=Inconsolata\ 15
 set t_Co=256    "use 256 colors
 set novb
