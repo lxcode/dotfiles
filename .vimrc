@@ -155,6 +155,8 @@ augroup latex
 	autocmd BufEnter *.tex,*.sty let g:tex_flavor='latex'
 	au BufWinLeave *.tex,*.sty mkview
 	au BufWinEnter *.tex,*.sty silent loadview
+    autocmd BufEnter deliverable.tex,status.tex badd vulnlist.tex
+    autocmd BufEnter deliverable.tex,status.tex badd appendices.tex
 augroup end
 
 augroup misc
