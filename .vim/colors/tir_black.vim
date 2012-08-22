@@ -133,3 +133,6 @@ hi link javaScriptNumber Number
 
 " Special for CSharp
 hi link csXmlTag Keyword 
+
+" For taglist
+hi MyTagListFileName guifg=#a0a8b0 guibg=#384048 ctermfg=grey ctermbg=60
