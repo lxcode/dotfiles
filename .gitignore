@@ -1,0 +1,41 @@
+# Annoying files
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+# For LaTeX docs
+*.aux
+*.cg
+*.idx
+*.ilg
+*.ind
+*.lltr
+*.loc
+*.lov
+*.lstr
+*.synctex.gz
+*.tdo
+*.toc
+*.tv
+*.nav
+*.snm
+*.vrb
+# binary junk
+*.zip
+*.iso
+*.gz
+*.tgz
+*.tar
+*.tar.gz
+*.7z
+*.pcap
+*.jar
+*.o
+*.d
+*.class
+[Tt]humbs.db
+*.DS_Store
+# Editor temporary files
+*.swp
+~$*
+.netrwhist

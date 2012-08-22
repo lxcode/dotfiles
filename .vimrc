@@ -9,8 +9,10 @@ map <S-t> :call PreviewWord()<CR>
 map <F12> :cn<CR>
 map <silent> <F9> :NERDTreeToggle<CR>
 nnoremap map <silent> <F9> :NERDTreeToggle<CR>
-map <silent> <F10> :TlistToggle<CR>
-nnoremap <silent> <F10> :TlistToggle<CR>
+"map <silent> <F10> :TlistToggle<CR>
+"nnoremap <silent> <F10> :TlistToggle<CR>
+map <silent> <F10> :TagbarToggle<CR>
+nnoremap <silent> <F10> :TagbarToggle<CR>
 map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
 map <buffer> K :execute "!pydoc " . expand("<cword>")<CR>
 map <F11> :set paste<CR>i<CR>%---<CR>\vtitle{}<CR>\vid{}<CR>\vclass{}<CR>\vseverity{}<CR>\vdifficulty{}<CR>\vuln<CR><CR>\vtargets<CR><CR>\vdesc<CR><CR>\vscenario<CR><CR>\vshortterm<CR><CR>\vlongterm<CR>  :set nopaste<CR>
@@ -29,6 +31,7 @@ set diffopt+=iwhite
 set cursorline
 if has('gui_running')
     set ballooneval
+    set balloondelay=100
 endif
 set gfn=Inconsolata\ 15
 set t_Co=256    "use 256 colors
@@ -113,6 +116,56 @@ let g:Tlist_Enable_Fold_Column=0
 let g:Tlist_Display_Tag_Scope=1
 let g:tlist_objc_settings = 'ObjectiveC;i:interface;c:class;m:method;p:property;I:implementation;f:function;v:variable;F:field;p:protocol'
 let g:tlist_tex_settings='latex;l:labels;s:sections;t:subsections;u:subsubsections;v:vulns'
+
+"tagbar 
+let g:tagbar_type_objc = {
+    \ 'ctagstype' : 'ObjectiveC',
+    \ 'kinds'     : [
+        \ 'i:interface',
+        \ 'I:implementation',
+        \ 'p:Protocol',
+        \ 'm:Object_method',
+        \ 'c:Class_method',
+        \ 'v:Global_variable',
+        \ 'F:Object field',
+        \ 'f:function',
+        \ 'p:property',
+        \ 't:type_alias',
+        \ 's:type_structure',
+        \ 'e:enumeration',
+        \ 'M:preprocessor_macro',
+    \ ],
+    \ 'sro'        : ' ',
+    \ 'kind2scope' : {
+        \ 'i' : 'interface',
+        \ 'I' : 'implementation',
+        \ 'p' : 'Protocol',
+        \ 's' : 'type_structure',
+        \ 'e' : 'enumeration'
+    \ },
+    \ 'scope2kind' : {
+        \ 'interface'      : 'i',
+        \ 'implementation' : 'I',
+        \ 'Protocol'       : 'p',
+        \ 'type_structure' : 's',
+        \ 'enumeration'    : 'e'
+    \ }
+\ }
+
+let g:tagbar_type_tex = {
+    \ 'ctagstype' : 'latex',
+    \ 'kinds'     : [
+        \ 's:sections',
+        \ 't:subsections',
+        \ 'u:subsubsections',
+        \ 'v:vulns',
+        \ 'g:graphics',
+        \ 'l:labels',
+        \ 'r:refs:1',
+        \ 'p:pagerefs:1'
+    \ ],
+    \ 'sort'    : 0,
+\ }
 
 " augroups 
 augroup c
