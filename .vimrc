@@ -79,6 +79,7 @@ set sidescroll=1
 set lazyredraw ttyfast
 set errorfile=/tmp/errors.vim
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
+set cscopequickfix=s-,c-,d-,i-,t-,e-   " omfg so much nicer
 
 "   Settings for vt100
 if $TERM == 'vt100'
@@ -102,8 +103,10 @@ let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_guide_size = 1
 
 let s:line1 = getline(1)
-" Don't have eclim on by default
-"let g:EclimDisabled = 1
+
+" buftabs
+let g:buftabs_marker_start = "(("
+let g:buftabs_marker_end = "))"
 
 " statline
 let g:statline_fugitive=1
@@ -229,3 +232,11 @@ augroup misc
 	au BufWinLeave *.md, mkview
 	au BufWinEnter *.md, silent loadview
 augroup end
+
+au BufWinEnter * call QFBind()
+function! QFBind()
+    if &buftype==#"quickfix"
+        exec "nnoremap <silent> <buffer> <right> :cnew<CR>"
+        exec "nnoremap <silent> <buffer> <left> :col<CR>"
+    endif
+endfunction
