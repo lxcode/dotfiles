@@ -173,46 +173,48 @@ let g:tagbar_type_tex = {
 " augroups 
 augroup c
 	au!
-"   autocmd BufEnter *.[Cchly] set cindent cinoptions+=n2,t0,(0,p0 cinwords={
-	autocmd BufEnter *.[mCchly] set nospell
-	autocmd BufEnter *.cpp set nospell
-	autocmd BufEnter *.java set nospell
-au BufWinLeave *.[mchly] mkview
-au BufWinEnter *.[mchly] silent loadview
-au BufWinLeave *.cpp mkview
-au BufWinEnter *.cpp silent loadview
-au BufWinLeave *.java mkview
-au BufWinEnter *.java silent loadview
+"   au BufEnter *.[Cchly] set cindent cinoptions+=n2,t0,(0,p0 cinwords={
+	au BufEnter *.[mCchly] set nospell
+	au BufEnter *.cpp set nospell
+	au BufEnter *.java set nospell
+    au BufWinLeave *.[mchly] mkview
+    au BufWinEnter *.[mchly] silent loadview
+    au BufWinLeave *.cpp mkview
+    au BufWinEnter *.cpp silent loadview
+    au BufWinLeave *.java mkview
+    au BufWinEnter *.java silent loadview
 augroup end
 
 augroup html
 	au!
-	autocmd BufEnter *.htm* set wrapmargin=5 wrapscan
-	autocmd BufEnter *.htm* set spell
-	autocmd BufLeave *.htm* set wrapscan&
+	au BufEnter *.htm* set wrapmargin=5 wrapscan
+	au BufEnter *.htm* set spell
+	au BufLeave *.htm* set wrapscan&
 " 	Read the html template automagically when starting a new html file
-	autocmd BufNewFile *.html r ~/.vim/template.html
+	au BufNewFile *.html r ~/.vim/template.html
 	au BufWinLeave *.htm* mkview
 	au BufWinEnter *.htm* silent loadview
 augroup end
 
 augroup python
-	autocmd BufEnter *.py,*.pyw set smartindent smarttab nospell
+	au BufEnter *.py,*.pyw set smartindent smarttab nospell
 	au BufWinLeave *.py mkview
 	au BufWinEnter *.py silent loadview
 augroup end
 
 augroup latex
-    autocmd BufEnter *.tex,*.sty set filetype=tex
-    autocmd BufEnter *.tex set spell
-    autocmd BufEnter *.tex,*.sty syntax spell toplevel
-    autocmd BufEnter *.tex,*.sty set textwidth=78
-	autocmd BufEnter *.tex,*.sty let g:Imap_UsePlaceHolders=0
-	autocmd BufEnter *.tex,*.sty let g:tex_flavor='latex'
+    au BufEnter *.tex,*.sty set filetype=tex
+    au BufEnter *.tex set spell
+    au BufEnter *.tex,*.sty syntax spell toplevel
+    au BufEnter *.tex,*.sty set textwidth=78
+	au BufEnter *.tex,*.sty let g:Imap_UsePlaceHolders=0
+	au BufEnter *.tex,*.sty let g:tex_flavor='latex'
+	au BufEnter *.tex,*.sty set comments+=b:\\item
 	au BufWinLeave *.tex,*.sty mkview
 	au BufWinEnter *.tex,*.sty silent loadview
-    autocmd BufEnter deliverable.tex,status.tex badd vulnlist.tex
-    autocmd BufEnter deliverable.tex,status.tex badd appendices.tex
+    au BufEnter deliverable.tex,status.tex badd vulnlist.tex
+    au BufEnter deliverable.tex,status.tex badd appendices.tex
+    au BufEnter deliverable.tex badd execsummary.tex
 augroup end
 
 augroup misc
@@ -231,6 +233,8 @@ augroup misc
 	au BufNewFile,BufRead *.md set spell
 	au BufWinLeave *.md, mkview
 	au BufWinEnter *.md, silent loadview
+	au BufWinEnter *.md, set textwidth=78
+	au BufWinEnter *.md, set comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
 
 au BufWinEnter * call QFBind()
