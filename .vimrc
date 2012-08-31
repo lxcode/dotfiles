@@ -88,6 +88,7 @@ if $TERM == 'vt100'
 endif
 
 colorscheme tir_black
+source ~/.vim/ftplugin/man.vim
 
 "latex
 imap <buffer> [[ \begin{
