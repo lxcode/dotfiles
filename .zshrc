@@ -19,6 +19,8 @@ alias d='dirs -v'
 alias h=history
 alias grep=egrep
 alias mic='sudo make install clean'
+alias mu='cd /usr/ports && sudo make update'
+alias mc='sudo make config'
 alias ll='ls -l'
 alias la='ls -a'
 alias become='sudo -s -H -u'
@@ -28,6 +30,8 @@ alias wu='svstat /service/* /service/*/log'
 alias rmsvn="find . -type d -name '\.svn' |xargs rm -rf"
 alias rmgit="find . -type d -name '\.git' |xargs rm -rf"
 alias pm="portmaster"
+
+
 
 # List only directories and symbolic
 # links that point to directories
