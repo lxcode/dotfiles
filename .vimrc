@@ -35,10 +35,11 @@ if has('gui_running')
 endif
 set gfn=Inconsolata\ 15
 set t_Co=256    "use 256 colors
+set hidden
 set novb
 set number
 set viewdir=$HOME/.views
-set mouse=nv     " Turn this off for console-only mode
+set mouse=a     " Turn this off for console-only mode
 set selectmode+=mouse
 set guioptions=aegit
 set shortmess=atI
