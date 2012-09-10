@@ -92,7 +92,7 @@ if $TERM == 'vt100'
 endif
 
 colorscheme tir_black
-source ~/.vim/ftplugin/man.vim
+" source ~/.vim/ftplugin/man.vim
 
 "latex
 imap <buffer> [[ \begin{
@@ -102,6 +102,9 @@ let g:LatexBox_viewer = "evince"
 
 " supertab
 let g:SuperTabContextFileTypeExclusions = ['make']
+
+" lusty
+let g:LustyExplorerSuppressRubyWarning = 1
 
 " Indentguides
 let g:indent_guides_enable_on_vim_startup = 0
