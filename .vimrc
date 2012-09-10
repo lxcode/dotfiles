@@ -174,7 +174,6 @@ let g:tagbar_type_tex = {
 " augroups 
 augroup c
 	au!
-"   au BufEnter *.[Cchly] set cindent cinoptions+=n2,t0,(0,p0 cinwords={
 	au BufEnter *.[mCchly] set nospell
 	au BufEnter *.cpp set nospell
 	au BufEnter *.java set nospell
@@ -218,9 +217,15 @@ augroup latex
     au BufEnter deliverable.tex badd execsummary.tex
 augroup end
 
+augroup quickfix
+	au FileType qf, noremap <CR> <CR><C-W><C-P>j 
+	au FileType qf, set nospell
+	au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
+	au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
+augroup end
+
 augroup misc
 	au BufWinEnter *.fugitiveblame, set nospell
-	au FileType qf, set nospell
 	au BufWinEnter *.txt, set spell
 	au BufWinLeave *.txt, mkview
 	au BufWinEnter *.txt, silent loadview
@@ -237,11 +242,3 @@ augroup misc
 	au BufWinEnter *.md, set textwidth=78
 	au BufWinEnter *.md, set comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
-
-au BufWinEnter * call QFBind()
-function! QFBind()
-    if &buftype==#"quickfix"
-        exec "nnoremap <silent> <buffer> <right> :cnew<CR>"
-        exec "nnoremap <silent> <buffer> <left> :col<CR>"
-    endif
-endfunction
