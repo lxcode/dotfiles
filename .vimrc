@@ -72,8 +72,10 @@ set notitle icon
 set helpheight=0
 set incsearch
 set showmatch
-set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.out,*.fls
-set wildignore+=*.loc,*.gz,*.latexmain
+set suffixes=.out
+set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls,*.
+set wildignore+=*.loc,*.gz,*.latexmain,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx
+set wildignore+=*.fdb_latexmk,*.ind
 set scrolloff=2
 set shortmess=otix
 set showcmd
