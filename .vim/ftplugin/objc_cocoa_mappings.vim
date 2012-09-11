@@ -22,11 +22,11 @@ let g:x = b:cocoa_proj
 
 com! -buffer ListMethods call objc#method_list#Activate(1)
 com! -buffer -nargs=? -complete=customlist,objc#method_builder#Completion BuildMethods call objc#method_builder#Build('<args>')
-com! -buffer -nargs=? -complete=custom,objc#man#Completion CocoaDoc call objc#man#ShowDoc('<args>')
+"XXX" com! -buffer -nargs=? -complete=custom,objc#man#Completion CocoaDoc call objc#man#ShowDoc('<args>')
 com! -buffer -nargs=? Alternate call <SID>AlternateFile()
 
 let objc_man_key = exists('objc_man_key') ? objc_man_key : 'K'
-exe 'nn <buffer> <silent> '.objc_man_key.' :<c-u>call objc#man#ShowDoc()<cr>'
+"XXX" exe 'nn <buffer> <silent> '.objc_man_key.' :<c-u>call objc#man#ShowDoc()<cr>'
 
 nn <buffer> <silent> <leader>A :cal<SID>AlternateFile()<cr>
 
