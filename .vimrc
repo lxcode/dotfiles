@@ -101,6 +101,9 @@ let g:LatexBox_viewer = "evince"
 " supertab
 let g:SuperTabContextFileTypeExclusions = ['make']
 
+" cctree
+let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
+
 " lusty
 let g:LustyExplorerSuppressRubyWarning = 1
 
