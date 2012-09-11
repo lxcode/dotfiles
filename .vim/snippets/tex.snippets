@@ -189,3 +189,25 @@ snippet frac
 	\frac{${1:num}}{${2:denom}}
 snippet sum
 	\sum^{${1:n}}_{${2:i=1}}{${3}}
+snippet vuln
+	%---
+	\vtitle{${1}}
+	\vid{${2}}
+	\vclass{${3}}
+	\vseverity{${4}}
+	\vdifficulty{${5}}
+	\vuln
+	
+	\vtargets ${6}
+	
+	\vdesc ${7}
+	
+	\vscenario ${8}
+	
+	\vshortterm ${9}
+	
+	\vlongterm ${10}
+snippet code
+	\begin{lstlisting}[style=code,language=${1},numbers=none,caption={${2}}]
+
+	\end{lstlisting}
