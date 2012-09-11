@@ -4,18 +4,13 @@ map <left> :bp<cr>
 map ** gwap
 map <F4> :w<CR> :!lacheck %<CR>
 map <F8> :w<CR> :!make<CR>
-map <S-t> :call PreviewWord()<CR>
-" Jump to next word in quickfix list
-map <F12> :cn<CR>
 map <silent> <F9> :NERDTreeToggle<CR>
 nnoremap map <silent> <F9> :NERDTreeToggle<CR>
-"map <silent> <F10> :TlistToggle<CR>
-"nnoremap <silent> <F10> :TlistToggle<CR>
 map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
-map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
-map <buffer> K :execute "!pydoc " . expand("<cword>")<CR>
 map <F11> :set paste<CR>i<CR>%---<CR>\vtitle{}<CR>\vid{}<CR>\vclass{}<CR>\vseverity{}<CR>\vdifficulty{}<CR>\vuln<CR><CR>\vtargets<CR><CR>\vdesc<CR><CR>\vscenario<CR><CR>\vshortterm<CR><CR>\vlongterm<CR>  :set nopaste<CR>
+map <F12> :cn<CR>
+map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
 
 " save my pinky
 nore ; :
@@ -72,8 +67,10 @@ set notitle icon
 set helpheight=0
 set incsearch
 set showmatch
-set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.out,*.fls
-set wildignore+=*.loc,*.gz,*.latexmain
+set suffixes=.out
+set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls,*.
+set wildignore+=*.loc,*.gz,*.latexmain,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx
+set wildignore+=*.fdb_latexmk,*.ind
 set scrolloff=2
 set shortmess=otix
 set showcmd
@@ -82,6 +79,7 @@ set lazyredraw ttyfast
 set errorfile=/tmp/errors.vim
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 set cscopequickfix=s-,c-,d-,i-,t-,e-   " omfg so much nicer
+set foldlevelstart=2
 
 "   Settings for vt100
 if $TERM == 'vt100'
@@ -90,7 +88,7 @@ if $TERM == 'vt100'
 endif
 
 colorscheme tir_black
-" source ~/.vim/ftplugin/man.vim
+source ~/.vim/ftplugin/man.vim
 
 "latex
 imap <buffer> [[ \begin{
@@ -175,7 +173,7 @@ let g:tagbar_type_tex = {
 " augroups 
 augroup c
 	au!
-"   au BufEnter *.[Cchly] set cindent cinoptions+=n2,t0,(0,p0 cinwords={
+	au BufNewFile *.c r ~/.vim/templates/template.c
 	au BufEnter *.[mCchly] set nospell
 	au BufEnter *.cpp set nospell
 	au BufEnter *.java set nospell
@@ -192,8 +190,7 @@ augroup html
 	au BufEnter *.htm* set wrapmargin=5 wrapscan
 	au BufEnter *.htm* set spell
 	au BufLeave *.htm* set wrapscan&
-" 	Read the html template automagically when starting a new html file
-	au BufNewFile *.html r ~/.vim/template.html
+	au BufNewFile *.html r ~/.vim/templates/template.html
 	au BufWinLeave *.htm* mkview
 	au BufWinEnter *.htm* silent loadview
 augroup end
@@ -219,9 +216,15 @@ augroup latex
     au BufEnter deliverable.tex badd execsummary.tex
 augroup end
 
+augroup quickfix
+	au FileType qf, noremap ' <CR><C-W><C-P>j 
+	au FileType qf, set nospell
+	au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
+	au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
+augroup end
+
 augroup misc
 	au BufWinEnter *.fugitiveblame, set nospell
-	au FileType qf, set nospell
 	au BufWinEnter *.txt, set spell
 	au BufWinLeave *.txt, mkview
 	au BufWinEnter *.txt, silent loadview
@@ -238,11 +241,3 @@ augroup misc
 	au BufWinEnter *.md, set textwidth=78
 	au BufWinEnter *.md, set comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
-
-au BufWinEnter * call QFBind()
-function! QFBind()
-    if &buftype==#"quickfix"
-        exec "nnoremap <silent> <buffer> <right> :cnew<CR>"
-        exec "nnoremap <silent> <buffer> <left> :col<CR>"
-    endif
-endfunction

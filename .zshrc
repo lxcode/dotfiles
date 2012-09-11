@@ -32,8 +32,6 @@ alias rmgit="find . -type d -name '\.git' |xargs rm -rf"
 alias pm="sudo portmaster"
 alias pwad="sudo portmaster -wad"
 
-
-
 # List only directories and symbolic
 # links that point to directories
 alias lsd='ls -ld *(-/DN)'
