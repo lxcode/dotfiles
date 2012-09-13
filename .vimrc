@@ -10,7 +10,7 @@ map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 map <F12> :cn<CR>
 map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
-map <C-p> :call PreviewWord()<CR>
+map <C-p> :ptag<CR>
 
 " save my pinky
 nore ; :
@@ -108,6 +108,11 @@ let s:line1 = getline(1)
 " buftabs
 let g:buftabs_marker_start = "(("
 let g:buftabs_marker_end = "))"
+
+" vimchat
+let g:vimchat_otr = 1
+let g:vimchat_statusicon = 0
+let g:vimchat_blinktimeout = -1
 
 " statline
 let g:statline_fugitive=1
@@ -222,6 +227,7 @@ augroup misc
     " complete words from the dictionary when writing emails
 	au BufWinEnter *mutt-*, set complete+=k
 	au BufWinEnter *mutt-*, UniCycleOn
+	au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
 	au BufNewFile,BufRead *.md set spell
 	au BufWinLeave *.md, mkview
@@ -229,40 +235,3 @@ augroup misc
 	au BufWinEnter *.md, set textwidth=78
 	au BufWinEnter *.md, set comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
-
-func PreviewWord()
-  if &previewwindow			" don't do this in the preview window
-    return
-  endif
-  let w = expand("<cword>")		" get the word under cursor
-  if w != ""				" if there is one ":ptag" to it
-
-" Delete any existing highlight before showing another tag
-    silent! wincmd P			" jump to preview window
-    if &previewwindow			" if we really get there...
-      match none			" delete existing highlight
-      wincmd p			" back to old window
-    endif
-
-" Try displaying a matching tag for the word under the cursor
-    let v:errmsg = ""
-    exe "silent! ptag " . w
-    if v:errmsg =~ "tag not found"
-      return
-    endif
-
-    silent! wincmd P			" jump to preview window
-    if &previewwindow		" if we really get there...
-	 if has("folding")
-	   silent! .foldopen		" don't want a closed fold
-	 endif
-	 call search("$", "b")		" to end of previous line
-	 let w = substitute(w, '\\', '\\\\', "")
-	 call search('\<\V' . w . '\>')	" position cursor on match
-" Add a match highlight to the word at this position
-      hi previewWord term=bold ctermbg=green guibg=green
-	 exe 'match previewWord "\%' . line(".") . 'l\%' . col(".") . 'c\k*"'
-      wincmd p			" back to old window
-    endif
-  endif
-endfun
