@@ -8,9 +8,9 @@ map <silent> <F9> :NERDTreeToggle<CR>
 nnoremap map <silent> <F9> :NERDTreeToggle<CR>
 map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
-map <F11> :set paste<CR>i<CR>%---<CR>\vtitle{}<CR>\vid{}<CR>\vclass{}<CR>\vseverity{}<CR>\vdifficulty{}<CR>\vuln<CR><CR>\vtargets<CR><CR>\vdesc<CR><CR>\vscenario<CR><CR>\vshortterm<CR><CR>\vlongterm<CR>  :set nopaste<CR>
 map <F12> :cn<CR>
 map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
+map <C-p> :call PreviewWord()<CR>
 
 " save my pinky
 nore ; :
@@ -28,7 +28,7 @@ if has('gui_running')
     set ballooneval
     set balloondelay=100
 endif
-set gfn=Inconsolata\ 15
+set gfn=Inconsolata\ 14
 set t_Co=256    "use 256 colors
 set hidden
 set novb
@@ -80,12 +80,6 @@ set errorfile=/tmp/errors.vim
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 set cscopequickfix=s-,c-,d-,i-,t-,e-   " omfg so much nicer
 set foldlevelstart=2
-
-"   Settings for vt100
-if $TERM == 'vt100'
-" makes vim a bit more responsive when on slow terminal
-  set noincsearch nottyfast
-endif
 
 colorscheme tir_black
 source ~/.vim/ftplugin/man.vim
@@ -171,24 +165,20 @@ let g:tagbar_type_tex = {
 \ }
 
 " augroups 
-augroup c
+augroup cjava
 	au!
 	au BufNewFile *.c r ~/.vim/templates/template.c
 	au BufEnter *.[mCchly] set nospell
-	au BufEnter *.cpp set nospell
-	au BufEnter *.java set nospell
+	au BufEnter *.cpp,*.java set nospell
     au BufWinLeave *.[mchly] mkview
     au BufWinEnter *.[mchly] silent loadview
-    au BufWinLeave *.cpp mkview
-    au BufWinEnter *.cpp silent loadview
-    au BufWinLeave *.java mkview
-    au BufWinEnter *.java silent loadview
+    au BufWinLeave *.cpp,*.java mkview
+    au BufWinEnter *.cpp,*.java silent loadview
 augroup end
 
 augroup html
 	au!
-	au BufEnter *.htm* set wrapmargin=5 wrapscan
-	au BufEnter *.htm* set spell
+	au BufEnter *.htm* set spell wrapmargin=5 wrapscan
 	au BufLeave *.htm* set wrapscan&
 	au BufNewFile *.html r ~/.vim/templates/template.html
 	au BufWinLeave *.htm* mkview
@@ -202,17 +192,15 @@ augroup python
 augroup end
 
 augroup latex
-    au BufEnter *.tex,*.sty set filetype=tex
-    au BufEnter *.tex set spell
-    au BufEnter *.tex,*.sty syntax spell toplevel
-    au BufEnter *.tex,*.sty set textwidth=78
+    au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78
+    au BufEnter *.tex,*.sty syntax spell toplevel 
 	au BufEnter *.tex,*.sty let g:Imap_UsePlaceHolders=0
 	au BufEnter *.tex,*.sty let g:tex_flavor='latex'
 	au BufEnter *.tex,*.sty set comments+=b:\\item
 	au BufWinLeave *.tex,*.sty mkview
 	au BufWinEnter *.tex,*.sty silent loadview
     au BufEnter deliverable.tex,status.tex badd vulnlist.tex
-    au BufEnter deliverable.tex,status.tex badd appendices.tex
+    au BufEnter deliverable.tex,status.tex,vulnlist.tex badd appendices.tex
     au BufEnter deliverable.tex badd execsummary.tex
 augroup end
 
@@ -233,7 +221,7 @@ augroup misc
 	au BufWinEnter *mutt-*, set spell
     " complete words from the dictionary when writing emails
 	au BufWinEnter *mutt-*, set complete+=k
-"	au BufWinEnter *mutt-*, UniCycleOn
+	au BufWinEnter *mutt-*, UniCycleOn
     au BufEnter *.nse set filetype=lua
 	au BufNewFile,BufRead *.md set spell
 	au BufWinLeave *.md, mkview
@@ -241,3 +229,40 @@ augroup misc
 	au BufWinEnter *.md, set textwidth=78
 	au BufWinEnter *.md, set comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
+
+func PreviewWord()
+  if &previewwindow			" don't do this in the preview window
+    return
+  endif
+  let w = expand("<cword>")		" get the word under cursor
+  if w != ""				" if there is one ":ptag" to it
+
+" Delete any existing highlight before showing another tag
+    silent! wincmd P			" jump to preview window
+    if &previewwindow			" if we really get there...
+      match none			" delete existing highlight
+      wincmd p			" back to old window
+    endif
+
+" Try displaying a matching tag for the word under the cursor
+    let v:errmsg = ""
+    exe "silent! ptag " . w
+    if v:errmsg =~ "tag not found"
+      return
+    endif
+
+    silent! wincmd P			" jump to preview window
+    if &previewwindow		" if we really get there...
+	 if has("folding")
+	   silent! .foldopen		" don't want a closed fold
+	 endif
+	 call search("$", "b")		" to end of previous line
+	 let w = substitute(w, '\\', '\\\\', "")
+	 call search('\<\V' . w . '\>')	" position cursor on match
+" Add a match highlight to the word at this position
+      hi previewWord term=bold ctermbg=green guibg=green
+	 exe 'match previewWord "\%' . line(".") . 'l\%' . col(".") . 'c\k*"'
+      wincmd p			" back to old window
+    endif
+  endif
+endfun
