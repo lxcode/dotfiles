@@ -1203,11 +1203,12 @@ class VimChatScope:
             secureString = "(*" + secure + "*)"
 
         #Get the first line
-        if resource:
-            line = tstamp + " " + secureString + \
-                user + "/" + resource + ": " + lines.pop(0)
-        else:
-            line = tstamp + " " + secureString + user + ": " + lines.pop(0)
+        line = tstamp + " " + secureString + user + ": " + lines.pop(0)
+        #if resource:
+        #    line = tstamp + " " + secureString + \
+        #        user + "/" + resource + ": " + lines.pop(0)
+        #else:
+        #    line = tstamp + " " + secureString + user + ": " + lines.pop(0)
 
         buf.append(line)
         #TODO: remove these lines

@@ -9,8 +9,8 @@ nnoremap map <silent> <F9> :NERDTreeToggle<CR>
 map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 map <F12> :cn<CR>
-map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
 map <C-p> :ptag<CR>
+nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 
 " save my pinky
 nore ; :
@@ -112,12 +112,15 @@ let g:buftabs_marker_end = "))"
 " vimchat
 let g:vimchat_otr = 1
 let g:vimchat_statusicon = 0
-let g:vimchat_blinktimeout = -1
+let g:vimchat_showPresenceNotification = -1
 
 " statline
 let g:statline_fugitive=1
 let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
+
+" grephere
+nmap <C-n> <Plug>(GrepHereCurrent) 
 
 "tagbar 
 let g:tagbar_type_objc = {
@@ -235,3 +238,18 @@ augroup misc
 	au BufWinEnter *.md, set textwidth=78
 	au BufWinEnter *.md, set comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
+
+" Quickfix toggle
+let g:quickfix_is_open = 0
+
+function! QuickfixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        execute g:quickfix_return_to_window . "wincmd w"
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
