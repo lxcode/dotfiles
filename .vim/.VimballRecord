@@ -1,0 +1,3 @@
+editqf.vba: call delete('/usr/home/lx/.vim/doc/editqf.txt')|call delete('/usr/home/lx/.vim/plugin/editqf.vim')
+GrepHere-1.10.vmb: call delete('/usr/home/lx/.vim/autoload/ingointegration.vim')|call delete('/usr/home/lx/.vim/autoload/ingosearch.vim')|call delete('/usr/home/lx/.vim/autoload/ingowindow.vim')|call delete('/usr/home/lx/.vim/autoload/GrepHere.vim')|call delete('/usr/home/lx/.vim/plugin/GrepHere.vim')|call delete('/usr/home/lx/.vim/doc/GrepHere.txt')
+GrepCommands-1.01.vmb: call delete('/usr/home/lx/.vim/autoload/escapings.vim')|call delete('/usr/home/lx/.vim/autoload/ingocollections.vim')|call delete('/usr/home/lx/.vim/autoload/GrepCommands.vim')|call delete('/usr/home/lx/.vim/plugin/GrepCommands.vim')|call delete('/usr/home/lx/.vim/doc/GrepCommands.txt')
