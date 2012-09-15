@@ -10,7 +10,10 @@ map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 map <F12> :cn<CR>
 map <C-p> :ptag<CR>
+map <C-s> 1z=
+imap <C-s> <Esc> b1z=ea<Space>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
+"set thesaurus+=/home/lx/.vim/thesaurus.txt
 
 " save my pinky
 nore ; :
@@ -37,6 +40,7 @@ set viewdir=$HOME/.views
 set mouse=a     " Turn this off for console-only mode
 set selectmode+=mouse
 set guioptions=aegit
+set pumheight=15
 set shortmess=atI
 set scrolloff=3
 set ignorecase  "case insensitive searches
@@ -122,6 +126,12 @@ let g:statline_mixed_indent=0
 " grephere
 nmap <C-n> <Plug>(GrepHereCurrent) 
 
+" clang
+let g:SuperTabDefaultCompletionType = "context"
+"let g:clang_complete_auto = 0
+let g:clang_complete_copen = 1
+
+
 "tagbar 
 let g:tagbar_type_objc = {
     \ 'ctagstype' : 'ObjectiveC',
@@ -172,6 +182,15 @@ let g:tagbar_type_tex = {
     \ 'sort'    : 0,
 \ }
 
+let g:tagbar_type_markdown = {
+        \ 'ctagstype' : 'markdown',
+        \ 'kinds' : [
+                \ 'h:Heading_L1',
+                \ 'i:Heading_L2',
+                \ 'k:Heading_L3'
+        \ ]
+\ }
+
 " augroups 
 augroup cjava
 	au!
@@ -202,7 +221,6 @@ augroup end
 augroup latex
     au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78
     au BufEnter *.tex,*.sty syntax spell toplevel 
-	au BufEnter *.tex,*.sty let g:Imap_UsePlaceHolders=0
 	au BufEnter *.tex,*.sty set comments+=b:\\item
 	au BufWinLeave *.tex,*.sty mkview
 	au BufWinEnter *.tex,*.sty silent loadview
@@ -234,8 +252,10 @@ augroup misc
 	au BufNewFile,BufRead *.md set spell
 	au BufWinLeave *.md, mkview
 	au BufWinEnter *.md, silent loadview
-	au BufWinEnter *.md, set textwidth=78
+	au BufWinEnter *.md, set textwidth=78 complete+=k
 	au BufWinEnter *.md, set comments+=b:-,b:+,b:*,b:+,n:>
+    au BufWinEnter *.md, imap >> <C-t>
+    au BufWinEnter *.md, imap << <C-d>
 augroup end
 
 " Quickfix toggle
