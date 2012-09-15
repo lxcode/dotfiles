@@ -150,8 +150,8 @@ snippet bf
 	\textbf{${1:text}}
 snippet under
 	\underline{${1:text}}
-snippet emp
-	\emph{${1:text}}
+snippet em
+	{\em ${1}}${2}
 snippet sc
 	\textsc{${1:text}}
 #Choosing font
@@ -160,14 +160,14 @@ snippet sf
 snippet rm
 	\textrm{${1:text}}
 snippet tt
-	\texttt{${1:text}}
+	{\tt ${1}}${2}
 #misc
 snippet ft
 	\footnote{${1:text}}
-snippet fig
+snippet figg
 	\begin{figure}
 	\begin{center}
-	    \includegraphics[scale=${1}]{Figures/${2}}
+	    \includegraphics[scale=${1}]{images/${2}}
 	\end{center}
 	\caption{${3}}
 	\label{fig:${4}}
@@ -190,8 +190,8 @@ snippet frac
 snippet sum
 	\sum^{${1:n}}_{${2:i=1}}{${3}}
 snippet frame
-	\begin{frame}[fragile]
-		${1}
+	\begin{frame}[fragile]{${1}}
+		${2}
 	\end{frame}
 snippet vuln
 	%---
