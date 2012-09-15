@@ -203,7 +203,6 @@ augroup latex
     au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78
     au BufEnter *.tex,*.sty syntax spell toplevel 
 	au BufEnter *.tex,*.sty let g:Imap_UsePlaceHolders=0
-	au BufEnter *.tex,*.sty let g:tex_flavor='latex'
 	au BufEnter *.tex,*.sty set comments+=b:\\item
 	au BufWinLeave *.tex,*.sty mkview
 	au BufWinEnter *.tex,*.sty silent loadview
