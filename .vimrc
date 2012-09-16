@@ -128,9 +128,9 @@ nmap <C-n> <Plug>(GrepHereCurrent)
 
 " clang
 let g:SuperTabDefaultCompletionType = "context"
-"let g:clang_complete_auto = 0
 let g:clang_complete_copen = 1
-
+let g:clang_snippets = 1
+let g:clang_snippets_engine = 'snipmate'
 
 "tagbar 
 let g:tagbar_type_objc = {
