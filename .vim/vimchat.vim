@@ -1496,15 +1496,17 @@ class VimChatScope:
                     return
                 chatBuf = self.getBufByName(chatFile)
                 bExists = int(vim.eval('buflisted("' + chatFile + '")'))
-                if chatBuf and bExists:
-                    statusUpdateLine = self.formatPresenceUpdateLine(fullJid,
-                        show,status)
-                    if chatBuf[-1] != statusUpdateLine:
-                        chatBuf.append(statusUpdateLine)
-                        self.moveCursorToBufBottom(chatBuf)
-                else:
-                    #Should never get here!
-                    print "Buffer did not exist for: " + fromJid
+                # I only care if people went offline
+                if status == "offline":
+                    if chatBuf and bExists:
+                        statusUpdateLine = self.formatPresenceUpdateLine(fullJid,
+                            show,status)
+                        if chatBuf[-1] != statusUpdateLine:
+                            chatBuf.append(statusUpdateLine)
+                            self.moveCursorToBufBottom(chatBuf)
+                    else:
+                        #Should never get here!
+                        print "Buffer did not exist for: " + fromJid
 
             # update old show list
             if len(self.oldShowList)<1:

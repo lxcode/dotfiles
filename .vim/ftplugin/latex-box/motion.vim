@@ -219,71 +219,106 @@ function! s:ConvertBack(line)
 
         let line = a:line
 
-        let line = substitute(line, "\\\\IeC\s*{\\\\'a}", 'á', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\`a}", 'à', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\^a}", 'à', 'g')
+		if !exists('g:LatexBox_plaintext_toc')
+			let line = substitute(line, "\\\\IeC\s*{\\\\'a}", 'á', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\`a}", 'à', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\^a}", 'à', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\¨a}", 'ä', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\\"a}", 'ä', 'g')
 
-        let line = substitute(line, "\\\\IeC\s*{\\\\'e}", 'é', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\`e}", 'è', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\^e}", 'ê', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\'e}", 'é', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\`e}", 'è', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\^e}", 'ê', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\¨e}", 'ë', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\\"e}", 'ë', 'g')
 
-        let line = substitute(line, "\\\\IeC\s*{\\\\'i}", 'í', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\`i}", 'î', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\^i}", 'ì', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\'i}", 'í', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\`i}", 'î', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\^i}", 'ì', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\¨i}", 'ï', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\\"i}", 'ï', 'g')
 
-        let line = substitute(line, "\\\\IeC\s*{\\\\'o}", 'ó', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\`o}", 'ò', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\^o}", 'ô', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\'o}", 'ó', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\`o}", 'ò', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\^o}", 'ô', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\¨o}", 'ö', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\\"o}", 'ö', 'g')
 
-        let line = substitute(line, "\\\\IeC\s*{\\\\'u}", 'ú', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\`u}", 'ù', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\^u}", 'û', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\'u}", 'ú', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\`u}", 'ù', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\^u}", 'û', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\¨u}", 'ü', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\\"u}", 'ü', 'g')
 
-        let line = substitute(line, "\\\\IeC\s*{\\\\'A}", 'Á', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\`A}", 'À', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\^A}", 'À', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\'A}", 'Á', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\`A}", 'À', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\^A}", 'À', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\¨A}", 'Ä', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\\"A}", 'Ä', 'g')
 
-        let line = substitute(line, "\\\\IeC\s*{\\\\'E}", 'É', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\`E}", 'È', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\^E}", 'Ê', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\'E}", 'É', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\`E}", 'È', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\^E}", 'Ê', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\¨E}", 'Ë', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\\"E}", 'Ë', 'g')
 
-        let line = substitute(line, "\\\\IeC\s*{\\\\'I}", 'Í', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\`I}", 'Î', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\^I}", 'Ì', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\'I}", 'Í', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\`I}", 'Î', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\^I}", 'Ì', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\¨I}", 'Ï', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\\"I}", 'Ï', 'g')
 
-        let line = substitute(line, "\\\\IeC\s*{\\\\'O}", 'Ó', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\`O}", 'Ò', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\^O}", 'Ô', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\'O}", 'Ó', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\`O}", 'Ò', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\^O}", 'Ô', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\¨O}", 'Ö', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\\"O}", 'Ö', 'g')
 
-        let line = substitute(line, "\\\\IeC\s*{\\\\'U}", 'Ú', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\`U}", 'Ù', 'g')
-        let line = substitute(line, "\\\\IeC\s*{\\\\^U}", 'Û', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\'U}", 'Ú', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\`U}", 'Ù', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\^U}", 'Û', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\¨U}", 'Ü', 'g')
+			let line = substitute(line, "\\\\IeC\s*{\\\\\"U}", 'Ü', 'g')
 
+		else
+			" substitute stuff like '\IeC{\"u}' (utf-8 umlauts in section heading) to plain 'u'
+			let line = substitute(line, "\\\\IeC\s*{\\\\.\\(.\\)}", '\1', 'g')
+		endif
         return line
 
 endfunction
 
-function! s:ReadTOC(auxfile)
+function! s:ReadTOC(auxfile, ...)
 
-	let toc = []
-
+	let texfile = fnamemodify(substitute(a:auxfile, '\.aux$', '.tex', ''), ':p')
 	let prefix = fnamemodify(a:auxfile, ':p:h')
+
+	if a:0 != 2
+		let toc = []
+		let fileindices = { texfile : [] }
+	else
+		let toc = a:1
+		let fileindices = a:2
+		let fileindices[ texfile ] = []
+	endif
+
 
 	for line in readfile(a:auxfile)
 
 		let included = matchstr(line, '^\\@input{\zs[^}]*\ze}')
 		
 		if included != ''
-			call extend(toc, s:ReadTOC(prefix . '/' . included))
+			" append the input TOX to `toc` and `fileindices`
+			call s:ReadTOC(prefix . '/' . included, toc, fileindices)
 			continue
 		endif
 
-		" Parse lines like:
+		" Parse statements like:
 		" \@writefile{toc}{\contentsline {section}{\numberline {secnum}Section Title}{pagenumber}}
 		" \@writefile{toc}{\contentsline {section}{\tocsection {}{1}{Section Title}}{pagenumber}}
 		" \@writefile{toc}{\contentsline {section}{\numberline {secnum}Section Title}{pagenumber}{otherstuff}}
 
-		let line = matchstr(line, '^\\@writefile{toc}{\\contentsline\s*\zs.*\ze}\s*$')
+		let line = matchstr(line, '\\@writefile{toc}{\\contentsline\s*\zs.*\ze}\s*$')
 		if empty(line)
 			continue
 		endif
@@ -321,15 +356,13 @@ function! s:ReadTOC(auxfile)
 		let text = LatexBox_TreeToTex(tree)
 		let text = s:ConvertBack(text)
 		let text = substitute(text, '^{\+\|}\+$', '', 'g')
-		" substitute stuff like '\IeC{\"u}' (utf-8 umlauts in section heading) to plain 'u'
-		let text = substitute(text, '\v\\IeC\{\\"(.)\}', '\1', 'g')
 
 		" add TOC entry
-		call add(toc, {'file': bufname('%'),
-					\ 'level': level, 'number': secnum, 'text': text, 'page': page})
+		call add(fileindices[texfile], len(toc))
+		call add(toc, {'file': texfile, 'level': level, 'number': secnum, 'text': text, 'page': page})
 	endfor
 
-	return toc
+	return [toc, fileindices]
 
 endfunction
 
@@ -343,11 +376,11 @@ function! LatexBox_TOC()
 	endif
 
 	" read TOC
-	let toc = s:ReadTOC(LatexBox_GetAuxFile())
+	let [toc, fileindices] = s:ReadTOC(LatexBox_GetAuxFile())
 	let calling_buf = bufnr('%')
 
 	" find closest section in current buffer
-	let closest_index = s:FindClosestSection(toc)
+	let closest_index = s:FindClosestSection(toc,fileindices)
 
 	execute g:LatexBox_split_side g:LatexBox_split_width . 'vnew LaTeX\ TOC'
 	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap cursorline nonumber
@@ -390,12 +423,18 @@ endfunction
 
 " Binary search for the closest section
 " return the index of the TOC entry
-function! s:FindClosestSection(toc)
-	let imax = len(a:toc)
+function! s:FindClosestSection(toc, fileindices)
+	let file = expand('%:p')
+	if !has_key(a:fileindices, file)
+		echoe 'Current file is not included in main tex file ' . LatexBox_GetMainTexFile() . '.'
+	endif
+
+	let imax = len(a:fileindices[file])
 	let imin = 0
 	while imin < imax - 1
 		let i = (imax + imin) / 2
-		let entry = a:toc[i]
+		let tocindex = a:fileindices[file][i]
+		let entry = a:toc[tocindex]
 		let titlestr = entry['text']
 		let titlestr = escape(titlestr, '\')
 		let titlestr = substitute(titlestr, ' ', '\\_\\s\\+', 'g')
@@ -407,7 +446,7 @@ function! s:FindClosestSection(toc)
 		endif
 	endwhile
 
-	return imin
+	return a:fileindices[file][imin]
 endfunction
 
 function! s:TOCActivate(close)
@@ -425,11 +464,12 @@ function! s:TOCActivate(close)
 	execute b:calling_win . 'wincmd w'
 
 	let bnr = bufnr(entry['file'])
-	if bnr >= 0
-		execute 'buffer ' . bnr
-	else
-		execute 'edit ' . entry['file']
+	if bnr == -1 
+		execute 'badd ' . entry['file']
+		let bnr = bufnr(entry['file'])
 	endif
+
+	execute 'buffer! ' . bnr
 
 	let titlestr = entry['text']
 

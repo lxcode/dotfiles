@@ -9,8 +9,8 @@ nnoremap map <silent> <F9> :NERDTreeToggle<CR>
 map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 map <F12> :cn<CR>
-map <C-p> :ptag<CR>
 map <C-s> 1z=
+map <C-p> :exe "ptag" expand("<cword>")<CR>
 imap <C-s> <Esc> b1z=ea<Space>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 "set thesaurus+=/home/lx/.vim/thesaurus.txt
@@ -34,6 +34,7 @@ endif
 set gfn=Inconsolata\ 14
 set t_Co=256    "use 256 colors
 set hidden
+set formatprg=par
 set novb
 set number
 set viewdir=$HOME/.views
@@ -89,29 +90,33 @@ colorscheme tir_black
 source ~/.vim/ftplugin/man.vim
 
 "latex
-imap <buffer> [[ \begin{
-imap <buffer> ]] <Plug>LatexCloseCurEnv
 let g:LatexBox_latexmk_options = "-xelatex"
 let g:LatexBox_viewer = "evince"
 
+augroup latex
+    au BufEnter *.tex,*.sty syntax spell toplevel 
+    au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
+	au BufEnter *.tex,*.sty set comments+=b:\\item 
+	au BufEnter *.tex,*.sty imap <buffer> [[ \begin{ imap <buffer> ]] <Plug>LatexCloseCurEnv
+    au BufEnter deliverable.tex,status.tex badd vulnlist.tex
+    au BufEnter deliverable.tex,status.tex,vulnlist.tex badd appendices.tex
+    au BufEnter deliverable.tex badd execsummary.tex
+	au BufWinLeave *.tex,*.sty mkview
+	au BufWinEnter *.tex,*.sty silent loadview
+augroup end
+
 " supertab
 let g:SuperTabContextFileTypeExclusions = ['make']
+let g:SuperTabDefaultCompletionType = "context"
 
 " cctree
 let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
-
-" lusty
-let g:LustyExplorerSuppressRubyWarning = 1
 
 " Indentguides
 let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_guide_size = 1
 
 let s:line1 = getline(1)
-
-" buftabs
-let g:buftabs_marker_start = "(("
-let g:buftabs_marker_end = "))"
 
 " vimchat
 let g:vimchat_otr = 1
@@ -127,10 +132,10 @@ let g:statline_mixed_indent=0
 nmap <C-n> <Plug>(GrepHereCurrent) 
 
 " clang
-let g:SuperTabDefaultCompletionType = "context"
-let g:clang_complete_copen = 1
+let g:clang_complete_copen = 0
 let g:clang_snippets = 1
 let g:clang_snippets_engine = 'snipmate'
+let g:clang_use_library = 1
 
 "tagbar 
 let g:tagbar_type_objc = {
@@ -196,6 +201,7 @@ augroup cjava
 	au!
 	au BufNewFile *.c r ~/.vim/templates/template.c
 	au BufEnter *.[mCchly] set nospell
+    au BufRead,BufNewFile *.m setfiletype objc
 	au BufEnter *.cpp,*.java set nospell
     au BufWinLeave *.[mchly] mkview
     au BufWinEnter *.[mchly] silent loadview
@@ -218,17 +224,8 @@ augroup python
 	au BufWinEnter *.py silent loadview
 augroup end
 
-augroup latex
-    au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78
-    au BufEnter *.tex,*.sty syntax spell toplevel 
-	au BufEnter *.tex,*.sty set comments+=b:\\item
-	au BufWinLeave *.tex,*.sty mkview
-	au BufWinEnter *.tex,*.sty silent loadview
-    au BufEnter deliverable.tex,status.tex badd vulnlist.tex
-    au BufEnter deliverable.tex,status.tex,vulnlist.tex badd appendices.tex
-    au BufEnter deliverable.tex badd execsummary.tex
-augroup end
-
+" Disable spellcheck on quickfix, switch between quickfix lists with the arrow 
+" keys
 augroup quickfix
 	au FileType qf, noremap ' <CR><C-W><C-P>j 
 	au FileType qf, set nospell
@@ -243,17 +240,14 @@ augroup misc
 	au BufWinEnter *.txt, silent loadview
 	au BufWinLeave *.conf, mkview
 	au BufWinEnter *.conf, silent loadview
-	au BufWinEnter *mutt-*, set spell
-    " complete words from the dictionary when writing emails
-	au BufWinEnter *mutt-*, set complete+=k
+	au BufWinEnter *mutt-*, set spell complete+=k
 	au BufWinEnter *mutt-*, UniCycleOn
 	au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
 	au BufNewFile,BufRead *.md set spell
 	au BufWinLeave *.md, mkview
 	au BufWinEnter *.md, silent loadview
-	au BufWinEnter *.md, set textwidth=78 complete+=k
-	au BufWinEnter *.md, set comments+=b:-,b:+,b:*,b:+,n:>
+	au BufWinEnter *.md, set textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
     au BufWinEnter *.md, imap >> <C-t>
     au BufWinEnter *.md, imap << <C-d>
 augroup end
