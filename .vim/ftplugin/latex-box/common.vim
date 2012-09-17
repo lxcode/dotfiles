@@ -59,7 +59,9 @@ if !exists('g:LatexBox_bibtex_wild_spaces')
 endif
 
 if !exists('g:LatexBox_cite_pattern')
-	let g:LatexBox_cite_pattern = '\C\\cite\(p\|t\)\=\*\=\(\[[^\]]*\]\)*\_\s*{'
+	"let g:LatexBox_cite_pattern = '\C\\cite\(p\|t\)\=\*\=\(\[[^\]]*\]\)*\_\s*{'
+	"Jpate suggestion for natbib package
+	let g:LatexBox_cite_pattern = '\C\\cite\(p\|t\|author\|year\|yearpart\)\=\*\=\(\[[^\]]*\]\)*\_\s*{'
 endif
 if !exists('g:LatexBox_ref_pattern')
 	let g:LatexBox_ref_pattern = '\C\\v\?\(eq\|page\)\?ref\*\?\_\s*{'
@@ -143,7 +145,13 @@ function! LatexBox_GetMainTexFile()
 		endif
 	endfor
 
-	" 4. prompt for file with completion
+	" 3 borrow the Vim-Latex-Suite method of finding it
+	if Tex_GetMainFileName() != expand('%:p')
+		let b:main_tex_file = Tex_GetMainFileName()
+		return b:main_tex_file
+	endif
+
+	" 5. prompt for file with completion
 	let b:main_tex_file = s:PromptForMainFile()
 	return b:main_tex_file
 endfunction
