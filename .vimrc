@@ -1,7 +1,9 @@
 "left/right arrows to switch buffers in normal mode, this will probably annoy you
 map <right> :bn<cr>
 map <left> :bp<cr>
-map ** gwap
+map ** gqap
+map <F1> 1z=
+imap <F1> <Esc>b1z=ea<Space>
 map <F4> :w<CR> :!lacheck %<CR>
 map <F8> :w<CR> :!make<CR>
 map <silent> <F9> :NERDTreeToggle<CR>
@@ -9,9 +11,7 @@ nnoremap map <silent> <F9> :NERDTreeToggle<CR>
 map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 map <F12> :cn<CR>
-map <C-s> 1z=
 map <C-p> :exe "ptag" expand("<cword>")<CR>
-imap <C-s> <Esc> b1z=ea<Space>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 "set thesaurus+=/home/lx/.vim/thesaurus.txt
 
@@ -92,6 +92,7 @@ source ~/.vim/ftplugin/man.vim
 "latex
 let g:LatexBox_latexmk_options = "-xelatex"
 let g:LatexBox_viewer = "evince"
+let g:Latexbox_Folding = 'yes'
 
 augroup latex
     au BufEnter *.tex,*.sty syntax spell toplevel 
@@ -122,6 +123,7 @@ let s:line1 = getline(1)
 let g:vimchat_otr = 1
 let g:vimchat_statusicon = 0
 let g:vimchat_showPresenceNotification = -1
+map g<Tab> gt
 
 " statline
 let g:statline_fugitive=1

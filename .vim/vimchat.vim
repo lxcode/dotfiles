@@ -46,6 +46,7 @@ try:
     import time
     import vim
     import xmpp
+    import logging
 
 
     try:
@@ -95,6 +96,8 @@ try:
 except:
     growl_enabled = False
 
+    logging.basicConfig(level=logging.WARNING, filename='/tmp/vimchaterr.log')
+    errlog = logging.getLogger('vimchaterr')
 
 class VimChatScope:
     #Global Variables
@@ -234,7 +237,7 @@ class VimChatScope:
                 else:
                     print "Error in inject_message"
 
-        def notify(sef, opdata=None, level=None, accountname=None,
+        def notify(self, opdata=None, level=None, accountname=None,
             protocol=None, username=None,title=None, primary=None,
             secondary=None):
 
@@ -1186,7 +1189,7 @@ class VimChatScope:
         vim.command('let b:groupchat=' + str(groupChat))
 
     def appendMessage(
-        self, account, buf, message, showJid='Me',secure=False):
+        self, account, buf, message, showJid='me',secure=False):
 
         if not buf:
             print "VimChat: Invalid Buffer to append to!"
@@ -1451,7 +1454,7 @@ class VimChatScope:
                 secure = "e"
 
         if not self.isGroupChat():
-            VimChat.appendMessage(account, chatBuf,body,'Me',secure)
+            VimChat.appendMessage(account, chatBuf,body,'Lx',secure)
 
         vim.command('hide')
         vim.command('sbuffer ' + str(chatBuf.number))
@@ -1552,8 +1555,9 @@ class VimChatScope:
 
         try:
             self.notify(jid, message, groupChat)
-        except:
-            print 'Could not notify:', message, 'from:', jid
+        except Exception, err:
+            errlog.exception('Error trying to notify from: %s', jid)
+            #print 'Could not notify:', message, 'from:', jid
         
         if self.growl_enabled:
             self.growl_notifier.notify("msg txrx", "VimChat - %s" % (jid),
@@ -1581,6 +1585,7 @@ class VimChatScope:
         vim.command("set tabline=%#Error#New-message-from-" + jid)
 
         self.pyNotification(jid+' says: ', msg, 'dialog-warning');
+        os.system("play /usr/local/share/sounds/purple/receive.wav")
         if self.gtk_enabled:
             self.statusIcon.blink(True)
             if self.blinktimeout != -1:
