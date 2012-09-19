@@ -64,6 +64,7 @@ try:
     if 'DBUS_SESSION_BUS_ADDRESS' in os.environ and int(vim.eval("has('gui_running')"))==0: 
         import pynotify
         pynotify_enabled = True
+        pynotify.init('vimchat')
     else:
         pynotify_enabled = False
 except:
@@ -966,6 +967,7 @@ class VimChatScope:
         buddyListWidth = vim.eval('g:vimchat_buddylistwidth')
 
         try:
+            vim.command("set nonumber") 
             vim.command("silent vertical sview " + self.rosterFile)
             vim.command("silent wincmd H")
             vim.command("silent vertical resize " + buddyListWidth)
@@ -1132,11 +1134,13 @@ class VimChatScope:
         setlocal syntax=vimchat
         setlocal wrap
         setlocal foldmethod=marker
+        setlocal nonumber
         nnoremap <buffer> <silent> i :py VimChat.sendBufferShow()<CR>
         nnoremap <buffer> <silent> o :py VimChat.sendBufferShow()<CR>
         nnoremap <buffer> <silent> a :py VimChat.sendBufferShow()<CR>
         nnoremap <buffer> <silent> B :py VimChat.toggleBuddyList()<CR>
         nnoremap <buffer> <silent> q :py VimChat.deleteChat()<CR>
+        map <Tab> gt
         au CursorMoved <buffer> exe 'py VimChat.clearNotify()'
         """
         vim.command(commands)
@@ -1176,6 +1180,7 @@ class VimChatScope:
             setlocal nosi
             setlocal buftype=nowrite
             setlocal wrap
+            setlocal nonumber
             setlocal foldmethod=marker
             noremap <buffer> <silent> <CR> :py VimChat.sendMessage()<CR>
             inoremap <buffer> <silent> <CR> <Esc>:py VimChat.sendMessage()<CR>
@@ -1189,7 +1194,7 @@ class VimChatScope:
         vim.command('let b:groupchat=' + str(groupChat))
 
     def appendMessage(
-        self, account, buf, message, showJid='me',secure=False):
+        self, account, buf, message, showJid='Me',secure=False):
 
         if not buf:
             print "VimChat: Invalid Buffer to append to!"
@@ -1544,6 +1549,7 @@ class VimChatScope:
 
         try:
             VimChat.appendMessage(account, buf, message, fromJid, secure)
+            vim.command('normal G')
         except:
             print 'Error zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz'
             print 'could not appendMessage:', message, 'from:', fromJid
@@ -1583,6 +1589,8 @@ class VimChatScope:
                 return
 
         vim.command("set tabline=%#Error#New-message-from-" + jid)
+        # Make vim beep
+        vim.command("normal \<Esc>")
 
         self.pyNotification(jid+' says: ', msg, 'dialog-warning');
         os.system("play /usr/local/share/sounds/purple/receive.wav")
@@ -1593,11 +1601,9 @@ class VimChatScope:
                 thr1.start()
 
     def pyNotification(self, subject, msg, type):
-        if pynotify_enabled:
-            pynotify.init('vimchat')
-            n = pynotify.Notification(subject, msg, type)
-            n.set_timeout(10000)
-            n.show()
+        n = pynotify.Notification(subject, msg, type)
+        n.set_timeout(10000)
+        n.show()
 
     def clearNotify(self):
         vim.command('set tabline&')
