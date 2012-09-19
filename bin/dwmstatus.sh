@@ -1,5 +1,7 @@
 #!/bin/sh
 
+xmodmap /usr/home/lx/.Xmodmap 
+
 while true
 	do
         fullmem=`sysctl -n \

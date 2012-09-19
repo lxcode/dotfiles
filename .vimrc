@@ -1,7 +1,7 @@
 "left/right arrows to switch buffers in normal mode, this will probably annoy you
 map <right> :bn<cr>
 map <left> :bp<cr>
-map ** gqap
+map ** gwap
 map <F1> 1z=
 imap <F1> <Esc>b1z=ea<Space>
 map <F4> :w<CR> :!lacheck %<CR>
@@ -11,7 +11,7 @@ nnoremap map <silent> <F9> :NERDTreeToggle<CR>
 map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 map <F12> :cn<CR>
-map <C-p> :exe "ptag" expand("<cword>")<CR>
+"map <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 "set thesaurus+=/home/lx/.vim/thesaurus.txt
 
@@ -31,7 +31,10 @@ if has('gui_running')
     set ballooneval
     set balloondelay=100
 endif
-set gfn=Inconsolata\ 14
+set guifont=Inconsolata\ 14
+if has("gui_macvim")
+  set guifont=Monaco:h14
+endif
 set t_Co=256    "use 256 colors
 set hidden
 set formatprg=par
@@ -42,19 +45,21 @@ set mouse=a     " Turn this off for console-only mode
 set selectmode+=mouse
 set guioptions=aegit
 set pumheight=15
-set shortmess=atI
+set shortmess+=atIoT
 set scrolloff=3
 set ignorecase  "case insensitive searches
 set smartcase
 set wildmode=list:longest "shows a list of possible values when tab-completing
-set shortmess=a
 set hlsearch    "highlight all search matches
 set nojoinspaces "don't allow two spaces after a period when reformatting
 "this is a bunch of goofy auto-format stuff for bulleted lists, etc
-set formatoptions=nwrtql 
+set formatoptions=nwrtqljm
+set autoindent
 " This is the default comments string setting, with - added so it can be used 
 " in bulletted lists.
-set comments=s1:/*,mb:*,ex:*/,://,b:#,b:-,b:+,:%,:XCOMM,n:>,fb:-,b:\\item
+set comments-=s1:/*,mb:*,ex:*/
+set comments+=fb:*,b:\\item
+set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
 set grepprg=grep\ -nH\ $*
 set cpoptions=BFst
 set printoptions=syntax:n
@@ -64,8 +69,8 @@ set nowritebackup
 set directory=/tmp "litter up /tmp, not the CWD
 set nomodeline
 set showmode
-set ts=4        "tabstop
-set sw=4        "shiftwidth
+set ts=4
+set sw=4
 set backspace=indent,eol,start
 set ruler
 set notitle icon
@@ -77,7 +82,6 @@ set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls,*.
 set wildignore+=*.loc,*.gz,*.latexmain,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx
 set wildignore+=*.fdb_latexmk,*.ind
 set scrolloff=2
-set shortmess=otix
 set showcmd
 set sidescroll=1
 set lazyredraw ttyfast
@@ -202,7 +206,7 @@ let g:tagbar_type_markdown = {
 augroup cjava
 	au!
 	au BufNewFile *.c r ~/.vim/templates/template.c
-	au BufEnter *.[mCchly] set nospell
+	au BufEnter *.[mCchly] set nospell comments+=s1:/*,mb:*,ex:*/
     au BufRead,BufNewFile *.m setfiletype objc
 	au BufEnter *.cpp,*.java set nospell
     au BufWinLeave *.[mchly] mkview
