@@ -11,7 +11,7 @@ nnoremap map <silent> <F9> :NERDTreeToggle<CR>
 map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 map <F12> :cn<CR>
-"map <C-p> :exe "ptag" expand("<cword>")<CR>
+map <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 "set thesaurus+=/home/lx/.vim/thesaurus.txt
 
@@ -128,6 +128,10 @@ let g:vimchat_otr = 1
 let g:vimchat_statusicon = 0
 let g:vimchat_showPresenceNotification = -1
 map g<Tab> gt
+
+" CtrlP
+let g:ctrlp_map = '<Leader>t'
+
 
 " statline
 let g:statline_fugitive=1
