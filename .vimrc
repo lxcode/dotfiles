@@ -90,7 +90,7 @@ set errorfile=/tmp/errors.vim
 set cscopequickfix=s-,c-,d-,i-,t-,e-   " omfg so much nicer
 set foldlevelstart=2
 
-colorscheme tir_black
+colorscheme lx-256-dark
 source ~/.vim/ftplugin/man.vim
 
 "latex
@@ -130,7 +130,7 @@ let g:vimchat_showPresenceNotification = -1
 map g<Tab> gt
 
 " CtrlP
-let g:ctrlp_map = '<Leader>t'
+let g:ctrlp_map = '<C-e>'
 let g:ctrlp_max_height = 30
 
 
