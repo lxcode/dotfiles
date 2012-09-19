@@ -131,6 +131,8 @@ map g<Tab> gt
 
 " CtrlP
 let g:ctrlp_map = '<Leader>t'
+let g:ctrlp_max_height = 30
+
 
 
 " statline
