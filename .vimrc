@@ -130,7 +130,7 @@ let g:vimchat_showPresenceNotification = -1
 map g<Tab> gt
 
 " CtrlP
-let g:ctrlp_map = '<Leader>t'
+let g:ctrlp_map = '<C-e>'
 let g:ctrlp_max_height = 30
 
 
