@@ -102,7 +102,8 @@ augroup latex
     au BufEnter *.tex,*.sty syntax spell toplevel 
     au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
 	au BufEnter *.tex,*.sty set comments+=b:\\item 
-	au BufEnter *.tex,*.sty imap <buffer> [[ \begin{ imap <buffer> ]] <Plug>LatexCloseCurEnv
+	au BufEnter *.tex,*.sty imap <buffer> [[ \begin{
+	au BufEnter *.tex,*.sty imap <buffer> ]] <Plug>LatexCloseCurEnv
     au BufEnter deliverable.tex,status.tex badd vulnlist.tex
     au BufEnter deliverable.tex,status.tex,vulnlist.tex badd appendices.tex
     au BufEnter deliverable.tex badd execsummary.tex

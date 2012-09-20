@@ -15,8 +15,10 @@ let s:itemize_envs = ['itemize', 'enumerate', 'description']
 " indent on \left( and on \(, but not on (
 " indent on \left[ and on \[, but not on [ and \[...]
 " indent on \left\{ and on \{, and on {
-let s:open_pat = '\\begin\>\|\%(\\left\s*\)\=\\\=[{]\|\%(\\left\s*\|\\\)\([[]\(\p\+]\)\@!\|[)]\)'
-let s:close_pat = '\\end\>\|\%(\\right\s*\)\=\\\=[}]\|\%(\\right\s*\|\\\)[])]'
+"let s:open_pat = '\\begin\>\|\%(\\left\s*\)\=\\\=[{]\|\%(\\left\s*\|\\\)\([[]\(\p\+]\)\@!\|[)]\)'
+"let s:close_pat = '\\end\>\|\%(\\right\s*\)\=\\\=[}]\|\%(\\right\s*\|\\\)[])]'
+let s:open_pat = '\\begin\>\|\%(\\left\s*\)\|\%(\\left\s*\|\\\)\([[]\(\p\+]\)\@!\|[)]\)'
+let s:close_pat = '\\end\>\|\%(\\right\s*\)\|\%(\\right\s*\|\\\)[])]'
 
 
 " Compute Level {{{

@@ -21,21 +21,24 @@ function! LatexBox_FoldLevel(linenum)
     let ret = -2 
     
     " If next line is another section, end a fold at the good level 
-    if nline =~ '\\part{.*}'
-        let ret = "<1"
-    else
-        if nline =~ '\\chapter{.*}'
-            let ret = "<2"
-        else 
-            if nline =~ '\\section{.*}'
-                let ret = "<3"
-            else
-                if nline =~ '\\subsection{.*}'
-                    let ret = "<4"
+"    if nline =~ '\\vtitle{.*}'
+"        let ret = "<1"
+"    else
+        if nline =~ '\\part{.*}'
+            let ret = "<1"
+        else
+            if nline =~ '\\chapter{.*}'
+                let ret = "<2"
+            else 
+                if nline =~ '\\section{.*}'
+                    let ret = "<3"
+                else
+                    if nline =~ '\\subsection{.*}'
+                        let ret = "<4"
+                    endif
                 endif
             endif
         endif
-    endif
 
     echoerr ret
 
@@ -46,21 +49,24 @@ function! LatexBox_FoldLevel(linenum)
     endif
 
     " If the line is a new section, start a fold at the good level
-    if line =~ '\\part{.*}'
-        let ret = ">1"
-    else
-        if line =~ '\\chapter{.*}'
-            let ret = ">2"
+"    if nline =~ '\\vtitle{.*}'
+"        let ret = ">1"
+"    else
+        if line =~ '\\part{.*}'
+            let ret = ">1"
         else
-            if line =~ '\\section{.*}'
-                let ret = ">3"
+            if line =~ '\\chapter{.*}'
+                let ret = ">2"
             else
-                if line =~ '\\subsection{.*}'
-                    let ret = ">4"
+                if line =~ '\\section{.*}'
+                    let ret = ">3"
+                else
+                    if line =~ '\\subsection{.*}'
+                        let ret = ">4"
+                    endif
                 endif
             endif
         endif
-    endif
 
     return ret
 endfunction
