@@ -97,6 +97,7 @@ source ~/.vim/ftplugin/man.vim
 let g:LatexBox_latexmk_options = "-xelatex"
 let g:LatexBox_viewer = "evince"
 let g:Latexbox_Folding = 'yes'
+map tt i{\tt <Esc>wea} <Esc>
 
 augroup latex
     au BufEnter *.tex,*.sty syntax spell toplevel 
