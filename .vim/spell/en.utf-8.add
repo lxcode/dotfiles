@@ -1460,3 +1460,10 @@ shouldn
 virtualize
 LUKS
 Boneh
+couldn
+NSUUID
+UIDevice
+currentDevice
+uniqueIdentifier
+identifierForVendor
+CISO
