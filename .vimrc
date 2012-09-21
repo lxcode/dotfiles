@@ -101,7 +101,7 @@ let g:tex_verbspell = 'yes'
 map tt i{\tt <Esc>wEa}<Esc>
 
 augroup latex
-    au BufWritePost *.tex Latexmk
+    au BufWritePost *.tex silent! Latexmk
     au BufEnter *.tex,*.sty syntax spell toplevel 
     au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
 	au BufEnter *.tex,*.sty set comments+=b:\\item 

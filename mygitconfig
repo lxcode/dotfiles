@@ -1,0 +1,31 @@
+[user]
+	email = david@isecpartners.com
+[branch "master"]
+    remote = origin
+    merge = refs/heads/master
+[merge]
+	tool = fugitive
+[diff]
+	external = /home/lx/bin/git-diff-wrapper
+[pager]
+      diff =
+[core]
+	editor = vim
+	pager = less -r
+[color]
+    ui = auto
+[alias]
+st = status
+ci = commit
+br = branch
+co = checkout
+[mergetool "fugitive"]
+	cmd = gvim -f -c \"Gdiff\" \"$MERGED\"
+[push]
+	default = tracking
+[remote "origin"]
+	push = HEAD
+[web]
+	browser = chromium
+[browser "chromium"]
+	path = /usr/local/bin/chrome
