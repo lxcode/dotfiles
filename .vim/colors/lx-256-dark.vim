@@ -1,5 +1,5 @@
-" tir_black color scheme
-" Based on ir_black from: http://blog.infinitered.com/entries/show/8
+" based on tir_black color scheme
+" which was Based on ir_black from: http://blog.infinitered.com/entries/show/8
 " adds 256 color console support
 " changed WildMenu color to be the same as PMenuSel
 
@@ -10,7 +10,7 @@ if exists("syntax_on")
  syntax reset
 endif
 
-let colors_name = "tir_black"
+let colors_name = "lx-256-dark"
 
 " General colors
 hi Normal guifg=#f6f3e8 guibg=black ctermfg=white ctermbg=NONE
