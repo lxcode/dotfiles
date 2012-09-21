@@ -1,8 +1,8 @@
 XTerm*reverseVideo:   	    on
 XTerm*visualBell:   	    off
 XTerm*scrollLines:   	    10000
-XTerm*faceName: DejaVu Sans Mono
-XTerm*faceSize: 9
+XTerm*faceName: Inconsolata
+XTerm*faceSize: 13
 XTerm*termName:         xterm-256color
 Xft*antialias: 1
 Xft*dpi: 96

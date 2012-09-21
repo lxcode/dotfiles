@@ -1592,7 +1592,8 @@ class VimChatScope:
         # Make vim beep
         vim.command("normal \<Esc>")
 
-        self.pyNotification(jid+' says: ', msg, 'dialog-warning');
+        #        self.pyNotification(jid+' says: ', msg, 'dialog-warning')
+        os.system("notify-send -i dialog-warning -t 3000 " +jid+ " says: " +msg)
         os.system("play /usr/local/share/sounds/purple/receive.wav")
         if self.gtk_enabled:
             self.statusIcon.blink(True)
