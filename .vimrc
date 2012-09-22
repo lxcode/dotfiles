@@ -1,7 +1,9 @@
-"left/right arrows to switch buffers in normal mode, this will probably annoy you
+"left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
+" auto-format the current paragraph
 map ** gwap
+" correct spelling
 map <F1> 1z=
 imap <F1> <Esc>b1z=ea<Space>
 map <F4> :w<CR> :!lacheck %<CR>
@@ -10,7 +12,9 @@ map <silent> <F9> :NERDTreeToggle<CR>
 nnoremap map <silent> <F9> :NERDTreeToggle<CR>
 map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
+" jump to next quickfix item
 map <F12> :cn<CR>
+" preview the tag under the cursor
 map <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 "set thesaurus+=/home/lx/.vim/thesaurus.txt
@@ -24,71 +28,66 @@ filetype plugin on
 filetype indent on
 helptags ~/.vim/doc
 
-set et          "expand tabs
-set diffopt+=iwhite
-set cursorline
+set et                      " expand tabs
+set diffopt+=iwhite         " ignore whitespace in diffs
+set cursorline              " hightlight the line the cursor is on
 if has('gui_running')
     set ballooneval
     set balloondelay=100
 endif
-set guifont=Inconsolata\ 14
 if has("gui_macvim")
   set guifont=Monaco:h14
+else
+  set guifont=Inconsolata\ 14
 endif
-set t_Co=256    "use 256 colors
+set t_Co=256                " use 256 colors
 set hidden
-set formatprg=par
 set novb
 set number
-set viewdir=$HOME/.views
-set mouse=a     " Turn this off for console-only mode
-set selectmode+=mouse
-set guioptions=aegit
-set pumheight=15
-set shortmess+=atIoT
-set scrolloff=3
-set ignorecase  "case insensitive searches
-set smartcase
-set wildmode=list:longest "shows a list of possible values when tab-completing
-set hlsearch    "highlight all search matches
-set nojoinspaces "don't allow two spaces after a period when reformatting
-"this is a bunch of goofy auto-format stuff for bulleted lists, etc
-set formatoptions=nwrtqljm
+set viewdir=$HOME/.views    " keep view states out of my .vim
+set mouse=a                 " Turn this off for console-only mode
+set selectmode+=mouse	    " Allow the mouse to select
+set guioptions=aegit        " get rid of useless stuff in the gui
+set pumheight=15            " trim down the completion popup menu
+set shortmess+=atIoT        " save space in status messages
+set scrolloff=2             " 3 lines of buffer before scrolling
+set ignorecase              " case insensitive searches
+set smartcase               " unless you type uppercase explicitly
+set wildmode=list:longest   " shows a list of candidates when tab-completing
+set hlsearch                " highlight all search matches
+set nojoinspaces            " disallow two spaces after a period when joining
+set formatoptions=nwrtqljm  " auto-formatting style for bullets and comments
 set autoindent
-" This is the default comments string setting, with - added so it can be used 
-" in bulletted lists.
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
 set grepprg=grep\ -nH\ $*
-set cpoptions=BFst
-set printoptions=syntax:n
-set tags=tags;/ "use first tags file in a directory tree
-set nobackup
-set nowritebackup
-set directory=/tmp "litter up /tmp, not the CWD
-set nomodeline
-set showmode
-set ts=4
-set sw=4
+set cpoptions=BFt
+set tags=tags;/             " use first tags file in a directory tree
+set nobackup                " ugh, stop making useless crap
+set nowritebackup           " same with overwriting
+set directory=/tmp          " litter up /tmp, not the CWD
+set nomodeline              " modelines are dumb
+set tabstop=4
+set shiftwidth=4
 set backspace=indent,eol,start
-set ruler
-set notitle icon
-set helpheight=0
-set incsearch
-set showmatch
-set suffixes=.out
+set ruler                   " show position in file
+set title icon              " set title data for gui
+set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
+set helpheight=0            " no minimum helpheight
+set incsearch               " search incrementally
+set showmatch               " show the matching terminating bracket
+set suffixes=.out           " set priority for tab completion
 set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls,*.
 set wildignore+=*.loc,*.gz,*.latexmain,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx
 set wildignore+=*.fdb_latexmk,*.ind
-set scrolloff=2
 set showcmd
-set sidescroll=1
-set lazyredraw ttyfast
+set sidescroll=1            " soft wrap long lines
+set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
-"set updatecount=100 updatetime=3600000		" saves power on notebooks
 set cscopequickfix=s-,c-,d-,i-,t-,e-   " omfg so much nicer
 set foldlevelstart=2
+"set updatecount=100 updatetime=3600000		" saves power on notebooks
 
 colorscheme lx-256-dark
 source ~/.vim/ftplugin/man.vim
@@ -97,8 +96,6 @@ source ~/.vim/ftplugin/man.vim
 let g:LatexBox_latexmk_options = "-xelatex"
 let g:LatexBox_viewer = "evince"
 let g:Latexbox_Folding = 'yes'
-let g:tex_verbspell = 'yes'
-map tt i{\tt <Esc>wEa}<Esc>
 
 augroup latex
     au BufWritePost *.tex silent! Latexmk
@@ -108,6 +105,7 @@ augroup latex
 	au BufEnter *.tex,*.sty imap <buffer> [[ \begin{
 	au BufEnter *.tex,*.sty imap <buffer> ]] <Plug>LatexCloseCurEnv
 	au BufEnter *.tex,*.sty imap <S-Enter> \pagebreak
+    au BufEnter *.tex,*.sty map tt i{\tt <Esc>wEa}<Esc>
     au BufEnter deliverable.tex,status.tex badd vulnlist.tex
     au BufEnter deliverable.tex,status.tex,vulnlist.tex badd appendices.tex
     au BufEnter deliverable.tex badd execsummary.tex
@@ -137,8 +135,6 @@ map g<Tab> gt
 " CtrlP
 let g:ctrlp_map = '<C-e>'
 let g:ctrlp_max_height = 30
-
-
 
 " statline
 let g:statline_fugitive=1
@@ -241,6 +237,15 @@ augroup python
 	au BufWinEnter *.py silent loadview
 augroup end
 
+augroup markdown
+	au BufNewFile,BufRead *.md set spell
+	au BufWinLeave *.md, mkview
+	au BufWinEnter *.md, silent loadview
+	au BufWinEnter *.md, set textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
+    au BufWinEnter *.md, imap >> <C-t>
+    au BufWinEnter *.md, imap << <C-d>
+augroup end
+
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow 
 " keys
 augroup quickfix
@@ -261,12 +266,6 @@ augroup misc
 	au BufWinEnter *mutt-*, UniCycleOn
 	au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
-	au BufNewFile,BufRead *.md set spell
-	au BufWinLeave *.md, mkview
-	au BufWinEnter *.md, silent loadview
-	au BufWinEnter *.md, set textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
-    au BufWinEnter *.md, imap >> <C-t>
-    au BufWinEnter *.md, imap << <C-d>
 augroup end
 
 " Quickfix toggle
