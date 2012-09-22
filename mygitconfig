@@ -12,6 +12,7 @@
 [core]
 	editor = vim
 	pager = less -r
+	whitespace = nowarn
 [color]
     ui = auto
 [alias]
