@@ -34,20 +34,22 @@ set cursorline              " hightlight the line the cursor is on
 if has('gui_running')
     set ballooneval
     set balloondelay=100
+    set guioptions=aAegiM       " get rid of useless stuff in the gui
+    if has("gui_macvim")
+      set guifont=Monaco:h14
+    else
+      set guifont=Inconsolata\ 14
+    endif
 endif
-if has("gui_macvim")
-  set guifont=Monaco:h14
-else
-  set guifont=Inconsolata\ 14
-endif
+if $DISPLAY != "" 
+    set mouse=a                 " Turn this off for console-only mode
+    set selectmode+=mouse	    " Allow the mouse to select
+endif 
 set t_Co=256                " use 256 colors
 set hidden
 set novb
 set number
 set viewdir=$HOME/.views    " keep view states out of my .vim
-set mouse=a                 " Turn this off for console-only mode
-set selectmode+=mouse	    " Allow the mouse to select
-set guioptions=aegit        " get rid of useless stuff in the gui
 set pumheight=15            " trim down the completion popup menu
 set shortmess+=atIoT        " save space in status messages
 set scrolloff=2             " 3 lines of buffer before scrolling
@@ -68,8 +70,7 @@ set nobackup                " ugh, stop making useless crap
 set nowritebackup           " same with overwriting
 set directory=/tmp          " litter up /tmp, not the CWD
 set nomodeline              " modelines are dumb
-set tabstop=4
-set shiftwidth=4
+set tabstop=4 shiftwidth=4
 set backspace=indent,eol,start
 set ruler                   " show position in file
 set title icon              " set title data for gui
@@ -209,7 +210,6 @@ let g:tagbar_type_markdown = {
         \ ]
 \ }
 
-" augroups 
 augroup cjava
 	au!
 	au BufNewFile *.c r ~/.vim/templates/template.c
