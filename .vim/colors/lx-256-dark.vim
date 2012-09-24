@@ -28,6 +28,10 @@ hi FoldColumn guibg=#202020 guifg=darkgrey
 hi Title guifg=#f6f3e8 gui=bold ctermfg=187 cterm=bold
 hi Visual guibg=#262D51 ctermbg=60
 
+hi TabLineSel ctermfg=blue
+hi TabLineFill ctermbg=black ctermfg=black
+hi TabLine ctermfg=magenta
+
 hi SpecialKey guifg=#808080 guibg=#343434 ctermfg=8 ctermbg=236
 
 hi WildMenu guifg=black guibg=#cae682 ctermfg=0 ctermbg=195
