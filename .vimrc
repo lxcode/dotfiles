@@ -28,23 +28,25 @@ filetype plugin on
 filetype indent on
 helptags ~/.vim/doc
 
-set et                      " expand tabs
-set diffopt+=iwhite         " ignore whitespace in diffs
-set cursorline              " hightlight the line the cursor is on
+if has('gui')
+    set guioptions=aAegiM       " get rid of useless stuff in the gui
+    if has("gui_macvim")
+        set guifont=Monaco:h14
+    else
+        set guifont=Inconsolata\ 14
+    endif
+endif
 if has('gui_running')
     set ballooneval
     set balloondelay=100
-    set guioptions=aAegiM       " get rid of useless stuff in the gui
-    if has("gui_macvim")
-      set guifont=Monaco:h14
-    else
-      set guifont=Inconsolata\ 14
-    endif
 endif
 if $DISPLAY != "" 
-    set mouse=a                 " Turn this off for console-only mode
-    set selectmode+=mouse	    " Allow the mouse to select
+    set mouse=a             " Turn this off for console-only mode
+    set selectmode+=mouse	" Allow the mouse to select
 endif 
+set et                      " expand tabs
+set diffopt+=iwhite         " ignore whitespace in diffs
+set cursorline              " hightlight the line the cursor is on
 set t_Co=256                " use 256 colors
 set hidden
 set novb
@@ -97,6 +99,7 @@ source ~/.vim/ftplugin/man.vim
 let g:LatexBox_latexmk_options = "-xelatex"
 let g:LatexBox_viewer = "evince"
 let g:Latexbox_Folding = 'yes'
+let g:tex_comment_nospell=1
 
 augroup latex
     au BufWritePost *.tex silent! Latexmk
