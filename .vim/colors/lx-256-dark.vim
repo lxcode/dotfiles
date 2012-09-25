@@ -29,8 +29,8 @@ hi Title guifg=#f6f3e8 gui=bold ctermfg=187 cterm=bold
 hi Visual guibg=#262D51 ctermbg=60
 
 hi TabLineSel ctermfg=blue
-hi TabLineFill ctermbg=black ctermfg=black
-hi TabLine ctermfg=magenta
+hi TabLineFill ctermbg=black cterm=none
+hi TabLine ctermfg=magenta ctermbg=black cterm=none
 
 hi SpecialKey guifg=#808080 guibg=#343434 ctermfg=8 ctermbg=236
 
