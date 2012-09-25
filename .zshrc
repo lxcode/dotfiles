@@ -35,6 +35,7 @@ alias mc="sudo make config"
 alias me="sudo make extract"
 alias cc_args="gmake CC='/home/lx/.vim/bin/cc_args.py gcc' CXX='/home/lx/.vim/bin/cc_args.py g++' -B"
 alias vim="vim --servername myservername"
+alias c64term='urxvt -bg "#3a319c" -fg "#7b71d6" -fn "xft:Adore64:size=10"'
 
 
 # List only directories and symbolic
