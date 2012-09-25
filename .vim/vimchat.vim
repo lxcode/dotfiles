@@ -59,7 +59,6 @@ try:
 except:
     vim.command('let g:vimchat_loaded = 1')
 
-pynotify_enabled = False
 try:
     if 'DBUS_SESSION_BUS_ADDRESS' in os.environ and int(vim.eval("has('gui_running')"))==0: 
         import pynotify
@@ -1589,8 +1588,8 @@ class VimChatScope:
                 return
 
                 #vim.command("set tabline=%#Error#New-message-from-" + jid)
-        #        self.pyNotification(jid.split("@")[0] +' says: ', msg, 'dialog-warning')
-        os.system('notify-send -i dialog-warning -t 3000 "%s says: %s"' % (jid, msg))
+                self.pyNotification(jid.split("@")[0] +' says: ', msg, 'dialog-warning')
+        #os.system('notify-send -i dialog-warning -t 3000 "%s says: %s"' % (jid.split("@")[0], msg))
         os.system("play /usr/local/share/sounds/purple/receive.wav")
         # Make vim beep
         vim.command("normal \<Esc>")
