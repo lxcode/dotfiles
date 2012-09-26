@@ -1587,9 +1587,8 @@ class VimChatScope:
             if not foundMyName:
                 return
 
-                #vim.command("set tabline=%#Error#New-message-from-" + jid)
-                self.pyNotification(jid.split("@")[0] +' says: ', msg, 'dialog-warning')
-        #os.system('notify-send -i dialog-warning -t 3000 "%s says: %s"' % (jid.split("@")[0], msg))
+        #vim.command("set tabline=%#Error#New-message-from-" + jid)
+        self.pyNotification(jid.split("@")[0] +' says: ', msg, 'dialog-warning')
         os.system("play /usr/local/share/sounds/purple/receive.wav")
         # Make vim beep
         vim.command("normal \<Esc>")
