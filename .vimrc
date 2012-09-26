@@ -1,6 +1,8 @@
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
+" there's probably some very good reason to not do this, guess I'll find out
+nnoremap <Tab> :bn<CR>
 " auto-format the current paragraph
 map ** gwap
 " correct spelling
@@ -33,7 +35,7 @@ if has('gui')
     if has("gui_macvim")
         set guifont=Monaco:h14
     else
-        set guifont=Inconsolata\ 14
+        set guifont=Inconsolata\ 15
     endif
 endif
 if has('gui_running')
@@ -84,12 +86,11 @@ set suffixes=.out           " set priority for tab completion
 set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls,*.
 set wildignore+=*.loc,*.gz,*.latexmain,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx
 set wildignore+=*.fdb_latexmk,*.ind
-set showcmd
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
 set cscopequickfix=s-,c-,d-,i-,t-,e-   " omfg so much nicer
-set foldlevelstart=2
+set foldlevelstart=2        " the default level of fold nesting on startup
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
 colorscheme lx-256-dark
@@ -110,9 +111,6 @@ augroup latex
 	au BufEnter *.tex,*.sty imap <buffer> ]] <Plug>LatexCloseCurEnv
 	au BufEnter *.tex,*.sty imap <S-Enter> \pagebreak
     au BufEnter *.tex,*.sty map tt i{\tt <Esc>wEa}<Esc>
-    au BufEnter deliverable.tex,status.tex badd vulnlist.tex
-    au BufEnter deliverable.tex,status.tex,vulnlist.tex badd appendices.tex
-    au BufEnter deliverable.tex badd execsummary.tex
 	au BufWinLeave *.tex,*.sty mkview
 	au BufWinEnter *.tex,*.sty silent loadview
 augroup end
@@ -138,7 +136,11 @@ map g<Tab> gt
 
 " CtrlP
 let g:ctrlp_map = '<C-e>'
+let g:ctrlp_by_filename = 1
 let g:ctrlp_max_height = 30
+map <Leader>e :CtrlP<CR>
+map <Leader>b :CtrlPBuffer<CR>
+map <Leader>m :CtrlPMRU<CR>
 
 " statline
 let g:statline_fugitive=1
