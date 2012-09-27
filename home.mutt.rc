@@ -1,0 +1,36 @@
+#color object    foreground     background
+color normal     color244       default  # normal text
+color indicator  default        color17  # actual message
+color status     color17        color240 # status line (different from vim)
+color error      color124       default  # errors
+color message    color65        default  # info messages
+color signature  color55        default  # signature
+color attachment color60        default  # MIME attachments
+color search     color16        color23  # search matches
+color hdrdefault color24        default  # default header lines
+color markers    color100       default  # markers (when line wraps)
+color quoted     color124       default  # quoted text
+color quoted1    color30        default
+color quoted2    color124       default
+color quoted3    color30        default
+color quoted4    color124       default
+color quoted5    color30        default
+color quoted6    color124       default
+color quoted7    color30        default
+color quoted8    color124       default
+color quoted9    color30        default
+
+#
+#     object     foreground     backg.   RegExp
+#
+color header     color65        default  '^date:'
+color header     color65        default  '^(to|from|b?cc|reply-to|x-label):'
+color header     color101       default  '^subject:.*$'
+color body       color94        default  "(((https?|ftp|gopher)://|(file|news|mailto):)[^\' <>\"]+|(www[0-9]?|web|w3)\\.)[^\' ,;<>\":]+"
+color body       color29        default  "[a-z0-9._-]+@[a-z0-9._-]+[a-z]{2}"
+color body       color55        default  "^gpg:.*"
+
+color index      color30        default ~N|~O   # New or Old
+color index      brightmagenta        default ~F      # Flagged
+color index      color124       default ~D      # Deleted
+color index      color60        default ~T      # Tagged
