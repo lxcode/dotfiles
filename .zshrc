@@ -34,7 +34,7 @@ alias pm="sudo portmaster"
 alias mc="sudo make config"
 alias me="sudo make extract"
 alias cc_args="gmake CC='/home/lx/.vim/bin/cc_args.py gcc' CXX='/home/lx/.vim/bin/cc_args.py g++' -B"
-if [ -n $DISPLAY ]; then
+if [ -n "$DISPLAY" ]; then
     alias vim="vim --servername vimserver"
 fi
 alias c64term='urxvt -bg "#3a319c" -fg "#7b71d6" -fn "xft:Adore64:size=10"'
