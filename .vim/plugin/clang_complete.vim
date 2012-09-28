@@ -7,7 +7,9 @@
 " Help: Use :help clang_complete
 "
 
-au FileType c,cpp,objc,objcpp call <SID>ClangCompleteInit()
+if exists('g:clang_complete_enable')
+    au FileType c,cpp,objc,objcpp call <SID>ClangCompleteInit()
+endif
 
 let b:clang_parameters = ''
 let b:clang_user_options = ''
