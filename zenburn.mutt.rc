@@ -12,33 +12,35 @@
 #
 
 # general-doesn't-fit stuff
-color normal     color188 color234
+#color normal     color188 color234
+color normal     color188 default
 color error      color115 color236
 color markers    color142 color238
-color tilde      color108 color234
+color tilde      color108 default
 color status     color144 color237
 
 # index stuff
 color indicator  color108 color236
-color tree       color109 color234
-#color index      color188 color234 ~A
-#color index      color188 color234 ~N
-#color index      color188 color234 ~O
-color index      color174 color234 ~F
-#color index      color174 color234 ~D
+color tree       color109 default
+#color index      color188 default ~A
+#color index      color188 default ~N
+#color index      color188 default ~O
+color index      color174 default ~F
+#color index      color174 default ~D
 
 
-#color index_number  color116 color234
-#color index_date    color47  color234
-#color index_flags   color0   color234
-#color index_label   color49  color234
-#color index_size    color116 color234
-#color index_subject color108 color234 ~A
+#color index_number  color116 default
+#color index_date    color47  default
+#color index_flags   default   default
+#color index_label   color49  default
+#color index_size    color116 default
+#color index_subject color108 default ~A
 
 
 # header stuff
-color hdrdefault color223 color237
-color header     color223 color237 "^Subject"
+color hdrdefault color223 default
+color header     color223 default "^Subject"
+color header     color223 default "^From"
 
 # gpg stuff
 color body       color188 color237 "^gpg: Good signature.*"
