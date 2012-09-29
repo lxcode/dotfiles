@@ -267,9 +267,8 @@ augroup end
 
 augroup misc
 	au BufWinEnter *.fugitiveblame, set nospell
-	au BufWinEnter *.txt, set spell textwidth=78
-	au BufWinLeave *.txt, mkview
-	au BufWinEnter *.txt, silent loadview
+    au BufWinLeave *.txt, mkview
+    au BufWinEnter *.txt, silent loadview
 	au BufWinLeave *.conf, mkview
 	au BufWinEnter *.conf, silent loadview
 	au BufWinEnter *mutt-*, set spell complete+=k
@@ -277,6 +276,12 @@ augroup misc
 	au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
 augroup end
+
+if (&ft=='help')
+    set nospell
+else
+    set spell textwidth=78
+endif
 
 " Quickfix toggle
 let g:quickfix_is_open = 0
