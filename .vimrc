@@ -20,7 +20,7 @@ map <F12> :cn<CR>
 map <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Delete my signature
-map dS Gvipdgg10j
+map <Leader>ds Gvipdgg10j
 
 " save my pinky
 nore ; :
@@ -101,7 +101,7 @@ colorscheme lx-256-dark
 source ~/.vim/ftplugin/man.vim
 
 "latex
-let g:LatexBox_latexmk_options = "-xelatex"
+"let g:LatexBox_latexmk_options = "-xelatex"
 let g:LatexBox_viewer = "evince"
 let g:Latexbox_Folding = 'yes'
 let g:tex_comment_nospell=1
