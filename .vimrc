@@ -266,7 +266,7 @@ augroup quickfix
 augroup end
 
 augroup misc
-	au BufWinEnter *.fugitiveblame, set nospell
+	au BufWinEnter *.fugitiveblame,*.diff, set nospell
     au BufWinLeave *.txt, mkview
     au BufWinEnter *.txt, silent loadview
 	au BufWinLeave *.conf, mkview
