@@ -9,4 +9,5 @@ ftplugin/latex-box/latexmk.vim
 ftplugin/latex-box/mappings.vim
 ftplugin/latex-box/motion.vim
 ftplugin/latex-box/vimcomplete.bst
+indent/tex.vim
 doc/latex-box.txt

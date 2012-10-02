@@ -1,7 +1,5 @@
 " based on tir_black color scheme
 " which was Based on ir_black from: http://blog.infinitered.com/entries/show/8
-" adds 256 color console support
-" changed WildMenu color to be the same as PMenuSel
 
 set background=dark
 hi clear
@@ -13,11 +11,12 @@ endif
 let colors_name = "lx-256-dark"
 
 " General colors
-hi Normal guifg=#f6f3e8 guibg=black ctermfg=white ctermbg=NONE
+"hi Normal guifg=#f6f3e8 guibg=black ctermfg=white ctermbg=NONE
+hi Normal guifg=#f6f3e8 guibg=#121212 ctermfg=white ctermbg=233
 hi NonText guifg=#070707 guibg=black ctermfg=0
 
 hi Cursor guifg=black guibg=white ctermfg=0 ctermbg=15
-hi LineNr guifg=#3D3D3D guibg=black ctermfg=239 ctermbg=NONE
+hi LineNr guifg=#3D3D3D guibg=#101010 ctermfg=239 ctermbg=NONE
 
 hi VertSplit guifg=#202020 guibg=#202020 ctermfg=235 ctermbg=60 
 hi StatusLine guifg=#202020 guibg=#808080 ctermfg=235 ctermbg=60
@@ -48,8 +47,8 @@ hi SpellLocal cterm=underline
 hi ModeMsg guifg=black guibg=#C6C5FE gui=bold ctermfg=0 ctermbg=189 cterm=bold
 
 if version >= 700 " Vim 7.x specific colors
- hi CursorLine guibg=#121212 gui=none ctermbg=234 cterm=none
- hi CursorColumn guibg=#121212 gui=none ctermbg=234 cterm=none
+ hi CursorLine guibg=#1c1c1c gui=none ctermbg=234 cterm=none
+ hi CursorColumn guibg=#1c1c1c gui=none ctermbg=234 cterm=none
  hi MatchParen guifg=#f6f3e8 guibg=#857b6f gui=bold ctermfg=white ctermbg=darkgray 
  hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242 
  hi PmenuSel guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195 

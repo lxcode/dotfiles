@@ -13,7 +13,7 @@ else
 	endfunction
 endif
 
-if !exists('g:LatexBox_loaded')
+if !exists('b:LatexBox_loaded')
 
 	let prefix = expand('<sfile>:p:h') . '/latex-box/'
 
@@ -24,6 +24,7 @@ if !exists('g:LatexBox_loaded')
 	execute 'source ' . s:FNameEscape(prefix . 'folding.vim')
 	" added by AH to add main.tex file finder
 	execute 'source ' . s:FNameEscape(prefix . 'findmain.vim')
+	execute 'source ' . s:FNameEscape(prefix . 'mappings.vim')
 
 	let b:LatexBox_loaded = 1
 
