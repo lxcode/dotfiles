@@ -19,7 +19,8 @@ map <F12> :cn<CR>
 " preview the tag under the cursor
 map <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
-"set thesaurus+=/home/lx/.vim/thesaurus.txt
+" Delete my signature
+map <Leader>ds Gvipdgg10j
 
 " save my pinky
 nore ; :
@@ -48,15 +49,14 @@ if $DISPLAY != ""
 endif 
 set et                      " expand tabs
 set diffopt+=iwhite         " ignore whitespace in diffs
-set cursorline              " hightlight the line the cursor is on
-set t_Co=256                " use 256 colors
-set hidden
-set novb
-set number
+set cursorline              " I like this, but damn is it slow
+set hidden                  " allow hidden buffers
+set novb                    " no visual bell
+set number                  " line numbers
 set viewdir=$HOME/.views    " keep view states out of my .vim
 set pumheight=15            " trim down the completion popup menu
 set shortmess+=atIoT        " save space in status messages
-set scrolloff=2             " 3 lines of buffer before scrolling
+set scrolloff=3             " 3 lines of buffer before scrolling
 set ignorecase              " case insensitive searches
 set smartcase               " unless you type uppercase explicitly
 set wildmode=list:longest   " shows a list of candidates when tab-completing
@@ -93,11 +93,15 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-   " omfg so much nicer
 set foldlevelstart=2        " the default level of fold nesting on startup
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
+" colors
+set t_Co=256                " use 256 colors
+let g:zenburn_high_Contrast=1
 colorscheme lx-256-dark
+
 source ~/.vim/ftplugin/man.vim
 
 "latex
-let g:LatexBox_latexmk_options = "-xelatex"
+"let g:LatexBox_latexmk_options = "-xelatex"
 let g:LatexBox_viewer = "evince"
 let g:Latexbox_Folding = 'yes'
 let g:tex_comment_nospell=1
@@ -151,6 +155,7 @@ let g:statline_mixed_indent=0
 nmap <C-n> <Plug>(GrepHereCurrent) 
 
 " clang
+"let g:clang_complete_enable = 1
 let g:clang_complete_copen = 0
 let g:clang_snippets = 1
 let g:clang_snippets_engine = 'snipmate'
@@ -261,10 +266,9 @@ augroup quickfix
 augroup end
 
 augroup misc
-	au BufWinEnter *.fugitiveblame, set nospell
-	au BufWinEnter *.txt, set spell
-	au BufWinLeave *.txt, mkview
-	au BufWinEnter *.txt, silent loadview
+	au BufWinEnter *.fugitiveblame,*.diff, set nospell
+    au BufWinLeave *.txt, mkview
+    au BufWinEnter *.txt, silent loadview
 	au BufWinLeave *.conf, mkview
 	au BufWinEnter *.conf, silent loadview
 	au BufWinEnter *mutt-*, set spell complete+=k
@@ -272,6 +276,12 @@ augroup misc
 	au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
 augroup end
+
+if (&ft=='help')
+    set nospell
+else
+    set spell textwidth=78
+endif
 
 " Quickfix toggle
 let g:quickfix_is_open = 0
@@ -286,4 +296,45 @@ function! QuickfixToggle()
         copen
         let g:quickfix_is_open = 1
     endif
+endfunction
+
+" ex command for toggling hex mode - define mapping if desired
+command -bar Hexmode call ToggleHex()
+
+" helper function to toggle hex mode
+function ToggleHex()
+  " hex mode should be considered a read-only operation
+  " save values for modified and read-only for restoration later,
+  " and clear the read-only flag for now
+  let l:modified=&mod
+  let l:oldreadonly=&readonly
+  let &readonly=0
+  let l:oldmodifiable=&modifiable
+  let &modifiable=1
+  if !exists("b:editHex") || !b:editHex
+    " save old options
+    let b:oldft=&ft
+    let b:oldbin=&bin
+    " set new options
+    setlocal binary " make sure it overrides any textwidth, etc.
+    let &ft="xxd"
+    " set status
+    let b:editHex=1
+    " switch to hex editor
+    %!xxd
+  else
+    " restore old options
+    let &ft=b:oldft
+    if !b:oldbin
+      setlocal nobinary
+    endif
+    " set status
+    let b:editHex=0
+    " return to normal editing
+    %!xxd -r
+  endif
+  " restore values for modified and read only state
+  let &mod=l:modified
+  let &readonly=l:oldreadonly
+  let &modifiable=l:oldmodifiable
 endfunction
