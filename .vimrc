@@ -62,7 +62,7 @@ set smartcase               " unless you type uppercase explicitly
 set wildmode=list:longest   " shows a list of candidates when tab-completing
 set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
-set formatoptions=nwrtqljm  " auto-formatting style for bullets and comments
+set formatoptions=qnwrtljm  " auto-formatting style for bullets and comments
 set autoindent
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
@@ -85,7 +85,7 @@ set showmatch               " show the matching terminating bracket
 set suffixes=.out           " set priority for tab completion
 set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls,*.
 set wildignore+=*.loc,*.gz,*.latexmain,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx
-set wildignore+=*.fdb_latexmk,*.ind
+set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
@@ -110,7 +110,7 @@ augroup latex
     au BufWritePost *.tex silent! Latexmk
     au BufEnter *.tex,*.sty syntax spell toplevel 
     au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
-	au BufEnter *.tex,*.sty set comments+=b:\\item 
+	au BufEnter *.tex,*.sty set comments+=b:\\item formatoptions-=q
 	au BufEnter *.tex,*.sty imap <buffer> [[ \begin{
 	au BufEnter *.tex,*.sty imap <buffer> ]] <Plug>LatexCloseCurEnv
 	au BufEnter *.tex,*.sty imap <S-Enter> \pagebreak

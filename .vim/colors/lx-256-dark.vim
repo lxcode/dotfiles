@@ -20,7 +20,7 @@ hi LineNr guifg=#3D3D3D guibg=#101010 ctermfg=239 ctermbg=NONE
 
 hi VertSplit guifg=#202020 guibg=#202020 ctermfg=235 ctermbg=60 
 hi StatusLine guifg=#202020 guibg=#808080 ctermfg=235 ctermbg=60
-hi StatusLineNC guifg=#080808 guibg=#808080 ctermfg=240 ctermbg=235 
+hi StatusLineNC guifg=#080808 guibg=#202020 ctermfg=240 ctermbg=235
 
 hi Folded guifg=#a0a8b0 guibg=#384048 ctermfg=grey ctermbg=60
 hi FoldColumn guibg=#202020 guifg=darkgrey
@@ -67,12 +67,12 @@ hi Conditional guifg=#6699CC ctermfg=110
 hi Todo guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195 
 hi Constant guifg=#99CC99 ctermfg=151 
 
-hi Identifier guifg=#C6C5FE ctermfg=189 
+hi Identifier guifg=#C6C5FE ctermfg=189
 hi Function guifg=#FFD2A7 ctermfg=223 
 hi Type guifg=#FFFFB6 ctermfg=229 
-hi Statement guifg=#6699CC ctermfg=110 
+hi Statement guifg=#6699CC ctermfg=110
 
-hi Special guifg=#E18964 ctermfg=173 
+hi Special guifg=#E18964 ctermfg=173
 hi Delimiter guifg=#00A0A0 ctermfg=37 
 hi Operator guifg=white ctermfg=white 
 
