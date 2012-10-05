@@ -67,7 +67,7 @@ set autoindent
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
-set grepprg=grep\ -nH\ $*
+set grepprg="unbuffer grep\ -nH\ $*"
 set cpoptions=BFt
 set tags=tags;/             " use first tags file in a directory tree
 set nobackup                " ugh, stop making useless crap
@@ -263,6 +263,7 @@ augroup quickfix
 	au FileType qf, set nospell
 	au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
 	au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
+	au FileType qf, setlocal statusline=\ %n\ \ %f%=L%l/%L\ %P
 augroup end
 
 augroup misc
