@@ -67,7 +67,7 @@ set autoindent
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
-set grepprg="unbuffer grep\ -nH\ $*"
+set grepprg="unbuffer grep\ -nIH\ $*"
 set cpoptions=BFt
 set tags=tags;/             " use first tags file in a directory tree
 set nobackup                " ugh, stop making useless crap
@@ -108,6 +108,7 @@ let g:tex_comment_nospell=1
 
 augroup latex
     au BufWritePost *.tex silent! Latexmk
+    au BufEnter *.tex source ~/.vim/ftplugin/quotes.vim
     au BufEnter *.tex,*.sty syntax spell toplevel 
     au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
 	au BufEnter *.tex,*.sty set comments+=b:\\item formatoptions-=q
