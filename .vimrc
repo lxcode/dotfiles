@@ -21,6 +21,7 @@ map <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Delete my signature
 map <Leader>ds Gvipdgg10j
+set pastetoggle=<F11>
 
 " save my pinky
 nore ; :
@@ -64,6 +65,7 @@ set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
 set formatoptions=qnwrtljm  " auto-formatting style for bullets and comments
 set autoindent
+set shiftround
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
@@ -95,7 +97,7 @@ set foldlevelstart=2        " the default level of fold nesting on startup
 
 " colors
 set t_Co=256                " use 256 colors
-let g:zenburn_high_Contrast=1
+"let g:zenburn_high_Contrast=1
 colorscheme lx-256-dark
 
 source ~/.vim/ftplugin/man.vim
@@ -154,6 +156,10 @@ let g:statline_mixed_indent=0
 
 " grephere
 nmap <C-n> <Plug>(GrepHereCurrent) 
+
+" vim-notes
+let g:notes_directory = '~/Documents/Notes'
+let g:notes_suffix = '.notes'
 
 " clang
 "let g:clang_complete_enable = 1
@@ -253,8 +259,10 @@ augroup markdown
 	au BufWinLeave *.md, mkview
 	au BufWinEnter *.md, silent loadview
 	au BufWinEnter *.md, set textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
-    au BufWinEnter *.md, imap >> <C-t>
-    au BufWinEnter *.md, imap << <C-d>
+    au BufWinEnter *.md,*.notes, imap <C-l> <C-t>
+    au BufWinEnter *.md,*.notes, imap <C-h> <C-d>
+    au BufWinEnter *.md,*.notes, imap >> <C-t>
+    au BufWinEnter *.md,*.notes, imap << <C-d>
 augroup end
 
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow 
