@@ -210,6 +210,8 @@ let g:tagbar_type_tex = {
         \ 't:subsections',
         \ 'u:subsubsections',
         \ 'v:vulns',
+        \ 'r:strecs',
+        \ 'R:ltrecs',
         \ 'g:graphics',
         \ 'l:labels',
         \ 'r:refs:1',
