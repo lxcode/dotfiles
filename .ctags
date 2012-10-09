@@ -14,5 +14,14 @@
 --regex-latex=/^\\lstinputlisting[[:space:]]*(\[[^]]*\])?[[:space:]]*(\[[^]]*\])?[[:space:]]*\{([^}]+)\}/\3/g,graphic+listing/
 --regex-latex=/\\label[[:space:]]*\{([^}]+)\}/\1/l,label/
 --regex-latex=/\\ref[[:space:]]*\{([^}]+)\}/\1/r,ref/
+--regex-latex=/\\vref[[:space:]]*\{([^}]+)\}/\1/r,vref/
 --regex-latex=/\\pageref[[:space:]]*\{([^}]+)\}/\1/p,pageref/
---regex-latex=/\\vtitle\{([^}]*)\}/\1/v,vuln/
+--regex-latex=/\\vtitle[[:space:]]*\{([^}]+)\}/\1/v,vuln/
+--regex-latex=/\\strec[[:space:]]*\{([^}]+)\}/\1/r,strec/
+--regex-latex=/\\ltrec[[:space:]]*\{([^}]+)\}/\1/R,ltrec/
+
+--langdef=markdown
+--langmap=markdown:.md
+--regex-markdown=/^#[ \t]+(.*)/\1/h,Heading_L1/
+--regex-markdown=/^##[ \t]+(.*)/\1/i,Heading_L2/
+--regex-markdown=/^###[ \t]+(.*)/\1/k,Heading_L3/
