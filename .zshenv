@@ -1,4 +1,4 @@
-for VI in /usr/local/bin/vim /usr/local/bin/nvi /usr/bin/vi
+for VI in /usr/local/bin/vim /opt/local/bin/vim /usr/bin/vim /usr/local/bin/nvi /usr/bin/vi
 do
 	if [ -x $VI ]; then
 		export EDITOR=$VI
