@@ -39,10 +39,6 @@ if [ -n "$DISPLAY" ]; then
     alias vim="vim --servername vimserver"
 fi
 
-if [ -n "$DISPLAY" ]; then
-    alias vim="vim --servername vimserver"
-fi
-
 # List only directories and symbolic
 # links that point to directories
 alias lsd='ls -ld *(-/DN)'
