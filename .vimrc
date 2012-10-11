@@ -36,6 +36,7 @@ if has('gui')
     set guioptions=aAegiM       " get rid of useless stuff in the gui
     if has("gui_macvim")
         set guifont=Monaco:h14
+        set clipboard=unnamed
     else
         set guifont=Inconsolata\ 15
     endif
