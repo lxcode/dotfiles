@@ -55,9 +55,9 @@ def parseArguments(arguments):
     elif arg == "-include":
       nextIsIncludeFile = True
 
-  result = map(lambda x: "-I" + x, includes)
-  result += map(lambda x: "-D" + x, defines)
-  result += map(lambda x: "-include " + x, include_file)
+  result = list(map(lambda x: "-I" + x, includes))
+  result.extend(map(lambda x: "-D" + x, defines))
+  result.extend(map(lambda x: "-include " + x, include_file))
 
   return result
 
@@ -76,9 +76,12 @@ result = mergeLists(configuration, args)
 writeConfiguration(map(lambda x: x + "\n", result))
 
 
-status = os.system(" ".join(sys.argv[1:]))
-if not os.WIFEXITED(status):
+import subprocess
+proc = subprocess.Popen(sys.argv[1:])
+ret = proc.wait()
+
+if ret is None:
   sys.exit(1)
-sys.exit(os.WEXITSTATUS(status))
+sys.exit(ret)
 
 # vim: set ts=2 sts=2 sw=2 expandtab :
