@@ -37,6 +37,7 @@ if has('gui')
     if has("gui_macvim")
         set guifont=Monaco:h14
         set clipboard=unnamed
+        let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
     else
         set guifont=Inconsolata\ 15
     endif
@@ -64,7 +65,7 @@ set smartcase               " unless you type uppercase explicitly
 set wildmode=list:longest   " shows a list of candidates when tab-completing
 set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
-set formatoptions=qnwrtljm  " auto-formatting style for bullets and comments
+set formatoptions=qnwrtlm  " auto-formatting style for bullets and comments
 set autoindent
 set shiftround
 set comments-=s1:/*,mb:*,ex:*/
@@ -163,7 +164,7 @@ let g:notes_directory = '~/Documents/Notes'
 let g:notes_suffix = '.notes'
 
 " clang
-"let g:clang_complete_enable = 1
+let g:clang_complete_enable = 1
 let g:clang_complete_copen = 0
 let g:clang_snippets = 1
 let g:clang_snippets_engine = 'snipmate'

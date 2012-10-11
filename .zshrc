@@ -13,7 +13,6 @@ alias j=jobs
 alias dis=disown
 alias pu=pushd
 alias yt='cd /tmp; youtube-dl `sselp`'
-alias open="xdg-open"
 alias po=popd
 alias d='dirs -v'
 alias h=history

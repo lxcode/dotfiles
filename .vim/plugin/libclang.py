@@ -4,19 +4,74 @@ import time
 import re
 import threading
 
-def initClangComplete(clang_complete_flags):
+def initClangComplete(clang_complete_flags, library_path = None):
   global index
+  if library_path:
+    Config.set_library_path(library_path)
+
+  Config.set_compatibility_check(False)
   index = Index.create()
   global translationUnits
   translationUnits = dict()
   global complete_flags
   complete_flags = int(clang_complete_flags)
+  global libclangLock
+  libclangLock = threading.Lock()
 
 # Get a tuple (fileName, fileContent) for the file opened in the current
 # vim buffer. The fileContent contains the unsafed buffer content.
 def getCurrentFile():
   file = "\n".join(vim.eval("getline(1, '$')"))
   return (vim.current.buffer.name, file)
+
+class CodeCompleteTimer:
+  def __init__(self, debug, file, line, column):
+    self._debug = debug
+
+    if not debug:
+      return
+
+    content = vim.eval("getline('.')");
+    print " "
+    print "libclang code completion"
+    print "========================"
+    print "File: %s" % file
+    print "Line: %d, Column: %d" % (line, column)
+    print " "
+    print "%s" % content
+
+    print " "
+
+    current = time.time()
+    self._start = current
+    self._last = current
+    self._events = []
+
+  def registerEvent(self, event):
+    if not self._debug:
+      return
+
+    current = time.time()
+    since_last = current - self._last
+    self._last = current
+    self._events.append((event, since_last))
+
+  def finish(self):
+    if not self._debug:
+      return
+
+    overall = self._last - self._start
+
+    for event in self._events:
+      name, since_last = event
+      percent = 1 / overall * since_last * 100
+      print "libclang code completion - %25s: %.3fs (%5.1f%%)" % \
+        (name, since_last, percent)
+
+    print " "
+    print "Overall: %.3f s" % overall
+    print "========================"
+    print " "
 
 def getCurrentTranslationUnit(args, currentFile, fileName, update = False):
   if fileName in translationUnits:
@@ -27,16 +82,16 @@ def getCurrentTranslationUnit(args, currentFile, fileName, update = False):
       tu.reparse([currentFile])
       if debug:
         elapsed = (time.time() - start)
-        print "LibClang - Reparsing: " + str(elapsed)
+        print "LibClang - Reparsing: %.3f" % elapsed
     return tu
 
   if debug:
     start = time.time()
-  flags = TranslationUnit.PrecompiledPreamble | TranslationUnit.CXXPrecompiledPreamble # | TranslationUnit.CacheCompletionResults
+  flags = TranslationUnit.PARSE_PRECOMPILED_PREAMBLE
   tu = index.parse(fileName, args, [currentFile], flags)
   if debug:
     elapsed = (time.time() - start)
-    print "LibClang - First parse: " + str(elapsed)
+    print "LibClang - First parse: %.3f" % elapsed
 
   if tu == None:
     print "Cannot parse this source file. The following arguments " \
@@ -53,7 +108,7 @@ def getCurrentTranslationUnit(args, currentFile, fileName, update = False):
   tu.reparse([currentFile])
   if debug:
     elapsed = (time.time() - start)
-    print "LibClang - First reparse (generate PCH cache): " + str(elapsed)
+    print "LibClang - First reparse (generate PCH cache): %.3f" % elapsed
   return tu
 
 def splitOptions(options):
@@ -87,6 +142,8 @@ def getQuickFix(diagnostic):
   elif diagnostic.severity == diagnostic.Note:
     type = 'I'
   elif diagnostic.severity == diagnostic.Warning:
+    if "argument unused during compilation" in diagnostic.spelling:
+      return None
     type = 'W'
   elif diagnostic.severity == diagnostic.Error:
     type = 'E'
@@ -149,40 +206,60 @@ def updateCurrentDiagnostics():
   debug = int(vim.eval("g:clang_debug")) == 1
   userOptionsGlobal = splitOptions(vim.eval("g:clang_user_options"))
   userOptionsLocal = splitOptions(vim.eval("b:clang_user_options"))
-  args = userOptionsGlobal + userOptionsLocal
+  parametersLocal = splitOptions(vim.eval("b:clang_parameters"))
+  args = userOptionsGlobal + userOptionsLocal + parametersLocal
+  libclangLock.acquire()
   getCurrentTranslationUnit(args, getCurrentFile(),
                           vim.current.buffer.name, update = True)
+  libclangLock.release()
 
-def getCurrentCompletionResults(line, column, args, currentFile, fileName):
+def getCurrentCompletionResults(line, column, args, currentFile, fileName,
+                                timer):
+
   tu = getCurrentTranslationUnit(args, currentFile, fileName)
-  if debug:
-    start = time.time()
+  timer.registerEvent("Get TU")
+
   cr = tu.codeComplete(fileName, line, column, [currentFile],
       complete_flags)
-  if debug:
-    elapsed = (time.time() - start)
-    print "LibClang - Code completion time: " + str(elapsed)
+  timer.registerEvent("Code Complete")
   return cr
 
 def formatResult(result):
   completion = dict()
 
-  abbr = getAbbr(result.string)
-  word = filter(lambda x: not x.isKindInformative() and not x.isKindResultType(), result.string)
+  returnValue = None
+  abbr = ""
+  chunks = filter(lambda x: not x.isKindInformative(), result.string)
 
   args_pos = []
   cur_pos = 0
-  for chunk in word:
-    chunk_len = len(chunk.spelling)
+  word = ""
+
+  for chunk in chunks:
+
+    if chunk.isKindResultType():
+      returnValue = chunk
+      continue
+
+    chunk_spelling = chunk.spelling
+
+    if chunk.isKindTypedText():
+      abbr = chunk_spelling
+
+    chunk_len = len(chunk_spelling)
     if chunk.isKindPlaceHolder():
       args_pos += [[ cur_pos, cur_pos + chunk_len ]]
     cur_pos += chunk_len
+    word += chunk_spelling
 
-  word = "".join(map(lambda x: x.spelling, word))
+  menu = word
+
+  if returnValue:
+    menu = returnValue.spelling + " " + menu
 
   completion['word'] = word
   completion['abbr'] = abbr
-  completion['menu'] = word
+  completion['menu'] = menu
   completion['info'] = word
   completion['args_pos'] = args_pos
   completion['dup'] = 0
@@ -195,9 +272,7 @@ def formatResult(result):
 
 
 class CompleteThread(threading.Thread):
-  lock = threading.Lock()
-
-  def __init__(self, line, column, currentFile, fileName):
+  def __init__(self, line, column, currentFile, fileName, timer=None):
     threading.Thread.__init__(self)
     self.line = line
     self.column = column
@@ -206,11 +281,13 @@ class CompleteThread(threading.Thread):
     self.result = None
     userOptionsGlobal = splitOptions(vim.eval("g:clang_user_options"))
     userOptionsLocal = splitOptions(vim.eval("b:clang_user_options"))
-    self.args = userOptionsGlobal + userOptionsLocal
+    parametersLocal = splitOptions(vim.eval("b:clang_parameters"))
+    self.args = userOptionsGlobal + userOptionsLocal + parametersLocal
+    self.timer = timer
 
   def run(self):
     try:
-      CompleteThread.lock.acquire()
+      libclangLock.acquire()
       if self.line == -1:
         # Warm up the caches. For this it is sufficient to get the current
         # translation unit. No need to retrieve completion results.
@@ -221,48 +298,63 @@ class CompleteThread(threading.Thread):
         getCurrentTranslationUnit(self.args, self.currentFile, self.fileName)
       else:
         self.result = getCurrentCompletionResults(self.line, self.column,
-                                          self.args, self.currentFile, self.fileName)
+                                                  self.args, self.currentFile,
+                                                  self.fileName, self.timer)
     except Exception:
       pass
-    CompleteThread.lock.release()
+    libclangLock.release()
 
 def WarmupCache():
   global debug
   debug = int(vim.eval("g:clang_debug")) == 1
   t = CompleteThread(-1, -1, getCurrentFile(), vim.current.buffer.name)
   t.start()
-  return
 
 
 def getCurrentCompletions(base):
   global debug
   debug = int(vim.eval("g:clang_debug")) == 1
-  priority = vim.eval("g:clang_sort_algo") == 'priority'
+  sorting = vim.eval("g:clang_sort_algo")
   line = int(vim.eval("line('.')"))
   column = int(vim.eval("b:col"))
 
-  t = CompleteThread(line, column, getCurrentFile(), vim.current.buffer.name)
+  timer = CodeCompleteTimer(debug, vim.current.buffer.name, line, column)
+
+  t = CompleteThread(line, column, getCurrentFile(), vim.current.buffer.name,
+                     timer)
   t.start()
   while t.isAlive():
     t.join(0.01)
     cancel = int(vim.eval('complete_check()'))
     if cancel != 0:
-      return []
+      return (str([]), timer)
   cr = t.result
   if cr is None:
-    return []
+    return (str([]), timer)
 
-  regexp = re.compile("^" + base)
-  filteredResult = filter(lambda x: regexp.match(getAbbr(x.string)), cr.results)
+  results = cr.results
 
-  getPriority = lambda x: x.string.priority
-  getAbbrevation = lambda x: getAbbr(x.string).lower()
-  if priority:
-    key = getPriority
-  else:
-    key = getAbbrevation
-  sortedResult = sorted(filteredResult, None, key)
-  return map(formatResult, sortedResult)
+  timer.registerEvent("Count # Results (%s)" % str(len(results)))
+
+  if base != "":
+    regexp = re.compile("^" + base)
+    results = filter(lambda x: regexp.match(getAbbr(x.string)), results)
+
+  timer.registerEvent("Filter")
+
+  if sorting == 'priority':
+    getPriority = lambda x: x.string.priority
+    results = sorted(results, None, getPriority)
+  if sorting == 'alpha':
+    getAbbrevation = lambda x: getAbbr(x.string).lower()
+    results = sorted(results, None, getAbbrevation)
+
+  timer.registerEvent("Sort")
+
+  result = map(formatResult, results)
+
+  timer.registerEvent("Format")
+  return (str(result), timer)
 
 def getAbbr(strings):
   tmplst = filter(lambda x: x.isKindTypedText(), strings)
