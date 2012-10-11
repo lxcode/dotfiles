@@ -37,7 +37,9 @@ if has('gui')
     if has("gui_macvim")
         set guifont=Monaco:h14
         set clipboard=unnamed
-        let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+        let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
+        let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
+
     else
         set guifont=Inconsolata\ 15
     endif
@@ -165,7 +167,7 @@ let g:notes_suffix = '.notes'
 
 " clang
 let g:clang_complete_enable = 1
-let g:clang_complete_copen = 0
+let g:clang_complete_copen = 1
 let g:clang_snippets = 1
 let g:clang_snippets_engine = 'snipmate'
 let g:clang_use_library = 1
