@@ -35,7 +35,7 @@ alias cc_args="gmake CC='/home/lx/.vim/bin/cc_args.py gcc' CXX='/home/lx/.vim/bi
 alias c64term='urxvt -bg "#3a319c" -fg "#7b71d6" -fn "xft:Adore64:size=10"'
 
 if [ -n "$DISPLAY" ]; then
-    alias vim="$EDITOR --servername vimserver"
+    alias vim="$EDITOR --servername VIM"
 fi
 
 # List only directories and symbolic
