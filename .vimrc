@@ -37,6 +37,7 @@ if has('gui')
     if has("gui_macvim")
         set guifont=Monaco:h14
         set clipboard=unnamed
+        let g:clang_complete_enable = 1
         let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
         let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
 
@@ -67,9 +68,10 @@ set smartcase               " unless you type uppercase explicitly
 set wildmode=list:longest   " shows a list of candidates when tab-completing
 set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
-set formatoptions=qnwrtlm  " auto-formatting style for bullets and comments
+set formatoptions=qnwrtlm   " auto-formatting style for bullets and comments
 set autoindent
-set shiftround
+set shiftround              " Round to the nearest shiftwidth when shifting
+set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
@@ -108,7 +110,11 @@ source ~/.vim/ftplugin/man.vim
 
 "latex
 "let g:LatexBox_latexmk_options = "-xelatex"
-let g:LatexBox_viewer = "evince"
+if has("macunix")
+    let g:LatexBox_viewer = "open"
+else
+    let g:LatexBox_viewer = "evince"
+endif
 let g:Latexbox_Folding = 'yes'
 let g:tex_comment_nospell=1
 
@@ -143,6 +149,7 @@ let s:line1 = getline(1)
 let g:vimchat_otr = 1
 let g:vimchat_statusicon = 0
 let g:vimchat_showPresenceNotification = -1
+let g:vimchat_pync_enabled = 1
 map g<Tab> gt
 
 " CtrlP
@@ -166,7 +173,7 @@ let g:notes_directory = '~/Documents/Notes'
 let g:notes_suffix = '.notes'
 
 " clang
-let g:clang_complete_enable = 1
+"let g:clang_complete_enable = 1
 let g:clang_complete_copen = 1
 let g:clang_snippets = 1
 let g:clang_snippets_engine = 'snipmate'
