@@ -71,10 +71,10 @@ menu "defops"
 "Hide Iconmgr"	f.hideiconmgr
 ""		f.nop
 #"Xterm"		f.exec "xterm -sb -sl 2000 -r -vb &"
-"Lxterm"	f.exec "gnome-terminal &"
-"Firefox"	f.exec "firefox &"
-"Gaim"		f.exec "gaim &"
-"Lock"		f.exec "xscreensaver-command -lock"
+"Terminal"	f.exec "urxvtc &"
+"Chrome"	f.exec "chrome &"
+"Gajim"		f.exec "gajim &"
+"Lock"		f.exec "slock"
 ""              f.nop
 "Kill"		f.destroy
 "Delete"	f.delete
