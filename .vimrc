@@ -75,7 +75,8 @@ set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
-set grepprg="unbuffer grep\ -nIH\ $*"
+"set grepprg="unbuffer grep\ -nIH\ $*"
+set grepprg=grep\ -nIH\ $*
 set cpoptions=BFt
 set tags=tags;/             " use first tags file in a directory tree
 set nobackup                " ugh, stop making useless crap
