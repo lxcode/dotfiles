@@ -302,8 +302,6 @@ augroup end
 
 if (&ft=='help')
     set nospell
-else
-    set spell textwidth=78
 endif
 
 " Quickfix toggle
