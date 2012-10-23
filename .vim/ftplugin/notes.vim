@@ -91,15 +91,15 @@ endif
 inoremap <buffer> *** <C-o>:call xolox#notes#insert_ruler()<CR>
 let b:undo_ftplugin .= ' | execute "iunmap <buffer> ***"'
 
-" Indent list items using <Tab> and <Shift-Tab>. {{{1
-imap <buffer> <silent> <Tab> <C-o>:call xolox#notes#indent_list(1, line('.'), line('.'))<CR>
-smap <buffer> <silent> <Tab> <C-o>:<C-u>call xolox#notes#indent_list(1, line("'<"), line("'>"))<CR><C-o>gv
-let b:undo_ftplugin .= ' | execute "iunmap <buffer> <Tab>"'
-let b:undo_ftplugin .= ' | execute "sunmap <buffer> <Tab>"'
-imap <buffer> <silent> <S-Tab> <C-o>:call xolox#notes#indent_list(-1, line('.'), line('.'))<CR>
-smap <buffer> <silent> <S-Tab> <C-o>:<C-u>call xolox#notes#indent_list(-1, line("'<"), line("'>"))<CR><C-o>gv
-let b:undo_ftplugin .= ' | execute "iunmap <buffer> <S-Tab>"'
-let b:undo_ftplugin .= ' | execute "sunmap <buffer> <S-Tab>"'
+" Indent list items using shift characters. {{{1
+imap <buffer> <silent> >> <C-o>:call xolox#notes#indent_list(1, line('.'), line('.'))<CR>
+smap <buffer> <silent> >> <C-o>:<C-u>call xolox#notes#indent_list(1, line("'<"), line("'>"))<CR><C-o>gv
+let b:undo_ftplugin .= ' | execute "iunmap <buffer> >>"'
+let b:undo_ftplugin .= ' | execute "sunmap <buffer> >>"'
+imap <buffer> <silent> << <C-o>:call xolox#notes#indent_list(-1, line('.'), line('.'))<CR>
+smap <buffer> <silent> << <C-o>:<C-u>call xolox#notes#indent_list(-1, line("'<"), line("'>"))<CR><C-o>gv
+let b:undo_ftplugin .= ' | execute "iunmap <buffer> <<"'
+let b:undo_ftplugin .= ' | execute "sunmap <buffer> <<"'
 
 " Indent list items using <Alt-Left> and <Alt-Right>. {{{1
 imap <buffer> <silent> <A-Right> <C-o>:call xolox#notes#indent_list(1, line('.'), line('.'))<CR>
