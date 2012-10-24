@@ -12,7 +12,7 @@ let colors_name = "lx-256-dark"
 
 " General colors
 "hi Normal guifg=#f6f3e8 guibg=black ctermfg=white ctermbg=NONE
-hi Normal guifg=#f6f3e8 guibg=#121212 ctermfg=white ctermbg=233
+hi Normal guifg=#f6f3e8 guibg=#121212 ctermfg=252 ctermbg=233
 hi NonText guifg=#070707 guibg=black ctermfg=0
 
 hi Cursor guifg=black guibg=white ctermfg=0 ctermbg=15

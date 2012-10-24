@@ -1,7 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-//static const char font[]            = "-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*";
 static const char font[]            = "-*-fixed-medium-r-normal-*-12-*-*-*-*-*-*-*";
 static const char normbordercolor[] = "#404040";
 static const char normbgcolor[]     = "#282828";
@@ -28,16 +27,13 @@ static const Rule rules[] = {
 	{ "Firefox",  	NULL,       NULL,       	1 << 2, False,      -1 },
 	{ "Opera",  	NULL,       NULL,       	1 << 2, False,      -1 },
 	{ "vimprobable",  	NULL,       NULL,       	1 << 2, False,      -1 },
+	{ "xombrero",  	NULL,       NULL,       	1 << 2, False,      -1 },
 	{ "rdesktop",  	NULL,       NULL,      		0,      True,       -1 },
-	{ "TkSVN",  	NULL,       NULL,      		0,      True,       -1 },
-	{ "tksvn",  	NULL,       NULL,      		0,      True,       -1 },
 	{ "feh",		NULL,       NULL,      		0,      True,       -1 },
 	{ NULL,  		NULL,   	"Buddy List", 	1 << 8,	False,      -1 },
 	{ NULL,  		NULL,   	"Chromium", 	1 << 2,	False,      -1 },
 	{ NULL,  		NULL,   	"Page(s) Unresponsive", 	1 << 2,	False,      -1 },
 	{ "Workrave",	NULL,     	NULL,      		1 << 8, True,       -1 },
-	{ "Skype",	NULL,     	NULL,      		1 << 8, False,       -1 },
-	{ "QEMU",		NULL,     	NULL,      		0,      True,       -1 },
 	{ "pinentry",	NULL,     	NULL,      		0,      True,       -1 },
 };
 
@@ -71,6 +67,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-i", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "urxvtc", NULL };
 static const char *lockcmd[]  = { "metalock", "-F", normbordercolor, "-w", "1", "-P", "-f", font, NULL };
+static const char *todocmd[]  = { "gvim", "note:todo", NULL };
 static const char *cmusplaypause[]  = { "cmus-remote", "-u", NULL };
 
 //#include "tilemovemouse.c"
@@ -85,6 +82,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY,                       XK_x,      spawn,          {.v = lockcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ControlMask,           XK_t,      spawn,          {.v = todocmd } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = cmusplaypause } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -119,11 +117,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
     { MODKEY,                       XK_a,      incnmaster,     {.i = +1 } },
     { MODKEY,                       XK_z,      incnmaster,     {.i = -1 } },
-};
-
-static Gesture gestures[] = {
-    {"l",  shiftview, {.i = -1 } },
-    {"r",  shiftview, {.i = +1 } },
+    { ShiftMask,                            XK_Right,  shiftview,      {.i = +1 } },
+    { ShiftMask,                            XK_Left,   shiftview,      {.i = -1 } },
 };
 
 /* button definitions */
@@ -132,7 +127,6 @@ static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button1,        startgesture,   {0} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
