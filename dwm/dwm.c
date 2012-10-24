@@ -74,6 +74,12 @@ typedef union {
 } Arg;
 
 typedef struct {
+	char *name;
+	void (*func)(const Arg *arg);
+	const Arg arg;
+} Gesture;
+
+typedef struct {
 	unsigned int click;
 	unsigned int mask;
 	unsigned int button;
@@ -228,6 +234,7 @@ static void setup(void);
 static void showhide(Client *c);
 static void sigchld(int unused);
 static void spawn(const Arg *arg);
+static void startgesture(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static int textnw(const char *text, unsigned int len);
@@ -1244,8 +1251,71 @@ monocle(Monitor *m) {
 }
 
 void
+startgesture(const Arg *arg) {
+	int x, y, dx, dy, q;
+	int valid=0, listpos=0, gestpos=0, count=0;
+	char move, currGest[10];
+	XEvent ev;
+	
+	if(XGrabPointer(dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync,
+		None, cursor[CurMove], CurrentTime) != GrabSuccess)
+		return;
+	if(!getrootptr(&x, &y))
+		return;
+	do {
+		XMaskEvent(dpy, MOUSEMASK|ExposureMask|SubstructureRedirectMask, &ev);
+		switch (ev.type) {
+			case ConfigureRequest:
+			case Expose:
+			case MapRequest:
+				handler[ev.type](&ev);
+				break;
+			case MotionNotify:
+				if(count++ < 10)
+					break;
+				count = 0;
+				dx = ev.xmotion.x - x;
+				dy = ev.xmotion.y - y;
+				x = ev.xmotion.x;
+				y = ev.xmotion.y;
+				
+				if( abs(dx)/(abs(dy)+1) == 0 )
+					move = dy<0?'u':'d';
+				else
+					move = dx<0?'l':'r';
+				
+				if(move!=currGest[gestpos-1])
+				{	
+					if(gestpos>9)
+					{	ev.type++;
+						break;
+					}
+					
+					currGest[gestpos] = move;
+					currGest[++gestpos] = '\0';
+					
+					valid = 0;
+					for(q = 0; q<LENGTH(gestures); q++)
+					{	if(!strcmp(currGest, gestures[q].name))
+						{	valid++;
+							listpos = q;	
+						}
+					}
+				}
+				
+		}
+	} while(ev.type != ButtonRelease);
+	
+	if(valid)
+		gestures[listpos].func(&(gestures[listpos].arg));
+	
+	XUngrabPointer(dpy, CurrentTime);
+}
+
+void
 motionnotify(XEvent *e) {
 	static Monitor *mon = NULL;
+
 	Monitor *m;
 	XMotionEvent *ev = &e->xmotion;
 
