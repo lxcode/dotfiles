@@ -3,6 +3,7 @@ map <right> :bn<cr>
 map <left> :bp<cr>
 " there's probably some very good reason to not do this, guess I'll find out
 nnoremap <Tab> :bn<CR>
+nnoremap <C-Tab> gt
 " auto-format the current paragraph
 map ** gwap
 " correct spelling
@@ -75,7 +76,6 @@ set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
-"set grepprg="unbuffer grep\ -nIH\ $*"
 set grepprg=grep\ -nIH\ $*
 set cpoptions=BFt
 set tags=tags;/             " use first tags file in a directory tree
@@ -110,7 +110,7 @@ colorscheme lx-256-dark
 source ~/.vim/ftplugin/man.vim
 
 "latex
-"let g:LatexBox_latexmk_options = "-xelatex"
+let g:LatexBox_latexmk_options = "-pdflatex=lualatex"
 if has("macunix")
     let g:LatexBox_viewer = "open"
 else
@@ -297,6 +297,7 @@ augroup misc
 	au BufWinEnter *.conf, silent loadview
 	au BufWinEnter *mutt-*, set spell complete+=k
 	au BufWinEnter *mutt-*, UniCycleOn
+    au FileType mail map <F8> :%g/^> >/d<CR>gg10j
 	au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
 augroup end
