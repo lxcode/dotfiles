@@ -61,7 +61,7 @@ if version >= 700 " Vim 7.x specific colors
 endif
 
 " Syntax highlighting
-hi Comment guifg=#7C7C7C ctermfg=8 gui=italic
+hi Comment guifg=#767676 ctermfg=243 gui=italic
 hi String guifg=#A8FF60 ctermfg=155 
 hi Number guifg=#FF73FD ctermfg=207 
 
