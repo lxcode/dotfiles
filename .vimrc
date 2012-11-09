@@ -137,6 +137,12 @@ augroup end
 let g:SuperTabContextFileTypeExclusions = ['make']
 let g:SuperTabDefaultCompletionType = "context"
 
+autocmd FileType *
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-p>") |
+    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+    \ endif
+
 " cctree
 let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
 
@@ -301,6 +307,15 @@ augroup misc
 	au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
 augroup end
+
+augroup syntax
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+augroup end 
 
 if (&ft=='help')
     set nospell
