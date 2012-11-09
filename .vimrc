@@ -10,6 +10,7 @@ map ** gwap
 map <F1> 1z=
 imap <F1> <Esc>b1z=ea<Space>
 map <F4> :w<CR> :!lacheck %<CR>
+noremap <F5> :GundoToggle<CR>
 map <F8> :w<CR> :!make<CR>
 map <silent> <F9> :NERDTreeToggle<CR>
 nnoremap map <silent> <F9> :NERDTreeToggle<CR>
