@@ -6,6 +6,7 @@ nnoremap <Tab> :bn<CR>
 nnoremap <C-Tab> gt
 " auto-format the current paragraph
 map ** gwap
+imap ** <Esc>gwap
 " correct spelling
 map <F1> 1z=
 imap <F1> <Esc>b1z=ea<Space>
@@ -108,7 +109,8 @@ set t_Co=256                " use 256 colors
 "let g:zenburn_high_Contrast=1
 colorscheme lx-256-dark
 
-source ~/.vim/ftplugin/man.vim
+" 33ms startup penalty!
+"source ~/.vim/ftplugin/man.vim
 
 "latex
 let g:LatexBox_latexmk_options = "-pdflatex=lualatex"
@@ -296,13 +298,18 @@ augroup quickfix
 	au FileType qf, setlocal statusline=\ %n\ \ %f%=L%l/%L\ %P
 augroup end
 
+augroup msdocs
+    au BufReadCmd *.docx,*.xlsx,*.pptx call zip#Browse(expand("<amatch>"))
+    au BufReadCmd *.odt,*.ott,*.ods,*.ots,*.odp,*.otp,*.odg,*.otg call zip#Browse(expand("<amatch>"))
+augroup end
+
 augroup misc
 	au BufWinEnter *.fugitiveblame,*.diff, set nospell
     au BufWinLeave *.txt, mkview
     au BufWinEnter *.txt, silent loadview
 	au BufWinLeave *.conf, mkview
 	au BufWinEnter *.conf, silent loadview
-	au BufWinEnter *mutt-*, set spell complete+=k
+	au BufWinEnter *mutt-*, set spell complete+=k nonu
 	au BufWinEnter *mutt-*, UniCycleOn
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
 	au BufWinEnter *vimChatRoster, set foldlevel=1
