@@ -166,6 +166,7 @@ map g<Tab> gt
 let g:ctrlp_map = '<C-e>'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_max_height = 30
+let g:ctrlp_clear_cache_on_exit = 0
 map <Leader>e :CtrlP<CR>
 map <Leader>b :CtrlPBuffer<CR>
 map <Leader>m :CtrlPMRU<CR>
@@ -314,6 +315,8 @@ augroup misc
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
 	au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
+    au InsertEnter * hi CursorLine guibg=#1e1e1e gui=none ctermbg=233 cterm=none
+    au InsertLeave * hi CursorLine guibg=#1c1c1c gui=none ctermbg=235 cterm=none
 augroup end
 
 augroup syntax
