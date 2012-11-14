@@ -90,6 +90,8 @@ set backspace=indent,eol,start
 set ruler                   " show position in file
 set title icon              " set title data for gui
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
+set ttimeout
+set ttimeoutlen=100         " Make it so Esc enters Normal mode right away
 set helpheight=0            " no minimum helpheight
 set incsearch               " search incrementally
 set showmatch               " show the matching terminating bracket
