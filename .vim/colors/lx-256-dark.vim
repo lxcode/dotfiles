@@ -44,10 +44,10 @@ hi SpellCap cterm=underline
 hi SpellRare cterm=underline
 hi SpellLocal cterm=underline
 
-hi DiffAdd						ctermbg=17										guibg=#2a0d6a
-hi DiffDelete	ctermfg=234		ctermbg=60		cterm=none		guifg=#242424	guibg=#3e3969	gui=none
-hi DiffText						ctermbg=53		cterm=none						guibg=#73186e	gui=none
-hi DiffChange					ctermbg=237										guibg=#382a37
+hi DiffAdd ctermbg=17 guibg=#2a0d6a
+hi DiffDelete ctermfg=234 ctermbg=60 cterm=none	 guifg=#242424	guibg=#3e3969	gui=none
+hi DiffText	ctermbg=53	cterm=none guibg=#73186e gui=none
+hi DiffChange ctermbg=237	guibg=#382a37
 
 hi ModeMsg guifg=black guibg=#C6C5FE gui=bold ctermfg=0 ctermbg=189 cterm=bold
 
@@ -61,7 +61,7 @@ if version >= 700 " Vim 7.x specific colors
 endif
 
 " Syntax highlighting
-hi Comment guifg=#767676 ctermfg=243 gui=italic
+hi Comment guifg=#767676 ctermfg=244 gui=italic
 hi String guifg=#A8FF60 ctermfg=155 
 hi Number guifg=#FF73FD ctermfg=207 
 
