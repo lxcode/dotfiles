@@ -24,7 +24,7 @@ map <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Delete my signature
 map <Leader>ds Gvipdgg10j
-set pastetoggle=<F11>
+set pastetoggle=<F11> 
 
 " save my pinky
 nore ; :
@@ -178,6 +178,9 @@ let g:statline_fugitive=1
 let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
 
+" yankring
+let g:yankring_history_dir="/tmp"
+
 " grephere
 nmap <C-n> <Plug>(GrepHereCurrent) 
 
@@ -317,7 +320,7 @@ augroup misc
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
 	au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
-    au InsertEnter * hi CursorLine guibg=#1e1e1e gui=none ctermbg=233 cterm=none
+    au InsertEnter * hi CursorLine guibg=#121212 gui=none ctermbg=233 cterm=none
     au InsertLeave * hi CursorLine guibg=#1c1c1c gui=none ctermbg=235 cterm=none
 augroup end
 
