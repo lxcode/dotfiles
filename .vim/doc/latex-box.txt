@@ -383,6 +383,10 @@ Compilation ~
 
 	Viewer application for the output file, e.g., "xpdf".
 
+*g:LatexBox_quickfix*		Default: 1
+
+	If set to 0, disable automatic quickfix window.
+
 *g:LatexBox_autojump*		Default: 0
 
 	Automatically jump to first error after calling latexmk.
@@ -394,6 +398,13 @@ Compilation ~
 	this variable to the path of the main source file on which LaTeX must
 	be called.
 
+*g:LatexBox_show_warnings*	Default: 1
+
+	If set to 1, warnings in complication will be listed as errors.
+
+*g:LatexBox_ignore_warnings*	Default: ['Underfull', 'Overfull', 'specifier changed to']
+ 
+	A list of warnings to be ignored. 
 
 ------------------------------------------------------------------------------
 
@@ -420,10 +431,19 @@ and subsection).
 
 *g:LatexBox_Folding*		Default: undefined
 
-	Set to yes to activate LaTeX structure folding. Please note that any
+	Set to 1 to activate LaTeX structure folding. Please note that any
 	modeline that would set |foldmethod| to something else than
 	'fold-expr' will disable the function. The same goes for |foldexpr|.
 	Set this variable in your .vimrc
+
+*g:LatexBox_fold_envs*       Default: undefined
+
+	Turn on/off folding of environments
+
+*g:LatexBox_fold_preamble*       Default: undefined
+
+	Turn on/off folding of preamble
+
 
 ==============================================================================
 
@@ -444,19 +464,19 @@ Q: How can I use xelatex instead of pdflatex for some documents only?
 A: Instead of putting the settings in your ~/.latexmkrc file, put them in your
    document's working directory, in a file named either latexmkrc or .latexmkrc: >
 	$pdflatex = 'xelatex %O %S'
-<
 
 Q: How can I specify the main TeX file for a multi-file document
 
-A: Add a comment to the first few lines of your file to specify this: >
-	%! TEX root = main.tex'
-<
+A: There are serverl ways to do this:
+
+   1. Add a comment to the first few lines of your file to specify this: >
+	%! TEX root = main.tex
+<  2. Create an empty file called 'main.tex.latexmain' in the same directory.
 
 ==============================================================================
 
 TODO						*latex-box-todo*
 
-- Automatically find the main TeX document.
 - Improve TOC jumping and filter out weird characters. Deal with multiple
   sections with the same name.
 - Fix bugs?
