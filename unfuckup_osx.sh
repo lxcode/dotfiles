@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 # I am a grownup, I can handle this knowledge
 defaults write com.apple.Finder AppleShowAllFiles TRUE
