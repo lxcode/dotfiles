@@ -125,12 +125,12 @@ function! LatexBox_FoldText(lnum)
     endif
 
     " Parts and sections
-    if line =~# '\\\(\(sub\)*section\|part\|chapter\)'
-        let title = matchlist(line, '^\s*\\\(\%(sub\)*section\|part\|chapter\)\*\?\s*\[\(.\{1,80}\)')
+    if line =~# '\\\(\(sub\)*section\|part\|chapter\|vtitle\)'
+        let title = matchlist(line, '^\s*\\\(\%(sub\)*section\|part\|chapter\|vtitle\)\*\?\s*\[\(.\{1,80}\)')
         if !empty(title)
             return pretext . substitute(title[1], '^\(.\)' , '\u\1', '') . ': ' . substitute(title[2], '\].\{-}$', '', '') . ' '
         endif
-        let title = matchlist(line, '^\s*\\\(\%(sub\)*section\|part\|chapter\)\*\?\s*{\(.\{1,80}\)')
+        let title = matchlist(line, '^\s*\\\(\%(sub\)*section\|part\|chapter\|vtitle\)\*\?\s*{\(.\{1,80}\)')
         if !empty(title)
             return pretext . substitute(title[1], '^\(.\)' , '\u\1', '') . ': ' . substitute(title[2], '}.\{-}$', '', '') . ' '
         endif
