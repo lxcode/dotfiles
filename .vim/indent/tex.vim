@@ -24,11 +24,18 @@ function! s:CountMatches(str, pat)
 endfunction
 
 
-" Compute Level {{{
-function! s:ComputeLevel(lnum_prev, lnum_curr)
+" TexIndent {{{
+function! LatexBox_TexIndent()
 
-	let line_curr = getline(a:lnum_curr)
-	let line_prev = getline(a:lnum_prev)
+	let lnum_curr = v:lnum
+	let lnum_prev = prevnonblank(lnum_curr - 1)
+
+	if lnum_prev == 0
+		return 0
+	endif
+
+	let line_curr = getline(lnum_curr)
+	let line_prev = getline(lnum_prev)
 
 	" remove \\
 	let line_curr = substitute(line_curr, '\\\\', '', 'g')
@@ -75,22 +82,6 @@ function! s:ComputeLevel(lnum_prev, lnum_curr)
 	elseif item_here && !item_above
 		let n -= 1
 	endif
-
-	return n
-endfunction
-" }}}
-
-" TexIndent {{{
-function! LatexBox_TexIndent()
-
-	let lnum_curr = v:lnum
-	let lnum_prev = prevnonblank(lnum_curr - 1)
-
-	if lnum_prev == 0
-		return 0
-	endif
-
-	let n = s:ComputeLevel(lnum_prev,lnum_curr)
 
 	return indent(lnum_prev) + n * &sw
 endfunction

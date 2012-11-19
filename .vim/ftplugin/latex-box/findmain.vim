@@ -51,7 +51,10 @@ function! Tex_GetMainFileName(...)
 		let lheadfile = expand('%'.modifier)
 	endif
 
-	exe 'cd '.s:origdir
+    if lheadfile !~ '\.tex$'
+        let lheadfile .= '.tex'
+    endif
+    exe 'cd '.s:origdir
 
 	" NOTE: The caller of this function needs to escape the file name with
 	"       fnameescape() . The reason its not done here is that escaping is not
@@ -59,4 +62,3 @@ function! Tex_GetMainFileName(...)
 	"       certain platforms.
 	return lheadfile
 endfunction
-

@@ -102,7 +102,7 @@ set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
-set cscopequickfix=s-,c-,d-,i-,t-,e-   " omfg so much nicer
+set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=2        " the default level of fold nesting on startup
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
@@ -121,8 +121,18 @@ if has("macunix")
 else
     let g:LatexBox_viewer = "evince"
 endif
-let g:Latexbox_Folding = 'yes'
-let g:tex_comment_nospell=1
+let g:LatexBox_Folding = 1
+let g:LatexBox_fold_preamble = 1
+let g:LatexBox_fold_envs = 1
+let g:LatexBox_fold_parts=[
+           \ "part",
+           \ "chapter",
+           \ "section",
+           \ "subsection",
+           \ "subsubsection",
+           \ "vtitle"
+           \ ]
+let g:tex_comment_nospell = 1
 
 augroup latex
     au BufWritePost *.tex silent! Latexmk

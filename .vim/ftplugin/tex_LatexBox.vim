@@ -30,7 +30,4 @@ if !exists('b:LatexBox_loaded')
 
 endif
 
-execute 'source ' . s:FNameEscape(prefix . 'mappings.vim')
-execute 'source ' . s:FNameEscape(prefix . 'indent.vim')
-
 " vim:fdm=marker:ff=unix:noet:ts=4:sw=4
