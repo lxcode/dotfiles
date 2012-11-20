@@ -3,12 +3,15 @@ map <right> :bn<cr>
 map <left> :bp<cr>
 " there's probably some very good reason to not do this, guess I'll find out
 nnoremap <Tab> :bn<CR>
+nnoremap <C-Tab> gt
 " auto-format the current paragraph
 map ** gwap
+imap ** <Esc>gwap
 " correct spelling
 map <F1> 1z=
 imap <F1> <Esc>b1z=ea<Space>
 map <F4> :w<CR> :!lacheck %<CR>
+noremap <F5> :GundoToggle<CR>
 map <F8> :w<CR> :!make<CR>
 map <silent> <F9> :NERDTreeToggle<CR>
 nnoremap map <silent> <F9> :NERDTreeToggle<CR>
@@ -21,7 +24,7 @@ map <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Delete my signature
 map <Leader>ds Gvipdgg10j
-set pastetoggle=<F11>
+set pastetoggle=<F11> 
 
 " save my pinky
 nore ; :
@@ -75,7 +78,6 @@ set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
-"set grepprg="unbuffer grep\ -nIH\ $*"
 set grepprg=grep\ -nIH\ $*
 set cpoptions=BFt
 set tags=tags;/             " use first tags file in a directory tree
@@ -88,6 +90,8 @@ set backspace=indent,eol,start
 set ruler                   " show position in file
 set title icon              " set title data for gui
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
+set ttimeout
+set ttimeoutlen=100         " Make it so Esc enters Normal mode right away
 set helpheight=0            " no minimum helpheight
 set incsearch               " search incrementally
 set showmatch               " show the matching terminating bracket
@@ -98,7 +102,7 @@ set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
-set cscopequickfix=s-,c-,d-,i-,t-,e-   " omfg so much nicer
+set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=2        " the default level of fold nesting on startup
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
@@ -107,17 +111,28 @@ set t_Co=256                " use 256 colors
 "let g:zenburn_high_Contrast=1
 colorscheme lx-256-dark
 
-source ~/.vim/ftplugin/man.vim
+" 33ms startup penalty!
+"source ~/.vim/ftplugin/man.vim
 
 "latex
-"let g:LatexBox_latexmk_options = "-xelatex"
+let g:LatexBox_latexmk_options = "-pdflatex=lualatex"
 if has("macunix")
     let g:LatexBox_viewer = "open"
 else
     let g:LatexBox_viewer = "evince"
 endif
-let g:Latexbox_Folding = 'yes'
-let g:tex_comment_nospell=1
+let g:LatexBox_Folding = 1
+let g:LatexBox_fold_preamble = 1
+let g:LatexBox_fold_envs = 1
+let g:LatexBox_fold_parts=[
+           \ "part",
+           \ "chapter",
+           \ "section",
+           \ "subsection",
+           \ "subsubsection",
+           \ "vtitle"
+           \ ]
+let g:tex_comment_nospell = 1
 
 augroup latex
     au BufWritePost *.tex silent! Latexmk
@@ -136,6 +151,12 @@ augroup end
 " supertab
 let g:SuperTabContextFileTypeExclusions = ['make']
 let g:SuperTabDefaultCompletionType = "context"
+
+autocmd FileType *
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-p>") |
+    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+    \ endif
 
 " cctree
 let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
@@ -157,6 +178,7 @@ map g<Tab> gt
 let g:ctrlp_map = '<C-e>'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_max_height = 30
+let g:ctrlp_clear_cache_on_exit = 0
 map <Leader>e :CtrlP<CR>
 map <Leader>b :CtrlPBuffer<CR>
 map <Leader>m :CtrlPMRU<CR>
@@ -165,6 +187,9 @@ map <Leader>m :CtrlPMRU<CR>
 let g:statline_fugitive=1
 let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
+
+" yankring
+let g:yankring_history_dir="/tmp"
 
 " grephere
 nmap <C-n> <Plug>(GrepHereCurrent) 
@@ -289,17 +314,34 @@ augroup quickfix
 	au FileType qf, setlocal statusline=\ %n\ \ %f%=L%l/%L\ %P
 augroup end
 
+augroup msdocs
+    au BufReadCmd *.docx,*.xlsx,*.pptx call zip#Browse(expand("<amatch>"))
+    au BufReadCmd *.odt,*.ott,*.ods,*.ots,*.odp,*.otp,*.odg,*.otg call zip#Browse(expand("<amatch>"))
+augroup end
+
 augroup misc
 	au BufWinEnter *.fugitiveblame,*.diff, set nospell
     au BufWinLeave *.txt, mkview
     au BufWinEnter *.txt, silent loadview
 	au BufWinLeave *.conf, mkview
 	au BufWinEnter *.conf, silent loadview
-	au BufWinEnter *mutt-*, set spell complete+=k
+	au BufWinEnter *mutt-*, set spell complete+=k nonu
 	au BufWinEnter *mutt-*, UniCycleOn
+    au FileType mail map <F8> :%g/^> >/d<CR>gg10j
 	au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
+    au InsertEnter * hi CursorLine guibg=#121212 gui=none ctermbg=233 cterm=none
+    au InsertLeave * hi CursorLine guibg=#1c1c1c gui=none ctermbg=235 cterm=none
 augroup end
+
+augroup syntax
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+augroup end 
 
 if (&ft=='help')
     set nospell

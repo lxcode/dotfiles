@@ -146,10 +146,10 @@ snippet fcite
 #Formating text: italic, bold, underline, small capital, emphase ..
 snippet it
 	\textit{${1:text}}
-snippet bf
-	\textbf{${1:text}}
 snippet under
 	\underline{${1:text}}
+snippet bf
+	{\bf ${1}}${2}
 snippet em
 	{\em ${1}}${2}
 snippet sc
@@ -225,6 +225,12 @@ snippet fig
 
 snippet fu
 	\footnote{\url{${1}}}${2}
+
+snippet url
+	\url{${1}}
+
+snippet href
+	\href{${1}}{${2}}
 
 snippet ...
 	\ldots

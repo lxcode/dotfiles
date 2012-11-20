@@ -1,5 +1,7 @@
 " LaTeX Box completion
 
+setlocal omnifunc=LatexBox_Complete
+
 " <SID> Wrap {{{
 function! s:GetSID()
 	return matchstr(expand('<sfile>'), '\zs<SNR>\d\+_\ze.*$')
@@ -10,6 +12,77 @@ function! s:SIDWrap(func)
 endfunction
 " }}}
 
+" Completion {{{
+if !exists('g:LatexBox_completion_close_braces')
+	let g:LatexBox_completion_close_braces = 1
+endif
+if !exists('g:LatexBox_bibtex_wild_spaces')
+	let g:LatexBox_bibtex_wild_spaces = 1
+endif
+
+if !exists('g:LatexBox_cite_pattern')
+	"let g:LatexBox_cite_pattern = '\C\\cite\(p\|t\)\=\*\=\(\[[^\]]*\]\)*\_\s*{'
+	"Jpate suggestion for natbib package
+	let g:LatexBox_cite_pattern = '\C\\cite\(p\|t\|author\|year\|yearpart\)\=\*\=\(\[[^\]]*\]\)*\_\s*{'
+endif
+if !exists('g:LatexBox_ref_pattern')
+	let g:LatexBox_ref_pattern = '\C\\v\?\(eq\|page\)\?ref\*\?\_\s*{'
+endif
+
+if !exists('g:LatexBox_completion_environments')
+	let g:LatexBox_completion_environments = [
+		\ {'word': 'itemize',		'menu': 'bullet list' },
+		\ {'word': 'enumerate',		'menu': 'numbered list' },
+		\ {'word': 'description',	'menu': 'description' },
+		\ {'word': 'center',		'menu': 'centered text' },
+		\ {'word': 'figure',		'menu': 'floating figure' },
+		\ {'word': 'table',			'menu': 'floating table' },
+		\ {'word': 'equation',		'menu': 'equation (numbered)' },
+		\ {'word': 'align',			'menu': 'aligned equations (numbered)' },
+		\ {'word': 'align*',		'menu': 'aligned equations' },
+		\ {'word': 'document' },
+		\ {'word': 'abstract' },
+		\ ]
+endif
+
+if !exists('g:LatexBox_completion_commands')
+	let g:LatexBox_completion_commands = [
+		\ {'word': '\begin{' },
+		\ {'word': '\end{' },
+		\ {'word': '\item' },
+		\ {'word': '\label{' },
+		\ {'word': '\ref{' },
+		\ {'word': '\eqref{eq:' },
+		\ {'word': '\cite{' },
+		\ {'word': '\chapter{' },
+		\ {'word': '\section{' },
+		\ {'word': '\subsection{' },
+		\ {'word': '\subsubsection{' },
+		\ {'word': '\paragraph{' },
+		\ {'word': '\nonumber' },
+		\ {'word': '\bibliography' },
+		\ {'word': '\bibliographystyle' },
+		\ ]
+endif
+" }}}
+
+"LatexBox_kpsewhich {{{
+function! LatexBox_kpsewhich(file)
+	let old_dir = getcwd()
+	execute 'lcd ' . fnameescape(LatexBox_GetTexRoot())
+	redir => out
+	silent execute '!kpsewhich ' . a:file
+	redir END
+
+	let out = split(out, "\<NL>")[-1]
+	let out = substitute(out, '\r', '', 'g')
+	let out = glob(fnamemodify(out, ':p'), 1)
+
+	execute 'lcd ' . fnameescape(old_dir)
+
+	return out
+endfunction
+"}}}
 
 " Omni Completion {{{
 
@@ -97,26 +170,10 @@ function! LatexBox_Complete(findstart, base)
 endfunction
 " }}}
 
-
 " BibTeX search {{{
 
 " find the \bibliography{...} commands
 " the optional argument is the file name to be searched
-function! LatexBox_kpsewhich(file)
-	let old_dir = getcwd()
-	execute 'lcd ' . fnameescape(LatexBox_GetTexRoot())
-	redir => out
-	silent execute '!kpsewhich ' . a:file
-	redir END
-
-	let out = split(out, "\<NL>")[-1]
-	let out = substitute(out, '\r', '', 'g')
-	let out = glob(fnamemodify(out, ':p'), 1)
-
-	execute 'lcd ' . fnameescape(old_dir)
-
-	return out
-endfunction
 
 function! s:FindBibData(...)
 
@@ -126,7 +183,7 @@ function! s:FindBibData(...)
 		let file = a:1
 	endif
 
-	if empty(glob(file, 1))
+	if !filereadable(file)
 		return ''
 	endif
 
@@ -227,7 +284,6 @@ function! LatexBox_BibComplete(regexp)
 endfunction
 " }}}
 
-
 " ExtractLabels {{{
 " Generate list of \newlabel commands in current buffer.
 "
@@ -244,39 +300,44 @@ function! s:ExtractLabels()
 		let [nln, nameend] = searchpairpos( '{', '', '}', 'W' )
 		if nln != lblline
 			let [lblline, lblbegin] = searchpos( '\\newlabel{', 'ecW' )
-			break
+			continue
 		endif
-        let curname = strpart( getline( lblline ), lblbegin, nameend - lblbegin - 1 )
+		let curname = strpart( getline( lblline ), lblbegin, nameend - lblbegin - 1 )
 
-        if 0 == search( '{\w*{', 'ce', lblline )
-            let [lblline, lblbegin] = searchpos( '\\newlabel{', 'ecW' )
-            break
-        endif
+		" Ignore cref entries (because they are duplicates)
+		if curname =~ "\@cref"
+			continue
+		endif
 
-        let numberbegin = getpos('.')[2]
-        let [nln, numberend]  = searchpairpos( '{', '', '}', 'W' )
+		if 0 == search( '{\w*{', 'ce', lblline )
+		    let [lblline, lblbegin] = searchpos( '\\newlabel{', 'ecW' )
+		    continue
+		endif
+
+		let numberbegin = getpos('.')[2]
+		let [nln, numberend]  = searchpairpos( '{', '', '}', 'W' )
 		if nln != lblline
 			let [lblline, lblbegin] = searchpos( '\\newlabel{', 'ecW' )
-			break
+			continue
 		endif
-        let curnumber = strpart( getline( lblline ), numberbegin, numberend - numberbegin - 1 )
+		let curnumber = strpart( getline( lblline ), numberbegin, numberend - numberbegin - 1 )
 
-        if 0 == search( '\w*{', 'ce', lblline )
-            let [lblline, lblbegin] = searchpos( '\\newlabel{', 'ecW' )
-            break
-        endif
+		if 0 == search( '\w*{', 'ce', lblline )
+		    let [lblline, lblbegin] = searchpos( '\\newlabel{', 'ecW' )
+		    continue
+		endif
 
-        let pagebegin = getpos('.')[2]
-        let [nln, pageend]  = searchpairpos( '{', '', '}', 'W' )
-        if nln != lblline
+		let pagebegin = getpos('.')[2]
+		let [nln, pageend]  = searchpairpos( '{', '', '}', 'W' )
+		if nln != lblline
 			let [lblline, lblbegin] = searchpos( '\\newlabel{', 'ecW' )
-			break
+			continue
 		endif
-        let curpage = strpart( getline( lblline ), pagebegin, pageend - pagebegin - 1 )
+		let curpage = strpart( getline( lblline ), pagebegin, pageend - pagebegin - 1 )
 
-        let matches += [ [ curname, curnumber, curpage ] ]
+		let matches += [ [ curname, curnumber, curpage ] ]
 
-        let [lblline, lblbegin] = searchpos( '\\newlabel{', 'ecW' )
+		let [lblline, lblbegin] = searchpos( '\\newlabel{', 'ecW' )
 	endwhile
 
 	return matches
@@ -298,9 +359,9 @@ function! s:ExtractInputs()
 		let [nln, inend] = searchpairpos( '{', '', '}', 'W' )
 		if nln != inline
 			let [inline, inbegin] = searchpos( '\\@input{', 'ecW' )
-			break
+			continue
 		endif
-		let matches += [ strpart( getline( inline ), inbegin, inend - inbegin - 1 ) ]
+		let matches += [ LatexBox_kpsewhich(strpart( getline( inline ), inbegin, inend - inbegin - 1 )) ]
 
 		let [inline, inbegin] = searchpos( '\\@input{', 'ecW' )
 	endwhile
@@ -359,7 +420,7 @@ function! s:CompleteLabels(regex, ...)
 		let file = a:1
 	endif
 
-	if empty(glob(file, 1))
+	if !filereadable(file)
 		return []
 	endif
 
@@ -382,7 +443,7 @@ function! s:CompleteLabels(regex, ...)
 
 	let suggestions = []
 	for m in matches
-		let entry = {'word': m[0], 'menu': '(' . m[1] . ') [p.' . m[2] . ']'}
+		let entry = {'word': m[0], 'menu': printf("%7s [p. %s]", '('.m[1].')', m[2])}
 		if g:LatexBox_completion_close_braces && !s:NextCharsMatch('^\s*[,}]')
 			" add trailing '}'
 			let entry = copy(entry)
@@ -395,7 +456,6 @@ function! s:CompleteLabels(regex, ...)
 	return suggestions
 endfunction
 " }}}
-
 
 " Close Current Environment {{{
 function! s:CloseCurEnv()
@@ -421,7 +481,6 @@ function! s:CloseCurEnv()
 	endif
 	return ''
 endfunction
-
 " }}}
 
 " Wrap Selection {{{
@@ -496,7 +555,6 @@ function! s:ChangeEnvPrompt()
 		let line = strpart(line, 0, cnum - 1) . l:begin . strpart(line, cnum + len(env) + 7)
 		call setline(lnum, line)
 	endif
-
 endfunction
 
 function! s:GetEnvironmentList(lead, cmdline, pos)
@@ -519,11 +577,11 @@ endfunction
 " }}}
 
 " Mappings {{{
-imap <silent> <Plug>LatexCloseCurEnv		<C-R>=<SID>CloseCurEnv()<CR>
-vmap <silent> <Plug>LatexWrapSelection		:<c-u>call <SID>WrapSelection('')<CR>i
-vmap <silent> <Plug>LatexEnvWrapSelection	:<c-u>call <SID>PromptEnvWrapSelection()<CR>
+imap <silent> <Plug>LatexCloseCurEnv			<C-R>=<SID>CloseCurEnv()<CR>
+vmap <silent> <Plug>LatexWrapSelection			:<c-u>call <SID>WrapSelection('')<CR>i
+vmap <silent> <Plug>LatexEnvWrapSelection		:<c-u>call <SID>PromptEnvWrapSelection()<CR>
 vmap <silent> <Plug>LatexEnvWrapFmtSelection	:<c-u>call <SID>PromptEnvWrapSelection(1)<CR>
-nmap <silent> <Plug>LatexChangeEnv			:call <SID>ChangeEnvPrompt()<CR>
+nmap <silent> <Plug>LatexChangeEnv				:call <SID>ChangeEnvPrompt()<CR>
 " }}}
 
 " vim:fdm=marker:ff=unix:noet:ts=4:sw=4

@@ -12,7 +12,7 @@ let colors_name = "lx-256-dark"
 
 " General colors
 "hi Normal guifg=#f6f3e8 guibg=black ctermfg=white ctermbg=NONE
-hi Normal guifg=#f6f3e8 guibg=#121212 ctermfg=252 ctermbg=233
+hi Normal guifg=#f6f3e8 guibg=#242424 ctermfg=252 ctermbg=234
 hi NonText guifg=#070707 guibg=black ctermfg=0
 
 hi Cursor guifg=black guibg=white ctermfg=0 ctermbg=15
@@ -44,10 +44,15 @@ hi SpellCap cterm=underline
 hi SpellRare cterm=underline
 hi SpellLocal cterm=underline
 
+hi DiffAdd ctermbg=17 guibg=#2a0d6a
+hi DiffDelete ctermfg=234 ctermbg=60 cterm=none	 guifg=#242424	guibg=#3e3969	gui=none
+hi DiffText	ctermbg=53	cterm=none guibg=#73186e gui=none
+hi DiffChange ctermbg=237	guibg=#382a37
+
 hi ModeMsg guifg=black guibg=#C6C5FE gui=bold ctermfg=0 ctermbg=189 cterm=bold
 
 if version >= 700 " Vim 7.x specific colors
- hi CursorLine guibg=#1c1c1c gui=none ctermbg=234 cterm=none
+ hi CursorLine guibg=#1c1c1c gui=none ctermbg=235 cterm=none
  hi CursorColumn guibg=#1c1c1c gui=none ctermbg=234 cterm=none
  hi MatchParen guifg=#f6f3e8 guibg=#857b6f gui=bold ctermfg=white ctermbg=darkgray 
  hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242 
@@ -56,12 +61,12 @@ if version >= 700 " Vim 7.x specific colors
 endif
 
 " Syntax highlighting
-hi Comment guifg=#7C7C7C ctermfg=8 gui=italic
+hi Comment guifg=#767676 ctermfg=244 gui=italic
 hi String guifg=#A8FF60 ctermfg=155 
 hi Number guifg=#FF73FD ctermfg=207 
 
 hi Keyword guifg=#96CBFE ctermfg=117 
-hi PreProc guifg=#96CBFE ctermfg=117 
+hi PreProc guifg=#e5786d ctermfg=173 
 hi Conditional guifg=#6699CC ctermfg=110 
 
 hi Todo guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195 
