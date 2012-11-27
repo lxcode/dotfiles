@@ -2,7 +2,7 @@
 map <right> :bn<cr>
 map <left> :bp<cr>
 " there's probably some very good reason to not do this, guess I'll find out
-nnoremap <Tab> :bn<CR>
+nnoremap <Tab> gt
 nnoremap <C-Tab> gt
 " auto-format the current paragraph
 map ** gwap
