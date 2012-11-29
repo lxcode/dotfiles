@@ -19,7 +19,7 @@ nnoremap <silent> <F10> :TagbarToggle<CR>
 " jump to next quickfix item
 map <F12> :cn<CR>
 " preview the tag under the cursor
-map <C-p> :exe "ptag" expand("<cword>")<CR>
+map <C-S-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Delete my signature
 map <Leader>ds Gvipdgg10j
@@ -151,12 +151,13 @@ augroup end
 " supertab
 let g:SuperTabContextFileTypeExclusions = ['make']
 let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 
-autocmd FileType *
-    \ if &omnifunc != '' |
-    \   call SuperTabChain(&omnifunc, "<c-p>") |
-    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-    \ endif
+"autocmd FileType *
+"    \ if &omnifunc != '' |
+"    \   call SuperTabChain(&omnifunc, "<c-p>") |
+"    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+"    \ endif
 
 " cctree
 let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
