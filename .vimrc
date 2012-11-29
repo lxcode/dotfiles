@@ -2,6 +2,7 @@
 map <right> :bn<cr>
 map <left> :bp<cr>
 nnoremap <C-Tab> gt
+nnoremap Y y$
 " auto-format the current paragraph
 map ** gwap
 imap ** <Esc>gwap
@@ -54,6 +55,7 @@ if $DISPLAY != ""
     set mouse=a             " Turn this off for console-only mode
     set selectmode+=mouse	" Allow the mouse to select
 endif 
+set spell
 set et                    " expand tabs
 set diffopt+=iwhite       " ignore whitespace in diffs
 set cursorline          " I like this, but damn is it slow
