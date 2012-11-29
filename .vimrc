@@ -19,7 +19,7 @@ nnoremap <silent> <F10> :TagbarToggle<CR>
 " jump to next quickfix item
 map <F12> :cn<CR>
 " preview the tag under the cursor
-map <C-p> :exe "ptag" expand("<cword>")<CR>
+map <C-S-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Delete my signature
 map <Leader>ds Gvipdgg10j
@@ -151,12 +151,23 @@ augroup end
 " supertab
 let g:SuperTabContextFileTypeExclusions = ['make']
 let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabContextDiscoverDiscovery =
+    \ ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
 
 autocmd FileType *
-    \ if &omnifunc != '' |
-    \   call SuperTabChain(&omnifunc, "<c-p>") |
-    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-    \ endif
+            \  if &omnifunc != '' |
+            \      let g:myfunc = &omnifunc |
+            \  elseif &completefunc != '' |
+            \      let g:myfunc = &completefunc |
+            \  else |
+            \      let g:myfunc = '' |
+            \  endif |
+            \  if g:myfunc != '' |
+            \      call SuperTabChain(g:myfunc, "<c-x><c-p>") |
+            \      call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+            \  endif
 
 " cctree
 let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
@@ -324,10 +335,8 @@ augroup end
 
 augroup misc
     au BufWinEnter *.fugitiveblame,*.diff, set nospell
-    au BufWinLeave *.txt, mkview
-    au BufWinEnter *.txt, silent loadview
-    au BufWinLeave *.conf, mkview
-    au BufWinEnter *.conf, silent loadview
+    au BufWinLeave *.txt,*.conf,.vimrc mkview
+    au BufWinEnter *.txt,*.conf,.vimrc silent loadview
     au BufWinEnter *mutt-*, set spell complete+=k nonu
     au BufWinEnter *mutt-*, UniCycleOn
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
@@ -405,4 +414,3 @@ function ToggleHex()
   let &readonly=l:oldreadonly
   let &modifiable=l:oldmodifiable
 endfunction
-
