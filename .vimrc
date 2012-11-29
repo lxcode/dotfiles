@@ -1,9 +1,8 @@
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
-" there's probably some very good reason to not do this, guess I'll find out
-nnoremap <Tab> :bn<CR>
 nnoremap <C-Tab> gt
+nnoremap Y y$
 " auto-format the current paragraph
 map ** gwap
 imap ** <Esc>gwap
@@ -45,7 +44,7 @@ if has('gui')
         let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
 
     else
-        set guifont=Inconsolata\ 15
+        set guifont=Inconsolata\ 14
     endif
 endif
 if has('gui_running')
@@ -56,22 +55,23 @@ if $DISPLAY != ""
     set mouse=a             " Turn this off for console-only mode
     set selectmode+=mouse	" Allow the mouse to select
 endif 
-set et                      " expand tabs
-set diffopt+=iwhite         " ignore whitespace in diffs
-set cursorline              " I like this, but damn is it slow
-set hidden                  " allow hidden buffers
-set novb                    " no visual bell
-set number                  " line numbers
-set viewdir=$HOME/.views    " keep view states out of my .vim
-set pumheight=15            " trim down the completion popup menu
-set shortmess+=atIoT        " save space in status messages
-set scrolloff=3             " 3 lines of buffer before scrolling
-set ignorecase              " case insensitive searches
-set smartcase               " unless you type uppercase explicitly
-set wildmode=list:longest   " shows a list of candidates when tab-completing
-set hlsearch                " highlight all search matches
-set nojoinspaces            " disallow two spaces after a period when joining
-set formatoptions=qnwrtlm   " auto-formatting style for bullets and comments
+set spell
+set et                    " expand tabs
+set diffopt+=iwhite,vertical   " ignore whitespace in diffs
+set cursorline            " I like this, but damn is it slow
+set hidden                " allow hidden buffers
+set novb                  " no visual bell
+set number                " line numbers
+set viewdir=$HOME/.views  " keep view states out of my .vim
+set pumheight=15          " trim down the completion popup menu
+set shortmess+=atIoT      " save space in status messages
+set scrolloff=3           " 3 lines of buffer before scrolling
+set ignorecase            " case insensitive searches
+set smartcase             " unless you type uppercase explicitly
+set wildmode=list:longest " shows a list of candidates when tab-completing
+set hlsearch              " highlight all search matches
+set nojoinspaces          " disallow two spaces after a period when joining
+set formatoptions=qnwrtlm " auto-formatting style for bullets and comments
 set autoindent
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
@@ -139,13 +139,13 @@ augroup latex
     au BufEnter *.tex source ~/.vim/ftplugin/quotes.vim
     au BufEnter *.tex,*.sty syntax spell toplevel 
     au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
-	au BufEnter *.tex,*.sty set comments+=b:\\item formatoptions-=q
-	au BufEnter *.tex,*.sty imap <buffer> [[ \begin{
-	au BufEnter *.tex,*.sty imap <buffer> ]] <Plug>LatexCloseCurEnv
-	au BufEnter *.tex,*.sty imap <S-Enter> \pagebreak
+    au BufEnter *.tex,*.sty set comments+=b:\\item formatoptions-=q
+    au BufEnter *.tex,*.sty imap <buffer> [[ \begin{
+    au BufEnter *.tex,*.sty imap <buffer> ]] <Plug>LatexCloseCurEnv
+    au BufEnter *.tex,*.sty imap <S-Enter> \pagebreak
     au BufEnter *.tex,*.sty map tt i{\tt <Esc>wEa}<Esc>
-	au BufWinLeave *.tex,*.sty mkview
-	au BufWinEnter *.tex,*.sty silent loadview
+    au BufWinLeave *.tex,*.sty mkview
+    au BufWinEnter *.tex,*.sty silent loadview
 augroup end
 
 " supertab
@@ -177,6 +177,7 @@ map g<Tab> gt
 " CtrlP
 let g:ctrlp_map = '<C-e>'
 let g:ctrlp_by_filename = 1
+let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 30
 let g:ctrlp_clear_cache_on_exit = 0
 map <Leader>e :CtrlP<CR>
@@ -188,8 +189,10 @@ let g:statline_fugitive=1
 let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
 
-" yankring
-let g:yankring_history_dir="/tmp"
+" yankstack
+nmap <leader>p <Plug>yankstack_substitute_older_paste
+nmap <leader>P <Plug>yankstack_substitute_older_paste
+
 
 " grephere
 nmap <C-n> <Plug>(GrepHereCurrent) 
@@ -267,11 +270,11 @@ let g:tagbar_type_markdown = {
 \ }
 
 augroup cjava
-	au!
-	au BufNewFile *.c r ~/.vim/templates/template.c
-	au BufEnter *.[mCchly] set nospell comments+=s1:/*,mb:*,ex:*/
+    au!
+    au BufNewFile *.c r ~/.vim/templates/template.c
+    au BufEnter *.[mCchly] set nospell comments+=s1:/*,mb:*,ex:*/
     au BufRead,BufNewFile *.m setfiletype objc
-	au BufEnter *.cpp,*.java set nospell
+    au BufEnter *.cpp,*.java set nospell
     au BufWinLeave *.[mchly] mkview
     au BufWinEnter *.[mchly] silent loadview
     au BufWinLeave *.cpp,*.java mkview
@@ -279,25 +282,25 @@ augroup cjava
 augroup end
 
 augroup html
-	au!
-	au BufEnter *.htm* set spell wrapmargin=5 wrapscan
-	au BufLeave *.htm* set wrapscan&
-	au BufNewFile *.html r ~/.vim/templates/template.html
-	au BufWinLeave *.htm* mkview
-	au BufWinEnter *.htm* silent loadview
+    au!
+    au BufEnter *.htm* set spell wrapmargin=5 wrapscan
+    au BufLeave *.htm* set wrapscan&
+    au BufNewFile *.html r ~/.vim/templates/template.html
+    au BufWinLeave *.htm* mkview
+    au BufWinEnter *.htm* silent loadview
 augroup end
 
 augroup python
-	au BufEnter *.py,*.pyw set smartindent smarttab nospell
-	au BufWinLeave *.py mkview
-	au BufWinEnter *.py silent loadview
+    au BufEnter *.py,*.pyw set smartindent smarttab nospell
+    au BufWinLeave *.py mkview
+    au BufWinEnter *.py silent loadview
 augroup end
 
 augroup markdown
-	au BufNewFile,BufRead *.md set spell
-	au BufWinLeave *.md, mkview
-	au BufWinEnter *.md, silent loadview
-	au BufWinEnter *.md, set textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
+    au BufNewFile,BufRead *.md set spell
+    au BufWinLeave *.md, mkview
+    au BufWinEnter *.md, silent loadview
+    au BufWinEnter *.md, set textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
     au BufWinEnter *.md,*.notes, imap <C-l> <C-t>
     au BufWinEnter *.md,*.notes, imap <C-h> <C-d>
     au BufWinEnter *.md,*.notes, imap >> <C-t>
@@ -307,11 +310,11 @@ augroup end
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow 
 " keys
 augroup quickfix
-	au FileType qf, noremap ' <CR><C-W><C-P>j 
-	au FileType qf, set nospell
-	au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
-	au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
-	au FileType qf, setlocal statusline=\ %n\ \ %f%=L%l/%L\ %P
+    au FileType qf, noremap ' <CR><C-W><C-P>j 
+    au FileType qf, set nospell
+    au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
+    au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
+    au FileType qf, setlocal statusline=\ %n\ \ %f%=L%l/%L\ %P
 augroup end
 
 augroup msdocs
@@ -320,15 +323,15 @@ augroup msdocs
 augroup end
 
 augroup misc
-	au BufWinEnter *.fugitiveblame,*.diff, set nospell
+    au BufWinEnter *.fugitiveblame,*.diff, set nospell
     au BufWinLeave *.txt, mkview
     au BufWinEnter *.txt, silent loadview
-	au BufWinLeave *.conf, mkview
-	au BufWinEnter *.conf, silent loadview
-	au BufWinEnter *mutt-*, set spell complete+=k nonu
-	au BufWinEnter *mutt-*, UniCycleOn
+    au BufWinLeave *.conf, mkview
+    au BufWinEnter *.conf, silent loadview
+    au BufWinEnter *mutt-*, set spell complete+=k nonu
+    au BufWinEnter *mutt-*, UniCycleOn
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
-	au BufWinEnter *vimChatRoster, set foldlevel=1
+    au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
     au InsertEnter * hi CursorLine guibg=#121212 gui=none ctermbg=233 cterm=none
     au InsertLeave * hi CursorLine guibg=#1c1c1c gui=none ctermbg=235 cterm=none
@@ -402,3 +405,4 @@ function ToggleHex()
   let &readonly=l:oldreadonly
   let &modifiable=l:oldmodifiable
 endfunction
+

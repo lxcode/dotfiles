@@ -19,7 +19,7 @@ hi Cursor guifg=black guibg=white ctermfg=0 ctermbg=15
 hi LineNr guifg=#3D3D3D guibg=#101010 ctermfg=239 ctermbg=NONE
 
 hi VertSplit guifg=#202020 guibg=#202020 ctermfg=235 ctermbg=60 
-hi StatusLine guifg=#202020 guibg=#808080 ctermfg=235 ctermbg=60
+hi StatusLine guifg=#1a1a1a guibg=#808080 ctermfg=233 ctermbg=60
 hi StatusLineNC guifg=#080808 guibg=#202020 ctermfg=240 ctermbg=235
 
 hi Folded guifg=#a0a8b0 guibg=#384048 ctermfg=grey ctermbg=60
