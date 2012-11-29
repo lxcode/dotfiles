@@ -57,8 +57,8 @@ if $DISPLAY != ""
 endif 
 set spell
 set et                    " expand tabs
-set diffopt+=iwhite       " ignore whitespace in diffs
-set cursorline          " I like this, but damn is it slow
+set diffopt+=iwhite,vertical   " ignore whitespace in diffs
+set cursorline            " I like this, but damn is it slow
 set hidden                " allow hidden buffers
 set novb                  " no visual bell
 set number                " line numbers
