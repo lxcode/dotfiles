@@ -11,14 +11,14 @@ endif
 let colors_name = "lx-256-dark"
 
 " General colors
-"hi Normal guifg=#f6f3e8 guibg=black ctermfg=white ctermbg=NONE
-hi Normal guifg=#f6f3e8 guibg=#242424 ctermfg=252 ctermbg=234
+"hi Normal guifg=#a8a8a8 guibg=black ctermfg=white ctermbg=NONE
+hi Normal guifg=#d0d0d0 guibg=#242424 ctermfg=252 ctermbg=234
 hi NonText guifg=#070707 guibg=black ctermfg=0
 
-hi Cursor guifg=black guibg=white ctermfg=0 ctermbg=15
+hi Cursor guifg=black guibg=#5fafff ctermfg=0 ctermbg=15
 hi LineNr guifg=#3D3D3D guibg=#101010 ctermfg=239 ctermbg=NONE
 
-hi VertSplit guifg=#202020 guibg=#202020 ctermfg=235 ctermbg=60 
+hi VertSplit guifg=#000000 guibg=#202020 ctermfg=235 ctermbg=60 
 hi StatusLine guifg=#1a1a1a guibg=#808080 ctermfg=233 ctermbg=60
 hi StatusLineNC guifg=#080808 guibg=#202020 ctermfg=240 ctermbg=235
 

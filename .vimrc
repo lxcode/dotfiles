@@ -97,7 +97,7 @@ set incsearch               " search incrementally
 set showmatch               " show the matching terminating bracket
 set suffixes=.out           " set priority for tab completion
 set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls,*.
-set wildignore+=*.loc,*.gz,*.latexmain,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx
+set wildignore+=*.loc,*.gz,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx
 set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
@@ -115,7 +115,7 @@ colorscheme lx-256-dark
 "source ~/.vim/ftplugin/man.vim
 
 "latex
-let g:LatexBox_latexmk_options = "-pdflatex=lualatex"
+let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
 if has("macunix")
     let g:LatexBox_viewer = "open"
 else
@@ -335,8 +335,8 @@ augroup end
 
 augroup misc
     au BufWinEnter *.fugitiveblame,*.diff, set nospell
-    au BufWinLeave *.txt,*.conf,.vimrc mkview
-    au BufWinEnter *.txt,*.conf,.vimrc silent loadview
+    au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
+    au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
     au BufWinEnter *mutt-*, set spell complete+=k nonu
     au BufWinEnter *mutt-*, UniCycleOn
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
