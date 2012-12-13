@@ -2,6 +2,7 @@
 map <right> :bn<cr>
 map <left> :bp<cr>
 nnoremap <C-Tab> gt
+" Make Y behave like C and D
 nnoremap Y y$
 " auto-format the current paragraph
 map ** gwap
@@ -112,9 +113,13 @@ set t_Co=256                " use 256 colors
 colorscheme lx-256-dark
 
 " 33ms startup penalty!
-"source ~/.vim/ftplugin/man.vim
+source ~/.vim/ftplugin/man.vim
+
+" buftabs
+let g:buftabs_only_basename=1
 
 "latex
+let g:tex_comment_nospell = 1
 let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
 if has("macunix")
     let g:LatexBox_viewer = "open"
@@ -123,7 +128,17 @@ else
 endif
 let g:LatexBox_Folding = 1
 let g:LatexBox_fold_preamble = 1
-let g:LatexBox_fold_envs = 1
+let g:LatexBox_fold_envs = 0
+let g:LatexBox_quickfix = 0
+let g:LatexBox_show_warnings = 0
+let g:LatexBox_ignore_warnings = [
+            \ 'Underfull',
+            \ 'Overfull',
+            \ 'specifier changed to',
+            \ 'Font shape',
+            \ 'epstopdf',
+            \ ]
+
 let g:LatexBox_fold_parts=[
            \ "part",
            \ "chapter",
@@ -132,7 +147,6 @@ let g:LatexBox_fold_parts=[
            \ "subsubsection",
            \ "vtitle"
            \ ]
-let g:tex_comment_nospell = 1
 
 augroup latex
     au BufWritePost *.tex silent! Latexmk
@@ -186,6 +200,7 @@ let g:vimchat_pync_enabled = 1
 map g<Tab> gt
 
 " CtrlP
+let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_map = '<C-e>'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 0
@@ -258,15 +273,13 @@ let g:tagbar_type_tex = {
     \ 'ctagstype' : 'latex',
     \ 'kinds'     : [
         \ 's:sections',
-        \ 't:subsections',
-        \ 'u:subsubsections',
-        \ 'v:vulns',
-        \ 'r:strecs',
-        \ 'R:ltrecs',
         \ 'g:graphics',
         \ 'l:labels',
         \ 'r:refs:1',
-        \ 'p:pagerefs:1'
+        \ 'p:pagerefs:1',
+        \ 'v:vulns',
+        \ 'r:strecs',
+        \ 'R:ltrecs'
     \ ],
     \ 'sort'    : 0,
 \ }
@@ -294,28 +307,28 @@ augroup end
 
 augroup html
     au!
-    au BufEnter *.htm* set spell wrapmargin=5 wrapscan
-    au BufLeave *.htm* set wrapscan&
+    au FileType html set spell wrapmargin=5 wrapscan
+    au FileType html set wrapscan&
     au BufNewFile *.html r ~/.vim/templates/template.html
     au BufWinLeave *.htm* mkview
     au BufWinEnter *.htm* silent loadview
 augroup end
 
 augroup python
-    au BufEnter *.py,*.pyw set smartindent smarttab nospell
+    au FileType python set smartindent smarttab nospell
     au BufWinLeave *.py mkview
     au BufWinEnter *.py silent loadview
 augroup end
 
 augroup markdown
-    au BufNewFile,BufRead *.md set spell
     au BufWinLeave *.md, mkview
     au BufWinEnter *.md, silent loadview
-    au BufWinEnter *.md, set textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
     au BufWinEnter *.md,*.notes, imap <C-l> <C-t>
     au BufWinEnter *.md,*.notes, imap <C-h> <C-d>
     au BufWinEnter *.md,*.notes, imap >> <C-t>
     au BufWinEnter *.md,*.notes, imap << <C-d>
+    au FileType markdown set spell
+    au FileType markdown set textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
 
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow 
@@ -337,13 +350,16 @@ augroup misc
     au BufWinEnter *.fugitiveblame,*.diff, set nospell
     au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
     au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
-    au BufWinEnter *mutt-*, set spell complete+=k nonu
-    au BufWinEnter *mutt-*, UniCycleOn
+    au FileType make set diffopt-=iwhite
+    au FileType vim set nospell
+    au FileType mail set spell complete+=k nonu
+    au FileType mail UniCycleOn
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
     au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
-    au InsertEnter * hi CursorLine guibg=#121212 gui=none ctermbg=233 cterm=none
-    au InsertLeave * hi CursorLine guibg=#1c1c1c gui=none ctermbg=235 cterm=none
+    " What - like how does this even work
+    au InsertLeave * hi! link CursorLine CursorLine 
+    au InsertEnter * hi! link CursorLine Normal
 augroup end
 
 augroup syntax
