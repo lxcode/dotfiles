@@ -4,6 +4,9 @@ map <left> :bp<cr>
 nnoremap <C-Tab> gt
 " Make Y behave like C and D
 nnoremap Y y$
+" Use , in addition to \ for the leader
+let mapleader = ","
+nmap \ ,
 " auto-format the current paragraph
 map ** gwap
 imap ** <Esc>gwap
@@ -62,13 +65,14 @@ set diffopt+=iwhite,vertical   " ignore whitespace in diffs
 set cursorline            " I like this, but damn is it slow
 set hidden                " allow hidden buffers
 set novb                  " no visual bell
-set number                " line numbers
+set nonu                  " line numbers
 set viewdir=$HOME/.views  " keep view states out of my .vim
 set pumheight=15          " trim down the completion popup menu
 set shortmess+=atIoT      " save space in status messages
 set scrolloff=3           " 3 lines of buffer before scrolling
 set ignorecase            " case insensitive searches
 set smartcase             " unless you type uppercase explicitly
+set smarttab              " use shiftwidth instead of tab stops
 set wildmode=list:longest " shows a list of candidates when tab-completing
 set hlsearch              " highlight all search matches
 set nojoinspaces          " disallow two spaces after a period when joining
@@ -298,7 +302,7 @@ augroup cjava
     au BufNewFile *.c r ~/.vim/templates/template.c
     au BufEnter *.[mCchly] set nospell comments+=s1:/*,mb:*,ex:*/
     au BufRead,BufNewFile *.m setfiletype objc
-    au BufEnter *.cpp,*.java set nospell
+    au BufEnter *.cpp,*.java set nospell number
     au BufWinLeave *.[mchly] mkview
     au BufWinEnter *.[mchly] silent loadview
     au BufWinLeave *.cpp,*.java mkview
@@ -307,7 +311,7 @@ augroup end
 
 augroup html
     au!
-    au FileType html set spell wrapmargin=5 wrapscan
+    au FileType html set spell wrapmargin=5 wrapscan number
     au FileType html set wrapscan&
     au BufNewFile *.html r ~/.vim/templates/template.html
     au BufWinLeave *.htm* mkview
@@ -315,7 +319,7 @@ augroup html
 augroup end
 
 augroup python
-    au FileType python set smartindent smarttab nospell
+    au FileType python set smartindent smarttab nospell number
     au BufWinLeave *.py mkview
     au BufWinEnter *.py silent loadview
 augroup end
@@ -335,7 +339,7 @@ augroup end
 " keys
 augroup quickfix
     au FileType qf, noremap ' <CR><C-W><C-P>j 
-    au FileType qf, set nospell
+    au FileType qf, set nospell number
     au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
     au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
     au FileType qf, setlocal statusline=\ %n\ \ %f%=L%l/%L\ %P
@@ -347,7 +351,7 @@ augroup msdocs
 augroup end
 
 augroup misc
-    au BufWinEnter *.fugitiveblame,*.diff, set nospell
+    au BufWinEnter *.fugitiveblame,*.diff, set nospell number
     au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
     au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
     au FileType make set diffopt-=iwhite
