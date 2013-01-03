@@ -11,7 +11,6 @@ export PATH=/usr/local/libexec/ccache:$PATH
 export CCACHE_PATH=/usr/bin:/usr/local/bin
 export CCACHE_DIR="/home/lx/.ccache"
 export CLICOLOR=yes
-export EMAIL=lx@here.com
 
 #export XMODIFIERS='@im=SCIM'
 #export GTK_IM_MODULE="scim"
@@ -23,7 +22,7 @@ export MANPATH=/usr/man:/usr/share/man:/usr/local/man:$X11HOME/man:/usr/lang/man
 export ORACLE_HOME=/compat/linux/usr/lib/oracle/10.2.0.3 
 export CVSROOT=anoncvs@anoncvs1.FreeBSD.org:/home/ncvs
 
-path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /var/qmail/bin $X11HOME/bin /usr/local/9/bin /crypt/usr/local/texlive/2012/bin/amd64-freebsd ~/bin ~/android/tools /home/lx/git/isec/tools/misc/graudit /usr/local/libexec/git-core )
+path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /var/qmail/bin $X11HOME/bin /usr/local/9/bin /crypt/usr/local/texlive/2012/bin/amd64-freebsd /usr/texbin ~/bin ~/android/tools /home/lx/git/isec/tools/misc/graudit /usr/local/libexec/git-core )
 
 case $OSTYPE in
 	solaris*)
