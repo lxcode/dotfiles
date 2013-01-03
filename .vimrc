@@ -357,7 +357,6 @@ augroup misc
     au FileType make set diffopt-=iwhite
     au FileType vim set nospell
     au FileType mail set spell complete+=k nonu
-    au FileType mail UniCycleOn
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
     au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
