@@ -22,12 +22,12 @@ set beep=no			# don't beep for silly reasons
 set beep_new=no		# beep when there's new mail
 set sort=threads # default sort messages by thread
 set sort_browser=reverse-date # showing mbox list default to newest first
-set sort_aux=last-date-received # showing threads with youngest message last
+set sort_aux=reverse-last-date-received # showing threads with youngest message first
 set markers=no			# no markers for wrapped lines in the pager
 set abort_unmodified=no		# don't automatically abort an unchanged mail
 set abort_nosubject=no		# or when there's no subject
 set move=no			# don't ask to move unread mail
-set postpone=ask-no		# black to no on "postpone?" prompt
+set postpone=ask-no		# default to no on "postpone?" prompt
 set recall=no			# don't ask about recalling postponed msgs
 set delete=yes			# don't ask about deleting
 set edit_headers=yes		# edit headers while editing a message
@@ -101,7 +101,7 @@ bind pager \Cb previous-page
 bind pager G bottom
 bind pager l list-reply
 bind pager <Tab> next-unread
-bind index G last-entry
+bind index G first-entry
 bind index \Cf next-page
 bind index \Cb previous-page
 bind index M current-middle
@@ -109,8 +109,10 @@ bind index L limit
 bind index l list-reply
 bind index <Tab> next-unread
 bind attach l list-reply
+macro index i 'L~F^M'
+macro index 8 'L.^M'
 
-folder-hook . "push 'M'"
+#folder-hook . "push 'M'"
 
 # colors...works with transparency, change black to black if desired
 color hdrdefault brightcyan default
