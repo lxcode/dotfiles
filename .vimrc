@@ -46,7 +46,6 @@ if has('gui')
         let g:clang_complete_enable = 1
         let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
         let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
-
     else
         set guifont=Inconsolata\ 14
     endif
@@ -56,13 +55,13 @@ if has('gui_running')
     set balloondelay=100
 endif
 if $DISPLAY != "" 
-    set mouse=a             " Turn this off for console-only mode
-    set selectmode+=mouse	" Allow the mouse to select
+    set cursorline        " I like this, but damn is it slow
 endif 
+set mouse=a               " Turn this off for console-only mode
+set selectmode+=mouse	  " Allow the mouse to select
 set spell
 set et                    " expand tabs
 set diffopt+=iwhite,vertical   " ignore whitespace in diffs
-set cursorline            " I like this, but damn is it slow
 set hidden                " allow hidden buffers
 set novb                  " no visual bell
 set nonu                  " line numbers
@@ -357,7 +356,7 @@ augroup misc
     au FileType make set diffopt-=iwhite
     au FileType vim set nospell
     au FileType mail set spell complete+=k nonu
-    au FileType mail UniCycleOn
+"    au FileType mail UniCycleOn
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
     au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
