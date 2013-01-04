@@ -22,17 +22,19 @@ alias la='ls -a'
 alias become='sudo -s -H -u'
 alias burp='LC_CTYPE=C java -mx512m -jar /home/lx/tools/burpsuite_pro_v1.4.12.jar'
 alias vpn='sudo openvpn /usr/local/etc/openvpn.conf'
-alias wu='svstat /service/* /service/*/log'
+alias wu='sudo sv stat /service/*'
 alias rmsvn="find . -type d -name '\.svn' |xargs rm -rf"
 alias rmgit="find . -type d -name '\.git' |xargs rm -rf"
 alias mic='sudo make install clean'
 alias mu='cd /usr/ports && sudo make update'
 alias mc='sudo make config'
+alias mcr="sudo make config-recursive"
 alias pwad='sudo portmaster -wad'
 alias pm="sudo portmaster"
 alias me="sudo make extract"
 alias cc_args="gmake CC='/home/lx/.vim/bin/cc_args.py gcc' CXX='/home/lx/.vim/bin/cc_args.py g++' -B"
 alias c64term='urxvt -bg "#3a319c" -fg "#7b71d6" -fn "xft:Adore64:size=10"'
+alias srv="sudo service"
 
 if [ -n "$DISPLAY" ]; then
     alias vim="$EDITOR --servername VIM"
