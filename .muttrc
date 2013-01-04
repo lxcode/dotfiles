@@ -62,7 +62,9 @@ account-hook . 'unset imap_user; unset imap_pass;'
 auto_view text/html
 alternative_order text/plain text/enriched text/html
 
-set index_format="%Z %{%b %d} %-15.15F (%?l?%4l&%4c?) %s"
+#set index_format="%Z %{%b %d} %-15.15F (%?l?%4l&%4c?) %s"
+set date_format="%m/%d"
+set index_format="%Z %D %-15.15F %?M?(+%03M)&(%4c)? %s"
 
 # Custom headers
 my_hdr X-OpenPGP-Key-fingerprint: 482A 8C46 C844 7E7C 8CBC 2313 96EE BEE5 1F4B CA13
