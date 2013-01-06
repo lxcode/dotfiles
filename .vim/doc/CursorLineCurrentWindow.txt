@@ -1,0 +1,95 @@
+*CursorLineCurrentWindow.txt*	Only highlight the screen line of the cursor in the currently active window.
+
+		 CURSOR LINE CURRENT WINDOW    by Ingo Karkat
+						 *CursorLineCurrentWindow.vim*
+description			|CursorLineCurrentWindow-description|
+usage				|CursorLineCurrentWindow-usage|
+installation			|CursorLineCurrentWindow-installation|
+limitations			|CursorLineCurrentWindow-limitations|
+known problems			|CursorLineCurrentWindow-known-problems|
+todo				|CursorLineCurrentWindow-todo|
+history				|CursorLineCurrentWindow-history|
+
+==============================================================================
+DESCRIPTION				 *CursorLineCurrentWindow-description*
+
+The 'cursorline' setting makes it easy to locate the cursor position. However,
+when there are split windows, each one shows its cursor line, and the only
+indication of the currently active window is the different 'statusline'
+highlighting (with |hl-StatusLine| vs. |hl-StatusLineNC|).
+
+This plugin avoids the clutter of multiple highlighted screen lines with split
+windows by disabling the 'cursorline' setting for all but the current window.
+
+RELATED WORKS								     *
+
+The basic idea is outlined in the Vim Tips Wiki:
+    http://vim.wikia.com/wiki/Highlight_current_line
+
+==============================================================================
+USAGE					       *CursorLineCurrentWindow-usage*
+
+Globally enable 'cursorline' in your |vimrc| via >
+    :set cursorline
+After sourcing this plugin, 'cursorline' will only be active for the current
+window. So with multiple split windows, only one of them, the one where the
+cursor is in, will have the 'cursorline'.
+
+
+Disable cursorline for the current window via: >
+    :setlocal nocursorline
+This will persist even after moving away and back to the window.
+
+Disable cursorline globally via: >
+    :set nocursorline
+As soon as you enter a window, its line highlighting will vanish.
+
+						     *w:persistent_cursorline*
+For some kind of files it is helpful to keep the line highlighting active,
+e.g. to serve as a ruler. You can keep the highlighting for a particular
+window by setting a window-local variable: >
+    :let w:persistent_cursorline = 1
+
+==============================================================================
+INSTALLATION				*CursorLineCurrentWindow-installation*
+
+This script is packaged as a |vimball|. If you have the "gunzip" decompressor
+in your PATH, simply edit the *.vba.gz package in Vim; otherwise, decompress
+the archive first, e.g. using WinZip. Inside Vim, install by sourcing the
+vimball or via the |:UseVimball| command. >
+    vim CursorLineCurrentWindow.vba.gz
+    :so %
+To uninstall, use the |:RmVimball| command.
+
+DEPENDENCIES				*CursorLineCurrentWindow-dependencies*
+
+- Requires Vim 7.0 or higher.
+
+==============================================================================
+LIMITATIONS				 *CursorLineCurrentWindow-limitations*
+
+KNOWN PROBLEMS			      *CursorLineCurrentWindow-known-problems*
+
+TODO						*CursorLineCurrentWindow-todo*
+
+IDEAS					       *CursorLineCurrentWindow-ideas*
+
+==============================================================================
+HISTORY					     *CursorLineCurrentWindow-history*
+
+1.00	18-Aug-2012
+First published version.
+
+0.10	23-Aug-2011
+Allow persistent cursorlines via w:persistent_cursorline.
+
+0.01	09-May-2006
+Started development.
+
+==============================================================================
+Copyright: (C) 2012 Ingo Karkat
+The VIM LICENSE applies to this script; see |copyright|.
+
+Maintainer:	Ingo Karkat <ingo@karkat.de>
+==============================================================================
+ vim:tw=78:ts=8:ft=help:norl:
