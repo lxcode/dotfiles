@@ -10,6 +10,7 @@ Xft*hinting: 1
 Xft*hintstyle: hintfull
 Xft*rgba: rgba
 URxvt*reverseVideo:   	    on
+URxvt*iso14755: False
 URxvt*visualBell:   	    off
 URxvt*scrollLines:   	    10000
 URxvt*scrollBar:   	    0
