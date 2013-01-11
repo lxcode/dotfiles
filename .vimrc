@@ -1,12 +1,15 @@
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
+map g<Tab> :bn<CR>
 nnoremap <C-Tab> gt
 " Make Y behave like C and D
 nnoremap Y y$
 " Use , in addition to \ for the leader
 let mapleader = ","
 nmap \ ,
+" save my pinky
+nore ; :
 " auto-format the current paragraph
 map ** gwap
 imap ** <Esc>gwap
@@ -23,15 +26,11 @@ nnoremap <silent> <F10> :TagbarToggle<CR>
 " jump to next quickfix item
 map <F12> :cn<CR>
 " preview the tag under the cursor
-map <C-S-p> :exe "ptag" expand("<cword>")<CR>
+map <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Delete my signature
 map <Leader>ds Gvipdgg10j
 set pastetoggle=<F11> 
-
-" save my pinky
-nore ; :
-nore , ;
 
 syntax on
 filetype plugin on
@@ -47,7 +46,7 @@ if has('gui')
         let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
         let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
     else
-        set guifont=Inconsolata\ 14
+        set guifont=Inconsolata\ 13
     endif
 endif
 if has('gui_running')
@@ -55,27 +54,27 @@ if has('gui_running')
     set balloondelay=100
 endif
 if $DISPLAY != "" 
-    set cursorline        " I like this, but damn is it slow
+    set cursorline          " I like this, but damn is it slow
 endif 
-set mouse=a               " Turn this off for console-only mode
-set selectmode+=mouse	  " Allow the mouse to select
+set mouse=a                 " Turn this off for console-only mode
+set selectmode+=mouse	    " Allow the mouse to select
 set spell
-set et                    " expand tabs
+set et                      " expand tabs
 set diffopt+=iwhite,vertical   " ignore whitespace in diffs
-set hidden                " allow hidden buffers
-set novb                  " no visual bell
-set nonu                  " line numbers
-set viewdir=$HOME/.views  " keep view states out of my .vim
-set pumheight=15          " trim down the completion popup menu
-set shortmess+=atIoT      " save space in status messages
-set scrolloff=3           " 3 lines of buffer before scrolling
-set ignorecase            " case insensitive searches
-set smartcase             " unless you type uppercase explicitly
-set smarttab              " use shiftwidth instead of tab stops
-set wildmode=list:longest " shows a list of candidates when tab-completing
-set hlsearch              " highlight all search matches
-set nojoinspaces          " disallow two spaces after a period when joining
-set formatoptions=qnwrtlm " auto-formatting style for bullets and comments
+set hidden                  " allow hidden buffers
+set novb                    " no visual bell
+set nonu                    " line numbers
+set viewdir=$HOME/.views    " keep view states out of my .vim
+set pumheight=15            " trim down the completion popup menu
+set shortmess+=atIoT        " save space in status messages
+set scrolloff=3             " 3 lines of buffer before scrolling
+set ignorecase              " case insensitive searches
+set smartcase               " unless you type uppercase explicitly
+set smarttab                " use shiftwidth instead of tab stops
+set wildmode=list:longest   " shows a list of candidates when tab-completing
+set hlsearch                " highlight all search matches
+set nojoinspaces            " disallow two spaces after a period when joining
+set formatoptions=qnwrtlm   " auto-formatting style for bullets and comments
 set autoindent
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
@@ -123,7 +122,8 @@ let g:buftabs_only_basename=1
 
 "latex
 let g:tex_comment_nospell = 1
-let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
+"let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
+let g:LatexBox_latexmk_options = "-xelatex"
 if has("macunix")
     let g:LatexBox_viewer = "open"
 else
@@ -153,6 +153,9 @@ let g:LatexBox_fold_parts=[
 
 augroup latex
     au BufWritePost *.tex silent! Latexmk
+    " The NoStarch style is a bit crufty and needs pdflatex
+    au BufEnter book.tex let g:LatexBox_latexmk_options = "" 
+    au BufEnter book.tex let g:LatexBox_fold_envs = 1
     au BufEnter *.tex source ~/.vim/ftplugin/quotes.vim
     au BufEnter *.tex,*.sty syntax spell toplevel 
     au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
@@ -182,7 +185,7 @@ autocmd FileType *
             \      let g:myfunc = '' |
             \  endif |
             \  if g:myfunc != '' |
-            \      call SuperTabChain(g:myfunc, "<c-x><c-p>") |
+            \      call SuperTabChain(g:myfunc, "<c-p>") |
             \      call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
             \  endif
 
@@ -200,7 +203,7 @@ let g:vimchat_otr = 1
 let g:vimchat_statusicon = 0
 let g:vimchat_showPresenceNotification = -1
 let g:vimchat_pync_enabled = 1
-map g<Tab> gt
+"map g<Tab> gt
 
 " CtrlP
 let g:ctrlp_cmd = 'CtrlPMixed'
@@ -222,9 +225,16 @@ let g:statline_mixed_indent=0
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_older_paste
 
+" dwm.vim
+let g:dwm_map_keys = 0
+nmap <C-n> <Plug>DWMNew
+nmap <C-i> <Plug>DWMFocus
+nmap <C-m> <Plug>DWMFull
+nnoremap <C-j> <C-W>w
+nnoremap <C-k> <C-W>W
 
 " grephere
-nmap <C-n> <Plug>(GrepHereCurrent) 
+nmap <Leader>g <Plug>(GrepHereCurrent) 
 
 " vim-notes
 let g:notes_directory = '~/Documents/Notes'
