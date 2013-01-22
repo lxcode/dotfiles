@@ -58,3 +58,5 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 # Vermeidung von zeit-paradoxon
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
+# Disable drop shadow on screenshots
+defaults write com.apple.screencapture disable-shadow -bool true

@@ -62,7 +62,7 @@ set spell
 set et                      " expand tabs
 set diffopt+=iwhite,vertical   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
-set novb                    " no visual bell
+set vb t_vb=                " no visual bell
 set nonu                    " line numbers
 set viewdir=$HOME/.views    " keep view states out of my .vim
 set pumheight=15            " trim down the completion popup menu
@@ -83,6 +83,7 @@ set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
 set grepprg=grep\ -nIH\ $*
 set cpoptions=BFt
+set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
 set nobackup                " ugh, stop making useless crap
 set nowritebackup           " same with overwriting
@@ -228,7 +229,7 @@ nmap <leader>P <Plug>yankstack_substitute_older_paste
 " dwm.vim
 let g:dwm_map_keys = 0
 nmap <C-n> <Plug>DWMNew
-nmap <C-i> <Plug>DWMFocus
+"nmap <C-i> <Plug>DWMFocus
 nmap <C-m> <Plug>DWMFull
 nnoremap <C-j> <C-W>w
 nnoremap <C-k> <C-W>W
