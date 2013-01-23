@@ -8,6 +8,7 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 # Don't ask stupid questions
 defaults write com.apple.Finder WarnOnEmptyTrash -bool false
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # ANIMATE FASTER
 defaults write com.apple.dock expose-animation-duration -float 0.15
@@ -60,3 +61,15 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Disable drop shadow on screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
+
+# Disable stupid semitransparent menubar
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
+
+# I do not need my documents to be cloud
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# Check for updates daily.
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+# It's my library. Let me see it.
+chflags nohidden ~/Library/
