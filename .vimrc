@@ -62,7 +62,7 @@ set spell
 set et                      " expand tabs
 set diffopt+=iwhite,vertical   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
-set vb t_vb=                " no visual bell
+set novb t_vb=              " no visual bell
 set nonu                    " line numbers
 set viewdir=$HOME/.views    " keep view states out of my .vim
 set pumheight=15            " trim down the completion popup menu
@@ -229,8 +229,8 @@ nmap <leader>P <Plug>yankstack_substitute_older_paste
 " dwm.vim
 let g:dwm_map_keys = 0
 nmap <C-n> <Plug>DWMNew
-"nmap <C-i> <Plug>DWMFocus
-nmap <C-m> <Plug>DWMFull
+nmap <Leader>i <Plug>DWMFocus
+nmap <Leader>z <Plug>DWMFull
 nnoremap <C-j> <C-W>w
 nnoremap <C-k> <C-W>W
 
