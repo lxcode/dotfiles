@@ -14,8 +14,9 @@ let s:list_envs = ['itemize', 'enumerate', 'description']
 " indent on \left( and on \(, but not on (
 " indent on \left[ and on \[, but not on [
 " indent on \left\{ and on {, but not on \{
-let s:open_pat = '\\\@<!\%(\\begin\|\\left\|\\(\|\\\[\|{\)'
-let s:close_pat = '\\\@<!\%(\\end\|\\right\|\\)\|\\\]\|}\)'
+"let s:open_pat = '\\\@<!\%(\\begin\|\\left\|\\(\|\\\[\|{\)'
+let s:open_pat = '\\\@<!\%(\\begin\|\\left\|\\(\|\\\[\)'
+let s:close_pat = '\\\@<!\%(\\end\|\\right\|\\)\|\\\]\)'
 let s:list_open_pat = '\\\@<!\\begin{\%(' . join(s:list_envs, '\|') . '\)}'
 let s:list_close_pat	= '\\\@<!\\end{\%(' . join(s:list_envs, '\|') . '\)}'
 
