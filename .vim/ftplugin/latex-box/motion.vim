@@ -5,7 +5,9 @@
 function! s:HasSyntax(syntaxName, ...)
 	let line	= a:0 >= 1 ? a:1 : line('.')
 	let col		= a:0 >= 2 ? a:2 : col('.')
-	return index(map(synstack(line, col), 'synIDattr(v:val, "name") == "' . a:syntaxName . '"'), 1) >= 0
+	return index(map(synstack(line, col),
+				\ 'synIDattr(v:val, "name") == "' . a:syntaxName . '"'),
+				\ 1) >= 0
 endfunction
 " }}}
 
@@ -40,9 +42,6 @@ function! s:SearchAndSkipComments(pat, ...)
 	return ret
 endfunction
 " }}}
-
-
-
 
 " Finding Matching Pair {{{
 function! s:FindMatchingPair(mode)
@@ -151,7 +150,6 @@ vnoremap <silent> <Plug>LatexBox_JumpToMatch		:call <SID>FindMatchingPair('v')<C
 onoremap <silent> <Plug>LatexBox_JumpToMatch		v:call <SID>FindMatchingPair('o')<CR>
 " }}}
 
-
 " select inline math {{{
 " s:SelectInlineMath(seltype)
 " where seltype is either 'inner' or 'outer'
@@ -184,8 +182,10 @@ function! s:SelectInlineMath(seltype)
 	endif
 endfunction
 
-vnoremap <silent> <Plug>LatexBox_SelectInlineMathInner :<C-U>call <SID>SelectInlineMath('inner')<CR>
-vnoremap <silent> <Plug>LatexBox_SelectInlineMathOuter :<C-U>call <SID>SelectInlineMath('outer')<CR>
+vnoremap <silent> <Plug>LatexBox_SelectInlineMathInner
+			\ :<C-U>call <SID>SelectInlineMath('inner')<CR>
+vnoremap <silent> <Plug>LatexBox_SelectInlineMathOuter
+			\ :<C-U>call <SID>SelectInlineMath('outer')<CR>
 " }}}
 
 " select current environment {{{
@@ -244,7 +244,7 @@ endfunction
 
 " Table of Contents {{{
 
-"Special UTF-8 conversion
+" Special UTF-8 conversion
 function! s:ConvertBack(line)
 
 	let line = a:line
@@ -311,7 +311,8 @@ function! s:ConvertBack(line)
 		let line = substitute(line, "\\\\IeC\s*{\\\\\"U}", 'Ü', 'g')
 
 	else
-		" substitute stuff like '\IeC{\"u}' (utf-8 umlauts in section heading) to plain 'u'
+		" substitute stuff like '\IeC{\"u}' (utf-8 umlauts in section heading)
+		" to plain 'u'
 		let line = substitute(line, "\\\\IeC\s*{\\\\.\\(.\\)}", '\1', 'g')
 	endif
 	return line
@@ -412,15 +413,25 @@ function! LatexBox_TOC()
 	" find closest section in current buffer
 	let closest_index = s:FindClosestSection(toc,fileindices)
 
+	" create TOC window and set local settings
 	execute g:LatexBox_split_side g:LatexBox_split_width . 'vnew LaTeX\ TOC'
-	setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap cursorline nonumber
+	setlocal buftype=nofile
+				\ bufhidden=wipe
+				\ nobuflisted
+				\ noswapfile
+				\ nowrap
+				\ cursorline
+				\ nonumber
+				\ nolist
+				\ tabstop=8
 
+	" add TOC entries
 	for entry in toc
 		call append('$', entry['number'] . "\t" . entry['text'])
 	endfor
-	call append('$', ["", "<Esc>/q: close", "<Space>: jump", "<Enter>: jump and close"])
-
-	0delete
+	call append('$', ["", "<Esc>/q: close",
+				\ "<Space>: jump", "<Enter>: jump and close"])
+	0delete _
 
 	" syntax
 	syntax match helpText /^<.*/
@@ -433,6 +444,7 @@ function! LatexBox_TOC()
 	highlight link mainSecLine	Title
 	highlight link ssubSecLine	Comment
 
+	" mappings
 	map <buffer> <silent> q			:bwipeout<CR>
 	map <buffer> <silent> <Esc>		:bwipeout<CR>
 	map <buffer> <silent> <Space> 	:call <SID>TOCActivate(0)<CR>
@@ -440,8 +452,13 @@ function! LatexBox_TOC()
 	nnoremap <silent> <buffer> <leftrelease> :call <SID>TOCActivate(0)<cr>
 	nnoremap <silent> <buffer> <2-leftmouse> :call <SID>TOCActivate(1)<cr>
 	nnoremap <buffer> <silent> G	G4k
+	map <buffer> <silent> OA k
+	map <buffer> <silent> OB j
+	map <buffer> <silent> OC l
+	map <buffer> <silent> OD h
 
-	setlocal nomodifiable tabstop=8
+	" lock buffer
+	setlocal nomodifiable
 
 	let b:toc = toc
 	let b:calling_win = bufwinnr(calling_buf)
@@ -479,6 +496,17 @@ function! s:FindClosestSection(toc, fileindices)
 	return a:fileindices[file][imin]
 endfunction
 
+function! s:EscapeTitle(titlestr)
+	" Credit goes to Marcin Szamotulski for the following fix.  It allows to
+	" match through commands added by TeX.
+	let titlestr = substitute(a:titlestr, '\\\w*\>\s*\%({[^}]*}\)\?', '.*', 'g')
+
+	let titlestr = escape(titlestr, '\')
+	let titlestr = substitute(titlestr, ' ', '\\_\\s\\+', 'g')
+
+	return titlestr
+endfunction
+
 function! s:TOCActivate(close)
 	let n = getpos('.')[1] - 1
 
@@ -488,6 +516,21 @@ function! s:TOCActivate(close)
 
 	let entry = b:toc[n]
 
+	let titlestr = s:EscapeTitle(entry['text'])
+
+	" Search for duplicates
+	"
+	let i=0
+	let entry_hash = entry['level'].titlestr
+	let duplicates = 0
+	while i<n
+		let i_entry = b:toc[n]
+		let i_hash = b:toc[i]['level'].s:EscapeTitle(b:toc[i]['text'])
+		if i_hash == entry_hash
+			let duplicates += 1
+		endif
+		let i += 1
+	endwhile
 	let toc_bnr = bufnr('%')
 	let toc_wnr = winnr()
 
@@ -501,14 +544,13 @@ function! s:TOCActivate(close)
 
 	execute 'buffer! ' . bnr
 
-	let titlestr = entry['text']
 
-	" Credit goes to Marcin Szamotulski for the following fix. It allows to match through
-	" commands added by TeX.
-	let titlestr = substitute(titlestr, '\\\w*\>\s*\%({[^}]*}\)\?', '.*', 'g')
-
-	let titlestr = escape(titlestr, '\')
-	let titlestr = substitute(titlestr, ' ', '\\_\\s\\+', 'g')
+	" skip duplicates
+	while duplicates > 0
+		if search('\\' . entry['level'] . '\_\s*{' . titlestr . '}', 'ws')
+			let duplicates -= 1
+		endif
+	endwhile
 
 	if search('\\' . entry['level'] . '\_\s*{' . titlestr . '}', 'ws')
 		normal zt
