@@ -169,9 +169,9 @@ function! LatexBox_FoldText()
     endif
 
     " Parts, sections and fake sections
-    if line =~ '\\\(\(sub\)*section\|part\|chapter\)'
+    if line =~ '\\\(\(sub\)*section\|part\|chapter\|vtitle\)'
         let title =  matchstr(line,
-                    \ '^\s*\\\(\(sub\)*section\|part\|chapter\)\*\?{\zs.*\ze}')
+                    \ '^\s*\\\(\(sub\)*section\|vtitle\|part\|chapter\)\*\?{\zs.*\ze}')
     elseif line =~ 'Fakesection:'
         let title = matchstr(line, 'Fakesection:\s*\zs.*')
     elseif line =~ 'Fakesection'

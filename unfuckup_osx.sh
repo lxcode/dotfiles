@@ -73,3 +73,6 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # It's my library. Let me see it.
 chflags nohidden ~/Library/
+
+# disable "safe sleep".
+pmset -a hibernatemode 0
