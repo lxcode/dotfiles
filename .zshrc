@@ -11,9 +11,9 @@ alias skype='skype --resources=/usr/local/share/skype'
 alias sp="cadaver https://webdavsite"
 alias j=jobs
 alias dis=disown
-alias pu=pushd
+alias pd=popd
+alias p=popd
 alias yt='cd /tmp; youtube-dl `sselp`'
-alias po=popd
 alias d='dirs -v'
 alias h=history
 alias grep=egrep
@@ -35,6 +35,14 @@ alias me="sudo make extract"
 alias cc_args="gmake CC='/home/lx/.vim/bin/cc_args.py gcc' CXX='/home/lx/.vim/bin/cc_args.py g++' -B"
 alias c64term='urxvt -bg "#3a319c" -fg "#7b71d6" -fn "xft:Adore64:size=10"'
 alias srv="sudo service"
+
+mcd() {
+    cd `locate "$*"|slmenu -l 50`
+}
+
+mvi() {
+    vim `locate "$*"|slmenu -l 50`
+}
 
 if [ -n "$DISPLAY" ]; then
     alias vim="$EDITOR --servername VIM"
