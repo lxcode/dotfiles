@@ -12,6 +12,7 @@ nmap \ ,
 nore ; :
 " auto-format the current paragraph
 map ** gwap
+nmap -- gwap
 imap ** <Esc>gwap
 " correct spelling
 map <F1> 1z=
@@ -362,6 +363,7 @@ augroup end
 
 augroup misc
     au BufWinEnter *.fugitiveblame,*.diff, set nospell number
+    au BufWinEnter *.plist, call ReadPlist()
     au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
     au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
     au FileType make set diffopt-=iwhite
@@ -401,6 +403,16 @@ function! QuickfixToggle()
         let g:quickfix_return_to_window = winnr()
         copen
         let g:quickfix_is_open = 1
+    endif
+endfunction
+
+" Some quick bindings to edit binary plists
+command -bar PlistXML :set binary | :1,$!plutil -convert xml1 /dev/stdin -o -
+command -bar Plistbin :1,$!plutil -convert binary1 /dev/stdin -o -
+
+fun ReadPlist()
+    if getline("'[") =~ "^bplist"
+        :PlistXML
     endif
 endfunction
 
