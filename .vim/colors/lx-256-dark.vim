@@ -54,7 +54,7 @@ hi ModeMsg guifg=black guibg=#C6C5FE gui=bold ctermfg=0 ctermbg=189 cterm=bold
 if version >= 700 " Vim 7.x specific colors
  hi CursorLine guibg=#1c1c1c gui=none ctermbg=235 cterm=none
  hi CursorColumn guibg=#1c1c1c gui=none ctermbg=234 cterm=none
- hi MatchParen guifg=#df00ff guibg=none gui=bold ctermfg=magenta ctermbg=none 
+ hi MatchParen guifg=#df00ff guibg=#242424 gui=bold ctermfg=magenta ctermbg=none 
  hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242 
  hi PmenuSel guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195 
  hi Search guifg=#000000 guibg=#875f87 ctermfg=232  ctermbg=96 
