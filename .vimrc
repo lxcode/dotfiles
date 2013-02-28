@@ -59,7 +59,6 @@ if $DISPLAY != ""
 endif 
 set mouse=a                 " Turn this off for console-only mode
 set selectmode+=mouse	    " Allow the mouse to select
-set spell
 set et                      " expand tabs
 set diffopt+=iwhite,vertical   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
