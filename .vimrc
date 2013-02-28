@@ -223,6 +223,7 @@ let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
 
 " yankstack
+let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_older_paste
 
