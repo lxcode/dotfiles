@@ -10,6 +10,11 @@ let mapleader = ","
 nmap \ ,
 " save my pinky
 nore ; :
+" But allow the original functionality of ; and ,
+noremap ;; ;
+noremap ,, ,
+" Esc shortcut
+imap jj <Esc>
 " auto-format the current paragraph
 map ** gwap
 nmap -- gwap
@@ -45,7 +50,7 @@ if has('gui')
         set clipboard=unnamed
         let g:clang_complete_enable = 1
         let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-        let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
+        let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
     else
         set guifont=Inconsolata\ 13
     endif
@@ -160,7 +165,7 @@ augroup latex
     au BufEnter *.tex source ~/.vim/ftplugin/quotes.vim
     au BufEnter *.tex,*.sty syntax spell toplevel 
     au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
-    au BufEnter *.tex,*.sty set comments+=b:\\item formatoptions-=q
+    au BufEnter *.tex,*.sty set comments+=b:\\item formatoptions-=q foldlevel=5
     au BufEnter *.tex,*.sty imap <buffer> [[ \begin{
     au BufEnter *.tex,*.sty imap <buffer> ]] <Plug>LatexCloseCurEnv
     au BufEnter *.tex,*.sty imap <S-Enter> \pagebreak

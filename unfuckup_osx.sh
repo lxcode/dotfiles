@@ -80,3 +80,8 @@ chflags nohidden /usr
 pmset -a hibernatemode 0
 rm /private/var/vm/sleepimage
 
+# Remove the Java browser Plugin.
+rm -rf /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+touch /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+chmod 000 /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+chflags uchg /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
