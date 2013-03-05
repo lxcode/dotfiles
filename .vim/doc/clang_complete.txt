@@ -114,7 +114,7 @@ Default: 0
 
 				       	*clang_complete-snippets_engine*
 				       	*g:clang_snippets_engine*
-The snippets engine (clang_complete, snipmate, ultisnips... see the snippets
+The snippets engine (clang_complete, ultisnips... see the snippets
 subdirectory).
 Default: "clang_complete"
 
@@ -177,6 +177,15 @@ Set sources for user options passed to clang. Available sources are:
   ignored);
 - .clang_complete - use information from .clang_complete file Multiple options
   are separated by comma;
+- compile_commands.json - get the compilation arguments for the sources from a
+  compilation database. For example, recent versions of CMake (>=2.8.7) can
+  output this information. clang_complete will search upwards from where vi
+  was started for a database named 'compile_commands.json'.
+  Note : compilation databases can only be used when 'g:clang_use_library'
+  equals 1 and the clang libraries are recent enough (clang>=3.2). The 
+  compilation database only contains information for the C/C++ sources files,
+  so when editing a header, clang_complete will reuse the compilation
+  arguments from the last file found in the database.
 - {anything} else will be treaded as a custom option source in the following
   manner: clang_complete will try to load the autoload-function named
   getopts#{anything}#getopts, which then will be able to modify
@@ -186,15 +195,14 @@ Set sources for user options passed to clang. Available sources are:
 This option is processed and all sources are used on buffer loading, not each
 time before doing completion.
 
-Two examples of custom option sources is bundled with clang_complete and are
-called "clang" and "gcc". These sources run clang and gcc, respectively, to
-get a list of include paths. The list of include paths for each of supported
-filetypes (c, cpp, objc and objcpp) is cached on a disk and can be removed by
-calling the ClearIncludeCaches() function (for changes to take affect one
-needs to reread buffers using the :edit command or something equivalent).
-Since list of included paths can depend on user options "clang" and "gcc"
-should appear at the end of the list of sources.
-Default: "path, .clang_complete, clang"
+Default: "path, .clang_complete"
+
+                                        *clang_complete-compilation_database*
+                                        *g:clang_compilation_database*
+By default, clang_complete will search upwards from where it was started to
+find a compilation database. In case this behaviour does not match your needs,
+you can set |g:clang_compilation_database| to the directory where the database
+can be loaded from.
 
        				       	*clang_complete-use_library*
        				       	*g:clang_use_library*
@@ -202,7 +210,9 @@ Instead of calling the clang/clang++ tool use libclang directly. This gives
 access to many more clang features. Furthermore it automatically caches all
 includes in memory. Updates after changes in the same file will therefore be a
 lot faster.
-Default: 0
+Note: This version doesn't support calling clang binary for completion. If you
+cannot use libclang, you should download clang_complete from vim.org website.
+Default: 1
 
        				       	*clang_complete-library_path*
        				       	*g:clang_library_path*
@@ -315,10 +325,10 @@ for example:
 let g:clang_snippets = 1
 let g:clang_snippets_engine = 'clang_complete'
 
-If you have snipmate installed, you can use
+If you have ultisnips installed, you can use
 
 let g:clang_snippets = 1
-let g:clang_snippets_engine = 'snipmate'
+let g:clang_snippets_engine = 'ultisnips'
 
 instead. After a completetion you can use <Tab> in normal mode to jump to the
 next parameter.

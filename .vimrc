@@ -16,9 +16,7 @@ noremap ,, ,
 " Esc shortcut
 imap jj <Esc>
 " auto-format the current paragraph
-map ** gwap
 nmap -- gwap
-imap ** <Esc>gwap
 " correct spelling
 map <F1> 1z=
 imap <F1> <Esc>b1z=ea<Space>
@@ -37,6 +35,9 @@ nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Delete my signature
 map <Leader>ds Gvipdgg10j
 set pastetoggle=<F11> 
+" Window movement
+nnoremap <C-j> <C-W>w
+nnoremap <C-k> <C-W>W
 
 syntax on
 filetype plugin on
@@ -232,13 +233,6 @@ let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_older_paste
 
-" dwm.vim
-let g:dwm_map_keys = 0
-nmap <C-n> <Plug>DWMNew
-nmap <Leader>i <Plug>DWMFocus
-nmap <Leader>z <Plug>DWMFull
-nnoremap <C-j> <C-W>w
-nnoremap <C-k> <C-W>W
 
 " grephere
 nmap <Leader>g <Plug>(GrepHereCurrent) 
