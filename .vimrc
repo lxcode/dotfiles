@@ -17,14 +17,16 @@ noremap ,, ,
 imap jj <Esc>
 " auto-format the current paragraph
 nmap -- gwap
+nmap ** gwap
+" Clear search pattern with C-/
+nmap <silent>  :noh<CR>
 " correct spelling
 map <F1> 1z=
 imap <F1> <Esc>b1z=ea<Space>
 map <F4> :w<CR> :!lacheck %<CR>
 noremap <F5> :GundoToggle<CR>
 map <F8> :w<CR> :!make<CR>
-map <silent> <F9> :NERDTreeToggle<CR>
-nnoremap map <silent> <F9> :NERDTreeToggle<CR>
+map <silent> <F9> :call ToggleVExplorer()<CR>
 map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 " jump to next quickfix item
@@ -124,6 +126,12 @@ colorscheme lx-256-dark
 " 33ms startup penalty!
 source ~/.vim/ftplugin/man.vim
 
+"netrw
+"let g:netrw_liststyle=3
+let g:netrw_browse_split=4
+let g:netrw_winsize=25
+set autochdir
+
 " buftabs
 let g:buftabs_only_basename=1
 
@@ -166,7 +174,7 @@ augroup latex
     au BufEnter *.tex source ~/.vim/ftplugin/quotes.vim
     au BufEnter *.tex,*.sty syntax spell toplevel 
     au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
-    au BufEnter *.tex,*.sty set comments+=b:\\item formatoptions-=q foldlevel=5
+    au BufEnter *.tex,*.sty set comments+=b:\\item formatoptions-=q foldlevel=6
     au BufEnter *.tex,*.sty imap <buffer> [[ \begin{
     au BufEnter *.tex,*.sty imap <buffer> ]] <Plug>LatexCloseCurEnv
     au BufEnter *.tex,*.sty imap <S-Enter> \pagebreak
@@ -233,7 +241,6 @@ let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_older_paste
 
-
 " grephere
 nmap <Leader>g <Plug>(GrepHereCurrent) 
 
@@ -242,10 +249,10 @@ let g:notes_directory = '~/Documents/Notes'
 let g:notes_suffix = '.notes'
 
 " clang
-"let g:clang_complete_enable = 1
+let g:clang_complete_enable = 1
 let g:clang_complete_copen = 1
 let g:clang_snippets = 1
-let g:clang_snippets_engine = 'snipmate'
+"let g:clang_snippets_engine = 'snipmate'
 let g:clang_use_library = 1
 
 "tagbar 
@@ -403,6 +410,26 @@ function! QuickfixToggle()
         copen
         let g:quickfix_is_open = 1
     endif
+endfunction
+
+" Toggle Vexplore with Ctrl-E
+function! ToggleVExplorer()
+  if exists("t:expl_buf_num")
+      let expl_win_num = bufwinnr(t:expl_buf_num)
+      if expl_win_num != -1
+          let cur_win_nr = winnr()
+          exec expl_win_num . 'wincmd w'
+          close
+          exec cur_win_nr . 'wincmd w'
+          unlet t:expl_buf_num
+      else
+          unlet t:expl_buf_num
+      endif
+  else
+      exec '1wincmd w'
+      Vexplore
+      let t:expl_buf_num = bufnr("%")
+  endif
 endfunction
 
 " Some quick bindings to edit binary plists
