@@ -13,12 +13,10 @@ nore ; :
 " But allow the original functionality of ; and ,
 noremap ;; ;
 noremap ,, ,
-" Esc shortcut
-imap jj <Esc>
 " auto-format the current paragraph
 nmap -- gwap
-nmap ** gwap
-" Clear search pattern with C-/
+nmap __ gqap
+" Clear search pattern with C-/ (only works in terminal)
 nmap <silent>  :noh<CR>
 " correct spelling
 map <F1> 1z=
@@ -82,7 +80,7 @@ set smarttab                " use shiftwidth instead of tab stops
 set wildmode=list:longest   " shows a list of candidates when tab-completing
 set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
-set formatoptions=qnwrtlm   " auto-formatting style for bullets and comments
+set formatoptions=qnrtlm    " auto-formatting style for bullets and comments
 set autoindent
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
@@ -374,8 +372,9 @@ augroup misc
     au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
     au FileType make set diffopt-=iwhite
     au FileType vim set nospell
-    au FileType mail set spell complete+=k nonu
-"    au FileType mail UniCycleOn
+    au FileType mail set spell complete+=k nonu formatoptions+=a
+    " par is much better at rewrapping mail
+    au FileType mail if executable("par") | set formatprg=par | endif
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
     au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufEnter *.nse set filetype=lua
