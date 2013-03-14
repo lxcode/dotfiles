@@ -1210,11 +1210,11 @@ function! s:BaseTag._getPrefix() abort dict
     endif
     " Visibility is called 'access' in the ctags output
     if g:tagbar_show_visibility
-    if has_key(self.fields, 'access')
+        if has_key(self.fields, 'access')
             let prefix .= get(s:visibility_symbols, self.fields.access, ' ')
-    else
-        let prefix .= ' '
-    endif
+        else
+            let prefix .= ' '
+        endif
     endif
 
     return prefix
@@ -2047,16 +2047,16 @@ function! s:ExecuteCtagsOnFile(fname, realfname, ftype) abort
     if v:shell_error || ctags_output =~ 'Warning: cannot open source file'
         if !s:known_files.has(a:realfname) ||
          \ !empty(s:known_files.get(a:realfname))
-        echoerr 'Tagbar: Could not execute ctags for ' . a:fname . '!'
-        echomsg 'Executed command: "' . ctags_cmd . '"'
-        if !empty(ctags_output)
-            call s:LogDebugMessage('Command output:')
-            call s:LogDebugMessage(ctags_output)
-            echomsg 'Command output:'
-            for line in split(ctags_output, '\n')
-                echomsg line
-            endfor
-        endif
+            echoerr 'Tagbar: Could not execute ctags for ' . a:fname . '!'
+            echomsg 'Executed command: "' . ctags_cmd . '"'
+            if !empty(ctags_output)
+                call s:LogDebugMessage('Command output:')
+                call s:LogDebugMessage(ctags_output)
+                echomsg 'Command output:'
+                for line in split(ctags_output, '\n')
+                    echomsg line
+                endfor
+            endif
         endif
         return -1
     endif
@@ -2097,7 +2097,7 @@ function! s:ParseTagline(part1, part2, typeinfo, fileinfo) abort
     for field in fields
         " can't use split() since the value can contain ':'
         let delimit = stridx(field, ':')
-        let key     = strpart(field, 0, delimit)
+        let key = strpart(field, 0, delimit)
         " Remove all tabs that may illegally be in the value
         let val = substitute(strpart(field, delimit + 1), '\t', '', 'g')
         if len(val) > 0
@@ -2734,7 +2734,7 @@ function! s:HighlightTag(openfolds, ...) abort
     if tagbarwinnr == -1
         return
     endif
-    let prevwinnr   = winnr()
+    let prevwinnr = winnr()
     call s:winexec(tagbarwinnr . 'wincmd w')
 
     match none
@@ -3048,8 +3048,8 @@ function! s:OpenParents(...) abort
     endif
 
     if !empty(tag)
-    call tag.openParents()
-    call s:RenderKeepView()
+        call tag.openParents()
+        call s:RenderKeepView()
     endif
 endfunction
 
@@ -3092,7 +3092,7 @@ function! s:AutoUpdate(fname, force) abort
         if a:force || empty(curfile) ||
          \ (filereadable(a:fname) && getftime(a:fname) > curfile.mtime)
             call s:LogDebugMessage('File data outdated, updating' .
-                                 \ ' [' .  a:fname . ']')
+                                 \ ' [' . a:fname . ']')
             call s:ProcessFile(a:fname, sftype)
             let updated = 1
         else
@@ -3601,12 +3601,12 @@ endfunction
 function! tagbar#currenttag(fmt, default, ...) abort
     if a:0 > 0
         " also test for non-zero value for backwards compatibility
-        let longsig  = a:1 =~# 's' || (type(a:1) == type(0) && a:1 != 0)
-        let fullpath = a:1 =~# 'f'
+        let longsig   = a:1 =~# 's' || (type(a:1) == type(0) && a:1 != 0)
+        let fullpath  = a:1 =~# 'f'
         let prototype = a:1 =~# 'p'
     else
-        let longsig  = 0
-        let fullpath = 0
+        let longsig   = 0
+        let fullpath  = 0
         let prototype = 0
     endif
 
@@ -3620,7 +3620,7 @@ function! tagbar#currenttag(fmt, default, ...) abort
         if prototype
             return tag.getPrototype(1)
         else
-        return printf(a:fmt, tag.str(longsig, fullpath))
+            return printf(a:fmt, tag.str(longsig, fullpath))
         endif
     else
         return a:default
