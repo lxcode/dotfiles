@@ -280,6 +280,8 @@ Motion ~
 	Use Enter to navigate to selected entry.
 	See |g:LatexBox_split_width|.
 	See |g:LatexBox_split_side|.
+*:LatexTOCToggle*
+	Toggle the display of the table of contents.
 
 Associated setting:
 	|g:LatexBox_plaintext_toc| (set this if UTF8 conversion does not work)
@@ -392,6 +394,19 @@ Mappings ~
 *g:LatexBox_no_mappings*
 	If this variable is defined, the default keyboard mappings will not be
 	loaded.
+
+*g:LatexBox_open_pats*
+*g:LatexBox_close_pats*
+	These variables define the patterns that LatexBox use to detect
+	matching pair of braces, parantheses, environments, and similar.  The
+	default values are >
+
+	let g:LatexBox_open_pats  = [ '\\{','{','\\(','(','\\\[','\[',
+		\ '\\begin\s*{.\{-}}', '\\left\s*\%([^\\]\|\\.\|\\\a*\)']
+
+	let g:LatexBox_close_pats = [ '\\}','}','\\)',')','\\\]','\]',
+		\ '\\end\s*{.\{-}}',   '\\right\s*\%([^\\]\|\\.\|\\\a*\)']
+<
 
 
 						*latex-box-settings-completion*
@@ -507,6 +522,15 @@ Compilation ~
 *g:LatexBox_ignore_warnings*	Default: ['Underfull', 'Overfull', 'specifier changed to']
  
 	A list of warnings to be ignored. 
+
+*g:LatexBox_build_dir*		Default: ""
+
+	Set output directory for build files.
+
+*b:build_dir*			Default: ""
+
+	Set output directory for build files.  This overrides the global
+	setting.
 
 ------------------------------------------------------------------------------
 

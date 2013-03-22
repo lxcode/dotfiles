@@ -1,38 +1,50 @@
 " LaTeX Box common functions
 
 " Error Format {{{
-" This assumes we're using the -file-line-error with [pdf]latex.
+" The error formats assume we're using the -file-line-error with [pdf]latex.
+
+" Check for options
+if !exists("g:LatexBox_show_warnings")
+	let g:LatexBox_show_warnings=1
+endif
 if !exists("g:LatexBox_ignore_warnings")
-	let g:LatexBox_show_warnings = 1
-	let g:LatexBox_ignore_warnings =['Underfull', 'Overfull', 'specifier changed to']
+	let g:LatexBox_ignore_warnings =
+				\['Underfull',
+				\ 'Overfull',
+				\ 'specifier changed to']
 endif
 
-
-
-" ignore certain common warnings
-if g:LatexBox_show_warnings
-	for i in range(len(g:LatexBox_ignore_warnings))
-		let warning = escape(substitute(g:LatexBox_ignore_warnings[i], '[\,]', '%\\\\&', 'g'), ' ')
-		if i==0
-			let opr = '='
-		else
-			let opr = '+='
-		endif
-		exe 'setlocal efm' . opr . '%-G%.%#'. warning .'%.%#'
-	endfor
-end
-" see |errorformat-LaTeX|
-setlocal efm+=%E!\ LaTeX\ %trror:\ %m
-setlocal efm+=%E!\ %m
+" See |errorformat-LaTeX|
+setlocal efm=%E!\ LaTeX\ %trror:\ %m
 setlocal efm+=%E%f:%l:\ %m
+
+" Show or ignore warnings
 if g:LatexBox_show_warnings
+	for w in g:LatexBox_ignore_warnings
+		let warning = escape(substitute(w, '[\,]', '%\\\\&', 'g'), ' ')
+		exe 'setlocal efm+=%-G%.%#'. warning .'%.%#'
+	endfor
 	setlocal efm+=%+WLaTeX\ %.%#Warning:\ %.%#line\ %l%.%#
 	setlocal efm+=%+W%.%#\ at\ lines\ %l--%*\\d
 	setlocal efm+=%+WLaTeX\ %.%#Warning:\ %m
+	setlocal efm+=%+W%.%#%.%#Warning:\ %m
+else
+	setlocal efm+=%-WLaTeX\ %.%#Warning:\ %.%#line\ %l%.%#
+	setlocal efm+=%-W%.%#\ at\ lines\ %l--%*\\d
+	setlocal efm+=%-WLaTeX\ %.%#Warning:\ %m
+	setlocal efm+=%-W%.%#%.%#Warning:\ %m
 endif
-"ignore unmatched lines
+
+" Consider the remaining statements that starts with "!" as errors
+setlocal efm+=%E!\ %m
+
+" Push file to file stack
+setlocal efm+=%+P**%f
+
+" Ignore unmatched lines
 setlocal efm+=%-G\\s%#
 setlocal efm+=%-G%.%#
+
 " }}}
 
 " Vim Windows {{{
@@ -123,10 +135,32 @@ function! LatexBox_GetTexBasename(with_dir)
 endfunction
 
 function! LatexBox_GetAuxFile()
+	" 1. check for b:build_dir variable
+	if exists('b:build_dir') && isdirectory(b:build_dir)
+		return b:build_dir . '/' . LatexBox_GetTexBasename(0) . '.aux'
+	endif
+
+	" 2. check for g:LatexBox_build_dir variable
+	if exists('g:LatexBox_build_dir') && isdirectory(g:LatexBox_build_dir)
+		return g:LatexBox_build_dir . '/' . LatexBox_GetTexBasename(0) . '.aux'
+	endif
+
+	" 3. use the base name of main tex file
 	return LatexBox_GetTexBasename(1) . '.aux'
 endfunction
 
 function! LatexBox_GetLogFile()
+	" 1. check for b:build_dir variable
+	if exists('b:build_dir') && isdirectory(b:build_dir)
+		return b:build_dir . '/' . LatexBox_GetTexBasename(0) . '.log'
+	endif
+
+	" 2. check for g:LatexBox_build_dir variable
+	if exists('g:LatexBox_build_dir') && isdirectory(g:LatexBox_build_dir)
+		return g:LatexBox_build_dir . '/' . LatexBox_GetTexBasename(0) . '.log'
+	endif
+
+	" 3. use the base name of main tex file
 	return LatexBox_GetTexBasename(1) . '.log'
 endfunction
 

@@ -16,6 +16,9 @@ noremap ,, ,
 " auto-format the current paragraph
 nmap -- gwap
 nmap __ gqap
+" Get rid of jumping behavior when using these search
+nnoremap * *<c-o>
+nnoremap # #<c-o>
 " Clear search pattern with C-/ (only works in terminal)
 nmap <silent>  :noh<CR>
 " correct spelling
@@ -77,7 +80,9 @@ set scrolloff=3             " 3 lines of buffer before scrolling
 set ignorecase              " case insensitive searches
 set smartcase               " unless you type uppercase explicitly
 set smarttab                " use shiftwidth instead of tab stops
-set wildmode=list:longest   " shows a list of candidates when tab-completing
+set wildmode=longest,list   " shows a list of candidates when tab-completing
+set wildmenu                " use a more functional completion menu when tab-completing
+set encoding=utf-8          " always use utf-8
 set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
 set formatoptions=qnrtlm    " auto-formatting style for bullets and comments
@@ -106,14 +111,15 @@ set helpheight=0            " no minimum helpheight
 set incsearch               " search incrementally
 set showmatch               " show the matching terminating bracket
 set suffixes=.out           " set priority for tab completion
-set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls,*.
-set wildignore+=*.loc,*.gz,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx
-set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log
+set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls
+set wildignore+=*.loc,*.gz,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx,*.pdf
+set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log,*.latexmain,*.out
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
 set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=2        " the default level of fold nesting on startup
+set virtualedit=block       " when doing block select, allow going past the end of lines
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
 " colors
@@ -130,10 +136,17 @@ let g:netrw_browse_split=4
 let g:netrw_winsize=25
 set autochdir
 
+" quickfixsigns
+let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
+" Disable display of the ' and . marks, so the gutter will be disabled until
+" manually set marks or quickfix/diff info is present.
+let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
+
 " buftabs
 let g:buftabs_only_basename=1
 
 "latex
+let g:tex_no_error=1
 let g:tex_comment_nospell = 1
 "let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
 let g:LatexBox_latexmk_options = "-xelatex"
@@ -142,6 +155,7 @@ if has("macunix")
 else
     let g:LatexBox_viewer = "evince"
 endif
+let g:LatexBox_split_side = "rightbelow"
 let g:LatexBox_Folding = 1
 let g:LatexBox_fold_preamble = 1
 let g:LatexBox_fold_envs = 0
@@ -411,7 +425,7 @@ function! QuickfixToggle()
     endif
 endfunction
 
-" Toggle Vexplore with Ctrl-E
+" Toggle Vexplore
 function! ToggleVExplorer()
   if exists("t:expl_buf_num")
       let expl_win_num = bufwinnr(t:expl_buf_num)

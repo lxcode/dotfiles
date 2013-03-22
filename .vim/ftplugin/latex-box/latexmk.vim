@@ -253,17 +253,16 @@ function! LatexBox_LatexErrors(status, ...)
 		execute 'cd ' . LatexBox_GetTexRoot()
 	endif
 
-	if (g:LatexBox_autojump)
+	if g:LatexBox_autojump
 		execute 'cfile ' . fnameescape(log)
 	else
 		execute 'cgetfile ' . fnameescape(log)
 	endif
 
-	if(g:LatexBox_quickfix==1)
 		" always open quickfix when an error/warning is detected
+	if g:LatexBox_quickfix
 		ccl
 		cw
-		redraw!
 	endif
 
 	if a:status

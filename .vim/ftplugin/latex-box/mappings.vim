@@ -20,7 +20,6 @@ map <buffer> <LocalLeader>lv :LatexView<CR>
 " }}}
 
 " TOC {{{
-command! LatexTOC call LatexBox_TOC()
 map <silent> <buffer> <LocalLeader>lt :LatexTOC<CR>
 " }}}
 
