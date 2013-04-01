@@ -181,16 +181,16 @@ let g:LatexBox_fold_parts=[
 augroup latex
     au BufWritePost *.tex silent! Latexmk
     " The NoStarch style is a bit crufty and needs pdflatex
-    au BufEnter book.tex let g:LatexBox_latexmk_options = "" 
-    au BufEnter book.tex let g:LatexBox_fold_envs = 1
-    au BufEnter *.tex source ~/.vim/ftplugin/quotes.vim
-    au BufEnter *.tex,*.sty syntax spell toplevel 
-    au BufEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
-    au BufEnter *.tex,*.sty set comments+=b:\\item formatoptions-=q foldlevel=6
-    au BufEnter *.tex,*.sty imap <buffer> [[ \begin{
-    au BufEnter *.tex,*.sty imap <buffer> ]] <Plug>LatexCloseCurEnv
-    au BufEnter *.tex,*.sty imap <S-Enter> \pagebreak
-    au BufEnter *.tex,*.sty map tt i{\tt <Esc>wEa}<Esc>
+    au BufWinEnter book.tex let g:LatexBox_latexmk_options = "" 
+    au BufWinEnter book.tex let g:LatexBox_fold_envs = 1
+    au BufWinEnter *.tex source ~/.vim/ftplugin/quotes.vim
+    au BufWinEnter *.tex,*.sty syntax spell toplevel 
+    au BufWinEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
+    au BufWinEnter *.tex,*.sty set comments+=b:\\item formatoptions-=q foldlevel=6
+    au BufWinEnter *.tex,*.sty imap <buffer> [[ \begin{
+    au BufWinEnter *.tex,*.sty imap <buffer> ]] <Plug>LatexCloseCurEnv
+    au BufWinEnter *.tex,*.sty imap <S-Enter> \pagebreak
+    au BufWinEnter *.tex,*.sty map tt i{\tt <Esc>wEa}<Esc>
     au BufWinLeave *.tex,*.sty mkview
     au BufWinEnter *.tex,*.sty silent loadview
 augroup end
@@ -329,9 +329,9 @@ let g:tagbar_type_markdown = {
 augroup cjava
     au!
     au BufNewFile *.c r ~/.vim/templates/template.c
-    au BufEnter *.[mCchly] set nospell comments+=s1:/*,mb:*,ex:*/
+    au BufWinEnter *.[mCchly] set nospell comments+=s1:/*,mb:*,ex:*/
     au BufRead,BufNewFile *.m setfiletype objc
-    au BufEnter *.cpp,*.java set nospell number
+    au BufWinEnter *.cpp,*.java set nospell number
     au BufWinLeave *.[mchly] mkview
     au BufWinEnter *.[mchly] silent loadview
     au BufWinLeave *.cpp,*.java mkview
@@ -391,7 +391,7 @@ augroup misc
     au FileType mail if executable("par") | set formatprg=par | endif
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
     au BufWinEnter *vimChatRoster, set foldlevel=1
-    au BufEnter *.nse set filetype=lua
+    au BufWinEnter *.nse set filetype=lua
     " What - like how does this even work
     au InsertLeave * hi! link CursorLine CursorLine 
     au InsertEnter * hi! link CursorLine Normal
