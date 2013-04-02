@@ -158,7 +158,7 @@ fu! s:esctagscmd(bin, args, ...)
 		let &ssl = ssl
 	en
 	if has('iconv')
-		let last = s:enc != &enc ? s:enc : !empty($LANG) ? $LANG : &enc
+		let last = s:enc != &enc ? s:enc : !empty( $LANG ) ? $LANG : &enc
 		let cmd = iconv(cmd, &enc, last)
 	en
 	retu cmd
@@ -238,7 +238,7 @@ fu! ctrlp#buffertag#accept(mode, str)
 		\ '\v^[^\t]+\t+[^\t|]+\|(\d+)\:[^\t|]+\|(\d+)\|\s(.+)$')
 	let bufnr = str2nr(get(vals, 1))
 	if bufnr
-		cal ctrlp#acceptfile(a:mode, bufname(bufnr))
+		cal ctrlp#acceptfile(a:mode, bufnr)
 		exe 'norm!' str2nr(get(vals, 2, line('.'))).'G'
 		cal s:chknearby('\V\C'.get(vals, 3, ''))
 		sil! norm! zvzz
