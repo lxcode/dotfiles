@@ -134,7 +134,6 @@ source ~/.vim/ftplugin/man.vim
 "let g:netrw_liststyle=3
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
-set autochdir
 
 " quickfixsigns
 let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
@@ -331,6 +330,7 @@ augroup cjava
     au BufNewFile *.c r ~/.vim/templates/template.c
     au BufWinEnter *.[mCchly] set nospell comments+=s1:/*,mb:*,ex:*/
     au BufRead,BufNewFile *.m setfiletype objc
+    au BufRead,BufNewFile *.m let c_no_curly_error = 1
     au BufWinEnter *.cpp,*.java set nospell number
     au BufWinLeave *.[mchly] mkview
     au BufWinEnter *.[mchly] silent loadview
