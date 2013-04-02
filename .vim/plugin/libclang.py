@@ -12,7 +12,10 @@ import os
 def canFindBuiltinHeaders(index, args = []):
   flags = 0
   currentFile = ("test.c", '#include "stddef.h"')
-  tu = index.parse("test.c", args, [currentFile], flags)
+  try:
+    tu = index.parse("test.c", args, [currentFile], flags)
+  except TranslationUnitLoadError, e:
+    return 0
   return len(tu.diagnostics) == 0
 
 # Derive path to clang builtin headers.
@@ -159,11 +162,12 @@ def getCurrentTranslationUnit(args, currentFile, fileName, timer,
       timer.registerEvent("Reparsing")
     return tu
 
-  flags = TranslationUnit.PARSE_PRECOMPILED_PREAMBLE
-  tu = index.parse(fileName, args, [currentFile], flags)
-  timer.registerEvent("First parse")
-
-  if tu == None:
+  flags = TranslationUnit.PARSE_PRECOMPILED_PREAMBLE | \
+          TranslationUnit.PARSE_DETAILED_PROCESSING_RECORD
+  try:
+    tu = index.parse(fileName, args, [currentFile], flags)
+    timer.registerEvent("First parse")
+  except TranslationUnitLoadError, e:
     return None
 
   translationUnits[fileName] = tu
@@ -363,9 +367,8 @@ def formatResult(result):
   completion = dict()
   returnValue = None
   abbr = ""
-  args_pos = []
-  cur_pos = 0
   word = ""
+  info = ""
 
   for chunk in result.string:
 
@@ -381,22 +384,22 @@ def formatResult(result):
     if chunk.isKindTypedText():
       abbr = chunk_spelling
 
-    chunk_len = len(chunk_spelling)
     if chunk.isKindPlaceHolder():
-      args_pos += [[ cur_pos, cur_pos + chunk_len ]]
-    cur_pos += chunk_len
-    word += chunk_spelling
+      word += snippetsFormatPlaceHolder(chunk_spelling)
+    else:
+      word += chunk_spelling
 
-  menu = word
+    info += chunk_spelling
+
+  menu = info
 
   if returnValue:
     menu = returnValue.spelling + " " + menu
 
-  completion['word'] = abbr
+  completion['word'] = snippetsAddSnippet(info, word, abbr)
   completion['abbr'] = abbr
   completion['menu'] = menu
-  completion['info'] = word
-  completion['args_pos'] = args_pos
+  completion['info'] = info
   completion['dup'] = 1
 
   # Replace the number that represents a specific kind with a better
@@ -498,6 +501,44 @@ def getAbbr(strings):
     if chunks.isKindTypedText():
       return chunks.spelling
   return ""
+
+def jumpToLocation(filename, line, column):
+  if filename != vim.current.buffer.name:
+    try:
+      vim.command("edit %s" % filename)
+    except:
+      # For some unknown reason, whenever an exception occurs in
+      # vim.command, vim goes crazy and output tons of useless python
+      # errors, catch those.
+      return
+  else:
+    vim.command("normal m'")
+  vim.current.window.cursor = (line, column - 1)
+
+def gotoDeclaration():
+  global debug
+  debug = int(vim.eval("g:clang_debug")) == 1
+  params = getCompileParams(vim.current.buffer.name)
+  line, col = vim.current.window.cursor
+  timer = CodeCompleteTimer(debug, vim.current.buffer.name, line, col, params)
+
+  with workingDir(params['cwd']):
+    with libclangLock:
+      tu = getCurrentTranslationUnit(params['args'], getCurrentFile(),
+                                     vim.current.buffer.name, timer,
+                                     update = True)
+      if tu is None:
+        print "Couldn't get the TranslationUnit"
+        return
+
+      f = File.from_name(tu, vim.current.buffer.name)
+      loc = SourceLocation.from_position(tu, f, line, col + 1)
+      cursor = Cursor.from_location(tu, loc)
+      if cursor.referenced is not None and loc != cursor.referenced.location:
+        loc = cursor.referenced.location
+        jumpToLocation(loc.file.name, loc.line, loc.column)
+
+  timer.finish()
 
 # Manually extracted from Index.h
 # Doing it by hand is long, error prone and horrible, we must find a way
