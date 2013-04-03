@@ -18,7 +18,7 @@ export CLICOLOR=yes
 export LC_CTYPE=en_US.UTF-8
 export LESSHISTFILE="-"
 export X11HOME=/usr/local
-export MANPATH=/usr/man:/usr/share/man:/usr/local/man:$X11HOME/man:/usr/lang/man:/var/qmail/man:/usr/pkg/man:/opt/local/man
+export MANPATH=/usr/man:/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/lang/man:/var/qmail/man:/usr/pkg/man:/opt/local/man
 export ORACLE_HOME=/compat/linux/usr/lib/oracle/10.2.0.3 
 export CVSROOT=anoncvs@anoncvs1.FreeBSD.org:/home/ncvs
 
