@@ -216,6 +216,13 @@ snippet vuln
 	\vshortterm ${9}
 	
 	\vlongterm ${10}
+snippet lstmp
+	\begin{minipage}{\textwidth}
+	\begin{lstlisting}[style=code,language=${1},numbers=none,caption={${2}}]
+	${3}
+	\end{lstlisting} 
+	%stopzone
+	\end{minipage}
 snippet lst
 	\begin{lstlisting}[style=code,language=${1},numbers=none,caption={${2}}]
 	${3}

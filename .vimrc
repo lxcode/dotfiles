@@ -92,7 +92,7 @@ set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
-set grepprg=grep\ -nIH\ $*
+set grepprg=grep\ -R\ --color=always\ -nIH\ $* " need to make this portable
 set cpoptions=BFt
 set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
@@ -372,6 +372,7 @@ augroup quickfix
     au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
     au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
     au FileType qf, setlocal statusline=\ %n\ \ %f%=L%l/%L\ %P
+    au BufReadPost quickfix call GrepColors()
 augroup end
 
 augroup msdocs
@@ -386,7 +387,7 @@ augroup misc
     au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
     au FileType make set diffopt-=iwhite
     au FileType vim set nospell
-    au FileType mail set spell complete+=k nonu formatoptions+=a
+    au FileType mail set spell complete+=k nonu
     " par is much better at rewrapping mail
     au FileType mail if executable("par") | set formatprg=par | endif
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
@@ -494,4 +495,16 @@ function ToggleHex()
   let &mod=l:modified
   let &readonly=l:oldreadonly
   let &modifiable=l:oldmodifiable
+endfunction
+
+" I use this to highlight the match from grep, but keep quickfix syntax
+" highlighting intact.
+function GrepColors()
+    set conceallevel=3
+    set cocu=nv
+    syn region ansiRed start="\e\[01;31m\e\[K"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
+    syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m\e\[K"
+    hi ansiRed    ctermfg=red   guifg=red  cterm=none         gui=none
+    syn match ansiStop		conceal "\e\[m\e\[K"
+    hi! link ansiStop NONE
 endfunction
