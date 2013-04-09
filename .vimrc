@@ -22,8 +22,8 @@ nnoremap # #<c-o>
 " Clear search pattern with C-/ (only works in terminal)
 nmap <silent>  :noh<CR>
 " correct spelling
-map <F1> 1z=
-imap <F1> <Esc>b1z=ea<Space>
+nmap <F1> [s1z=<C-o>
+imap <F1> <Esc>[s1z=<C-o>i
 map <F4> :w<CR> :!lacheck %<CR>
 noremap <F5> :GundoToggle<CR>
 map <F8> :w<CR> :!make<CR>
