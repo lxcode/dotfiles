@@ -41,6 +41,9 @@ set pastetoggle=<F11>
 " Window movement
 nnoremap <C-j> <C-W>w
 nnoremap <C-k> <C-W>W
+" Keep selected blocks selected when shifting
+vmap > >gv
+vmap < <gv
 
 syntax on
 filetype plugin on
@@ -248,12 +251,12 @@ let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
 
 " yankstack
+" have to do this because it'll nuke our previous Y mapping
+call yankstack#setup()
+nnoremap Y y$
 let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_older_paste
-
-" grephere
-nmap <Leader>g <Plug>(GrepHereCurrent) 
 
 " vim-notes
 let g:notes_directory = '~/Documents/Notes'
@@ -263,7 +266,6 @@ let g:notes_suffix = '.notes'
 let g:clang_complete_enable = 1
 let g:clang_complete_copen = 1
 let g:clang_snippets = 1
-"let g:clang_snippets_engine = 'snipmate'
 let g:clang_use_library = 1
 
 "tagbar 
@@ -381,6 +383,7 @@ augroup msdocs
 augroup end
 
 augroup misc
+    au BufWinEnter *.dtrace, filetype=D
     au BufWinEnter *.fugitiveblame,*.diff, set nospell number
     au BufWinEnter *.plist, call ReadPlist()
     au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
