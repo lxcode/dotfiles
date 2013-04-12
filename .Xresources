@@ -14,21 +14,20 @@ URxvt*iso14755: False
 URxvt*visualBell:   	    off
 URxvt*scrollLines:   	    10000
 URxvt*scrollBar:   	    0
-URxvt*urlLauncher:	/usr/local/bin/firefox
-!URxvt.perl-lib: /home/lx/.urxvt/
-!URxvt*perl-ext: selection,mark-yank-urls,matcher
-!URxvt*keysym.Mod4-y: perl:mark-yank-urls:activate_mark_mode
+URxvt*url-launcher:	/usr/bin/open
+URxvt*perl-ext: selection,matcher
+URxvt*matcher.button:	3
 URxvt*underlineURLs: true
 URxvt*transparent:	off
 URxvt*shading:	10
-URxvt*matcher.button:	3
-URxvt.font:             xft:Inconsolata-13:Medium xft:Meiryo Normal-13
-URxvt.boldfont:         xft:Inconsolata-13:Bold xft:Meiryo Bold-13
+URxvt.font:             xft:Inconsolata-13:Medium:antialias=true:hinting=true xft:Meiryo Normal-13
+URxvt.boldfont:         xft:Inconsolata-13:Bold:antialias=true:hinting=true xft:Meiryo Bold-13
+URxvt.letterSpace:	 -1
 !URxvt.italicFont:       xft:Consolas-13:Italic
 URxvt.imLocale: ja_JP.UTF-8
 URxvt.preeditType: OnTheSpot,None
 URxvt.urgentOnBell:         true
-URxvt.cursorBlink:         true
+URxvt.cursorBlink:         false
 URxvt.scrollTtyOutput:        false
 URxvt.termName: xterm-256color
 URxvt.fading: 25
