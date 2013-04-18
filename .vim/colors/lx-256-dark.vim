@@ -12,11 +12,13 @@ let colors_name = "lx-256-dark"
 
 " General colors
 "hi Normal guifg=#a8a8a8 guibg=black ctermfg=white ctermbg=NONE
-hi Normal guifg=#d0d0d0 guibg=#242424 ctermfg=252 ctermbg=234
+"hi Normal guifg=#d0d0d0 guibg=#242424 ctermfg=252 ctermbg=234
+hi Normal ctermfg=231 ctermbg=235 guifg=#f8f8f2 guibg=#272822
 hi NonText guifg=#070707 guibg=black ctermfg=0
 
 hi Cursor guifg=black guibg=#5fafff ctermfg=0 ctermbg=15
-hi LineNr guifg=#3D3D3D guibg=#101010 ctermfg=239 ctermbg=NONE
+"hi LineNr guifg=#3D3D3D guibg=#101010 ctermfg=239 ctermbg=237
+hi LineNr ctermfg=102 ctermbg=237 guifg=#90908a guibg=#3c3d37
 
 hi VertSplit guifg=#000000 guibg=#202020 ctermfg=235 ctermbg=60 
 hi StatusLine guifg=#1a1a1a guibg=#808080 ctermfg=233 ctermbg=60
@@ -36,8 +38,9 @@ hi SpecialKey guifg=#808080 guibg=#343434 ctermfg=8 ctermbg=236
 hi WildMenu guifg=black guibg=#cae682 ctermfg=0 ctermbg=195
 hi PmenuSbar guifg=black guibg=white ctermfg=0 ctermbg=15
 
-hi Error gui=undercurl ctermfg=203 ctermbg=none cterm=underline guisp=#FF6C60
-hi ErrorMsg guifg=white guibg=#FF6C60 gui=bold ctermfg=white ctermbg=203 cterm=bold
+hi Error gui=undercurl ctermfg=203 cterm=underline guisp=#FF6C60
+"hi ErrorMsg guifg=white guibg=#FF6C60 gui=bold ctermfg=white ctermbg=203 cterm=bold
+hi ErrorMsg ctermfg=231 ctermbg=197 guifg=#f8f8f0 guibg=#f92672
 hi WarningMsg guifg=white guibg=#FF6C60 gui=bold ctermfg=white ctermbg=203 cterm=bold
 hi SpellBad cterm=underline ctermbg=none ctermfg=203
 hi SpellCap cterm=underline
@@ -52,32 +55,34 @@ hi DiffChange ctermbg=237	guibg=#382a37
 hi ModeMsg guifg=black guibg=#C6C5FE gui=bold ctermfg=0 ctermbg=189 cterm=bold
 
 if version >= 700 " Vim 7.x specific colors
- hi CursorLine guibg=#1c1c1c gui=none ctermbg=235 cterm=none
- hi CursorColumn guibg=#1c1c1c gui=none ctermbg=234 cterm=none
- hi MatchParen guifg=#df00ff guibg=#242424 gui=bold ctermfg=magenta ctermbg=none 
- hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242 
- hi PmenuSel guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195 
- hi Search guifg=#000000 guibg=#875f87 ctermfg=232  ctermbg=96 
- hi SignColumn guibg=black ctermbg=232
-
+    " hi CursorLine guibg=#1c1c1c gui=none ctermbg=235 cterm=none
+    hi CursorLine ctermfg=NONE ctermbg=237 cterm=NONE guifg=NONE guibg=#3c3d37 gui=NONE
+    hi CursorColumn guibg=#1c1c1c gui=none ctermbg=234 cterm=none
+    hi MatchParen guifg=#df00ff guibg=#242424 gui=bold ctermfg=magenta ctermbg=none 
+    hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242 
+    hi PmenuSel guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195 
+    hi Search guifg=#000000 guibg=#875f87 ctermfg=232  ctermbg=96 
+    hi SignColumn guibg=black ctermbg=232
 endif
 
 " Syntax highlighting
 hi Comment guifg=#767676 ctermfg=244 gui=italic
 hi String guifg=#A8FF60 ctermfg=155 
-hi Number guifg=#FF73FD ctermfg=207 
+"hi Number guifg=#FF73FD ctermfg=207 
+hi Number ctermfg=141 guifg=#ae81ff
 
 hi Keyword guifg=#96CBFE ctermfg=117 
-hi PreProc guifg=#e5786d ctermfg=173 
+hi PreProc guifg=#f92672 ctermfg=197 
 hi Conditional guifg=#6699CC ctermfg=110 
 
 hi Todo guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195 
 hi Constant guifg=#99CC99 ctermfg=151 
 
-hi Identifier guifg=#C6C5FE ctermfg=189
+hi Identifier guifg=#FF005F ctermfg=197
 hi Function guifg=#FFD2A7 ctermfg=223 
-hi Type guifg=#FFFFB6 ctermfg=229 
+hi Type guifg=#FFDFFF ctermfg=225
 hi Statement guifg=#6699CC ctermfg=110
+"hi Statement ctermfg=197 guifg=#f92672
 
 hi Special guifg=#E18964 ctermfg=173
 hi Delimiter guifg=#00A0A0 ctermfg=37 

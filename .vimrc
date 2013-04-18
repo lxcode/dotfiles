@@ -20,7 +20,7 @@ nmap __ gqap
 nnoremap * *<c-o>
 nnoremap # #<c-o>
 " Clear search pattern with C-/ (only works in terminal)
-nmap <silent>  :noh<CR>
+map <silent>  :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>i
@@ -33,7 +33,7 @@ nnoremap <silent> <F10> :TagbarToggle<CR>
 " jump to next quickfix item
 map <F12> :cn<CR>
 " preview the tag under the cursor
-map <C-p> :exe "ptag" expand("<cword>")<CR>
+nmap <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Delete my signature
 map <Leader>ds Gvipdgg10j
@@ -53,7 +53,7 @@ helptags ~/.vim/doc
 if has('gui')
     set guioptions=aAegiM       " get rid of useless stuff in the gui
     if has("gui_macvim")
-        set guifont=Monaco:h14
+        set guifont=Inconsolata:h18
         set clipboard=unnamed
         let g:clang_complete_enable = 1
         let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
@@ -94,7 +94,7 @@ set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
-set formatlistpat=^\\s*[0-9*]\\+[\\]:.)}\\t\ ]\\s*
+set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
 set grepprg=grep\ -R\ --color=always\ -nIH\ $* " need to make this portable
 set cpoptions=BFt
 set completeopt=menuone,longest
@@ -123,6 +123,7 @@ set errorfile=/tmp/errors.vim
 set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=2        " the default level of fold nesting on startup
 set virtualedit=block       " when doing block select, allow going past the end of lines
+set cryptmethod=blowfish    " in case I ever decide to use vim -x
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
 " colors
@@ -148,6 +149,7 @@ let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
 let g:buftabs_only_basename=1
 
 "latex
+let g:tex_flavor="latex"
 let g:tex_no_error=1
 let g:tex_comment_nospell = 1
 "let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
@@ -181,20 +183,20 @@ let g:LatexBox_fold_parts=[
            \ ]
 
 augroup latex
-    au BufWritePost *.tex silent! Latexmk
     " The NoStarch style is a bit crufty and needs pdflatex
     au BufWinEnter book.tex let g:LatexBox_latexmk_options = "" 
     au BufWinEnter book.tex let g:LatexBox_fold_envs = 1
-    au BufWinEnter *.tex source ~/.vim/ftplugin/quotes.vim
-    au BufWinEnter *.tex,*.sty syntax spell toplevel 
-    au BufWinEnter *.tex,*.sty set spell filetype=tex textwidth=78 smartindent
-    au BufWinEnter *.tex,*.sty set comments+=b:\\item formatoptions-=q foldlevel=6
-    au BufWinEnter *.tex,*.sty imap <buffer> [[ \begin{
-    au BufWinEnter *.tex,*.sty imap <buffer> ]] <Plug>LatexCloseCurEnv
-    au BufWinEnter *.tex,*.sty imap <S-Enter> \pagebreak
-    au BufWinEnter *.tex,*.sty map tt i{\tt <Esc>wEa}<Esc>
+    au BufWritePost *.tex silent! Latexmk
     au BufWinLeave *.tex,*.sty mkview
     au BufWinEnter *.tex,*.sty silent loadview
+    au FileType tex syntax spell toplevel 
+    au FileType tex set spell textwidth=78 smartindent
+    au FileType tex set comments+=b:\\item formatoptions-=q formatoptions+=w foldlevel=6
+    au FileType tex imap <buffer> [[ \begin{
+    au FileType tex imap <buffer> ]] <Plug>LatexCloseCurEnv
+    au FileType tex imap <S-Enter> \pagebreak
+    au FileType tex nmap tt i{\tt <Esc>wEa}<Esc>
+    au FileType tex source ~/.vim/ftplugin/quotes.vim
 augroup end
 
 " supertab
@@ -218,8 +220,16 @@ autocmd FileType *
             \      call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
             \  endif
 
+" seek
+
+let g:seek_enable_jumps = 1
+
 " cctree
-let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
+if has("macunix")
+    let g:CCTreeSplitProgCmd="/opt/local/bin/gsplit"
+else
+    let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
+endif
 
 " Indentguides
 let g:indent_guides_enable_on_vim_startup = 0
@@ -511,3 +521,8 @@ function GrepColors()
     syn match ansiStop		conceal "\e\[m\e\[K"
     hi! link ansiStop NONE
 endfunction
+
+"if &term == "screen"
+  let &t_SI = "\<Esc>[3 q"
+  let &t_EI = "\<Esc>[0 q"
+"endif
