@@ -404,6 +404,7 @@ augroup misc
     " par is much better at rewrapping mail
     au FileType mail if executable("par") | set formatprg=par | endif
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
+    au FileType mail,text let b:delimitMate_autoclose = 0
     au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufWinEnter *.nse set filetype=lua
     " What - like how does this even work
@@ -521,8 +522,3 @@ function GrepColors()
     syn match ansiStop		conceal "\e\[m\e\[K"
     hi! link ansiStop NONE
 endfunction
-
-"if &term == "screen"
-  let &t_SI = "\<Esc>[3 q"
-  let &t_EI = "\<Esc>[0 q"
-"endif
