@@ -35,8 +35,6 @@ map <F12> :cn<CR>
 " preview the tag under the cursor
 nmap <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
-" Delete my signature
-map <Leader>ds Gvipdgg10j
 set pastetoggle=<F11> 
 " Window movement
 nnoremap <C-j> <C-W>w
@@ -68,9 +66,9 @@ if has('gui_running')
 endif
 if $DISPLAY != "" 
     set cursorline          " I like this, but damn is it slow
+    set mouse=a             " Turn this off for console-only mode
+    set selectmode+=mouse	" Allow the mouse to select
 endif 
-set mouse=a                 " Turn this off for console-only mode
-set selectmode+=mouse	    " Allow the mouse to select
 set et                      " expand tabs
 set diffopt+=iwhite,vertical   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
@@ -128,13 +126,13 @@ set cryptmethod=blowfish    " in case I ever decide to use vim -x
 
 " colors
 set t_Co=256                " use 256 colors
-"let g:zenburn_high_Contrast=1
 colorscheme lx-256-dark
 
 " 33ms startup penalty!
 source ~/.vim/ftplugin/man.vim
 
 "netrw
+" This breaks with macvim :(
 "let g:netrw_liststyle=3
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
@@ -221,7 +219,6 @@ autocmd FileType *
             \  endif
 
 " seek
-
 let g:seek_enable_jumps = 1
 
 " cctree
@@ -230,12 +227,6 @@ if has("macunix")
 else
     let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
 endif
-
-" Indentguides
-let g:indent_guides_enable_on_vim_startup = 0
-let g:indent_guides_guide_size = 1
-
-let s:line1 = getline(1)
 
 " vimchat
 let g:vimchat_otr = 1
