@@ -23,7 +23,7 @@ nnoremap # #<c-o>
 map <silent>  :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
-imap <F1> <Esc>[s1z=<C-o>i
+imap <F1> <Esc>[s1z=<C-o>a
 map <F4> :w<CR> :!lacheck %<CR>
 noremap <F5> :GundoToggle<CR>
 map <F8> :w<CR> :!make<CR>
