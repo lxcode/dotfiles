@@ -37,8 +37,6 @@ map <F12> :cn<CR>
 " preview the tag under the cursor
 nmap <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
-" Delete my signature
-map <Leader>ds Gvipdgg10j
 set pastetoggle=<F11> 
 " Window movement
 nnoremap <C-j> <C-W>w
@@ -70,9 +68,9 @@ if has('gui_running')
 endif
 if $DISPLAY != "" 
     set cursorline          " I like this, but damn is it slow
+    set mouse=a             " Turn this off for console-only mode
+    set selectmode+=mouse	" Allow the mouse to select
 endif 
-set mouse=a                 " Turn this off for console-only mode
-set selectmode+=mouse	    " Allow the mouse to select
 set et                      " expand tabs
 set diffopt+=iwhite,vertical   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
@@ -231,7 +229,6 @@ autocmd FileType *
             \  endif
 
 " seek
-
 let g:seek_enable_jumps = 1
 
 " cctree
@@ -240,12 +237,6 @@ if has("macunix")
 else
     let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
 endif
-
-" Indentguides
-let g:indent_guides_enable_on_vim_startup = 0
-let g:indent_guides_guide_size = 1
-
-let s:line1 = getline(1)
 
 " vimchat
 let g:vimchat_otr = 1
