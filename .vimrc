@@ -1,6 +1,8 @@
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
+map <home> :rewind<cr>
+map <end> :last<cr>
 map g<Tab> :bn<CR>
 nnoremap <C-Tab> gt
 " Make Y behave like C and D
@@ -126,16 +128,24 @@ set virtualedit=block       " when doing block select, allow going past the end 
 set cryptmethod=blowfish    " in case I ever decide to use vim -x
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
+if exists('&autochdir')
+    " Change directory to first open file
+    set autochdir
+    set noautochdir
+endif
+
 " colors
 set t_Co=256                " use 256 colors
-"let g:zenburn_high_Contrast=1
 colorscheme lx-256-dark
 
 " 33ms startup penalty!
 source ~/.vim/ftplugin/man.vim
 
 "netrw
-"let g:netrw_liststyle=3
+if !has("gui_macvim")
+    " this is all broken on macvim
+    let g:netrw_liststyle=3
+endif
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 
@@ -259,6 +269,9 @@ map <Leader>m :CtrlPMRU<CR>
 let g:statline_fugitive=1
 let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
+
+" gundo
+let g:gundo_close_on_revert=1
 
 " yankstack
 " have to do this because it'll nuke our previous Y mapping
@@ -407,6 +420,8 @@ augroup misc
     au FileType mail,text let b:delimitMate_autoclose = 0
     au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufWinEnter *.nse set filetype=lua
+    " If a JS file has only one line, unminify it
+    au FileType javascript if line('$')==1 | call Unminify() | endif
     " What - like how does this even work
     au InsertLeave * hi! link CursorLine CursorLine 
     au InsertEnter * hi! link CursorLine Normal
@@ -521,4 +536,15 @@ function GrepColors()
     hi ansiRed    ctermfg=red   guifg=red  cterm=none         gui=none
     syn match ansiStop		conceal "\e\[m\e\[K"
     hi! link ansiStop NONE
+endfunction
+
+" Simple re-format for minified Javascript
+command! Unminify call Unminify()
+function! Unminify()
+    %s/{\ze[^\r\n]/{\r/g
+    %s/){/) {/g
+    %s/};\?\ze[^\r\n]/\0\r/g
+    %s/;\ze[^\r\n]/;\r/g
+    %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
+    normal ggVG=
 endfunction
