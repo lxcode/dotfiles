@@ -8,7 +8,7 @@ do
 done
 
 export FPATH=/usr/share/zsh/site-functions:$FPATH
-#export GREP_COLORS="ms=01;31:mc=:sl=:cx=:fn=:ln=:bn=:se=:ne="
+export GREP_COLORS="ms=01;31:mc=:sl=:cx=:fn=:ln=:bn=:se=:ne="
 export PATH=/usr/local/libexec/ccache:$PATH
 export CCACHE_PATH=/usr/bin:/usr/local/bin
 export CCACHE_DIR="/home/lx/.ccache"
