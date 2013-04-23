@@ -23,6 +23,7 @@ nnoremap * *<c-o>
 nnoremap # #<c-o>
 " Clear search pattern with C-/ (only works in terminal)
 map <silent>  :noh<CR>
+map <silent> <Leader>/ :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
@@ -44,6 +45,8 @@ nnoremap <C-k> <C-W>W
 " Keep selected blocks selected when shifting
 vmap > >gv
 vmap < <gv
+" Insert a single character with space
+nmap <Space> :exec "normal i".nr2char(getchar())."\e"<CR>
 
 syntax on
 filetype plugin on
@@ -51,6 +54,7 @@ filetype indent on
 helptags ~/.vim/doc
 
 if has('gui')
+    set gcr=n:blinkon0          " don't blink the cursor in normal mode
     set guioptions=aAegiM       " get rid of useless stuff in the gui
     if has("gui_macvim")
         set guifont=Inconsolata:h18
@@ -95,7 +99,7 @@ set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
-set grepprg=grep\ -R\ --color=always\ -nIH\ $* " need to make this portable
+set grepprg=grep\ -R\ --exclude=cscope.out\ --color=always\ -nIH\ $* " need to make this portable
 set cpoptions=BFt
 set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
@@ -116,7 +120,7 @@ set showmatch               " show the matching terminating bracket
 set suffixes=.out           " set priority for tab completion
 set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls
 set wildignore+=*.loc,*.gz,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx,*.pdf
-set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log,*.latexmain,*.out
+set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log,*.latexmain
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
@@ -341,6 +345,22 @@ let g:tagbar_type_markdown = {
         \ ]
 \ }
 
+let g:tagbar_type_scala = {
+    \ 'ctagstype' : 'Scala',
+    \ 'kinds'     : [
+        \ 'p:packages:1',
+        \ 'V:values',
+        \ 'v:variables',
+        \ 'T:types',
+        \ 't:traits',
+        \ 'o:objects',
+        \ 'a:aclasses',
+        \ 'c:classes',
+        \ 'r:cclasses',
+        \ 'm:methods'
+    \ ]
+\ }
+
 augroup cjava
     au!
     au BufNewFile *.c r ~/.vim/templates/template.c
@@ -441,7 +461,7 @@ function! QuickfixToggle()
         execute g:quickfix_return_to_window . "wincmd w"
     else
         let g:quickfix_return_to_window = winnr()
-        copen
+        bot copen
         let g:quickfix_is_open = 1
     endif
 endfunction
@@ -518,7 +538,7 @@ function ToggleHex()
 endfunction
 
 " I use this to highlight the match from grep, but keep quickfix syntax
-" highlighting intact.
+" highlighting intact. This is for BSD grep.
 function GrepColors()
     set conceallevel=3
     set cocu=nv
