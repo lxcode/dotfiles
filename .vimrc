@@ -90,7 +90,7 @@ set smarttab                " use shiftwidth instead of tab stops
 set wildmode=longest,list   " shows a list of candidates when tab-completing
 set wildmenu                " use a more functional completion menu when tab-completing
 set encoding=utf-8          " always use utf-8
-set hlsearch                " highlight all search matches
+"set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
 set formatoptions=qnrtlm    " auto-formatting style for bullets and comments
 set autoindent
@@ -417,7 +417,8 @@ augroup msdocs
 augroup end
 
 augroup misc
-    au BufWinEnter *.dtrace, filetype=D
+    au BufWinEnter *.scala, set filetype=scala
+    au BufWinEnter *.dtrace, set filetype=D
     au BufWinEnter *.fugitiveblame,*.diff, set nospell number
     au BufWinEnter *.plist, call ReadPlist()
     au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
