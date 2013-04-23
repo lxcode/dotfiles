@@ -394,8 +394,8 @@ augroup markdown
     au BufWinEnter *.md, silent loadview
     au BufWinEnter *.md,*.notes, imap <C-l> <C-t>
     au BufWinEnter *.md,*.notes, imap <C-h> <C-d>
-    au BufWinEnter *.md,*.notes, imap >> <C-t>
-    au BufWinEnter *.md,*.notes, imap << <C-d>
+    au BufWinEnter *.md,*.notes,*mutt*, imap >> <C-t>
+    au BufWinEnter *.md,*.notes,*mutt*, imap << <C-d>
     au FileType markdown set spell
     au FileType markdown set textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
