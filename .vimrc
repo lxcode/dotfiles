@@ -99,7 +99,7 @@ set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
-set grepprg=grep\ -R\ --exclude=cscope.out\ --color=always\ -nIH\ $* " need to make this portable
+set grepprg=grep\ -R\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $* " need to make this portable
 set cpoptions=BFt
 set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
