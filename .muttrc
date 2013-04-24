@@ -12,6 +12,7 @@ set folder=imaps://lx@redundancy.redundancy.org # set root folder
 set mask="^."				# show everything in folder view
 
 # Misc options
+set help=no
 set editor="vim +'/^$/' -c'noh'"
 set charset="utf-8"
 set maildir_trash=no		# set the trashed flag on maildir msgs
