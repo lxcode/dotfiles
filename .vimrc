@@ -150,6 +150,8 @@ if !has("gui_macvim")
 endif
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
+let g:netrw_banner=0
+let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' "hide files by default
 
 " quickfixsigns
 let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
@@ -434,6 +436,7 @@ augroup misc
     au BufWinEnter *.nse set filetype=lua
     " If a JS file has only one line, unminify it
     au FileType javascript if line('$')==1 | call Unminify() | endif
+    au FileType help set nospell
     " What - like how does this even work
     au InsertLeave * hi! link CursorLine CursorLine 
     au InsertEnter * hi! link CursorLine Normal
@@ -447,10 +450,6 @@ augroup syntax
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 augroup end 
-
-if (&ft=='help')
-    set nospell
-endif
 
 " Quickfix toggle
 let g:quickfix_is_open = 0
