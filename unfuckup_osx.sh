@@ -76,8 +76,13 @@ chflags nohidden ~/Library/
 chflags nohidden /tmp
 chflags nohidden /usr
 
-# disable "safe sleep".
+# Disable "safe sleep", saving 8-16G of disk space. Doing so is basically no
+# less secure than the default behavior when it comes to cold boot attacks, as
+# Safe Sleep leaves the RAM powered for hours anyway. You'd have to hibernate
+# every time you leave the machine to prevent that. If you want to do that, use
+# hibernatemode 1.
 pmset -a hibernatemode 0
+pmset -a autopoweroff 0
 rm /private/var/vm/sleepimage
 
 # Remove the Java browser Plugin.
