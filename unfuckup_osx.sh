@@ -80,7 +80,12 @@ chflags nohidden /usr
 # less secure than the default behavior when it comes to cold boot attacks, as
 # Safe Sleep leaves the RAM powered for hours anyway. You'd have to hibernate
 # every time you leave the machine to prevent that. If you want to do that, use
-# hibernatemode 1.
+# this:
+#
+#sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25
+#
+# You can also use autopoweroff and reduce the autopoweroffdelay if you want 
+# to sleep -> hibernate after a period of time.
 pmset -a hibernatemode 0
 pmset -a autopoweroff 0
 rm /private/var/vm/sleepimage
