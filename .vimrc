@@ -16,8 +16,8 @@ nore ; :
 noremap ;; ;
 noremap ,, ,
 " auto-format the current paragraph
-nmap -- gwap
-nmap __ gqap
+nmap -- gwip
+nmap __ gqip
 " Get rid of jumping behavior when using these search
 nnoremap * *<c-o>
 nnoremap # #<c-o>
