@@ -271,14 +271,6 @@ let g:statline_mixed_indent=0
 " gundo
 let g:gundo_close_on_revert=1
 
-" yankstack
-" have to do this because it'll nuke our previous Y mapping
-call yankstack#setup()
-nnoremap Y y$
-let g:yankstack_yank_keys = ['c', 'C', 'd', 'D', 'x', 'X', 'y', 'Y']
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_older_paste
-
 " vim-notes
 let g:notes_directory = '~/Documents/Notes'
 let g:notes_suffix = '.notes'
