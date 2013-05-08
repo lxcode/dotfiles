@@ -64,17 +64,17 @@ endif
 
 
 " dictionary of latexmk PID's (basename: pid)
-let s:latexmk_running_pids = {}
+let b:latexmk_running_pids = {}
 
 " Set PID {{{
 function! s:LatexmkSetPID(basename, pid)
-	let s:latexmk_running_pids[a:basename] = a:pid
+	let b:latexmk_running_pids[a:basename] = a:pid
 endfunction
 " }}}
 
 " Callback {{{
 function! s:LatexmkCallback(basename, status)
-	call remove(s:latexmk_running_pids, a:basename)
+	call remove(b:latexmk_running_pids, a:basename)
 	call LatexBox_LatexErrors(a:status, a:basename)
 endfunction
 " }}}
@@ -89,7 +89,7 @@ function! LatexBox_Latexmk(force)
 
 	let basename = LatexBox_GetTexBasename(1)
 
-	if has_key(s:latexmk_running_pids, basename)
+	if has_key(b:latexmk_running_pids, basename)
 		echomsg "latexmk is already running for `" . fnamemodify(basename, ':t') . "'"
 		return
 	endif
@@ -138,14 +138,14 @@ function! LatexBox_LatexmkStop()
 
 	let basename = LatexBox_GetTexBasename(1)
 
-	if !has_key(s:latexmk_running_pids, basename)
+	if !has_key(b:latexmk_running_pids, basename)
 		echomsg "latexmk is not running for `" . fnamemodify(basename, ':t') . "'"
 		return
 	endif
 
-	call s:kill_latexmk(s:latexmk_running_pids[basename])
+	call s:kill_latexmk(b:latexmk_running_pids[basename])
 
-	call remove(s:latexmk_running_pids, basename)
+	call remove(b:latexmk_running_pids, basename)
 	echomsg "latexmk stopped for `" . fnamemodify(basename, ':t') . "'"
 endfunction
 " }}}
@@ -181,10 +181,10 @@ endfunction
 
 " kill_all_latexmk {{{
 function! s:kill_all_latexmk()
-	for gpid in values(s:latexmk_running_pids)
+	for gpid in values(b:latexmk_running_pids)
 		call s:kill_latexmk(gpid)
 	endfor
-	let s:latexmk_running_pids = {}
+	let b:latexmk_running_pids = {}
 endfunction
 " }}}
 
@@ -212,11 +212,11 @@ endfunction
 function! LatexBox_LatexmkStatus(detailed)
 
 	if a:detailed
-		if empty(s:latexmk_running_pids)
+		if empty(b:latexmk_running_pids)
 			echo "latexmk is not running"
 		else
 			let plist = ""
-			for [basename, pid] in items(s:latexmk_running_pids)
+			for [basename, pid] in items(b:latexmk_running_pids)
 				if !empty(plist)
 					let plist .= '; '
 				endif
@@ -226,7 +226,7 @@ function! LatexBox_LatexmkStatus(detailed)
 		endif
 	else
 		let basename = LatexBox_GetTexBasename(1)
-		if has_key(s:latexmk_running_pids, basename)
+		if has_key(b:latexmk_running_pids, basename)
 			echo "latexmk is running"
 		else
 			echo "latexmk is not running"

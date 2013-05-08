@@ -235,7 +235,8 @@ autocmd FileType *
             \  endif
 
 " seek
-let g:seek_enable_jumps = 1
+" This seems to break dp and do in vimdiff
+"let g:seek_enable_jumps = 1
 
 " cctree
 if has("macunix")

@@ -1,4 +1,4 @@
-*latex-box.txt*  	LaTeX Box
+*latex-box.txt*	LaTeX Box
 *latex-box*
 
 This plugin consists of a set of tools to help editing LaTeX documents.
@@ -50,7 +50,7 @@ This plugin provides:
 
 ==============================================================================
 
-COMPLETION						*latex-box-completion*
+COMPLETION					*latex-box-completion*
 
 Completion is achieved through omni completion |compl-omni|, with default
 bindings <CTRL-X><CTRL-O>. There are five types of completion:
@@ -231,11 +231,11 @@ Associated setting: >
 
 ==============================================================================
 
-COMMANDS						*latex-box-commands*
+COMMANDS					*latex-box-commands*
 
 ------------------------------------------------------------------------------
 
-							*latex-box-commands-compilation*
+						*latex-box-commands-compilation*
 Compilation ~
 
 *:Latexmk*
@@ -263,7 +263,7 @@ number). To navigate through the errors, you can use the |:cc|, |:cn| and
 
 ------------------------------------------------------------------------------
 
-							*latex-box-commands-viewing*
+						*latex-box-commands-viewing*
 Viewing ~
 
 *:LatexView*
@@ -272,7 +272,7 @@ Viewing ~
 
 ------------------------------------------------------------------------------
 
-							*latex-box-commands-motion*
+						*latex-box-commands-motion*
 Motion ~
 
 *:LatexTOC*
@@ -288,7 +288,7 @@ Associated setting:
 
 ==============================================================================
 
-MOTION							*latex-box-motion*
+MOTION						*latex-box-motion*
 
 The function LatexBox_JumpToNextBraces({backward}) allows to jump outside of
 the current brace/bracket pair, or inside of the next opening braces/brackets.
@@ -296,11 +296,11 @@ the current brace/bracket pair, or inside of the next opening braces/brackets.
 
 ==============================================================================
 
-MAPPINGS						*latex-box-mappings*
+MAPPINGS					*latex-box-mappings*
 
 ------------------------------------------------------------------------------
 
-							*latex-box-mappings-compilation*
+						*latex-box-mappings-compilation*
 Compilation ~
 
 <LocalLeader>ll		|:Latexmk|
@@ -324,7 +324,7 @@ Compilation ~
 
 ------------------------------------------------------------------------------
 
-							*latex-box-mappings-viewing*
+						*latex-box-mappings-viewing*
 Viewing ~
 
 <LocalLeader>lv		|:LatexView|
@@ -332,7 +332,7 @@ Viewing ~
 
 ------------------------------------------------------------------------------
 
-							*latex-box-mappings-insertion*
+						*latex-box-mappings-insertion*
 Insertion ~
 
 
@@ -362,7 +362,7 @@ Suggested mappings to put in ~/.vim/ftplugin/tex.vim: >
 <
 ------------------------------------------------------------------------------
 
-							*latex-box-mappings-motion*
+						*latex-box-mappings-motion*
 Motion ~
 
 <LocalLeader>lt		|:LatexTOC|
@@ -384,7 +384,7 @@ Suggested bindings: >
 
 ==============================================================================
 
-SETTINGS						*latex-box-settings*
+SETTINGS					*latex-box-settings*
 
 
 ------------------------------------------------------------------------------
@@ -475,7 +475,7 @@ Templates (DEPRECATED) ~
 	this well, like snipMate:
 	http://www.vim.org/scripts/script.php?script_id=2540
 
-	
+
 ------------------------------------------------------------------------------
 
 						*latex-box-settings-compilation*
@@ -553,7 +553,13 @@ Vim Windows ~
 FOLDING						*latex-box-folding*
 
 LatexBox can fold texts according to LaTeX structure (part, chapter, section
-and subsection).
+and subsection).  Folding is off by default, and can be turned on by defining
+the |g:LatexBox_Folding| variable.
+
+The standard fold settings should suffice for most people.  When folding is
+turned on and a latex document is opened, the document is parsed once in order
+to define the highest fold level based on which parts and sections should be
+folded.
 
 *g:LatexBox_Folding*		Default: undefined
 
@@ -562,14 +568,41 @@ and subsection).
 	'fold-expr' will disable the function. The same goes for |foldexpr|.
 	Set this variable in your .vimrc
 
-*g:LatexBox_fold_envs*       Default: undefined
-
-	Turn on/off folding of environments
-
-*g:LatexBox_fold_preamble*       Default: undefined
+*g:LatexBox_fold_preamble*	Default: 1
 
 	Turn on/off folding of preamble
 
+*g:LatexBox_fold_envs*		Default: 1
+
+	Turn on/off folding of environments
+
+*g:LatexBox_fold_parts*
+
+	Define parts that should be folded.  These are intended as top level
+	parts such as \frontmatter and \appendix, and if they are present in
+	a latex document they will get fold level 1.  The default list of
+	parts is: >
+		let g:LatexBox_fold_parts=[
+			\ "appendix",
+			\ "frontmatter",
+			\ "mainmatter",
+			\ "backmatter"
+			\ ]
+	<
+
+*g:LatexBox_fold_sections*
+
+	Define which section levels should be folded.  The order of the
+	elements defines the order in which they are folded.  The
+	default list of sections is: >
+		let g:LatexBox_fold_sections=[
+			\ "part",
+			\ "chapter",
+			\ "section",
+			\ "subsection",
+			\ "subsubsection"
+			\ ]
+	<
 
 ==============================================================================
 

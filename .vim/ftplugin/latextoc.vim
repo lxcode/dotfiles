@@ -92,18 +92,18 @@ endfunction
 " }}}
 
 " Mappings {{{
-noremap <buffer> <silent> s :call <SID>TOCToggleNumbers()<CR>
-noremap <buffer> <silent> q :bwipeout<CR>
-noremap <buffer> <silent> <Esc> :bwipeout<CR>
-noremap <buffer> <silent> <Space> :call <SID>TOCActivate(0)<CR>
-noremap <buffer> <silent> <CR> :call <SID>TOCActivate(1)<CR>
-nnoremap <silent> <buffer> <leftrelease> :call <SID>TOCActivate(0)<cr>
-nnoremap <silent> <buffer> <2-leftmouse> :call <SID>TOCActivate(1)<cr>
+nnoremap <buffer> <silent> s :call <SID>TOCToggleNumbers()<CR>
+nnoremap <buffer> <silent> q :bwipeout<CR>
+nnoremap <buffer> <silent> <Esc> :bwipeout<CR>
+nnoremap <buffer> <silent> <Space> :call <SID>TOCActivate(0)<CR>
+nnoremap <buffer> <silent> <CR> :call <SID>TOCActivate(1)<CR>
+nnoremap <buffer> <silent> <leftrelease> :call <SID>TOCActivate(0)<cr>
+nnoremap <buffer> <silent> <2-leftmouse> :call <SID>TOCActivate(1)<cr>
 nnoremap <buffer> <silent> G G4k
-noremap <buffer> <silent> OA k
-noremap <buffer> <silent> OB j
-noremap <buffer> <silent> OC l
-noremap <buffer> <silent> OD h
+nnoremap <buffer> <silent> <Esc>OA k
+nnoremap <buffer> <silent> <Esc>OB j
+nnoremap <buffer> <silent> <Esc>OC l
+nnoremap <buffer> <silent> <Esc>OD h
 " }}}
 
 " vim:fdm=marker:ff=unix:noet:ts=4:sw=4
