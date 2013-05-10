@@ -200,7 +200,7 @@ augroup latex
     " The NoStarch style is a bit crufty and needs pdflatex
     au BufWinEnter book.tex let g:LatexBox_latexmk_options = "" 
     au BufWinEnter book.tex let g:LatexBox_fold_envs = 1
-    au BufWritePost *.tex silent! Latexmk
+    au BufWritePost *.tex Latexmk
     au BufWinLeave *.tex,*.sty mkview
     au BufWinEnter *.tex,*.sty silent loadview
     au FileType tex syntax spell toplevel 
@@ -486,6 +486,7 @@ command -bar Plistbin :1,$!plutil -convert binary1 /dev/stdin -o -
 fun ReadPlist()
     if getline("'[") =~ "^bplist"
         :PlistXML
+        set filetype=xml
     endif
 endfunction
 
