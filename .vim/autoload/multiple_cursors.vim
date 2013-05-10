@@ -50,13 +50,21 @@ endif
 " Internal Mappings
 "===============================================================================
 
-inoremap <silent> <Plug>(i) <C-o>:call <SID>process_user_inut('i')<CR>
-nnoremap <silent> <Plug>(i) :call <SID>process_user_inut('n')<CR>
-xnoremap <silent> <Plug>(i) :<C-u>call <SID>process_user_inut('v')<CR>
+inoremap <silent> <Plug>(i) <C-o>:call <SID>process_user_inut()<CR>
+nnoremap <silent> <Plug>(i) :call <SID>process_user_inut()<CR>
+xnoremap <silent> <Plug>(i) :<C-u>call <SID>process_user_inut()<CR>
 
 inoremap <silent> <Plug>(a) <C-o>:call <SID>apply_user_input_next('i')<CR>
 nnoremap <silent> <Plug>(a) :call <SID>apply_user_input_next('n')<CR>
 xnoremap <silent> <Plug>(a) :<C-u>call <SID>apply_user_input_next('v')<CR>
+
+inoremap <silent> <Plug>(d) <C-o>:call <SID>detect_bad_input()<CR>
+nnoremap <silent> <Plug>(d) :call <SID>detect_bad_input()<CR>
+xnoremap <silent> <Plug>(d) :<C-u>call <SID>detect_bad_input()<CR>
+
+inoremap <silent> <Plug>(w) <C-o>:call <SID>wait_for_user_input('')<CR>
+nnoremap <silent> <Plug>(w) :call <SID>wait_for_user_input('')<CR>
+xnoremap <silent> <Plug>(w) :<C-u>call <SID>wait_for_user_input('')<CR>
 
 " Note that although these mappings are seemingly triggerd from Visual mode,
 " they are in fact triggered from Normal mode. We quit visual mode to allow the
@@ -72,6 +80,10 @@ nnoremap <silent> <Plug>(n) :<C-u>call multiple_cursors#new('v')<CR>
 " Print some debugging info
 function! multiple_cursors#debug()
   call s:cm.debug()
+endfunction
+
+function! multiple_cursors#get_latency_debug_file()
+  return s:latency_debug_file
 endfunction
 
 " Creates a new cursor. Different logic applies depending on the mode the user
@@ -110,12 +122,10 @@ function! multiple_cursors#new(mode)
       " Start in normal mode
       call s:wait_for_user_input('n')
     else
-      " Save the '< and '> marks
-      call s:exit_visual_mode()
-
       " Came directly from visual mode
       if s:cm.is_empty()
         call s:cm.reset(0)
+
         if visualmode() ==# 'V'
           let left = [line('.'), 1]
           let right = [line('.'), col('$')-1]
@@ -129,8 +139,12 @@ function! multiple_cursors#new(mode)
       endif
       let content = s:get_text(s:region("'<", "'>"))
       let next = s:find_next(content)
-      call s:cm.add(next[1], next)
-      call s:update_visual_markers(next)
+      if s:cm.add(next[1], next)
+        call s:update_visual_markers(next)
+      else
+        call cursor(s:cm.get_current().position)
+        echohl WarningMsg | echo 'No more matches' | echohl None
+      endif
       call s:wait_for_user_input('v')
     endif
   endif
@@ -154,6 +168,61 @@ function! multiple_cursors#skip()
   call s:cm.add(next[1], next)
   call s:update_visual_markers(next)
   call s:wait_for_user_input('v')
+endfunction
+
+" Search for pattern between the start and end line number. For each match, add
+" a virtual cursor at the end and start multicursor mode
+" This function is called from a command. User commands in Vim do not support
+" passing in column ranges. If the user selects a block of text in visual mode,
+" but not visual line mode, we only want to match patterns within the actual
+" visual selection. We get around this by checking the last visual selection and
+" see if its start and end lines match the input. If so, we assume that the user
+" did a normal visual selection and we use the '< and '> marks to define the
+" region instead of start and end from the method parameter.
+function! multiple_cursors#find(start, end, pattern)
+  let s:cm.saved_winview = winsaveview()
+  let s:cm.start_from_find = 1
+  if visualmode() ==# 'v' && a:start == line("'<") && a:end == line("'>")
+    let pos1 = s:pos("'<")
+    let pos2 = s:pos("'>")
+  else
+    let pos1 = [a:start, 1]
+    let pos2 = [a:end, col([a:end, '$'])]
+  endif
+  call cursor(pos1)
+  let first = 1
+  while 1
+    if first
+      " First search starts from the current position
+      let match = search(a:pattern, 'cW')
+      let first = 0
+    else
+      let match = search(a:pattern, 'W')
+    endif
+    if !match
+      break
+    endif
+    let left = s:pos('.')
+    call search(a:pattern, 'ceW')
+    let right = s:pos('.')
+    if s:compare_pos(right, pos2) > 0
+      break
+    endif
+    call s:cm.add(right, [left, right])
+    " Redraw here forces the cursor movement to be updated. This prevents the
+    " jerky behavior when doing any action once the cursors are added. But it
+    " also slows down adding the cursors dramatically. We need to a better
+    " solution here
+    " redraw
+  endwhile
+  if s:cm.is_empty()
+    call winrestview(s:cm.saved_winview)
+    echohl ErrorMsg | echo 'No match found' | echohl None
+    return
+  else 
+    echohl Normal | echo 'Added '.s:cm.size().' cursor'.(s:cm.size()>1?'s':'') | echohl None
+    call s:wait_for_user_input('v')
+  endif
 endfunction
 
 "===============================================================================
@@ -248,9 +317,12 @@ function! s:CursorManager.new()
   let obj.saved_settings = {
         \ 'virtualedit': &virtualedit,
         \ 'cursorline': &cursorline,
+        \ 'lazyredraw': &lazyredraw,
         \ }
   " We save the window view when multicursor mode is entered
   let obj.saved_winview = []
+  " Track whether we started multicursor mode from calling multiple_cursors#find
+  let obj.start_from_find = 0
   return obj
 endfunction
 
@@ -263,8 +335,9 @@ function! s:CursorManager.reset(restore_view) dict
     endif
 
     " If the cursor moved, just restoring the view could get confusing, let's
-    " put the cursor at where the user left it
-    if !self.is_empty()
+    " put the cursor at where the user left it. Only do this if we didn't start
+    " from find mode
+    if !self.is_empty() && !self.start_from_find
       call cursor(self.get(0).position)
     endif
   endif
@@ -282,11 +355,9 @@ function! s:CursorManager.reset(restore_view) dict
   let self.current_index = -1
   let self.starting_index = -1
   let self.saved_winview = []
+  let self.start_from_find = 0
+  let s:char = ''
   call self.restore_user_settings()
-
-  " FIXME(terryma): Doesn't belong here
-  let s:from_mode = ''
-  let s:to_mode = ''
 endfunction
 
 " Returns 0 if it's not managing any cursors at the moment
@@ -349,18 +420,23 @@ endfunction
 " position changed, false otherwise
 function! s:CursorManager.update_current() dict
   let cur = self.get_current()
-  if s:to_mode ==# 'v'
+  if s:to_mode ==# 'v' || s:to_mode ==# 'V'
+    " If we're in visual line mode, we need to go to visual mode before we can
+    " update the visual region
+    if s:to_mode ==# 'V'
+      exec "normal! gvv\<Esc>"
+    endif
+
     " Sets the cursor at the right place
-    call s:exit_visual_mode()
+    exec "normal! gv\<Esc>"
     call cur.update_visual_selection(s:get_visual_region(s:pos('.')))
-    call s:exit_visual_mode()
-  else
+  elseif s:from_mode ==# 'v' || s:from_mode ==# 'V'
     call cur.remove_visual_selection()
   endif
-
   let vdelta = line('$') - s:saved_linecount
-  " If the cursor changed line, and the total number of lines changed
-  if vdelta != 0 && cur.line() != line('.')
+  " If the total number of lines changed in the buffer, we need to potentially
+  " adjust other cursor locations
+  if vdelta != 0
     if self.current_index != self.size() - 1
       let cur_line_length = len(getline(cur.line()))
       let new_line_length = len(getline('.'))
@@ -435,10 +511,16 @@ endfunction
 " virtualedit needs to be set to onemore for updates to work correctly
 " cursorline needs to be turned off for the cursor highlight to work on the line
 " where the real vim cursor is
+" lazyredraw needs to be turned on to prevent jerky screen behavior with many
+" cursors on screen
 function! s:CursorManager.initialize() dict
   let &virtualedit = "onemore"
   let &cursorline = 0
-  let self.saved_winview = winsaveview()
+  let &lazyredraw = 1
+  " We could have already saved the view from multiple_cursors#find
+  if !self.start_from_find
+    let self.saved_winview = winsaveview()
+  endif
 endfunction
 
 " Restore user settings.
@@ -446,6 +528,7 @@ function! s:CursorManager.restore_user_settings() dict
   if !empty(self.saved_settings)
     let &virtualedit = self.saved_settings['virtualedit']
     let &cursorline = self.saved_settings['cursorline']
+    let &lazyredraw = self.saved_settings['lazyredraw']
   endif
 endfunction
 
@@ -486,6 +569,7 @@ function! s:CursorManager.add(pos, ...) dict
   let self.current_index += 1
   return 1
 endfunction
+
 "===============================================================================
 " Variables
 "===============================================================================
@@ -500,6 +584,9 @@ let s:to_mode = ''
 let s:saved_linecount = -1
 " This is used to apply the highlight fix. See s:apply_highight_fix()
 let s:saved_line = 0
+" This is the number of cursor locations where we detected an input that we
+" cannot play back
+let s:bad_input = 0
 " Singleton cursor manager instance
 let s:cm = s:CursorManager.new()
 
@@ -540,6 +627,8 @@ endfunction
 " Mode change: Normal -> Visual
 " Cursor change: Set to end of region
 " TODO: Refactor this and s:update_visual_markers
+" FIXME: By using m` we're destroying the user's jumplist. We should use a
+" different mark and use :keepjump
 function! s:select_in_visual_mode(region)
   if a:region[0] == a:region[1]
     normal! v
@@ -585,7 +674,7 @@ endfunction
 " Highlight the position using the cursor highlight group
 function! s:highlight_cursor(pos)
   " Give cursor highlight high priority, to overrule visual selection
-  return matchadd(s:hi_group_cursor, '\%'.a:pos[0].'l\%'.a:pos[1].'v', 99999)
+  return matchadd(s:hi_group_cursor, '\%'.a:pos[0].'l\%'.a:pos[1].'c', 99999)
 endfunction
 
 " Compare two position arrays. Return a negative value if lhs occurs before rhs,
@@ -601,16 +690,21 @@ endfunction
 " multiple places.
 function! s:highlight_region(region)
   let s = sort(copy(a:region), "s:compare_pos")
-  if (s[0][0] == s[1][0]) 
-    " Same line
-    let pattern = '\%'.s[0][0].'l\%>'.(s[0][1]-1).'v.*\%<'.(s[1][1]+1).'v.'
+  if s:to_mode ==# 'V'
+    let pattern = '\%>'.(s[0][0]-1).'l\%<'.(s[1][0]+1).'l.*\ze.\_$'
   else
-    " Two lines
-    let s1 = '\%'.s[0][0].'l.\%>'.s[0][1].'v.*'
-    let s2 = '\%'.s[1][0].'l.*\%<'.s[1][1].'v..'
-    let pattern = s1.'\|'.s2
-    if (s[1][0] - s[0][0] > 1)
-      let pattern = pattern.'\|\%>'.s[0][0].'l\%<'.s[1][0].'l' 
+    if (s[0][0] == s[1][0])
+      " Same line
+      let pattern = '\%'.s[0][0].'l\%>'.(s[0][1]-1).'c.*\%<'.(s[1][1]+1).'c.'
+    else
+      " Two lines
+      let s1 = '\%'.s[0][0].'l.\%>'.s[0][1].'c.*'
+      let s2 = '\%'.s[1][0].'l.*\%<'.s[1][1].'c..'
+      let pattern = s1.'\|'.s2
+      " More than two lines
+      if (s[1][0] - s[0][0] > 1)
+        let pattern = pattern.'\|\%>'.s[0][0].'l\%<'.s[1][0].'l.*\ze.\_$' 
+      endif
     endif
   endif
   return matchadd(s:hi_group_visual, pattern)
@@ -621,16 +715,12 @@ function! s:revert_mode(from, to)
   if a:to ==# 'v'
     call s:cm.reapply_visual_selection()
   endif
-  if a:to ==# 'i'
-    startinsert
+  if a:to ==# 'V'
+    call s:cm.reapply_visual_selection()
+    normal! V
   endif
   if a:to ==# 'n' && a:from ==# 'i'
     stopinsert
-  endif
-  if a:to ==# 'n' && a:from ==# 'v'
-    " TODO(terryma): Hmm this would cause visual to normal mode to break.
-    " Strange
-    " call s:exit_visual_mode()
   endif
 endfunction
 
@@ -652,7 +742,7 @@ function! s:feedkeys(keys)
 endfunction
 
 " Take the user input and apply it at every cursor
-function! s:process_user_inut(mode)
+function! s:process_user_inut()
   " Grr this is frustrating. In Insert mode, between the feedkey call and here,
   " the current position could actually CHANGE for some odd reason. Forcing a
   " position reset here
@@ -669,13 +759,51 @@ function! s:process_user_inut(mode)
 
   " Apply the user input. Note that the above could potentially change mode, we
   " use the mapping below to help us determine what the new mode is
-  call s:feedkeys(s:char."\<Plug>(a)")
+  " Note that it's possible that \<Plug>(a) never gets called, we have a
+  " detection mechanism using \<Plug>(d). See its documentation for more details
+
+  " Assume that input is not valid
+  let s:valid_input = 0
+
+  " If we're coming from insert mode or going into insert mode, always chain the
+  " undos together.
+  " FIXME(terryma): Undo always places the cursor at the beginning of the line.
+  " Figure out why.
+  if s:from_mode ==# 'i' || s:to_mode ==# 'i'
+    silent! undojoin | call s:feedkeys(s:char."\<Plug>(a)")
+  else
+    call s:feedkeys(s:char."\<Plug>(a)")
+  endif
+  
+  " Even when s:char produces invalid input, this method is always called. The
+  " 't' here is important
+  call feedkeys("\<Plug>(d)", 't')
+endfunction
+
+" This method is always called during fanout, even when a bad user input causes
+" s:apply_user_input_next to not be called. We detect that and force the method
+" to be called to continue the fanout process
+function! s:detect_bad_input()
+  if !s:valid_input
+    " We ignore the bad input and force invoke s:apply_user_input_next
+    call feedkeys("\<Plug>(a)")
+    let s:bad_input += 1
+  endif
 endfunction
 
 " Apply the user input at the next cursor location
 function! s:apply_user_input_next(mode)
-  " Save the current mode
-  let s:to_mode = a:mode
+  let s:valid_input = 1
+
+  " Save the current mode, only if we haven't already
+  if empty(s:to_mode)
+    let s:to_mode = a:mode
+    if s:to_mode ==# 'v'
+      if visualmode() ==# 'V'
+        let s:to_mode = 'V'
+      endif
+    endif
+  endif
 
   " Update the current cursor's information
   let changed = s:cm.update_current()
@@ -683,19 +811,16 @@ function! s:apply_user_input_next(mode)
   " Advance the cursor index
   call s:cm.next()
 
-  " Update Vim's cursor
-  call cursor(s:cm.get_current().position)
-
   " We're done if we're made the full round
   if s:cm.loop_done()
-    if s:to_mode ==# 'v'
+    if s:to_mode ==# 'v' || s:to_mode ==# 'V'
       " This is necessary to set the "'<" and "'>" markers properly
       call s:update_visual_markers(s:cm.get_current().visual)
     endif
-    call s:wait_for_user_input(s:to_mode)
+    call feedkeys("\<Plug>(w)")
   else
     " Continue to next
-    call s:process_user_inut(s:from_mode)
+    call feedkeys("\<Plug>(i)")
   endif
 endfunction
 
@@ -737,15 +862,20 @@ endfunction
 " Quits multicursor mode and clears all cursors. Return true if exited
 " successfully.
 function! s:exit()
-  if s:char ==# g:multi_cursor_quit_key &&
-        \ (s:from_mode ==# 'n' ||
-        \ s:from_mode ==# 'v' && g:multi_cursor_exit_from_visual_mode ||
-        \ s:from_mode ==# 'i' && g:multi_cursor_exit_from_insert_mode)
-    if s:from_mode ==# 'i'
-      stopinsert
-    elseif s:from_mode ==# 'v'
-      call s:exit_visual_mode()
-    endif
+  if s:char !=# g:multi_cursor_quit_key
+    return 0
+  endif
+  let exit = 0
+  if s:from_mode ==# 'n'
+    let exit = 1
+  elseif (s:from_mode ==# 'v' || s:from_mode ==# 'V') &&
+        \ g:multi_cursor_exit_from_visual_mode
+    let exit = 1
+  elseif s:from_mode ==# 'i' && g:multi_cursor_exit_from_insert_mode
+    stopinsert
+    let exit = 1
+  endif
+  if exit
     call s:cm.reset(1)
     return 1
   endif
@@ -780,21 +910,75 @@ function! s:apply_highlight_fix()
   " Only do this if we're on the last character of the line
   if col('.') == col('$')
     let s:saved_line = getline('.')
-    call setline('.', s:saved_line.' ')
+    if s:from_mode ==# 'i'
+      silent! undojoin | call setline('.', s:saved_line.' ')
+    else
+      call setline('.', s:saved_line.' ')
+    endif
   endif
 endfunction
 
 " Revert the fix if it was applied earlier
 function! s:revert_highlight_fix()
   if type(s:saved_line) == 1
-    call setline('.', s:saved_line)
+    if s:from_mode ==# 'i'
+      silent! undojoin | call setline('.', s:saved_line)
+    else 
+      call setline('.', s:saved_line)
+    endif
   endif
   let s:saved_line = 0
 endfunction
 
+function! s:display_error()
+  if s:bad_input > 0
+    echohl ErrorMsg |
+          \ echo "Key '".s:char."' cannot be replayed at ".
+          \ s:bad_input." cursor location".(s:bad_input == 1 ? '' : 's') |
+          \ echohl Normal
+  endif
+  let s:bad_input = 0
+endfunction
+
+let s:latency_debug_file = ''
+function! s:start_latency_measure()
+  if g:multi_cursor_debug_latency
+    let s:start_time = reltime()
+  endif
+endfunction
+
+function! s:skip_latency_measure()
+  if g:multi_cursor_debug_latency
+    let s:skip_latency_measure = 1
+  endif
+endfunction
+
+function! s:end_latency_measure()
+  if g:multi_cursor_debug_latency && !empty(s:char)
+    if empty(s:latency_debug_file)
+      let s:latency_debug_file = tempname()
+      exec 'redir >> '.s:latency_debug_file
+        silent! echom "Starting latency debug at ".reltimestr(reltime())
+      redir END
+    endif
+    
+    if !s:skip_latency_measure
+      exec 'redir >> '.s:latency_debug_file
+        silent! echom "Processing '".s:char."' took ".string(str2float(reltimestr(reltime(s:start_time)))*1000).' ms in '.s:cm.size().' cursors. mode = '.s:from_mode
+      redir END
+    endif
+  endif
+  let s:skip_latency_measure = 0
+endfunction
+
 function! s:wait_for_user_input(mode)
   let s:from_mode = a:mode
+  if empty(a:mode)
+    let s:from_mode = s:to_mode
+  endif
   let s:to_mode = ''
+
+  call s:display_error()
 
   " Right before redraw, apply the highlighting bug fix
   call s:apply_highlight_fix()
@@ -804,7 +988,14 @@ function! s:wait_for_user_input(mode)
   " Immediately revert the change to leave the user's buffer unchanged
   call s:revert_highlight_fix()
 
+  call s:end_latency_measure()
+
   let s:char = s:get_char()
+
+  call s:start_latency_measure()
+
+  " Clears any echoes we might've added
+  normal! :<Esc>
 
   if s:exit()
     return
@@ -813,6 +1004,7 @@ function! s:wait_for_user_input(mode)
   " If the key is a special key and we're in the right mode, handle it
   if index(get(s:special_keys, s:from_mode, []), s:char) != -1
     call s:handle_special_key(s:char, s:from_mode)
+    call s:skip_latency_measure()
   else
     call s:cm.start_loop()
     call s:feedkeys("\<Plug>(i)")
