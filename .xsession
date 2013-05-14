@@ -1,13 +1,14 @@
 #!/bin/sh
 
-userresources=/usr/home/lx/.Xresources
-usermodmap=/usr/home/lx/.Xmodmap
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
 
-xrdb -merge $userresources&
+xrdb -merge $userresources
 xmodmap $usermodmap
 setxkbmap -option terminate:ctrl_alt_bksp&
-
 xsetroot -solid black&
+xset -b&
+xset r rate 400 80&
 nitrogen --restore&
 
 eval `dbus-launch --sh-syntax --exit-with-session`
@@ -33,11 +34,7 @@ export GNOME_KEYRING_PID
 
 #LC_CTYPE=ja_JP.UTF-8; export LC_CTYPE
 #export LC_CTYPE=en_US.UTF-8
-export OOO_FORCE_DESKTOP=gnome
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-#export XMODIFIERS='@im=UIM'
-#export GTK_IM_MODULE="uim"
-#export QT_IM_MODULE="uim"
 export XIM=ibus
 export GTK_IM_MODULE=ibus
 export QT_IM_MODULE=xim
@@ -45,11 +42,6 @@ export XMODIFIERS=@im=ibus
 export XIM_PROGRAM="ibus-daemon"
 export XIM_ARGS="-r --daemonize --xim"
 
-xset -b&
-xset r rate 400 80&
-autocutsel &
-autocutsel -s PRIMARY&
-#parcellite&
 urxvtd&
 
 #xrandr --output VGA1 --right-of LVDS 
@@ -57,9 +49,18 @@ wmname LG3D&
 
 setxkbmap -option terminate:ctrl_alt_bksp&
 xautolock -time 7 -locker '/usr/local/bin/metalock -F "#404040" -f "-*-fixed-medium-r-normal-*-12-*-*-*-*-*-*-*" -w 1 -P'&
-xmodmap /usr/home/lx/.Xmodmap
 
-/home/lx/bin/dwmstatus.sh | while read line; do xsetroot -name "$line"; done&
+case $OSTYPE in
+    darwin*)
+        quartz-wm --only proxy &
+    ;;
+    *)
+        autocutsel &
+        autocutsel -s PRIMARY&
+    ;;
+esac
+
+$HOME/bin/dwmstatus.sh | while read line; do xsetroot -name "$line"; done&
 while true; do dwm; done
 
 ssh-add -D < /dev/null
