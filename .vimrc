@@ -47,6 +47,7 @@ vmap > >gv
 vmap < <gv
 " Insert a single character with space
 nmap <Space> :exec "normal i".nr2char(getchar())."\e"<CR>
+nmap <Leader>x :call system("cd `dirname %` && urxvt")<CR>
 
 syntax on
 filetype plugin on
@@ -244,6 +245,9 @@ if has("macunix")
 else
     let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
 endif
+
+" rainbow
+map <Leader>r :RainbowToggle<CR>
 
 " vimchat
 let g:vimchat_otr = 1
@@ -538,7 +542,7 @@ function GrepColors()
     set cocu=nv
     syn region ansiRed start="\e\[01;31m\e\[K"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
     syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m\e\[K"
-    hi ansiRed    ctermfg=red   guifg=red  cterm=none         gui=none
+    hi ansiRed    ctermfg=207   guifg=#FF005F  cterm=none         gui=none
     syn match ansiStop		conceal "\e\[m\e\[K"
     hi! link ansiStop NONE
 endfunction
