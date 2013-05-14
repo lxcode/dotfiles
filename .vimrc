@@ -48,6 +48,8 @@ vmap < <gv
 " Insert a single character with space
 nmap <Space> :exec "normal i".nr2char(getchar())."\e"<CR>
 nmap <Leader>x :call system("cd `dirname %` && urxvt")<CR>
+" Change to the directory of the current file
+nmap cd :lcd %:h \| :pwd<CR>
 
 syntax on
 filetype plugin on
