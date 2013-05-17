@@ -16,6 +16,7 @@ URxvt*scrollLines:   	    10000
 URxvt*scrollBar:   	    0
 URxvt*url-launcher:	/usr/bin/open
 URxvt*perl-ext: selection,matcher
+URxvt.colorUL: #4682B4
 URxvt*matcher.button:	3
 URxvt*underlineURLs: true
 URxvt*transparent:	off
