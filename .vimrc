@@ -50,6 +50,10 @@ nmap <Space> :exec "normal i".nr2char(getchar())."\e"<CR>
 nmap <Leader>x :call system("cd `dirname %` && urxvt")<CR>
 " Change to the directory of the current file
 nmap cd :lcd %:h \| :pwd<CR>
+" Delete a vuln
+" This works when I type it, but not here...
+nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
+
 
 syntax on
 filetype plugin on
@@ -66,7 +70,7 @@ if has('gui')
         let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
         let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
     else
-        set guifont=Inconsolata\ 13
+        set guifont=Inconsolata\ 14
     endif
 endif
 if has('gui_running')
@@ -171,6 +175,7 @@ let g:tex_no_error=1
 let g:tex_comment_nospell = 1
 "let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
 let g:LatexBox_latexmk_options = "-xelatex"
+let g:LatexBox_build_dir = "$HOME/.build"
 if has("macunix")
     let g:LatexBox_viewer = "open"
 else
@@ -558,4 +563,11 @@ function! Unminify()
     %s/;\ze[^\r\n]/;\r/g
     %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
     normal ggVG=
+endfunction
+
+command! -nargs=1 Graudit call Graudit(<f-args>)
+function! Graudit(db)
+    call system("$HOME/Tools/graudit/graudit -x 'cscope.*' -c0 -d " . a:db . " . > /tmp/graudit.out")
+    copen
+    cf /tmp/graudit.out
 endfunction
