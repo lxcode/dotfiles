@@ -158,7 +158,7 @@ endif
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
-let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' "hide files by default
+"let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' "hide files by default
 
 " quickfixsigns
 let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
@@ -544,6 +544,7 @@ endfunction
 
 " I use this to highlight the match from grep, but keep quickfix syntax
 " highlighting intact. This is for BSD grep.
+command -bar GrepColors call GrepColors()
 function GrepColors()
     set conceallevel=3
     set cocu=nv

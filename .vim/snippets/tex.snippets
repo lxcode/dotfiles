@@ -175,7 +175,7 @@ snippet figg
 	    \includegraphics[scale=${1}]{images/${2}}
 	\end{center}
 	\caption{${3}}
-	\label{fig:${4}}
+	\label{fig:${4:$2}}
 	\end{figure}
 snippet tikz
 	\begin{figure}
@@ -232,6 +232,7 @@ snippet fig
 	\begin{figure}[ht]
 		\center \includegraphics[width=1.0\textwidth]{images/${1}}
 		\caption{${2}}
+		\label{fig:${3:$1}}
 	\end{figure}
 snippet fu
 	\footnote{\url{${1}}}${2}

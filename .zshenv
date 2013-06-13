@@ -13,6 +13,7 @@ export PATH=/usr/local/libexec/ccache:$PATH
 export CCACHE_PATH=/usr/bin:/usr/local/bin
 export CCACHE_DIR="/home/lx/.ccache"
 export CLICOLOR=yes
+export TERM=xterm-256color
 
 #export XMODIFIERS='@im=SCIM'
 #export GTK_IM_MODULE="scim"
