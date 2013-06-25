@@ -67,7 +67,7 @@ endif
 
 " Syntax highlighting
 hi Comment guifg=#767676 ctermfg=244 gui=italic
-hi String guifg=#A8FF60 ctermfg=155 
+hi String guifg=#afffff ctermfg=155 
 "hi Number guifg=#FF73FD ctermfg=207 
 hi Number ctermfg=141 guifg=#ae81ff
 
@@ -78,7 +78,7 @@ hi Conditional guifg=#6699CC ctermfg=110
 hi Todo guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195 
 hi Constant guifg=#99CC99 ctermfg=151 
 
-hi Identifier guifg=#FF005F ctermfg=207 CTERM=NONE
+hi Identifier guifg=#8787ff ctermfg=207 CTERM=NONE
 " This is linked to Identifier by default, but that looks awful
 hi mailQuoted2 guifg=#585858 ctermfg=240
 hi Function guifg=#FFD2A7 ctermfg=223 
@@ -86,7 +86,7 @@ hi Type guifg=#FFDFFF ctermfg=225
 hi Statement guifg=#6699CC ctermfg=110
 "hi Statement ctermfg=197 guifg=#f92672
 
-hi Special guifg=#E18964 ctermfg=173
+hi Special guifg=#df8787 ctermfg=173
 hi Delimiter guifg=#00A0A0 ctermfg=37 
 hi Operator guifg=white ctermfg=white 
 
