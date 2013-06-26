@@ -11,9 +11,7 @@ endif
 let colors_name = "lx-256-dark"
 
 " General colors
-"hi Normal guifg=#a8a8a8 guibg=black ctermfg=white ctermbg=NONE
-hi Normal guifg=#d0d0d0 guibg=#242424 ctermfg=252 ctermbg=234
-"hi Normal ctermfg=231 ctermbg=235 guifg=#f8f8f2 guibg=#272822
+hi Normal guifg=#d0d0d0 guibg=#242424 ctermfg=252 ctermbg=NONE
 hi NonText guifg=#070707 guibg=black ctermfg=0
 
 hi Cursor guifg=black guibg=#5fafff ctermfg=0 ctermbg=15
@@ -67,7 +65,7 @@ endif
 
 " Syntax highlighting
 hi Comment guifg=#767676 ctermfg=244 gui=italic
-hi String guifg=#afffff ctermfg=155 
+hi String guifg=#5fffff ctermfg=123 
 "hi Number guifg=#FF73FD ctermfg=207 
 hi Number ctermfg=141 guifg=#ae81ff
 
@@ -78,7 +76,7 @@ hi Conditional guifg=#6699CC ctermfg=110
 hi Todo guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195 
 hi Constant guifg=#99CC99 ctermfg=151 
 
-hi Identifier guifg=#8787ff ctermfg=207 CTERM=NONE
+hi Identifier guifg=#8787ff ctermfg=105 CTERM=NONE
 " This is linked to Identifier by default, but that looks awful
 hi mailQuoted2 guifg=#585858 ctermfg=240
 hi Function guifg=#FFD2A7 ctermfg=223 
@@ -86,7 +84,7 @@ hi Type guifg=#FFDFFF ctermfg=225
 hi Statement guifg=#6699CC ctermfg=110
 "hi Statement ctermfg=197 guifg=#f92672
 
-hi Special guifg=#df8787 ctermfg=173
+hi Special guifg=#df8787 ctermfg=174
 hi Delimiter guifg=#00A0A0 ctermfg=37 
 hi Operator guifg=white ctermfg=white 
 
