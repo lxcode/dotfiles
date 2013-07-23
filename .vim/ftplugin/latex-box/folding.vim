@@ -13,6 +13,17 @@ if exists('g:LatexBox_Folding') && g:LatexBox_Folding == 1
     setl foldmethod=expr
     setl foldexpr=LatexBox_FoldLevel(v:lnum)
     setl foldtext=LatexBox_FoldText()
+    "
+    " The foldexpr function returns "=" for most lines, which means it can become
+    " slow for large files.  The following is a hack that is based on this reply to
+    " a discussion on the Vim Developer list:
+    " http://permalink.gmane.org/gmane.editors.vim.devel/14100
+    "
+    augroup FastFold
+        autocmd!
+        autocmd InsertEnter *.tex setlocal foldmethod=manual
+        autocmd InsertLeave *.tex setlocal foldmethod=expr
+    augroup end
 endif
 if !exists('g:LatexBox_fold_preamble')
     let g:LatexBox_fold_preamble=1
@@ -38,17 +49,6 @@ if !exists('g:LatexBox_fold_sections')
                 \ ]
 endif
 
-"
-" The foldexpr function returns "=" for most lines, which means it can become
-" slow for large files.  The following is a hack that is based on this reply to
-" a discussion on the Vim Developer list:
-" http://permalink.gmane.org/gmane.editors.vim.devel/14100
-"
-augroup FastFold
-    autocmd!
-    autocmd InsertEnter *.tex setlocal foldmethod=manual
-    autocmd InsertLeave *.tex setlocal foldmethod=expr
-augroup end
 
 " {{{1 LatexBox_FoldLevel help functions
 
@@ -129,11 +129,11 @@ function! LatexBox_FoldLevel(lnum)
     " Fold preamble
     if g:LatexBox_fold_preamble == 1
         if line =~# '\s*\\documentclass'
-                return ">1"
+            return ">1"
         elseif line =~# '^\s*\\begin\s*{\s*document\s*}'
             return "0"
-            endif
-            endif
+        endif
+    endif
 
     " Fold parts (\frontmatter, \mainmatter, \backmatter, and \appendix)
     if line =~# s:foldparts
@@ -144,20 +144,20 @@ function! LatexBox_FoldLevel(lnum)
     for [part, level] in b:LatexBox_FoldSections
         if line =~# part
             return ">" . level
-    endif
+        endif
     endfor
 
     " Fold environments
     if g:LatexBox_fold_envs == 1
         if line =~# s:envbeginpattern
-                return "a1"
+            return "a1"
         elseif line =~# '^\s*\\end{document}'
             " Never fold \end{document}
             return 0
         elseif line =~# s:envendpattern
-                return "s1"
-            endif
+            return "s1"
         endif
+    endif
 
     " Return foldlevel of previous line
     return "="
@@ -198,11 +198,14 @@ function! s:CaptionTable()
 endfunction
 
 function! s:CaptionFrame(line)
-    " Test simple variant first
-    let caption = matchstr(a:line,'\\begin\*\?{.*}{\zs.\+')
+    " Test simple variants first
+    let caption1 = matchstr(a:line,'\\begin\*\?{.*}{\zs.\+\ze}')
+    let caption2 = matchstr(a:line,'\\begin\*\?{.*}{\zs.\+')
 
-    if ! caption == ''
-        return caption
+    if len(caption1) > 0
+        return caption1
+    elseif len(caption2) > 0
+        return caption2
     else
         let i = v:foldstart
         while i <= v:foldend
@@ -261,11 +264,14 @@ function! LatexBox_FoldText()
         let title =  matchstr(line,'Fake' . sections . ':\s*\zs.*')
     elseif line =~ 'Fake' . sections
         let title =  matchstr(line, 'Fake' . sections)
-        endif
+    endif
 
     " Environments
     if line =~ '\\begin'
+        " Capture environment name
         let env = matchstr(line,'\\begin\*\?{\zs\w*\*\?\ze}')
+
+        " Set caption based on type of environment
         if env == 'frame'
             let label = ''
             let caption = s:CaptionFrame(line)
@@ -276,6 +282,13 @@ function! LatexBox_FoldText()
             let label = s:LabelEnv()
             let caption = s:CaptionEnv()
         endif
+
+        " If no caption found, check for a caption comment
+        if caption == ''
+            let caption = matchstr(line,'\\begin\*\?{.*}\s*%\s*\zs.*')
+        endif
+
+        " Create title based on caption and label
         if caption . label == ''
             let title = env
         elseif label == ''
@@ -284,10 +297,10 @@ function! LatexBox_FoldText()
         elseif caption == ''
             let title = printf('%-12s%56s', env, '(' . label . ')')
         else
-            let title = printf('%-12s%-30s %23s', env . ':',
+            let title = printf('%-12s%-30s %21s', env . ':',
                         \ strpart(substitute(caption, '}\s*$', '',''),0,34),
                         \ '(' . label . ')')
-    endif
+        endif
     endif
 
     let title = strpart(title, 0, 68)

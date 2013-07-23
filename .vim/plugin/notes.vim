@@ -1,6 +1,6 @@
 " Vim plug-in
 " Author: Peter Odding <peter@peterodding.com>
-" Last Change: December 13, 2011
+" Last Change: June 23, 2013
 " URL: http://peterodding.com/code/vim/notes/
 
 " Support for automatic update using the GLVS plug-in.
@@ -19,9 +19,12 @@ command! -bar -bang -nargs=? -complete=customlist,xolox#notes#cmd_complete Note 
 command! -bar -bang -nargs=? -complete=customlist,xolox#notes#cmd_complete DeleteNote call xolox#notes#delete(<q-bang>, <q-args>)
 command! -bang -nargs=? -complete=customlist,xolox#notes#keyword_complete SearchNotes call xolox#notes#search(<q-bang>, <q-args>)
 command! -bar -bang RelatedNotes call xolox#notes#related(<q-bang>)
-command! -bar -bang -nargs=? RecentNotes call xolox#notes#recent(<q-bang>, <q-args>)
+command! -bar -bang -nargs=? RecentNotes call xolox#notes#recent#show(<q-bang>, <q-args>)
+command! -bar -bang MostRecentNote call xolox#notes#recent#edit(<q-bang>)
 command! -bar -count=1 ShowTaggedNotes call xolox#notes#tags#show_tags(<count>)
 command! -bar IndexTaggedNotes call xolox#notes#tags#create_index()
+command! -bar NoteToMarkdown call xolox#notes#markdown#view()
+command! -bar NoteToHtml call xolox#notes#html#view()
 
 " TODO Generalize this so we have one command + modifiers (like :tab)?
 command! -bar -bang -range NoteFromSelectedText call xolox#notes#from_selection(<q-bang>, 'edit')
@@ -42,12 +45,18 @@ augroup PluginNotes
   au BufReadCmd note:* nested call xolox#notes#shortcut()
   " Automatic commands to read/write notes (used for automatic renaming).
   exe 'au BufReadCmd' xolox#notes#autocmd_pattern(g:notes_shadowdir, 0) 'call xolox#notes#edit_shadow()'
-  exe 'au BufWriteCmd' xolox#notes#autocmd_pattern(g:notes_directory, 1) 'call xolox#notes#save()'
+  for s:directory in xolox#notes#find_directories(0)
+    exe 'au BufWriteCmd' xolox#notes#autocmd_pattern(s:directory, 1) 'call xolox#notes#save()'
+  endfor
+  unlet s:directory
 augroup END
 
 augroup filetypedetect
   let s:template = 'au BufNewFile,BufRead %s if &bt == "" | setl ft=notes | end'
-  execute printf(s:template, xolox#notes#autocmd_pattern(g:notes_directory, 1))
+  for s:directory in xolox#notes#find_directories(0)
+    execute printf(s:template, xolox#notes#autocmd_pattern(s:directory, 1))
+  endfor
+  unlet s:directory
   execute printf(s:template, xolox#notes#autocmd_pattern(g:notes_shadowdir, 0))
 augroup END
 

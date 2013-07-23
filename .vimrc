@@ -66,9 +66,6 @@ if has('gui')
     if has("gui_macvim")
         set guifont=Inconsolata:h18
         set clipboard=unnamed
-        let g:clang_complete_enable = 1
-        let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-        let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
     else
         set guifont=Inconsolata\ 14
     endif
@@ -117,7 +114,7 @@ set nomodeline              " modelines are dumb
 set tabstop=4 shiftwidth=4
 set backspace=indent,eol,start
 set ruler                   " show position in file
-set title icon              " set title data for gui
+set title
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
 set ttimeout
 set ttimeoutlen=100         " Make it so Esc enters Normal mode right away
@@ -171,11 +168,12 @@ let g:buftabs_only_basename=1
 
 "latex
 let g:tex_flavor="latex"
-let g:tex_no_error=1
+let g:tex_no_error = 1
 let g:tex_comment_nospell = 1
 "let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
 let g:LatexBox_latexmk_options = "-xelatex"
 let g:LatexBox_build_dir = "$HOME/.build"
+let g:LatexBox_latexmk_async = 1
 if has("macunix")
     let g:LatexBox_viewer = "open"
 else
@@ -283,11 +281,13 @@ let g:statline_mixed_indent=0
 let g:gundo_close_on_revert=1
 
 " vim-notes
-let g:notes_directory = '~/Documents/Notes'
+let g:notes_directories = ['~/Documents/Notes']
 let g:notes_suffix = '.notes'
 
 " clang
 let g:clang_complete_enable = 1
+let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
+let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
 let g:clang_complete_copen = 1
 let g:clang_snippets = 1
 let g:clang_use_library = 1

@@ -1,6 +1,6 @@
 " Vim file type plug-in
 " Author: Peter Odding <peter@peterodding.com>
-" Last Change: December 1, 2011
+" Last Change: May 16, 2013
 " URL: http://peterodding.com/code/vim/notes/
 
 if exists('b:did_ftplugin')
@@ -57,31 +57,31 @@ set completeopt+=longest
 
 " Change double-dash to em-dash as it is typed. {{{1
 if g:notes_smart_quotes && xolox#notes#unicode_enabled()
-  imap <buffer> -- —
+  inoremap <buffer> -- —
   let b:undo_ftplugin .= ' | execute "iunmap <buffer> --"'
 endif
 
 " Change plain quotes to curly quotes as they're typed. {{{1
 if g:notes_smart_quotes
-  imap <buffer> <expr> ' xolox#notes#insert_quote(1)
-  imap <buffer> <expr> " xolox#notes#insert_quote(2)
+  inoremap <buffer> <expr> ' xolox#notes#insert_quote(1)
+  inoremap <buffer> <expr> " xolox#notes#insert_quote(2)
   let b:undo_ftplugin .= ' | execute "iunmap <buffer> ''"'
   let b:undo_ftplugin .= ' | execute ''iunmap <buffer> "'''
 endif
 
 " Change ASCII style arrows to Unicode arrows. {{{1
 if g:notes_smart_quotes && xolox#notes#unicode_enabled()
-  imap <buffer> -> →
-  imap <buffer> <- ←
+  inoremap <buffer> -> →
+  inoremap <buffer> <- ←
   let b:undo_ftplugin .= ' | execute "iunmap <buffer> ->"'
   let b:undo_ftplugin .= ' | execute "iunmap <buffer> <-"'
 endif
 
 " Convert ASCII list bullets to Unicode bullets. {{{1
 if g:notes_smart_quotes
-  imap <buffer> <expr> * xolox#notes#insert_bullet('*')
-  imap <buffer> <expr> - xolox#notes#insert_bullet('-')
-  imap <buffer> <expr> + xolox#notes#insert_bullet('+')
+  inoremap <buffer> <expr> * xolox#notes#insert_bullet('*')
+  inoremap <buffer> <expr> - xolox#notes#insert_bullet('-')
+  inoremap <buffer> <expr> + xolox#notes#insert_bullet('+')
   let b:undo_ftplugin .= ' | execute "iunmap <buffer> *"'
   let b:undo_ftplugin .= ' | execute "iunmap <buffer> -"'
   let b:undo_ftplugin .= ' | execute "iunmap <buffer> +"'
@@ -91,25 +91,29 @@ endif
 inoremap <buffer> *** <C-o>:call xolox#notes#insert_ruler()<CR>
 let b:undo_ftplugin .= ' | execute "iunmap <buffer> ***"'
 
-" Indent list items using shift characters. {{{1
-imap <buffer> <silent> >> <C-o>:call xolox#notes#indent_list(1, line('.'), line('.'))<CR>
-smap <buffer> <silent> >> <C-o>:<C-u>call xolox#notes#indent_list(1, line("'<"), line("'>"))<CR><C-o>gv
-let b:undo_ftplugin .= ' | execute "iunmap <buffer> >>"'
-let b:undo_ftplugin .= ' | execute "sunmap <buffer> >>"'
-imap <buffer> <silent> << <C-o>:call xolox#notes#indent_list(-1, line('.'), line('.'))<CR>
-smap <buffer> <silent> << <C-o>:<C-u>call xolox#notes#indent_list(-1, line("'<"), line("'>"))<CR><C-o>gv
-let b:undo_ftplugin .= ' | execute "iunmap <buffer> <<"'
-let b:undo_ftplugin .= ' | execute "sunmap <buffer> <<"'
+" Indent list items using <Tab> and <Shift-Tab>? {{{1
+if g:notes_tab_indents
+  inoremap <buffer> <silent> <Tab> <C-o>:call xolox#notes#indent_list(1, line('.'), line('.'))<CR>
+  snoremap <buffer> <silent> <Tab> <C-o>:<C-u>call xolox#notes#indent_list(1, line("'<"), line("'>"))<CR><C-o>gv
+  let b:undo_ftplugin .= ' | execute "iunmap <buffer> <Tab>"'
+  let b:undo_ftplugin .= ' | execute "sunmap <buffer> <Tab>"'
+  inoremap <buffer> <silent> <S-Tab> <C-o>:call xolox#notes#indent_list(-1, line('.'), line('.'))<CR>
+  snoremap <buffer> <silent> <S-Tab> <C-o>:<C-u>call xolox#notes#indent_list(-1, line("'<"), line("'>"))<CR><C-o>gv
+  let b:undo_ftplugin .= ' | execute "iunmap <buffer> <S-Tab>"'
+  let b:undo_ftplugin .= ' | execute "sunmap <buffer> <S-Tab>"'
+endif
 
-" Indent list items using <Alt-Left> and <Alt-Right>. {{{1
-imap <buffer> <silent> <A-Right> <C-o>:call xolox#notes#indent_list(1, line('.'), line('.'))<CR>
-smap <buffer> <silent> <A-Right> <C-o>:<C-u>call xolox#notes#indent_list(1, line("'<"), line("'>"))<CR><C-o>gv
-let b:undo_ftplugin .= ' | execute "iunmap <buffer> <A-Right>"'
-let b:undo_ftplugin .= ' | execute "sunmap <buffer> <A-Right>"'
-imap <buffer> <silent> <A-Left> <C-o>:call xolox#notes#indent_list(-1, line('.'), line('.'))<CR>
-smap <buffer> <silent> <A-Left> <C-o>:<C-u>call xolox#notes#indent_list(-1, line("'<"), line("'>"))<CR><C-o>gv
-let b:undo_ftplugin .= ' | execute "iunmap <buffer> <A-Left>"'
-let b:undo_ftplugin .= ' | execute "sunmap <buffer> <A-Left>"'
+" Indent list items using <Alt-Left> and <Alt-Right>? {{{1
+if g:notes_alt_indents
+  inoremap <buffer> <silent> <A-Right> <C-o>:call xolox#notes#indent_list(1, line('.'), line('.'))<CR>
+  snoremap <buffer> <silent> <A-Right> <C-o>:<C-u>call xolox#notes#indent_list(1, line("'<"), line("'>"))<CR><C-o>gv
+  let b:undo_ftplugin .= ' | execute "iunmap <buffer> <A-Right>"'
+  let b:undo_ftplugin .= ' | execute "sunmap <buffer> <A-Right>"'
+  inoremap <buffer> <silent> <A-Left> <C-o>:call xolox#notes#indent_list(-1, line('.'), line('.'))<CR>
+  snoremap <buffer> <silent> <A-Left> <C-o>:<C-u>call xolox#notes#indent_list(-1, line("'<"), line("'>"))<CR><C-o>gv
+  let b:undo_ftplugin .= ' | execute "iunmap <buffer> <A-Left>"'
+  let b:undo_ftplugin .= ' | execute "sunmap <buffer> <A-Left>"'
+endif
 
 " Automatically remove empty list items on Enter. {{{1
 inoremap <buffer> <silent> <expr> <CR> xolox#notes#cleanup_list()
@@ -117,13 +121,13 @@ let b:undo_ftplugin .= ' | execute "iunmap <buffer> <CR>"'
 
 " Shortcuts to create new notes from the selected text. {{{1
 
-vmap <buffer> <silent> <Leader>en :NoteFromSelectedText<CR>
+vnoremap <buffer> <silent> <Leader>en :NoteFromSelectedText<CR>
 let b:undo_ftplugin .= ' | execute "vunmap <buffer> <Leader>en"'
 
-vmap <buffer> <silent> <Leader>sn :SplitNoteFromSelectedText<CR>
+vnoremap <buffer> <silent> <Leader>sn :SplitNoteFromSelectedText<CR>
 let b:undo_ftplugin .= ' | execute "vunmap <buffer> <Leader>sn"'
 
-vmap <buffer> <silent> <Leader>tn :TabNoteFromSelectedText<CR>
+vnoremap <buffer> <silent> <Leader>tn :TabNoteFromSelectedText<CR>
 let b:undo_ftplugin .= ' | execute "vunmap <buffer> <Leader>tn"'
 
 " }}}1
@@ -131,6 +135,7 @@ let b:undo_ftplugin .= ' | execute "vunmap <buffer> <Leader>tn"'
 " This is currently the only place where a command is guaranteed to be
 " executed when the user edits a note. Maybe I shouldn't abuse this (it
 " doesn't feel right ;-) but for now it will do.
+call xolox#notes#recent#track()
 call xolox#notes#check_sync_title()
 
 " vim: ts=2 sw=2 et
