@@ -271,6 +271,8 @@ let g:ctrlp_clear_cache_on_exit = 0
 map <Leader>e :CtrlP<CR>
 map <Leader>b :CtrlPBuffer<CR>
 map <Leader>m :CtrlPMRU<CR>
+" CtrlP tjump
+nnoremap <c-]> :CtrlPtjump<cr>
 
 " statline
 let g:statline_fugitive=1
