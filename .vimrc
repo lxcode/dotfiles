@@ -80,7 +80,7 @@ if $DISPLAY != ""
     set selectmode+=mouse	" Allow the mouse to select
 endif 
 set et                      " expand tabs
-set diffopt+=iwhite,vertical   " ignore whitespace in diffs
+set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
 set novb t_vb=              " no visual bell
 set nonu                    " line numbers

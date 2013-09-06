@@ -48,9 +48,9 @@ mvi() {
     vim `locate "$*"|slmenu -l 50`
 }
 
-if [ -n "$DISPLAY" ]; then
-    alias vim="$EDITOR --servername VIM"
-fi
+#if [ -n "$DISPLAY" ]; then
+#    alias vim="$EDITOR --servername VIM"
+#fi
 
 # List only directories and symbolic
 # links that point to directories
