@@ -189,7 +189,6 @@ endfunction
 " the optional argument is the file name to be searched
 
 function! s:FindBibData(...)
-
 	if a:0 == 0
 		let file = LatexBox_GetMainTexFile()
 	else
@@ -200,69 +199,95 @@ function! s:FindBibData(...)
 		return ''
 	endif
 
-	let bibliography_cmds = [ '\\bibliography', '\\addbibresource', '\\addglobalbib', '\\addsectionbib' ]
+	let bibliography_cmds = [
+				\ '\\bibliography',
+				\ '\\addbibresource',
+				\ '\\addglobalbib',
+				\ '\\addsectionbib',
+				\ ]
 
 	let lines = readfile(file)
 
 	let bibdata_list = []
 
 	for cmd in bibliography_cmds
-		let bibdata_list +=
-				\ map(filter(copy(lines), 'v:val =~ ''\C' . cmd . '\s*{[^}]\+}'''),
-				\ 'matchstr(v:val, ''\C' . cmd . '\s*{\zs[^}]\+\ze}'')')
+		let bibdata_list += map(filter(copy(lines),
+					\ 'v:val =~ ''\C' . cmd . '\s*{[^}]\+}'''),
+					\ 'matchstr(v:val, ''\C' . cmd . '\s*{\zs[^}]\+\ze}'')')
 	endfor
 
-	let bibdata_list +=
-				\ map(filter(copy(lines), 'v:val =~ ''\C\\\%(input\|include\)\s*{[^}]\+}'''),
-				\ 's:FindBibData(LatexBox_kpsewhich(matchstr(v:val, ''\C\\\%(input\|include\)\s*{\zs[^}]\+\ze}'')))')
+	let bibdata_list += map(filter(copy(lines),
+				\ 'v:val =~ ''\C\\\%(input\|include\)\s*{[^}]\+}'''),
+				\ 's:FindBibData(LatexBox_kpsewhich(matchstr(v:val,'
+					\ . '''\C\\\%(input\|include\)\s*{\zs[^}]\+\ze}'')))')
 
-	let bibdata_list +=
-				\ map(filter(copy(lines), 'v:val =~ ''\C\\\%(input\|include\)\s\+\S\+'''),
-				\ 's:FindBibData(LatexBox_kpsewhich(matchstr(v:val, ''\C\\\%(input\|include\)\s\+\zs\S\+\ze'')))')
+	let bibdata_list += map(filter(copy(lines),
+				\ 'v:val =~ ''\C\\\%(input\|include\)\s\+\S\+'''),
+				\ 's:FindBibData(LatexBox_kpsewhich(matchstr(v:val,'
+					\ . '''\C\\\%(input\|include\)\s\+\zs\S\+\ze'')))')
 
-	let bibdata = join(bibdata_list, ',')
-
-	return bibdata
+	return join(bibdata_list, ',')
 endfunction
 
 let s:bstfile = expand('<sfile>:p:h') . '/vimcomplete'
 
 function! LatexBox_BibSearch(regexp)
+	let res = []
 
-	" find bib data
-    let bibdata = s:FindBibData()
-    if bibdata == ''
-        echomsg 'error: no \bibliography{...} command found'
-        return
-    endif
+	" Find data from bib files
+	let bibdata = s:FindBibData()
+	if bibdata != ''
 
-    " write temporary aux file
-	let tmpbase = LatexBox_GetTexRoot() . '/_LatexBox_BibComplete'
-    let auxfile = tmpbase . '.aux'
-    let bblfile = tmpbase . '.bbl'
-    let blgfile = tmpbase . '.blg'
+		" write temporary aux file
+		let tmpbase = LatexBox_GetTexRoot() . '/_LatexBox_BibComplete'
+		let auxfile = tmpbase . '.aux'
+		let bblfile = tmpbase . '.bbl'
+		let blgfile = tmpbase . '.blg'
 
-    call writefile(['\citation{*}', '\bibstyle{' . s:bstfile . '}', '\bibdata{' . bibdata . '}'], auxfile)
+		call writefile(['\citation{*}', '\bibstyle{' . s:bstfile . '}',
+					\ '\bibdata{' . bibdata . '}'], auxfile)
 
-    silent execute '! cd ' shellescape(LatexBox_GetTexRoot()) .
-				\ ' ; bibtex -terse ' . fnamemodify(auxfile, ':t') . ' >/dev/null'
+		silent execute '! cd ' shellescape(LatexBox_GetTexRoot()) .
+					\ ' ; bibtex -terse '
+					\ . fnamemodify(auxfile, ':t') . ' >/dev/null'
 
-    let res = []
-    let curentry = ''
+		let lines = split(substitute(join(readfile(bblfile), "\n"),
+					\ '\n\n\@!\(\s\=\)\s*\|{\|}', '\1', 'g'), "\n")
 
-	let lines = split(substitute(join(readfile(bblfile), "\n"), '\n\n\@!\(\s\=\)\s*\|{\|}', '\1', 'g'), "\n")
+		for line in filter(lines, 'v:val =~ a:regexp')
+			let matches = matchlist(line,
+						\ '^\(.*\)||\(.*\)||\(.*\)||\(.*\)||\(.*\)')
+			if !empty(matches) && !empty(matches[1])
+				call add(res, {
+							\ 'key': matches[1],
+							\ 'type': matches[2],
+							\ 'author': matches[3],
+							\ 'year': matches[4],
+							\ 'title': matches[5],
+							\ })
+			endif
+		endfor
 
-    for line in filter(lines, 'v:val =~ a:regexp')
-		let matches = matchlist(line, '^\(.*\)||\(.*\)||\(.*\)||\(.*\)||\(.*\)')
-		if !empty(matches) && !empty(matches[1])
-			call add(res, {'key': matches[1], 'type': matches[2],
-						\ 'author': matches[3], 'year': matches[4], 'title': matches[5]})
-		endif
-    endfor
+		call delete(auxfile)
+		call delete(bblfile)
+		call delete(blgfile)
+	endif
 
-	call delete(auxfile)
-	call delete(bblfile)
-	call delete(blgfile)
+	" Find data from 'thebibliography' environments
+	let lines = readfile(LatexBox_GetMainTexFile())
+	if match(lines, '\C\\begin{thebibliography}')
+		for line in filter(filter(lines, 'v:val =~ ''\C\\bibitem'''),
+					\ 'v:val =~ a:regexp')
+			let match = matchlist(line, '\\bibitem{\([^}]*\)')[1]
+			call add(res, {
+						\ 'key': match,
+						\ 'type': '',
+						\ 'author': '',
+						\ 'year': '',
+						\ 'title': match,
+						\ })
+		endfor
+	endif
 
 	return res
 endfunction
@@ -279,21 +304,23 @@ function! LatexBox_BibComplete(regexp)
 		let regexp = a:regexp
 	endif
 
-    let res = []
-    for m in LatexBox_BibSearch(regexp)
-
-        let w = {'word': m['key'],
-					\ 'abbr': '[' . m['type'] . '] ' . m['author'] . ' (' . m['year'] . ')',
-					\ 'menu': m['title']}
+	let res = []
+	for m in LatexBox_BibSearch(regexp)
+		let type = m['type']   == '' ? '[-]' : '[' . m['type']   . '] '
+		let auth = m['author'] == '' ? ''    :       m['author'][:20] . ' '
+		let year = m['year']   == '' ? ''    : '(' . m['year']   . ')'
+		let w = { 'word': m['key'],
+				\ 'abbr': type . auth . year,
+				\ 'menu': m['title'] }
 
 		" close braces if needed
 		if g:LatexBox_completion_close_braces && !s:NextCharsMatch('^\s*[,}]')
 			let w.word = w.word . '}'
 		endif
 
-        call add(res, w)
-    endfor
-    return res
+		call add(res, w)
+	endfor
+	return res
 endfunction
 " }}}
 

@@ -1,6 +1,6 @@
 syntax match helpText /^.*: .*/
 syntax match secNum /^\S\+\(\.\S\+\)\?\s*/ contained conceal
-syntax match secLine /^\S\+\t\S\+/ contains=secNum
+syntax match secLine /^\S\+\t.\+/ contains=secNum
 syntax match mainSecLine /^[^\.]\+\t.*/ contains=secNum
 syntax match ssubSecLine /^[^\.]\+\.[^\.]\+\.[^\.]\+\t.*/ contains=secNum
 highlight link helpText		PreProc

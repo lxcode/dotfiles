@@ -1,7 +1,8 @@
 " LaTeX Box common functions
 
 " Error Format {{{
-" The error formats assume we're using the -file-line-error with [pdf]latex.
+" Note: The error formats assume we're using the -file-line-error with
+"       [pdf]latex.
 
 " Check for options
 if !exists("g:LatexBox_show_warnings")
@@ -44,25 +45,32 @@ setlocal efm+=%+P**%f
 " Ignore unmatched lines
 setlocal efm+=%-G\\s%#
 setlocal efm+=%-G%.%#
-
 " }}}
 
 " Vim Windows {{{
 
-" width of vertical splits
+" Width of vertical splits
 if !exists('g:LatexBox_split_width')
 	let g:LatexBox_split_width = 30
 endif
 
-" where vertical splits appear
+" Where vertical splits appear
 if !exists('g:LatexBox_split_side')
 	let g:LatexBox_split_side = "leftabove"
 endif
 
+" Resize when split?
+if !exists('g:LatexBox_split_resize')
+	let g:LatexBox_split_resize = 0
+endif
+
+" Toggle help info
+if !exists('g:LatexBox_toc_hidehelp')
+	let g:LatexBox_toc_hidehelp = 0
+endif
 " }}}
 
 " Filename utilities {{{
-
 function! LatexBox_GetMainTexFile()
 
 	" 1. check for the b:main_tex_file variable
@@ -76,7 +84,8 @@ function! LatexBox_GetMainTexFile()
 		let linecontents = getline(linenum)
 		if linecontents =~ 'root\s*='
 			" Remove everything but the filename
-			let b:main_tex_file = substitute(linecontents, '.*root\s*=\s*', "", "")
+			let b:main_tex_file = substitute(linecontents,
+						\ '.*root\s*=\s*', "", "")
 			let b:main_tex_file = substitute(b:main_tex_file, '\s*$', "", "")
 			" Prepend current directory if this isn't an absolute path
 			if b:main_tex_file !~ '^/'
@@ -167,12 +176,14 @@ endfunction
 function! LatexBox_GetOutputFile()
 	" 1. check for b:build_dir variable
 	if exists('b:build_dir') && isdirectory(b:build_dir)
-		return b:build_dir . '/' . LatexBox_GetTexBasename(0) . '.' . g:LatexBox_output_type
+		return b:build_dir . '/' . LatexBox_GetTexBasename(0)
+					\ . '.' . g:LatexBox_output_type
 	endif
 
 	" 2. check for g:LatexBox_build_dir variable
 	if exists('g:LatexBox_build_dir') && isdirectory(g:LatexBox_build_dir)
-		return g:LatexBox_build_dir . '/' . LatexBox_GetTexBasename(0) . '.' . g:LatexBox_output_type
+		return g:LatexBox_build_dir . '/' . LatexBox_GetTexBasename(0)
+					\ . '.' . g:LatexBox_output_type
 	endif
 
 	" 3. use the base name of main tex file
@@ -181,23 +192,40 @@ endfunction
 " }}}
 
 " View Output {{{
+
+" Default pdf viewer
+if !exists('g:LatexBox_viewer')
+	if has('win32')
+		" On windows, 'running' a file will open it with the default program
+		let g:LatexBox_viewer = ''
+	else
+		let g:LatexBox_viewer = 'xdg-open'
+	endif
+endif
+
 function! LatexBox_View()
 	let outfile = LatexBox_GetOutputFile()
 	if !filereadable(outfile)
 		echomsg fnamemodify(outfile, ':.') . ' is not readable'
 		return
 	endif
-	let cmd = '!' . g:LatexBox_viewer . ' ' . shellescape(outfile) . ' >&/dev/null &'
+	let cmd = g:LatexBox_viewer . ' ' . shellescape(outfile)
+	if has('win32')
+		let cmd = '!start /b' . cmd . ' >nul'
+	else
+		let cmd = '!' . cmd . ' >/dev/null &'
+	endif
 	silent execute cmd
 	if !has("gui_running")
 		redraw!
 	endif
 endfunction
 
-command! LatexView			call LatexBox_View()
+command! LatexView call LatexBox_View()
 " }}}
 
 " In Comment {{{
+
 " LatexBox_InComment([line], [col])
 " return true if inside comment
 function! LatexBox_InComment(...)
@@ -208,12 +236,14 @@ endfunction
 " }}}
 
 " Get Current Environment {{{
+
 " LatexBox_GetCurrentEnvironment([with_pos])
 " Returns:
-" - environment													if with_pos is not given
-" - [envirnoment, lnum_begin, cnum_begin, lnum_end, cnum_end]	if with_pos is nonzero
+" - environment
+"	  if with_pos is not given
+" - [envirnoment, lnum_begin, cnum_begin, lnum_end, cnum_end]
+"	  if with_pos is nonzero
 function! LatexBox_GetCurrentEnvironment(...)
-
 	if a:0 > 0
 		let with_pos = a:1
 	else
@@ -237,12 +267,12 @@ function! LatexBox_GetCurrentEnvironment(...)
 	if strpart(getline('.'), col('.') - 1) =~ '^\%(' . begin_pat . '\)'
 		let flags .= 'c'
 	endif
-	let [lnum1, cnum1] = searchpairpos(begin_pat, '', end_pat, flags, 'LatexBox_InComment()')
+	let [lnum1, cnum1] = searchpairpos(begin_pat, '', end_pat, flags,
+				\ 'LatexBox_InComment()')
 
 	let env = ''
 
 	if lnum1
-
 		let line = strpart(getline(lnum1), cnum1 - 1)
 
 		if empty(env)
@@ -254,25 +284,23 @@ function! LatexBox_GetCurrentEnvironment(...)
 		if empty(env)
 			let env = matchstr(line, '^\\(')
 		endif
-
 	endif
 
 	if with_pos == 1
-
 		let flags = 'nW'
 		if !(lnum1 == lnum && cnum1 == cnum)
 			let flags .= 'c'
 		endif
 
-		let [lnum2, cnum2] = searchpairpos(begin_pat, '', end_pat, flags, 'LatexBox_InComment()')
+		let [lnum2, cnum2] = searchpairpos(begin_pat, '', end_pat, flags,
+					\ 'LatexBox_InComment()')
+
 		call setpos('.', saved_pos)
 		return [env, lnum1, cnum1, lnum2, cnum2]
 	else
 		call setpos('.', saved_pos)
 		return env
 	endif
-
-
 endfunction
 " }}}
 
@@ -290,7 +318,8 @@ function! LatexBox_TexToTree(str)
 		endif
 		if i2 >= len(a:str) || a:str[i2] == '{'
 			if depth == 0
-				let item = substitute(strpart(a:str, i1, i2 - i1), '^\s*\|\s*$', '', 'g')
+				let item = substitute(strpart(a:str, i1, i2 - i1),
+							\ '^\s*\|\s*$', '', 'g')
 				if !empty(item)
 					call add(tree, item)
 				endif

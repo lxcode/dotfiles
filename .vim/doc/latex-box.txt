@@ -281,6 +281,7 @@ Motion ~
         Use Enter to navigate to selected entry.
         See |g:LatexBox_split_width|.
         See |g:LatexBox_split_side|.
+        See |g:LatexBox_split_resize|.
 *:LatexTOCToggle*
         Toggle the display of the table of contents.
 
@@ -570,6 +571,16 @@ Vim Windows ~
         On which side the vertically split windows appear. Used for the table
         of contents. Set to "rightbelow" to have it on the right side.
 
+*g:LatexBox_split_resize*               Default: 0
+        Resize vim/gvim when opening new windows. Used for the table of
+        contents. If set to 1, it will add/remove |g:LatexBox_split_width| to
+        the number of columns dynamically, in order to keep the latex file open
+        with the desired width.
+
+*g:LatexBox_toc_hidehelp*               Default: 0
+        If enabled, the help info at the bottom of the TOC window will be
+        hidden.
+
 ==============================================================================
 
 FOLDING                                                    *latex-box-folding*
@@ -623,6 +634,12 @@ folded.
                         \ ]
         <
 
+*g:LatexBox_fold_toc*                   Default: 0
+        Turn on/off folding of TOC (|latex-box-commands-motion|).
+
+*g:LatexBox_fold_toc_levels*            Default: 1
+        Set number of section levels to fold in TOC.
+
 ==============================================================================
 
 FREQUENTLY ASKED QUESTIONS                                     *latex-box-FAQ*
@@ -646,11 +663,9 @@ A: Add the following line in your ~/.latexmkrc file: >
    |g:LatexBox_latexmk_options|, for instance as: >
 
         let g:LatexBox_latexmk_options
-                        \ = "-pdflatex='pdflatex -synctex=1 \\%O \\%S'"
+                        \ = "-pdflatex='pdflatex -synctex=1 \%O \%S'"
 
-<  which can be added to your .vimrc file as desired. Note in particular that
-   the %'s must be escaped twice. For more details, see |cmdline-special| and
-   |expr-string|.
+<  which can be added to your .vimrc file as desired.
 
 Q: How can I use xelatex instead of pdflatex for some documents only?
 

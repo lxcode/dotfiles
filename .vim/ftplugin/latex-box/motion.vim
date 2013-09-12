@@ -13,8 +13,8 @@ endif
 " HasSyntax {{{
 " s:HasSyntax(syntaxName, [line], [col])
 function! s:HasSyntax(syntaxName, ...)
-	let line	= a:0 >= 1 ? a:1 : line('.')
-	let col		= a:0 >= 2 ? a:2 : col('.')
+	let line = a:0 >= 1 ? a:1 : line('.')
+	let col  = a:0 >= 2 ? a:2 : col('.')
 	return index(map(synstack(line, col),
 				\ 'synIDattr(v:val, "name") == "' . a:syntaxName . '"'),
 				\ 1) >= 0
@@ -161,21 +161,20 @@ endfunction
 
 " Allow to disable functionality if desired
 if !exists('g:LatexBox_loaded_matchparen')
-
 	" Disable matchparen autocommands
 	augroup LatexBox_HighlightPairs
-	autocmd BufEnter * if !exists("g:loaded_matchparen") || !g:loaded_matchparen | runtime plugin/matchparen.vim | endif
-	autocmd BufEnter *.tex 3match none | unlet! g:loaded_matchparen | au! matchparen
-	autocmd! CursorMoved *.tex call s:FindMatchingPair('h')
-	autocmd! CursorMovedI *.tex call s:FindMatchingPair('i')
+		autocmd BufEnter * if !exists("g:loaded_matchparen") || !g:loaded_matchparen | runtime plugin/matchparen.vim | endif
+		autocmd BufEnter *.tex 3match none | unlet! g:loaded_matchparen | au! matchparen
+		autocmd! CursorMoved *.tex call s:FindMatchingPair('h')
+		autocmd! CursorMovedI *.tex call s:FindMatchingPair('i')
 	augroup END
-
-	" Use LatexBox'es FindMatchingPair as '%' (enable jump between e.g. $'s)
-	nnoremap <silent> <Plug>LatexBox_JumpToMatch	:call <SID>FindMatchingPair('n')<CR>
-	vnoremap <silent> <Plug>LatexBox_JumpToMatch	:call <SID>FindMatchingPair('v')<CR>
-	onoremap <silent> <Plug>LatexBox_JumpToMatch	v:call <SID>FindMatchingPair('o')<CR>
-
 endif
+
+" Use LatexBox'es FindMatchingPair as '%' (enable jump between e.g. $'s)
+nnoremap <silent> <Plug>LatexBox_JumpToMatch	:call <SID>FindMatchingPair('n')<CR>
+vnoremap <silent> <Plug>LatexBox_JumpToMatch	:call <SID>FindMatchingPair('v')<CR>
+onoremap <silent> <Plug>LatexBox_JumpToMatch	v:call <SID>FindMatchingPair('o')<CR>
+
 " }}}
 
 " select inline math {{{
@@ -396,10 +395,13 @@ function! s:ReadTOC(auxfile, texfile, ...)
 		if len(tree[1]) > 3 && empty(tree[1][1])
 			call remove(tree[1], 1)
 		endif
-		let secnum = ""
 		if len(tree[1]) > 1
 			if !empty(tree[1][1])
-				let secnum = tree[1][1][0]
+				let secnum = LatexBox_TreeToTex(tree[1][1])
+				let secnum = s:ConvertBack(secnum)
+				let secnum = substitute(secnum, '\\\S\+\s', '', 'g')
+				let secnum = substitute(secnum, '\\\S\+{\(.\{-}\)}', '\1', 'g')
+				let secnum = substitute(secnum, '^{\+\|}\+$', '', 'g')
 			endif
 			let tree = tree[1][2:]
 		else
@@ -430,10 +432,13 @@ function! LatexBox_TOC(...)
 	let winnr = bufwinnr(bufnr('LaTeX TOC'))
 	if winnr >= 0
 		if a:0 == 0
-		silent execute winnr . 'wincmd w'
+			silent execute winnr . 'wincmd w'
 		else
 			" Supplying an argument to this function causes toggling instead
 			" of jumping to the TOC window
+			if g:LatexBox_split_resize
+				silent exe "set columns-=" . g:LatexBox_split_width
+			endif
 			silent execute 'bwipeout' . bufnr('LaTeX TOC')
 		endif
 		return
@@ -448,6 +453,9 @@ function! LatexBox_TOC(...)
 	let closest_index = s:FindClosestSection(toc,fileindices)
 
 	" Create TOC window and set local settings
+	if g:LatexBox_split_resize
+		silent exe "set columns+=" . g:LatexBox_split_width
+	endif
 	silent exe g:LatexBox_split_side g:LatexBox_split_width . 'vnew LaTeX\ TOC'
 	let b:toc = toc
 	let b:toc_numbers = 1
@@ -458,11 +466,13 @@ function! LatexBox_TOC(...)
 	for entry in toc
 		call append('$', entry['number'] . "\t" . entry['text'])
 	endfor
-	call append('$', "")
-	call append('$', "<Esc>/q: close")
-	call append('$', "<Space>: jump")
-	call append('$', "<Enter>: jump and close")
-	call append('$', "s:       hide numbering")
+	if !g:LatexBox_toc_hidehelp
+		call append('$', "")
+		call append('$', "<Esc>/q: close")
+		call append('$', "<Space>: jump")
+		call append('$', "<Enter>: jump and close")
+		call append('$', "s:       hide numbering")
+	endif
 	0delete _
 
 	execute 'normal! ' . (closest_index + 1) . 'G'
