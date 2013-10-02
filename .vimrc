@@ -130,7 +130,6 @@ set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
 set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=2        " the default level of fold nesting on startup
-set virtualedit=block       " when doing block select, allow going past the end of lines
 set cryptmethod=blowfish    " in case I ever decide to use vim -x
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
@@ -173,7 +172,16 @@ let g:tex_comment_nospell = 1
 "let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
 let g:LatexBox_latexmk_options = "-xelatex"
 let g:LatexBox_build_dir = "$HOME/.build"
-let g:LatexBox_latexmk_async = 1
+" Work around the fact that cmdline macvim doesn't support server mode
+if has("gui_macvim")
+    let g:LatexBox_latexmk_async = 1
+else
+    if has("macunix")
+        let g:LatexBox_latexmk_async = 1
+    else 
+        let g:LatexBox_latexmk_async = 0
+    endif
+endif
 if has("macunix")
     let g:LatexBox_viewer = "open"
 else
@@ -206,7 +214,7 @@ augroup latex
     " The NoStarch style is a bit crufty and needs pdflatex
     au BufWinEnter book.tex let g:LatexBox_latexmk_options = "" 
     au BufWinEnter book.tex let g:LatexBox_fold_envs = 1
-    au BufWritePost *.tex Latexmk
+"    au BufWritePost *.tex Latexmk
     au BufWinLeave *.tex,*.sty mkview
     au BufWinEnter *.tex,*.sty silent loadview
     au FileType tex syntax spell toplevel 
