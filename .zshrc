@@ -20,7 +20,7 @@ alias grep=egrep
 alias ll='ls -l'
 alias la='ls -a'
 alias become='sudo -s -H -u'
-alias burp='LC_CTYPE=C java -mx512m -jar /home/lx/tools/burpsuite_pro_v1.4.12.jar'
+alias burp='LC_CTYPE=C java -mx512m -jar /Users/lx/Tools/burpsuite_pro*.jar'
 alias vpn='sudo openvpn /usr/local/etc/openvpn.conf'
 alias wu='sudo sv stat /service/*'
 alias rmsvn="find . -type d -name '\.svn' |xargs rm -rf"
@@ -48,9 +48,9 @@ mvi() {
     vim `locate "$*"|slmenu -l 50`
 }
 
-#if [ -n "$DISPLAY" ]; then
-#    alias vim="$EDITOR --servername VIM"
-#fi
+if [ -n "$DISPLAY" ]; then
+    alias vim="$EDITOR --servername VIM"
+fi
 
 # List only directories and symbolic
 # links that point to directories
@@ -109,6 +109,11 @@ function title {
 	   print -nR $'\033]0;'$*$'\a'
 	;;
 
+	dvtm*)
+
+	   print -nR $'\033]0;'$*$'\a'
+	;;
+
 	screen*)
 
 	    print -nR $'\033k'$1$'\033'\\ 
@@ -135,6 +140,10 @@ xterm*)
 ;;
 
 rxvt*)
+    title `print -Pn %n@%m:` $cmd[1]:t "$cmd[2,-1]"
+;;
+
+dvtm*)
     title `print -Pn %n@%m:` $cmd[1]:t "$cmd[2,-1]"
 ;;
 
