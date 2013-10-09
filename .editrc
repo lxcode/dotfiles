@@ -1,2 +1,2 @@
-lldb:bind -v
+bind -v
 lldb:bind ^I lldb_complete
