@@ -199,6 +199,10 @@ autoload -U compinit
 compinit -u
 
 # Completion Styles
+#
+#
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zshcache
 
 # list of completers to use
 zstyle ':completion:*::::' completer _expand _complete _ignored
