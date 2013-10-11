@@ -219,7 +219,7 @@ augroup latex
     au BufWinEnter *.tex,*.sty silent loadview
     au FileType tex syntax spell toplevel 
     au FileType tex set spell textwidth=78 smartindent
-    au FileType tex set comments+=b:\\item formatoptions-=q formatoptions+=w foldlevel=6
+    au FileType tex set comments+=b:\\item formatoptions-=q formatoptions+=w foldlevelstart=6
     au FileType tex imap <buffer> [[ \begin{
     au FileType tex imap <buffer> ]] <Plug>LatexCloseCurEnv
     au FileType tex imap <S-Enter> \pagebreak
