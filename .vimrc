@@ -248,10 +248,6 @@ autocmd FileType *
             \      call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
             \  endif
 
-" seek
-" This seems to break dp and do in vimdiff
-"let g:seek_enable_jumps = 1
-
 " cctree
 if has("macunix")
     let g:CCTreeSplitProgCmd="/opt/local/bin/gsplit"

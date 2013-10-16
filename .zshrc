@@ -85,6 +85,15 @@ lxdo()
 	su root -mc $args
 }
 
+ssh()
+{
+    if [ $TERM = dvtm-256color ]; then
+        env TERM=rxvt-256color ssh "$@"
+    else
+        ssh "$@"
+    fi
+}
+
 
 # Where to look for autoloaded function definitions
 fpath=(~/.zfunc $fpath)
