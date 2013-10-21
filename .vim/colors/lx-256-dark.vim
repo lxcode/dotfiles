@@ -36,7 +36,7 @@ hi SpecialKey guifg=#808080 guibg=#343434 ctermfg=8 ctermbg=236
 hi WildMenu guifg=black guibg=#cae682 ctermfg=0 ctermbg=195
 hi PmenuSbar guifg=black guibg=white ctermfg=0 ctermbg=15
 
-hi Error gui=undercurl ctermfg=203 cterm=underline guisp=#FF6C60
+hi Error gui=undercurl ctermfg=203 ctermbg=NONE  cterm=underline guisp=#FF6C60
 "hi ErrorMsg guifg=white guibg=#FF6C60 gui=bold ctermfg=white ctermbg=203 cterm=bold
 hi ErrorMsg ctermfg=231 ctermbg=197 guifg=#f8f8f0 guibg=#f92672
 hi WarningMsg guifg=white guibg=#FF6C60 gui=bold ctermfg=white ctermbg=203 cterm=bold
