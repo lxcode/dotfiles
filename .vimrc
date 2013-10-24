@@ -429,6 +429,7 @@ augroup msdocs
 augroup end
 
 augroup misc
+    au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.scala, set filetype=scala
     au BufWinEnter *.dtrace, set filetype=D
     au BufWinEnter *.fugitiveblame,*.diff, set nospell number
