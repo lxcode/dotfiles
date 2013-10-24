@@ -5,7 +5,7 @@
 	<key>AdjustWindowForFontSizeChange</key>
 	<true/>
 	<key>AllowClipboardAccess</key>
-	<false/>
+	<true/>
 	<key>AnimateDimming</key>
 	<true/>
 	<key>AppleAntiAliasingThreshold</key>
@@ -37,7 +37,7 @@
 	<key>DimOnlyText</key>
 	<true/>
 	<key>DisableFullscreenTransparency</key>
-	<false/>
+	<true/>
 	<key>EnableRendezvous</key>
 	<false/>
 	<key>FocusFollowsMouse</key>
@@ -46,6 +46,13 @@
 	<real>10</real>
 	<key>GlobalKeyMap</key>
 	<dict>
+		<key>0x2e-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>11</integer>
+			<key>Text</key>
+			<string>0x07 0x2e</string>
+		</dict>
 		<key>0x4a-0x120000</key>
 		<dict>
 			<key>Action</key>
@@ -123,6 +130,13 @@
 			<key>Text</key>
 			<string>0x07 0x74</string>
 		</dict>
+		<key>0x77-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>11</integer>
+			<key>Text</key>
+			<string>0x07 0x78</string>
+		</dict>
 		<key>0x78-0x100000</key>
 		<dict>
 			<key>Action</key>
@@ -143,6 +157,13 @@
 			<integer>11</integer>
 			<key>Text</key>
 			<string>0x07 0x63</string>
+		</dict>
+		<key>0xd-0x120000</key>
+		<dict>
+			<key>Action</key>
+			<integer>23</integer>
+			<key>Text</key>
+			<string></string>
 		</dict>
 		<key>0xf700-0x300000</key>
 		<dict>
@@ -200,6 +221,13 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
+		<key>0xf72c-0x0</key>
+		<dict>
+			<key>Action</key>
+			<integer>11</integer>
+			<key>Text</key>
+			<string>0x07 0x1b 0x5b 0x35 0x7e</string>
+		</dict>
 		<key>0xf72c-0x100000</key>
 		<dict>
 			<key>Action</key>
@@ -213,6 +241,13 @@
 			<integer>9</integer>
 			<key>Text</key>
 			<string></string>
+		</dict>
+		<key>0xf72d-0x0</key>
+		<dict>
+			<key>Action</key>
+			<integer>11</integer>
+			<key>Text</key>
+			<string>0x07 0x1b 0x5b 0x36 0x7e</string>
 		</dict>
 		<key>0xf72d-0x100000</key>
 		<dict>
@@ -236,7 +271,7 @@
 	<key>HideActivityIndicator</key>
 	<false/>
 	<key>HideScrollbar</key>
-	<false/>
+	<true/>
 	<key>HideTab</key>
 	<true/>
 	<key>HighlightTabLabels</key>
@@ -256,7 +291,7 @@
 	<key>IRMemory</key>
 	<integer>4</integer>
 	<key>JobName</key>
-	<true/>
+	<false/>
 	<key>LeftCommand</key>
 	<integer>7</integer>
 	<key>LeftOption</key>
@@ -273,10 +308,27 @@
 	<string></string>
 	<key>NSScrollAnimationEnabled</key>
 	<false/>
+	<key>NSTableView Columns KeyBingingTable</key>
+	<array>
+		<data>
+		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
+		hAErATCG
+		</data>
+		<string>198</string>
+		<data>
+		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
+		hAErATGG
+		</data>
+		<string>287</string>
+	</array>
+	<key>NSTableView Hidden Columns KeyBingingTable</key>
+	<array/>
+	<key>NSTableView Sort Ordering KeyBingingTable</key>
+	<array/>
 	<key>NSWindow Frame Preferences</key>
-	<string>356 293 924 485 0 0 1280 778 </string>
+	<string>677 519 924 485 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 352 570 426 0 0 1280 800 </string>
+	<string>4 352 570 426 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>229 96 570 451 0 0 1280 778 </string>
 	<key>NeverWarnAboutShortLivedSessions_6D183BE5-5AB6-48B3-AEA5-CE6961F6BE53</key>
@@ -383,11 +435,11 @@
 			<key>Ansi 4 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.73333334922790527</real>
+				<real>0.93665158748626709</real>
 				<key>Green Component</key>
-				<real>0.0</real>
+				<real>0.31278637051582336</real>
 				<key>Red Component</key>
-				<real>0.0</real>
+				<real>0.09437955915927887</real>
 			</dict>
 			<key>Ansi 5 Color</key>
 			<dict>
@@ -1005,7 +1057,7 @@
 			<key>Use Canonical Parser</key>
 			<false/>
 			<key>Use Italic Font</key>
-			<false/>
+			<true/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -1080,7 +1132,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2013-09-09T21:23:38Z</date>
+	<date>2013-10-23T19:35:53Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1116,7 +1168,7 @@
 	<key>WebKitStandardFont</key>
 	<string>Lucida Grande</string>
 	<key>WindowNumber</key>
-	<true/>
+	<false/>
 	<key>WindowStyle</key>
 	<integer>0</integer>
 	<key>WordCharacters</key>
