@@ -286,10 +286,6 @@ let g:statline_mixed_indent=0
 " gundo
 let g:gundo_close_on_revert=1
 
-" vim-notes
-let g:notes_directories = ['~/Documents/Notes']
-let g:notes_suffix = '.notes'
-
 " clang
 let g:clang_complete_enable = 1
 let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
