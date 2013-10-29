@@ -398,8 +398,9 @@ augroup python
 augroup end
 
 augroup markdown
-    au BufWinLeave *.md, mkview
-    au BufWinEnter *.md, silent loadview
+    au BufWinEnter *.notes set filetype=markdown
+    au BufWinLeave *.md,*.notes, mkview
+    au BufWinEnter *.md,*.notes, silent loadview
     au BufWinEnter *.md,*.notes, imap <C-l> <C-t>
     au BufWinEnter *.md,*.notes, imap <C-h> <C-d>
     au BufWinEnter *.md,*.notes,*mutt*, imap >> <C-t>
