@@ -252,3 +252,7 @@ zstyle -e ':completion:*:urls' urls 'reply=($(cat $HOME/.w3m/history $HOME/.nets
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
 zstyle -e ':completion:*:ports' ports 'reply=($(nmap $1 |grep open |awk -F / {print $1}))'
+
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
