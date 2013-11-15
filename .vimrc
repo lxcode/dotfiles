@@ -46,7 +46,7 @@ nnoremap <C-k> <C-W>W
 vmap > >gv
 vmap < <gv
 " Insert a single character with space
-nmap <Space> :exec "normal i".nr2char(getchar())."\e"<CR>
+"nmap <Space> :exec "normal i".nr2char(getchar())."\e"<CR>
 nmap <Leader>x :call system("cd `dirname %` && urxvt")<CR>
 " Change to the directory of the current file
 nmap cd :lcd %:h \| :pwd<CR>
@@ -190,7 +190,7 @@ endif
 let g:LatexBox_split_side = "rightbelow"
 let g:LatexBox_Folding = 1
 let g:LatexBox_fold_preamble = 1
-let g:LatexBox_fold_envs = 0
+let g:LatexBox_fold_envs = 1
 let g:LatexBox_quickfix = 0
 let g:LatexBox_show_warnings = 0
 let g:LatexBox_ignore_warnings = [

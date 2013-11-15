@@ -88,7 +88,7 @@ lxdo()
 ssh()
 {
     if [ $TERM = dvtm-256color ]; then
-        env TERM=rxvt-256color ssh "$@"
+        env TERM=xterm-256color ssh "$@"
     else
         ssh "$@"
     fi
@@ -256,3 +256,18 @@ zstyle -e ':completion:*:ports' ports 'reply=($(nmap $1 |grep open |awk -F / {pr
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
+
+# bind UP and DOWN arrow keys
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
+# bind P and N for EMACS mode
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+
+# bind k and j for VI mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+source ~/.zsh/zsh-history-substring-search.zsh
