@@ -1,6 +1,9 @@
 " LaTeX indent file (part of LaTeX Box)
 " Maintainer: David Munger (mungerd@gmail.com)
 
+if exists("g:LatexBox_custom_indent") && ! g:LatexBox_custom_indent
+	finish
+endif
 if exists("b:did_indent")
 	finish
 endif
@@ -14,9 +17,8 @@ let s:list_envs = ['itemize', 'enumerate', 'description']
 " indent on \left( and on \(, but not on (
 " indent on \left[ and on \[, but not on [
 " indent on \left\{ and on {, but not on \{
-"let s:open_pat = '\\\@<!\%(\\begin\|\\left\|\\(\|\\\[\|{\)'
-let s:open_pat = '\\\@<!\%(\\begin\|\\left\|\\(\|\\\[\)'
-let s:close_pat = '\\\@<!\%(\\end\|\\right\|\\)\|\\\]\)'
+let s:open_pat = '\\\@<!\%(\\begin\|\\left\|\\(\|\\\[\|{\)'
+let s:close_pat = '\\\@<!\%(\\end\|\\right\|\\)\|\\\]\|}\)'
 let s:list_open_pat = '\\\@<!\\begin{\%(' . join(s:list_envs, '\|') . '\)}'
 let s:list_close_pat	= '\\\@<!\\end{\%(' . join(s:list_envs, '\|') . '\)}'
 

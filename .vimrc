@@ -94,7 +94,7 @@ set smarttab                " use shiftwidth instead of tab stops
 set wildmode=longest,list   " shows a list of candidates when tab-completing
 set wildmenu                " use a more functional completion menu when tab-completing
 set encoding=utf-8          " always use utf-8
-"set hlsearch                " highlight all search matches
+set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
 set formatoptions=qnrtlm    " auto-formatting style for bullets and comments
 set autoindent
@@ -373,8 +373,8 @@ augroup cjava
     au!
     au BufNewFile *.c r ~/.vim/templates/template.c
     au BufWinEnter *.[mCchly] set nospell comments+=s1:/*,mb:*,ex:*/
-    au BufRead,BufNewFile *.m,*.xm setfiletype objc
-    au BufRead,BufNewFile *.m,*.xm let c_no_curly_error = 1
+    au BufWinEnter,BufNewFile *.m,*.xm,*.xmi setfiletype objc
+    au BufWinEnter,BufNewFile *.m,*.xm,*.xmi let c_no_curly_error = 1
     au BufWinEnter *.cpp,*.java set nospell number
     au BufWinLeave *.[mchly] mkview
     au BufWinEnter *.[mchly] silent loadview

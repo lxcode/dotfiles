@@ -46,7 +46,11 @@ This plugin provides:
 
 |latex-box-folding|                     FOLDING
 
+|latex-box-indent|                      INDENTATION
+
 |latex-box-FAQ|                         Frequently Asked Questions
+
+|latex-box-todo|                        TODO
 
 ==============================================================================
 
@@ -196,7 +200,7 @@ The results: >
         \[hello,
         world
 
-For equation envirments, it's always triggered by '$': >
+For equation environments, it's always triggered by '$': >
 
         \begin{eq-env}
                 $h <CTRL-X><CTRL-O>
@@ -343,6 +347,11 @@ Insertion ~
 *<Plug>LatexChangeEnv*
         Change the current environment. Use with nmap, e.g.: >
         nmap <F5> <Plug>LatexChangeEnv
+<
+
+*<Plug>LatexToggleStarEnv*
+        Toggle star environments (add or remove star). Use with nmap, e.g.: >
+        nmap <F5> <Plug>LatexToggleStarEnv
 <
 
 *<Plug>LatexWrapSelection*
@@ -508,8 +517,14 @@ Compilation ~
 *g:LatexBox_latexmk_preview_continuously*       Default: 0
         Run latexmk in continuous mode (i.e. with the "-pvc" option).
         Latexmk will track the currently edited file for writes and
-        recompile automatically when necessary, without hanging VIM. Note that
-        this will disable automatic error loading.
+        recompile automatically when necessary, without hanging VIM.
+        Setting |g:LatexBox_quickfix|=2 is recommended when this is enabled,
+        to prevent the quickfix window from stealing the cursor.
+
+*g:LatexBox_latexmk_env*                        Default: ""
+        Additional environment options to place in front of the latexmk
+        command, e.g. >
+                let g:LatexBox_latexmk_env = "TEXINPUTS=~/mytex:"
 
 *g:LatexBox_latexmk_options*                    Default: ""
         Additional options to pass to latexmk during compilation, e.g, "-d".
@@ -639,6 +654,15 @@ folded.
 
 *g:LatexBox_fold_toc_levels*            Default: 1
         Set number of section levels to fold in TOC.
+
+==============================================================================
+
+INDENTATION                                                 *latex-box-indent*
+
+*g:LatexBox_custom_indent*              Default: Not defined
+        The custom indent file of LaTeX-Box is ignored if this variable is
+        defined and set to 0.  This will revert to the default indentation
+        file from vim.
 
 ==============================================================================
 
