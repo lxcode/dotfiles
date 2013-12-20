@@ -1,0 +1,20 @@
+#!/bin/sh
+
+FIFO="/tmp/dvtm-status.$$"
+
+[ -e "$FIFO" ] || mkfifo "$FIFO"
+chmod 600 $FIFO
+
+while true; do
+	date=`date '+%a %b %d %H:%M'`
+    batt=`pmset -g batt|tail -1 |awk '{print $2}'|sed -e 's/;//'`
+    ssid=`airport -I | grep 'SSID' |tail -1|awk '{print $2}'`
+    unread=`osascript ~/bin/adium-unread.applescript`
+    echo $unread $ssid $batt $date
+	sleep 60
+done > $FIFO &
+
+STATUS_PID=$!
+dvtm -s $FIFO "$@" 2> /dev/null
+kill $STATUS_PID
+rm $FIFO
