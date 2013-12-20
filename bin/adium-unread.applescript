@@ -9,7 +9,7 @@ if adiumisrunning then
 		if unreads is equal to 0 then
 			return ""
 		else
-			return "Unread: " & unreads
+			return "Unread IM: " & unreads & " |"
 		end if
 	end tell
 else

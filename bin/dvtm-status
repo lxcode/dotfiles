@@ -9,9 +9,10 @@ while true; do
 	date=`date '+%a %b %d %H:%M'`
     batt=`pmset -g batt|tail -1 |awk '{print $2}'|sed -e 's/;//'`
     ssid=`airport -I | grep 'SSID' |tail -1|awk '{print $2}'`
-    unread=`osascript ~/bin/adium-unread.applescript`
-    echo $unread $ssid $batt $date
-	sleep 60
+    unreadmail=`osascript ~/bin/mail-unread.applescript`
+    unreadim=`osascript ~/bin/adium-unread.applescript`
+    echo "$unreadim $unreadmail | SSID: $ssid | $batt | $date "
+	sleep 10
 done > $FIFO &
 
 STATUS_PID=$!
