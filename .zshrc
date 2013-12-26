@@ -85,14 +85,14 @@ lxdo()
 	su root -mc $args
 }
 
-ssh()
-{
-    if [ $TERM = dvtm-256color ]; then
-        env TERM=xterm-256color ssh "$@"
-    else
-        ssh "$@"
-    fi
-}
+#ssh()
+#{
+#    if [ $TERM = dvtm-256color ]; then
+#        env TERM=xterm-256color \ssh "$@"
+#    else
+#        \ssh "$@"
+#    fi
+#}
 
 
 # Where to look for autoloaded function definitions
@@ -203,7 +203,6 @@ bindkey '^R' history-incremental-search-backward
 #bindkey '^I' complete-word # complete on tab, leave expansion to _expand
 #bindkey "^I" menu-complete # menu complete seems much faster.
 
-
 autoload -U compinit
 compinit -u
 
@@ -246,7 +245,7 @@ zstyle ':completion:*:processes' command 'ps -o pid,s,nice,stime,args'
 zstyle -e ':completion:*:hosts' hosts 'reply=($(cat $HOME/.ssh/known_hosts $HOME/.ssh/known_hosts2 /{usr/local/,}etc/ssh/ssh_known_hosts 2>/dev/null | sed -e "/^#/d" -e "s/ .*\$//" -e "s/,/ /g"))'
 
 # URL completion style...
-zstyle -e ':completion:*:urls' urls 'reply=($(cat $HOME/.w3m/history $HOME/.netscape/history.list 2>/dev/null | sed -e "/^#/d" -e "s:http\://::g" ))'
+zstyle -e ':completion:*:urls' urls 'reply=($(cat $HOME/.w3m/history 2>/dev/null | sed -e "/^#/d" -e "s:http\://::g" ))'
 
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
@@ -257,17 +256,3 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-# bind UP and DOWN arrow keys
-zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-
-# bind P and N for EMACS mode
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
-
-# bind k and j for VI mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-
-source ~/.zsh/zsh-history-substring-search.zsh

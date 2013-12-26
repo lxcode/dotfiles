@@ -5,7 +5,7 @@ if mailisrunning then
         if x is equal to 0 then
             return ""
         else
-            return "Unread mail: " & x & " | "
+            return "Unread mail: " & x & " |"
         end if
     end tell
 else 

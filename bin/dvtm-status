@@ -11,7 +11,7 @@ while true; do
     ssid=`airport -I | grep 'SSID' |tail -1|awk '{print $2}'`
     unreadmail=`osascript ~/bin/mail-unread.applescript`
     unreadim=`osascript ~/bin/adium-unread.applescript`
-    echo "$unreadim $unreadmail | SSID: $ssid | $batt | $date "
+    echo "$unreadim $unreadmail SSID: $ssid | $batt | $date "
 	sleep 10
 done > $FIFO &
 
