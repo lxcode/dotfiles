@@ -4,6 +4,8 @@ map <left> :bp<cr>
 map <home> :rewind<cr>
 map <end> :last<cr>
 map g<Tab> :bn<CR>
+" Make Esc clear highlighted searches
+map <silent> <Esc> :noh<Esc>
 nnoremap <C-Tab> gt
 " Make Y behave like C and D
 nnoremap Y y$
