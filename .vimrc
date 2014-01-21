@@ -1,11 +1,11 @@
+" Make space clear highlighted searches
+nmap <silent> <space> :noh<CR>
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
 map <home> :rewind<cr>
 map <end> :last<cr>
 map g<Tab> :bn<CR>
-" Make Esc clear highlighted searches
-map <silent> <Esc> :noh<Esc>
 nnoremap <C-Tab> gt
 " Make Y behave like C and D
 nnoremap Y y$
@@ -126,7 +126,7 @@ set showmatch               " show the matching terminating bracket
 set suffixes=.out           " set priority for tab completion
 set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls
 set wildignore+=*.loc,*.gz,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx,*.pdf
-set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log,*.latexmain
+set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log,*.latexmain,*.out
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
