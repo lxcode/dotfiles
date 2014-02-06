@@ -420,6 +420,8 @@ augroup quickfix
     au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
     au FileType qf, setlocal statusline=\ %n\ \ %f%=L%l/%L\ %P
     au BufReadPost quickfix call GrepColors()
+    au BufWinEnter quickfix call GrepColors()
+    au BufWinEnter qf:list call GrepColors()
 augroup end
 
 augroup msdocs
