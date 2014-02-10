@@ -76,6 +76,9 @@ chflags nohidden ~/Library/
 sudo chflags nohidden /tmp
 sudo chflags nohidden /usr
 
+# Link to the airport command
+sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
+
 # Stop DHCP from twiddling names
 #scutil --set HostName local.foo.bar
 
