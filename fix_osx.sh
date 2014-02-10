@@ -96,12 +96,15 @@ sudo chflags nohidden /usr
 
 # Make symlinks
 
+read -p "Preparing to make symlinks"
+
 for file in .zshrc .zshenv .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf
 do
     ln -s ~/git/dotfiles/$file ~/$file
 done
 
-# Clone repos
+# Install things
+read -p "Preparing to install apps"
 
 cd ~/git && \
     git clone git://repo.or.cz/dvtm.git && \
