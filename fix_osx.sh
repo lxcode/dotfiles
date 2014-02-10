@@ -121,5 +121,6 @@ cd ~/git && \
 
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 brew doctor
-brew install macvim tmux w3m apg bvi cscope ctags daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl
+brew install macvim tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl
+brew install ctags --HEAD
 brew linkapps
