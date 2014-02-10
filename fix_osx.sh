@@ -96,7 +96,7 @@ sudo chflags nohidden /usr
 
 # Make symlinks
 
-for file in ".zshrc .zshenv .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf"
+for file in .zshrc .zshenv .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf
 do
     ln -s ~/git/dotfiles/$file ~/$file
 done
@@ -107,6 +107,8 @@ cd ~/git && \
     git clone git://repo.or.cz/dvtm.git && \
     cd dvtm && \
     cp ~/git/dotfiles/dvtm-config.h ./config.h && \
+    sed -i bak 's/ncursesw/ncurses/g' config.mk
+    sed -i bak 's/strip -s/strip/g' Makefile
     sudo make install clean
 
 # Brews
@@ -114,4 +116,4 @@ cd ~/git && \
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 brew doctor
 brew install macvim tmux w3m apg bvi cscope ctags daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl
-brew makelinks
+brew linkapps
