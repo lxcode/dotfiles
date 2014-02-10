@@ -73,8 +73,11 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # It's my library. Let me see it.
 chflags nohidden ~/Library/
-chflags nohidden /tmp
-chflags nohidden /usr
+sudo chflags nohidden /tmp
+sudo chflags nohidden /usr
+
+# Stop DHCP from twiddling names
+#scutil --set HostName local.foo.bar
 
 # Disable "safe sleep", saving 8-16G of disk space. Doing so is basically no
 # less secure than the default behavior when it comes to cold boot attacks, as
@@ -82,16 +85,33 @@ chflags nohidden /usr
 # every time you leave the machine to prevent that. If you want to do that, use
 # this:
 #
-#sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25
+# sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25
 #
 # You can also use autopoweroff and reduce the autopoweroffdelay if you want 
 # to sleep -> hibernate after a period of time.
-pmset -a hibernatemode 0
-pmset -a autopoweroff 0
-rm /private/var/vm/sleepimage
+# 
+# pmset -a hibernatemode 0
+# pmset -a autopoweroff 0
+# rm /private/var/vm/sleepimage
 
-# Remove the Java browser Plugin.
-rm -rf /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-touch /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-chmod 000 /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
-chflags uchg /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin
+# Make symlinks
+
+for file in ".zshrc .zshenv .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf"
+do
+    ln -s ~/git/dotfiles/$file ~/$file
+done
+
+# Clone repos
+
+cd ~/git && \
+    git clone git://repo.or.cz/dvtm.git && \
+    cd dvtm && \
+    cp ~/git/dotfiles/dvtm-config.h ./config.h && \
+    sudo make install clean
+
+# Brews
+
+ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+brew doctor
+brew install macvim tmux w3m apg bvi cscope ctags daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl
+brew makelinks
