@@ -5,6 +5,7 @@ syslogd_flags="-ss"
 virecover_enable="NO"
 ntpd_sync_on_start="YES"
 ntpd_enable=YES"
+ntpd_sync_on_start="YES"
 clear_tmp_enable="YES"
 sendmail_enable="NO"
 sendmail_submit_enable="NO"
@@ -16,7 +17,6 @@ keyrate="fast"
 EOF
 
 cat <<EOF >> /etc/make.conf
-WITH_OPTIONS=1
 WITH_XTERM_COLOR=1
 WITHOUT_CUPS=1
 WITHOUT_PRINT=1
@@ -38,4 +38,14 @@ IGNORE_FILES='/etc/motd /etc/passwd /etc/group /etc/mail/mailer.conf'
 DIFF_OPTIONS='-I$FreeBSD:.*[$]'
 EOF
 
+cat <<EOF >> /etc/sysctl.conf
+net.inet.ip.portrange.reservedlow=0
+net.inet.ip.portrange.reservedhigh=0
+net.inet.tcp.blackhole=2
+net.inet.udp.blackhole=1
+security.jail.allow_raw_sockets=1
+kern.ipc.shm_allow_removed=1
+EOF
+
 sed -i -e "s/rw/rw,noatime/g" /etc/fstab
+
