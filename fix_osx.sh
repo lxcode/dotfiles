@@ -48,7 +48,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # ANIMATE MORE FASTER
 defaults write NSGlobalDomain NSWindowResizeTime .1
 
-# I hope whoever came up with this stupid fucking idea dies in a tar pit
+# By default, you can't type things like "GAAAAAAAAAAAH". Unacceptable.
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Fastest key repeat. Still too slow.
