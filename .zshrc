@@ -40,6 +40,10 @@ alias tl="task long"
 alias th="task list +home"
 alias tw="task list +work"
 
+bvimdiff() {
+    vimdiff <(xxd $1) <(xxd $2)
+}
+
 mcd() {
     cd `locate "$*"|slmenu -l 50`
 }
