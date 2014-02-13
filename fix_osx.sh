@@ -93,7 +93,7 @@ defaults write /Library/Preferences/com.apple.sharing.firewall state -bool YES
 
 # Ask for password after lock
 defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
+defaults write com.apple.screensaver askForPasswordDelay -int 5
 
 # Enable subpixel font rendering on non-Apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
