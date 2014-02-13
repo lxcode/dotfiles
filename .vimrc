@@ -105,7 +105,8 @@ set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
-set grepprg=grep\ -R\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $* " need to make this portable
+" need to make this portable
+set grepprg=grep\ -R\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $* 
 set cpoptions=BFt
 set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
@@ -156,7 +157,7 @@ endif
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
-"let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' "hide files by default
+let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' "hide files by default
 
 " quickfixsigns
 let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
@@ -259,6 +260,9 @@ endif
 
 " rainbow
 map <Leader>r :RainbowToggle<CR>
+
+" capslock
+imap <C-l> <Plug>CapsLockToggle
 
 " vimchat
 let g:vimchat_otr = 1
@@ -435,7 +439,6 @@ augroup misc
     au BufWinEnter *.scala, set filetype=scala
     au BufWinEnter *.dtrace, set filetype=D
     au BufWinEnter *.fugitiveblame,*.diff, set nospell number
-    au BufWinEnter *.plist, call ReadPlist()
     au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
     au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
     au FileType make set diffopt-=iwhite
@@ -497,17 +500,6 @@ function! ToggleVExplorer()
       Vexplore
       let t:expl_buf_num = bufnr("%")
   endif
-endfunction
-
-" Some quick bindings to edit binary plists
-command -bar PlistXML :set binary | :1,$!plutil -convert xml1 /dev/stdin -o -
-command -bar Plistbin :1,$!plutil -convert binary1 /dev/stdin -o -
-
-fun ReadPlist()
-    if getline("'[") =~ "^bplist"
-        :PlistXML
-        set filetype=xml
-    endif
 endfunction
 
 " ex command for toggling hex mode - define mapping if desired
