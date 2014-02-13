@@ -1,4 +1,5 @@
 #!/bin/sh
+# Run this script as a regular user.
 
 # I am a grownup, I can handle this knowledge
 defaults write com.apple.Finder AppleShowAllFiles TRUE
@@ -10,12 +11,17 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.Finder WarnOnEmptyTrash -bool false
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
+# Stop doing the stupid desktop reordering thing
+defaults write com.apple.dock mru-spaces -bool false
+
 # ANIMATE FASTER
 defaults write com.apple.dock expose-animation-duration -float 0.15
 
 # Use autohide but make it quick
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-time-modifier -float 0.17
+# On second thought, let's make it fast to animate but hard to trigger
+defaults write com.apple.dock autohide-delay -int 2
 
 # Kill dashboard
 defaults write com.apple.dock "dashboard-in-overlay" -bool true
@@ -27,6 +33,14 @@ defaults write com.apple.dock wvous-br-modifier -int 0
 # Start screen saver
 defaults write com.apple.dock wvous-bl-corner -int 5
 defaults write com.apple.dock wvous-bl-modifier -int 0
+
+# Disable screen saver
+defaults write com.apple.dock wvous-tl-corner -int 6
+defaults write com.apple.dock wvous-tl-modifier -int 0
+
+# Make the dock all NeXTy
+defaults write com.apple.dock orientation left
+defaults write com.apple.dock pinning -string start
 
 # Allow keyboard navigation for modals
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
@@ -71,6 +85,34 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 # Check for updates daily.
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
+# Disable candy colors
+defaults write -g AppleAquaColorVariant -int 6;
+
+# Turn on firewall, such as it is
+defaults write /Library/Preferences/com.apple.sharing.firewall state -bool YES
+
+# Ask for password after lock
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Enable subpixel font rendering on non-Apple LCDs
+defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+# Show icons for hard drives, servers, and removable media on the desktop
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+# Enable HiDPI display modes
+sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+
+# Disable Time Machine icon
+for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
+    defaults write "${domain}" dontAutoLoad -array \
+        "/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
+done
+
 # It's my library. Let me see it.
 chflags nohidden ~/Library/
 sudo chflags nohidden /tmp
@@ -78,6 +120,10 @@ sudo chflags nohidden /usr
 
 # Link to the airport command
 sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
+
+# The old Solaris admin in me still cringes when I see this command
+killall Dock
+killall Finder
 
 # Stop DHCP from twiddling names
 #scutil --set HostName local.foo.bar
@@ -96,6 +142,9 @@ sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Curre
 # pmset -a hibernatemode 0
 # pmset -a autopoweroff 0
 # rm /private/var/vm/sleepimage
+# sudo touch /private/var/vm/sleepimage
+# sudo chflags uchg /private/var/vm/sleepimage
+
 
 # Make symlinks
 
