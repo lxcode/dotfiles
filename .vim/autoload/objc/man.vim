@@ -7,8 +7,8 @@
 
 let s:docsets =  []
 let locations = [
-	\ {'path': '$HOME/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS5_1.iOSLibrary.docset/',
-	\ 'alias': 'iOS 5.1'}
+	\ {'path': '$HOME/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS7.0.iOSLibrary.docset/',
+	\ 'alias': 'iOS 7.0'}
 	\ ]
 for location in locations
 	let loc = { 'path': expand(location.path), 'alias': location.alias }
