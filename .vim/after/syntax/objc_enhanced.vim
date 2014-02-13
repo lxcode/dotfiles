@@ -4,6 +4,10 @@
 " Last Updated: June 23, 2009
 
 ru after/syntax/cocoa_keywords.vim
+if &filetype == "objcpp"
+    set filetype=objc
+endif
+
 syn match objcDirective '@synthesize\|@dynamic\|@property' display
 syn match objcDirective '@optional\|@required' display
 syn match objcDirective '@autoreleasepool' display
