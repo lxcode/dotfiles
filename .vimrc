@@ -261,9 +261,6 @@ endif
 " rainbow
 map <Leader>r :RainbowToggle<CR>
 
-" capslock
-imap <C-l> <Plug>CapsLockToggle
-
 " vimchat
 let g:vimchat_otr = 1
 let g:vimchat_statusicon = 0
