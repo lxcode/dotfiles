@@ -18,7 +18,7 @@ hi Cursor guifg=black guibg=#5fafff ctermfg=0 ctermbg=15
 "hi LineNr guifg=#3D3D3D guibg=#101010 ctermfg=239 ctermbg=237
 hi LineNr ctermfg=102 ctermbg=237 guifg=#90908a guibg=#3c3d37
 
-hi VertSplit guifg=#000000 guibg=#202020 ctermfg=235 ctermbg=60 
+hi VertSplit guifg=#000000 guibg=#202020 ctermfg=235 ctermbg=60
 hi StatusLine guifg=#1a1a1a guibg=#808080 ctermfg=233 ctermbg=60
 hi StatusLineNC guifg=#080808 guibg=#202020 ctermfg=240 ctermbg=235
 
@@ -56,37 +56,37 @@ if version >= 700 " Vim 7.x specific colors
     " hi CursorLine guibg=#1c1c1c gui=none ctermbg=235 cterm=none
     hi CursorLine ctermfg=NONE ctermbg=237 cterm=NONE guifg=NONE guibg=#3c3d37 gui=NONE
     hi CursorColumn guibg=#1c1c1c gui=none ctermbg=234 cterm=none
-    hi MatchParen guifg=#df00ff guibg=#242424 gui=bold ctermfg=magenta ctermbg=none 
-    hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242 
-    hi PmenuSel guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195 
-    hi Search guifg=#000000 guibg=#875f87 ctermfg=232  ctermbg=96 
+    hi MatchParen guifg=#df00ff guibg=#242424 gui=bold ctermfg=magenta ctermbg=none
+    hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242
+    hi PmenuSel guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195
+    hi Search guifg=#000000 guibg=#875f87 ctermfg=232  ctermbg=96
     hi SignColumn guibg=black ctermbg=232
 endif
 
 " Syntax highlighting
 hi Comment guifg=#767676 ctermfg=244 gui=italic
-hi String guifg=#5fffff ctermfg=123 
-"hi Number guifg=#FF73FD ctermfg=207 
+hi String guifg=#5fffff ctermfg=123
+"hi Number guifg=#FF73FD ctermfg=207
 hi Number ctermfg=141 guifg=#ae81ff
 
-hi Keyword guifg=#96CBFE ctermfg=117 
-hi PreProc guifg=#ff5f87 ctermfg=204 
-hi Conditional guifg=#6699CC ctermfg=110 
+hi Keyword guifg=#96CBFE ctermfg=117
+hi PreProc guifg=#ff5f87 ctermfg=204
+hi Conditional guifg=#6699CC ctermfg=110
 
-hi Todo guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195 
-hi Constant guifg=#99CC99 ctermfg=151 
+hi Todo guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195
+hi Constant guifg=#99CC99 ctermfg=151
 
 hi Identifier guifg=#8787ff ctermfg=105 CTERM=NONE
 " This is linked to Identifier by default, but that looks awful
 hi mailQuoted2 guifg=#585858 ctermfg=240
-hi Function guifg=#FFD2A7 ctermfg=223 
+hi Function guifg=#FFD2A7 ctermfg=223
 hi Type guifg=#FFDFFF ctermfg=225
 hi Statement guifg=#6699CC ctermfg=110
 "hi Statement ctermfg=197 guifg=#f92672
 
 hi Special guifg=#df8787 ctermfg=174
-hi Delimiter guifg=#00A0A0 ctermfg=37 
-hi Operator guifg=white ctermfg=white 
+hi Delimiter guifg=#00A0A0 ctermfg=37
+hi Operator guifg=white ctermfg=white
 
 hi link Character Constant
 hi link Boolean Constant
@@ -107,47 +107,47 @@ hi link SpecialComment Special
 hi link Debug Special
 
 " Special for Ruby
-hi rubyRegexp guifg=#B18A3D ctermfg=brown 
-hi rubyRegexpDelimiter guifg=#FF8000 ctermfg=brown 
-hi rubyEscape guifg=white ctermfg=cyan 
-hi rubyInterpolationDelimiter guifg=#00A0A0 ctermfg=blue 
+hi rubyRegexp guifg=#B18A3D ctermfg=brown
+hi rubyRegexpDelimiter guifg=#FF8000 ctermfg=brown
+hi rubyEscape guifg=white ctermfg=cyan
+hi rubyInterpolationDelimiter guifg=#00A0A0 ctermfg=blue
 hi rubyControl guifg=#6699CC ctermfg=blue "and break, etc
-hi rubyStringDelimiter guifg=#336633 ctermfg=lightgreen 
-hi link rubyClass Keyword 
-hi link rubyModule Keyword 
-hi link rubyKeyword Keyword 
+hi rubyStringDelimiter guifg=#336633 ctermfg=lightgreen
+hi link rubyClass Keyword
+hi link rubyModule Keyword
+hi link rubyKeyword Keyword
 hi link rubyOperator Operator
 hi link rubyIdentifier Identifier
 hi link rubyInstanceVariable Identifier
 hi link rubyGlobalVariable Identifier
 hi link rubyClassVariable Identifier
-hi link rubyConstant Type 
+hi link rubyConstant Type
 
 " Special for Java
-hi link javaScopeDecl Identifier 
-hi link javaCommentTitle javaDocSeeTag 
-hi link javaDocTags javaDocSeeTag 
-hi link javaDocParam javaDocSeeTag 
-hi link javaDocSeeTagParam javaDocSeeTag 
+hi link javaScopeDecl Identifier
+hi link javaCommentTitle javaDocSeeTag
+hi link javaDocTags javaDocSeeTag
+hi link javaDocParam javaDocSeeTag
+hi link javaDocSeeTagParam javaDocSeeTag
 
-hi javaDocSeeTag guifg=#CCCCCC ctermfg=darkgray 
-hi javaDocSeeTag guifg=#CCCCCC ctermfg=darkgray 
+hi javaDocSeeTag guifg=#CCCCCC ctermfg=darkgray
+hi javaDocSeeTag guifg=#CCCCCC ctermfg=darkgray
 
 " Special for XML
-hi link xmlTag Keyword 
-hi link xmlTagName Conditional 
-hi link xmlEndTag Identifier 
+hi link xmlTag Keyword
+hi link xmlTagName Conditional
+hi link xmlEndTag Identifier
 
 " Special for HTML
-hi link htmlTag Keyword 
-hi link htmlTagName Conditional 
-hi link htmlEndTag Identifier 
+hi link htmlTag Keyword
+hi link htmlTagName Conditional
+hi link htmlEndTag Identifier
 
 " Special for Javascript
-hi link javaScriptNumber Number 
+hi link javaScriptNumber Number
 
 " Special for CSharp
-hi link csXmlTag Keyword 
+hi link csXmlTag Keyword
 
 " For taglist
 hi MyTagListFileName guifg=#a0a8b0 guibg=#384048 ctermfg=grey ctermbg=60
