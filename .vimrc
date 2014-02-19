@@ -34,7 +34,7 @@ map <F8> :w<CR> :!make<CR>
 map <silent> <F9> :call ToggleVExplorer()<CR>
 map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
-set pastetoggle=<F11> 
+set pastetoggle=<F11>
 " jump to next quickfix item
 map <F12> :cn<CR>
 " preview the tag under the cursor
@@ -54,6 +54,7 @@ nmap cd :lcd %:h \| :pwd<CR>
 " Delete a vuln
 " This works when I type it, but not here...
 nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
+nmap <Leader>fw :FixWhitespace<CR>
 
 
 syntax on
@@ -75,11 +76,11 @@ if has('gui_running')
     set ballooneval
     set balloondelay=100
 endif
-if $DISPLAY != "" 
+if $DISPLAY != ""
     set cursorline          " I like this, but damn is it slow
     set mouse=a             " Turn this off for console-only mode
     set selectmode+=mouse	" Allow the mouse to select
-endif 
+endif
 set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
@@ -105,7 +106,7 @@ set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
 " need to make this portable
-set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $* 
+set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
 set cpoptions=BFt
 set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
@@ -180,7 +181,7 @@ if has("gui_macvim")
 else
     if has("macunix")
         let g:LatexBox_latexmk_async = 1
-    else 
+    else
         let g:LatexBox_latexmk_async = 0
     endif
 endif
@@ -214,12 +215,12 @@ let g:LatexBox_fold_parts=[
 
 augroup latex
     " The NoStarch style is a bit crufty and needs pdflatex
-    au BufWinEnter book.tex let g:LatexBox_latexmk_options = "" 
+    au BufWinEnter book.tex let g:LatexBox_latexmk_options = ""
     au BufWinEnter book.tex let g:LatexBox_fold_envs = 1
 "    au BufWritePost *.tex Latexmk
     au BufWinLeave *.tex,*.sty mkview
     au BufWinEnter *.tex,*.sty silent loadview
-    au FileType tex syntax spell toplevel 
+    au FileType tex syntax spell toplevel
     au FileType tex set spell textwidth=78 smartindent
     au FileType tex set comments+=b:\\item formatoptions-=q formatoptions+=w foldlevelstart=6
     au FileType tex imap <buffer> [[ \begin{
@@ -296,7 +297,7 @@ let g:clang_complete_copen = 1
 let g:clang_snippets = 1
 let g:clang_use_library = 1
 
-"tagbar 
+"tagbar
 let g:tagbar_type_objc = {
     \ 'ctagstype' : 'ObjectiveC',
     \ 'kinds'     : [
@@ -411,10 +412,10 @@ augroup markdown
     au FileType markdown set textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
 
-" Disable spellcheck on quickfix, switch between quickfix lists with the arrow 
+" Disable spellcheck on quickfix, switch between quickfix lists with the arrow
 " keys
 augroup quickfix
-    au FileType qf, noremap ' <CR><C-W><C-P>j 
+    au FileType qf, noremap ' <CR><C-W><C-P>j
     au FileType qf, set nospell number
     au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
     au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
@@ -450,7 +451,7 @@ augroup misc
     au FileType javascript if line('$')==1 | call Unminify() | endif
     au FileType help set nospell
     " What - like how does this even work
-    au InsertLeave * hi! link CursorLine CursorLine 
+    au InsertLeave * hi! link CursorLine CursorLine
     au InsertEnter * hi! link CursorLine Normal
 augroup end
 
@@ -461,7 +462,7 @@ augroup syntax
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-augroup end 
+augroup end
 
 " Quickfix toggle
 let g:quickfix_is_open = 0
