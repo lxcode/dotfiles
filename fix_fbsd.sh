@@ -20,6 +20,14 @@ cat <<EOF >> /etc/make.conf
 WITH_XTERM_COLOR=1
 WITHOUT_CUPS=1
 WITHOUT_PRINT=1
+NO_FORTRAN=     true
+NO_IPFILTER=    true
+NO_LPR= true
+NO_NIS= true
+NO_VINUM=       true
+NO_BIND=        true
+NO_ATM= true
+NO_I4B= true
 EOF
 
 cat <<EOF >> /boot/loader.conf

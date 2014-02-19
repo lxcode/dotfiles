@@ -20,7 +20,7 @@ noremap ,, ,
 " auto-format the current paragraph
 nmap -- gwip
 nmap __ gqip
-" Get rid of jumping behavior when using these search
+" Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
 nnoremap # #<c-o>
 " Clear search pattern with C-/ (only works in terminal)
@@ -29,18 +29,17 @@ map <silent> <Leader>/ :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
-map <F4> :w<CR> :!lacheck %<CR>
 noremap <F5> :GundoToggle<CR>
 map <F8> :w<CR> :!make<CR>
 map <silent> <F9> :call ToggleVExplorer()<CR>
 map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
+set pastetoggle=<F11> 
 " jump to next quickfix item
 map <F12> :cn<CR>
 " preview the tag under the cursor
 nmap <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
-set pastetoggle=<F11> 
 " Window movement
 nnoremap <C-j> <C-W>w
 nnoremap <C-k> <C-W>W
@@ -106,7 +105,7 @@ set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
 " need to make this portable
-set grepprg=grep\ -R\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $* 
+set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $* 
 set cpoptions=BFt
 set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
@@ -292,7 +291,7 @@ let g:gundo_close_on_revert=1
 " clang
 let g:clang_complete_enable = 1
 let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.1.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
+let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
 let g:clang_complete_copen = 1
 let g:clang_snippets = 1
 let g:clang_use_library = 1
@@ -375,7 +374,7 @@ let g:tagbar_type_scala = {
 augroup cjava
     au!
     au BufNewFile *.c r ~/.vim/templates/template.c
-    au BufWinEnter *.[mCchly] set nospell comments+=s1:/*,mb:*,ex:*/
+    au BufWinEnter *.[mCchly] set nospell number comments+=s1:/*,mb:*,ex:*/
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi setfiletype objc
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi let c_no_curly_error = 1
     au BufWinEnter *.cpp,*.java set nospell number
@@ -497,6 +496,12 @@ function! ToggleVExplorer()
       Vexplore
       let t:expl_buf_num = bufnr("%")
   endif
+endfunction
+
+command -bar Cookies call ReadCookies()
+function ReadCookies()
+    call system("cp Cookies.binarycookies /tmp/")
+    %!python $HOME/bin/BinaryCookieReader.py /tmp/Cookies.binarycookies
 endfunction
 
 " ex command for toggling hex mode - define mapping if desired
