@@ -152,6 +152,11 @@ hi link csXmlTag Keyword
 " For taglist
 hi MyTagListFileName guifg=#a0a8b0 guibg=#384048 ctermfg=grey ctermbg=60
 
+" For cctree
 highlight default link CCTreeHiSymbol  Title
 highlight default link CCTreeHiMarkers Visual
 
+" For quickfixsigns
+hi QuickFixSignsDiffAddLx    ctermfg=0 ctermbg=27 guifg=black  guibg=#0000ff
+hi QuickFixSignsDiffDeleteLx ctermfg=0 ctermbg=161 guifg=black guibg=#df005f
+hi QuickFixSignsDiffChangeLx ctermfg=0 ctermbg=68 guifg=black  guibg=#5f87df
