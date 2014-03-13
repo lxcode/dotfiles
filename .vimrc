@@ -456,6 +456,9 @@ augroup misc
     " What - like how does this even work
     au InsertLeave * hi! link CursorLine CursorLine
     au InsertEnter * hi! link CursorLine Normal
+    " Disable the 'warning, editing a read-only file' thing that
+    " hangs the UI
+    au FileChangedRO * se noreadonly
 augroup end
 
 augroup syntax
