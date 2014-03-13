@@ -134,6 +134,7 @@ set errorfile=/tmp/errors.vim
 set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=2        " the default level of fold nesting on startup
 set cryptmethod=blowfish    " in case I ever decide to use vim -x
+set autoread                " Disable warning about file change to writable
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
 if exists('&autochdir')
