@@ -6,9 +6,13 @@ Display |signs| at interesting lines:
     - items in the |quickfix| and |location-lists| (e.g. compilation errors)
     - |marks| a-zA-Z
     - changes (given the file is under a VCS like git, svn, mercurial, 
-      or bazaar)
-    - relative line numbers (show numbers only until the cursor moves)
-    - etc.
+      or bazaar -- see |g:tlib#vcs#def| for a list of supported VCSs)
+    - breakpoints: vim, R (if rer_vim is installed)
+    - cursor position
+    - relative line numbers (show numbers only until the cursor moves; 
+      this requires that you add the following command to |vimrc|: >
+        noremap <silent> <leader><c-l> :call quickfixsigns#RelNumbersOnce()<cr>
+<    - etc.
 
 Other lists can be configured via the |g:quickfixsigns_lists| variable.
 
@@ -63,14 +67,17 @@ Contents~
         :QuickfixsignsToggle ........................ |:QuickfixsignsToggle|
         :QuickfixsignsSelect ........................ |:QuickfixsignsSelect|
         g:quickfixsigns_classes ..................... |g:quickfixsigns_classes|
+        g:quickfixsign_timeout ...................... |g:quickfixsign_timeout|
         g:quickfixsigns_events ...................... |g:quickfixsigns_events|
         g:quickfixsigns_class_rel ................... |g:quickfixsigns_class_rel|
         g:quickfixsigns_class_qfl ................... |g:quickfixsigns_class_qfl|
         g:quickfixsigns_class_loc ................... |g:quickfixsigns_class_loc|
+        g:quickfixsign_list_types ................... |g:quickfixsign_list_types|
         g:quickfixsigns_class_cursor ................ |g:quickfixsigns_class_cursor|
         g:quickfixsigns_balloon ..................... |g:quickfixsigns_balloon|
         g:quickfixsigns_max ......................... |g:quickfixsigns_max|
         g:quickfixsigns_blacklist_buffer ............ |g:quickfixsigns_blacklist_buffer|
+        g:quickfixsign_type_rx ...................... |g:quickfixsign_type_rx|
         g:quickfixsigns_icons ....................... |g:quickfixsigns_icons|
         QuickfixsignsSelect ......................... |QuickfixsignsSelect()|
         QuickfixsignsUpdate ......................... |QuickfixsignsUpdate()|
@@ -97,9 +104,13 @@ Contents~
         g:quickfixsigns#vcsdiff#cd .................. |g:quickfixsigns#vcsdiff#cd|
         g:quickfixsigns#vcsdiff#cmd_separator ....... |g:quickfixsigns#vcsdiff#cmd_separator|
         g:quickfixsigns#vcsdiff#guess_type .......... |g:quickfixsigns#vcsdiff#guess_type|
+        g:quickfixsigns#vcsdiff#list_type ........... |g:quickfixsigns#vcsdiff#list_type|
         g:quickfixsigns#vcsdiff#highlight ........... |g:quickfixsigns#vcsdiff#highlight|
+        g:quickfixsigns#vcsdiff#del_numbered ........ |g:quickfixsigns#vcsdiff#del_numbered|
         quickfixsigns#vcsdiff#GuessType ............. |quickfixsigns#vcsdiff#GuessType()|
         quickfixsigns#vcsdiff#GetList ............... |quickfixsigns#vcsdiff#GetList()|
+        quickfixsigns#vcsdiff#GetList0 .............. |quickfixsigns#vcsdiff#GetList0()|
+        quickfixsigns#vcsdiff#GetList1 .............. |quickfixsigns#vcsdiff#GetList1()|
         g:quickfixsigns#breakpoints#filetypes ....... |g:quickfixsigns#breakpoints#filetypes|
         g:quickfixsigns_class_breakpoints ........... |g:quickfixsigns_class_breakpoints|
         quickfixsigns#breakpoints#GetList ........... |quickfixsigns#breakpoints#GetList()|
@@ -157,11 +168,18 @@ g:quickfixsigns_classes        (default: ['qfl', 'loc', 'marks', 'vcsdiff', 'bre
       event: A list of events on which signs of this type should be set
       level: Precedence of signs (if there are more signs at a line, 
              the one with the higher level will be displayed)
-      timeout: Update the sign at most every X seconds
+      maxsigns: Override the value of |g:quickfixsigns_max|
+      timeout: Update the sign at most every X seconds (defaults to 
+             |g:quickfixsign_timeout|)
       test:  Update the sign only if the expression is true.
 
+                                                    *g:quickfixsign_timeout*
+g:quickfixsign_timeout         (default: 0)
+    The default number of seconds for the timeout option for sign 
+    class definitions (see |g:quickfixsigns_classes|).
+
                                                     *g:quickfixsigns_events*
-g:quickfixsigns_events         (default: ['BufEnter', 'CursorHold', 'CursorHoldI', 'InsertLeave', 'InsertEnter', 'InsertChange'])
+g:quickfixsigns_events         (default: ['BufEnter', 'CursorHold', 'CursorHoldI', 'InsertLeave', 'InsertEnter'])
     List of events for signs that should be frequently updated.
 
                                                     *g:quickfixsigns_class_rel*
@@ -172,12 +190,15 @@ g:quickfixsigns_class_rel      (default: {'sign': '*s:RelSign', 'get': 's:GetRel
     See also |quickfixsigns#RelNumbersOnce()|.
 
                                                     *g:quickfixsigns_class_qfl*
-g:quickfixsigns_class_qfl      (default: {'sign': 'QFS_QFL', 'get': 's:GetQFList(%s)', 'event': ['BufEnter', 'CursorHold', 'CursorHoldI', 'QuickFixCmdPost'], 'level': 7, 'scope': 'vim'})
+g:quickfixsigns_class_qfl      (default: {'sign': '*s:QflSign', 'get': 's:GetQFList(%s)', 'event': ['BufEnter', 'CursorHold', 'CursorHoldI', 'QuickFixCmdPost'], 'level': 7, 'scope': 'vim'})
     Signs for |quickfix| lists.
 
                                                     *g:quickfixsigns_class_loc*
-g:quickfixsigns_class_loc      (default: {'sign': 'QFS_LOC', 'get': 's:GetLocList(%s)', 'event': ['BufEnter', 'CursorHold', 'CursorHoldI', 'QuickFixCmdPost'], 'level': 8})
+g:quickfixsigns_class_loc      (default: {'sign': '*s:LocSign', 'get': 's:GetLocList(%s)', 'event': ['BufEnter', 'CursorHold', 'CursorHoldI', 'QuickFixCmdPost'], 'level': 8})
     Signs for |location| lists.
+
+                                                    *g:quickfixsign_list_types*
+g:quickfixsign_list_types      (default: 'EW')
 
                                                     *g:quickfixsigns_class_cursor*
 g:quickfixsigns_class_cursor   (default: {'sign': 'QFS_CURSOR', 'get': 's:GetCursor(%s)', 'event': ['BufEnter', 'CursorHold', 'CursorHoldI', 'CursorMoved', 'CursorMovedI'], 'timeout': 1, 'level': 3})
@@ -196,8 +217,16 @@ g:quickfixsigns_max            (default: 500)
     Don't display signs if the list is longer than n items.
 
                                                     *g:quickfixsigns_blacklist_buffer*
-g:quickfixsigns_blacklist_buffer (default: '^\(__.*__\|NERD_tree_.*\|-MiniBufExplorer-\)$')
+g:quickfixsigns_blacklist_buffer (default: '\(^\|[\/]\)\(__.*__\|NERD_tree_.*\|-MiniBufExplorer-\|\[unite\] - .*\)$')
     Don't show signs in buffers matching this |regexp|.
+
+                                                    *g:quickfixsign_type_rx*
+g:quickfixsign_type_rx         (default: {'*': [['E', '\c\<error\>'], ['W', '\c\<warning\>']]})
+    A dictionary of {&filetype: [[TYPE, REGEXP] ...]}.
+    If a qfl or loc list item has no type defined, match the item 
+    against the |regexp| and assume TYPE if it matches.
+    Use "*" for default values.
+    This way, users can patch suboptimal 'errorformat' definitions.
 
                                                     *g:quickfixsigns_icons*
 g:quickfixsigns_icons          (default: {})
@@ -314,7 +343,7 @@ g:quickfixsigns#vcsdiff#vcs    (default: {...})
     Currently supported vcs: git, hg, svn, bzr
 
                                                     *g:quickfixsigns_class_vcsdiff*
-g:quickfixsigns_class_vcsdiff  (default: {'sign': '*quickfixsigns#vcsdiff#Signs', 'get': 'quickfixsigns#vcsdiff#GetList(%s)', 'event': ['BufEnter', 'BufWritePost'], 'level': 6})
+g:quickfixsigns_class_vcsdiff  (default: {'sign': '*quickfixsigns#vcsdiff#Signs', 'get': 'quickfixsigns#vcsdiff#GetList(%s)', 'event': ['BufRead', 'BufWritePost'], 'level': 6})
 
                                                     *g:quickfixsigns#vcsdiff#cd*
 g:quickfixsigns#vcsdiff#cd     (default: 'cd')
@@ -330,14 +359,26 @@ g:quickfixsigns#vcsdiff#guess_type (default: 1)
     buffers).
     Can also be buffer-local.
 
+                                                    *g:quickfixsigns#vcsdiff#list_type*
+g:quickfixsigns#vcsdiff#list_type (default: 1)
+    Defines how changed lines are displayed. Must be one of:
+      0 ... QuickFixSigns's original version
+      1 ... An alternative version that works more like `diff -y` (see 
+            |quickfixsigns#vcsdiff#GetList1()|)
+
                                                     *g:quickfixsigns#vcsdiff#highlight*
-g:quickfixsigns#vcsdiff#highlight (default: {'DEL': 'DiffDelete', 'ADD': 'DiffAdd', 'CHANGE': 'DiffChange'})
+g:quickfixsigns#vcsdiff#highlight (default: {'DEL': 'QuickFixSignsDiffDelete', 'ADD': 'QuickFixSignsDiffAdd', 'CHANGE': 'QuickFixSignsDiffChange'})
     The highlighting of deleted lines can sometimes be confusing. In 
     order to disable the display of signs for DEL changes, save the 
     following line as after/autoload/quickfixsigns/vcsdiff.vim: >
 
       call remove(g:quickfixsigns#vcsdiff#highlight, 'DEL')
 <
+
+                                                    *g:quickfixsigns#vcsdiff#del_numbered*
+g:quickfixsigns#vcsdiff#del_numbered (default: 1)
+    If true, add an indicator for how many lines were deleted next to 
+    the sign for deleted lines.
 
                                                     *quickfixsigns#vcsdiff#GuessType()*
 quickfixsigns#vcsdiff#GuessType()
@@ -352,8 +393,19 @@ quickfixsigns#vcsdiff#GuessType()
 
                                                     *quickfixsigns#vcsdiff#GetList()*
 quickfixsigns#vcsdiff#GetList(filename)
+
+                                                    *quickfixsigns#vcsdiff#GetList0()*
+quickfixsigns#vcsdiff#GetList0(filename)
     quickfixsigns#vcsdiff#GuessType() must return the name of a supported 
     VCS (see |g:quickfixsigns#vcsdiff#vcs|).
+
+                                                    *quickfixsigns#vcsdiff#GetList1()*
+quickfixsigns#vcsdiff#GetList1(filename)
+    quickfixsigns#vcsdiff#GuessType() must return the name of a supported 
+    VCS (see |g:quickfixsigns#vcsdiff#vcs|).
+    This version by Chronial works more like diff -y (see 
+    https://github.com/Chronial/vim-quickfixsigns/commit/1cf739c790746157c3cb9b6234c1454333397c9e 
+    for details).
 
 
 ========================================================================
