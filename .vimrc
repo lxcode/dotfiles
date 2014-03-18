@@ -29,7 +29,6 @@ map <silent> <Leader>/ :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
-noremap <F5> :GundoToggle<CR>
 map <F8> :w<CR> :!make<CR>
 map <silent> <F9> :call ToggleVExplorer()<CR>
 map <silent> <F10> :TagbarToggle<CR>
@@ -225,7 +224,8 @@ augroup latex
     au BufWinEnter *.tex,*.sty silent loadview
     au FileType tex syntax spell toplevel
     au FileType tex set spell textwidth=78 smartindent
-    au FileType tex set comments+=b:\\item formatoptions-=q formatoptions+=w foldlevelstart=6
+    "au FileType tex set comments+=b:\\item formatoptions-=q formatoptions+=w foldlevelstart=6
+    au FileType tex set comments+=b:\\item formatoptions-=q foldlevelstart=6
     au FileType tex imap <buffer> [[ \begin{
     au FileType tex imap <buffer> ]] <Plug>LatexCloseCurEnv
     au FileType tex imap <S-Enter> \pagebreak
@@ -288,9 +288,6 @@ nnoremap <c-]> :CtrlPtjump<cr>
 let g:statline_fugitive=1
 let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
-
-" gundo
-let g:gundo_close_on_revert=1
 
 " clang
 let g:clang_complete_enable = 1
@@ -447,6 +444,7 @@ augroup misc
     " par is much better at rewrapping mail
     au FileType mail if executable("par") | set formatprg=par | endif
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
+    au FileType mail FixWhitespace
     au FileType mail,text let b:delimitMate_autoclose = 0
     au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufWinEnter *.nse set filetype=lua
