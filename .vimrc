@@ -17,9 +17,11 @@ nore ; :
 " But allow the original functionality of ; and ,
 noremap ;; ;
 noremap ,, ,
-" auto-format the current paragraph
-nmap -- gwip
-nmap __ gqip
+" auto-format the current paragraph, but keep - for netrw
+if &filetype!='netrw'
+    nnoremap <buffer> -- gwip
+    nnoremap <buffer> __ gqip
+endif
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
 nnoremap # #<c-o>
@@ -150,14 +152,11 @@ colorscheme lx-256-dark
 source ~/.vim/ftplugin/man.vim
 
 "netrw
-if !has("gui_macvim")
-    " this is all broken on macvim
-    let g:netrw_liststyle=3
-endif
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
 let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' "hide files by default
+let g:netrw_sort_sequence = '[\/]$,*,\%(' . join(map(split(&suffixes, ','), 'escape(v:val, ".*$~")'), '\|') . '\)[*@]\=$'
 
 " quickfixsigns
 let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
@@ -437,6 +436,7 @@ augroup msdocs
 augroup end
 
 augroup misc
+    au FileType netrw unmap <buffer> --
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.scala, set filetype=scala
