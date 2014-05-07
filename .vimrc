@@ -193,9 +193,6 @@ else
     let g:LatexBox_viewer = "evince"
 endif
 let g:LatexBox_split_side = "rightbelow"
-let g:LatexBox_Folding = 1
-let g:LatexBox_fold_preamble = 1
-let g:LatexBox_fold_envs = 1
 let g:LatexBox_quickfix = 0
 let g:LatexBox_show_warnings = 0
 let g:LatexBox_ignore_warnings = [
@@ -219,6 +216,15 @@ augroup latex
     " The NoStarch style is a bit crufty and needs pdflatex
     au BufWinEnter book.tex let g:LatexBox_latexmk_options = ""
     au BufWinEnter book.tex let g:LatexBox_fold_envs = 1
+    if &diff
+        let g:LatexBox_Folding = 0
+        let g:LatexBox_fold_preamble = 0
+        let g:LatexBox_fold_envs = 0
+    else
+        let g:LatexBox_Folding = 1
+        let g:LatexBox_fold_preamble = 1
+        let g:LatexBox_fold_envs = 1
+    endif
 "    au BufWritePost *.tex Latexmk
     au BufWinLeave *.tex,*.sty mkview
     au BufWinEnter *.tex,*.sty silent loadview
