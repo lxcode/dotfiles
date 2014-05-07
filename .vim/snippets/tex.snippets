@@ -143,6 +143,12 @@ snippet page
 	${1:page}~\pageref{${2}}${3}
 snippet index
 	\index{${1:index}}${2}
+snippet indtt
+	\index{${1:index name}@{\tt $2$1}}
+snippet indem
+	\index{${1:index name}@{\em $2$1}}
+snippet indbf
+	\index{${1:index name}@{\bf $2$1}}
 #Citations
 snippet cite
 	\cite[${1}]{${2}}${3}
@@ -150,7 +156,7 @@ snippet fcite
 	\footcite[${1}]{${2}}${3}
 #Formating text: italic, bold, underline, small capital, emphase ..
 snippet it
-	\textit{${1:text}}
+	{\it {${1}}${2}
 snippet under
 	\underline{${1:text}}
 snippet bf
