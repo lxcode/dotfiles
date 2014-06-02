@@ -12,6 +12,7 @@ Display |signs| at interesting lines:
     - relative line numbers (show numbers only until the cursor moves; 
       this requires that you add the following command to |vimrc|: >
         noremap <silent> <leader><c-l> :call quickfixsigns#RelNumbersOnce()<cr>
+    - long lines (see |g:quickfixsigns_class_longlines| for details)
 <    - etc.
 
 Other lists can be configured via the |g:quickfixsigns_lists| variable.
@@ -33,6 +34,25 @@ in $VIMFILES/after/plugin/quickfixsigns.vim (by use of |sign-define|):
     QFS_REL_x ... Relative line numbers
     QFS_VCS_{ADD,DEL,CHANGE} ... VCS changes (see also 
             |g:quickfixsigns#vcsdiff#highlight|)
+
+
+Adding new sign classes~
+
+VIM plugin developers can easily define new sign classes:
+
+    1. Add the NAME of your sign class to |g:quickfixsigns_classes|
+    2. Define a variable g:quickfixsigns_class_{NAME} -- a dictionary that 
+       contains at least the following keys: sign, get. See 
+       |g:quickfixsigns_classes| for further details.
+
+On startup any files matching autoload/quickfixsigns/*.vim in the 
+'runtimepath' are loaded. When the sign class is defined in an |autoload| file, 
+you should first check whether NAME is included in |g:quickfixsigns_classes|. 
+See ../autoload/quickfixsigns/breakpoints.vim for a working example.
+
+CAVEAT: If the "get" expression entails running an external program, "event" 
+should not contain |FocusGained| and |FocusLost| events.
+
 
 CREDITS:
 quickfixsigns includes some icons from the open icon library. See 
@@ -79,6 +99,7 @@ Contents~
         g:quickfixsigns_blacklist_buffer ............ |g:quickfixsigns_blacklist_buffer|
         g:quickfixsign_type_rx ...................... |g:quickfixsign_type_rx|
         g:quickfixsigns_icons ....................... |g:quickfixsigns_icons|
+        g:quickfixsign_use_dummy .................... |g:quickfixsign_use_dummy|
         QuickfixsignsSelect ......................... |QuickfixsignsSelect()|
         QuickfixsignsUpdate ......................... |QuickfixsignsUpdate()|
         QuickfixsignsSet ............................ |QuickfixsignsSet()|
@@ -99,6 +120,9 @@ Contents~
         g:quickfixsigns#marks#texthl ................ |g:quickfixsigns#marks#texthl|
         quickfixsigns#marks#GetList ................. |quickfixsigns#marks#GetList()|
         quickfixsigns#marks#GetSign ................. |quickfixsigns#marks#GetSign()|
+        g:quickfixsigns_class_longlines ............. |g:quickfixsigns_class_longlines|
+        g:quickfixsigns#longlines#width_expr ........ |g:quickfixsigns#longlines#width_expr|
+        quickfixsigns#longlines#GetList ............. |quickfixsigns#longlines#GetList()|
         g:quickfixsigns#vcsdiff#vcs ................. |g:quickfixsigns#vcsdiff#vcs|
         g:quickfixsigns_class_vcsdiff ............... |g:quickfixsigns_class_vcsdiff|
         g:quickfixsigns#vcsdiff#cd .................. |g:quickfixsigns#vcsdiff#cd|
@@ -123,7 +147,7 @@ Contents~
 plugin/quickfixsigns.vim~
 
                                                     *:QuickfixsignsSet*
-:QuickfixsignsSet
+:QuickfixsignsSet [SIGN ...]
     Reset the signs in the current buffer.
 
                                                     *:QuickfixsignsDisable*
@@ -163,9 +187,11 @@ g:quickfixsigns_classes        (default: ['qfl', 'loc', 'marks', 'vcsdiff', 'bre
              value begins with "*", the value is interpreted as 
              function name that is called with a qfl item as its 
              single argument.
-      get:   A vim script expression as string that returns a list 
-             compatible with |getqflist()|.
-      event: A list of events on which signs of this type should be set
+      get:   A format string (see |printf|) for VIM |expression|, 
+             containing one "%s" placeholder (the filename), that 
+             returns a list compatible with |getqflist()|.
+      event: A list of events on which signs of this type should be 
+             set (default: BufEnter)
       level: Precedence of signs (if there are more signs at a line, 
              the one with the higher level will be displayed)
       maxsigns: Override the value of |g:quickfixsigns_max|
@@ -234,6 +260,11 @@ g:quickfixsigns_icons          (default: {})
     icons that should be displayed as signs.
     Defaults to empty on windows and non-gui versions.
 
+                                                    *g:quickfixsign_use_dummy*
+g:quickfixsign_use_dummy       (default: index(g:quickfixsigns_classes, 'marks') == -1)
+    If true, set a dummy sign. It's recommended to use dummy signs 
+    when |g:quickfixsigns_classes| does not contain "marks".
+
                                                     *QuickfixsignsSelect()*
 QuickfixsignsSelect(list)
 
@@ -241,7 +272,7 @@ QuickfixsignsSelect(list)
 QuickfixsignsUpdate(?class="")
 
                                                     *QuickfixsignsSet()*
-QuickfixsignsSet(event, ?classes=[])
+QuickfixsignsSet(event, ?classes=[], ?filename=expand('%:p'))
     (Re-)Set the signs that should be updated at a certain event. If event 
     is empty, update all signs.
 
@@ -322,6 +353,24 @@ quickfixsigns#marks#GetList(filename)
 
                                                     *quickfixsigns#marks#GetSign()*
 quickfixsigns#marks#GetSign(item)
+
+
+========================================================================
+autoload/quickfixsigns/longlines.vim~
+
+                                                    *g:quickfixsigns_class_longlines*
+g:quickfixsigns_class_longlines (default: {'sign': 'QFS_LONGLINES', 'get': 'quickfixsigns#longlines#GetList(%s)', 'event': ['BufRead', 'BufWritePost']})
+    Mark long lines (see |g:quickfixsigns#longlines#width_expr|) with 
+    a sign.
+
+    Users have to enable this sign class by adding 'longlines' to 
+    |g:quickfixsigns_classes|.
+
+                                                    *g:quickfixsigns#longlines#width_expr*
+g:quickfixsigns#longlines#width_expr (default: '&tw')
+
+                                                    *quickfixsigns#longlines#GetList()*
+quickfixsigns#longlines#GetList(filename)
 
 
 ========================================================================
