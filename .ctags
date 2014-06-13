@@ -21,7 +21,7 @@
 --regex-latex=/\\subsection\*\{([^}]*)\}/\1/s,subsection/
 --regex-latex=/\\subsubsection\*\{([^}]*)\}/\1/s,subsubsection/
 
---regex-latex=/\\vtitle[[:space:]]*\{([^}]+)\}/\1/v,vuln/
+--regex-latex=/\\vtitle[[:space:]]*\{(.+)\}/\1/v,vuln/
 --regex-latex=/\\strec[[:space:]]*\{([^}]+)\}/\1/r,strec/
 --regex-latex=/\\ltrec[[:space:]]*\{([^}]+)\}/\1/R,ltrec/
 
