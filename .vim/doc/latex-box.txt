@@ -288,6 +288,8 @@ Motion ~
         See |g:LatexBox_split_resize|.
 *:LatexTOCToggle*
         Toggle the display of the table of contents.
+*:LatexLabels*
+        Same as TOC but with regex-selected labels.
 
 Associated setting:
         |g:LatexBox_plaintext_toc| (set this if UTF8 conversion does not work)
@@ -462,11 +464,12 @@ Completion ~
                 let LatexBox_ref_pattern = '\c\\\a*ref\*\?\_\s*{'
 <       Both of the above examples also match commands with a trailing star.
 
-        Defualt values: >
+        Default values: >
                 let g:LatexBox_cite_pattern
-                        \ = '\c\\\a*cite\a*\*\?\(\[[^\]]*\]\)\_\s*{'
+                        \ = '\m\c\\\a*cite\a*\*\?\(\[[^\]]*\]\)\_\s*{'
                 let g:LatexBox_ref_pattern
-                        \ = '\C\\v\?\(eq\|page\|[cC]\)\?ref\*\?\_\s*{'
+                        \ = '\m\C\\v\?\(eq\|page\|[cC]\)\?ref\*\?\_\s*{'
+<       The '\m' flag indicates that these are magic regular expressions.
 <       The default settings should work for most standard LaTeX packages.
 
 *g:LatexBox_complete_inlineMath*        Default: 0

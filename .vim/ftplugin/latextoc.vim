@@ -40,13 +40,9 @@ endfunction
 
 " {{{2 EscapeTitle
 function! s:EscapeTitle(titlestr)
-    " Credit goes to Marcin Szamotulski for the following fix.  It allows to
-    " match through commands added by TeX.
-    let titlestr = substitute(a:titlestr, '\\\w*\>\s*\%({[^}]*}\)\?', '.*', 'g')
-
-    let titlestr = escape(titlestr, '\')
-    let titlestr = substitute(titlestr, ' ', '\\_\\s\\+', 'g')
-
+    let titlestr = substitute(a:titlestr, '\\[a-zA-Z@]*\>\s*{\?', '.*', 'g')
+    let titlestr = substitute(titlestr, '}', '', 'g')
+    let titlestr = substitute(titlestr, '\%(\.\*\s*\)\{2,}', '.*', 'g')
     return titlestr
 endfunction
 
@@ -82,7 +78,7 @@ function! s:TOCActivate(close)
 
     let files = [entry['file']]
     for line in filter(readfile(entry['file']), 'v:val =~ ''\\input{''')
-        call add(files, matchstr(line, '{\zs.*\ze\(\.tex\)\?}') . '.tex')
+        call add(files, matchstr(line, '{\zs.\{-}\ze\(\.tex\)\?}') . '.tex')
     endfor
 
     " Find section in buffer (or inputted files)
@@ -101,6 +97,10 @@ endfunction
 
 " {{{2 TOCFindMatch
 function! s:TOCFindMatch(strsearch,duplicates,files)
+    if len(a:files) == 0
+        echoerr "Could not find: " . a:strsearch
+        return
+    endif
 
     call s:TOCOpenBuf(a:files[0])
     let dups = a:duplicates
@@ -120,7 +120,6 @@ function! s:TOCFindMatch(strsearch,duplicates,files)
     endif
 
     call s:TOCFindMatch(a:strsearch,dups,a:files[1:])
-
 endfunction
 
 " {{{2 TOCFoldLevel
@@ -170,6 +169,7 @@ function! s:TOCOpenBuf(file)
         let bnr = bufnr(a:file)
     endif
     execute 'buffer! ' . bnr
+    normal! gg
 
 endfunction
 
