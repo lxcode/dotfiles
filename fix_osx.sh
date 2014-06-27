@@ -59,7 +59,9 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClic
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
 # I prefer to scroll in the perverted, unnatural direction
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+# Actually nevermind, I'll try to adapt. Sigh.
+#defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
 
 # This is not an iPad.
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
@@ -67,17 +69,18 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Do not ask me if I'm sure. I am always sure.
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
-# Do not shit all over my network shares
+# Do not leave crap all over my network shares
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# Vermeidung von zeit-paradoxon
+# Time machine is great, but I don't need this prompt
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Disable drop shadow on screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
 # Disable stupid semitransparent menubar
-defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
+# This is probably counterproductive with dark mode
+# defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
 # I do not need my documents to be cloud
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
@@ -130,21 +133,20 @@ killall Finder
 
 # Disable "safe sleep", saving 8-16G of disk space. Doing so is basically no
 # less secure than the default behavior when it comes to cold boot attacks, as
-# Safe Sleep leaves the RAM powered for hours anyway. You'd have to hibernate
-# every time you leave the machine to prevent that. If you want to do that, use
+# Safe Sleep leaves the RAM powered for 24 hours anyway. You'd have to hibernate
+# every time you close the machine to prevent that. If you want to do that, use
 # this:
 #
 # sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25
 #
-# You can also use autopoweroff and reduce the autopoweroffdelay if you want 
+# You can also use autopoweroff and reduce the autopoweroffdelay if you want
 # to sleep -> hibernate after a period of time.
-# 
+#
 # pmset -a hibernatemode 0
 # pmset -a autopoweroff 0
 # rm /private/var/vm/sleepimage
 # sudo touch /private/var/vm/sleepimage
 # sudo chflags uchg /private/var/vm/sleepimage
-
 
 # Make symlinks
 
@@ -170,6 +172,6 @@ cd ~/git && \
 
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 brew doctor
-brew install macvim tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl
+brew install task macvim tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl
 brew install ctags --HEAD
 brew linkapps
