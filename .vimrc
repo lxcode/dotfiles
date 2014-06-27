@@ -27,7 +27,7 @@ nnoremap * *<c-o>
 nnoremap # #<c-o>
 " Clear search pattern with C-/ (only works in terminal)
 map <silent>  :noh<CR>
-map <silent> <Leader>/ :noh<CR>
+map <silent> <Leader>\ :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
@@ -56,6 +56,7 @@ nmap cd :lcd %:h \| :pwd<CR>
 " This works when I type it, but not here...
 nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
 nmap <Leader>fw :FixWhitespace<CR>
+nmap zz ZZ
 
 
 syntax on
