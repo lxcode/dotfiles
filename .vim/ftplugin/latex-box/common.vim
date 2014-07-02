@@ -56,6 +56,7 @@ endif
 
 " Push file to file stack
 setlocal efm+=%+P**%f
+setlocal efm+=%+P**\"%f\"
 
 " Ignore unmatched lines
 setlocal efm+=%-G%.%#
@@ -126,8 +127,8 @@ function! LatexBox_GetMainTexFile()
 	endif
 
 	" 5. borrow the Vim-Latex-Suite method of finding it
-	if Tex_GetMainFileName() != expand('%:p')
-		let b:main_tex_file = Tex_GetMainFileName()
+	if LatexBox_GetMainFileName() != expand('%:p')
+		let b:main_tex_file = LatexBox_GetMainFileName()
 		return b:main_tex_file
 	endif
 
@@ -139,6 +140,8 @@ endfunction
 function! s:PromptForMainFile()
 	let saved_dir = getcwd()
 	execute 'cd ' . fnameescape(expand('%:p:h'))
+
+	" Prompt for file
 	let l:file = ''
 	while !filereadable(l:file)
 		let l:file = input('main LaTeX file: ', '', 'file')
@@ -147,6 +150,16 @@ function! s:PromptForMainFile()
 		endif
 	endwhile
 	let l:file = fnamemodify(l:file, ':p')
+
+	" Make persistent
+	let l:persistent = ''
+	while l:persistent !~ '\v^(y|n)'
+		let l:persistent = input('make choice persistent? (y, n) ')
+		if l:persistent == 'y'
+			call writefile([], l:file . '.latexmain')
+		endif
+	endwhile
+
 	execute 'cd ' . fnameescape(saved_dir)
 	return l:file
 endfunction
@@ -224,13 +237,13 @@ if !exists('g:LatexBox_viewer')
 	endif
 endif
 
-function! LatexBox_View()
+function! LatexBox_View(args)
 	let outfile = LatexBox_GetOutputFile()
 	if !filereadable(outfile)
 		echomsg fnamemodify(outfile, ':.') . ' is not readable'
 		return
 	endif
-	let cmd = g:LatexBox_viewer . ' ' . shellescape(outfile)
+	let cmd = g:LatexBox_viewer . ' ' .a:args . ' ' . shellescape(outfile)
 	if has('win32')
 		let cmd = '!start /b ' . cmd . ' >nul'
 	else
@@ -242,7 +255,7 @@ function! LatexBox_View()
 	endif
 endfunction
 
-command! LatexView call LatexBox_View()
+command! -nargs=* LatexView call LatexBox_View(<args>)
 " }}}
 
 " In Comment {{{
