@@ -160,3 +160,6 @@ highlight default link CCTreeHiMarkers Visual
 hi QuickFixSignsDiffAddLx    ctermfg=0 ctermbg=27 guifg=black  guibg=#0000ff
 hi QuickFixSignsDiffDeleteLx ctermfg=0 ctermbg=161 guifg=black guibg=#df005f
 hi QuickFixSignsDiffChangeLx ctermfg=0 ctermbg=68 guifg=black  guibg=#5f87df
+
+" For whitespace
+highlight ExtraWhitespace ctermbg=236
