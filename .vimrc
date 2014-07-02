@@ -55,7 +55,7 @@ nmap cd :lcd %:h \| :pwd<CR>
 " Delete a vuln
 " This works when I type it, but not here...
 nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
-nmap <Leader>fw :StripWhiteSpace<CR>
+nmap <Leader>fw :StripWhitespace<CR>
 nmap zz ZZ
 
 
@@ -451,7 +451,7 @@ augroup misc
     " par is much better at rewrapping mail
     au FileType mail if executable("par") | set formatprg=par | endif
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
-    au FileType mail StripWhiteSpace
+    au FileType mail StripWhitespace
     au FileType mail,text let b:delimitMate_autoclose = 0
     au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufWinEnter *.nse set filetype=lua
