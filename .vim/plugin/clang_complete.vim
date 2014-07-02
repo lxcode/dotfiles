@@ -7,7 +7,13 @@
 " Help: Use :help clang_complete
 "
 
+if exists('g:clang_complete_loaded')
+  finish
+endif
+let g:clang_complete_loaded = 1
+
 au FileType c,cpp,objc,objcpp call <SID>ClangCompleteInit()
+au FileType c.*,cpp.*,objc.*,objcpp.* call <SID>ClangCompleteInit()
 
 let b:clang_parameters = ''
 let b:clang_user_options = ''
@@ -100,7 +106,23 @@ function! s:ClangCompleteInit()
   endif
 
   if !exists('g:clang_auto_user_options')
-    let g:clang_auto_user_options = 'path, .clang_complete'
+    let g:clang_auto_user_options = '.clang_complete, path'
+  endif
+
+  if !exists('g:clang_jumpto_declaration_key')
+    let g:clang_jumpto_declaration_key = '<C-]>'
+  endif
+
+  if !exists('g:clang_jumpto_declaration_in_preview_key')
+    let g:clang_jumpto_declaration_in_preview_key = '<C-W>]'
+  endif
+
+  if !exists('g:clang_jumpto_back_key')
+    let g:clang_jumpto_back_key = '<C-T>'
+  endif
+
+  if !exists('g:clang_make_default_keymappings')
+    let g:clang_make_default_keymappings = 1
   endif
 
   call LoadUserOptions()
@@ -108,7 +130,7 @@ function! s:ClangCompleteInit()
   let b:my_changedtick = b:changedtick
   let b:clang_parameters = '-x c'
 
-  if &filetype == 'objc'
+  if &filetype =~ 'objc'
     let b:clang_parameters = '-x objective-c'
   endif
 
@@ -136,13 +158,15 @@ function! s:ClangCompleteInit()
 
   python snippetsInit()
 
-  inoremap <expr> <buffer> <C-X><C-U> <SID>LaunchCompletion()
-  inoremap <expr> <buffer> . <SID>CompleteDot()
-  inoremap <expr> <buffer> > <SID>CompleteArrow()
-  inoremap <expr> <buffer> : <SID>CompleteColon()
-  inoremap <expr> <buffer> <CR> <SID>HandlePossibleSelectionEnter()
-  nnoremap <buffer> <silent> <C-]> :call <SID>GotoDeclaration()<CR><Esc>
-  nnoremap <buffer> <silent> <C-T> <C-O>
+  if g:clang_make_default_keymappings == 1
+    inoremap <expr> <buffer> <C-X><C-U> <SID>LaunchCompletion()
+    inoremap <expr> <buffer> . <SID>CompleteDot()
+    inoremap <expr> <buffer> > <SID>CompleteArrow()
+    inoremap <expr> <buffer> : <SID>CompleteColon()
+    execute "nnoremap <buffer> <silent> " . g:clang_jumpto_declaration_key . " :call <SID>GotoDeclaration(0)<CR><Esc>"
+    execute "nnoremap <buffer> <silent> " . g:clang_jumpto_declaration_in_preview_key . " :call <SID>GotoDeclaration(1)<CR><Esc>"
+    execute "nnoremap <buffer> <silent> " . g:clang_jumpto_back_key . " <C-O>"
+  endif
 
   " Force menuone. Without it, when there's only one completion result,
   " it can be confusing (not completing and no popup)
@@ -191,29 +215,90 @@ function! LoadUserOptions()
   endfor
 endfunction
 
+" Used to tell if a flag needs a space between the flag and file
+let s:flagInfo = {
+\   '-I': {
+\     'pattern': '-I\s*',
+\     'output': '-I'
+\   },
+\   '-F': {
+\     'pattern': '-F\s*',
+\     'output': '-F'
+\   },
+\   '-iquote': {
+\     'pattern': '-iquote\s*',
+\     'output': '-iquote'
+\   },
+\   '-include': {
+\     'pattern': '-include\s\+',
+\     'output': '-include '
+\   }
+\ }
+
+let s:flagPatterns = []
+for s:flag in values(s:flagInfo)
+  let s:flagPatterns = add(s:flagPatterns, s:flag.pattern)
+endfor
+let s:flagPattern = '\%(' . join(s:flagPatterns, '\|') . '\)'
+
+
+function! s:processFilename(filename, root)
+  " Handle Unix absolute path
+  if matchstr(a:filename, '\C^[''"\\]\=/') != ''
+    let l:filename = a:filename
+  " Handle Windows absolute path
+  elseif s:isWindows() 
+       \ && matchstr(a:filename, '\C^"\=[a-zA-Z]:[/\\]') != ''
+    let l:filename = a:filename
+  " Convert relative path to absolute path
+  else
+    " If a windows file, the filename may need to be quoted.
+    if s:isWindows()
+      if matchstr(a:filename, '\C^".*"\s*$') == ''
+        let l:filename = substitute(a:filename, '\C^\(.\{-}\)\s*$'
+                                            \ , '"' . a:root . '\1"', 'g')
+      else
+        " Strip first double-quote and prepend the root.
+        let l:filename = substitute(a:filename, '\C^"\(.\{-}\)\s*$'
+                                            \ , '"' . a:root . '\1"', 'g')
+      endif
+    else
+      " For Unix, assume the filename is already escaped/quoted correctly
+      let l:filename = shellescape(a:root) . a:filename
+    endif
+  endif
+  
+  return l:filename
+endfunction
+
 function! s:parseConfig()
   let l:local_conf = findfile('.clang_complete', getcwd() . ',.;')
   if l:local_conf == '' || !filereadable(l:local_conf)
     return
   endif
 
-  let l:root = substitute(fnamemodify(l:local_conf, ':p:h'), '\', '/', 'g')
+  let l:sep = '/'
+  if s:isWindows()
+    let l:sep = '\'
+  endif
+
+  let l:root = fnamemodify(l:local_conf, ':p:h') . l:sep
 
   let l:opts = readfile(l:local_conf)
   for l:opt in l:opts
-    " Use forward slashes only
-    let l:opt = substitute(l:opt, '\', '/', 'g')
-    " Handling of absolute path
-    if matchstr(l:opt, '\C-I\s*/') != ''
-      let l:opt = substitute(l:opt, '\C-I\s*\(/\%(\w\|\\\s\)*\)',
-            \ '-I' . '\1', 'g')
-    elseif s:isWindows() && matchstr(l:opt, '\C-I\s*[a-zA-Z]:/') != ''
-      let l:opt = substitute(l:opt, '\C-I\s*\([a-zA-Z:]/\%(\w\|\\\s\)*\)',
-            \ '-I' . '\1', 'g')
-    else
-      let l:opt = substitute(l:opt, '\C-I\s*\(\%(\w\|\.\|/\|\\\s\)*\)',
-            \ '-I' . l:root . '/\1', 'g')
+    " Ensure passed filenames are absolute. Only performed on flags which
+    " require a filename/directory as an argument, as specified in s:flagInfo
+    if matchstr(l:opt, '\C^\s*' . s:flagPattern . '\s*') != ''
+      let l:flag = substitute(l:opt, '\C^\s*\(' . s:flagPattern . '\).*'
+                            \ , '\1', 'g')
+      let l:flag = substitute(l:flag, '^\(.\{-}\)\s*$', '\1', 'g')
+      let l:filename = substitute(l:opt,
+                                \ '\C^\s*' . s:flagPattern . '\(.\{-}\)\s*$',
+                                \ '\1', 'g')
+      let l:filename = s:processFilename(l:filename, l:root)
+      let l:opt = s:flagInfo[l:flag].output . l:filename
     endif
+
     let b:clang_user_options .= ' ' . l:opt
   endfor
 endfunction
@@ -228,7 +313,7 @@ function! s:findCompilationDatase(cdb)
 endfunction
 
 function! s:parsePathOption()
-  let l:dirs = split(&path, ',')
+  let l:dirs = map(split(&path, '\\\@<![, ]'), 'substitute(v:val, ''\\\([, ]\)'', ''\1'', ''g'')')
   for l:dir in l:dirs
     if len(l:dir) == 0 || !isdirectory(l:dir)
       continue
@@ -236,7 +321,7 @@ function! s:parsePathOption()
 
     " Add only absolute paths
     if matchstr(l:dir, '\s*/') != ''
-      let l:opt = '-I' . l:dir
+      let l:opt = '-I' . shellescape(l:dir)
       let b:clang_user_options .= ' ' . l:opt
     endif
   endfor
@@ -356,7 +441,10 @@ function! ClangComplete(findstart, base)
     python vim.command('let l:res = ' + completions)
     python timer.registerEvent("Load into vimscript")
 
-    inoremap <expr> <buffer> <C-Y> <SID>HandlePossibleSelectionCtrlY()
+    if g:clang_make_default_keymappings == 1
+      inoremap <expr> <buffer> <C-Y> <SID>HandlePossibleSelectionCtrlY()
+      inoremap <expr> <buffer> <CR> <SID>HandlePossibleSelectionEnter()
+    endif
     augroup ClangComplete
       au CursorMovedI <buffer> call <SID>TriggerSnippet()
     augroup end
@@ -394,6 +482,7 @@ function! s:TriggerSnippet()
 
   " Stop monitoring as we'll trigger a snippet
   silent! iunmap <buffer> <C-Y>
+  silent! iunmap <buffer> <CR>
   augroup ClangComplete
     au! CursorMovedI <buffer>
   augroup end
@@ -458,9 +547,9 @@ function! s:CompleteColon()
   return ':' . s:LaunchCompletion()
 endfunction
 
-function! s:GotoDeclaration()
+function! s:GotoDeclaration(preview)
   try
-    python gotoDeclaration()
+    python gotoDeclaration(vim.eval('a:preview') == '1')
   catch /^Vim\%((\a\+)\)\=:E37/
     echoe "The current file is not saved, and 'hidden' is not set."
           \ "Either save the file or add 'set hidden' in your vimrc."
@@ -471,6 +560,16 @@ endfunction
 " May be used in a mapping to update the quickfix window.
 function! g:ClangUpdateQuickFix()
   call s:DoPeriodicQuickFix()
+  return ''
+endfunction
+
+function! g:ClangGotoDeclaration()
+  call s:GotoDeclaration(0)
+  return ''
+endfunction
+
+function! g:ClangGotoDeclarationPreview()
+  call s:GotoDeclaration(1)
   return ''
 endfunction
 

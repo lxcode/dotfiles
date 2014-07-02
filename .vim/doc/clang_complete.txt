@@ -1,4 +1,4 @@
-*clang_complete.txt*	For Vim version 7.3.  Last change: 2013 Mar 3
+*clang_complete.txt*	For Vim version 7.3.  Last change: 2014 Apr 13
 
 
 		  clang_complete plugin documentation
@@ -84,6 +84,11 @@ Example .clang_complete file: >
 <
 ==============================================================================
 5. Options					*clang_complete-options*
+
+					*clang_complete-loaded*
+					*g:clang_complete_loaded*
+If set, clang_complete won't be loaded.
+Default: unset.
 
        				       	*clang_complete-auto_select*
 				       	*g:clang_auto_select*
@@ -192,7 +197,7 @@ Set sources for user options passed to clang. Available sources are:
 This option is processed and all sources are used on buffer loading, not each
 time before doing completion.
 
-Default: "path, .clang_complete"
+Default: ".clang_complete, path"
 
                                         *clang_complete-compilation_database*
                                         *g:clang_compilation_database*
@@ -232,6 +237,31 @@ Default: 0
 					*g:clang_complete_patterns*
 If clang should complete code patterns, i.e loop constructs etc.
 Defaut: 0
+
+					*clang_complete-jumpto_declaration_key*
+					*g:clang_jumpto_declaration_key*
+Set the key used to jump to declaration.
+Defaut: "<C-]>"
+Note: You could use the g:ClangGotoDeclaration() to do the same with a mapping.
+
+					*clang_complete-jumpto_declaration_in_preview_key*
+					*g:clang_jumpto_declaration_in_preview_key*
+Set the key used to jump to declaration in a preview window.
+Defaut: "<C-W>]"
+Note: You could use the g:ClangGotoDeclarationPreview() to do the same with a mapping.
+
+					*clang_complete-jumpto_back_key*
+					*g:clang_jumpto_back_key*
+Set the key used to jump back.
+Note: Effectively this will be remapped to <C-O>. The default value is chosen
+to be coherent with ctags implementation.
+Defaut: "<C-T>"
+
+					*clang_complete-make_default_keymappings*
+					*g:clang_make_default_keymappings*
+If this option is set, the default keymappings will be set by clang_complete.
+Otherwise none are set and the user will have to provide those keymappings.
+Default: 1
 
 ==============================================================================
 6. Known issues					*clang_complete-issues*
