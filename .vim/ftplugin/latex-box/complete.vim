@@ -366,7 +366,7 @@ function! s:ExtractLabels()
 		let curname = strpart( getline( lblline ), lblbegin, nameend - lblbegin - 1 )
 
 		" Ignore cref entries (because they are duplicates)
-		if curname =~ "@cref\|cref@"
+		if curname =~# "@cref$"
 			continue
 		endif
 

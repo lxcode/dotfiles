@@ -705,34 +705,44 @@ A: Add the following line in your ~/.latexmkrc file: >
 
 Q: How can I use SyncTeX with the SumatraPDF viewer?
 
-A: To enable Inverse Search, that is, jumping from a position in the PDF document to
-   the TeX file, add the following LatexBox settings to your ~/.vimrc file: >
+A: To enable SyncTeX add the following LatexBox settings to your ~/.vimrc file: >
 
-        let g:LatexBox_latexmk_options = '-pdflatex="pdflatex -synctex=1 %O %S"'
+        let g:LatexBox_latexmk_options =
+          \ '-pdflatex="pdflatex -synctex=1 %O %S"'
 
-        let g:LatexBox_viewer='SumatraPDF -reuse-instance -inverse-search '.
-    	 	    \    '"gvim --servername '.v:servername.' --remote-send \"^<C-\^>^<C-n^>'.
-    	 	    \    ':drop \%f^<CR^>:\%l^<CR^>:normal\! zzzv^<CR^>'.
-    	 	    \    ':call remote_foreground('''.v:servername.''')^<CR^>\""'
+   To enable Inverse Search, that is, jumping from a position in the PDF
+   document to the TeX file, add the following LatexBox settings to your
+   ~/.vimrc file: >
 
-<  This is inspired by the remoteOpen.vim in vim-latex. The naive try, >
+        let g:LatexBox_latexmk_options =
+          \ '-pdflatex="pdflatex -synctex=1 %O %S"'
+
+        let g:LatexBox_viewer = 'SumatraPDF -reuse-instance -inverse-search '
+          \ . '"gvim --servername ' . v:servername
+          \ . ' --remote-send \"^<C-\^>^<C-n^>'
+          \ . ':drop \%f^<CR^>:\%l^<CR^>:normal\! zzzv^<CR^>'
+          \ . ':call remote_foreground('''.v:servername.''')^<CR^>\""'
+
+<   The above approach inspired by remoteOpen.vim from LaTeX-suite. The naive
+   try, >
 
         ..\ "gvim +\%l \%f"
-        
-<  changes the current work dir to the dir of the viewer (see 
-   http://vim.1045645.n5.nabble.com/autochdir-td1140014.html) and produces a 
-   lot of error messages.
 
-   To enable Forward Search, that is, jumping from a position in the TeX file to the
-   PDF document, add the following mapping to your ~/.vim/ftplugin/tex.vim file: >
+<   changes the current work dir to the dir of the viewer (see
+   http://vim.1045645.n5.nabble.com/autochdir-td1140014.html) and produces
+   a lot of error messages.
 
+   To enable Forward Search, that is, jumping from a position in the TeX file
+   to the PDF document, add the following mapping to your
+   ~/.vim/ftplugin/tex.vim file: >
 
-       nnoremap <expr><buffer> <C-F11> ':LatexView '.'-forward-search '.
-            \ shellescape('"'.expand('%:p').'"').' '.line(".").' '
+        nnoremap <expr><buffer> <C-F11> ':LatexView ' . '-forward-search '
+            \ . shellescape(expand('%:p')) . ' ' . line(".") . '\<CR>'
 
-<  When hitting <C-F11>, the viewer (SumatraPDF) will open the PDF document 
-   at the page corresponding to the current cursor position in the TeX document.
-   
+<   When hitting <C-F11>, the viewer (SumatraPDF) will open the PDF document
+   at the page corresponding to the current cursor position in the TeX
+   document.
+
 Q: How can I use xelatex instead of pdflatex for some documents only?
 
 A: Instead of putting the settings in your ~/.latexmkrc file, put them in your

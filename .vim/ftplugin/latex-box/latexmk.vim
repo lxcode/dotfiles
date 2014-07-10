@@ -426,7 +426,7 @@ function! LatexBox_LatexErrors(status, ...)
 
 		" Write status message to screen
 		if a:status > 0 || len(getqflist())>1
-			if s:log_contains_error(fnameescape(log))
+			if s:log_contains_error(log)
 				let l:status_msg = ' ... failed!'
 			else
 				let l:status_msg = ' ... there were warnings!'
