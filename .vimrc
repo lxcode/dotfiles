@@ -70,6 +70,8 @@ if has('gui')
     if has("gui_macvim")
         set guifont=Inconsolata:h18
         set clipboard=unnamed
+        noremap <Leader>zo :set guifont=Inconsolata:h4<CR>
+        noremap <Leader>zi :set guifont=Inconsolata:h18<CR>
     else
         set guifont=Inconsolata\ 14
     endif
@@ -153,6 +155,7 @@ colorscheme lx-256-dark
 source ~/.vim/ftplugin/man.vim
 
 "netrw
+let g:netrw_liststyle=3
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
