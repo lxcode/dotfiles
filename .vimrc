@@ -181,6 +181,10 @@ let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'AD
 let g:buftabs_only_basename=1
 " }}}
 
+" clever-f {{{
+let g:clever_f_mark_char_color="PreProc"
+" }}}
+
 " Limelight {{{
 let g:limelight_conceal_ctermfg = 240
 let g:limelight_conceal_guifg = '#777777'
