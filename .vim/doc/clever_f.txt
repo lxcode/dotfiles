@@ -1,6 +1,7 @@
 *clever-f.txt*                                      Make |f|, |F|, |t| and |T| cleverer.
 
 Author : rhysd <lin90162@yahoo.co.jp>
+Version : 1.3
 
 CONTENTS          *clever-f.vim-contents*
 
@@ -22,8 +23,9 @@ Instead of |;|, |f| is available to repeat after you type |f|{char} or |F|{char}
 after |f|{char} and |F|{char} is also available to undo a jump. |t|{char} and
 |T|{char} are ditto. This extension makes a repeat easier and makes you forget
 the existence of |;|. You can use |;| for other key mapping.
-In addition, you can customize a behavior of the mappings. Please check
-|clever-f.vim-variables|.
+In addition, many handy features (target highlignting, smartcase matching, and
+so on) are provided and you can customize behavior of the mappings.
+Please check |clever-f.vim-variables|.
 
 
 ==============================================================================
@@ -61,8 +63,8 @@ MAPPINGS                                                 *clever-f.vim-mappings*
                                    *g:clever_f_not_overwrites_standard_mappings*
 
 If you don't set |g:clever_f_not_overwrites_standard_mappings|, |clever-f|
-replaces |f|, |F|, |t|, and |T| with |<Plug>(clever-f)|, |<Plug>(clever-F)|,
-|<Plug>(clever-t)| and |<Plug>(clever-T)| as default mappings.
+replaces |f|, |F|, |t|, and |T| with |<Plug>(clever-f-f)|, |<Plug>(clever-f-F)|,
+|<Plug>(clever-f-t)| and |<Plug>(clever-f-T)| as default mappings.
 
 <Plug>(clever-f-f)                    *<Plug>(clever-f-f)*
 <Plug>(clever-f-F)                    *<Plug>(clever-f-F)*
@@ -83,7 +85,7 @@ g:clever_f_across_no_line                            *g:clever_f_across_no_line*
 
 g:clever_f_ignore_case                                  *g:clever_f_ignore_case*
 
-    If the value is equivalent to 1, it makes |clever-f| mappings' search case
+    If the value is equivalent to 1, it makes |clever-f| mappings' search case-
     insensitive. For example, if you input 'fa', it matches both 'a' and 'A'.
     The default value is 0.
 
@@ -137,9 +139,68 @@ g:clever_f_chars_match_any_signs              *g:clever_f_chars_match_any_signs*
     matches all signs. You can jump signs whose keys are hard to press.
     The default value is ''.
 
+>
     input:   f;   f       f      f f       f       f
     move :  _-->_--->_--------->_>_>_------------>_>_
     text :  hoge.huga( autoloads: %w{ aaa bbb ccc } )
+<
+
+g:clever_f_mark_cursor                                  *g:clever_f_mark_cursor*
+
+    If the value is equivalent to 1, current cursor position will be
+    highlighted when waiting for {char}. This way you won't lose your focus
+    from the place your cursor was.
+    The default value is 1.
+
+g:clever_f_mark_cursor_color                      *g:clever_f_mark_cursor_color*
+
+    Only used when |g:clever_f_mark_cursor| is enabled. Change highlight group
+    used to mark cursor position.
+    The default value is "Cursor".
+
+g:clever_f_hide_cursor_on_cmdline            *g:clever_f_hide_cursor_on_cmdline*
+
+    If the value is equivalent to 1, a cursor is hidden on inputting {char}.
+    This feature prevents cursor from moving to command line.
+    The default value is 1.
+
+g:clever_f_timeout_ms                                    *g:clever_f_timeout_ms*
+
+    If the value is greater than 0, |clever-f| check the interval of previous
+    search and next search.  If the interval is longer than the value,
+    |clever-f| resets its state to make you input a character. The unit of the
+    value is millisecond.
+    The default value is 0 (it means no timeout).
+
+g:clever_f_mark_char                                      *g:clever_f_mark_char*
+
+    If the value is equivalent to 1, the characters in line which you input
+    in |f|, |F|, |t| and |T| are highlighted until the search ends.  The
+    highlighted characters means candidates the cursor can move to by |f|, |F|, |t|
+    and |T|.  Highlighting is enabled in normal and visual mode.
+    The default value is 1.
+
+g:clever_f_mark_char_color                          *g:clever_f_mark_char_color*
+
+    If |g:clever_f_mark_char| is enabled, |clever-f| highlights the target
+    characters using the highlight group which |g:clever_f_mark_char_color|
+    specifies.  If you want to change the highlight group |clever-f| uses, set
+    your favorite highlight group to this variable.
+    The default value is "CleverFDefaultLabel", which makes characters red and
+    bold.  If you want to make an original label highlight, define your own
+    highlight group.(See |:highlight|)
+
+g:clever_f_repeat_last_char_inputs          *g:clever_f_repeat_last_char_inputs*
+
+    This is a list of string value.  If one of the elements are input,
+    |clever-f| use the previous input instead of the input.
+    The default value is ["\<CR>"].  It means that previous input is used when
+    you input <CR>.  For example, when you previously input 'fa' and then
+    input 'f<CR>', 'a' will be used instead of '<CR>'.
+    If you want to add <Tab> to the element, please write below in your vimrc.
+>
+    let g:clever_f_repeat_last_char_inputs = ["\<CR>", "\<Tab>"]
+<
 
 ==============================================================================
 SPECIAL THANKS                                     *clever-f.vim-special-thanks*
@@ -183,4 +244,4 @@ LICENSE                                                   *clever-f.vim-license*
 
 
 ==============================================================================
-vim:tw=78:colorcolumn=78:ts=8:ft=help:norl:noet:fen:fdl=0:
+vim:tw=78:colorcolumn=78:ts=8:ft=help:norl:et:fen:fdl=0:
