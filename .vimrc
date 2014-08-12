@@ -183,6 +183,7 @@ let g:buftabs_only_basename=1
 
 " clever-f {{{
 let g:clever_f_mark_char_color="PreProc"
+let g:clever_f_smart_case=1
 " }}}
 
 " Limelight {{{
