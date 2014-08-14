@@ -4,7 +4,7 @@ for port in `w3m -dump_source "http://www.freshports.org/search.php?stype=mainta
 
 do
 	cd /usr/ports/${port}
-	DISTDIR=/public/file/0/mirror make fetch
+	DISTDIR=/home/lx/www/mirror make fetch
 done
 
 OTHERS="audio/musicpd"
@@ -13,5 +13,5 @@ for port in $OTHERS
 
 do
         cd /usr/ports/${port}
-        DISTDIR=/public/file/0/mirror make fetch
+        DISTDIR=/home/lx/www/mirror make fetch
 done
