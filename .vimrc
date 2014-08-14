@@ -19,7 +19,7 @@ nore ; :
 " auto-format the current paragraph, but keep - for netrw
 if &filetype!='netrw'
     nnoremap <buffer> -- gwip
-    nnoremap <buffer> __ gqip
+    nnoremap <buffer> __ :call WrapComments()<CR>
 endif
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
@@ -44,8 +44,6 @@ nnoremap <C-k> <C-W>W
 " Keep selected blocks selected when shifting
 vmap > >gv
 vmap < <gv
-" Insert a single character with space
-"nmap <Space> :exec "normal i".nr2char(getchar())."\e"<CR>
 nmap <Leader>x :call system("cd `dirname %` && urxvt")<CR>
 " Change to the directory of the current file
 nmap cd :lcd %:h \| :pwd<CR>
@@ -103,7 +101,7 @@ set wildmenu                " use a more functional completion menu when tab-com
 set encoding=utf-8          " always use utf-8
 set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
-set formatoptions=qnrtlmnc  " auto-formatting style for bullets and comments
+set formatoptions=qjnrtlmnc " auto-formatting style for bullets and comments
 set autoindent
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
@@ -111,7 +109,7 @@ set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
 " need to make this portable
-set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
+set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
 set cpoptions=BFt
 set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
@@ -250,7 +248,7 @@ augroup latex
     au BufWinEnter *.tex,*.sty silent loadview
     au FileType tex syntax spell toplevel
     au FileType tex set spell textwidth=78 smartindent
-    au FileType tex foldlevelstart=6
+    au FileType tex set formatoptions+=w foldlevelstart=6
     au FileType tex imap <buffer> [[ \begin{
     au FileType tex imap <buffer> ]] <Plug>LatexCloseCurEnv
     au FileType tex imap <S-Enter> \pagebreak
@@ -308,9 +306,11 @@ let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 30
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_extensions = ['buffertag']
 map <Leader>e :CtrlP<CR>
-map <Leader>b :CtrlPBuffer<CR>
 map <Leader>m :CtrlPMRU<CR>
+map <Leader>t :CtrlPTag<CR>
+map <Leader>g :CtrlPBufTagAll<CR>
 " CtrlP tjump
 nnoremap <c-]> :CtrlPtjump<cr>
 vnoremap <c-]> :CtrlPtjumpVisual<cr>
@@ -546,6 +546,13 @@ function! ToggleVExplorer()
       Vexplore
       let t:expl_buf_num = bufnr("%")
   endif
+endfunction
+
+" wrap comments
+function! WrapComments()
+    set formatoptions-=w
+    exec "normal gwip"
+    set formatoptions+=w
 endfunction
 
 command -bar Cookies call ReadCookies()
