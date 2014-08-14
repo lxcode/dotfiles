@@ -313,6 +313,9 @@ map <Leader>b :CtrlPBuffer<CR>
 map <Leader>m :CtrlPMRU<CR>
 " CtrlP tjump
 nnoremap <c-]> :CtrlPtjump<cr>
+vnoremap <c-]> :CtrlPtjumpVisual<cr>
+let g:ctrlp_tjump_shortener = ['/\(Users|home\)/lx', '~']
+let g:ctrlp_tjump_only_silent = 1
 " }}}
 
 " statline {{{
