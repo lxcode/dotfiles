@@ -13,11 +13,9 @@ nnoremap Y y$
 " Use , in addition to \ for the leader
 let mapleader = ","
 nmap \ ,
+nmap <space> ,
 " save my pinky
 nore ; :
-" But allow the original functionality of ; and ,
-noremap ;; ;
-noremap ,, ,
 " auto-format the current paragraph, but keep - for netrw
 if &filetype!='netrw'
     nnoremap <buffer> -- gwip
@@ -83,7 +81,7 @@ if has('gui_running')
     set balloondelay=100
 endif
 if $DISPLAY != ""
-    set cursorline          " I like this, but damn is it slow
+    "set cursorline          " I like this, but damn is it slow
     set mouse=a             " Turn this off for console-only mode
     set selectmode+=mouse	" Allow the mouse to select
     set ttymouse=xterm2
@@ -105,7 +103,7 @@ set wildmenu                " use a more functional completion menu when tab-com
 set encoding=utf-8          " always use utf-8
 set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
-set formatoptions=qnrtlm    " auto-formatting style for bullets and comments
+set formatoptions=qnrtlmnc  " auto-formatting style for bullets and comments
 set autoindent
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
@@ -252,8 +250,7 @@ augroup latex
     au BufWinEnter *.tex,*.sty silent loadview
     au FileType tex syntax spell toplevel
     au FileType tex set spell textwidth=78 smartindent
-    au FileType tex set comments+=b:\\item formatoptions-=q formatoptions+=w foldlevelstart=6
-    "au FileType tex set comments+=b:\\item formatoptions-=q foldlevelstart=6
+    au FileType tex foldlevelstart=6
     au FileType tex imap <buffer> [[ \begin{
     au FileType tex imap <buffer> ]] <Plug>LatexCloseCurEnv
     au FileType tex imap <S-Enter> \pagebreak
@@ -476,6 +473,7 @@ augroup misc
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.scala, set filetype=scala
     au BufWinEnter *.dtrace, set filetype=D
+    au BufWinEnter *.less, set filetype=css
     au BufWinEnter *.fugitiveblame,*.diff, set nospell number
     au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
     au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
