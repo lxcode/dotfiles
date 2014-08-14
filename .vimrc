@@ -1,3 +1,4 @@
+" Keymappings {{{
 " Make space clear highlighted searches
 nmap <silent> <space> :noh<CR>
 "left/right arrows to switch buffers in normal mode
@@ -12,11 +13,9 @@ nnoremap Y y$
 " Use , in addition to \ for the leader
 let mapleader = ","
 nmap \ ,
+nmap <space> ,
 " save my pinky
 nore ; :
-" But allow the original functionality of ; and ,
-noremap ;; ;
-noremap ,, ,
 " auto-format the current paragraph, but keep - for netrw
 if &filetype!='netrw'
     nnoremap <buffer> -- gwip
@@ -57,8 +56,9 @@ nmap cd :lcd %:h \| :pwd<CR>
 nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
 nmap <Leader>fw :StripWhitespace<CR>
 nmap zz ZZ
+" }}}
 
-
+" Settings {{{
 syntax on
 filetype plugin on
 filetype indent on
@@ -70,6 +70,8 @@ if has('gui')
     if has("gui_macvim")
         set guifont=Inconsolata:h18
         set clipboard=unnamed
+        noremap <Leader>zo :set guifont=Inconsolata:h4<CR>
+        noremap <Leader>zi :set guifont=Inconsolata:h18<CR>
     else
         set guifont=Inconsolata\ 14
     endif
@@ -79,9 +81,10 @@ if has('gui_running')
     set balloondelay=100
 endif
 if $DISPLAY != ""
-    set cursorline          " I like this, but damn is it slow
+    "set cursorline          " I like this, but damn is it slow
     set mouse=a             " Turn this off for console-only mode
     set selectmode+=mouse	" Allow the mouse to select
+    set ttymouse=xterm2
 endif
 set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
@@ -100,7 +103,7 @@ set wildmenu                " use a more functional completion menu when tab-com
 set encoding=utf-8          " always use utf-8
 set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
-set formatoptions=qnrtlm    " auto-formatting style for bullets and comments
+set formatoptions=qnrtlmnc  " auto-formatting style for bullets and comments
 set autoindent
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
@@ -148,29 +151,46 @@ endif
 " colors
 set t_Co=256                " use 256 colors
 colorscheme lx-256-dark
+" }}}
 
+" Plugins {{{
 " 33ms startup penalty!
 source ~/.vim/ftplugin/man.vim
 
-"netrw
+" netrw {{{
+let g:netrw_liststyle=3
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
 let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' "hide files by default
 let g:netrw_sort_sequence = '[\/]$,*,\%(' . join(map(split(&suffixes, ','), 'escape(v:val, ".*$~")'), '\|') . '\)[*@]\=$'
+" }}}
 
-" quickfixsigns
+" quickfixsigns {{{
 let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
 " Disable display of the ' and . marks, so the gutter will be disabled until
 " manually set marks or quickfix/diff info is present.
 let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
 let g:quickfixsign_use_dummy = 0
 let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'ADD': 'QuickFixSignsDiffAddLx', 'CHANGE': 'QuickFixSignsDiffChangeLx'}   "{{{2}}}"
+" }}}
 
-" buftabs
+" buftabs {{{
 let g:buftabs_only_basename=1
+" }}}
 
-"latex
+" clever-f {{{
+let g:clever_f_mark_char_color="PreProc"
+let g:clever_f_smart_case=1
+" }}}
+
+" Limelight {{{
+let g:limelight_conceal_ctermfg = 240
+let g:limelight_conceal_guifg = '#777777'
+let g:limelight_default_coefficient = 0.7
+" }}}
+
+" latex-box {{{
 let g:tex_flavor="latex"
 let g:tex_no_error = 1
 let g:tex_comment_nospell = 1
@@ -230,16 +250,16 @@ augroup latex
     au BufWinEnter *.tex,*.sty silent loadview
     au FileType tex syntax spell toplevel
     au FileType tex set spell textwidth=78 smartindent
-    "au FileType tex set comments+=b:\\item formatoptions-=q formatoptions+=w foldlevelstart=6
-    au FileType tex set comments+=b:\\item formatoptions-=q foldlevelstart=6
+    au FileType tex foldlevelstart=6
     au FileType tex imap <buffer> [[ \begin{
     au FileType tex imap <buffer> ]] <Plug>LatexCloseCurEnv
     au FileType tex imap <S-Enter> \pagebreak
     au FileType tex nmap tt i{\tt <Esc>wEa}<Esc>
     au FileType tex source ~/.vim/ftplugin/quotes.vim
 augroup end
+" }}}
 
-" supertab
+" supertab {{{
 let g:SuperTabContextFileTypeExclusions = ['make']
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
@@ -259,25 +279,29 @@ autocmd FileType *
             \      call SuperTabChain(g:myfunc, "<c-p>") |
             \      call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
             \  endif
+" }}}
 
-" cctree
+" cctree {{{
 if has("macunix")
     let g:CCTreeSplitProgCmd="/opt/local/bin/gsplit"
 else
     let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
 endif
+" }}}
 
-" rainbow
+" rainbow {{{
 map <Leader>r :RainbowToggle<CR>
+" }}}
 
-" vimchat
+" vimchat {{{
 let g:vimchat_otr = 1
 let g:vimchat_statusicon = 0
 let g:vimchat_showPresenceNotification = -1
 let g:vimchat_pync_enabled = 1
 "map g<Tab> gt
+" }}}
 
-" CtrlP
+" CtrlP {{{
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_map = '<C-e>'
 let g:ctrlp_by_filename = 1
@@ -289,21 +313,24 @@ map <Leader>b :CtrlPBuffer<CR>
 map <Leader>m :CtrlPMRU<CR>
 " CtrlP tjump
 nnoremap <c-]> :CtrlPtjump<cr>
+" }}}
 
-" statline
+" statline {{{
 let g:statline_fugitive=1
 let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
+" }}}
 
-" clang
+" clang {{{
 let g:clang_complete_enable = 1
 let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
 let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
 let g:clang_complete_copen = 1
 let g:clang_snippets = 1
 let g:clang_use_library = 1
+" }}}
 
-"tagbar
+" tagbar {{{
 let g:tagbar_type_objc = {
     \ 'ctagstype' : 'ObjectiveC',
     \ 'kinds'     : [
@@ -377,7 +404,11 @@ let g:tagbar_type_scala = {
         \ 'm:methods'
     \ ]
 \ }
+" }}}
 
+" }}}
+
+" augroups {{{
 augroup cjava
     au!
     au BufNewFile *.c r ~/.vim/templates/template.c
@@ -442,9 +473,11 @@ augroup misc
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.scala, set filetype=scala
     au BufWinEnter *.dtrace, set filetype=D
+    au BufWinEnter *.less, set filetype=css
     au BufWinEnter *.fugitiveblame,*.diff, set nospell number
     au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
     au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
+    au BufWinEnter .vimrc set foldmethod=marker
     au FileType make set diffopt-=iwhite
     au FileType vim set nospell
     au FileType mail set spell complete+=k nonu
@@ -470,11 +503,13 @@ augroup syntax
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 augroup end
+" }}}
 
+" Custom functions {{{
 " Quickfix toggle
 let g:quickfix_is_open = 0
 
@@ -587,3 +622,4 @@ function! Graudit(db)
     copen
     cf /tmp/graudit.out
 endfunction
+" }}}

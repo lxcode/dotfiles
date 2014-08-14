@@ -16,9 +16,10 @@ function! taskwarrior#list(...) abort
 
     if b:type == 'special'
         setlocal buftype=nofile
-        call append(0, split((system('task '.b:rc.' '.b:filter.' '.b:command)), '\n'))
-        execute 'setlocal filetype=task'.b:command
-        nnoremap <buffer> q :call taskwarrior#quit()<CR>
+        call append(0, systemlist('task '.b:rc.' '.b:filter.' '.b:command))
+        silent global/^[\t ]*$/delete
+        execute 'setlocal filetype=task_'.b:command
+        nnoremap <buffer> q :call taskwarrior#Bclose(bufnr('%'))<CR>
         call setpos('.', pos)
         return
     endif
@@ -34,14 +35,15 @@ function! taskwarrior#list(...) abort
     let b:task_report_labels  = rcl == '' ? split(matchstr(system("task show |grep report.".b:command.".labels")[0:-2], '\S*$'), ',') : split(rcl, ',')
     let line1                 = join(b:task_report_labels, ' ')
 
-    let context = split(system("task ".b:rc.' '.b:filter.' '.b:command), '\n')
-    if len(context) < 2 || context[1] !~ '^[ -]\+$'
+    let context = systemlist('task '.b:rc.' '.b:filter.' '.b:command)
+    let split_lineno = match(context, '^[ -]\+$')
+    if split_lineno == -1
         call append(0, line1)
     else
-        let index = match(context, '^$')
-        call append(0, context[0:index])
-        global/^\s*$/delete
-        2d
+        let end = match(context[split_lineno+0:], '^$')
+        call append(0, context[split_lineno-1:end+split_lineno-1])
+        silent global/^[\t ]*$/delete
+        silent global/^[ -]\+$/delete
     endif
 
     call filter(b:task_report_columns, "index(split(getline(1), ' '), b:task_report_labels[v:key]) != -1")
@@ -60,7 +62,7 @@ function! taskwarrior#list(...) abort
     let b:summary       = taskwarrior#data#global_stats()
     let b:sort          = taskwarrior#sort#order_list()[0]
     let b:now           = system('task active limit:1 rc.verbose:nothing rc.report.active.sort=start- rc.report.active.columns=start.active,start.age,id,description.desc rc.report.active.labels=A,Age,ID,Description')[0:-2]
-    let b:active        = split(system('task start.any: count'), '\n')[0]
+    let b:active        = systemlist('task start.any: count')[0]
     let b:selected      = []
     let b:sline         = []
     let b:sstring       = ''
@@ -96,19 +98,15 @@ function! taskwarrior#init(...)
         endif
         return
     endif
+
+    execute 'edit task\ '.type
+
     if exists('g:task_view')
-        if a:0 == 0
-            execute g:task_view.'buffer'
-            let command = get(b:, 'command', g:task_report_name)
-            let filter  = get(b:, 'filter', '')
-            let type    = get(b:, 'type', 'report')
-            let rc      = get(b:, 'rc', g:task_rc_override)
-        endif
-        call taskwarrior#quit()
+        let g:task_view += [bufnr('%')]
+    else
+        let g:task_view = [bufnr('%')]
     endif
 
-    execute 'edit task\ '.command
-    let g:task_view = bufnr('%')
     setlocal noswapfile
     call taskwarrior#list(command, filter, type, rc)
 
@@ -116,12 +114,54 @@ endfunction
 
 function! taskwarrior#refresh()
     if exists('g:task_view')
-        execute g:task_view.'buffer'
-        call taskwarrior#list()
+        for bufn in g:task_view
+            execute bufn.'buffer'
+            call taskwarrior#list()
+        endfor
     else
         call taskwarrior#init()
     endif
 endfunction
+
+function! taskwarrior#Bclose(buffer)
+    if a:buffer =~ '^\d\+$'
+        let btarget = bufnr(str2nr(a:buffer))
+    else
+        let btarget = bufnr(a:buffer)
+    endif
+    if bufname(btarget) == ''
+        bdelete
+        return
+    endif
+    " Numbers of windows that view target buffer which we will delete.
+    let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
+    let wcurrent = winnr()
+    for w in wnums
+        execute w.'wincmd w'
+        let prevbuf = bufnr('#')
+        if prevbuf > 0 && buflisted(prevbuf) && prevbuf != w
+            buffer #
+        else
+            bprevious
+        endif
+        if btarget == bufnr('%')
+            " Numbers of listed buffers which are not the target to be deleted.
+            let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
+            " Listed, not target, and not displayed.
+            let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
+            " Take the first buffer, if any (could be more intelligent).
+            let bjump = (bhidden + blisted + [-1])[0]
+            if bjump > 0
+                execute 'buffer '.bjump
+            else
+                enew
+            endif
+        endif
+    endfor
+    execute 'silent! bdelete '.btarget
+    execute wcurrent.'wincmd w'
+endfunction
+
 
 function! taskwarrior#hi_field()
     silent! syntax clear taskwarrior_field
@@ -130,8 +170,15 @@ function! taskwarrior#hi_field()
 endfunction
 
 function! taskwarrior#quit()
-    silent! execute g:task_view.'bd!'
-    unlet g:task_view
+    call taskwarrior#Bclose(bufnr('%'))
+    call remove(g:task_view, index(g:task_view, bufnr('%')))
+endfunction
+
+function! taskwarrior#quit_all()
+    for bufn in g:task_view
+        call taskwarrior#Bclose(bufn)
+    endfor
+    let g:task_view = []
 endfunction
 
 function! taskwarrior#system_call(filter, command, args, mode)

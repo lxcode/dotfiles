@@ -31,13 +31,13 @@ highlight default link taskwarrior_id          VarId
 highlight default link taskwarrior_project     String
 highlight default link taskwarrior_Status      Include
 highlight default link taskwarrior_priority    Class
-highlight default link taskwarrior_due         Normal
+highlight default link taskwarrior_due         Todo
 highlight default link taskwarrior_end         Keyword
 highlight default link taskwarrior_description Normal
 highlight default link taskwarrior_entry       Special
 highlight default link taskwarrior_depends     Todo
 highlight default link taskwarrior_tags        Keyword
 highlight default link taskwarrior_uuid        VarId
-highlight default link taskwarrior_urgency     Normal
+highlight default link taskwarrior_urgency     Todo
 
 let b:current_syntax = 'taskreport'
