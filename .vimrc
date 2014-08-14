@@ -24,15 +24,13 @@ endif
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
 nnoremap # #<c-o>
-" Clear search pattern with C-/ (only works in terminal)
-map <silent>  :noh<CR>
+" Clear search pattern with \\
 map <silent> <Leader>\ :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
 map <F8> :w<CR> :!make<CR>
 map <silent> <F9> :call ToggleVExplorer()<CR>
-map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 set pastetoggle=<F11>
 " jump to next quickfix item
@@ -55,7 +53,9 @@ nmap cd :lcd %:h \| :pwd<CR>
 " This works when I type it, but not here...
 nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
 nmap <Leader>fw :StripWhitespace<CR>
+" Quick exits
 nmap zz ZZ
+nmap Q :qa!<CR>
 " }}}
 
 " Settings {{{
