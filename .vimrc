@@ -18,8 +18,8 @@ nmap <space> ,
 nore ; :
 " auto-format the current paragraph, but keep - for netrw
 if &filetype!='netrw'
-    nnoremap <buffer> -- gwip
-    nnoremap <buffer> __ :call WrapComments()<CR>
+    nnoremap <buffer> __ gwip
+    nnoremap <buffer> -- :call WrapMerge()<CR>
 endif
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
@@ -182,6 +182,10 @@ let g:clever_f_mark_char_color="PreProc"
 let g:clever_f_smart_case=1
 " }}}
 
+" Indentlines {{{
+nmap \|\| :IndentLinesToggle<CR>
+" }}}
+
 " Limelight {{{
 let g:limelight_conceal_ctermfg = 240
 let g:limelight_conceal_guifg = '#777777'
@@ -311,6 +315,7 @@ map <Leader>e :CtrlP<CR>
 map <Leader>m :CtrlPMRU<CR>
 map <Leader>t :CtrlPTag<CR>
 map <Leader>g :CtrlPBufTagAll<CR>
+map <Leader>b :CtrlPBuffer<CR>
 " CtrlP tjump
 nnoremap <c-]> :CtrlPtjump<cr>
 vnoremap <c-]> :CtrlPtjumpVisual<cr>
@@ -549,7 +554,7 @@ function! ToggleVExplorer()
 endfunction
 
 " wrap comments
-function! WrapComments()
+function! WrapMerge()
     set formatoptions-=w
     exec "normal gwip"
     set formatoptions+=w
