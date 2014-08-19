@@ -1,50 +1,52 @@
 "==============================================================================
 "Script Title: rainbow parentheses improved
-"Script Version: 2.51.1
-"Author: luochen1990, oblitum
-"Last Edited: 2012 Nov 29
-"Simple Configuration:
-"    first, put "rainbow.vim"(this file) to dir vim73/plugin or vimfiles/plugin
-"    second, add the follow sentences to your .vimrc or _vimrc :
-"
-"            let g:rainbow_active = 1
-"
-"    third, restart your vim and enjoy coding.
-"Advanced Configuration:
-"    an advanced configuration allows you to define what parentheses to use 
-"    for each type of file . you can also determine the colors of your 
-"    parentheses by this way (read file vim73/rgb.txt for all named colors) .
-"        e.g. this is an advanced config (add these sentences to your vimrc):
-"
-"            let g:rainbow_active = 1
-"       
-"            let g:rainbow_load_separately = [
-"                \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
-"                \ [ '*.tex' , [['(', ')'], ['\[', '\]']] ],
-"                \ [ '*.cpp' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
-"                \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
-"                \ ]
-"       
-"            let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick',]
-"
-"User Command:
-"   :RainbowToggle  --you can use it to toggle this plugin.
-"   :Rainbow        --you can use it to toggle this plugin.
+"Script Version: 2.52
+"Author: luochen1990, Francisco Lopes
+"Last Edited: 2013 Sep 12
 
-
-" read file vim73/rgb.txt for all named colors
+" By default, use rainbow colors copied from gruvbox colorscheme (https://github.com/morhetz/gruvbox).
+" They are generally good for both light and dark colorschemes.
 let s:guifgs = exists('g:rainbow_guifgs')? g:rainbow_guifgs : [
-            \ 'DeepSkyBlue', 'ChartReuse', 'Yellow', 'Coral', 'DeepPink',
-            \ 'Purple'
+            \ '#458588',
+            \ '#b16286',
+            \ '#cc241d',
+            \ '#d65d0e',
+            \ '#458588',
+            \ '#b16286',
+            \ '#cc241d',
+            \ '#d65d0e',
+            \ '#458588',
+            \ '#b16286',
+            \ '#cc241d',
+            \ '#d65d0e',
+            \ '#458588',
+            \ '#b16286',
+            \ '#cc241d',
+            \ '#d65d0e',
             \ ]
 
 let s:ctermfgs = exists('g:rainbow_ctermfgs')? g:rainbow_ctermfgs : [
-            \ 'lightblue', 'lightgreen', 'yellow', 'red', 'magenta'
+            \ 'brown',
+            \ 'Darkblue',
+            \ 'darkgray',
+            \ 'darkgreen',
+            \ 'darkcyan',
+            \ 'darkred',
+            \ 'darkmagenta',
+            \ 'brown',
+            \ 'gray',
+            \ 'black',
+            \ 'darkmagenta',
+            \ 'Darkblue',
+            \ 'darkgreen',
+            \ 'darkcyan',
+            \ 'darkred',
+            \ 'red',
             \ ]
 
 let s:max = has('gui_running')? len(s:guifgs) : len(s:ctermfgs)
 
-func rainbow#load(...)
+func! rainbow#load(...)
     if exists('b:loaded')
         cal rainbow#clear()
     endif
@@ -56,19 +58,20 @@ func rainbow#load(...)
                     \ ['(', ')'],
                     \ ['\[', '\]'],
                     \ ['{', '}'],
-                    \ ['\v%(<operator\_s*)@<!%(%(\_i|template\_s*)@<=\<[<#=]@!|\<@<!\<[[:space:]<#=]@!)', '>']
+                    \ ['\v%(<operator\_s*)@<!%(%(\i|^\_s*|template\_s*)@<=\<[<#=]@!|\<@<!\<[[:space:]<#=]@!)', '\v%(-)@<!\>']
+                    \ ]
+    elseif &ft == 'rust' || &ft == 'cs' || &ft == 'java'
+        let b:loaded = [
+                    \ ['(', ')'],
+                    \ ['\[', '\]'],
+                    \ ['{', '}'],
+                    \ ['\v%(\i|^\_s*)@<=\<[<#=]@!|\<@<!\<[[:space:]<#=]@!', '\v%(-)@<!\>']
                     \ ]
     else
         let b:loaded = [ ['(', ')'], ['\[', '\]'], ['{', '}'] ]
     endif
 
-    "let b:operators = (a:0 < 2) ? '"\v[{\[(<_"''`#*/>)\]}]@![[:punct:]]|\*/@!|/[/*]@!|\<#@!|#@<!\>"' : a:2
-    let b:operators = ""
-
-    let str = 'TOP'
-    for each in range(1, s:max)
-        let str .= ',lv'.each
-    endfor
+    let b:operators = (a:0 < 2) ? '"\v[{\[(<_"''`#*/>)\]}]@![[:punct:]]|\*/@!|/[/*]@!|\<#@!|#@<!\>"' : a:2
 
     if b:operators != ''
         exe 'syn match op_lv0 '.b:operators
@@ -80,6 +83,11 @@ func rainbow#load(...)
         endfor
     endif
 
+    let str = 'TOP'
+    for each in range(1, s:max)
+        let str .= ',lv'.each
+    endfor
+
     let cmd = 'syn region %s matchgroup=%s start=+%s+ end=+%s+ containedin=%s contains=%s,%s,@Spell fold'
     for [left , right] in b:loaded
         for each in range(1, s:max)
@@ -90,7 +98,7 @@ func rainbow#load(...)
     cal rainbow#activate()
 endfunc
 
-func rainbow#clear()
+func! rainbow#clear()
     if exists('b:loaded')
         unlet b:loaded
         exe 'syn clear op_lv0'
@@ -101,7 +109,7 @@ func rainbow#clear()
     endif
 endfunc
 
-func rainbow#activate()
+func! rainbow#activate()
     if !exists('b:loaded')
         cal rainbow#load()
     endif
@@ -116,7 +124,7 @@ func rainbow#activate()
     let b:active = 'active'
 endfunc
 
-func rainbow#inactivate()
+func! rainbow#inactivate()
     if exists('b:active')
         exe 'hi clear op_lv0'
         for each in range(1, s:max)
@@ -128,7 +136,7 @@ func rainbow#inactivate()
     endif
 endfunc
 
-func rainbow#toggle()
+func! rainbow#toggle()
     if exists('b:active')
         cal rainbow#inactivate()
     else
@@ -141,14 +149,14 @@ if exists('g:rainbow_active') && g:rainbow_active
         let ps = g:rainbow_load_separately
         for i in range(len(ps))
             if len(ps[i]) < 3
-                exe printf('auto syntax,bufnewfile,bufreadpost %s call rainbow#load(ps[%d][1])' , ps[i][0] , i)
+                exe printf('au syntax,colorscheme %s call rainbow#load(ps[%d][1])' , ps[i][0] , i)
             else
-                exe printf('auto syntax,bufnewfile,bufreadpost %s call rainbow#load(ps[%d][1] , ps[%d][2])' , ps[i][0] , i , i)
+                exe printf('au syntax,colorscheme %s call rainbow#load(ps[%d][1] , ps[%d][2])' , ps[i][0] , i , i)
             endif
         endfor
     else
-        auto syntax,bufnewfile,bufreadpost * call rainbow#load()
-    endif 
+        au syntax,colorscheme * call rainbow#load()
+    endif
 endif
 
 command! RainbowToggle call rainbow#toggle()
