@@ -18,21 +18,19 @@ nmap <space> ,
 nore ; :
 " auto-format the current paragraph, but keep - for netrw
 if &filetype!='netrw'
-    nnoremap <buffer> -- gwip
-    nnoremap <buffer> __ gqip
+    nnoremap <buffer> __ gwip
+    nnoremap <buffer> -- :call WrapMerge()<CR>
 endif
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
 nnoremap # #<c-o>
-" Clear search pattern with C-/ (only works in terminal)
-map <silent>  :noh<CR>
+" Clear search pattern with \\
 map <silent> <Leader>\ :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
 map <F8> :w<CR> :!make<CR>
 map <silent> <F9> :call ToggleVExplorer()<CR>
-map <silent> <F10> :TagbarToggle<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 set pastetoggle=<F11>
 " jump to next quickfix item
@@ -46,8 +44,6 @@ nnoremap <C-k> <C-W>W
 " Keep selected blocks selected when shifting
 vmap > >gv
 vmap < <gv
-" Insert a single character with space
-"nmap <Space> :exec "normal i".nr2char(getchar())."\e"<CR>
 nmap <Leader>x :call system("cd `dirname %` && urxvt")<CR>
 " Change to the directory of the current file
 nmap cd :lcd %:h \| :pwd<CR>
@@ -55,7 +51,9 @@ nmap cd :lcd %:h \| :pwd<CR>
 " This works when I type it, but not here...
 nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
 nmap <Leader>fw :StripWhitespace<CR>
+" Quick exits
 nmap zz ZZ
+nmap Q :qa!<CR>
 " }}}
 
 " Settings {{{
@@ -103,7 +101,7 @@ set wildmenu                " use a more functional completion menu when tab-com
 set encoding=utf-8          " always use utf-8
 set hlsearch                " highlight all search matches
 set nojoinspaces            " disallow two spaces after a period when joining
-set formatoptions=qnrtlmnc  " auto-formatting style for bullets and comments
+set formatoptions=qjnrtlmnc " auto-formatting style for bullets and comments
 set autoindent
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
@@ -111,7 +109,7 @@ set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
 " need to make this portable
-set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
+set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
 set cpoptions=BFt
 set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
@@ -184,6 +182,10 @@ let g:clever_f_mark_char_color="PreProc"
 let g:clever_f_smart_case=1
 " }}}
 
+" Indentlines {{{
+nmap \|\| :IndentLinesToggle<CR>
+" }}}
+
 " Limelight {{{
 let g:limelight_conceal_ctermfg = 240
 let g:limelight_conceal_guifg = '#777777'
@@ -250,7 +252,7 @@ augroup latex
     au BufWinEnter *.tex,*.sty silent loadview
     au FileType tex syntax spell toplevel
     au FileType tex set spell textwidth=78 smartindent
-    au FileType tex foldlevelstart=6
+    au FileType tex set formatoptions+=w foldlevelstart=6
     au FileType tex imap <buffer> [[ \begin{
     au FileType tex imap <buffer> ]] <Plug>LatexCloseCurEnv
     au FileType tex imap <S-Enter> \pagebreak
@@ -308,11 +310,17 @@ let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 30
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_extensions = ['buffertag']
 map <Leader>e :CtrlP<CR>
-map <Leader>b :CtrlPBuffer<CR>
 map <Leader>m :CtrlPMRU<CR>
+map <Leader>t :CtrlPTag<CR>
+map <Leader>g :CtrlPBufTagAll<CR>
+map <Leader>b :CtrlPBuffer<CR>
 " CtrlP tjump
 nnoremap <c-]> :CtrlPtjump<cr>
+vnoremap <c-]> :CtrlPtjumpVisual<cr>
+let g:ctrlp_tjump_shortener = ['/\(Users|home\)/lx', '~']
+let g:ctrlp_tjump_only_silent = 1
 " }}}
 
 " statline {{{
@@ -543,6 +551,13 @@ function! ToggleVExplorer()
       Vexplore
       let t:expl_buf_num = bufnr("%")
   endif
+endfunction
+
+" wrap comments
+function! WrapMerge()
+    set formatoptions-=w
+    exec "normal gwip"
+    set formatoptions+=w
 endfunction
 
 command -bar Cookies call ReadCookies()
