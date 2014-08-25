@@ -59,14 +59,13 @@ if version >= 700 " Vim 7.x specific colors
     hi MatchParen guifg=#df00ff guibg=#242424 gui=bold ctermfg=magenta ctermbg=none
     hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242
     hi PmenuSel guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195
-    hi Search guifg=#000000 guibg=#875f87 ctermfg=232  ctermbg=96
+    hi Search guifg=#f6f3e8 guibg=#8700df ctermfg=white ctermbg=92
     hi SignColumn guibg=black ctermbg=232
 endif
 
 " Syntax highlighting
 hi Comment guifg=#767676 ctermfg=244 gui=italic
 hi String guifg=#5fffff ctermfg=123
-"hi Number guifg=#FF73FD ctermfg=207
 hi Number ctermfg=141 guifg=#ae81ff
 
 hi Keyword guifg=#96CBFE ctermfg=117
