@@ -75,9 +75,9 @@ function! taskwarrior#action#annotate(op)
                 execute 'e '.file
             elseif ft !~ '(No such file or directory)' || file =~ '[a-z]*:\/\/[^ >,;]*'
                 if executable('xdg-open')
-                    silent execute '!xdg-open '.file.'&'
+                    call system('xdg-open '.file.'&')
                 elseif executable('open')
-                    silent execute '!open '.file.'&'
+                    call system('open '.file.'&')
                 endif
             endif
         endif
@@ -204,7 +204,7 @@ function! taskwarrior#action#visual(action) range
     elseif a:action == 'delete'
         call taskwarrior#system_call(filter, 'delete', '', 'interactive')
     elseif a:action == 'info'
-        call taskinfo#init('information', filter, systemlist('task information '.filter))
+        call taskinfo#init('information', filter, split(system('task information '.filter), '\n'))
     elseif a:action == 'select'
         for var in fil
             let index = index(b:selected, var)
@@ -301,5 +301,5 @@ function! taskwarrior#action#show_info()
     else
         let filter = b:filter
     endif
-    call taskinfo#init(command, filter, systemlist('task '.command.' '.filter))
+    call taskinfo#init(command, filter, split(system('task '.command.' '.filter), '\n'))
 endfunction
