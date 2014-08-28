@@ -16,11 +16,9 @@ nmap \ ,
 nmap <space> ,
 " save my pinky
 nore ; :
-" auto-format the current paragraph, but keep - for netrw
-if &filetype!='netrw'
-    nnoremap <buffer> __ gwip
-    nnoremap <buffer> -- :call WrapMerge()<CR>
-endif
+" auto-format the current paragraph
+nnoremap <buffer> __ gwip
+nnoremap <buffer> -- :call WrapMerge()<CR>
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
 nnoremap # #<c-o>
@@ -143,11 +141,11 @@ set cryptmethod=blowfish    " in case I ever decide to use vim -x
 set autoread                " Disable warning about file change to writable
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
-if exists('&autochdir')
-    " Change directory to first open file
-    set autochdir
-    set noautochdir
-endif
+"if exists('&autochdir')
+"    " Change directory to first open file
+"    set autochdir
+"    set noautochdir
+"endif
 
 " colors
 set t_Co=256                " use 256 colors
@@ -330,6 +328,7 @@ let g:ctrlp_tjump_only_silent = 1
 let g:statline_fugitive=1
 let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
+let g:statline_filename_relative=1
 " }}}
 
 " clang {{{
@@ -557,13 +556,17 @@ function! ToggleVExplorer()
   endif
 endfunction
 
-" wrap comments
+" wrap nicely
 function! WrapMerge()
     set formatoptions-=w
     exec "normal gwip"
     set formatoptions+=w
 endfunction
 
+" clear quickfix
+command -bar Qfc call setqflist([])
+
+" Read in cookiefiles
 command -bar Cookies call ReadCookies()
 function ReadCookies()
     call system("cp Cookies.binarycookies /tmp/")
