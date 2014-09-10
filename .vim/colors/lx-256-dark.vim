@@ -15,12 +15,11 @@ hi Normal guifg=#d0d0d0 guibg=#242424 ctermfg=252 ctermbg=NONE
 hi NonText guifg=#070707 guibg=black ctermfg=0
 
 hi Cursor guifg=black guibg=#5fafff ctermfg=0 ctermbg=15
-"hi LineNr guifg=#3D3D3D guibg=#101010 ctermfg=239 ctermbg=237
 hi LineNr ctermfg=102 ctermbg=237 guifg=#90908a guibg=#3c3d37
 
 hi VertSplit guifg=#000000 guibg=#202020 ctermfg=235 ctermbg=60
-hi StatusLine guifg=#1a1a1a guibg=#808080 ctermfg=233 ctermbg=60
-hi StatusLineNC guifg=#080808 guibg=#202020 ctermfg=240 ctermbg=235
+hi StatusLine guifg=#1a1a1a guibg=#808080 ctermfg=232 ctermbg=60 cterm=reverse gui=reverse
+hi StatusLineNC guifg=#080808 guibg=#202020 ctermfg=233 ctermbg=235
 
 hi Folded guifg=#a0a8b0 guibg=#384048 ctermfg=grey ctermbg=60
 hi FoldColumn guibg=#202020 guifg=darkgrey
@@ -47,8 +46,8 @@ hi SpellLocal cterm=underline
 
 hi DiffAdd ctermbg=17 guibg=#2a0d6a
 hi DiffDelete ctermfg=234 ctermbg=60 cterm=none	 guifg=#242424	guibg=#3e3969	gui=none
-hi DiffText	ctermbg=53	cterm=none guibg=#73186e gui=none
-hi DiffChange ctermbg=237	guibg=#382a37
+hi DiffText	ctermbg=53 cterm=none guibg=#73186e gui=none
+hi DiffChange ctermbg=55 guibg=#5f00af
 
 hi ModeMsg guifg=black guibg=#C6C5FE gui=bold ctermfg=0 ctermbg=189 cterm=bold
 
