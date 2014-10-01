@@ -186,6 +186,7 @@ let g:clever_f_smart_case=1
 
 " Indentlines {{{
 nmap \|\| :IndentLinesToggle<CR>
+let g:indentLine_faster = 1
 " }}}
 
 " Limelight {{{
