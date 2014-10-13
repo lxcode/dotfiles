@@ -152,7 +152,9 @@ killall Finder
 
 read -p "Preparing to make symlinks"
 
-for file in .zshrc .zshenv .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf
+mkdir ~/bin && cd ~/bin
+
+for file in .zshrc .zshenv .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf bin
 do
     ln -s ~/git/dotfiles/$file ~/$file
 done
@@ -170,8 +172,9 @@ cd ~/git && \
 
 # Brews
 
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+sudo xcodebuild -license
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
-brew install task macvim tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl bbe ctags
+brew install task macvim tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl bbe zsh
 brew install ctags --HEAD
 brew linkapps
