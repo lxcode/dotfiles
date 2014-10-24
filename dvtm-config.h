@@ -1,3 +1,8 @@
+/* specify a default editor and arguments which is used in case
+ * neither $DVTM_EDITOR nor $EDITOR is set. */
+static char editor[] = "vim";
+static const char *editor_args[] = { editor, "-", NULL };
+
 /* valid curses attributes are listed below they can be ORed
  *
  * A_NORMAL        Normal display (no highlight)
@@ -21,6 +26,7 @@ static Color colors[] = {
 	[BLUE]    = { .fg = COLOR_BLUE, .bg = -1, .fg256 = 68, .bg256 = -1, },
 };
 
+#define COLOR(c)        COLOR_PAIR(colors[c].pair)
 /* curses attributes for the currently focused window */
 #define SELECTED_ATTR   (COLOR(BLUE) | A_NORMAL)
 /* curses attributes for normal (not selected) windows */
@@ -44,14 +50,15 @@ static Color colors[] = {
 
 #include "tile.c"
 #include "grid.c"
-#include "bstack.c"
+#include "tstack.c"
 #include "fullscreen.c"
+#include "fibonacci.c"
 
 /* by default the first layout entry is used */
 static Layout layouts[] = {
 	{ "[]=", tile },
 	{ "+++", grid },
-	{ "TTT", bstack },
+	{ "[@]", dwindle },
 	{ "[ ]", fullscreen },
 };
 
@@ -63,8 +70,8 @@ static KeyBinding bindings[] = {
 	{ { MOD, 'C',          }, { create,         { NULL, NULL, "$CWD" }      } },
 	{ { MOD, 'x',          }, { killclient,     { NULL }                    } },
 	{ { MOD, 'j',          }, { focusnext,      { NULL }                    } },
-	{ { MOD, 'u',          }, { focusnextnm,    { NULL }                    } },
-	{ { MOD, 'i',          }, { focusprevnm,    { NULL }                    } },
+//	{ { MOD, 'u',          }, { focusnextnm,    { NULL }                    } },
+//	{ { MOD, 'i',          }, { focusprevnm,    { NULL }                    } },
 	{ { MOD, 'k',          }, { focusprev,      { NULL }                    } },
 	{ { MOD, 't',          }, { setlayout,      { "[]=" }                   } },
 	{ { MOD, 'g',          }, { setlayout,      { "+++" }                   } },
@@ -76,7 +83,16 @@ static KeyBinding bindings[] = {
 	{ { MOD, '.',          }, { toggleminimize, { NULL }                    } },
 	{ { MOD, 's',          }, { togglebar,      { NULL }                    } },
 	{ { MOD, 'M',          }, { togglemouse,    { NULL }                    } },
-	{ { MOD, 'i',          }, { zoom,           { NULL }                    } },
+	{ { MOD, 'i',          }, { zoom ,          { NULL }                    } },
+	{ { MOD, '1',          }, { focusn,         { "1" }                     } },
+	{ { MOD, '2',          }, { focusn,         { "2" }                     } },
+	{ { MOD, '3',          }, { focusn,         { "3" }                     } },
+	{ { MOD, '4',          }, { focusn,         { "4" }                     } },
+	{ { MOD, '5',          }, { focusn,         { "5" }                     } },
+	{ { MOD, '6',          }, { focusn,         { "6" }                     } },
+	{ { MOD, '7',          }, { focusn,         { "7" }                     } },
+	{ { MOD, '8',          }, { focusn,         { "8" }                     } },
+	{ { MOD, '9',          }, { focusn,         { "9" }                     } },
 	{ { MOD, '\t',         }, { focuslast,      { NULL }                    } },
 	{ { MOD, 'Q',          }, { quit,           { NULL }                    } },
 	{ { MOD, 'a',          }, { togglerunall,   { NULL }                    } },
@@ -89,6 +105,9 @@ static KeyBinding bindings[] = {
 	{ { MOD, KEY_PPAGE,    }, { scrollback,     { "-1" }                    } },
 	{ { MOD, KEY_NPAGE,    }, { scrollback,     { "1"  }                    } },
 	{ { MOD, KEY_F(1),     }, { create,         { "man dvtm", "dvtm help" } } },
+	{ { MOD, MOD,          }, { send,           { (const char []){MOD, 0} } } },
+	{ { KEY_SPREVIOUS,     }, { scrollback,     { "-1" }                    } },
+	{ { KEY_SNEXT,         }, { scrollback,     { "1"  }                    } },
 };
 
 static const ColorRule colorrules[] = {

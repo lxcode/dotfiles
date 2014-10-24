@@ -17,8 +17,8 @@ nmap <space> ,
 " save my pinky
 nore ; :
 " auto-format the current paragraph
-nnoremap <buffer> __ gwip
-nnoremap <buffer> -- :call WrapMerge()<CR>
+nnoremap __ gwip
+nnoremap -- :call WrapMerge()<CR>
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
 nnoremap # #<c-o>
@@ -138,7 +138,7 @@ set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
 set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=2        " the default level of fold nesting on startup
-set cryptmethod=blowfish2   " in case I ever decide to use vim -x
+set cryptmethod=blowfish    " in case I ever decide to use vim -x
 set autoread                " Disable warning about file change to writable
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
