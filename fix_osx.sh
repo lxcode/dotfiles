@@ -177,4 +177,6 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew doctor
 brew install task macvim tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl bbe zsh
 brew install ctags --HEAD
+brew install profanity --with-terminal-notifier
 brew linkapps
+task
