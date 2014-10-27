@@ -107,6 +107,9 @@ defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
+# DARK MODE
+sudo defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
+
 # Enable HiDPI display modes
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
