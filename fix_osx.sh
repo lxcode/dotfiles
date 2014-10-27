@@ -42,6 +42,9 @@ defaults write com.apple.dock wvous-tl-modifier -int 0
 defaults write com.apple.dock orientation left
 defaults write com.apple.dock pinning -string start
 
+# Remove all dock icons
+defaults write com.apple.dock persistent-apps -array
+
 # Allow keyboard navigation for modals
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
