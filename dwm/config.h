@@ -64,10 +64,10 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-i", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char *dmenucmd[] = { "dmenu_run", "-i", "-m", dmenumon, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "urxvtc", NULL };
 static const char *lockcmd[]  = { "metalock", "-F", normbordercolor, "-w", "1", "-P", "-f", font, NULL };
-static const char *todocmd[]  = { "gvim", "note:todo", NULL };
 static const char *cmusplaypause[]  = { "cmus-remote", "-u", NULL };
 
 //#include "tilemovemouse.c"
@@ -82,7 +82,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY,                       XK_x,      spawn,          {.v = lockcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ControlMask,           XK_t,      spawn,          {.v = todocmd } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = cmusplaypause } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },

@@ -196,11 +196,11 @@ and have it close automatically on tag selection regardless of the
 |g:tagbar_autoclose| setting.
 
 Pausing the Tagbar window~
-Use |:TagbarTogglePause| to toggle freezing the Tagbar window on its currently
-displayed file. Freezing the window stops the Tagbar contents from changing
-when switching to a different source file. All Tagbar functionality continues
-to work as expected. Unfreezing the window will cause it to load the current
-source file.
+Use |:TagbarTogglePause| to toggle freezing/locking the Tagbar window on its
+currently displayed file. Freezing the window stops the Tagbar contents from
+changing when switching to a different source file. All Tagbar functionality
+continues to work as expected. Unfreezing the window will cause it to load the
+current source file.
 
 Jumping to tags~
 When you're inside the Tagbar window you can jump to the definition of a tag
@@ -591,7 +591,7 @@ Default: 0
 If this variable is set to 1 and the current tag is inside of a closed fold
 then the folds will be opened as much as needed for the tag to be visible so
 it can be highlighted. If it is set to 0 then the folds will only be opened
-when opening the Tagbar window and the current tag is insided a closed fold,
+when opening the Tagbar window and the current tag is inside a closed fold,
 otherwise the folds won't be opened and the parent tag will be highlighted
 instead. If it is set to 2 then the folds will never be opened automatically.
 
@@ -647,8 +647,8 @@ system is different from the one set in Vim, i.e. the 'encoding' option. For
 example, if you use a Simplified Chinese Windows version that has a system
 encoding of "cp936", and you have set 'encoding' to "utf-8", then you would
 have to set this variable to "cp936".
-Note that this requires Vim to be compiled with the |+multi_byte| and (unless
-your encoding is latin1) |+iconv| features to work.
+Note that this requires Vim to be compiled with the |+multi_byte| and |+iconv|
+features to work.
 
 Example:
 >
