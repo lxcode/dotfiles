@@ -144,6 +144,7 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=2        " the default level of fold nesting on startup
 set cryptmethod=blowfish    " in case I ever decide to use vim -x
 set autoread                " Disable warning about file change to writable
+set conceallevel=0          " Don't hide things by default
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
 "if exists('&autochdir')
@@ -202,9 +203,10 @@ let g:limelight_default_coefficient = 0.7
 " latex-box {{{
 let g:tex_flavor="latex"
 let g:tex_no_error = 1
+let g:tex_conceal= ""
 let g:tex_comment_nospell = 1
 "let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
-let g:LatexBox_latexmk_options = "-xelatex"
+let g:LatexBox_latexmk_options = "-xelatex -interaction=batchmode"
 let g:LatexBox_build_dir = "$HOME/.build"
 " Work around the fact that cmdline macvim doesn't support server mode
 if has("gui_macvim")
@@ -243,7 +245,7 @@ let g:LatexBox_fold_parts=[
 
 augroup latex
     " The NoStarch style is a bit crufty and needs pdflatex
-    au BufWinEnter book.tex let g:LatexBox_latexmk_options = ""
+    au BufWinEnter book.tex let g:LatexBox_latexmk_options = "-interaction=batchmode -draftmode"
     au BufWinEnter book.tex let g:LatexBox_fold_envs = 1
     if &diff
         let g:LatexBox_Folding = 0
