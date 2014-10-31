@@ -17,8 +17,8 @@ nmap <space> ,
 " save my pinky
 nore ; :
 " auto-format the current paragraph
-nnoremap <buffer> __ gwip
-nnoremap <buffer> -- :call WrapMerge()<CR>
+nnoremap __ gwip
+nnoremap -- :call WrapMerge()<CR>
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
 nnoremap # #<c-o>
@@ -98,8 +98,13 @@ set wildmode=longest,list   " shows a list of candidates when tab-completing
 set wildmenu                " use a more functional completion menu when tab-completing
 set encoding=utf-8          " always use utf-8
 set hlsearch                " highlight all search matches
+set foldcolumn=0            " I never use this.
 set nojoinspaces            " disallow two spaces after a period when joining
-set formatoptions=qjnrtlmnc " auto-formatting style for bullets and comments
+if version >= 704
+    set formatoptions=qjnrtlmnc " auto-formatting style
+else
+    set formatoptions=qnrtlmnc  " auto-formatting style minus j
+endif
 set autoindent
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
@@ -185,6 +190,7 @@ let g:clever_f_smart_case=1
 
 " Indentlines {{{
 nmap \|\| :IndentLinesToggle<CR>
+let g:indentLine_faster = 1
 " }}}
 
 " Limelight {{{

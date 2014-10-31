@@ -40,6 +40,8 @@ alias t="task"
 alias tl="task long"
 alias th="task list +home"
 alias tw="task list +work"
+alias ws="python -m SimpleHTTPServer 8080"
+alias tws="twistd -no web --path=. --port=8080"
 
 bvimdiff() {
     vimdiff <(xxd $1) <(xxd $2)
@@ -70,10 +72,10 @@ hgdiff() {
     vimdiff -c 'map q :qa!<CR>' <(hg cat "$1") "$1";
 }
 freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
-pskill() 
-{ 
+pskill()
+{
 	for pid in `ps $PSFLAGS |grep $1 |grep -v grep |awk '{print $1}'`
-	do 
+	do
 		echo "killing $1 ($pid)"
 		kill $2 $pid
 	done
@@ -130,7 +132,7 @@ function title {
 
 	screen*)
 
-	    print -nR $'\033k'$1$'\033'\\ 
+	    print -nR $'\033k'$1$'\033'\\
 	    print -nR $'\033]0;'$2$'\a'
 	;;
 	esac
@@ -187,7 +189,7 @@ WATCHFMT='%n %a %l from %m at %t.'
 # Set/unset  shell options
 setopt   notify globdots pushdtohome cdablevars autolist
 setopt   autocd longlistjobs
-setopt   autoresume histignoredups pushdsilent 
+setopt   autoresume histignoredups pushdsilent
 setopt   autopushd pushdminus extendedglob rcquotes mailwarning
 setopt   multios
 unsetopt bgnice autoparamslash
@@ -223,7 +225,7 @@ zstyle ':completion:*::::' completer _expand _complete _ignored
 # allow one error for every three characters typed in approximate completer
 zstyle -e ':completion:*:approximate:*' max-errors \
     'reply=( $(( ($#PREFIX+$#SUFFIX)/3 )) numeric )'
-    
+
 # insert all expansions for expand completer
 zstyle ':completion:*:expand:*' tag-order all-expansions
 

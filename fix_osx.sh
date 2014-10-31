@@ -42,6 +42,9 @@ defaults write com.apple.dock wvous-tl-modifier -int 0
 defaults write com.apple.dock orientation left
 defaults write com.apple.dock pinning -string start
 
+# Remove all dock icons
+defaults write com.apple.dock persistent-apps -array
+
 # Allow keyboard navigation for modals
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
@@ -78,6 +81,9 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # Disable drop shadow on screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
+# Disable Spotlight icon
+sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+
 # Disable stupid semitransparent menubar
 # This is probably counterproductive with dark mode
 # defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
@@ -106,6 +112,9 @@ defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+# DARK MODE
+sudo defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
 
 # Enable HiDPI display modes
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
@@ -152,7 +161,9 @@ killall Finder
 
 read -p "Preparing to make symlinks"
 
-for file in .zshrc .zshenv .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf
+mkdir ~/bin && cd ~/bin
+
+for file in .zshrc .zshenv .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf bin
 do
     ln -s ~/git/dotfiles/$file ~/$file
 done
@@ -170,8 +181,11 @@ cd ~/git && \
 
 # Brews
 
-ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+sudo xcodebuild -license
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
-brew install task macvim tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl bbe ctags
+brew install task macvim tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl bbe zsh
 brew install ctags --HEAD
+brew install profanity --with-terminal-notifier
 brew linkapps
+task

@@ -10,13 +10,24 @@
  * A_PROTECT       Protected mode
  * A_INVIS         Invisible or blank mode
  */
-#define BLUE            (COLORS==256 ? 68 : COLOR_BLUE)
+
+enum {
+	DEFAULT,
+	BLUE,
+};
+
+static Color colors[] = {
+	[DEFAULT] = { .fg = -1,         .bg = -1, .fg256 = -1, .bg256 = -1, },
+	[BLUE]    = { .fg = COLOR_BLUE, .bg = -1, .fg256 = 68, .bg256 = -1, },
+};
+
+#define COLOR(c)        COLOR_PAIR(colors[c].pair)
 /* curses attributes for the currently focused window */
-#define SELECTED_ATTR   COLOR(BLUE, -1) | A_NORMAL
+#define SELECTED_ATTR   (COLOR(BLUE) | A_NORMAL)
 /* curses attributes for normal (not selected) windows */
-#define NORMAL_ATTR     COLOR(-1, -1) | A_NORMAL
+#define NORMAL_ATTR     (COLOR(DEFAULT) | A_NORMAL)
 /* curses attributes for the status bar */
-#define BAR_ATTR        COLOR(BLUE, -1) | A_NORMAL
+#define BAR_ATTR        (COLOR(BLUE) | A_NORMAL)
 /* status bar (command line option -s) position */
 #define BAR_POS		BAR_TOP /* BAR_BOTTOM, BAR_OFF */
 /* determines whether the statusbar text should be right or left aligned */
@@ -34,68 +45,68 @@
 
 #include "tile.c"
 #include "grid.c"
-#include "bstack.c"
+#include "tstack.c"
 #include "fullscreen.c"
+#include "fibonacci.c"
 
 /* by default the first layout entry is used */
 static Layout layouts[] = {
 	{ "[]=", tile },
 	{ "+++", grid },
-	{ "TTT", bstack },
+	{ "[@]", dwindle },
 	{ "[ ]", fullscreen },
 };
 
 #define MOD CTRL('g')
 
 /* you can at most specifiy MAX_ARGS (3) number of arguments */
-static Key keys[] = {
-	{ MOD, 'c',       { create,         { NULL }                    } },
-	{ MOD, 'C',       { create,         { NULL, NULL, "$CWD" }      } },
-	{ MOD, 'x',       { killclient,     { NULL }                    } },
-	{ MOD, 'j',       { focusnext,      { NULL }                    } },
-//	{ MOD, 'u',       { focusnextnm,    { NULL }                    } },
-//	{ MOD, 'i',       { focusprevnm,    { NULL }                    } },
-	{ MOD, 'k',       { focusprev,      { NULL }                    } },
-	{ MOD, 't',       { setlayout,      { "[]=" }                   } },
-	{ MOD, 'g',       { setlayout,      { "+++" }                   } },
-	{ MOD, 'b',       { setlayout,      { "TTT" }                   } },
-	{ MOD, 'm',       { setlayout,      { "[ ]" }                   } },
-	{ MOD, ' ',       { setlayout,      { NULL }                    } },
-	{ MOD, 'h',       { setmfact,       { "-0.05" }                 } },
-	{ MOD, 'l',       { setmfact,       { "+0.05" }                 } },
-	{ MOD, '.',       { toggleminimize, { NULL }                    } },
-	{ MOD, 's',       { togglebar,      { NULL }                    } },
-	{ MOD, 'M',       { togglemouse,    { NULL }                    } },
-	{ MOD, 'i',       { zoom ,          { NULL }                    } },
-	{ MOD, '1',       { focusn,         { "1" }                     } },
-	{ MOD, '2',       { focusn,         { "2" }                     } },
-	{ MOD, '3',       { focusn,         { "3" }                     } },
-	{ MOD, '4',       { focusn,         { "4" }                     } },
-	{ MOD, '5',       { focusn,         { "5" }                     } },
-	{ MOD, '6',       { focusn,         { "6" }                     } },
-	{ MOD, '7',       { focusn,         { "7" }                     } },
-	{ MOD, '8',       { focusn,         { "8" }                     } },
-	{ MOD, '9',       { focusn,         { "9" }                     } },
-	{ MOD, 'Q',       { quit,           { NULL }                    } },
-	{ MOD, 'a',       { togglerunall,   { NULL }                    } },
-	{ MOD, 'r',       { redraw,         { NULL }                    } },
-	{ MOD, 'X',       { lock,           { NULL }                    } },
-	{ MOD, 'B',       { togglebell,     { NULL }                    } },
-	{ MOD, 'v',       { copymode,       { NULL }                    } },
-	{ MOD, '/',       { copymode,       { "/" }                     } },
-	{ MOD, '?',       { copymode,       { "?" }                     } },
-	{ MOD, 'p',       { paste,          { NULL }                    } },
-	{ MOD, KEY_PPAGE, { scrollback,     { "-1" }                    } },
-	{ MOD, KEY_NPAGE, { scrollback,     { "1"  }                    } },
-	{ MOD, KEY_F(1),  { create,         { "man dvtm", "dvtm help" } } },
+static KeyBinding bindings[] = {
+	{ { MOD, 'c',          }, { create,         { NULL }                    } },
+	{ { MOD, 'C',          }, { create,         { NULL, NULL, "$CWD" }      } },
+	{ { MOD, 'x',          }, { killclient,     { NULL }                    } },
+	{ { MOD, 'j',          }, { focusnext,      { NULL }                    } },
+//	{ { MOD, 'u',          }, { focusnextnm,    { NULL }                    } },
+//	{ { MOD, 'i',          }, { focusprevnm,    { NULL }                    } },
+	{ { MOD, 'k',          }, { focusprev,      { NULL }                    } },
+	{ { MOD, 't',          }, { setlayout,      { "[]=" }                   } },
+	{ { MOD, 'g',          }, { setlayout,      { "+++" }                   } },
+	{ { MOD, 'b',          }, { setlayout,      { "TTT" }                   } },
+	{ { MOD, 'm',          }, { setlayout,      { "[ ]" }                   } },
+	{ { MOD, ' ',          }, { setlayout,      { NULL }                    } },
+	{ { MOD, 'h',          }, { setmfact,       { "-0.05" }                 } },
+	{ { MOD, 'l',          }, { setmfact,       { "+0.05" }                 } },
+	{ { MOD, '.',          }, { toggleminimize, { NULL }                    } },
+	{ { MOD, 's',          }, { togglebar,      { NULL }                    } },
+	{ { MOD, 'M',          }, { togglemouse,    { NULL }                    } },
+	{ { MOD, 'i',          }, { zoom ,          { NULL }                    } },
+	{ { MOD, '1',          }, { focusn,         { "1" }                     } },
+	{ { MOD, '2',          }, { focusn,         { "2" }                     } },
+	{ { MOD, '3',          }, { focusn,         { "3" }                     } },
+	{ { MOD, '4',          }, { focusn,         { "4" }                     } },
+	{ { MOD, '5',          }, { focusn,         { "5" }                     } },
+	{ { MOD, '6',          }, { focusn,         { "6" }                     } },
+	{ { MOD, '7',          }, { focusn,         { "7" }                     } },
+	{ { MOD, '8',          }, { focusn,         { "8" }                     } },
+	{ { MOD, '9',          }, { focusn,         { "9" }                     } },
+	{ { MOD, '\t',         }, { focuslast,      { NULL }                    } },
+	{ { MOD, 'Q',          }, { quit,           { NULL }                    } },
+	{ { MOD, 'a',          }, { togglerunall,   { NULL }                    } },
+	{ { MOD, 'r',          }, { redraw,         { NULL }                    } },
+	{ { MOD, 'B',          }, { togglebell,     { NULL }                    } },
+	{ { MOD, 'v',          }, { copymode,       { NULL }                    } },
+	{ { MOD, '/',          }, { copymode,       { "/" }                     } },
+	{ { MOD, '?',          }, { copymode,       { "?" }                     } },
+	{ { MOD, 'p',          }, { paste,          { NULL }                    } },
+	{ { MOD, KEY_PPAGE,    }, { scrollback,     { "-1" }                    } },
+	{ { MOD, KEY_NPAGE,    }, { scrollback,     { "1"  }                    } },
+	{ { MOD, KEY_F(1),     }, { create,         { "man dvtm", "dvtm help" } } },
+	{ { MOD, MOD,          }, { send,           { (const char []){MOD, 0} } } },
+	{ { KEY_SPREVIOUS,     }, { scrollback,     { "-1" }                    } },
+	{ { KEY_SNEXT,         }, { scrollback,     { "1"  }                    } },
 };
 
 static const ColorRule colorrules[] = {
-	{ "", A_NORMAL, -1, -1 }, /* default */
-#if 0
-	/* title attrs     fgcolor      bgcolor */
-	{ "ssh", A_NORMAL, COLOR_BLACK, 224      },
-#endif
+	{ "", A_NORMAL, &colors[DEFAULT] }, /* default */
 };
 
 /* possible values for the mouse buttons are listed below:
@@ -153,4 +164,17 @@ static Action actions[] = {
 
 static char const * const keytable[] = {
 	/* add your custom key escape sequences */
+};
+
+/* editor to use for copy mode. If neither of DVTM_EDITOR, EDITOR and PAGER is
+ * set the first entry is chosen. Otherwise the array is consulted for supported
+ * options. A %d in argv is replaced by the line number at which the file should
+ * be opened. If filter is true the editor is expected to work even if stdout is
+ * redirected (i.e. not a terminal).
+ */
+static Editor editors[] = {
+	{ .name = "vis",  .argv = { "vis",  "+%d", NULL      }, .filter = true  },
+	{ .name = "sandy",.argv = { "sandy","-d",  "-", NULL }, .filter = true  },
+	{ .name = "vim",  .argv = { "vim",  "+%d", "-", NULL }, .filter = false },
+	{ .name = "less", .argv = { "less", "+%d", "-", NULL }, .filter = false },
 };
