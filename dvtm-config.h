@@ -30,6 +30,8 @@ static Color colors[] = {
 #define BAR_ATTR        (COLOR(BLUE) | A_NORMAL)
 /* status bar (command line option -s) position */
 #define BAR_POS		BAR_TOP /* BAR_BOTTOM, BAR_OFF */
+/* whether status bar should be hidden if only one client exists */
+#define BAR_AUTOHIDE    true
 /* determines whether the statusbar text should be right or left aligned */
 #define BAR_ALIGN       ALIGN_RIGHT
 /* separator between window title and window number */
@@ -42,6 +44,16 @@ static Color colors[] = {
 #define MFACT 0.5
 /* scroll back buffer size in lines */
 #define SCROLL_HISTORY 3000
+/* printf format string for the tag in the status bar */
+#define TAG_SYMBOL   "[%s]"
+/* curses attributes for the currently selected tags */
+#define TAG_SEL      (COLOR(BLUE) | A_BOLD)
+/* curses attributes for not selected tags which contain no windows */
+#define TAG_NORMAL   (COLOR(DEFAULT) | A_NORMAL)
+/* curses attributes for not selected tags which contain windows */
+#define TAG_OCCUPIED (COLOR(BLUE) | A_NORMAL)
+
+const char tags[][8] = { "1", "2", "3", "4" };
 
 #include "tile.c"
 #include "grid.c"
@@ -91,18 +103,41 @@ static KeyBinding bindings[] = {
 	{ { MOD, '\t',         }, { focuslast,      { NULL }                    } },
 	{ { MOD, 'Q',          }, { quit,           { NULL }                    } },
 	{ { MOD, 'a',          }, { togglerunall,   { NULL }                    } },
+	{ { MOD, CTRL('L'),    }, { redraw,         { NULL }                    } },
 	{ { MOD, 'r',          }, { redraw,         { NULL }                    } },
 	{ { MOD, 'B',          }, { togglebell,     { NULL }                    } },
-	{ { MOD, 'v',          }, { copymode,       { NULL }                    } },
+	{ { MOD, 'e',          }, { copymode,       { NULL }                    } },
 	{ { MOD, '/',          }, { copymode,       { "/" }                     } },
-	{ { MOD, '?',          }, { copymode,       { "?" }                     } },
 	{ { MOD, 'p',          }, { paste,          { NULL }                    } },
 	{ { MOD, KEY_PPAGE,    }, { scrollback,     { "-1" }                    } },
 	{ { MOD, KEY_NPAGE,    }, { scrollback,     { "1"  }                    } },
-	{ { MOD, KEY_F(1),     }, { create,         { "man dvtm", "dvtm help" } } },
+	{ { MOD, '?',          }, { create,         { "man dvtm", "dvtm help" } } },
 	{ { MOD, MOD,          }, { send,           { (const char []){MOD, 0} } } },
 	{ { KEY_SPREVIOUS,     }, { scrollback,     { "-1" }                    } },
 	{ { KEY_SNEXT,         }, { scrollback,     { "1"  }                    } },
+	{ { MOD, '0',          }, { view,           { NULL }                    } },
+	{ { MOD, KEY_F(1),     }, { view,           { tags[0] }                 } },
+	{ { MOD, KEY_F(2),     }, { view,           { tags[1] }                 } },
+	{ { MOD, KEY_F(3),     }, { view,           { tags[2] }                 } },
+	{ { MOD, KEY_F(4),     }, { view,           { tags[3] }                 } },
+	{ { MOD, 'v', '1'      }, { view,           { tags[0] }                 } },
+	{ { MOD, 'v', '2'      }, { view,           { tags[1] }                 } },
+	{ { MOD, 'v', '3'      }, { view,           { tags[2] }                 } },
+	{ { MOD, 'v', '4'      }, { view,           { tags[3] }                 } },
+	{ { MOD, 'v', '\t',    }, { viewprevtag,    { NULL }                    } },
+	{ { MOD, 't', '0'      }, { tag,            { NULL }                    } },
+	{ { MOD, 't', '1'      }, { tag,            { tags[0] }                 } },
+	{ { MOD, 't', '2'      }, { tag,            { tags[1] }                 } },
+	{ { MOD, 't', '3'      }, { tag,            { tags[2] }                 } },
+	{ { MOD, 't', '4'      }, { tag,            { tags[3] }                 } },
+	{ { MOD, 'V', '1'      }, { toggleview,     { tags[0] }                 } },
+	{ { MOD, 'V', '2'      }, { toggleview,     { tags[1] }                 } },
+	{ { MOD, 'V', '3'      }, { toggleview,     { tags[2] }                 } },
+	{ { MOD, 'V', '4'      }, { toggleview,     { tags[3] }                 } },
+	{ { MOD, 'T', '1'      }, { toggletag,      { tags[0] }                 } },
+	{ { MOD, 'T', '2'      }, { toggletag,      { tags[1] }                 } },
+	{ { MOD, 'T', '3'      }, { toggletag,      { tags[2] }                 } },
+	{ { MOD, 'T', '4'      }, { toggletag,      { tags[3] }                 } },
 };
 
 static const ColorRule colorrules[] = {
