@@ -205,9 +205,8 @@ let g:tex_flavor="latex"
 let g:tex_no_error = 1
 let g:tex_conceal= ""
 let g:tex_comment_nospell = 1
-"let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
-let g:LatexBox_latexmk_options = "-xelatex -interaction=batchmode"
-let g:LatexBox_build_dir = "$HOME/.build"
+"let g:LatexBox_latexmk_options = "--disable-write18 --file-line-error --interaction=batchmode -pdflatex=lualatex -latex=lualatex"
+let g:LatexBox_latexmk_options = "-xelatex --disable-write18 --file-line-error --interaction=batchmode"
 " Work around the fact that cmdline macvim doesn't support server mode
 if has("gui_macvim")
     let g:LatexBox_latexmk_async = 1
