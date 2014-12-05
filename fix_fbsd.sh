@@ -4,7 +4,7 @@ cat <<EOF >> /etc/rc.conf
 syslogd_flags="-ss"
 virecover_enable="NO"
 ntpd_sync_on_start="YES"
-ntpd_enable=YES"
+ntpd_enable="YES"
 ntpd_sync_on_start="YES"
 clear_tmp_enable="YES"
 sendmail_enable="NO"
