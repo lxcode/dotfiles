@@ -341,7 +341,7 @@ let g:statline_filename_relative=1
 " clang {{{
 let g:clang_complete_enable = 1
 let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
+let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
 let g:clang_complete_copen = 1
 let g:clang_snippets = 1
 let g:clang_use_library = 1

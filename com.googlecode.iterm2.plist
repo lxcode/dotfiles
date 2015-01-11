@@ -377,11 +377,13 @@
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
 	<key>NSWindow Frame Preferences</key>
-	<string>108 158 924 485 0 0 1280 777 </string>
+	<string>108 170 924 485 0 0 1280 800 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>1090 966 384 129 0 0 2560 1418 </string>
+	<string>450 486 384 129 0 0 1280 777 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 376 570 401 0 0 1280 800 </string>
+	<string>0 0 1280 800 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>229 122 570 401 0 0 1280 778 </string>
 	<key>NeverWarnAboutShortLivedSessions_6D183BE5-5AB6-48B3-AEA5-CE6961F6BE53</key>
@@ -616,7 +618,7 @@
 			<key>Disable Window Resizing</key>
 			<true/>
 			<key>Flashing Bell</key>
-			<false/>
+			<true/>
 			<key>Foreground Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -997,7 +999,7 @@
 			<key>Shortcut</key>
 			<string></string>
 			<key>Silence Bell</key>
-			<false/>
+			<true/>
 			<key>Smart Cursor Color</key>
 			<true/>
 			<key>Smart Selection Rules</key>
@@ -1187,7 +1189,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-10-30T23:25:51Z</date>
+	<date>2014-12-02T22:05:53Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -1212,6 +1214,8 @@
 	<integer>10</integer>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<true/>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1415467520</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -1235,6 +1239,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.0.0.20141022</string>
+	<string>2.0.0.20141103</string>
 </dict>
 </plist>
