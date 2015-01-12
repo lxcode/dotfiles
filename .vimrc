@@ -51,7 +51,6 @@ nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
 nmap <Leader>fw :StripWhitespace<CR>
 " Quick exits
 nmap zz ZZ
-nmap Q :qa!<CR>
 " }}}
 
 " Settings {{{
@@ -192,6 +191,7 @@ let g:clever_f_smart_case=1
 " Indentlines {{{
 nmap \|\| :IndentLinesToggle<CR>
 let g:indentLine_faster = 1
+let g:indentLine_enabled = 0
 " }}}
 
 " Limelight {{{
@@ -647,7 +647,7 @@ endfunction
 
 command! -nargs=1 Graudit call Graudit(<f-args>)
 function! Graudit(db)
-    call system("$HOME/Tools/graudit/graudit -x 'cscope.*' -c0 -d " . a:db . " . > /tmp/graudit.out")
+    call system("$HOME/Tools/graudit/graudit -x 'cscope.*' -c0 -d " . a:db . " . | awk 'length($0) < 200' > /tmp/graudit.out")
     copen
     cf /tmp/graudit.out
 endfunction
