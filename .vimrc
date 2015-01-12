@@ -51,7 +51,6 @@ nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
 nmap <Leader>fw :StripWhitespace<CR>
 " Quick exits
 nmap zz ZZ
-nmap Q :qa!<CR>
 " }}}
 
 " Settings {{{
@@ -144,6 +143,7 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=2        " the default level of fold nesting on startup
 set cryptmethod=blowfish    " in case I ever decide to use vim -x
 set autoread                " Disable warning about file change to writable
+set conceallevel=0          " Don't hide things by default
 "set updatecount=100 updatetime=3600000		" saves power on notebooks
 
 "if exists('&autochdir')
@@ -191,6 +191,7 @@ let g:clever_f_smart_case=1
 " Indentlines {{{
 nmap \|\| :IndentLinesToggle<CR>
 let g:indentLine_faster = 1
+let g:indentLine_enabled = 0
 " }}}
 
 " Limelight {{{
@@ -202,10 +203,10 @@ let g:limelight_default_coefficient = 0.7
 " latex-box {{{
 let g:tex_flavor="latex"
 let g:tex_no_error = 1
+let g:tex_conceal= ""
 let g:tex_comment_nospell = 1
-"let g:LatexBox_latexmk_options = "-pdflatex=lualatex -latex=lualatex"
-let g:LatexBox_latexmk_options = "-xelatex"
-let g:LatexBox_build_dir = "$HOME/.build"
+"let g:LatexBox_latexmk_options = "--disable-write18 --file-line-error --interaction=batchmode -pdflatex=lualatex -latex=lualatex"
+let g:LatexBox_latexmk_options = "-xelatex --disable-write18 --file-line-error --interaction=batchmode"
 " Work around the fact that cmdline macvim doesn't support server mode
 if has("gui_macvim")
     let g:LatexBox_latexmk_async = 1
@@ -243,7 +244,7 @@ let g:LatexBox_fold_parts=[
 
 augroup latex
     " The NoStarch style is a bit crufty and needs pdflatex
-    au BufWinEnter book.tex let g:LatexBox_latexmk_options = ""
+    au BufWinEnter book.tex let g:LatexBox_latexmk_options = "-interaction=batchmode -draftmode"
     au BufWinEnter book.tex let g:LatexBox_fold_envs = 1
     if &diff
         let g:LatexBox_Folding = 0
@@ -340,7 +341,7 @@ let g:statline_filename_relative=1
 " clang {{{
 let g:clang_complete_enable = 1
 let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
+let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
 let g:clang_complete_copen = 1
 let g:clang_snippets = 1
 let g:clang_use_library = 1
@@ -646,7 +647,7 @@ endfunction
 
 command! -nargs=1 Graudit call Graudit(<f-args>)
 function! Graudit(db)
-    call system("$HOME/Tools/graudit/graudit -x 'cscope.*' -c0 -d " . a:db . " . > /tmp/graudit.out")
+    call system("$HOME/Tools/graudit/graudit -x 'cscope.*' -c0 -d " . a:db . " . | awk 'length($0) < 200' > /tmp/graudit.out")
     copen
     cf /tmp/graudit.out
 endfunction

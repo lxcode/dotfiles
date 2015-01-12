@@ -81,9 +81,6 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # Disable drop shadow on screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
-# Disable Spotlight icon
-sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
-
 # Disable stupid semitransparent menubar
 # This is probably counterproductive with dark mode
 # defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
