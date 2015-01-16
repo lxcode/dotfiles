@@ -971,7 +971,7 @@ def cursor_moved():
 	if not file_is_reviewable(vim.current.buffer.name):
 		return
 
-	show_current_notes()
+    #show_current_notes()
 
 	if is_auditing:
 		filename = vim.current.buffer.name
