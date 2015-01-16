@@ -143,11 +143,12 @@ killall Finder
 # every time you close the machine to prevent that. If you want to do that, use
 # this:
 #
-# sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25
+# sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25 autopoweroff 0
 #
 # You can also use autopoweroff and reduce the autopoweroffdelay if you want
 # to sleep -> hibernate after a period of time.
 #
+# Or you can do this to save space.
 # pmset -a hibernatemode 0
 # pmset -a autopoweroff 0
 # rm /private/var/vm/sleepimage
