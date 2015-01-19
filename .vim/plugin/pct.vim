@@ -79,7 +79,8 @@ import vim
 try:
 	from peewee import *
 except ImportError as e:
-	print("Could not import peewee module, run 'pip install peewee'")
+    pass
+    #    print("Could not import peewee module, run 'pip install peewee'")
 
 class PctModels:
 	Path = None
