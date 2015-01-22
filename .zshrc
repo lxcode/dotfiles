@@ -42,8 +42,8 @@ alias th="task list +home"
 alias tw="task list +work"
 alias ws="python -m SimpleHTTPServer 8080"
 alias tws="twistd -no web --path=. --port=8080"
-alias tpush="cd ~/.task && git add * && git commit -m 'Task update' && git push"
-alias tpull="cd ~/.task && git pull"
+alias tpush="pushd ~/.task && git add * && git commit -m 'Task update' && git push && popd"
+alias tpull="pushd ~/.task && git pull && popd"
 
 bvimdiff() {
     vimdiff <(xxd $1) <(xxd $2)
