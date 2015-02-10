@@ -79,7 +79,8 @@ import vim
 try:
 	from peewee import *
 except ImportError as e:
-	print("Could not import peewee module, run 'pip install peewee'")
+    pass
+    #    print("Could not import peewee module, run 'pip install peewee'")
 
 class PctModels:
 	Path = None
@@ -971,7 +972,7 @@ def cursor_moved():
 	if not file_is_reviewable(vim.current.buffer.name):
 		return
 
-	show_current_notes()
+    #show_current_notes()
 
 	if is_auditing:
 		filename = vim.current.buffer.name
