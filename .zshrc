@@ -1,4 +1,4 @@
-# Use hard limits, except for a smaller stack and no core dumps
+### Limits
 unlimit
 limit stack 8192
 limit core unlimited
@@ -6,9 +6,35 @@ limit -s
 
 umask 022
 
-# Set up aliases
+### Environment
+export MAIL=/home/$USERNAME/Maildir
+export HELPDIR=/usr/local/lib/zsh/help  # directory for run-help function to find docs
+
+MAILCHECK=300
+HISTSIZE=1336
+DIRSTACKSIZE=20
+HISTFILE=~/.zsh_history
+SAVEHIST=1336
+
+### Watch
+watch=(notme)                   # watch for everybody but me
+LOGCHECK=300                    # check every 5 min for login/logout activity
+WATCHFMT='%n %a %l from %m at %t.'
+
+### Options
+setopt   notify globdots pushdtohome cdablevars autolist
+setopt   autocd longlistjobs
+setopt   autoresume histignoredups pushdsilent
+setopt   autopushd pushdminus extendedglob rcquotes mailwarning
+setopt   multios
+unsetopt bgnice autoparamslash
+
+# argh, cut it out!
+setopt nocorrect nocorrectall
+setopt NO_CDABLE_VARS
+
+### Aliases
 alias skype='skype --resources=/usr/local/share/skype'
-alias sp="cadaver https://sharepoint.corp.isecpartners.com"
 alias j=jobs
 alias dis=disown
 alias pd=popd
@@ -44,7 +70,10 @@ alias ws="python -m SimpleHTTPServer 8080"
 alias tws="twistd -no web --path=. --port=8080"
 alias tpush="pushd ~/.task && git add * && git commit -m 'Task update' && git push; popd"
 alias tpull="pushd ~/.task && git pull; popd"
+alias lsd='ls -ld *(-/DN)'
+alias lsa='ls -ld .*'
 
+### Functions
 bvimdiff() {
     vimdiff <(xxd $1) <(xxd $2)
 }
@@ -61,19 +90,14 @@ if [ -n "$DISPLAY" ]; then
     alias vim="$EDITOR --servername VIM"
 fi
 
-# List only directories and symbolic
-# links that point to directories
-alias lsd='ls -ld *(-/DN)'
-
-# List only file beginning with "."
-alias lsa='ls -ld .*'
-
-# Shell functions
 setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
+
 hgdiff() {
     vimdiff -c 'map q :qa!<CR>' <(hg cat "$1") "$1";
 }
+
 freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
+
 pskill()
 {
 	for pid in `ps $PSFLAGS |grep $1 |grep -v grep |awk '{print $1}'`
@@ -82,27 +106,19 @@ pskill()
 		kill $2 $pid
 	done
 }
+
 cgrep()
 {
 	regex=$1
 	file=$2
 	sed -n -e '/$regex/{=;x;1!p;g;$!N;p;D;}' -e h $file
 }
+
 lxdo()
 {
 	args=$*
 	su root -mc $args
 }
-
-#ssh()
-#{
-#    if [ $TERM = dvtm-256color ]; then
-#        env TERM=xterm-256color \ssh "$@"
-#    else
-#        \ssh "$@"
-#    fi
-#}
-
 
 # Where to look for autoloaded function definitions
 fpath=(~/.zfunc $fpath)
@@ -111,7 +127,7 @@ for func in $^fpath/*(N-.x:t); autoload $func
 # automatically remove duplicates from these arrays
 typeset -U path cdpath fpath manpath
 
-# Set prompts
+### Prompts
 PROMPT='[%B%n%b@%m %3~ %h ] '
 
 # set up cool things in xterm title bars
@@ -171,58 +187,41 @@ screen*)
 esac
 }
 
+# typing ... expands to ../.., .... to ../../.., etc.
+rationalise-dot() {
+    if [[ $LBUFFER = *.. ]]; then
+        LBUFFER+=/..
+    else
+        LBUFFER+=.
+    fi
+}
+zle -N rationalise-dot
+zle -N edit-command-line
 
-# Some environment variables
-export MAIL=/home/$USERNAME/Maildir
-export HELPDIR=/usr/local/lib/zsh/help  # directory for run-help function to find docs
-
-MAILCHECK=300
-HISTSIZE=1336
-DIRSTACKSIZE=20
-HISTFILE=~/.zsh_history
-SAVEHIST=1336
-
-# Watch for my friends
-#watch=( $(<~/.friends) )       # watch for people in .friends file
-watch=(notme)                   # watch for everybody but me
-LOGCHECK=300                    # check every 5 min for login/logout activity
-WATCHFMT='%n %a %l from %m at %t.'
-
-# Set/unset  shell options
-setopt   notify globdots pushdtohome cdablevars autolist
-setopt   autocd longlistjobs
-setopt   autoresume histignoredups pushdsilent
-setopt   autopushd pushdminus extendedglob rcquotes mailwarning
-setopt   multios
-unsetopt bgnice autoparamslash
-
-# argh, cut it out!
-setopt nocorrect nocorrectall
-setopt NO_CDABLE_VARS
-
-# Autoload zsh modules when they are referenced
+### Modules
 zmodload -a zsh/stat stat
 zmodload -a zsh/zpty zpty
 zmodload -a zsh/zprof zprof
 zmodload -ap zsh/mapfile mapfile
 
+### Bindings
 bindkey -v               # vi key bindings
+bindkey "\e[Z" reverse-menu-complete
 bindkey '^R' history-incremental-search-backward
+bindkey . rationalise-dot
+bindkey -M isearch . self-insert # history search fix
+bindkey -M vicmd v edit-command-line
 
-#bindkey '^I' complete-word # complete on tab, leave expansion to _expand
-#bindkey "^I" menu-complete # menu complete seems much faster.
-
-autoload -U compinit
+### Completion
+autoload -Uz compinit
 compinit -u
+autoload -U edit-command-line
 
-# Completion Styles
-#
-#
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zshcache
 
 # list of completers to use
-zstyle ':completion:*::::' completer _expand _complete _ignored
+zstyle ':completion:*::::' completer _expand _complete _approximate _ignored
 
 # allow one error for every three characters typed in approximate completer
 zstyle -e ':completion:*:approximate:*' max-errors \
@@ -235,8 +234,6 @@ zstyle ':completion:*:expand:*' tag-order all-expansions
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle ':completion:*:messages' format '%d'
-#zstyle ':completion:*:warnings' format 'No matches for: %d'
-#zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=long-list select=0
 zstyle ':completion:*' list-colors ''
@@ -260,11 +257,6 @@ zstyle -e ':completion:*:urls' urls 'reply=($(cat $HOME/.w3m/history 2>/dev/null
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
 zstyle -e ':completion:*:ports' ports 'reply=($(nmap $1 |grep open |awk -F / {print $1}))'
-
-autoload -U edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
-
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
