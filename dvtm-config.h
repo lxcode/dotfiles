@@ -34,16 +34,10 @@ static Color colors[] = {
 #define BAR_POS		BAR_TOP /* BAR_BOTTOM, BAR_OFF */
 /* whether status bar should be hidden if only one client exists */
 #define BAR_AUTOHIDE    true
-/* determines whether the statusbar text should be right or left aligned */
-#define BAR_ALIGN       ALIGN_RIGHT
-/* separator between window title and window number */
-#define SEPARATOR " | "
-/* printf format string for the window title, first %s
- * is replaced by the title, second %s is replaced by
- * the SEPARATOR, %d stands for the window number */
-#define TITLE "[%s%s#%d]"
 /* master width factor [0.1 .. 0.9] */
 #define MFACT 0.5
+/* number of clients in master area */
+#define NMASTER 1
 /* scroll back buffer size in lines */
 #define SCROLL_HISTORY 3000
 /* printf format string for the tag in the status bar */
@@ -81,18 +75,21 @@ static KeyBinding bindings[] = {
 	{ { MOD, 'C',          }, { create,         { NULL, NULL, "$CWD" }      } },
 	{ { MOD, 'x',          }, { killclient,     { NULL }                    } },
 	{ { MOD, 'j',          }, { focusnext,      { NULL }                    } },
-//	{ { MOD, 'u',          }, { focusnextnm,    { NULL }                    } },
-//	{ { MOD, 'i',          }, { focusprevnm,    { NULL }                    } },
+	{ { MOD, 'J',          }, { focusnextnm,    { NULL }                    } },
+	{ { MOD, 'K',          }, { focusprevnm,    { NULL }                    } },
 	{ { MOD, 'k',          }, { focusprev,      { NULL }                    } },
 	{ { MOD, 't',          }, { setlayout,      { "[]=" }                   } },
 	{ { MOD, 'g',          }, { setlayout,      { "+++" }                   } },
 	{ { MOD, 'b',          }, { setlayout,      { "TTT" }                   } },
 	{ { MOD, 'm',          }, { setlayout,      { "[ ]" }                   } },
 	{ { MOD, ' ',          }, { setlayout,      { NULL }                    } },
+	{ { MOD, '=',          }, { incnmaster,     { "+1" }                    } },
+	{ { MOD, '-',          }, { incnmaster,     { "-1" }                    } },
 	{ { MOD, 'h',          }, { setmfact,       { "-0.05" }                 } },
 	{ { MOD, 'l',          }, { setmfact,       { "+0.05" }                 } },
 	{ { MOD, '.',          }, { toggleminimize, { NULL }                    } },
 	{ { MOD, 's',          }, { togglebar,      { NULL }                    } },
+	{ { MOD, 'S',          }, { togglebarpos,   { NULL }                    } },
 	{ { MOD, 'M',          }, { togglemouse,    { NULL }                    } },
 	{ { MOD, 'i',          }, { zoom ,          { NULL }                    } },
 	{ { MOD, '1',          }, { focusn,         { "1" }                     } },
