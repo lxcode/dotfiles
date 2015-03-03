@@ -211,6 +211,12 @@ bindkey '^R' history-incremental-search-backward
 bindkey . rationalise-dot
 bindkey -M isearch . self-insert # history search fix
 bindkey -M vicmd v edit-command-line
+bindkey '^P' up-line-or-search
+bindkey '^N' down-line-or-search
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
 
 ### Completion
 autoload -Uz compinit
@@ -221,7 +227,7 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zshcache
 
 # list of completers to use
-zstyle ':completion:*::::' completer _expand _complete _approximate _ignored
+zstyle ':completion:*::::' completer _expand _complete _ignored
 
 # allow one error for every three characters typed in approximate completer
 zstyle -e ':completion:*:approximate:*' max-errors \
@@ -262,3 +268,6 @@ zstyle -e ':completion:*:ports' ports 'reply=($(nmap $1 |grep open |awk -F / {pr
 export PATH="/usr/local/heroku/bin:$PATH"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+### Source things
+source ~/.zsh/zsh-history-substring-search.zsh
