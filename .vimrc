@@ -37,8 +37,8 @@ map <F12> :cn<CR>
 nmap <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Window movement
-nnoremap <C-j> <C-W>w
-nnoremap <C-k> <C-W>W
+nnoremap <C-j> <C-w>w
+nnoremap <C-k> <C-w>W
 " Keep selected blocks selected when shifting
 vmap > >gv
 vmap < <gv
