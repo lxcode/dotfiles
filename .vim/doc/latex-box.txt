@@ -299,6 +299,8 @@ Motion ~
 *:LatexTOC*
         Open a table of contents.
         Use Enter to navigate to selected entry.
+        See |g:LatexBox_split_type|.
+        See |g:LatexBox_split_length|.
         See |g:LatexBox_split_width|.
         See |g:LatexBox_split_side|.
         See |g:LatexBox_split_resize|.
@@ -612,18 +614,40 @@ Compilation ~
                                                   *latex-box-settings-windows*
 Vim Windows ~
 
+For different settings, change the .vimrc so that a more comfortable 
+global variable is used. For example, if one prefers horizontal splits 
+(non-default, featured in screenshot), consider the following lines in 
+the .vimrc:
+
+>
+              if s:extfname ==? "tex" 
+                ...
+                let |g:LatexBox_split_type| = "new"
+                ...
+              end if
+<        
+
+*g:LatexBox_split_type*                 Default: "vnew"
+        The type of split for the Table of Contents. Use "new" for horizontal,
+        "vnew" for vertical. Note that these are the general commands for 
+        splitting--more info can be found via :help new.
+
+*g:LatexBox_split_length*               Default: 15
+        Length of horizontally split vim windows. Used for the table of contents.
+
 *g:LatexBox_split_width*                Default: 30
         Width of vertically split vim windows. Used for the table of contents.
 
-*g:LatexBox_split_side*                 Default: "leftabove"
-        On which side the vertically split windows appear. Used for the table
-        of contents. Set to "rightbelow" to have it on the right side.
+*g:LatexBox_split_side*                 Default: "aboveleft"
+        On which side the split windows appear. Above for horizontal splits
+        and left for vertical splits. Used for the table of contents. 
+        Set to "belowright" to have it on the below/right side.
 
 *g:LatexBox_split_resize*               Default: 0
         Resize vim/gvim when opening new windows. Used for the table of
-        contents. If set to 1, it will add/remove |g:LatexBox_split_width| to
-        the number of columns dynamically, in order to keep the latex file open
-        with the desired width.
+        contents. If set to 1, it will add/remove |g:LatexBox_split_width| or
+        |g:LatexBox_split_length| to the number of columns dynamically, 
+        in order to keep the latex file open with the desired dimension.
 
 *g:LatexBox_toc_hidehelp*               Default: 0
         If enabled, the help info at the bottom of the TOC window will be
