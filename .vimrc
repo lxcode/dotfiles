@@ -140,7 +140,7 @@ set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
 set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
-set foldlevelstart=2        " the default level of fold nesting on startup
+set foldlevelstart=0        " the default level of fold nesting on startup
 set cryptmethod=blowfish    " in case I ever decide to use vim -x
 set autoread                " Disable warning about file change to writable
 set conceallevel=0          " Don't hide things by default
@@ -224,6 +224,7 @@ else
 endif
 let g:LatexBox_split_side = "rightbelow"
 let g:LatexBox_quickfix = 0
+let g:LatexBox_fold_automatic = 0
 let g:LatexBox_show_warnings = 0
 let g:LatexBox_ignore_warnings = [
             \ 'Underfull',
@@ -260,7 +261,7 @@ augroup latex
     au BufWinEnter *.tex,*.sty silent loadview
     au FileType tex syntax spell toplevel
     au FileType tex set spell textwidth=78 smartindent
-    au FileType tex set formatoptions+=w foldlevelstart=6
+    au FileType tex set formatoptions+=w
     au FileType tex imap <buffer> [[ \begin{
     au FileType tex imap <buffer> ]] <Plug>LatexCloseCurEnv
     au FileType tex imap <S-Enter> \pagebreak
