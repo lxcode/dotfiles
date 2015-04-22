@@ -37,8 +37,10 @@ map <F12> :cn<CR>
 nmap <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Window movement
-nnoremap <C-j> <C-w>w
-nnoremap <C-k> <C-w>W
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-l>k
 " Keep selected blocks selected when shifting
 vmap > >gv
 vmap < <gv
@@ -84,7 +86,7 @@ endif
 set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
-set novb t_vb=              " no visual bell
+set noerrorbells vb t_vb=   " no bells
 set nonu                    " line numbers
 set viewdir=$HOME/.views    " keep view states out of my .vim
 set pumheight=15            " trim down the completion popup menu
@@ -162,7 +164,7 @@ colorscheme lx-256-dark
 source ~/.vim/ftplugin/man.vim
 
 " netrw {{{
-let g:netrw_liststyle=3
+let g:netrw_liststyle=0
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
@@ -172,6 +174,7 @@ let g:netrw_sort_sequence = '[\/]$,*,\%(' . join(map(split(&suffixes, ','), 'esc
 
 " quickfixsigns {{{
 let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
+let g:quickfixsigns_echo_balloon = 1
 " Disable display of the ' and . marks, so the gutter will be disabled until
 " manually set marks or quickfix/diff info is present.
 let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
@@ -516,6 +519,7 @@ augroup misc
     " Disable the 'warning, editing a read-only file' thing that
     " hangs the UI
     au FileChangedRO * se noreadonly
+    au GUIEnter * set visualbell t_vb=
 augroup end
 
 augroup syntax
