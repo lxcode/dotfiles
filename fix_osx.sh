@@ -161,7 +161,7 @@ read -p "Preparing to make symlinks"
 
 mkdir ~/bin && cd ~/bin
 
-for file in .zshrc .zshenv .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf bin
+for file in .zshrc .zshenv .zsh .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf bin
 do
     ln -s ~/git/dotfiles/$file ~/$file
 done
