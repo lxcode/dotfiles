@@ -8,6 +8,7 @@ map <home> :rewind<cr>
 map <end> :last<cr>
 map g<Tab> :bn<CR>
 nnoremap <C-Tab> gt
+nnoremap <Tab> >>
 " Make Y behave like C and D
 nnoremap Y y$
 " Use , in addition to \ for the leader
@@ -51,6 +52,9 @@ nmap cd :lcd %:h \| :pwd<CR>
 " This works when I type it, but not here...
 nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
 nmap <Leader>fw :StripWhitespace<CR>
+" Base64 conversion
+vnoremap <leader>64 c<c-r>=system('base64',@")<cr><esc>
+vnoremap <leader>64d c<c-r>=system('base64 --decode',@")<cr><esc>
 " Quick exits
 nmap zz ZZ
 " }}}
@@ -112,11 +116,11 @@ set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
-if has("macunix")
+"if has("macunix")
     set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
-else
-    set grepprg=bsdgrep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
-endif
+"else
+"    set grepprg=bsdgrep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
+"endif
 set cpoptions=BFt
 set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
@@ -490,7 +494,7 @@ augroup msdocs
 augroup end
 
 augroup misc
-    au FileType netrw unmap <buffer> --
+    au FileType netrw silent! unmap <buffer> --
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.scala, set filetype=scala
