@@ -72,6 +72,7 @@ alias tpush="pushd ~/.task && git add * && git commit -m 'Task update' && git pu
 alias tpull="pushd ~/.task && git pull; popd"
 alias lsd='ls -ld *(-/DN)'
 alias lsa='ls -ld .*'
+alias ctags-objc='ctags --languages=objectivec --langmap=objectivec:.h.m'
 
 ### Functions
 bvimdiff() {
@@ -86,9 +87,9 @@ mvi() {
     vim `locate "$*"|slmenu -l 50`
 }
 
-if [ -n "$DISPLAY" ]; then
-    alias vim="$EDITOR --servername VIM"
-fi
+#if [ -n "$DISPLAY" ]; then
+#    alias vim="$EDITOR --servername VIM"
+#fi
 
 setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
 
