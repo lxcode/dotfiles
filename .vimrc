@@ -498,6 +498,7 @@ augroup misc
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.scala, set filetype=scala
+    au BufWinEnter *.proto, set filetype=proto
     au BufWinEnter *.dtrace, set filetype=D
     au BufWinEnter *.less, set filetype=css
     au BufWinEnter *.fugitiveblame,*.diff, set nospell number
