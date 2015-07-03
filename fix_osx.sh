@@ -95,7 +95,7 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 defaults write -g AppleAquaColorVariant -int 6;
 
 # Turn on firewall, such as it is
-defaults write /Library/Preferences/com.apple.sharing.firewall state -bool YES
+sudo defaults write /Library/Preferences/com.apple.sharing.firewall state -bool YES
 
 # Ask for password after lock
 defaults write com.apple.screensaver askForPassword -int 1
@@ -173,7 +173,7 @@ cd ~/git && \
     git clone git://repo.or.cz/dvtm.git && \
     cd dvtm && \
     cp ~/git/dotfiles/dvtm-config.h ./config.h && \
-    sed -i bak 's/ncursesw/ncurses/g' config.mk
+    cp ~/git/dotfiles/dvtm-config.mk ./config.mk
     sed -i bak 's/strip -s/strip/g' Makefile
     sudo make install clean
 
@@ -182,7 +182,8 @@ cd ~/git && \
 sudo xcodebuild -license
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
-brew install task macvim tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl bbe zsh
+# Note that macvim requires full xcode
+brew install task macvim tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl bbe zsh w3m
 brew install ctags --HEAD
 brew install profanity --with-terminal-notifier
 brew linkapps
