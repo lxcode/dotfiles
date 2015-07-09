@@ -8,6 +8,7 @@ map <home> :rewind<cr>
 map <end> :last<cr>
 map g<Tab> :bn<CR>
 nnoremap <C-Tab> gt
+nnoremap <Tab> >>
 " Make Y behave like C and D
 nnoremap Y y$
 " Use , in addition to \ for the leader
@@ -37,8 +38,10 @@ map <F12> :cn<CR>
 nmap <C-p> :exe "ptag" expand("<cword>")<CR>
 nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
 " Window movement
-nnoremap <C-j> <C-w>w
-nnoremap <C-k> <C-w>W
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-l>k
 " Keep selected blocks selected when shifting
 vmap > >gv
 vmap < <gv
@@ -49,6 +52,9 @@ nmap cd :lcd %:h \| :pwd<CR>
 " This works when I type it, but not here...
 nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
 nmap <Leader>fw :StripWhitespace<CR>
+" Base64 conversion
+vnoremap <leader>64 c<c-r>=system('base64',@")<cr><esc>
+vnoremap <leader>64d c<c-r>=system('base64 --decode',@")<cr><esc>
 " Quick exits
 nmap zz ZZ
 " }}}
@@ -84,7 +90,7 @@ endif
 set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
-set novb t_vb=              " no visual bell
+set noerrorbells vb t_vb=   " no bells
 set nonu                    " line numbers
 set viewdir=$HOME/.views    " keep view states out of my .vim
 set pumheight=15            " trim down the completion popup menu
@@ -110,11 +116,11 @@ set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
-if has("macunix")
+"if has("macunix")
     set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
-else
-    set grepprg=bsdgrep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
-endif
+"else
+"    set grepprg=bsdgrep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
+"endif
 set cpoptions=BFt
 set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
@@ -162,7 +168,7 @@ colorscheme lx-256-dark
 source ~/.vim/ftplugin/man.vim
 
 " netrw {{{
-let g:netrw_liststyle=3
+let g:netrw_liststyle=0
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
@@ -172,6 +178,7 @@ let g:netrw_sort_sequence = '[\/]$,*,\%(' . join(map(split(&suffixes, ','), 'esc
 
 " quickfixsigns {{{
 let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
+let g:quickfixsigns_echo_balloon = 1
 " Disable display of the ' and . marks, so the gutter will be disabled until
 " manually set marks or quickfix/diff info is present.
 let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
@@ -487,10 +494,11 @@ augroup msdocs
 augroup end
 
 augroup misc
-    au FileType netrw unmap <buffer> --
+    au FileType netrw silent! unmap <buffer> --
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.scala, set filetype=scala
+    au BufWinEnter *.proto, set filetype=proto
     au BufWinEnter *.dtrace, set filetype=D
     au BufWinEnter *.less, set filetype=css
     au BufWinEnter *.fugitiveblame,*.diff, set nospell number
@@ -516,6 +524,7 @@ augroup misc
     " Disable the 'warning, editing a read-only file' thing that
     " hangs the UI
     au FileChangedRO * se noreadonly
+    au GUIEnter * set visualbell t_vb=
 augroup end
 
 augroup syntax

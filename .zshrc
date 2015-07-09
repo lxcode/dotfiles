@@ -72,6 +72,7 @@ alias tpush="pushd ~/.task && git add * && git commit -m 'Task update' && git pu
 alias tpull="pushd ~/.task && git pull; popd"
 alias lsd='ls -ld *(-/DN)'
 alias lsa='ls -ld .*'
+alias ctags-objc='ctags --languages=objectivec --langmap=objectivec:.h.m'
 
 ### Functions
 bvimdiff() {
@@ -86,9 +87,9 @@ mvi() {
     vim `locate "$*"|slmenu -l 50`
 }
 
-if [ -n "$DISPLAY" ]; then
-    alias vim="$EDITOR --servername VIM"
-fi
+#if [ -n "$DISPLAY" ]; then
+#    alias vim="$EDITOR --servername VIM"
+#fi
 
 setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
 
@@ -262,7 +263,7 @@ zstyle -e ':completion:*:urls' urls 'reply=($(cat $HOME/.w3m/history 2>/dev/null
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
-zstyle -e ':completion:*:ports' ports 'reply=($(nmap $1 |grep open |awk -F / {print $1}))'
+#zstyle -e ':completion:*:ports' ports 'reply=($(nmap $1 |grep open |awk -F / {print $1}))'
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

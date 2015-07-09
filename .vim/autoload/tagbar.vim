@@ -28,6 +28,11 @@ if exists(':Tagbar') == 0
     runtime plugin/tagbar.vim
 endif
 
+if exists(':Tagbar') == 0
+    echomsg 'Tagbar: Could not load plugin code, check your runtimepath!'
+    finish
+endif
+
 " Basic init {{{2
 
 redir => s:ftype_out
@@ -237,6 +242,7 @@ function! s:InitTypes() abort
         \ 'union'     : 'u'
     \ }
     let s:known_types.cpp = type_cpp
+    let s:known_types.cuda = type_cpp
     " C# {{{3
     let type_cs = s:TypeInfo.New()
     let type_cs.ctagstype = 'c#'
@@ -1022,7 +1028,7 @@ function! s:CreateAutocommands() abort
 endfunction
 
 " s:CheckForExCtags() {{{2
-" Test whether the ctags binary is actually Exuberant Ctags and not GNU ctags
+" Test whether the ctags binary is actually Exuberant Ctags and not BSD ctags
 " (or something else)
 function! s:CheckForExCtags(silent) abort
     call s:debug('Checking for Exuberant Ctags')
@@ -1080,9 +1086,9 @@ function! s:CheckForExCtags(silent) abort
 
     let ctags_output = s:ExecuteCtags(ctags_cmd)
 
-    if v:shell_error || ctags_output !~# 'Exuberant Ctags'
+    if v:shell_error || ctags_output !~# '\(Exuberant\|Universal\) Ctags'
         let errmsg = 'Tagbar: Ctags doesn''t seem to be Exuberant Ctags!'
-        let infomsg = 'GNU ctags will NOT WORK.' .
+        let infomsg = 'BSD ctags will NOT WORK.' .
             \ ' Please download Exuberant Ctags from ctags.sourceforge.net' .
             \ ' and install it in a directory in your $PATH' .
             \ ' or set g:tagbar_ctags_bin.'
@@ -1142,6 +1148,11 @@ function! s:CheckExCtagsVersion(output) abort
         return 1
     endif
 
+    if a:output =~ 'Universal Ctags'
+        call s:debug("Found Universal Ctags, assuming compatibility")
+        return 1
+    endif
+
     let matchlist = matchlist(a:output, '\vExuberant Ctags (\d+)\.(\d+)')
     let major     = matchlist[1]
     let minor     = matchlist[2]
@@ -1158,7 +1169,7 @@ function! s:CheckFTCtags(bin, ftype) abort
     endif
 
     if exists('g:tagbar_type_' . a:ftype)
-        execute 'let userdef = ' . 'g:tagbar_type_' . a:ftype
+        let userdef = g:tagbar_type_{a:ftype}
         if has_key(userdef, 'ctagsbin')
             return userdef.ctagsbin
         else
@@ -1261,6 +1272,8 @@ function! s:BaseTag._getPrefix() abort dict
     if g:tagbar_show_visibility
         if has_key(self.fields, 'access')
             let prefix .= get(s:visibility_symbols, self.fields.access, ' ')
+        elseif has_key(self.fields, 'file')
+            let prefix .= s:visibility_symbols.private
         else
             let prefix .= ' '
         endif
@@ -1291,7 +1304,6 @@ endfunction
 " s:BaseTag.getClosedParentTline() {{{3
 function! s:BaseTag.getClosedParentTline() abort dict
     let tagline  = self.tline
-    let fileinfo = self.fileinfo
 
     " Find the first closed parent, starting from the top of the hierarchy.
     let parents   = []
@@ -1374,7 +1386,6 @@ endfunction
 
 " s:NormalTag.strfmt() {{{3
 function! s:NormalTag.strfmt() abort dict
-    let fileinfo = self.fileinfo
     let typeinfo = self.typeinfo
 
     let suffix = get(self.fields, 'signature', '')
@@ -1477,7 +1488,6 @@ endfunction
 
 " s:PseudoTag.strfmt() {{{3
 function! s:PseudoTag.strfmt() abort dict
-    let fileinfo = self.fileinfo
     let typeinfo = self.typeinfo
 
     let suffix = get(self.fields, 'signature', '')
@@ -2078,8 +2088,10 @@ function! s:ProcessFile(fname, ftype) abort
         let parts = split(line, ';"')
         if len(parts) == 2 " Is a valid tag line
             let taginfo = s:ParseTagline(parts[0], parts[1], typeinfo, fileinfo)
-            let fileinfo.fline[taginfo.fields.line] = taginfo
-            call add(fileinfo.tags, taginfo)
+            if !empty(taginfo)
+                let fileinfo.fline[taginfo.fields.line] = taginfo
+                call add(fileinfo.tags, taginfo)
+            endif
         endif
     endfor
 
@@ -2162,7 +2174,7 @@ function! s:ExecuteCtagsOnFile(fname, realfname, typeinfo) abort
                           \ '-',
                           \ '--format=2',
                           \ '--excmd=pattern',
-                          \ '--fields=nksSa',
+                          \ '--fields=nksSaf',
                           \ '--extra=',
                           \ '--sort=no',
                           \ '--append=no'
@@ -2205,6 +2217,8 @@ function! s:ExecuteCtagsOnFile(fname, realfname, typeinfo) abort
     let ctags_output = s:ExecuteCtags(ctags_cmd)
 
     if v:shell_error || ctags_output =~ 'Warning: cannot open source file'
+        call s:debug('Command output:')
+        call s:debug(ctags_output)
         " Only display an error message if the Tagbar window is open and we
         " haven't seen the error before.
         if bufwinnr("__Tagbar__") != -1 &&
@@ -2213,8 +2227,6 @@ function! s:ExecuteCtagsOnFile(fname, realfname, typeinfo) abort
             call s:warning('Tagbar: Could not execute ctags for ' . a:realfname . '!')
             echomsg 'Executed command: "' . ctags_cmd . '"'
             if !empty(ctags_output)
-                call s:debug('Command output:')
-                call s:debug(ctags_output)
                 echomsg 'Command output:'
                 for line in split(ctags_output, '\n')
                     echomsg line
@@ -2256,13 +2268,19 @@ function! s:ParseTagline(part1, part2, typeinfo, fileinfo) abort
     " When splitting fields make sure not to create empty keys or values in
     " case a value illegally contains tabs
     let fields = split(a:part2, '^\t\|\t\ze\w\+:')
-    let taginfo.fields.kind = remove(fields, 0)
+    if fields[0] !~# ':'
+        let taginfo.fields.kind = remove(fields, 0)
+    endif
     for field in fields
         " can't use split() since the value can contain ':'
         let delimit = stridx(field, ':')
         let key = strpart(field, 0, delimit)
         " Remove all tabs that may illegally be in the value
         let val = substitute(strpart(field, delimit + 1), '\t', '', 'g')
+        " File-restricted scoping
+        if key == "file"
+            let taginfo.fields[key] = 'yes'
+        endif
         if len(val) > 0
             if key == 'line' || key == 'column'
                 let taginfo.fields[key] = str2nr(val)
@@ -2278,6 +2296,16 @@ function! s:ParseTagline(part1, part2, typeinfo, fileinfo) abort
     " Do some sanity checking in case ctags reports invalid line numbers
     if taginfo.fields.line < 0
         let taginfo.fields.line = 0
+    endif
+
+    if !has_key(taginfo.fields, 'kind')
+        call s:debug("Warning: No 'kind' field found for tag " . basic_info[0] . "!")
+        if index(s:warnings.type, a:typeinfo.ftype) == -1
+            call s:warning("No 'kind' field found for tag " . basic_info[0] . "!" .
+                         \ " Please read the last section of ':help tagbar-extend'.")
+            call add(s:warnings.type, a:typeinfo.ftype)
+        endif
+        return {}
     endif
 
     " Make some information easier accessible
@@ -2311,6 +2339,7 @@ function! s:ParseTagline(part1, part2, typeinfo, fileinfo) abort
                 \ ' Please read '':help tagbar-extend''.')
             call add(s:warnings.type, a:typeinfo.ftype)
         endif
+        return {}
     endtry
 
     return taginfo
@@ -2835,7 +2864,7 @@ endfunction
 " s:PrintHelp() {{{2
 function! s:PrintHelp() abort
     if !g:tagbar_compact && s:short_help
-        silent 0put ='\" Press <F1> or ? for help'
+        silent 0put ='\" Press ' . s:get_map_str('help') . ' for help'
         silent  put _
     elseif !s:short_help
         silent 0put ='\" Tagbar keybindings'
@@ -3292,8 +3321,6 @@ endfunction
 
 " s:OpenParents() {{{2
 function! s:OpenParents(...) abort
-    let tagline = 0
-
     if a:0 == 1
         let tag = a:1
     else
@@ -3620,8 +3647,8 @@ endfunction
 function! s:ExecuteCtags(ctags_cmd) abort
     call s:debug('Executing ctags command: ' . a:ctags_cmd)
 
-    if has('unix')
-        " Reset shell in case it is set to something incompatible like fish
+    if &shell =~# 'fish$'
+        " Reset shell since fish isn't really compatible
         let shell_save = &shell
         set shell=sh
     endif
@@ -3643,7 +3670,7 @@ function! s:ExecuteCtags(ctags_cmd) abort
         call s:debug(v:statusmsg)
         redraw!
     else
-        let ctags_output = system(a:ctags_cmd)
+        silent let ctags_output = system(a:ctags_cmd)
     endif
 
     if &shell =~ 'cmd\.exe'
@@ -3655,7 +3682,7 @@ function! s:ExecuteCtags(ctags_cmd) abort
         let &shellslash = shellslash_save
     endif
 
-    if has('unix')
+    if exists('shell_save')
         let &shell = shell_save
     endif
 
@@ -3894,7 +3921,7 @@ function! s:QuitIfOnlyWindow() abort
     endif
 
     let curwinnr = winnr()
-    let prevwinnr = winnr('#')
+    let prevwinnr = winnr('#') == 0 ? curwinnr : winnr('#')
     call s:goto_win(tagbarwinnr, 1)
 
     " Check if there is more than one window
