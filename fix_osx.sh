@@ -183,7 +183,9 @@ sudo xcodebuild -license
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
 # Note that macvim requires full xcode
-brew install task macvim tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl bbe zsh w3m
+brew install macvim
+brew install task tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl bbe zsh w3m
+brew install vim --override-system-vi --with-client-server --with-lua --with-python3
 brew install ctags --HEAD
 brew install profanity --with-terminal-notifier
 brew linkapps
