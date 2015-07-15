@@ -161,7 +161,7 @@ set t_Co=256                " use 256 colors
 colorscheme lx-256-dark
 " }}}
 
-" Plugins {{{
+" Plugins
 " 33ms startup penalty!
 source ~/.vim/ftplugin/man.vim
 
@@ -190,6 +190,7 @@ let g:quickfixsigns_echo_balloon = 1
 " manually set marks or quickfix/diff info is present.
 let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
 let g:quickfixsign_use_dummy = 0
+" Aaaand we just found the limitations of manual fold markers
 let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'ADD': 'QuickFixSignsDiffAddLx', 'CHANGE': 'QuickFixSignsDiffChangeLx'}   "{{{2}}}"
 " }}}
 
@@ -437,8 +438,6 @@ let g:tagbar_type_scala = {
         \ 'm:methods'
     \ ]
 \ }
-" }}}
-
 " }}}
 
 " augroups {{{
