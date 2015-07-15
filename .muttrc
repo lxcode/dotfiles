@@ -6,45 +6,45 @@
 # Stuff for IMAP-SSL
 set certificate_file=~/.mutt_certs 	# store certs here
 set entropy_file=/dev/urandom		# where to get chaos
-set imap_keepalive=120			# poke the imap server every 2 mins
+set imap_keepalive=120			    # poke the imap server every 2 mins
 # uncomment these to enable imap
 set folder=imaps://lx@redundancy.redundancy.org # set root folder
-set mask="^."				# show everything in folder view
+set mask="^."				        # show everything in folder view
 
 # Misc options
 set help=no
 set editor="$EDITOR +'/^$/' -c'noh'"
 set charset="utf-8"
-set maildir_trash=no		# set the trashed flag on maildir msgs
+set maildir_trash=no		        # set the trashed flag on maildir msgs
 set header_cache="~/.headercache"	# cache headers
+set alias_file=~/.muttalias         # alias storage
+set sort_browser=reverse-date       # default to newest first
+set sort_aux=reverse-last-date-received # show threads with newest message first
 set message_cachedir="~/.muttcache"
 set from=lx@redundancy.redundancy.org
 set hostname="redundancy.redundancy.org"
-set beep=no			# don't beep for silly reasons 
-set beep_new=no		# beep when there's new mail
-set sort=threads # default sort messages by thread
-set sort_browser=reverse-date # showing mbox list default to newest first
-set sort_aux=reverse-last-date-received # showing threads with youngest message first
-set markers=no			# no markers for wrapped lines in the pager
-set abort_unmodified=no		# don't automatically abort an unchanged mail
-set abort_nosubject=no		# or when there's no subject
-set move=no			# don't ask to move unread mail
+set beep=no             # don't beep for silly reasons
+set beep_new=no         # beep when there's new mail
+set sort=threads        # default sort messages by thread
+set markers=no		    # no markers for wrapped lines in the pager
+set abort_unmodified=no	# don't automatically abort an unchanged mail
+set abort_nosubject=no	# or when there's no subject
+set move=no			    # don't ask to move unread mail
 set postpone=ask-no		# default to no on "postpone?" prompt
 set recall=no			# don't ask about recalling postponed msgs
 set delete=yes			# don't ask about deleting
-set edit_headers=yes		# edit headers while editing a message
-set include=yes			# always quote the original message in reply 
-set alias_file=~/.muttalias     # where to put my aliases til ldap bloody works
-source ~/.muttalias             # import stored aliases
-set pager_index_lines=7		# show n lines of the index in the pager
+set edit_headers=yes	# edit headers while editing a message
+set include=yes			# always quote the original message in reply
+source ~/.muttalias     # import stored aliases
+set pager_index_lines=7	# show n lines of the index in the pager
 set spoolfile= =		# use the main folder as the spoolfile
 set sleep_time=0		# don't pause when switching folders and such
-set confirmappend=no		# don't ask about appending to a mailbox
+set confirmappend=no	# don't ask about appending to a mailbox
 set timeout=15			# poll the boxes every 15 seconds
 set postponed= =Drafts 	# Put unsent mail here
 set record= =Sent		# put sent mail here
 set mime_fwd=ask-no		# forward attachments
-ignore *			# weed all headers by default
+ignore *			    # weed all headers by default
 unignore from date subject to cc X-Face:	# don't weed important ones, though
 alternates lx@FreeBSD.org lx@redundancy.org lx@grumplicio.us lx@darkambient.net	# other addresses I use
 
@@ -77,7 +77,7 @@ my_hdr X-Face: %H~{\$1~NOw1y\#%mM6{|4:/<p]y9X%E+4%:1wo-M!re,zl.qH~yzbL-MWhtp\$3Q
 #my_hdr X-Processing-Key: 09 F9 11 02 9D 74 E3 5B D8 41 56 C5 63 56 88 C0
 
 # monitor these boxes
-mailboxes = =Plan =Lists.8lives =Lists.Security.Ctf =Lists.FreeBSD.Developers =Lists.FreeBSD.Security =Lists.FreeBSD.Hackers =Lists.FreeBSD.ppc =Lists.FreeBSD.Ports =Lists.FreeBSD.ports-bugs =Lists.FreeBSD.CVS =Lists.FreeBSD.Current =Lists.FreeBSD.Stable =Lists.FreeBSD.Security =Lists.IETF =Lists.Security.Vulnwatch =Lists.Security.Vuln-Dev =Lists.Security.Bugtraq =Lists.Security.Pen-Test =Lists.Security.Incidents =Lists.Security.FullDisclosure =Lists.Security.VulnDiscuss =Lists.Cocoa =Lists.Fish =Lists.XeTeX =Lists.Antzen =Spam 
+mailboxes = =Plan =Lists.8lives =Lists.Security.Ctf =Lists.FreeBSD.Developers =Lists.FreeBSD.Security =Lists.FreeBSD.Hackers =Lists.FreeBSD.ppc =Lists.FreeBSD.Ports =Lists.FreeBSD.ports-bugs =Lists.FreeBSD.CVS =Lists.FreeBSD.Current =Lists.FreeBSD.Stable =Lists.FreeBSD.Security =Lists.IETF =Lists.Security.Vulnwatch =Lists.Security.Vuln-Dev =Lists.Security.Bugtraq =Lists.Security.Pen-Test =Lists.Security.Incidents =Lists.Security.FullDisclosure =Lists.Security.VulnDiscuss =Lists.Cocoa =Lists.Fish =Lists.XeTeX =Lists.Antzen =Spam
 
 # make mutt aware of our mailing lists
 subscribe ports freebsd-ports chickensoup citypunk pen-test vuln-dev security-announce incidents bugtraq vulnwatch vulndiscuss full-disclosure fish thiels misc pf firewall-wizards sfs exprise freebsd-current current log ctf bikergoths-l securesoftware badmovie securityjobs osiris osiris-devel DSI_evolver SRX-6 developers cmus-devel cocoa-students 8lives
@@ -91,7 +91,7 @@ macro pager H "<pipe-message>formail -I X-CRM114-Status -I X-CRM114-Action -I X-
 macro index A "<save-message>=Archives.2012\n"
 macro pager A "<save-message>=Archives.2012\n"
 
-# From the body or index, call urlview.  If explicitly viewed from 
+# From the body or index, call urlview.  If explicitly viewed from
 # the attachment menu, use w3m.
 
 macro index \Cv |urlview\n
@@ -126,7 +126,7 @@ color quoted brightgreen default
 color signature brightred default
 color header brightgreen default ^From:
 color header brightgreen default ^Subject:
-color indicator brightwhite blue 
+color indicator brightwhite blue
 color attachment brightmagenta default
 color error brightred default
 color status brightwhite blue
