@@ -62,6 +62,7 @@ alias me="sudo make extract"
 alias cc_args="gmake CC='/home/lx/.vim/bin/cc_args.py gcc' CXX='/home/lx/.vim/bin/cc_args.py g++' -B"
 alias c64term='urxvt -bg "#3a319c" -fg "#7b71d6" -fn "xft:Adore64:size=10"'
 alias srv="sudo service"
+alias k="khal calendar --days 90"
 alias t="task"
 alias tl="task long"
 alias th="task list +home"
@@ -87,9 +88,9 @@ mvi() {
     vim `locate "$*"|slmenu -l 50`
 }
 
-#if [ -n "$DISPLAY" ]; then
-#    alias vim="$EDITOR --servername VIM"
-#fi
+if [ -n "$DISPLAY" ]; then
+    alias vim="$EDITOR --servername VIM"
+fi
 
 setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
 
