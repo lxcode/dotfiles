@@ -8,7 +8,6 @@ map <home> :rewind<cr>
 map <end> :last<cr>
 map g<Tab> :bn<CR>
 nnoremap <C-Tab> gt
-nnoremap <Tab> >>
 " Make Y behave like C and D
 nnoremap Y y$
 " Use , in addition to \ for the leader
@@ -150,7 +149,6 @@ set foldlevelstart=0        " the default level of fold nesting on startup
 set cryptmethod=blowfish    " in case I ever decide to use vim -x
 set autoread                " Disable warning about file change to writable
 set conceallevel=0          " Don't hide things by default
-"set updatecount=100 updatetime=3600000		" saves power on notebooks
 
 "if exists('&autochdir')
 "    " Change directory to first open file
@@ -163,9 +161,18 @@ set t_Co=256                " use 256 colors
 colorscheme lx-256-dark
 " }}}
 
-" Plugins {{{
+" Plugins
 " 33ms startup penalty!
 source ~/.vim/ftplugin/man.vim
+
+" Don't load plugins that have unmet dependencies
+if !executable('task')
+    let g:loaded_taskwarrior = 1
+endif
+
+if !has('python3')
+    let g:loaded_pct = 1
+endif
 
 " netrw {{{
 let g:netrw_liststyle=0
@@ -183,6 +190,7 @@ let g:quickfixsigns_echo_balloon = 1
 " manually set marks or quickfix/diff info is present.
 let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
 let g:quickfixsign_use_dummy = 0
+" Aaaand we just found the limitations of manual fold markers
 let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'ADD': 'QuickFixSignsDiffAddLx', 'CHANGE': 'QuickFixSignsDiffChangeLx'}   "{{{2}}}"
 " }}}
 
@@ -430,8 +438,6 @@ let g:tagbar_type_scala = {
         \ 'm:methods'
     \ ]
 \ }
-" }}}
-
 " }}}
 
 " augroups {{{
