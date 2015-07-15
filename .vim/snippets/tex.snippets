@@ -178,7 +178,7 @@ snippet ft
 snippet figg
 	\begin{figure}
 	\begin{center}
-	    \includegraphics[scale=${1}]{images/${2}}
+	    \includegraphics[scale=${1}]{images/${2:filename}}
 	\end{center}
 	\caption{${3}}
 	\label{fig:${4:$2}}
@@ -224,23 +224,21 @@ snippet vuln
 	\vlongterm${11}
 snippet ncc
 	\begin{nccvuln}
+		\vtitle{${1}}
+		\vrisk{${2}}{${3}}{${4}}
+		\vid{${5}}
+		\vclass{${6}}
+		\vcomponent{${7}}
 
-	\vtitle{${1}}
-	\vrisk{${2}}{${3}}{${4}}
-	\vid{${5}}
-	\vclass{${6}}
-	\vcomponent{${7}}
+		\vtarget
 
-	\vlocation
+		\vimpact
 
-	\vimpact
+		\vdesc
 
-	\vdesc
+		\vrepro
 
-	\vrepro
-
-	\vrec
-
+		\vrec
 	\end{nccvuln}
 snippet lstmp
 	\begin{minipage}{\textwidth}
@@ -252,7 +250,7 @@ snippet lst
 	\end{lstlisting}
 snippet fig
 	\begin{figure}[ht]
-		\center \includegraphics[width=1.0\textwidth]{images/${1}}
+		\center \includegraphics[width=1.0\textwidth]{images/${1:filename}}
 		\caption{${2}}
 		\label{fig:${3:$1}}
 	\end{figure}
