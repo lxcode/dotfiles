@@ -280,7 +280,7 @@ augroup latex
     au FileType tex imap <buffer> [[ \begin{
     au FileType tex imap <buffer> ]] <Plug>LatexCloseCurEnv
     au FileType tex imap <S-Enter> \pagebreak
-    au FileType tex nmap tt i{\tt <Esc>wEa}<Esc>
+    au FileType tex nmap tt i\texttt{<Esc>wEa}<Esc>
     au FileType tex source ~/.vim/ftplugin/quotes.vim
 augroup end
 " }}}
