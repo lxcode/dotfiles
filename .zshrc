@@ -63,7 +63,7 @@ alias cc_args="gmake CC='/home/lx/.vim/bin/cc_args.py gcc' CXX='/home/lx/.vim/bi
 alias c64term='urxvt -bg "#3a319c" -fg "#7b71d6" -fn "xft:Adore64:size=10"'
 alias srv="sudo service"
 alias k="khal"
-alias sk="vdirsyncer sync && khal calendar"
+alias sk="vdirsyncer sync lx_calendar && khal calendar"
 alias t="task"
 alias tl="task long"
 alias th="task list +home"
