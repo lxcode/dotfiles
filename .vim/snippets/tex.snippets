@@ -71,6 +71,11 @@ snippet itemize
 	\begin{itemize}
 		\item ${1}
 	\end{itemize}
+# Itemize
+snippet minitem
+	\begin{minitem}
+		\item ${1}
+	\end{minitem}
 # Description
 snippet desc
 	\begin{description}
@@ -156,13 +161,13 @@ snippet fcite
 	\footcite[${1}]{${2}}${3}
 #Formating text: italic, bold, underline, small capital, emphase ..
 snippet it
-	{\it {${1}}${2}
+	\textit{${1}}${2}
 snippet under
 	\underline{${1:text}}
 snippet bf
-	{\bf ${1}}${2}
+	\textbf{${1}}${2}
 snippet em
-	{\em ${1}}${2}
+	\emph{${1}}${2}
 snippet sc
 	\textsc{${1:text}}
 #Choosing font
@@ -171,14 +176,14 @@ snippet sf
 snippet rm
 	\textrm{${1:text}}
 snippet tt
-	{\tt ${1}}${2}
+	\texttt{${1}}${2}
 #misc
 snippet ft
 	\footnote{${1:text}}
 snippet figg
 	\begin{figure}
 	\begin{center}
-	    \includegraphics[scale=${1}]{images/${2}}
+	    \includegraphics[scale=${1}]{images/${2:filename}}
 	\end{center}
 	\caption{${3}}
 	\label{fig:${4:$2}}
@@ -224,23 +229,21 @@ snippet vuln
 	\vlongterm${11}
 snippet ncc
 	\begin{nccvuln}
+		\vtitle{${1}}
+		\vrisk{${2}}{${3}}{${4}}
+		\vid{${5}}
+		\vclass{${6}}
+		\vcomponent{${7}}
 
-	\vtitle{${1}}
-	\vrisk{${2}}{${3}}{${4}}
-	\vid{${5}}
-	\vclass{${6}}
-	\vcomponent{${7}}
+		\vtarget
 
-	\vlocation
+		\vimpact
 
-	\vimpact
+		\vdesc
 
-	\vdesc
+		\vrepro
 
-	\vrepro
-
-	\vrec
-
+		\vrec
 	\end{nccvuln}
 snippet lstmp
 	\begin{minipage}{\textwidth}
@@ -252,7 +255,7 @@ snippet lst
 	\end{lstlisting}
 snippet fig
 	\begin{figure}[ht]
-		\center \includegraphics[width=1.0\textwidth]{images/${1}}
+		\center \includegraphics[width=1.0\textwidth]{images/${1:filename}}
 		\caption{${2}}
 		\label{fig:${3:$1}}
 	\end{figure}
