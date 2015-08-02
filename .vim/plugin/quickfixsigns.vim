@@ -4,7 +4,7 @@
 " @GIT:         http://github.com/tomtom/quickfixsigns_vim/
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2009-03-14.
-" @Last Change: 2015-04-07.
+" @Last Change: 2015-04-24.
 " @Revision:    1419
 " GetLatestVimScripts: 2584 1 :AutoInstall: quickfixsigns.vim
 
@@ -84,7 +84,7 @@ endif
 
 if !exists('g:quickfixsigns_events')
     " List of events for signs that should be frequently updated.
-    let g:quickfixsigns_events = ['BufEnter', 'CursorHold', 'CursorHoldI', 'InsertLeave', 'InsertEnter']   "{{{2
+    let g:quickfixsigns_events = ['BufReadPost', 'BufEnter', 'CursorHold', 'CursorHoldI', 'InsertLeave', 'InsertEnter']   "{{{2
 endif
 
 
@@ -152,7 +152,7 @@ endif
 
 if !exists('g:quickfixsigns_blacklist_buffer')
     " Don't show signs in buffers matching this |regexp|.
-    let g:quickfixsigns_blacklist_buffer = '\(^\|[\/]\)\(__.*__\|NERD_tree_.*\|-MiniBufExplorer-\|\[unite\] - .*\)$'   "{{{2
+    let g:quickfixsigns_blacklist_buffer = '\(^\|[\/]\)\(__.*__\|ControlP\|NERD_tree_.*\|-MiniBufExplorer-\|\[unite\] - .*\)$'   "{{{2
 endif
 
 
@@ -238,8 +238,7 @@ function! s:Redir(cmd) "{{{3
 endf
 
 
-let s:signss = s:Redir('silent sign list')
-let g:quickfixsigns_signs = split(s:signss, '\n')
+let g:quickfixsigns_signs = split(s:Redir('sign list'), '\n')
 call filter(g:quickfixsigns_signs, 'v:val =~ ''^sign QFS_''')
 call map(g:quickfixsigns_signs, 'matchstr(v:val, ''^sign \zsQFS_\w\+'')')
 
@@ -918,7 +917,6 @@ endf
 
 runtime! autoload/quickfixsigns/*.vim
 call QuickfixsignsSelect(g:quickfixsigns_classes)
-unlet! s:signss
 
 
 augroup QuickFixSigns

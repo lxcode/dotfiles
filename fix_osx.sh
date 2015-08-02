@@ -189,4 +189,12 @@ brew install vim --override-system-vi --with-client-server --with-lua --with-pyt
 brew install ctags --HEAD
 brew install profanity --with-terminal-notifier
 brew linkapps
+
+# Install casks
+read -p "Preparing to install casks"
+brew install caskroom/cask/brew-cask
+brew cask install font-inconsolata
+brew cask install iterm2
+brew cask install adium
+brew cask install google-chrome
 task
