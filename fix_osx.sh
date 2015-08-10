@@ -159,8 +159,6 @@ killall Finder
 
 read -p "Preparing to make symlinks"
 
-mkdir ~/bin && cd ~/bin
-
 for file in .zshrc .zshenv .zsh .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf bin
 do
     ln -s ~/git/dotfiles/$file ~/$file
@@ -185,7 +183,6 @@ brew doctor
 # Note that macvim requires full xcode
 brew install macvim
 brew install task tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par weechat wireshark youtube-dl bbe zsh w3m
-brew install vim --override-system-vi --with-client-server --with-lua --with-python3
 brew install ctags --HEAD
 brew install profanity --with-terminal-notifier
 brew linkapps
@@ -193,9 +190,12 @@ brew linkapps
 # Install casks
 read -p "Preparing to install casks"
 brew install caskroom/cask/brew-cask
+brew tap caskroom/fonts
 brew cask install font-inconsolata
 brew cask install karabiner
 brew cask install iterm2
 brew cask install adium
 brew cask install google-chrome
+# Needs XQuartz
+brew install vim --override-system-vi --with-client-server --with-lua --with-python3
 task
