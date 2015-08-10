@@ -381,7 +381,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>108 170 924 485 0 0 1280 800 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>450 486 384 129 0 0 1280 777 </string>
+	<string>126 250 384 129 0 0 640 457 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -565,7 +565,7 @@
 			<key>Blink Allowed</key>
 			<false/>
 			<key>Blinking Cursor</key>
-			<false/>
+			<true/>
 			<key>Blur</key>
 			<false/>
 			<key>Blur Radius</key>
@@ -1125,6 +1125,10 @@
 			<string>/Users/isec</string>
 		</dict>
 	</array>
+	<key>NoSyncTimeOfLastPromo</key>
+	<real>453506533.54453403</real>
+	<key>NoSyncTimeOfLastPromoDownload</key>
+	<real>455253230.56550503</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1191,7 +1195,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-01-30T18:42:43Z</date>
+	<date>2015-06-06T03:12:33Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -1241,6 +1245,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.0.0.20141103</string>
+	<string>2.1.1</string>
 </dict>
 </plist>
