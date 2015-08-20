@@ -74,7 +74,7 @@ alias tpush="pushd ~/.task && git add * && git commit -m 'Task update' && git pu
 alias tpull="pushd ~/.task && git pull; popd"
 alias lsd='ls -ld *(-/DN)'
 alias lsa='ls -ld .*'
-alias ctags-objc='ctags --languages=objectivec --langmap=objectivec:.h.m'
+alias ctags-objc='/usr/local/bin/ctags --languages=objectivec --langmap=objectivec:.h.m -R .'
 
 ### Functions
 bvimdiff() {
