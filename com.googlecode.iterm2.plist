@@ -177,14 +177,14 @@
 			<key>Action</key>
 			<integer>11</integer>
 			<key>Text</key>
-			<string>0x07 0x78</string>
+			<string>0x07 0x78 0x78</string>
 		</dict>
 		<key>0x78-0x100000</key>
 		<dict>
 			<key>Action</key>
 			<integer>11</integer>
 			<key>Text</key>
-			<string>0x07 0x78</string>
+			<string>0x07 0x78 0x78</string>
 		</dict>
 		<key>0x9-0x40000</key>
 		<dict>
@@ -381,7 +381,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>108 170 924 485 0 0 1280 800 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>126 250 384 129 0 0 640 457 </string>
+	<string>450 503 384 129 0 0 1280 800 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -1128,7 +1128,7 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>453506533.54453403</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>455253230.56550503</real>
+	<real>461533567.47852898</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1195,7 +1195,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-06-06T03:12:33Z</date>
+	<date>2015-08-20T20:55:39Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
