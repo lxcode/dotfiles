@@ -34,21 +34,17 @@ setopt nocorrect nocorrectall
 setopt NO_CDABLE_VARS
 
 ### Aliases
-alias skype='skype --resources=/usr/local/share/skype'
 alias j=jobs
 alias dis=disown
 alias pd=popd
 alias p=popd
-alias x=exit
 alias yt='cd /tmp; youtube-dl `sselp`'
-alias d='dirs -v'
 alias h=history
 alias grep=egrep
 alias ll='ls -l'
 alias la='ls -a'
-alias become='sudo -s -H -u'
+alias be='sudo -s -H -u'
 alias burp='LC_CTYPE=C java -mx512m -jar /Users/lx/Tools/burpsuite_pro*.jar'
-alias vpn='sudo openvpn /usr/local/etc/openvpn.conf'
 alias wu='sudo sv stat /service/*'
 alias rmsvn="find . -type d -name '\.svn' |xargs rm -rf"
 alias rmgit="find . -type d -name '\.git' |xargs rm -rf"
@@ -61,7 +57,6 @@ alias pm="sudo portmaster"
 alias me="sudo make extract"
 alias cc_args="gmake CC='/home/lx/.vim/bin/cc_args.py gcc' CXX='/home/lx/.vim/bin/cc_args.py g++' -B"
 alias c64term='urxvt -bg "#3a319c" -fg "#7b71d6" -fn "xft:Adore64:size=10"'
-alias srv="sudo service"
 alias k="khal"
 alias sk="vdirsyncer sync lx_calendar && khal calendar"
 alias t="task"
@@ -95,20 +90,7 @@ fi
 
 setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
 
-hgdiff() {
-    vimdiff -c 'map q :qa!<CR>' <(hg cat "$1") "$1";
-}
-
 freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
-
-pskill()
-{
-	for pid in `ps $PSFLAGS |grep $1 |grep -v grep |awk '{print $1}'`
-	do
-		echo "killing $1 ($pid)"
-		kill $2 $pid
-	done
-}
 
 cgrep()
 {
