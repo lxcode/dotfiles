@@ -182,10 +182,11 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew doctor
 brew install task tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par python3 weechat wireshark youtube-dl bbe zsh w3m
 # Note that macvim requires full xcode
-brew install macvim --override-system-vim --with-python3
+brew install macvim --with-python3
 brew install ctags --HEAD
 brew install profanity --with-terminal-notifier
 brew linkapps
+pip3 install peewee
 
 # Install casks
 read -p "Preparing to install casks"
@@ -196,6 +197,8 @@ brew cask install karabiner
 brew cask install iterm2
 brew cask install adium
 brew cask install google-chrome
+brew cask install xquartz
+brew cask install spectacle
 # Needs XQuartz
 brew install vim --override-system-vi --with-client-server --with-lua --with-python3
 task
