@@ -10,7 +10,6 @@ umask 022
 export MAIL=/home/$USERNAME/Maildir
 export HELPDIR=/usr/local/lib/zsh/help  # directory for run-help function to find docs
 
-MAILCHECK=300
 HISTSIZE=1336
 DIRSTACKSIZE=20
 HISTFILE=~/.zsh_history
