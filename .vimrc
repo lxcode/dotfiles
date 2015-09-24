@@ -668,3 +668,7 @@ function! Graudit(db)
     cf /tmp/graudit.out
 endfunction
 " }}}
+
+if exists('$ADMIN_SCRIPTS/master.vimrc')
+    source $ADMIN_SCRIPTS/master.vimrc
+endif
