@@ -1,0 +1,83 @@
+#compdef khal
+# vim: ft=zsh sw=2 ts=2
+# install by copying to file where your zsh looks for completion scripts
+# e.g. add this to your zshrc:
+# fpath=(~/.zsh/completion $fpath) 
+
+_calendars() {
+  local accounts
+  accounts=( ${${(f)"$(command khal printcalendars 2> /dev/null)"}/[$'\n']##/} )
+  compadd "$a" ${(kv)=accounts}
+}
+
+_ics_files() {
+  _files -g "*.ics"
+}
+
+local ret=1 state
+
+local -a common_ops
+common_ops=(
+  {-h,--help}"[show help]"
+  {-v,--verbose}"[give more output]"
+  --version"[show version and exit]"
+  {-q,--quiet}"[give less output]"
+  {-c,--config=}"[config file]:filename:_files"
+)
+
+_directories () {
+  _wanted directories expl directory _path_files -/ "$@" -
+}
+
+typeset -A opt_args
+_arguments \
+  ':subcommand:->subcommand' \
+  $common_ops \
+  '*::options:->options' && ret=0
+
+case $state in
+  subcommand)
+    local -a subcommands
+    subcommands=(
+      "agenda:show agenda"
+      "calendar:show calendar"
+      "interactive:open the interactive calendar"
+      "import:import an ics file into a calendar"
+      "new:add a new event"
+      "printcalendars:print all configured calendars"
+      "printformats:print a date in all formats"
+      "search:search for events"
+    )
+
+    _describe -t subcommands 'khal subcommands' subcommands && ret=0
+  ;;
+
+  options)
+    local -a args
+    args=(
+      $common_ops
+    )
+
+    case $words[1] in
+      calendar | agenda | interactive)
+        args+=(
+          "-a=[use this calendar]:calendars:_calendars"
+          "-b=[do not use this calendar]:calendars:_calendars"
+        )
+      ;;
+    import)
+        args+=(
+          "-a=[use this calendar]:calendars:_calendars"
+          "*:file:_ics_files"
+          --batch"[do not ask for any confirmation]"
+        )
+      ;;
+    esac
+
+    _arguments $args && ret=0
+  ;;
+esac
+
+return ret
+
+# vim: ft=zsh

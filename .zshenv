@@ -19,10 +19,8 @@ export LC_CTYPE=en_US.UTF-8
 export LESSHISTFILE="-"
 export X11HOME=/usr/local
 export MANPATH=/usr/man:/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/lang/man:/var/qmail/man:/usr/pkg/man:/opt/local/man
-export ORACLE_HOME=/compat/linux/usr/lib/oracle/10.2.0.3 
-export ANDROID_HOME=/usr/local/opt/android-sdk
 
-path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /var/qmail/bin $X11HOME/bin /usr/local/9/bin /crypt/usr/local/texlive/2012/bin/amd64-freebsd /usr/texbin ~/bin ~/android/tools /home/lx/git/isec/tools/misc/graudit /usr/local/libexec/git-core )
+path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /var/qmail/bin $X11HOME/bin /usr/local/9/bin /crypt/usr/local/texlive/2015/bin/amd64-freebsd /usr/texbin ~/bin ~/android/tools /opt/facebook/bin /home/lx/tools/graudit /usr/local/libexec/git-core /mnt/vol/engshare/admin/scripts)
 
 case $OSTYPE in
 	solaris*)
