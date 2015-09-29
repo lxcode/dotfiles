@@ -671,10 +671,10 @@ endfunction
 
 let $ADMIN_SCRIPTS = "/mnt/vol/engshare/admin/scripts"
 
-if filereadable("$ADMIN_SCRIPTS/master.vimrc")
+if filereadable($ADMIN_SCRIPTS . "/master.vimrc")
     source $ADMIN_SCRIPTS/master.vimrc
 endif
 
-if filereadable("$ADMIN_SCRIPTS/vim/biggrep.vim")
+if filereadable($ADMIN_SCRIPTS . "/vim/biggrep.vim")
     source $ADMIN_SCRIPTS/vim/biggrep.vim
 endif
