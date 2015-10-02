@@ -115,11 +115,7 @@ set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
-"if has("macunix")
-    set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
-"else
-"    set grepprg=bsdgrep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
-"endif
+set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
 set cpoptions=BFt
 set completeopt=menuone,longest
 set tags=tags;/             " use first tags file in a directory tree
@@ -638,15 +634,24 @@ function ToggleHex()
 endfunction
 
 " I use this to highlight the match from grep, but keep quickfix syntax
-" highlighting intact. This is for BSD grep.
+" highlighting intact. Detects Linux due to the different escape sequences of
+" GNU grep.
 command -bar GrepColors call GrepColors()
 function GrepColors()
     set conceallevel=3
     set cocu=nv
+
+    if system('uname')=~'Linux'
+      syn region ansiRed start="\e\[01;31m"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
+      syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m"
+      syn match ansiStop		conceal "\e\[m"
+    else
     syn region ansiRed start="\e\[01;31m\e\[K"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
     syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m\e\[K"
+      syn match ansiStop		conceal "\e\[m\e\[K"
+    endif
+
     hi ansiRed    ctermfg=197   guifg=#FF005F  cterm=none         gui=none
-    syn match ansiStop		conceal "\e\[m\e\[K"
     hi! link ansiStop NONE
 endfunction
 
@@ -671,10 +676,10 @@ endfunction
 
 let $ADMIN_SCRIPTS = "/mnt/vol/engshare/admin/scripts"
 
-if filereadable("$ADMIN_SCRIPTS/master.vimrc")
+if filereadable($ADMIN_SCRIPTS . "/master.vimrc")
     source $ADMIN_SCRIPTS/master.vimrc
 endif
 
-if filereadable("$ADMIN_SCRIPTS/vim/biggrep.vim")
+if filereadable($ADMIN_SCRIPTS . "/vim/biggrep.vim")
     source $ADMIN_SCRIPTS/vim/biggrep.vim
 endif
