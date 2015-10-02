@@ -69,6 +69,7 @@ alias tpull="pushd ~/.task && git pull; popd"
 alias lsd='ls -ld *(-/DN)'
 alias lsa='ls -ld .*'
 alias ctags-objc='/usr/local/bin/ctags --languages=objectivec --langmap=objectivec:.h.m -R .'
+alias vim="$EDITOR"
 
 ### Functions
 bvimdiff() {
@@ -82,10 +83,6 @@ mcd() {
 mvi() {
     vim `locate "$*"|slmenu -l 50`
 }
-
-#if [ -n "$DISPLAY" ]; then
-#    alias vim="$EDITOR --servername VIM"
-#fi
 
 setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
 
