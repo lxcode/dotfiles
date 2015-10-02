@@ -1,4 +1,4 @@
-for VI in /usr/local/bin/vim /opt/local/bin/vim /Applications/MacVim.app/Contents/MacOS/Vim /usr/bin/vim /usr/local/bin/nvi /usr/bin/vi
+for VI in /usr/local/bin/nvim /usr/local/bin/vim /opt/local/bin/vim /Applications/MacVim.app/Contents/MacOS/Vim /usr/bin/vim /usr/local/bin/nvi /usr/bin/vi
 do
 	if [ -x $VI ]; then
 		export EDITOR=$VI

@@ -84,7 +84,9 @@ if $DISPLAY != ""
     "set cursorline          " I like this, but damn is it slow
     set mouse=a             " Turn this off for console-only mode
     set selectmode+=mouse	" Allow the mouse to select
-    set ttymouse=xterm2
+    if !has('nvim')
+        set ttymouse=xterm2
+    endif
 endif
 set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
@@ -142,9 +144,11 @@ set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
 set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=0        " the default level of fold nesting on startup
-set cryptmethod=blowfish    " in case I ever decide to use vim -x
 set autoread                " Disable warning about file change to writable
 set conceallevel=0          " Don't hide things by default
+if !has('nvim')
+    set cryptmethod=blowfish    " in case I ever decide to use vim -x
+endif
 
 "if exists('&autochdir')
 "    " Change directory to first open file
