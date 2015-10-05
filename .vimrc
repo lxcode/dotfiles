@@ -56,6 +56,10 @@ vnoremap <leader>64 c<c-r>=system('base64',@")<cr><esc>
 vnoremap <leader>64d c<c-r>=system('base64 --decode',@")<cr><esc>
 " Quick exits
 nmap zz ZZ
+" Open a small terminal
+if has('nvim')
+    nnoremap <leader>o :below 10sp term://$SHELL<cr>i
+endif
 " }}}
 
 " Settings {{{
