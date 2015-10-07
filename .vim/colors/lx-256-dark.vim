@@ -161,3 +161,8 @@ hi QuickFixSignsDiffChangeLx ctermfg=0 ctermbg=68 guifg=black  guibg=#5f87df
 
 " For whitespace
 highlight ExtraWhitespace ctermbg=236
+
+" For buftabline
+hi BufTabLineActive ctermbg=0 guibg=black
+hi BufTabLineHidden ctermfg=242 guifg=#666666
+hi BufTabLineActive ctermfg=248

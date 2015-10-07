@@ -202,6 +202,11 @@ let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'AD
 let g:buftabs_only_basename=1
 " }}}
 
+" buftabline {{{
+let g:buftabline_show=1
+let g:buftabline_separators=1
+" }}}
+
 " clever-f {{{
 let g:clever_f_mark_char_color="PreProc"
 let g:clever_f_smart_case=1
@@ -339,6 +344,9 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 30
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_extensions = ['buffertag']
+let g:ctrlp_max_files = 0
+let g:ctrlp_lazy_update = 350
+"let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 map <Leader>e :CtrlP<CR>
 map <Leader>m :CtrlPMRU<CR>
 map <Leader>t :CtrlPTag<CR>
