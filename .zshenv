@@ -14,6 +14,7 @@ export CCACHE_PATH=/usr/bin:/usr/local/bin
 export CCACHE_DIR="/home/lx/.ccache"
 export CLICOLOR=yes
 export DVTM_TERM=rxvt
+export ANDROID_HOME=/usr/local/opt/android-sdk
 
 export LC_CTYPE=en_US.UTF-8
 export LESSHISTFILE="-"
