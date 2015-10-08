@@ -27,6 +27,8 @@ map <silent> <Leader>\ :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
+" Clean up left side
+nmap <F2> :set nonu foldcolumn=0<CR>:QuickfixsignsToggle<CR>
 map <F8> :w<CR> :!make<CR>
 map <silent> <F9> :call ToggleVExplorer()<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
@@ -71,9 +73,9 @@ helptags ~/.vim/doc
 if has('gui')
     set gcr=n:blinkon0          " don't blink the cursor in normal mode
     set guioptions=aAegiM       " get rid of useless stuff in the gui
+    set clipboard=unnamed
     if has("gui_macvim")
         set guifont=Inconsolata:h18
-        set clipboard=unnamed
         noremap <Leader>zo :set guifont=Inconsolata:h4<CR>
         noremap <Leader>zi :set guifont=Inconsolata:h18<CR>
     else
@@ -84,6 +86,7 @@ if has('gui_running')
     set ballooneval
     set balloondelay=100
 endif
+
 if $DISPLAY != ""
     "set cursorline          " I like this, but damn is it slow
     set mouse=a             " Turn this off for console-only mode
@@ -479,6 +482,12 @@ augroup python
     au FileType python set smartindent smarttab nospell number
     au BufWinLeave *.py mkview
     au BufWinEnter *.py silent loadview
+augroup end
+
+augroup php
+    au FileType php set smartindent smarttab nospell number
+    au BufWinLeave *.php mkview
+    au BufWinEnter *.php silent loadview
 augroup end
 
 augroup markdown
