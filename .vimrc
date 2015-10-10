@@ -27,6 +27,8 @@ map <silent> <Leader>\ :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
+" Clean up left side
+nmap <F2> :set nonu foldcolumn=0<CR>:QuickfixsignsToggle<CR>
 map <F8> :w<CR> :!make<CR>
 map <silent> <F9> :call ToggleVExplorer()<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
@@ -56,6 +58,10 @@ vnoremap <leader>64 c<c-r>=system('base64',@")<cr><esc>
 vnoremap <leader>64d c<c-r>=system('base64 --decode',@")<cr><esc>
 " Quick exits
 nmap zz ZZ
+" Open a small terminal
+if has('nvim')
+    nnoremap <leader>o :below 10sp term://$SHELL<cr>i
+endif
 " }}}
 
 " Settings {{{
@@ -67,9 +73,9 @@ helptags ~/.vim/doc
 if has('gui')
     set gcr=n:blinkon0          " don't blink the cursor in normal mode
     set guioptions=aAegiM       " get rid of useless stuff in the gui
+    set clipboard=unnamed
     if has("gui_macvim")
         set guifont=Inconsolata:h18
-        set clipboard=unnamed
         noremap <Leader>zo :set guifont=Inconsolata:h4<CR>
         noremap <Leader>zi :set guifont=Inconsolata:h18<CR>
     else
@@ -80,6 +86,7 @@ if has('gui_running')
     set ballooneval
     set balloondelay=100
 endif
+
 if $DISPLAY != ""
     "set cursorline          " I like this, but damn is it slow
     set mouse=a             " Turn this off for console-only mode
@@ -120,7 +127,7 @@ set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
 set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
 set cpoptions=BFt
 set completeopt=menuone,longest
-set tags=tags;/             " use first tags file in a directory tree
+set tags=tags,./tags
 set nobackup                " ugh, stop making useless crap
 set nowritebackup           " same with overwriting
 set directory=/tmp          " litter up /tmp, not the CWD
@@ -198,9 +205,38 @@ let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'AD
 let g:buftabs_only_basename=1
 " }}}
 
+" buftabline {{{
+let g:buftabline_show=1
+let g:buftabline_separators=1
+" }}}
+
 " clever-f {{{
 let g:clever_f_mark_char_color="PreProc"
 let g:clever_f_smart_case=1
+" }}}
+
+" cscope {{{
+let g:cscope_interested_files = '\.java$\|\.php$\|\.h$\|\.hpp|\.cpp|\.c$|\.m$|\.swift$|\.py$'
+let g:cscope_split_threshold = 99999
+let g:cscope_auto_update = 0
+nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+nnoremap <leader>l :call ToggleLocationList()<CR>
+" s: Find this C symbol
+nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+" g: Find this definition
+nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+" d: Find functions called by this function
+nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+" c: Find functions calling this function
+nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
+" t: Find this text string
+nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
+" e: Find this egrep pattern
+nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+" f: Find this file
+nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
+" i: Find files #including this file
+nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 " }}}
 
 " Indentlines {{{
@@ -335,6 +371,9 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 30
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_extensions = ['buffertag']
+let g:ctrlp_max_files = 0
+let g:ctrlp_lazy_update = 350
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 map <Leader>e :CtrlP<CR>
 map <Leader>m :CtrlPMRU<CR>
 map <Leader>t :CtrlPTag<CR>
@@ -467,6 +506,12 @@ augroup python
     au FileType python set smartindent smarttab nospell number
     au BufWinLeave *.py mkview
     au BufWinEnter *.py silent loadview
+augroup end
+
+augroup php
+    au FileType php set smartindent smarttab nospell number
+    au BufWinLeave *.php mkview
+    au BufWinEnter *.php silent loadview
 augroup end
 
 augroup markdown
