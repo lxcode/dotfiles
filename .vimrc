@@ -27,6 +27,8 @@ map <silent> <Leader>\ :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
+" Clean up left side
+nmap <F2> :set nonu foldcolumn=0<CR>:QuickfixsignsToggle<CR>
 map <F8> :w<CR> :!make<CR>
 map <silent> <F9> :call ToggleVExplorer()<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
@@ -56,6 +58,10 @@ vnoremap <leader>64 c<c-r>=system('base64',@")<cr><esc>
 vnoremap <leader>64d c<c-r>=system('base64 --decode',@")<cr><esc>
 " Quick exits
 nmap zz ZZ
+" Open a small terminal
+if has('nvim')
+    nnoremap <leader>o :below 10sp term://$SHELL<cr>i
+endif
 " }}}
 
 " Settings {{{
@@ -67,9 +73,9 @@ helptags ~/.vim/doc
 if has('gui')
     set gcr=n:blinkon0          " don't blink the cursor in normal mode
     set guioptions=aAegiM       " get rid of useless stuff in the gui
+    set clipboard=unnamed
     if has("gui_macvim")
         set guifont=Inconsolata:h18
-        set clipboard=unnamed
         noremap <Leader>zo :set guifont=Inconsolata:h4<CR>
         noremap <Leader>zi :set guifont=Inconsolata:h18<CR>
     else
@@ -80,11 +86,14 @@ if has('gui_running')
     set ballooneval
     set balloondelay=100
 endif
+
 if $DISPLAY != ""
     "set cursorline          " I like this, but damn is it slow
     set mouse=a             " Turn this off for console-only mode
     set selectmode+=mouse	" Allow the mouse to select
-    set ttymouse=xterm2
+    if !has('nvim')
+        set ttymouse=xterm2
+    endif
 endif
 set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
@@ -115,14 +124,10 @@ set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
 set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
-"if has("macunix")
-    set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
-"else
-"    set grepprg=bsdgrep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
-"endif
+set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
 set cpoptions=BFt
 set completeopt=menuone,longest
-set tags=tags;/             " use first tags file in a directory tree
+set tags=tags,./tags
 set nobackup                " ugh, stop making useless crap
 set nowritebackup           " same with overwriting
 set directory=/tmp          " litter up /tmp, not the CWD
@@ -146,9 +151,11 @@ set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
 set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=0        " the default level of fold nesting on startup
-set cryptmethod=blowfish    " in case I ever decide to use vim -x
 set autoread                " Disable warning about file change to writable
 set conceallevel=0          " Don't hide things by default
+if !has('nvim')
+    set cryptmethod=blowfish    " in case I ever decide to use vim -x
+endif
 
 "if exists('&autochdir')
 "    " Change directory to first open file
@@ -198,9 +205,38 @@ let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'AD
 let g:buftabs_only_basename=1
 " }}}
 
+" buftabline {{{
+let g:buftabline_show=1
+let g:buftabline_separators=1
+" }}}
+
 " clever-f {{{
 let g:clever_f_mark_char_color="PreProc"
 let g:clever_f_smart_case=1
+" }}}
+
+" cscope {{{
+let g:cscope_interested_files = '\.java$\|\.php$\|\.h$\|\.hpp|\.cpp|\.c$|\.m$|\.swift$|\.py$'
+let g:cscope_split_threshold = 99999
+let g:cscope_auto_update = 0
+nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
+nnoremap <leader>l :call ToggleLocationList()<CR>
+" s: Find this C symbol
+nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+" g: Find this definition
+nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+" d: Find functions called by this function
+nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+" c: Find functions calling this function
+nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
+" t: Find this text string
+nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
+" e: Find this egrep pattern
+nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+" f: Find this file
+nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
+" i: Find files #including this file
+nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 " }}}
 
 " Indentlines {{{
@@ -335,6 +371,9 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 30
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_extensions = ['buffertag']
+let g:ctrlp_max_files = 0
+let g:ctrlp_lazy_update = 350
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 map <Leader>e :CtrlP<CR>
 map <Leader>m :CtrlPMRU<CR>
 map <Leader>t :CtrlPTag<CR>
@@ -467,6 +506,12 @@ augroup python
     au FileType python set smartindent smarttab nospell number
     au BufWinLeave *.py mkview
     au BufWinEnter *.py silent loadview
+augroup end
+
+augroup php
+    au FileType php set smartindent smarttab nospell number
+    au BufWinLeave *.php mkview
+    au BufWinEnter *.php silent loadview
 augroup end
 
 augroup markdown
@@ -638,15 +683,24 @@ function ToggleHex()
 endfunction
 
 " I use this to highlight the match from grep, but keep quickfix syntax
-" highlighting intact. This is for BSD grep.
+" highlighting intact. Detects Linux due to the different escape sequences of
+" GNU grep.
 command -bar GrepColors call GrepColors()
 function GrepColors()
     set conceallevel=3
     set cocu=nv
+
+    if system('uname')=~'Linux'
+      syn region ansiRed start="\e\[01;31m"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
+      syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m"
+      syn match ansiStop		conceal "\e\[m"
+    else
     syn region ansiRed start="\e\[01;31m\e\[K"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
     syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m\e\[K"
+      syn match ansiStop		conceal "\e\[m\e\[K"
+    endif
+
     hi ansiRed    ctermfg=197   guifg=#FF005F  cterm=none         gui=none
-    syn match ansiStop		conceal "\e\[m\e\[K"
     hi! link ansiStop NONE
 endfunction
 
@@ -668,3 +722,13 @@ function! Graudit(db)
     cf /tmp/graudit.out
 endfunction
 " }}}
+
+let $ADMIN_SCRIPTS = "/mnt/vol/engshare/admin/scripts"
+
+if filereadable($ADMIN_SCRIPTS . "/master.vimrc")
+    source $ADMIN_SCRIPTS/master.vimrc
+endif
+
+if filereadable($ADMIN_SCRIPTS . "/vim/biggrep.vim")
+    source $ADMIN_SCRIPTS/vim/biggrep.vim
+endif

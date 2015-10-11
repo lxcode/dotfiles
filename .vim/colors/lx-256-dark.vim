@@ -27,7 +27,7 @@ hi Title guifg=#f6f3e8 gui=bold ctermfg=187 cterm=bold
 hi Visual guibg=#262D51 ctermbg=60
 
 hi TabLineSel ctermfg=blue
-hi TabLineFill ctermbg=black cterm=none
+hi TabLineFill ctermbg=black cterm=none guifg=#000000
 hi TabLine ctermfg=magenta ctermbg=black cterm=none
 
 hi SpecialKey guifg=#808080 guibg=#343434 ctermfg=8 ctermbg=236
@@ -161,3 +161,8 @@ hi QuickFixSignsDiffChangeLx ctermfg=0 ctermbg=68 guifg=black  guibg=#5f87df
 
 " For whitespace
 highlight ExtraWhitespace ctermbg=236
+
+" For buftabline
+hi BufTabLineActive ctermbg=0 guibg=black
+hi BufTabLineHidden ctermfg=242 guifg=#666666
+hi BufTabLineActive ctermfg=248

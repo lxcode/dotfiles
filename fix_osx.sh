@@ -128,7 +128,7 @@ sudo chflags nohidden /tmp
 sudo chflags nohidden /usr
 
 # Link to the airport command
-sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
+sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
 
 # The old Solaris admin in me still cringes when I see this command
 killall Dock
@@ -180,12 +180,13 @@ cd ~/git && \
 sudo xcodebuild -license
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
-brew install task tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par python3 weechat wireshark youtube-dl bbe zsh w3m
+brew install task tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par python3 weechat wireshark youtube-dl bbe zsh w3m vdirsyncer khal ag fzf
 # Note that macvim requires full xcode
-brew install macvim --override-system-vim --with-python3
+brew install macvim --with-python3
 brew install ctags --HEAD
 brew install profanity --with-terminal-notifier
 brew linkapps
+pip3 install peewee
 
 # Install casks
 read -p "Preparing to install casks"
@@ -196,6 +197,8 @@ brew cask install karabiner
 brew cask install iterm2
 brew cask install adium
 brew cask install google-chrome
+brew cask install xquartz
+brew cask install spectacle
 # Needs XQuartz
 brew install vim --override-system-vi --with-client-server --with-lua --with-python3
 task
