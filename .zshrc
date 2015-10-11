@@ -274,3 +274,5 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 ### Source things
 source ~/.zsh/zsh-history-substring-search.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
