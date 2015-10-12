@@ -58,12 +58,6 @@ vnoremap <leader>64 c<c-r>=system('base64',@")<cr><esc>
 vnoremap <leader>64d c<c-r>=system('base64 --decode',@")<cr><esc>
 " Quick exits
 nmap zz ZZ
-if bufwinnr(1)
-  map <S-right> <C-W><
-  map <S-left> <C-W>>
-endif
-nnoremap <silent> <Leader>+ :exe "vertical resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <Leader>- :exe "vertical resize " . (winheight(0) * 2/3)<CR>
 " Open a small terminal
 if has('nvim')
     nnoremap <leader>o :below 10sp term://$SHELL<cr>i
@@ -371,7 +365,7 @@ let g:vimchat_pync_enabled = 1
 
 " CtrlP {{{
 let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_map = '<C-e>'
+"let g:ctrlp_map = '<C-e>'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 30
@@ -395,10 +389,11 @@ let g:ctrlp_tjump_only_silent = 1
 " FZF {{{
 set rtp+=~/.fzf
 set rtp+=/usr/local/opt/fzf
+nmap <C-e> :Files<CR>
 nmap <leader>m :History<CR>
 nmap <leader>e :Files<CR>
-map <Leader>t :Tags<CR>
-map <Leader>b :BTags<CR>
+nmap <Leader>t :Tags<CR>
+nmap <Leader>b :BTags<CR>
 " }}}
 
 
