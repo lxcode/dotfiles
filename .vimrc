@@ -58,6 +58,12 @@ vnoremap <leader>64 c<c-r>=system('base64',@")<cr><esc>
 vnoremap <leader>64d c<c-r>=system('base64 --decode',@")<cr><esc>
 " Quick exits
 nmap zz ZZ
+if bufwinnr(1)
+  map <S-right> <C-W><
+  map <S-left> <C-W>>
+endif
+nnoremap <silent> <Leader>+ :exe "vertical resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "vertical resize " . (winheight(0) * 2/3)<CR>
 " Open a small terminal
 if has('nvim')
     nnoremap <leader>o :below 10sp term://$SHELL<cr>i
@@ -374,17 +380,27 @@ let g:ctrlp_extensions = ['buffertag']
 let g:ctrlp_max_files = 0
 let g:ctrlp_lazy_update = 350
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-map <Leader>e :CtrlP<CR>
-map <Leader>m :CtrlPMRU<CR>
-map <Leader>t :CtrlPTag<CR>
-map <Leader>g :CtrlPBufTagAll<CR>
-map <Leader>b :CtrlPBuffer<CR>
-" CtrlP tjump
-nnoremap <c-]> :CtrlPtjump<cr>
-vnoremap <c-]> :CtrlPtjumpVisual<cr>
 let g:ctrlp_tjump_shortener = ['/\(Users|home\)/lx', '~']
 let g:ctrlp_tjump_only_silent = 1
+"map <Leader>e :CtrlP<CR>
+"map <Leader>m :CtrlPMRU<CR>
+"map <Leader>t :CtrlPTag<CR>
+"map <Leader>g :CtrlPBufTagAll<CR>
+"map <Leader>b :CtrlPBuffer<CR>
+" CtrlP tjump
+"nnoremap <c-]> :CtrlPtjump<cr>
+"vnoremap <c-]> :CtrlPtjumpVisual<cr>
 " }}}
+
+" FZF {{{
+set rtp+=~/.fzf
+set rtp+=/usr/local/opt/fzf
+nmap <leader>m :History<CR>
+nmap <leader>e :Files<CR>
+map <Leader>t :Tags<CR>
+map <Leader>b :BTags<CR>
+" }}}
+
 
 " statline {{{
 let g:statline_fugitive=1
