@@ -256,9 +256,6 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # command for process lists
 zstyle ':completion:*:processes' command 'ps -o pid,s,nice,stime,args'
 
-# ssh hosts matching style
-zstyle -e ':completion:*:hosts' hosts 'reply=($(cat $HOME/.ssh/known_hosts $HOME/.ssh/known_hosts2 /{usr/local/,}etc/ssh/ssh_known_hosts 2>/dev/null | sed -e "/^#/d" -e "s/ .*\$//" -e "s/,/ /g"))'
-
 # URL completion style...
 zstyle -e ':completion:*:urls' urls 'reply=($(cat $HOME/.w3m/history 2>/dev/null | sed -e "/^#/d" -e "s:http\://::g" ))'
 
