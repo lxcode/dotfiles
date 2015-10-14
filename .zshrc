@@ -275,8 +275,6 @@ source ~/.zsh/zsh-history-substring-search.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-# added by setup_fb4a.sh
 export ANDROID_SDK=/opt/android_sdk
 export ANDROID_NDK_REPOSITORY=/opt/android_ndk
 export ANDROID_HOME=${ANDROID_SDK}
