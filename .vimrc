@@ -139,6 +139,9 @@ set title
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
 set ttimeout
 set ttimeoutlen=100         " Make it so Esc enters Normal mode right away
+if has('nvim')
+    set ttimeoutlen=-1
+endif
 set helpheight=0            " no minimum helpheight
 set incsearch               " search incrementally
 set showmatch               " show the matching terminating bracket
@@ -361,29 +364,6 @@ let g:vimchat_statusicon = 0
 let g:vimchat_showPresenceNotification = -1
 let g:vimchat_pync_enabled = 1
 "map g<Tab> gt
-" }}}
-
-" CtrlP {{{
-let g:ctrlp_cmd = 'CtrlPMixed'
-"let g:ctrlp_map = '<C-e>'
-let g:ctrlp_by_filename = 1
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_max_height = 30
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_extensions = ['buffertag']
-let g:ctrlp_max_files = 0
-let g:ctrlp_lazy_update = 350
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_tjump_shortener = ['/\(Users|home\)/lx', '~']
-let g:ctrlp_tjump_only_silent = 1
-"map <Leader>e :CtrlP<CR>
-"map <Leader>m :CtrlPMRU<CR>
-"map <Leader>t :CtrlPTag<CR>
-"map <Leader>g :CtrlPBufTagAll<CR>
-"map <Leader>b :CtrlPBuffer<CR>
-" CtrlP tjump
-"nnoremap <c-]> :CtrlPtjump<cr>
-"vnoremap <c-]> :CtrlPtjumpVisual<cr>
 " }}}
 
 " FZF {{{

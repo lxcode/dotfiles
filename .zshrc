@@ -14,6 +14,7 @@ HISTSIZE=1336
 DIRSTACKSIZE=20
 HISTFILE=~/.zsh_history
 SAVEHIST=1336
+KEYTIMEOUT=1
 
 ### Watch
 watch=(notme)                   # watch for everybody but me
@@ -273,3 +274,8 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 source ~/.zsh/zsh-history-substring-search.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export ANDROID_SDK=/opt/android_sdk
+export ANDROID_NDK_REPOSITORY=/opt/android_ndk
+export ANDROID_HOME=${ANDROID_SDK}
+export PATH=${PATH}:${ANDROID_SDK}/tools:${ANDROID_SDK}/platform-tools
