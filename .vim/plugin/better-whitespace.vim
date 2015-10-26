@@ -33,18 +33,48 @@ call s:InitVariable('g:current_line_whitespace_disabled_soft', 0)
 call s:InitVariable('g:strip_whitespace_on_save', 0)
 
 " Set this to blacklist specific filetypes
-call s:InitVariable('g:better_whitespace_filetypes_blacklist', [])
+let default_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help']
+call s:InitVariable('g:better_whitespace_filetypes_blacklist', default_blacklist)
+
+" Disable verbosity by default
+call s:InitVariable('g:better_whitespace_verbosity', 0)
 
 " Only init once
 let s:better_whitespace_initialized = 0
 
+" Like windo but restore the current window.
+function! s:Windo(command)
+    let currwin=winnr()
+    execute 'windo ' . a:command
+    execute currwin . 'wincmd w'
+endfunction
+
+" Like tabdo but restore the current tab.
+function! s:Tabdo(command)
+    let currTab=tabpagenr()
+    execute 'tabdo ' . a:command
+    execute 'tabn ' . currTab
+endfunction
+
+" Execute command in all windows (across tabs).
+function! s:InAllWindows(command)
+    call s:Tabdo("call s:Windo('".substitute(a:command, "'", "''", 'g')."')")
+endfunction
+
 " Ensure the 'ExtraWhitespace' highlight group has been defined
 function! s:WhitespaceInit()
     " Check if the user has already defined highlighting for this group
-    if hlexists("ExtraWhitespace") == 0
+    if hlexists("ExtraWhitespace") == 0 || synIDattr(synIDtrans(hlID("ExtraWhitespace")), "bg") == -1
         highlight ExtraWhitespace ctermbg = red guibg = #FF0000
     endif
     let s:better_whitespace_initialized = 1
+endfunction
+
+" Like 'echo', but only outputs the message when verbosity is enabled
+function! s:Echo(message)
+    if g:better_whitespace_verbosity == 1
+        echo a:message
+    endif
 endfunction
 
 " Enable the whitespace highlighting
@@ -53,8 +83,9 @@ function! s:EnableWhitespace()
         let g:better_whitespace_enabled = 1
         call <SID>WhitespaceInit()
         " Match default whitespace
-        match ExtraWhitespace /\s\+$/
+        call s:InAllWindows('match ExtraWhitespace /\s\+$/')
         call <SID>SetupAutoCommands()
+        call <SID>Echo("Whitespace Highlighting: Enabled")
     endif
 endfunction
 
@@ -63,9 +94,9 @@ function! s:DisableWhitespace()
     if g:better_whitespace_enabled == 1
         let g:better_whitespace_enabled = 0
         " Clear current whitespace matches
-        match ExtraWhitespace ''
-        syn clear ExtraWhitespace
+        call s:InAllWindows("match ExtraWhitespace '' | syn clear ExtraWhitespace")
         call <SID>SetupAutoCommands()
+        call <SID>Echo("Whitespace Highlighting: Disabled")
     endif
 endfunction
 
@@ -90,12 +121,13 @@ function! s:CurrentLineWhitespaceOff( level )
         if a:level == 'hard'
             let g:current_line_whitespace_disabled_hard = 1
             let g:current_line_whitespace_disabled_soft = 0
-            syn clear ExtraWhitespace
-            match ExtraWhitespace /\s\+$/
+            call s:InAllWindows('syn clear ExtraWhitespace | match ExtraWhitespace /\s\+$/')
+            call <SID>Echo("Current Line Hightlight Off (hard)")
         elseif a:level == 'soft'
             let g:current_line_whitespace_disabled_soft = 1
             let g:current_line_whitespace_disabled_hard = 0
-            match ExtraWhitespace ''
+            call s:InAllWindows("match ExtraWhitespace ''")
+            call <SID>Echo("Current Line Hightlight Off (soft)")
         endif
         " Re-run auto commands with the new settings
         call <SID>SetupAutoCommands()
@@ -108,8 +140,8 @@ function! s:CurrentLineWhitespaceOn()
         let g:current_line_whitespace_disabled_hard = 0
         let g:current_line_whitespace_disabled_soft = 0
         call <SID>SetupAutoCommands()
-        syn clear ExtraWhitespace
-        match ExtraWhitespace /\s\+$/
+        call s:InAllWindows('syn clear ExtraWhitespace | match ExtraWhitespace /\s\+$/')
+        call <SID>Echo("Current Line Hightlight On")
     endif
 endfunction
 
@@ -132,10 +164,17 @@ endfunction
 function! s:ToggleStripWhitespaceOnSave()
     if g:strip_whitespace_on_save == 0
         let g:strip_whitespace_on_save = 1
+        call <SID>Echo("Strip Whitespace On Save: Enabled")
     else
         let g:strip_whitespace_on_save = 0
+        call <SID>Echo("Strip Whitespace On Save: Disabled")
     endif
     call <SID>SetupAutoCommands()
+endfunction
+
+" Determines if whitespace highlighting should currently be skipped
+function! s:ShouldSkipHighlight()
+    return &buftype == 'nofile' || index(g:better_whitespace_filetypes_blacklist, &ft) >= 0
 endfunction
 
 " Run :StripWhitespace to remove end of line whitespace
@@ -155,7 +194,8 @@ command! -nargs=* CurrentLineWhitespaceOff call <SID>CurrentLineWhitespaceOff( <
 command! CurrentLineWhitespaceOn call <SID>CurrentLineWhitespaceOn()
 
 " Process auto commands upon load
-autocmd VimEnter,WinEnter,BufEnter,FileType * call <SID>SetupAutoCommands()
+autocmd BufWinEnter * call <SID>SetupAutoCommands()
+autocmd ColorScheme * call <SID>WhitespaceInit()
 
 " Executes all auto commands
 function! <SID>SetupAutoCommands()
@@ -163,8 +203,8 @@ function! <SID>SetupAutoCommands()
     augroup better_whitespace
         autocmd!
 
-        if index(g:better_whitespace_filetypes_blacklist, &ft) >= 0
-            silent! call clearmatches()
+        if <SID>ShouldSkipHighlight()
+            match ExtraWhitespace ''
             return
         endif
 
@@ -188,13 +228,13 @@ function! <SID>SetupAutoCommands()
                 " Highlight all whitespace when exiting insert mode
                 autocmd InsertLeave,BufReadPost * match ExtraWhitespace /\s\+$/
                 " Clear whitespace highlighting when leaving buffer
-                autocmd BufWinLeave * call clearmatches()
+                autocmd BufWinLeave * match ExtraWhitespace ''
             else
                 " Highlight extraneous whitespace at the end of lines, but not the
-                " current line
-                syn clear ExtraWhitespace | syn match ExtraWhitespace excludenl /\s\+$/
-                autocmd InsertEnter * syn clear ExtraWhitespace | syn match ExtraWhitespace excludenl /\s\+\%#\@!$/ containedin=ALL
-                autocmd InsertLeave,BufReadPost * syn clear ExtraWhitespace | syn match ExtraWhitespace excludenl /\s\+$/ containedin=ALL
+                " current line.
+                call s:InAllWindows('syn clear ExtraWhitespace | syn match ExtraWhitespace excludenl /\s\+$/')
+                autocmd InsertEnter * syn clear ExtraWhitespace | syn match ExtraWhitespace excludenl /\s\+\%#\@!$/ containedin=ALLBUT,gitcommitDiff
+                autocmd InsertLeave,BufReadPost * syn clear ExtraWhitespace | syn match ExtraWhitespace excludenl /\s\+$/ containedin=ALLBUT,gitcommitDiff
             endif
         endif
 
