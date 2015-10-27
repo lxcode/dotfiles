@@ -22,16 +22,13 @@ LOGCHECK=300                    # check every 5 min for login/logout activity
 WATCHFMT='%n %a %l from %m at %t.'
 
 ### Options
-setopt   notify globdots pushdtohome cdablevars autolist
+setopt   notify globdots pushdtohome autolist
 setopt   autocd longlistjobs
 setopt   autoresume histignoredups pushdsilent
-setopt   autopushd pushdminus extendedglob rcquotes mailwarning
+setopt   autopushd pushdminus extendedglob rcquotes
 setopt   multios
-unsetopt bgnice autoparamslash
-
-# argh, cut it out!
 setopt nocorrect nocorrectall
-setopt NO_CDABLE_VARS
+unsetopt bgnice autoparamslash
 
 ### Aliases
 alias j=jobs
@@ -77,30 +74,9 @@ bvimdiff() {
     vimdiff <(xxd $1) <(xxd $2)
 }
 
-mcd() {
-    cd `locate "$*"|slmenu -l 50`
-}
-
-mvi() {
-    vim `locate "$*"|slmenu -l 50`
-}
-
 setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
 
 freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
-
-cgrep()
-{
-	regex=$1
-	file=$2
-	sed -n -e '/$regex/{=;x;1!p;g;$!N;p;D;}' -e h $file
-}
-
-lxdo()
-{
-	args=$*
-	su root -mc $args
-}
 
 brew-cask-upgrade() {
   if [ "$1" != '--continue' ]; then
