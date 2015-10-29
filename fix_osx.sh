@@ -128,6 +128,7 @@ sudo chflags nohidden /tmp
 sudo chflags nohidden /usr
 
 # Link to the airport command
+sudo mkdir -p /usr/local/bin
 sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
 
 # The old Solaris admin in me still cringes when I see this command
