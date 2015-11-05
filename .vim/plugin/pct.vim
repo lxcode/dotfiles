@@ -385,7 +385,7 @@ def init_db(create=True):
 
 	if create or found_db is not None:
 		create_db(found_db)
-		ok("found annotations database at %s" % found_db)
+    #ok("found annotations database at %s" % found_db)
 		vim.command("call DefineAutoCommands()")
 
 def get_path(path, create=True):
