@@ -1,4 +1,4 @@
-for VI in /usr/local/bin/nvim /usr/local/bin/vim /opt/local/bin/vim /Applications/MacVim.app/Contents/MacOS/Vim /usr/bin/vim /usr/local/bin/nvi /usr/bin/vi
+for VI in /usr/local/bin/vim /usr/local/bin/nvim /opt/local/bin/vim /Applications/MacVim.app/Contents/MacOS/Vim /usr/bin/vim /usr/local/bin/nvi /usr/bin/vi
 do
 	if [ -x $VI ]; then
 		export EDITOR=$VI
@@ -7,7 +7,8 @@ do
 	fi
 done
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-FZF_DEFAULT_OPTS="--extended"
+export FZF_DEFAULT_OPTS="--extended"
+export FZF_DEFAULT_COMMAND='ag -l -g ""'
 
 export FPATH=/usr/share/zsh/site-functions:$FPATH
 export GREP_COLORS="ms=01;31:mc=:sl=:cx=:fn=:ln=:bn=:se=:ne="
