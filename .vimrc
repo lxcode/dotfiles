@@ -710,13 +710,13 @@ function GrepColors()
     set cocu=nv
 
     if system('uname')=~'Linux'
-      syn region ansiRed start="\e\[01;31m"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
-      syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m"
-      syn match ansiStop		conceal "\e\[m"
+        syn region ansiRed start="\e\[01;31m"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
+        syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m"
+        syn match ansiStop		conceal "\e\[m"
     else
-    syn region ansiRed start="\e\[01;31m\e\[K"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
-    syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m\e\[K"
-      syn match ansiStop		conceal "\e\[m\e\[K"
+        syn region ansiRed start="\e\[01;31m\e\[K"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
+        syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m\e\[K"
+        syn match ansiStop		conceal "\e\[m\e\[K"
     endif
 
     hi ansiRed    ctermfg=197   guifg=#FF005F  cterm=none         gui=none
