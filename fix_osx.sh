@@ -128,6 +128,7 @@ sudo chflags nohidden /tmp
 sudo chflags nohidden /usr
 
 # Link to the airport command
+sudo mkdir -p /usr/local/bin
 sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
 
 # The old Solaris admin in me still cringes when I see this command
@@ -180,7 +181,7 @@ cd ~/git && \
 sudo xcodebuild -license
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
-brew install task tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par python3 weechat wireshark youtube-dl bbe zsh w3m vdirsyncer khal ag fzf mobile-shell
+brew install task tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par python3 weechat wireshark youtube-dl bbe zsh w3m vdirsyncer khal ag fzf mobile-shell tree
 # Note that macvim requires full xcode
 brew install macvim --with-python3
 brew install ctags --HEAD

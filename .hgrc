@@ -1,0 +1,12 @@
+[ui]
+username = lx <lx@grumplicio.us>
+
+[extensions]
+graphlog =
+color =
+purge =
+
+[pager]
+pager = LESS='FSRX' less
+ignore = version, help, update, serve, record
+attend = outgoing,incoming,diff,status,log,qdiff,blame,annotate,pdiff,glog

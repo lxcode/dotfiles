@@ -37,7 +37,7 @@ set pastetoggle=<F11>
 map <F12> :cn<CR>
 " preview the tag under the cursor
 nmap <C-p> :exe "ptag" expand("<cword>")<CR>
-nnoremap <silent> <C-c> :call QuickfixToggle()<cr>
+nnoremap <silent> <C-c> :QFix<cr>
 " Window movement
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -581,18 +581,46 @@ augroup end
 
 " Custom functions {{{
 " Quickfix toggle
-let g:quickfix_is_open = 0
 
-function! QuickfixToggle()
-    if g:quickfix_is_open
-        cclose
-        let g:quickfix_is_open = 0
-        execute g:quickfix_return_to_window . "wincmd w"
-    else
-        let g:quickfix_return_to_window = winnr()
-        bot copen
-        let g:quickfix_is_open = 1
+function! GetBufferList()
+  redir =>buflist
+  silent! ls!
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
     endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+"nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
+"nmap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
+
+command -bang -nargs=? QFix call QFixToggle(<bang>0)
+function! QFixToggle(forced)
+  if exists("g:qfix_win") && a:forced == 0
+    cclose
+    unlet g:qfix_win
+  else
+    copen 10
+    let g:qfix_win = bufnr("$")
+  endif
 endfunction
 
 " Toggle Vexplore
@@ -682,13 +710,13 @@ function GrepColors()
     set cocu=nv
 
     if system('uname')=~'Linux'
-      syn region ansiRed start="\e\[01;31m"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
-      syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m"
-      syn match ansiStop		conceal "\e\[m"
+        syn region ansiRed start="\e\[01;31m"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
+        syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m"
+        syn match ansiStop		conceal "\e\[m"
     else
-    syn region ansiRed start="\e\[01;31m\e\[K"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
-    syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m\e\[K"
-      syn match ansiStop		conceal "\e\[m\e\[K"
+        syn region ansiRed start="\e\[01;31m\e\[K"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
+        syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m\e\[K"
+        syn match ansiStop		conceal "\e\[m\e\[K"
     endif
 
     hi ansiRed    ctermfg=197   guifg=#FF005F  cterm=none         gui=none
@@ -714,7 +742,7 @@ function! Graudit(db)
 endfunction
 " }}}
 
-let $ADMIN_SCRIPTS = "/mnt/vol/engshare/admin/scripts"
+let $ADMIN_SCRIPTS = "/scripts"
 
 if filereadable($ADMIN_SCRIPTS . "/master.vimrc")
     source $ADMIN_SCRIPTS/master.vimrc
