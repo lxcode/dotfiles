@@ -15,6 +15,7 @@ DIRSTACKSIZE=20
 HISTFILE=~/.zsh_history
 SAVEHIST=1336
 KEYTIMEOUT=1
+MAILCHECK=0
 
 ### Watch
 watch=(notme)                   # watch for everybody but me
