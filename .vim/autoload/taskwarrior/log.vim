@@ -1,5 +1,8 @@
-let s:history_file  = glob(g:task_log_directory.'/.vim_tw.history')
-let s:bookmark_file = glob(g:task_log_directory.'/.vim_tw.bookmark')
+if !isdirectory(expand(g:task_log_directory))
+    call mkdir(expand(g:task_log_directory), 'p')
+endif
+let s:history_file  = expand(g:task_log_directory.'/.vim_tw.history')
+let s:bookmark_file = expand(g:task_log_directory.'/.vim_tw.bookmark')
 
 function! taskwarrior#log#history(action)
     if findfile(s:history_file) == ''

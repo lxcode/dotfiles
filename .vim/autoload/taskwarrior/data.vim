@@ -1,7 +1,8 @@
 function! taskwarrior#data#get_uuid(...)
     let line = a:0 == 0 ? '.' : a:1
     let vol = taskwarrior#data#get_value_by_column(line, 'uuid')
-    let vol = vol =~ '[0-9a-f]\{8}\(-[0-9a-f]\{4}\)\{3}-[0-9a-f]\{12}' ? vol : taskwarrior#data#get_value_by_column(line, 'id')
+    let vol = vol =~ '[0-9a-f]\{8}\(-[0-9a-f]\{4}\)\{3}-[0-9a-f]\{12}' ?
+                \ vol : taskwarrior#data#get_value_by_column(line, 'id')
     return vol =~ '^\s*-*\s*$' ? '' : vol
 endfunction
 
@@ -12,19 +13,18 @@ function! taskwarrior#data#get_args(...)
         return taskwarrior#data#get_args(a:1, g:task_default_prompt)
     endif
     let arg = ' '
-    let default = ''
-    let command = 'let this_%s = input("%s:", "%s")'
     for key in a:2
-        if a:1 == 'modify'
-            let default = taskwarrior#data#get_value_by_column('.', key)
-        endif
-        execute printf(command, key, key, default)
+        let default = a:1 == 'modify' ?
+                    \ taskwarrior#data#get_value_by_column('.', key)
+                    \ : ''
+        let temp = shellescape(input(key.":", default), 1)
         if key == 'description'
-            execute "let arg = arg.' '.this_".key
-        else
-            execute "let arg = arg.' '.key.':'.this_".key
+            let arg .= ' '.temp
+        elseif temp !~ '^[ \t]*$' || a:1 == 'modify'
+            let arg .= ' '.key.':'.temp
         endif
     endfor
+    echom arg
     return arg
 endfunction
 
@@ -36,12 +36,16 @@ function! taskwarrior#data#get_value_by_column(line, column, ...)
         let index = match(b:task_report_columns, '^'.a:column.'.*')
         return taskwarrior#data#get_value_by_index(a:line, index(b:task_report_columns, a:column))
     else
-        let ilist = split(system('task all '.taskwarrior#data#get_uuid().' rc.report.all.columns='.a:column.' rc.report.all.labels=cc'), '\n')
-        let split_lineno = match(ilist, '^[ -]\+$')
-        if split_lineno != -1
-            return substitute(ilist[split_lineno+1],  '\(\s*$\|^\s*\)', '',  'g')
+        let dict = taskwarrior#data#get_query()
+        let val = has_key(dict, a:column) ?
+                    \ dict[a:column] : ''
+        if type(val) == type('')
+            return val
+        elseif type(val) == type([])
+            return join(val, ' ')
+        else
+            return string(val)
         endif
-        return ''
     endif
 endfunction
 
@@ -88,37 +92,38 @@ function! taskwarrior#data#get_query(...)
     if uuid == ''
         return {}
     endif
-    return webapi#json#decode(system('task rc.verbose=off '.uuid.' _query'))
+    return webapi#json#decode(system('task rc.verbose=off '.uuid.' export'))
 endfunction
 
 function! taskwarrior#data#global_stats()
     let dict = taskwarrior#data#get_stats(b:filter)
-    if !exists('dict["Pending"]') || !exists('dict["Completed"]')
-        return ['0', '0', taskwarrior#data#get_stats('')['Pending']]
-    endif
-    return [dict['Pending'], dict['Completed'], taskwarrior#data#get_stats('')['Pending']]
+    return [
+                \ get(dict, 'Pending', 0),
+                \ get(dict, 'Completed', 0),
+                \ get(taskwarrior#data#get_stats(''), 'Pending', 0)
+                \ ]
 endfunction
 
 function! taskwarrior#data#category()
-    let dict              = {}
-    let dict['Pending']   = []
-    let dict['Waiting']   = []
-    let dict['Recurring'] = []
-    let dict['Completed'] = []
+    let dict           = {}
+    let dict.Pending   = []
+    let dict.Waiting   = []
+    let dict.Recurring = []
+    let dict.Completed = []
     for i in range(2, line('$'))
         let uuid = taskwarrior#data#get_uuid(i)
         if uuid == ''
             continue
         endif
         let subdict = taskwarrior#data#get_stats(uuid)
-        if subdict['Pending']       == '1'
-            let dict['Pending'] += [i]
-        elseif subdict['Waiting']   == '1'
-            let dict['Waiting'] += [i]
-        elseif subdict['Recurring'] == '1'
-            let dict['Recurring'] += [i]
-        elseif subdict['Completed'] == '1'
-            let dict['Completed'] += [i]
+        if subdict.Pending == '1'
+            let dict.Pending += [i]
+        elseif subdict.Waiting == '1'
+            let dict.Waiting += [i]
+        elseif subdict.Recurring == '1'
+            let dict.Recurring += [i]
+        elseif subdict.Completed == '1'
+            let dict.Completed += [i]
         endif
     endfor
     return dict
