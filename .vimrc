@@ -1,3 +1,7 @@
+" Abbreviations {{{
+abbr guys folks
+" }}}
+
 " Keymappings {{{
 " Make space clear highlighted searches
 nmap <silent> <space> :noh<CR>
@@ -751,3 +755,6 @@ endif
 if filereadable($ADMIN_SCRIPTS . "/vim/biggrep.vim")
     source $ADMIN_SCRIPTS/vim/biggrep.vim
 endif
+
+" Why do you turn this off
+set hlsearch
