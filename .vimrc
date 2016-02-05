@@ -184,9 +184,15 @@ if !executable('task')
     let g:loaded_taskwarrior = 1
 endif
 
+
 if !has('python3')
     let g:loaded_pct = 1
 endif
+
+" taskwarrior {{{
+let g:task_rc_override = 'rc.defaultwidth=0'
+let g:task_report_name = '-home'
+" }}}
 
 " netrw {{{
 let g:netrw_liststyle=0
