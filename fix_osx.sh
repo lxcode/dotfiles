@@ -130,6 +130,9 @@ chflags nohidden ~/Library/
 sudo chflags nohidden /tmp
 sudo chflags nohidden /usr
 
+# Kill parentalcontrolsd
+sudo rm -rf "/Library/Application Support/Apple/ParentalControls"
+
 # Link to the airport command
 sudo mkdir -p /usr/local/bin
 sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
