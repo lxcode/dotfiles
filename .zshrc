@@ -14,7 +14,7 @@ HISTSIZE=1336
 DIRSTACKSIZE=20
 HISTFILE=~/.zsh_history
 SAVEHIST=1336
-KEYTIMEOUT=1
+KEYTIMEOUT=0
 MAILCHECK=0
 
 ### Watch
@@ -198,6 +198,7 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
+bindkey '' vi-cmd-mode
 
 ### Completion
 autoload -Uz compinit
