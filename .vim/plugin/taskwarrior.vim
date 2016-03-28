@@ -3,12 +3,17 @@ if exists('g:loaded_taskwarrior') && g:loaded_taskwarrior
 endif
 
 if !executable('task')
-    "echoerr "This plugin depends on taskwarrior(http://taskwarrior.org)."
+    echoerr "This plugin depends on taskwarrior(http://taskwarrior.org)."
     finish
 endif
 
-let g:task_report_command           = ['active', 'all', 'blocked', 'blocking', 'completed', 'list', 'long', 'ls', 'minimal', 'newest', 'next', 'oldest', 'overdue', 'ready', 'recurring', 'unblocked', 'waiting']
-let g:task_interactive_command      = ['annotate', 'denotate', 'execute', 'duplicate', 'append', 'prepend', 'stop', 'delete', 'done', 'undo', 'config', 'edit', 'start', 'sync', 'synchronize', 'add', 'modify', 'import', 'colors', 'color', 'logo']
+let g:task_report_command           = get(g:, 'task_report_command', [])
+let s:task_report_command           = ['active', 'all', 'blocked', 'blocking', 'completed', 'list', 'long', 'ls', 'minimal', 'newest', 'next', 'oldest', 'overdue', 'ready', 'recurring', 'unblocked', 'waiting']
+let g:task_report_command           = extend(s:task_report_command, g:task_report_command)
+let g:task_interactive_command      = ['annotate', 'denotate', 'execute', 'duplicate',
+            \ 'append', 'prepend', 'stop', 'delete', 'done', 'undo',
+            \ 'config', 'edit', 'start', 'sync', 'synchronize', 'add',
+            \ 'modify', 'import', 'colors', 'color', 'logo', 'context']
 let g:task_filter                   = ['description:', 'proj:', 'pri:', 'status:', 'tag:', 'due.before:', 'due.after:', 'entry.before', 'entry.after', 'end.before', 'end.after', '+']
 let g:task_all_commands             = split(system('task _command'), '\n')
 let g:task_all_configurations       = split(system('task _config'), '\n')
@@ -58,6 +63,7 @@ let g:task_columns_format           = {
 "commands;
 "
 command! -nargs=? -complete=customlist,taskwarrior#complete#TW TW :call taskwarrior#init(<q-args>)
+command! -nargs=? TWReportInfo :call taskwarrior#action#show_info(<q-args>)
 "command! TWConfigColor
 command! TWDeleteCompleted :call taskwarrior#action#clear_completed()
 "command! TWDeleteNote

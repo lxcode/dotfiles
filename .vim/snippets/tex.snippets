@@ -149,11 +149,11 @@ snippet page
 snippet index
 	\index{${1:index}}${2}
 snippet indtt
-	\index{${1:index name}@{\tt $2$1}}
-snippet indem
-	\index{${1:index name}@{\em $2$1}}
+	\index{${1:index name}@\texttt{$2$1}}
+snippet indit
+	\index{${1:index name}@\textit{$2$1}}
 snippet indbf
-	\index{${1:index name}@{\bf $2$1}}
+	\index{${1:index name}@\textbf{$2$1}}
 #Citations
 snippet cite
 	\cite[${1}]{${2}}${3}

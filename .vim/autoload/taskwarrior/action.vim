@@ -6,6 +6,65 @@ function! taskwarrior#action#set_done()
     call taskwarrior#system_call(taskwarrior#data#get_uuid(), ' done', '', 'silent')
 endfunction
 
+function! taskwarrior#action#urgency() abort
+    let cc   = taskwarrior#data#current_column()
+    let udas = split(system('task _udas'), '\n')
+    let cmap = { 'start' : 'active',
+                \ 'entry' : 'age',
+                \ 'depends' : 'blocked',
+                \ 'parent' : 'blocking',
+                \ 'wait' : 'waiting',
+                \ 'description' : 'annotations'
+                \ }
+    let isuda = 0
+    if has_key(cmap, cc)
+        let cc = cmap[cc]
+    elseif index(['due', 'priority', 'project', 'tags', 'scheduled']
+                \ , cc) == -1
+        if index(udas, cc) == -1
+            call taskwarrior#sort#by_arg('urgency-')
+            return
+        else
+            let isuda = 1
+        endif
+    endif
+    let rcfile = $HOME.'/.taskrc'
+    if filereadable(rcfile)
+        let cv = taskwarrior#data#get_value_by_column(line('.'), cc)
+        let option = isuda ? 'urgency.uda.'.cc.'.coefficient' :
+                    \ 'urgency.'.cc.'.coefficient'
+        if len(cv)
+            let ctag = expand('<cword>')
+            if cc == 'tags' && index(split(cv), ctag) != -1
+                let option = 'urgency.user.tag.'.ctag.'.coefficient'
+            elseif cc == 'project' && cv =~ '^[^ \t%\\*]\+$'
+                let pl = split(cv, '\.')
+                let idx = index(pl, expand('<cword>'))
+                let option = 'urgency.user.project.'.
+                            \ join(pl[0:idx], '.').'.coefficient'
+            elseif isuda && cv =~ '^\w\+$'
+                let option = 'urgency.uda.'.cc.'.'.cv.'.coefficient'
+            endif
+        endif
+        let default_raw = split(system('task _get rc.'.option), '\n')
+        let default     = len(default_raw) ? default_raw[0] : '0'
+        let new         = input(option.' : ', default)
+        let lines       = readfile(rcfile)
+        let index       = match(lines, option)
+        if str2float(new) == str2float(default)
+        elseif str2float(new) == 0
+            call filter(lines, 'v:val !~ option')
+        elseif index == -1
+            call add(lines, option.'='.new)
+        else
+            let lines[index] = option.'='.new
+        endif
+        call writefile(lines, rcfile)
+    endif
+    call taskwarrior#sort#by_arg('urgency-')
+    execute 'normal! :\<Esc>'
+endfunction
+
 function! taskwarrior#action#modify(mode)
     let uuid = taskwarrior#data#get_uuid()
     if uuid == ''
@@ -160,11 +219,12 @@ function! taskwarrior#action#columns_format_change(direction)
         endif
     endif
     let newsub = index == 0 ? '' : '.'.clist[index]
-    if rcl != ''
-        let b:rc .= ' rc.report.'.b:command.'.columns:'.substitute(rcl, '[=:,]\zs'.ccol_ful, ccol.newsub, 'g')
-    else
-        let b:rc .= ' rc.report.'.b:command.'.columns:'.substitute(dfl, '[=:,]\zs'.ccol_ful, ccol.newsub, 'g')
-    endif
+    let b:rc .= ' rc.report.'.b:command.'.columns:'.
+                \ substitute(
+                \   rcl == '' ? dfl : rcl,
+                \   '[=:,]\zs'.ccol_ful.'\ze\(,\|$\)',
+                \   ccol.newsub, ''
+                \ )
     let b:hist = 1
     call taskwarrior#list()
 endfunction
@@ -204,7 +264,7 @@ function! taskwarrior#action#visual(action) range
     elseif a:action == 'delete'
         call taskwarrior#system_call(filter, 'delete', '', 'interactive')
     elseif a:action == 'info'
-        call taskinfo#init('information', filter, split(system('task information '.filter), '\n'))
+        call taskinfo#init('information', filter, split(system('task rc.color=no information '.filter), '\n'))
     elseif a:action == 'select'
         for var in fil
             let index = index(b:selected, var)
@@ -281,25 +341,30 @@ function! taskwarrior#action#select()
     setlocal syntax=taskreport
 endfunction
 
-function! taskwarrior#action#show_info()
-    let ccol = taskwarrior#data#current_column()
-    let dict = { 'project': 'projects',
-                \ 'tags': 'tags',
-                \ 'id': 'stats',
-                \ 'depends': 'blocking',
-                \ 'recur': 'recurring',
-                \ 'due': 'overdue',
-                \ 'wait': 'waiting',
-                \ 'urgency': 'ready',
-                \ 'entry': 'history.monthly',
-                \ 'end': 'history.monthly'}
-    let command = get(dict, ccol, 'summary')
-    let uuid = taskwarrior#data#get_uuid()
-    if uuid !~ '^\s*$'
-        let command = substitute(command, '\v(summary|stats)', 'information', '')
-        let filter = taskwarrior#data#get_uuid()
+function! taskwarrior#action#show_info(...)
+    if a:0 > 0
+        let command = 'info'
+        let filter = a:1
     else
-        let filter = b:filter
+        let ccol = taskwarrior#data#current_column()
+        let dict = { 'project': 'projects',
+                    \ 'tags': 'tags',
+                    \ 'id': 'stats',
+                    \ 'depends': 'blocking',
+                    \ 'recur': 'recurring',
+                    \ 'due': 'overdue',
+                    \ 'wait': 'waiting',
+                    \ 'urgency': 'ready',
+                    \ 'entry': 'history.monthly',
+                    \ 'end': 'history.monthly'}
+        let command = get(dict, ccol, 'summary')
+        let uuid = taskwarrior#data#get_uuid()
+        if uuid !~ '^\s*$'
+            let command = substitute(command, '\v(summary|stats)', 'information', '')
+            let filter = taskwarrior#data#get_uuid()
+        else
+            let filter = b:filter
+        endif
     endif
-    call taskinfo#init(command, filter, split(system('task '.command.' '.filter), '\n'))
+    call taskinfo#init(command, filter, split(system('task rc.color=no '.command.' '.filter), '\n'))
 endfunction

@@ -7,7 +7,7 @@ function! taskwarrior#list(...) abort
     let b:command = get(a:, 1, b:command)
     let b:filter  = get(a:, 2, b:filter)
     let b:type    = get(a:, 3, b:type)
-    let b:rc      = get(a:, 4, b:rc)
+    let b:rc      = get(a:, 4, b:rc). ' rc.defaultheight=0'
 
     let b:rc     .= ' '.join(filter(split(b:filter, ' '), "v:val =~ '^rc\..*'"))
     let b:filter  = join(filter(split(b:filter, ' '), "v:val !~ '^rc\..*'"))
@@ -35,13 +35,17 @@ function! taskwarrior#list(...) abort
     let b:task_report_labels  = rcl == '' ? split(matchstr(system("task show |grep report.".b:command.".labels")[0:-2], '\S*$'), ',') : split(rcl, ',')
     let line1                 = join(b:task_report_labels, ' ')
 
-    let context = split(system('task '.b:rc.' '.b:filter.' '.b:command), '\n')
+    let context = split(substitute(
+                \   system('task '.b:rc.' '.b:filter.' '.b:command),
+                \   '\[[0-9;]\+m',
+                \   '', 'g'),
+                \ '\n')
     let split_lineno = match(context, '^[ -]\+$')
     if split_lineno == -1
         call append(0, line1)
     else
-        let end = match(context[split_lineno+0:], '^$')
-        call append(0, context[split_lineno-1:end+split_lineno-1])
+        let end = len(context)-match(reverse(copy(context)), '^$')
+        call append(0, context[split_lineno-1:end-1])
         silent global/^[\t ]*$/delete
         silent global/^[ -]\+$/delete
     endif
@@ -61,11 +65,18 @@ function! taskwarrior#list(...) abort
     let b:task_columns += [999]
     let b:summary       = taskwarrior#data#global_stats()
     let b:sort          = taskwarrior#sort#order_list()[0]
-    let b:now           = system('task active limit:1 rc.verbose:nothing rc.report.active.sort=start- rc.report.active.columns=start.active,start.age,id,description.desc rc.report.active.labels=A,Age,ID,Description')[0:-2]
+    let a_tasks         = split(system('task active limit:1 rc.verbose:nothing
+                \ rc.report.active.sort=start-
+                \ rc.report.active.columns=start.active,start.age,id,description.desc
+                \ rc.report.active.labels=A,Age,ID,Description'), '\n')
+    let b:now           = len(a_tasks) > 0 ? a_tasks[-1] : ''
     let b:active        = split(system('task start.any: count'), '\n')[0]
     let b:selected      = []
     let b:sline         = []
     let b:sstring       = ''
+    let con             = split(system('task context show'), '\n')[0]
+    let b:context       = con =~ 'No context' ? 'none' :
+                \ matchstr(con, 'Context .\zs\S*\ze. ')
 
     setlocal filetype=taskreport
     if exists('b:ct')
@@ -87,6 +98,9 @@ function! taskwarrior#buffer_var_init()
 endfunction
 
 function! taskwarrior#init(...)
+    if exists(':TagbarClose')
+        TagbarClose
+    endif
     let argstring = join(a:000, ' ')
     let [command, filter, type] = taskwarrior#command_type(argstring)
     let rc = g:task_rc_override
@@ -99,7 +113,7 @@ function! taskwarrior#init(...)
         return
     endif
 
-    execute 'edit task\ '.type
+    execute 'edit task\ '.command.'\ '.type
 
     if exists('g:task_view')
         let g:task_view += [bufnr('%')]

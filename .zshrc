@@ -14,7 +14,7 @@ HISTSIZE=1336
 DIRSTACKSIZE=20
 HISTFILE=~/.zsh_history
 SAVEHIST=1336
-KEYTIMEOUT=1
+KEYTIMEOUT=0
 MAILCHECK=0
 
 ### Watch
@@ -59,8 +59,8 @@ alias k="khal"
 alias sk="vdirsyncer sync lx_calendar && khal calendar"
 alias t="task"
 alias tl="task long"
-alias th="task list +home"
-alias tw="task list +work"
+alias th="task +home"
+alias tw="task +work"
 alias ws="python -m SimpleHTTPServer 8080"
 alias tws="twistd -no web --path=. --port=8080"
 alias tpush="pushd ~/.task && git add * && git commit -m 'Task update' && git push; popd"
@@ -198,6 +198,7 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
+bindkey '' vi-cmd-mode
 
 ### Completion
 autoload -Uz compinit
