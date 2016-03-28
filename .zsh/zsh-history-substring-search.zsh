@@ -49,7 +49,7 @@ HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
 # the main ZLE widgets
 #-----------------------------------------------------------------------------
 
-function history-substring-search-up() {
+history-substring-search-up() {
   _history-substring-search-begin
 
   _history-substring-search-up-history ||
@@ -59,7 +59,7 @@ function history-substring-search-up() {
   _history-substring-search-end
 }
 
-function history-substring-search-down() {
+history-substring-search-down() {
   _history-substring-search-begin
 
   _history-substring-search-down-history ||
@@ -90,7 +90,7 @@ if [[ $+functions[_zsh_highlight] -eq 0 ]]; then
   # simply removes any existing highlights when the
   # user inserts printable characters into $BUFFER.
   #
-  function _zsh_highlight() {
+  _zsh_highlight() {
     if [[ $KEYS == [[:print:]] ]]; then
       region_highlight=()
     fi
@@ -143,7 +143,7 @@ if [[ $+functions[_zsh_highlight] -eq 0 ]]; then
 
     # Override ZLE widgets to make them invoke _zsh_highlight.
     local cur_widget
-    for cur_widget in ${${(f)"$(builtin zle -la)"}:#(.*|_*|orig-*|run-help|which-command|beep)}; do
+    for cur_widget in ${${(f)"$(builtin zle -la)"}:#(.*|_*|orig-*|run-help|which-command|beep|yank*)}; do
       case $widgets[$cur_widget] in
 
         # Already rebound event: do nothing.
@@ -173,7 +173,7 @@ if [[ $+functions[_zsh_highlight] -eq 0 ]]; then
   _zsh_highlight_bind_widgets
 fi
 
-function _history-substring-search-begin() {
+_history-substring-search-begin() {
   setopt localoptions extendedglob
 
   _history_substring_search_refresh_display=
@@ -200,12 +200,10 @@ function _history-substring-search-begin() {
     #
     # Find all occurrences of the search query in the history file.
     #
-    # (k) turns it an array of line numbers.
+    # (k) returns the "keys" (history index numbers) instead of the values
+    # (Oa) reverses the order, because (R) returns results reversed.
     #
-    # (on) seems to remove duplicates, which are default
-    #      options. They can be turned off by (ON).
-    #
-    _history_substring_search_matches=(${(kon)history[(R)(#$HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS)*${_history_substring_search_query_escaped}*]})
+    _history_substring_search_matches=(${(kOa)history[(R)(#$HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS)*${_history_substring_search_query_escaped}*]})
 
     #
     # Define the range of values that $_history_substring_search_match_index
@@ -241,7 +239,7 @@ function _history-substring-search-begin() {
   fi
 }
 
-function _history-substring-search-end() {
+_history-substring-search-end() {
   setopt localoptions extendedglob
 
   _history_substring_search_result=$BUFFER
@@ -277,7 +275,7 @@ function _history-substring-search-end() {
   return 0
 }
 
-function _history-substring-search-up-buffer() {
+_history-substring-search-up-buffer() {
   #
   # Check if the UP arrow was pressed to move the cursor within a multi-line
   # buffer. This amounts to three tests:
@@ -306,7 +304,7 @@ function _history-substring-search-up-buffer() {
   return 1
 }
 
-function _history-substring-search-down-buffer() {
+_history-substring-search-down-buffer() {
   #
   # Check if the DOWN arrow was pressed to move the cursor within a multi-line
   # buffer. This amounts to three tests:
@@ -335,7 +333,7 @@ function _history-substring-search-down-buffer() {
   return 1
 }
 
-function _history-substring-search-up-history() {
+_history-substring-search-up-history() {
   #
   # Behave like up in ZSH, except clear the $BUFFER
   # when beginning of history is reached like in Fish.
@@ -357,7 +355,7 @@ function _history-substring-search-up-history() {
   return 1
 }
 
-function _history-substring-search-down-history() {
+_history-substring-search-down-history() {
   #
   # Behave like down-history in ZSH, except clear the
   # $BUFFER when end of history is reached like in Fish.
@@ -380,7 +378,7 @@ function _history-substring-search-down-history() {
   return 1
 }
 
-function _history-substring-search-not-found() {
+_history-substring-search-not-found() {
   #
   # Nothing matched the search query, so put it back into the $BUFFER while
   # highlighting it accordingly so the user can revise it and search again.
@@ -390,7 +388,7 @@ function _history-substring-search-not-found() {
   _history_substring_search_query_highlight=$HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND
 }
 
-function _history-substring-search-up-search() {
+_history-substring-search-up-search() {
   _history_substring_search_refresh_display=1
 
   #
@@ -470,10 +468,23 @@ function _history-substring-search-up-search() {
     # We are at the beginning of history and there are no further matches.
     #
     _history-substring-search-not-found
+    return
+  fi
+
+  #
+  # When HIST_FIND_NO_DUPS is set, meaning that only unique command lines from
+  # history should be matched, make sure the new and old results are different.
+  # But when HIST_IGNORE_ALL_DUPS is set, ZSH already ensures a unique history.
+  #
+  if [[ ! -o HIST_IGNORE_ALL_DUPS && -o HIST_FIND_NO_DUPS && $BUFFER == $_history_substring_search_result ]]; then
+    #
+    # Repeat the current search so that a different (unique) match is found.
+    #
+    _history-substring-search-up-search
   fi
 }
 
-function _history-substring-search-down-search() {
+_history-substring-search-down-search() {
   _history_substring_search_refresh_display=1
 
   #
@@ -554,6 +565,19 @@ function _history-substring-search-down-search() {
     # We are at the end of history and there are no further matches.
     #
     _history-substring-search-not-found
+    return
+  fi
+
+  #
+  # When HIST_FIND_NO_DUPS is set, meaning that only unique command lines from
+  # history should be matched, make sure the new and old results are different.
+  # But when HIST_IGNORE_ALL_DUPS is set, ZSH already ensures a unique history.
+  #
+  if [[ ! -o HIST_IGNORE_ALL_DUPS && -o HIST_FIND_NO_DUPS && $BUFFER == $_history_substring_search_result ]]; then
+    #
+    # Repeat the current search so that a different (unique) match is found.
+    #
+    _history-substring-search-down-search
   fi
 }
 

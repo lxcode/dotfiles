@@ -1,4 +1,4 @@
-" Copyright (c) 2015 Junegunn Choi
+" Copyright (c) 2016 Junegunn Choi
 "
 " MIT License
 "
@@ -177,6 +177,7 @@ function! s:line_handler(lines)
   if len(a:lines) < 2
     return
   endif
+  normal! m'
   let cmd = get(get(g:, 'fzf_action', s:default_action), a:lines[0], '')
   if !empty(cmd)
     execute 'silent' cmd
@@ -193,9 +194,14 @@ function! fzf#vim#_lines(all)
   let rest = []
   let buf = bufnr('')
   for b in s:buflisted()
+    let lines = getbufline(b, 1, "$")
+    if empty(lines)
+      let path = fnamemodify(bufname(b), ':p')
+      let lines = filereadable(path) ? readfile(path) : []
+    endif
     call extend(b == buf ? cur : rest,
     \ filter(
-    \   map(getbufline(b, 1, "$"),
+    \   map(lines,
     \       '(!a:all && empty(v:val)) ? "" : printf("[%s]\t%s:\t%s", s:blue(b), s:yellow(v:key + 1), v:val)'),
     \   'a:all || !empty(v:val)'))
   endfor
@@ -217,6 +223,7 @@ function! s:buffer_line_handler(lines)
   if len(a:lines) < 2
     return
   endif
+  normal! m'
   let cmd = get(get(g:, 'fzf_action', s:default_action), a:lines[0], '')
   if !empty(cmd)
     execute 'silent' cmd
@@ -267,7 +274,7 @@ endfunction
 function! s:all_files()
   return extend(
   \ filter(reverse(copy(v:oldfiles)),
-  \        "v:val !~ 'fugitive:\\|__Tagbar__\\|NERD_tree\\|^/tmp/\\|.git/'"),
+  \        "v:val !~ 'fugitive:\\|__Tagbar__\\|NERD_tree\\|^/tmp/\\|\\.git/'"),
   \ filter(map(s:buflisted(), 'bufname(v:val)'), '!empty(v:val)'))
 endfunction
 
@@ -345,15 +352,43 @@ endfunction
 " ------------------------------------------------------------------
 " Buffers
 " ------------------------------------------------------------------
+function! s:find_open_window(b)
+  let [tcur, tcnt] = [tabpagenr() - 1, tabpagenr('$')]
+  for toff in range(0, tabpagenr('$') - 1)
+    let t = (tcur + toff) % tcnt + 1
+    let buffers = tabpagebuflist(t)
+    for w in range(1, len(buffers))
+      let b = buffers[w - 1]
+      if b == a:b
+        return [t, w]
+      endif
+    endfor
+  endfor
+  return [0, 0]
+endfunction
+
+function! s:jump(t, w)
+  execute 'normal!' a:t.'gt'
+  execute a:w.'wincmd w'
+endfunction
+
 function! s:bufopen(lines)
   if len(a:lines) < 2
     return
+  endif
+  let b = matchstr(a:lines[1], '\[\zs[0-9]*\ze\]')
+  if empty(a:lines[0]) && get(g:, 'fzf_buffers_jump')
+    let [t, w] = s:find_open_window(b)
+    if t
+      call s:jump(t, w)
+      return
+    endif
   endif
   let cmd = get(get(g:, 'fzf_action', s:default_action), a:lines[0], '')
   if !empty(cmd)
     execute 'silent' cmd
   endif
-  execute 'buffer' matchstr(a:lines[1], '\[\zs[0-9]*\ze\]')
+  execute 'buffer' b
 endfunction
 
 function! s:format_buffer(b)
@@ -367,8 +402,13 @@ function! s:format_buffer(b)
   return s:strip(printf("[%s] %s\t%s\t%s", s:yellow(a:b), flag, name, extra))
 endfunction
 
+function! s:sort_buffers(...)
+  let [b1, b2] = map(copy(a:000), 'get(g:fzf#vim#buffers, v:val, v:val)')
+  return b1 - b2
+endfunction
+
 function! fzf#vim#buffers(...)
-  let bufs = map(s:buflisted(), 's:format_buffer(v:val)')
+  let bufs = map(sort(s:buflisted(), 's:sort_buffers'), 's:format_buffer(v:val)')
   return s:fzf(fzf#vim#wrap({
   \ 'source':  reverse(bufs),
   \ 'sink*':   s:function('s:bufopen'),
@@ -425,14 +465,12 @@ endfunction
 " ------------------------------------------------------------------
 " BTags
 " ------------------------------------------------------------------
-function! s:btags_source()
+function! s:btags_source(tag_cmds)
   if !filereadable(expand('%'))
     throw 'Save the file first'
   endif
 
-  for cmd in [
-    \ printf('ctags -f - --sort=no --excmd=number --language-force=%s %s', &filetype, expand('%:S')),
-    \ printf('ctags -f - --sort=no --excmd=number %s', expand('%:S'))]
+  for cmd in a:tag_cmds
     let lines = split(system(cmd), "\n")
     if !v:shell_error
       break
@@ -450,6 +488,7 @@ function! s:btags_sink(lines)
   if len(a:lines) < 2
     return
   endif
+  normal! m'
   let cmd = get(get(g:, 'fzf_action', s:default_action), a:lines[0], '')
   if !empty(cmd)
     execute 'silent' cmd '%'
@@ -468,12 +507,21 @@ function! s:btags_sink(lines)
   normal! zz
 endfunction
 
-function! fzf#vim#buffer_tags(...)
+function! s:q(query)
+  return ' --query "'.escape(a:query, '"').'"'
+endfunction
+
+" query, [[tag commands], options]
+function! fzf#vim#buffer_tags(query, ...)
+  let args = copy(a:000)
+  let tag_cmds = len(args) > 1 ? remove(args, 0) : [
+    \ printf('ctags -f - --sort=no --excmd=number --language-force=%s %s', &filetype, expand('%:S')),
+    \ printf('ctags -f - --sort=no --excmd=number %s', expand('%:S'))]
   try
     return s:fzf(fzf#vim#wrap({
-    \ 'source':  s:btags_source(),
+    \ 'source':  s:btags_source(tag_cmds),
     \ 'sink*':   s:function('s:btags_sink'),
-    \ 'options': '-m -d "\t" --with-nth 1,4.. -n 1 --prompt "BTags> "'}), a:000)
+    \ 'options': '--reverse -m -d "\t" --with-nth 1,4.. -n 1 --prompt "BTags> "'.s:q(a:query)}), args)
   catch
     return s:warn(v:exception)
   endtry
@@ -486,6 +534,7 @@ function! s:tags_sink(lines)
   if len(a:lines) < 2
     return
   endif
+  normal! m'
   let qfl = []
   let cmd = get(get(g:, 'fzf_action', s:default_action), a:lines[0], 'e')
   let [magic, &magic] = [&magic, 0]
@@ -506,10 +555,13 @@ function! s:tags_sink(lines)
   normal! zz
 endfunction
 
-function! fzf#vim#tags(...)
+function! fzf#vim#tags(query, ...)
   if empty(tagfiles())
     call s:warn('Preparing tags')
     call system('ctags -R')
+    if empty(tagfiles())
+      return s:warn('Failed to create tags')
+    endif
   endif
 
   let tagfile = tagfiles()[0]
@@ -526,7 +578,7 @@ function! fzf#vim#tags(...)
   \ 'source':  proc.shellescape(fnamemodify(tagfile, ':t')),
   \ 'sink*':   s:function('s:tags_sink'),
   \ 'dir':     fnamemodify(tagfile, ':h'),
-  \ 'options': copt.'-m --tiebreak=begin --prompt "Tags> "'}), a:000)
+  \ 'options': copt.'-m --tiebreak=begin --prompt "Tags> "'.s:q(a:query)}), a:000)
 endfunction
 
 " ------------------------------------------------------------------
@@ -674,8 +726,7 @@ endfunction
 
 function! s:windows_sink(line)
   let list = matchlist(a:line, '\([ 0-9]*\):\([ 0-9]*\)')
-  execute 'normal!' list[1].'gt'
-  execute list[2].'wincmd w'
+  call s:jump(list[1], list[2])
 endfunction
 
 function! fzf#vim#windows(...)
@@ -729,7 +780,7 @@ function! s:commits(buffer_local, args)
     return s:warn('Not in git repository')
   endif
 
-  let source = 'git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+  let source = 'git log '.get(g:, 'fzf_commits_log_options', '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"')
   let current = expand('%:S')
   let managed = 0
   if !empty(current)
@@ -869,7 +920,7 @@ function! s:complete_insert(lines)
   endif
 
   let data = call(s:reducer, [a:lines])
-  execute 'normal!' (s:eol ? '' : 'h').del.(s:eol ? 'a': 'i').data
+  execute 'normal!' ((s:eol || empty(chars)) ? '' : 'h').del.(s:eol ? 'a': 'i').data
   if has('nvim')
     call feedkeys('a')
   else
