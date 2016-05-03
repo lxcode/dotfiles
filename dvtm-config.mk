@@ -10,7 +10,7 @@ MANPREFIX = ${PREFIX}/share/man
 TERMINFO := ${DESTDIR}${PREFIX}/share/terminfo
 
 INCS = -I.
-LIBS = -lc -lutil -lncurses
+LIBS = -lc -lutil -lncursesl
 # NetBSD
 #LIBS = -lc -lutil -lcurses
 # AIX

@@ -66,6 +66,10 @@ if !exists('g:clang_format_style')
   let g:clang_format_style = 'LLVM'
 end
 
+if !exists('g:clang_enable_format_command')
+  let g:clang_enable_format_command = 1
+endif
+
 if !exists('g:clang_check_syntax_auto')
 	let g:clang_check_syntax_auto = 0
 endif
@@ -116,6 +120,10 @@ if !exists('g:clang_vim_exec')
   endif
 endif
 
+if !exists('g:clang_verbose_pmenu')
+  let g:clang_verbose_pmenu = 0
+endif
+
 " Init on c/c++ files
 au FileType c,cpp call <SID>ClangCompleteInit(0)
 "}}}
@@ -124,7 +132,7 @@ au FileType c,cpp call <SID>ClangCompleteInit(0)
 func! s:IsValidFile()
   let l:cur = expand("%")
   " don't load plugin when in fugitive buffer
-  if l:cur =~ 'fugitive:///'
+  if l:cur =~ 'fugitive://'
     return 0
   endif
   " Please don't use filereadable to test, as the new created file is also
@@ -142,7 +150,7 @@ endf
 "
 " @head Prefix of debug info
 " @info Can be a string list, string, or dict
-" @lv   Debug level, write info only when lv < g:clang_debug, deault is 1
+" @lv   Debug level, write info only when lv < g:clang_debug, default is 1
 func! s:PDebug(head, info, ...)
   let l:lv = a:0 > 0 && a:1 > 1 ? a:1 : 1
 
@@ -656,22 +664,184 @@ func! s:ParseCompletionResult(output, base)
       continue
     endif
 
-    let l:proto = substitute(l:proto, '\(<#\)\|\(#>\)\|#', '', 'g')
-    if empty(l:res) || l:res[-1]['word'] !=# l:word
-      call add(l:res, {
-          \ 'word': l:word,
-          \ 'menu': l:has_preview ? '' : l:word ==# l:proto ? '' : l:proto,
-          \ 'info': l:proto,
-          \ 'dup' : 1 })
-    elseif !empty(l:res)
-      " overload functions, for C++
-      let l:res[-1]['info'] .= "\n" . l:proto
+    if g:clang_verbose_pmenu
+      " Keep `#` for further use
+      "let l:proto = substitute(l:proto, '\(<#\)\|\(#>\)\|#', '', 'g')
+      " Identify the type (test)
+      if empty(l:res) || l:res[-1]['word'] !=# l:word
+        if l:proto =~ '\v^\[#.{-}#\].+\(.*\).*' 
+          let l:kind = 'f'
+        elseif l:proto =~ '\v^\[#.*#\].+'
+          let l:kind = 'v'
+        elseif l:proto =~ '\v.+'
+          let l:kind = 't'
+        else
+          let l:kind = '?'
+        endif
+        if l:kind == 'f' || l:kind == 'v'
+          " Get the type of return value in the first []
+          let l:typeraw = matchlist(l:proto, '\v^\[#.{-}#\]')
+          let l:rettype = len(l:typeraw) ? typeraw[0][1:-2] : ""
+          let l:core = l:proto[strlen(l:rettype) + 2 :]
+        else
+          let l:rettype = ""
+          let l:core = l:proto
+        endif
+        " Remove # here
+        let l:core = substitute(l:core, '\v\<#|#\>|#', '', 'g')
+        let l:proto = substitute(l:proto, '\v\<#|#\>|#', '', 'g')
+        let l:rettype = substitute(l:rettype, '\v\<#|#\>|#', '', 'g')
+        " Another improvement: keep space for type, but only display abbr when
+        " space is limited
+        if strlen(l:core) > (&columns - wincol() - 25) && (&columns - wincol() > 20)
+          let l:core = l:core[0:&columns - wincol() - 25] . "..."
+        endif
+        call add(l:res, {
+              \ 'word': l:word,
+              \ 'abbr' : l:core,
+              \ 'kind' : l:kind,
+              \ 'menu': l:rettype,
+              \ 'info': l:proto,
+              \ 'dup' : 1 })
+      elseif !empty(l:res)
+        " overload functions, for C++
+        let l:proto = substitute(l:proto, '\v\<#|#\>|#', '', 'g')
+        let l:res[-1]['info'] .= "\n" . l:proto
+      endif
+    else
+      let l:proto = substitute(l:proto, '\(<#\)\|\(#>\)\|#', '', 'g')
+      if empty(l:res) || l:res[-1]['word'] !=# l:word
+        call add(l:res, {
+              \ 'word': l:word,
+              \ 'menu': l:has_preview ? '' : l:word ==# l:proto ? '' : l:proto,
+              \ 'info': l:proto,
+              \ 'dup' : 1 })
+      elseif !empty(l:res)
+        " overload functions, for C++
+        let l:res[-1]['info'] .= "\n" . l:proto
+      endif
     endif
   endfor
 
   return l:res
 endf
 " }}}
+"{{{ s:SetNeomakeMakerArguments
+" Set neomake_{c,cpp}_{clang,gcc}_maker variables to add the Clang arguments
+" parsed from the .clang or .clang.ow files.
+" @clang_options the options to be passed to makers
+" @clang_root the directory whence the maker must be executed
+func! s:SetNeomakeMakerArguments(clang_options, clang_root)
+  " Split the arguments into a list
+  " TODO: more intelligent splitting (an argument like '-I "/dir with/spaces"'
+  "       would not work)
+  let l:clang_options = split(a:clang_options, " ")
+
+  if &filetype == 'cpp'
+
+    " Store the original clang maker config to avoid a never-ending list of
+    " args
+    if !exists('s:origin_neomake_cpp_clang_maker')
+      if !exists('g:neomake_cpp_clang_maker')
+        try
+          " Neomake default
+          let s:origin_neomake_cpp_clang_maker = neomake#makers#ft#cpp#clang()
+        catch /^Vim\%((\a\+)\)\=:E117/
+          let s:origin_neomake_cpp_clang_maker = { "args" : [] }
+        endtry
+      else
+        " User config
+        let s:origin_neomake_cpp_clang_maker = g:neomake_cpp_clang_maker
+        if !exists('s:origin_neomake_cpp_clang_maker["args"]')
+          let s:origin_neomake_cpp_clang_maker["args"] = []
+        endif
+      endif
+    endif
+
+    " deepcopy needed as changing one would change the other otherwise.
+    let g:neomake_cpp_clang_maker = deepcopy(s:origin_neomake_cpp_clang_maker)
+    call extend(g:neomake_cpp_clang_maker["args"], l:clang_options)
+    let g:neomake_cpp_clang_maker["cwd"] = a:clang_root
+
+    " Store the original gcc maker config to avoid a never-ending list of
+    " args
+    if !exists('s:origin_neomake_cpp_gcc_maker')
+      if !exists('g:neomake_cpp_gcc_maker')
+        try
+          " Neomake default
+          let s:origin_neomake_cpp_gcc_maker = neomake#makers#ft#cpp#gcc()
+        catch /^Vim\%((\a\+)\)\=:E117/
+          let s:origin_neomake_cpp_gcc_maker = { "args" : [] }
+        endtry
+      else
+        " User config
+        let s:origin_neomake_cpp_gcc_maker = g:neomake_cpp_gcc_maker
+        if !exists('s:origin_neomake_cpp_gcc_maker["args"]')
+          let s:origin_neomake_cpp_gcc_maker["args"] = []
+        endif
+      endif
+    endif
+
+    " deepcopy needed as changing one would change the other otherwise.
+    let g:neomake_cpp_gcc_maker = deepcopy(s:origin_neomake_cpp_gcc_maker)
+    call extend(g:neomake_cpp_gcc_maker["args"], l:clang_options)
+    let g:neomake_cpp_gcc_maker["args"] = l:clang_options
+    let g:neomake_cpp_gcc_maker["cwd"] = a:clang_root
+
+  elseif &filetype == 'c'
+
+    " Store the original clang maker config to avoid a never-ending list of
+    " args
+    if !exists('s:origin_neomake_c_clang_maker')
+      if !exists('g:neomake_c_clang_maker')
+        try
+          " Neomake default
+          let s:origin_neomake_c_clang_maker = neomake#makers#ft#c#clang()
+        catch /^Vim\%((\a\+)\)\=:E117/
+          let s:origin_neomake_c_clang_maker = { "args" : [] }
+        endtry
+      else
+        " User config
+        let s:origin_neomake_c_clang_maker = g:neomake_c_clang_maker
+        if !exists('s:origin_neomake_c_clang_maker["args"]')
+          let s:origin_neomake_c_clang_maker["args"] = []
+        endif
+      endif
+    endif
+
+    " deepcopy needed as changing one would change the other otherwise.
+    let g:neomake_c_clang_maker = deepcopy(s:origin_neomake_c_clang_maker)
+    call extend(g:neomake_c_clang_maker["args"], l:clang_options)
+    let g:neomake_c_clang_maker["cwd"] = a:clang_root
+
+    " Store the original gcc maker config to avoid a never-ending list of
+    " args
+    if !exists('s:origin_neomake_c_gcc_maker')
+      if !exists('g:neomake_c_gcc_maker')
+        try
+          " Neomake default
+          let s:origin_neomake_c_gcc_maker = neomake#makers#ft#c#gcc()
+        catch /^Vim\%((\a\+)\)\=:E117/
+          let s:origin_neomake_c_gcc_maker = { "args" : [] }
+        endtry
+      else
+        " User config
+        let s:origin_neomake_c_gcc_maker = g:neomake_c_gcc_maker
+        if !exists('s:origin_neomake_c_gcc_maker["args"]')
+          let s:origin_neomake_c_gcc_maker["args"] = []
+        endif
+      endif
+    endif
+
+    " deepcopy needed as changing one would change the other otherwise.
+    let g:neomake_c_gcc_maker = deepcopy(s:origin_neomake_c_gcc_maker)
+    call extend(g:neomake_c_gcc_maker["args"], l:clang_options)
+    let g:neomake_c_gcc_maker["args"] = l:clang_options
+    let g:neomake_c_gcc_maker["cwd"] = a:clang_root
+
+  endif
+endf
+"}}}
 "{{{ s:ShrinkPrevieWindow
 " Shrink preview window to fit lines.
 " Assume cursor is in the editing window, and preview window is above of it.
@@ -778,10 +948,10 @@ func! s:ClangCompleteInit(force)
   " find project file first
   let l:cwd = fnameescape(getcwd())
   let l:fwd = fnameescape(expand('%:p:h'))
-  exe 'lcd ' . l:fwd
+  silent exe 'lcd ' . l:fwd
   let l:dotclang    = findfile(g:clang_dotfile, '.;')
   let l:dotclangow  = findfile(g:clang_dotfile_overwrite, '.;')
-  exe 'lcd '.l:cwd
+  silent exe 'lcd '.l:cwd
 
   let l:has_dotclang = strlen(l:dotclang) + strlen(l:dotclangow)
   if !l:has_dotclang && g:clang_load_if_clang_dotfile
@@ -870,12 +1040,12 @@ func! s:ClangCompleteInit(force)
   " Or add `-include-pch /path/to/x.h.pch` into the root file .clang manully
   if &filetype == 'cpp' && b:clang_options !~# '-include-pch'
     let l:cwd = fnameescape(getcwd())
-    exe 'lcd ' . b:clang_root
+    silent exe 'lcd ' . b:clang_root
     let l:afx = findfile(g:clang_stdafx_h, '.;./include') . '.pch'
     if filereadable(l:afx)
       let b:clang_options .= ' -include-pch ' . shellescape(l:afx)
     endif
-    exe 'lcd '.l:cwd
+    silent exe 'lcd '.l:cwd
   endif
 
   " Create GenPCH command
@@ -890,8 +1060,10 @@ func! s:ClangCompleteInit(force)
   " Useful to check syntax only
   com! ClangSyntaxCheck call <SID>ClangSyntaxCheck(b:clang_root, b:clang_options)
 
-  " Useful to format source code
-  com! ClangFormat call <SID>ClangFormat()
+  if g:clang_enable_format_command
+    " Useful to format source code
+    com! ClangFormat call <SID>ClangFormat()
+  endif
 
   if g:clang_auto   " Auto completion
     inoremap <expr> <buffer> . <SID>CompleteDot()
@@ -929,6 +1101,11 @@ func! s:ClangCompleteInit(force)
   " auto format current file if is enabled
   if g:clang_format_auto
     au BufWritePost <buffer> ClangFormat
+  endif
+
+  if exists(":Neomake")
+    " Set the configuration variables for Neomake makers
+    call s:SetNeomakeMakerArguments(b:clang_options, b:clang_root)
   endif
 
   call s:GlobalVarRestore(l:gvars)
@@ -982,7 +1159,7 @@ endf
 " @return [completion, diagnostics]
 func! s:ClangExecute(root, clang_options, line, col)
   let l:cwd = fnameescape(getcwd())
-  exe 'lcd ' . a:root
+  silent exe 'lcd ' . a:root
   let l:src = join(getline(1, '$'), "\n") . "\n"
   " shorter version, without redirecting stdout and stderr
   let l:cmd = printf('%s -fsyntax-only -Xclang -code-completion-macros -Xclang -code-completion-at=-:%d:%d %s -',
@@ -1051,7 +1228,7 @@ func! s:ClangExecute(root, clang_options, line, col)
       call s:PError('s:ClangExecute::acmd', 'execute async command failed')
     endif
   endif
-  exe 'lcd ' . l:cwd
+  silent exe 'lcd ' . l:cwd
   let b:clang_state['stdout'] = l:res[0]
   let b:clang_state['stderr'] = l:res[1]
   return l:res
@@ -1097,20 +1274,20 @@ endf
 " problem. Now this function will block...
 func! s:ClangSyntaxCheck(root, clang_options)
   let l:cwd = fnameescape(getcwd())
-  exe 'lcd ' . a:root
+  silent exe 'lcd ' . a:root
   let l:src = join(getline(1, '$'), "\n")
   let l:command = printf('%s -fsyntax-only %s -', g:clang_exec, a:clang_options)
   call s:PDebug("ClangSyntaxCheck::command", l:command)
   let l:clang_output = system(l:command, l:src)
   call s:DiagnosticsWindowOpen(expand('%:p:.'), split(l:clang_output, '\n'))
-  exe 'lcd ' . l:cwd
+  silent exe 'lcd ' . l:cwd
 endf
 " }}}
 " {{{ s:ClangFormat
 " Call clang-format to format source code
 func! s:ClangFormat()
   let l:view = winsaveview()
-  let l:command = printf("%s -style=%s ", g:clang_format_exec, g:clang_format_style)
+  let l:command = printf("%s -style=\"%s\" ", g:clang_format_exec, g:clang_format_style)
   silent execute '%!'. l:command
   call winrestview(l:view)
 endf
@@ -1223,4 +1400,4 @@ func! s:ClangComplete(findstart, base)
 endf
 "}}}
 
-" vim: set shiftwidth=2 softtabstop=2 tabstop=2 foldmethod=marker:
+" vim: set shiftwidth=2 softtabstop=2 tabstop=2 expandtab foldmethod=marker:
