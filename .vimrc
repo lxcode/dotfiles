@@ -3,8 +3,6 @@ abbr guys folks
 " }}}
 
 " Keymappings {{{
-" Make space clear highlighted searches
-nmap <silent> <space> :noh<CR>
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
