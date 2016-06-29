@@ -555,6 +555,7 @@ augroup misc
     au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
     au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
     au BufWinEnter .vimrc set foldmethod=marker
+    au FileType json set conceallevel=0
     au FileType make set diffopt-=iwhite
     au FileType vim set nospell
     au FileType mail set spell complete+=k nonu
