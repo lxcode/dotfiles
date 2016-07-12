@@ -49,6 +49,8 @@ nnoremap <C-l> <C-l>k
 vmap > >gv
 vmap < <gv
 nmap <Leader>x :call system("cd `dirname %` && urxvt")<CR>
+nmap <Leader>dt "=strftime("%c")<CR>P"
+nmap <Leader>dd "=strftime("%y-%m-%d")<CR>P"
 " Change to the directory of the current file
 nmap cd :lcd %:h \| :pwd<CR>
 " Delete a vuln
