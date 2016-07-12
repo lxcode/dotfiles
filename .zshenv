@@ -9,6 +9,7 @@ done
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 export FZF_DEFAULT_OPTS="--extended"
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export GOPATH=$HOME/go
 
 export FPATH=/usr/share/zsh/site-functions:$FPATH
 export GREP_COLORS="ms=01;31:mc=:sl=:cx=:fn=:ln=:bn=:se=:ne="
@@ -24,7 +25,7 @@ export LESSHISTFILE="-"
 export X11HOME=/usr/local
 export MANPATH=/usr/man:/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/lang/man:/var/qmail/man:/usr/pkg/man:/opt/local/man
 
-path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /var/qmail/bin $X11HOME/bin /usr/local/9/bin /crypt/usr/local/texlive/2015/bin/amd64-freebsd /usr/texbin ~/bin /opt/facebook/bin /home/lx/tools/graudit /usr/local/libexec/git-core /opt/android_sdk/platform-tools)
+path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /var/qmail/bin $X11HOME/bin /usr/local/9/bin $HOME/go/bin /crypt/usr/local/texlive/2015/bin/amd64-freebsd /usr/texbin ~/bin /opt/facebook/bin /home/lx/tools/graudit /usr/local/libexec/git-core /opt/android_sdk/platform-tools)
 
 case $OSTYPE in
 	solaris*)
