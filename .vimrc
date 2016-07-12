@@ -3,8 +3,6 @@ abbr guys folks
 " }}}
 
 " Keymappings {{{
-" Make space clear highlighted searches
-nmap <silent> <space> :noh<CR>
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
@@ -51,6 +49,8 @@ nnoremap <C-l> <C-l>k
 vmap > >gv
 vmap < <gv
 nmap <Leader>x :call system("cd `dirname %` && urxvt")<CR>
+nmap <Leader>dt "=strftime("%c")<CR>P"
+nmap <Leader>dd "=strftime("%y-%m-%d")<CR>P"
 " Change to the directory of the current file
 nmap cd :lcd %:h \| :pwd<CR>
 " Delete a vuln
@@ -557,6 +557,7 @@ augroup misc
     au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
     au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
     au BufWinEnter .vimrc set foldmethod=marker
+    au FileType json set conceallevel=0
     au FileType make set diffopt-=iwhite
     au FileType vim set nospell
     au FileType mail set spell complete+=k nonu
