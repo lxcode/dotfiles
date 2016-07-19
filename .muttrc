@@ -82,21 +82,10 @@ mailboxes = =Plan =Lists.8lives =Lists.Security.Ctf =Lists.FreeBSD.Developers =L
 # make mutt aware of our mailing lists
 subscribe ports freebsd-ports chickensoup citypunk pen-test vuln-dev security-announce incidents bugtraq vulnwatch vulndiscuss full-disclosure fish thiels misc pf firewall-wizards sfs exprise freebsd-current current log ctf bikergoths-l securesoftware badmovie securityjobs osiris osiris-devel DSI_evolver SRX-6 developers cmus-devel cocoa-students 8lives
 
-# CRM114 macros
-macro index X "<pipe-message>formail -I X-CRM114-Status -I X-CRM114-Action -I X-CRM114-Version | /usr/local/share/examples/crm114/mailreaver.crm -u /home/lx/.crm114/ --learnspam --force \n<delete-message>"
-macro index H "<pipe-message>formail -I X-CRM114-Status -I X-CRM114-Action -I X-CRM114-Version | /usr/local/share/examples/crm114/mailreaver.crm -u /home/lx/.crm114/ --learnnonspam --force \n<save-message>=\n"
-macro pager X "<pipe-message>formail -I X-CRM114-Status -I X-CRM114-Action -I X-CRM114-Version | /usr/local/share/examples/crm114/mailreaver.crm -u /home/lx/.crm114/ --learnspam --force \n<delete-message>"
-macro pager H "<pipe-message>formail -I X-CRM114-Status -I X-CRM114-Action -I X-CRM114-Version | /usr/local/share/examples/crm114/mailreaver.crm -u /home/lx/.crm114/ --learnnonspam --force \n<save-message>=\n"
+macro index,pager A "<save-message>=Archives.2016\n"
 
-macro index A "<save-message>=Archives.2012\n"
-macro pager A "<save-message>=Archives.2012\n"
-
-# From the body or index, call urlview.  If explicitly viewed from
-# the attachment menu, use w3m.
-
-macro index \Cv |urlview\n
-macro pager \Cv |urlview\n
-macro attach \Cv "|w3m -T text\/html\n"
+macro index,pager w ": unset wait_key; set pipe_decode\n|w3m\n: set wait_key; unset pipe_decode\n" "call w3m to extract URLs out of a message"
+macro index,pager,attach V  "|w3m -T text\/html\n"
 
 # my keybindings (vi-ish)
 bind pager 'j' next-line
@@ -117,6 +106,12 @@ bind index <Tab> next-unread
 bind attach l list-reply
 macro index i 'L~F^M'
 macro index 8 'L.^M'
+set query_command= "khard mutt --search '%s'"
+bind editor <Tab> complete-query
+bind editor ^T    complete
+macro index,pager B \
+    "<pipe-message>khard add-email<return>" \
+    "add the sender email address to khard"
 
 #folder-hook . "push 'M'"
 
@@ -133,7 +128,8 @@ color status brightwhite blue
 color tree brightgreen default
 color body brightmagenta default "(ftp|http)://[^ )>]+" # point out URLs
 color body brightmagenta default [-a-z_0-9.]+@[-a-z_0-9.]+    # e-mail addresses
-color index brightmagenta default ~F      # Flagged
+color index magenta default ~F      # Flagged
+color index cyan default ~N
 
 # get pgp info
 source ~/.muttpgp
