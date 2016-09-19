@@ -1,5 +1,6 @@
 " Abbreviations {{{
 abbr guys folks
+abbr shruggie ¯\_(ツ)_/¯
 " }}}
 
 " Keymappings {{{
