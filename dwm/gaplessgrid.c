@@ -3,8 +3,7 @@ gaplessgrid(Monitor *m) {
 	unsigned int n, cols, rows, cn, rn, i, cx, cy, cw, ch;
 	Client *c;
 
-	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next))
-		n++;
+	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++) ;
 	if(n == 0)
 		return;
 

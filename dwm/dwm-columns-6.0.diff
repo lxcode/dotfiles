@@ -1,7 +1,7 @@
-diff -r cfcfa05033e3 config.def.h
---- a/config.def.h	Fri Oct 28 23:45:12 2011 +0100
-+++ b/config.def.h	Fri Oct 28 18:57:59 2011 -0700
-@@ -32,6 +32,7 @@
+diff -up dwm_orig_src/config.def.h dwm-6.0/config.def.h
+--- dwm_orig_src/config.def.h	2012-08-25 12:34:20.847202795 -0400
++++ dwm-6.0/config.def.h	2012-08-25 11:58:15.210591031 -0400
+@@ -32,6 +32,7 @@ static const Layout layouts[] = {
  	{ "[]=",      tile },    /* first entry is default */
  	{ "><>",      NULL },    /* no layout function means floating behavior */
  	{ "[M]",      monocle },
@@ -9,7 +9,7 @@ diff -r cfcfa05033e3 config.def.h
  };
  
  /* key definitions */
-@@ -66,6 +67,7 @@
+@@ -66,6 +67,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
@@ -17,10 +17,10 @@ diff -r cfcfa05033e3 config.def.h
  	{ MODKEY,                       XK_space,  setlayout,      {0} },
  	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
  	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-diff -r cfcfa05033e3 dwm.c
---- a/dwm.c	Fri Oct 28 23:45:12 2011 +0100
-+++ b/dwm.c	Fri Oct 28 18:57:59 2011 -0700
-@@ -165,6 +165,7 @@
+diff -up dwm_orig_src/dwm.c dwm-6.0/dwm.c
+--- dwm_orig_src/dwm.c	2012-08-25 12:34:20.847202795 -0400
++++ dwm-6.0/dwm.c	2012-08-25 12:05:54.180592952 -0400
+@@ -167,6 +167,7 @@ static void cleanup(void);
  static void cleanupmon(Monitor *mon);
  static void clearurgent(Client *c);
  static void clientmessage(XEvent *e);
@@ -28,22 +28,25 @@ diff -r cfcfa05033e3 dwm.c
  static void configure(Client *c);
  static void configurenotify(XEvent *e);
  static void configurerequest(XEvent *e);
-@@ -1658,6 +1659,29 @@
+@@ -1702,6 +1703,32 @@ textnw(const char *text, unsigned int le
  }
  
  void
 +col(Monitor *m) {
-+	unsigned int i, n, h, w, x, y;
++	unsigned int i, n, h, w, x, y,mw;
 +	Client *c;
 +
 +	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 +	if(n == 0)
 +		return;
-+
++        if(n > m->nmaster)
++                mw = m->nmaster ? m->ww * m->mfact : 0;
++        else
++                mw = m->ww;
 +	for(i = x = y = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
 +		if(i < m->nmaster) {
-+			w = (m->ww - x) / (MIN(n, m->nmaster) + (n > m->nmaster) - i);
-+			resize(c, x + m->wx, m->wy, w - (2*c->bw), m->wh - (2*c->bw), False);
++			 w = (mw - x) / (MIN(n, m->nmaster)-i);
++                         resize(c, x + m->wx, m->wy, w - (2*c->bw), m->wh - (2*c->bw), False);
 +			x += WIDTH(c);
 +		}
 +		else {
