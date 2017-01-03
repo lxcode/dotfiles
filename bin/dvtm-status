@@ -7,12 +7,13 @@ chmod 600 $FIFO
 
 while true; do
 	date=`date '+%a %b %d %H:%M'`
-    batt=`pmset -g batt|tail -1 |awk '{print $2}'|sed -e 's/;//'`
+    batt=`pmset -g batt|tail -1 |awk '{print $3}'|sed -e 's/;//'`
     ssid=`/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep 'SSID' |tail -1|awk '{print $2}'`
     unreadmail=`osascript ~/bin/mail-unread.applescript 2>/dev/null`
-    unreadim=`osascript ~/bin/adium-unread.applescript 2>/dev/null`
+#    unreadim=`osascript ~/bin/adium-unread.applescript 2>/dev/null`
     tasks=`task 2>/dev/null | tail -1 | awk '{print $1}'`
-    echo "$unreadim $unreadmail Tasks: $tasks | SSID: $ssid | $batt | $date "
+    echo "$unreadmail Tasks: $tasks | SSID: $ssid | $batt | $date "
+    #echo "$unreadim $unreadmail SSID: $ssid | $batt | $date "
 	sleep 10
 done > $FIFO &
 
