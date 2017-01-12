@@ -17,7 +17,7 @@
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
 	<key>CheckTestRelease</key>
-	<true/>
+	<false/>
 	<key>ClosingHotkeySwitchesSpaces</key>
 	<false/>
 	<key>CommandSelection</key>
@@ -27,7 +27,7 @@
 	<key>CopyLastNewline</key>
 	<false/>
 	<key>CopySelection</key>
-	<true/>
+	<false/>
 	<key>Default Bookmark Guid</key>
 	<string>6D183BE5-5AB6-48B3-AEA5-CE6961F6BE53</string>
 	<key>DimBackgroundWindows</key>
@@ -37,6 +37,8 @@
 	<key>DimOnlyText</key>
 	<true/>
 	<key>DisableFullscreenTransparency</key>
+	<true/>
+	<key>DoubleClickPerformsSmartSelection</key>
 	<true/>
 	<key>EnableRendezvous</key>
 	<false/>
@@ -81,19 +83,40 @@
 			<key>Text</key>
 			<string>0x07 0x76 0x34</string>
 		</dict>
+		<key>0x35-0x80000</key>
+		<dict>
+			<key>Action</key>
+			<integer>11</integer>
+			<key>Text</key>
+			<string>0x07 0x76 0x35</string>
+		</dict>
+		<key>0x48-0x120000</key>
+		<dict>
+			<key>Action</key>
+			<integer>11</integer>
+			<key>Text</key>
+			<string>0x07 0x48</string>
+		</dict>
 		<key>0x4a-0x120000</key>
 		<dict>
 			<key>Action</key>
-			<integer>30</integer>
+			<integer>11</integer>
 			<key>Text</key>
-			<string></string>
+			<string>0x07 0x4a</string>
 		</dict>
 		<key>0x4b-0x120000</key>
 		<dict>
 			<key>Action</key>
-			<integer>31</integer>
+			<integer>11</integer>
 			<key>Text</key>
-			<string></string>
+			<string>0x07 0x4b</string>
+		</dict>
+		<key>0x4c-0x120000</key>
+		<dict>
+			<key>Action</key>
+			<integer>11</integer>
+			<key>Text</key>
+			<string>0x07 0x4c</string>
 		</dict>
 		<key>0x62-0x100000</key>
 		<dict>
@@ -177,7 +200,7 @@
 			<key>Action</key>
 			<integer>11</integer>
 			<key>Text</key>
-			<string>0x07 0x78 0x78</string>
+			<string>0x07 0x2e</string>
 		</dict>
 		<key>0x78-0x100000</key>
 		<dict>
@@ -361,12 +384,52 @@
 	<string></string>
 	<key>NSScrollAnimationEnabled</key>
 	<false/>
+	<key>NSScrollViewShouldScrollUnderTitlebar</key>
+	<false/>
+	<key>NSTableView Columns v2 KeyBingingTable</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
+	AAGGoK4HCA8aGxwdHh8gJjAxMlUkbnVsbNIJCgsOWk5TLm9iamVjdHNWJGNsYXNzogwN
+	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
+	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
+	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
+	DIAIgAlRMSNAczAAAAAAANIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
+	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
+	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
+	AAAAADoAAAAAAAAAAAAAAAAAAAFM
+	</data>
+	<key>NSTableView Sort Ordering v2 KeyBingingTable</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGFBVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
+	AAGGoKMHCA1VJG51bGzSCQoLDFpOUy5vYmplY3RzViRjbGFzc6CAAtIODxARWiRjbGFz
+	c25hbWVYJGNsYXNzZXNeTlNNdXRhYmxlQXJyYXmjEBITV05TQXJyYXlYTlNPYmplY3Rf
+	EA9OU0tleWVkQXJjaGl2ZXLRFhdVQXJyYXmAAQgRGiMtMjc7QUZRWFlbYGt0g4ePmKqt
+	swAAAAAAAAEBAAAAAAAAABgAAAAAAAAAAAAAAAAAAAC1
+	</data>
+	<key>NSTableView Supports v2 KeyBingingTable</key>
+	<true/>
+	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
+	<dict>
+		<key>TB Is Shown</key>
+		<integer>1</integer>
+	</dict>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>786 43 445 372 0 0 1280 800 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>267 569 924 485 0 0 2560 1417 </string>
+	<string>388 267 618 519 0 0 2560 1417 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>442 486 400 129 0 0 1280 778 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>970 769 620 392 0 0 2560 1418 </string>
+	<key>NSWindow Frame SessionsPreferences</key>
+	<string>269 90 599 505 0 0 1280 777 </string>
+	<key>NSWindow Frame SharedPreferences</key>
+	<string>685 696 796 473 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1280 800 0 0 1280 777 </string>
+	<string>0 0 2560 1440 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>152 50 570 451 0 0 1280 777 </string>
+	<string>1453 329 570 377 0 0 2560 1418 </string>
 	<key>NeverWarnAboutShortLivedSessions_6D183BE5-5AB6-48B3-AEA5-CE6961F6BE53</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -529,11 +592,11 @@
 			<key>Background Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.10108526796102524</real>
+				<real>0.158676877617836</real>
 				<key>Green Component</key>
-				<real>0.10108526796102524</real>
+				<real>0.158676877617836</real>
 				<key>Red Component</key>
-				<real>0.10108526796102524</real>
+				<real>0.158676877617836</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -925,11 +988,11 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>Menlo-Regular 11</string>
+			<string>SourceCodePro-Regular 11</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Menlo-Regular 11</string>
+			<string>SourceCodePro-Regular 11</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1104,10 +1167,28 @@
 			<string>/Users/isec</string>
 		</dict>
 	</array>
+	<key>NoSyncConfirmBeta</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
+	<integer>0</integer>
+	<key>NoSyncHaveShownPromoWithId_4</key>
+	<true/>
+	<key>NoSyncInstallationId</key>
+	<string>0CBDF39A-4899-479E-9149-9CE3BED4CA20</string>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
+	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
+	<real>487185774.160981</real>
 	<key>NoSyncTimeOfLastPromo</key>
-	<real>464562955.866458</real>
+	<real>477861477.647946</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>466041329.41574299</real>
+	<real>487185331.80550301</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1116,6 +1197,8 @@
 	<false/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
+	<key>OptionClickMovesCursor</key>
+	<false/>
 	<key>PMPrintingExpandedStateForPrint2</key>
 	<false/>
 	<key>PassOnControlClick</key>
@@ -1171,12 +1254,14 @@
 	<true/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
+	<key>SUFeedAlternateAppNameKey</key>
+	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=52</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-10-12T18:55:56Z</date>
+	<date>2017-01-12T18:41:26Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -1224,6 +1309,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.1.4</string>
+	<string>3.0.13</string>
 </dict>
 </plist>
