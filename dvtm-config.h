@@ -77,14 +77,16 @@ static Layout layouts[] = {
 	{ { MOD, 'V', KEY,     }, { toggleview,     { tags[TAG] }               } }, \
 	{ { MOD, 'T', KEY,     }, { toggletag,      { tags[TAG] }               } },
 
-/* you can at most specifiy MAX_ARGS (3) number of arguments */
+/* you can specifiy at most 3 arguments */
 static KeyBinding bindings[] = {
 	{ { MOD, 'c',          }, { create,         { NULL }                    } },
 	{ { MOD, 'C',          }, { create,         { NULL, NULL, "$CWD" }      } },
 	{ { MOD, 'x', 'x',     }, { killclient,     { NULL }                    } },
 	{ { MOD, 'j',          }, { focusnext,      { NULL }                    } },
-	{ { MOD, 'J',          }, { focusnextnm,    { NULL }                    } },
-	{ { MOD, 'K',          }, { focusprevnm,    { NULL }                    } },
+	{ { MOD, 'J',          }, { focusdown,      { NULL }                    } },
+	{ { MOD, 'K',          }, { focusup,        { NULL }                    } },
+	{ { MOD, 'H',          }, { focusleft,      { NULL }                    } },
+	{ { MOD, 'L',          }, { focusright,     { NULL }                    } },
 	{ { MOD, 'k',          }, { focusprev,      { NULL }                    } },
 	{ { MOD, 't',          }, { setlayout,      { "[]=" }                   } },
 	{ { MOD, 'g',          }, { setlayout,      { "+++" }                   } },
@@ -114,8 +116,9 @@ static KeyBinding bindings[] = {
 	{ { MOD, 'a',          }, { togglerunall,   { NULL }                    } },
 	{ { MOD, CTRL('L'),    }, { redraw,         { NULL }                    } },
 	{ { MOD, 'r',          }, { redraw,         { NULL }                    } },
-	{ { MOD, 'e',          }, { copymode,       { NULL }                    } },
-	{ { MOD, '/',          }, { copymode,       { "/" }                     } },
+	{ { MOD, 'e',          }, { copymode,       { "dvtm-editor" }           } },
+	{ { MOD, 'E',          }, { copymode,       { "dvtm-pager" }            } },
+	{ { MOD, '/',          }, { copymode,       { "dvtm-pager", "/" }       } },
 	{ { MOD, 'p',          }, { paste,          { NULL }                    } },
 	{ { MOD, KEY_PPAGE,    }, { scrollback,     { "-1" }                    } },
 	{ { MOD, KEY_NPAGE,    }, { scrollback,     { "1"  }                    } },
@@ -188,7 +191,12 @@ static Button buttons[] = {
 #endif /* CONFIG_MOUSE */
 
 static Cmd commands[] = {
+	/* create [cmd]: create a new window, run `cmd` in the shell if specified */
 	{ "create", { create,	{ NULL } } },
+	/* focus <win_id>: focus the window whose `DVTM_WINDOW_ID` is `win_id` */
+	{ "focus",  { focusid,	{ NULL } } },
+	/* tag <win_id> <tag> [tag ...]: add +tag, remove -tag or set tag of the window with the given identifier */
+	{ "tag",    { tagid,	{ NULL } } },
 };
 
 /* gets executed when dvtm is started */
@@ -198,19 +206,4 @@ static Action actions[] = {
 
 static char const * const keytable[] = {
 	/* add your custom key escape sequences */
-};
-
-/* editor to use for copy mode. If neither of DVTM_EDITOR, EDITOR and PAGER is
- * set the first entry is chosen. Otherwise the array is consulted for supported
- * options. A %d in argv is replaced by the line number at which the file should
- * be opened. If filter is true the editor is expected to work even if stdout is
- * redirected (i.e. not a terminal).
- */
-static Editor editors[] = {
-	{ .name = "vis",         .argv = { "vis", "+%d", "-", NULL  }, .filter = true  },
-	{ .name = "sandy",       .argv = { "sandy", "-d", "-", NULL }, .filter = true  },
-	{ .name = "dvtm-editor", .argv = { "dvtm-editor", "-", NULL }, .filter = true  },
-	{ .name = "vim",  .argv = { "vim",  "+%d", "-", NULL }, .filter = false },
-	{ .name = "less",        .argv = { "less", "+%d", NULL      }, .filter = false },
-	{ .name = "more",        .argv = { "more", "+%d", NULL      }, .filter = false },
 };

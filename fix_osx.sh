@@ -1,6 +1,9 @@
 #!/bin/sh
 # Run this script as a regular user.
 
+# Re-enable chime
+sudo /usr/sbin/nvram 'BootAudio=%01'
+
 # I am a grownup, I can handle this knowledge
 defaults write com.apple.Finder AppleShowAllFiles TRUE
 defaults write com.apple.Finder ShowPathbar -bool true
