@@ -75,6 +75,12 @@ bvimdiff() {
     vimdiff <(xxd $1) <(xxd $2)
 }
 
+mus() {
+    sudo zpool import backup
+    cmus
+    sudo zpool export backup
+}
+
 setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
 
 freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
@@ -168,10 +174,10 @@ screen*)
 esac
 }
 
-# typing ... expands to ../.., .... to ../../.., etc.
+# typing ... expands to ../., ... to ../../., etc.
 rationalise-dot() {
     if [[ $LBUFFER = *.. ]]; then
-        LBUFFER+=/..
+        LBUFFER+=/.
     else
         LBUFFER+=.
     fi
