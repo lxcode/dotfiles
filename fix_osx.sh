@@ -17,7 +17,7 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Stop doing the stupid desktop reordering thing
 defaults write com.apple.dock mru-spaces -bool false
 
-# Disable the desktop, one of the most useless UI paradigms every devised
+# Disable the desktop, one of the most useless UI paradigms ever devised
 defaults write com.apple.finder CreateDesktop -bool false
 
 # ANIMATE FASTER
