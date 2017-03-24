@@ -171,7 +171,7 @@ esac
 # typing ... expands to ../.., .... to ../../.., etc.
 rationalise-dot() {
     if [[ $LBUFFER = *.. ]]; then
-        LBUFFER+=/..
+        LBUFFER+=/.
     else
         LBUFFER+=.
     fi
