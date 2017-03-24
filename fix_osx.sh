@@ -203,7 +203,6 @@ read -p "Preparing to install casks"
 brew install caskroom/cask/brew-cask
 brew tap caskroom/fonts
 brew cask install font-inconsolata
-brew cask install karabiner
 brew cask install iterm2
 brew cask install adium
 brew cask install google-chrome
