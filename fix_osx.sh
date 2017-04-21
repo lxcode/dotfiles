@@ -61,7 +61,7 @@ defaults write NSGlobalDomain NSWindowResizeTime .1
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Fastest key repeat. Still too slow.
-defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 # Lower right corner click is right click
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
