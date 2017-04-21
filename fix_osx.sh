@@ -174,6 +174,9 @@ do
     ln -s ~/git/dotfiles/$file ~/$file
 done
 
+mkdir ~/.w3m
+ln -s ~/git/dotfiles/w3m-config ~/.w3m/config
+
 # Install things
 read -p "Preparing to install apps"
 
