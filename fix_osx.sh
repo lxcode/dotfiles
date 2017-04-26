@@ -17,7 +17,7 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Stop doing the stupid desktop reordering thing
 defaults write com.apple.dock mru-spaces -bool false
 
-# Disable the desktop, one of the most useless UI paradigms every devised
+# Disable the desktop, one of the most useless UI paradigms ever devised
 defaults write com.apple.finder CreateDesktop -bool false
 
 # ANIMATE FASTER
@@ -61,7 +61,7 @@ defaults write NSGlobalDomain NSWindowResizeTime .1
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Fastest key repeat. Still too slow.
-defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 # Lower right corner click is right click
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
@@ -174,6 +174,9 @@ do
     ln -s ~/git/dotfiles/$file ~/$file
 done
 
+mkdir ~/.w3m
+ln -s ~/git/dotfiles/w3m-config ~/.w3m/config
+
 # Install things
 read -p "Preparing to install apps"
 
@@ -203,7 +206,6 @@ read -p "Preparing to install casks"
 brew install caskroom/cask/brew-cask
 brew tap caskroom/fonts
 brew cask install font-inconsolata
-brew cask install karabiner
 brew cask install iterm2
 brew cask install adium
 brew cask install google-chrome

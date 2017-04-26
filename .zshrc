@@ -193,6 +193,7 @@ zmodload -ap zsh/mapfile mapfile
 
 ### Bindings
 bindkey -v               # vi key bindings
+bindkey jk vi-cmd-mode
 bindkey "\e[Z" reverse-menu-complete
 bindkey '^R' history-incremental-search-backward
 bindkey . rationalise-dot

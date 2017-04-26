@@ -11,7 +11,7 @@ sendmail_enable="NO"
 sendmail_submit_enable="NO"
 sendmail_outbound_enable="NO"
 sendmail_msp_queue_enable="NO"
-keymap="us.pc-ctrl.kbd"
+keymap="us.ctrl"
 keyrate="fast"
 #allscreens_flags="-g 132x60 MODE_280"
 EOF

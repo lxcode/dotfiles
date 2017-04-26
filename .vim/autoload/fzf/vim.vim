@@ -29,8 +29,10 @@ set cpo&vim
 " ------------------------------------------------------------------
 
 let s:layout_keys = ['window', 'up', 'down', 'left', 'right']
-let s:which_bin = executable('ruby') ? '/bin/preview.rb' : '/bin/preview.sh'
-let s:bin = { 'preview': expand('<sfile>:h:h:h') . s:which_bin }
+let s:bin_dir = expand('<sfile>:h:h:h').'/bin/'
+let s:bin = {
+\ 'preview': s:bin_dir.(executable('ruby') ? 'preview.rb' : 'preview.sh'),
+\ 'tags':    s:bin_dir.'tags.pl' }
 let s:TYPE = {'dict': type({}), 'funcref': type(function('call')), 'string': type('')}
 
 " [[options to wrap], preview window expression, [toggle-preview keys...]]
@@ -108,10 +110,6 @@ endfunction
 
 function! s:escape(path)
   return escape(a:path, ' $%#''"\')
-endfunction
-
-function! s:q1(str)
-  return "'".substitute(a:str, "'", "'\\\\''", 'g')."'"
 endfunction
 
 if v:version >= 704
@@ -221,7 +219,7 @@ function! s:warn(message)
   return 0
 endfunction
 
-function! s:uniq(list)
+function! fzf#vim#_uniq(list)
   let visited = {}
   let ret = []
   for l in a:list
@@ -363,7 +361,7 @@ endfunction
 " ------------------------------------------------------------------
 function! fzf#vim#colors(...)
   return s:fzf('colors', {
-  \ 'source':  s:uniq(map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+  \ 'source':  fzf#vim#_uniq(map(split(globpath(&rtp, "colors/*.vim"), "\n"),
   \               "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')")),
   \ 'sink':    'colo',
   \ 'options': '+m --prompt="Colors> "'
@@ -613,7 +611,7 @@ function! fzf#vim#ag(query, ...)
   let query = empty(a:query) ? '^(?=.)' : a:query
   let args = copy(a:000)
   let ag_opts = len(args) > 1 && type(args[0]) == s:TYPE.string ? remove(args, 0) : ''
-  let command = ag_opts . ' ' . s:q1(query)
+  let command = ag_opts . ' ' . shellescape(query)
   return call('fzf#vim#ag_raw', insert(args, command, 0))
 endfunction
 
@@ -695,7 +693,7 @@ function! s:btags_sink(lines)
 endfunction
 
 function! s:q(query)
-  return ' --query '.s:q1(a:query)
+  return ' --query '.shellescape(a:query)
 endfunction
 
 " query, [[tag commands], options]
@@ -731,9 +729,12 @@ function! s:tags_sink(lines)
     let [magic, &magic, wrapscan, &wrapscan, acd, &acd] = [&magic, 0, &wrapscan, 1, &acd, 0]
     for line in a:lines[1:]
       try
-        let parts = split(line, '\t\zs')
-        let excmd = matchstr(join(parts[2:], ''), '^.*\ze;"\t')
-        call s:open(cmd, parts[1][:-2])
+        let parts   = split(line, '\t\zs')
+        let excmd   = matchstr(join(parts[2:-2], '')[:-2], '^.*\ze;"\t')
+        let base    = fnamemodify(parts[-1], ':h')
+        let relpath = parts[1][:-2]
+        let abspath = relpath =~ '^/' ? relpath : join([base, relpath], '/')
+        call s:open(cmd, abspath)
         execute excmd
         call add(qfl, {'filename': expand('%'), 'lnum': line('.'), 'text': getline('.')})
       catch /^Vim:Interrupt$/
@@ -773,22 +774,20 @@ function! fzf#vim#tags(query, ...)
     endif
   endif
 
-  let tagfile = tagfiles()[0]
-  " We don't want to apply --ansi option when tags file is large as it makes
-  " processing much slower.
-  let tagsize = getfsize(tagfile)
-  if tagsize > 1024 * 1024 * 20
-    let proc = 'grep -av ''^\!'' '
-    let copt = tagsize > 1024 * 1024 * 200 ? '--algo=v1 ' : ''
-  else
-    let proc = 'perl -ne ''unless (/^\!/) { s/^(.*?)\t(.*?)\t/'.s:yellow('\1', 'Function').'\t'.s:blue('\2', 'String').'\t/; print }'' '
-    let copt = '--ansi '
-  endif
+  let tagfiles = tagfiles()
+  let v2_limit = 1024 * 1024 * 200
+  for tagfile in tagfiles
+    let v2_limit -= getfsize(tagfile)
+    if v2_limit < 0
+      break
+    endif
+  endfor
+  let opts = v2_limit < 0 ? '--algo=v1 ' : ''
+
   return s:fzf('tags', {
-  \ 'source':  proc.shellescape(fnamemodify(tagfile, ':t')),
+  \ 'source':  shellescape(s:bin.tags).' '.join(map(tagfiles, 'shellescape(fnamemodify(v:val, ":p"))')),
   \ 'sink*':   s:function('s:tags_sink'),
-  \ 'dir':     fnamemodify(tagfile, ':h'),
-  \ 'options': copt.'-m --tiebreak=begin --prompt "Tags> "'.s:q(a:query)}, a:000)
+  \ 'options': opts.'--nth 1..2 --with-nth ..-2 -m --tiebreak=begin --prompt "Tags> "'.s:q(a:query)}, a:000)
 endfunction
 
 " ------------------------------------------------------------------
@@ -923,7 +922,7 @@ endfunction
 
 function! fzf#vim#helptags(...)
   let sorted = sort(split(globpath(&runtimepath, '**/doc/tags'), '\n'))
-  let tags = exists('*uniq') ? uniq(sorted) : s:uniq(sorted)
+  let tags = exists('*uniq') ? uniq(sorted) : fzf#vim#_uniq(sorted)
 
   return s:fzf('helptags', {
   \ 'source':  "grep -H '.*' ".join(map(tags, 'shellescape(v:val)')).
@@ -1095,13 +1094,12 @@ function! fzf#vim#maps(mode, ...)
   let list = []
   let curr = ''
   for line in split(cout, "\n")
-    let src = matchstr(line, 'Last set from \zs.*')
-    if empty(src)
-      let curr = line[3:]
-    else
-      let src = '  '.join(reverse(reverse(split(src, '/'))[0:2]), '/')
+    if line =~ "^\t"
+      let src = '  '.join(reverse(reverse(split(split(line)[-1], '/'))[0:2]), '/')
       call add(list, printf('%s %s', curr, s:green(src, 'Comment')))
       let curr = ''
+    else
+      let curr = line[3:]
     endif
   endfor
   if !empty(curr)
