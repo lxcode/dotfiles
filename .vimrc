@@ -4,6 +4,8 @@ abbr shruggie ¯\_(ツ)_/¯
 " }}}
 
 " Keymappings {{{
+" Stupid new macbook
+imap jk <Esc>
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
@@ -381,10 +383,12 @@ let g:vimchat_pync_enabled = 1
 set rtp+=~/.fzf
 set rtp+=/usr/local/opt/fzf
 nmap <C-e> :Files<CR>
+nmap <C-g> :GFiles<CR>
 nmap <leader>m :History<CR>
 nmap <leader>e :Files<CR>
 nmap <Leader>t :Tags<CR>
 nmap <Leader>b :BTags<CR>
+let g:fzf_tags_command = '/usr/local/bin/ctags -R'
 " }}}
 
 
