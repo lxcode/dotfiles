@@ -730,6 +730,10 @@ function GrepColors()
         syn region ansiRed start="\e\[01;31m"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
         syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m"
         syn match ansiStop		conceal "\e\[m"
+   elseif system('uname')=~'FreeBSD'
+       syn region ansiRed start="\e\[01;31m"me=e-2 end="\e\[00m"me=e-5 contains=ansiConceal
+       syn match ansiConceal contained conceal    "\e\[\(\d*;\)*\d*m"
+       syn match ansiStop        conceal "\e\[00m\e\[K"
     else
         syn region ansiRed start="\e\[01;31m\e\[K"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
         syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m\e\[K"
