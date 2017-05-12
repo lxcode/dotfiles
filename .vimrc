@@ -406,6 +406,7 @@ let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/De
 let g:clang_complete_copen = 1
 let g:clang_snippets = 1
 let g:clang_use_library = 1
+let g:clang_format#detect_style_file = 1
 " }}}
 
 " tagbar {{{
