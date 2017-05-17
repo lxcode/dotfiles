@@ -32,6 +32,7 @@ map <silent> <Leader>\ :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
+nmap <Leader>fs [s1z=<C-o>
 " Clean up left side
 nmap <F2> :set nonu foldcolumn=0<CR>:QuickfixsignsToggle<CR>
 map <F8> :w<CR> :!make<CR>
