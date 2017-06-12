@@ -13,6 +13,7 @@ set mask="^."				        # show everything in folder view
 
 # Misc options
 set help=no
+set allow_ansi
 set editor="$EDITOR +'/^$/' -c'noh'"
 set charset="utf-8"
 set maildir_trash=no		        # set the trashed flag on maildir msgs
@@ -44,6 +45,7 @@ set timeout=15			# poll the boxes every 15 seconds
 set postponed= =Drafts 	# Put unsent mail here
 set record= =Sent		# put sent mail here
 set mime_fwd=ask-no		# forward attachments
+set wait_key=no       # No "press any key"
 ignore *			    # weed all headers by default
 unignore from date subject to cc X-Face:	# don't weed important ones, though
 alternates lx@FreeBSD.org lx@redundancy.org lx@grumplicio.us lx@darkambient.net	# other addresses I use
@@ -80,11 +82,13 @@ my_hdr X-Face: %H~{\$1~NOw1y\#%mM6{|4:/<p]y9X%E+4%:1wo-M!re,zl.qH~yzbL-MWhtp\$3Q
 mailboxes = =Plan =Lists.8lives =Lists.Security.Ctf =Lists.FreeBSD.Developers =Lists.FreeBSD.Security =Lists.FreeBSD.Hackers =Lists.FreeBSD.ppc =Lists.FreeBSD.Ports =Lists.FreeBSD.ports-bugs =Lists.FreeBSD.CVS =Lists.FreeBSD.Current =Lists.FreeBSD.Stable =Lists.FreeBSD.Security =Lists.IETF =Lists.Security.Vulnwatch =Lists.Security.Vuln-Dev =Lists.Security.Bugtraq =Lists.Security.Pen-Test =Lists.Security.Incidents =Lists.Security.FullDisclosure =Lists.Security.VulnDiscuss =Lists.Cocoa =Lists.Fish =Lists.XeTeX =Lists.Antzen =Spam
 
 # make mutt aware of our mailing lists
-subscribe ports freebsd-ports chickensoup citypunk pen-test vuln-dev security-announce incidents bugtraq vulnwatch vulndiscuss full-disclosure fish thiels misc pf firewall-wizards sfs exprise freebsd-current current log ctf bikergoths-l securesoftware badmovie securityjobs osiris osiris-devel DSI_evolver SRX-6 developers cmus-devel cocoa-students 8lives
+subscribe ports freebsd-ports pen-test vuln-dev bugtraq freebsd-current current developers 8lives
 
-macro index,pager A "<save-message>=Archives.2016\n"
+macro index,pager A "<enter-command>unset resolve<enter><clear-flag>N<enter-command>set resolve<enter><save-message>=.Archives.2017\n"
 
 macro index,pager w ": unset wait_key; set pipe_decode\n|w3m\n: set wait_key; unset pipe_decode\n" "call w3m to extract URLs out of a message"
+macro index \\ "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py<enter><change-folder-readonly>~/.cache/mutt_results<enter>" \
+            "search mail (using notmuch)"
 macro index,pager,attach V  "|w3m -T text\/html\n"
 
 # my keybindings (vi-ish)
