@@ -32,6 +32,8 @@ map <silent> <Leader>\ :noh<CR>
 " correct spelling
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
+" Poor man's cscope
+nnoremap gr :grep '\b<cword>\b' *<CR>
 " Clean up left side
 nmap <F2> :set nonu foldcolumn=0<CR>:QuickfixsignsToggle<CR>
 map <F8> :w<CR> :!make<CR>
@@ -493,11 +495,11 @@ augroup cjava
     au BufWinEnter *.[mCchly] set nospell number comments+=s1:/*,mb:*,ex:*/
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi setfiletype objc
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi let c_no_curly_error = 1
-    au BufWinEnter *.cpp,*.java set nospell number
+    au BufWinEnter *.cpp,*.java,*.hs set nospell number
     au BufWinLeave *.[mchly] mkview
     au BufWinEnter *.[mchly] silent loadview
-    au BufWinLeave *.cpp,*.java mkview
-    au BufWinEnter *.cpp,*.java silent loadview
+    au BufWinLeave *.cpp,*.java,*.hs mkview
+    au BufWinEnter *.cpp,*.java,*.hs silent loadview
 augroup end
 
 augroup html
