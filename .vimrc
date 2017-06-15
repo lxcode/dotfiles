@@ -142,7 +142,7 @@ set nobackup                " ugh, stop making useless crap
 set nowritebackup           " same with overwriting
 set directory=/tmp          " litter up /tmp, not the CWD
 set nomodeline              " modelines are dumb
-set tabstop=4 shiftwidth=4
+set tabstop=4 shiftwidth=4 softtabstop=4
 set backspace=indent,eol,start
 set ruler                   " show position in file
 set title
