@@ -69,6 +69,7 @@ alias lsd='ls -ld *(-/DN)'
 alias lsa='ls -ld .*'
 alias ctags-objc='/usr/local/bin/ctags --languages=objectivec --langmap=objectivec:.h.m -R .'
 alias vim="$EDITOR"
+eval "$(thefuck --alias)"
 
 ### Functions
 bvimdiff() {
