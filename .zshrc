@@ -82,6 +82,8 @@ mus() {
     sudo zpool export backup
 }
 
+fpr() { openssl s_client -connect $1 < /dev/null 2>/dev/null | openssl x509 -fingerprint -noout -in /dev/stdin }
+
 setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
 
 freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
