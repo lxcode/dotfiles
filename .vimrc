@@ -4,8 +4,6 @@ abbr shruggie ¯\_(ツ)_/¯
 " }}}
 
 " Keymappings {{{
-" Stupid new macbook
-imap jk <Esc>
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
