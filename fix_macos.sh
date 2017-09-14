@@ -233,6 +233,7 @@ brew doctor
 brew install task tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap par python3 weechat wireshark youtube-dl bbe zsh w3m vdirsyncer khal ag fzf mobile-shell tree
 # Note that macvim requires full xcode
 brew install macvim --with-python3
+brew install vim --override-system-vi --with-lua --with-python3
 brew install ctags --HEAD
 brew install profanity --with-terminal-notifier
 brew linkapps
@@ -248,5 +249,4 @@ brew cask install adium
 brew cask install google-chrome
 brew cask install xquartz
 brew cask install spectacle
-brew install vim --override-system-vi --with-lua --with-python3
 task
