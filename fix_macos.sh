@@ -248,6 +248,5 @@ brew cask install adium
 brew cask install google-chrome
 brew cask install xquartz
 brew cask install spectacle
-# Needs XQuartz
-brew install vim --override-system-vi --with-client-server --with-lua --with-python3
+brew install vim --override-system-vi --with-lua --with-python3
 task
