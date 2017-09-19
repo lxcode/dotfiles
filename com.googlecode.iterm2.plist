@@ -416,11 +416,11 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 47 606 456 0 0 2560 1578 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>737 139 918 495 0 0 2560 1600 </string>
+	<string>269 111 796 473 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 1440 900 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>-1272 220 890 602 -1440 0 1440 878 </string>
+	<string>0 0 1440 900 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>-902 0 570 377 -1440 0 1440 878 </string>
 	<key>NeverWarnAboutShortLivedSessions_6D183BE5-5AB6-48B3-AEA5-CE6961F6BE53</key>
@@ -1186,6 +1186,8 @@
 	<false/>
 	<key>PasteTabToStringTabStopSize</key>
 	<integer>4</integer>
+	<key>PerformDNSLookups</key>
+	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -1240,7 +1242,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-06-10T18:48:52Z</date>
+	<date>2017-09-18T18:00:28Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
