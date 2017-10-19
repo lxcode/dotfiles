@@ -7,8 +7,9 @@ do
 	fi
 done
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-export FZF_DEFAULT_OPTS="--extended"
-export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_DEFAULT_OPTS="--extended --bind ctrl-a:select-all"
+#export FZF_DEFAULT_COMMAND='ag -l -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export GOPATH=$HOME/go
 
 export FPATH=/usr/share/zsh/site-functions:$FPATH
