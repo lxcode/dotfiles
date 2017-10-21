@@ -235,7 +235,6 @@ brew install task tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi nmap
 brew install macvim --with-python3
 brew install vim --with-override-system-vi --with-lua --with-python3
 brew install ctags --HEAD
-brew install profanity --with-terminal-notifier
 brew linkapps
 pip3 install peewee
 
@@ -246,8 +245,6 @@ brew tap caskroom/fonts
 brew cask install font-inconsolata
 brew cask install iterm2
 brew cask install kitty
-brew cask install adium
 brew cask install google-chrome
-brew cask install xquartz
 brew cask install spectacle
 task
