@@ -168,6 +168,13 @@ if !has('nvim')
     set cryptmethod=blowfish    " in case I ever decide to use vim -x
 endif
 
+" Use pipe cursor on insert
+let &t_SI = "\<esc>[5 q"
+let &t_SR = "\<esc>[3 q"
+let &t_EI = "\<esc>[1 q"
+" Same in neovim
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+
 "if exists('&autochdir')
 "    " Change directory to first open file
 "    set autochdir
@@ -180,7 +187,6 @@ colorscheme lx-256-dark
 " }}}
 
 " Plugins
-" 33ms startup penalty!
 source ~/.vim/ftplugin/man.vim
 
 " Don't load plugins that have unmet dependencies
