@@ -81,7 +81,6 @@ helptags ~/.vim/doc
 if has('gui')
     set gcr=n:blinkon0          " don't blink the cursor in normal mode
     set guioptions=aAegiM       " get rid of useless stuff in the gui
-    set clipboard=unnamed
     if has("gui_macvim")
         set guifont=Inconsolata:h18
         noremap <Leader>zo :set guifont=Inconsolata:h4<CR>
@@ -96,7 +95,8 @@ if has('gui_running')
 endif
 
 if $DISPLAY != ""
-    "set cursorline          " I like this, but damn is it slow
+    set cursorline          " I like this, but damn is it slow
+    set clipboard=unnamed
     set mouse=a             " Turn this off for console-only mode
     set selectmode+=mouse	" Allow the mouse to select
     if !has('nvim')
