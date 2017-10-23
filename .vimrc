@@ -395,8 +395,10 @@ nmap <leader>m :History<CR>
 nmap <leader>e :Files<CR>
 nmap <Leader>t :Tags<CR>
 nmap <Leader>b :BTags<CR>
+nmap <C-]> :call fzf#vim#tags(expand('<cword>'), {'options': '--exact --select-1 --exit-0'})<CR>
 
 let g:fzf_tags_command = '/usr/local/bin/ctags -R'
+
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
   copen
