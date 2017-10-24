@@ -243,6 +243,8 @@ read -p "Preparing to install casks"
 brew install caskroom/cask/brew-cask
 brew tap caskroom/fonts
 brew cask install font-inconsolata
+brew cask install font-source-code-pro
+brew cask install font-m-plus
 brew cask install iterm2
 brew cask install kitty
 brew cask install google-chrome
