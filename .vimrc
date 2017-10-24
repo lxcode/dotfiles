@@ -95,7 +95,7 @@ if has('gui_running')
 endif
 
 if $DISPLAY != ""
-    set cursorline          " I like this, but damn is it slow
+    "set cursorline          " I like this, but damn is it slow
     set clipboard=unnamed
     set mouse=a             " Turn this off for console-only mode
     set selectmode+=mouse	" Allow the mouse to select
@@ -413,7 +413,7 @@ let g:fzf_action = {
 
 command! -bang -nargs=* F
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color=always '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!tags" --color=always '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
