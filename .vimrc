@@ -182,7 +182,11 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 "endif
 
 " colors
-set t_Co=256                " use 256 colors
+if has("termguicolors")
+    set termguicolors
+else
+    set t_Co=256
+endif
 colorscheme lx-256-dark
 " }}}
 
