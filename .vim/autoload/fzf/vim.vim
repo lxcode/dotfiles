@@ -32,7 +32,7 @@ let s:is_win = has('win32') || has('win64')
 let s:layout_keys = ['window', 'up', 'down', 'left', 'right']
 let s:bin_dir = expand('<sfile>:h:h:h').'/bin/'
 let s:bin = {
-\ 'preview': s:bin_dir.(!s:is_win && executable('ruby') ? 'preview.rb' : 'preview.sh'),
+\ 'preview': s:bin_dir.(executable('ruby') ? 'preview.rb' : 'preview.sh'),
 \ 'tags':    s:bin_dir.'tags.pl' }
 let s:TYPE = {'dict': type({}), 'funcref': type(function('call')), 'string': type(''), 'list': type([])}
 if s:is_win
@@ -41,7 +41,7 @@ if s:is_win
   else
     let s:bin.preview = fnamemodify(s:bin.preview, ':8')
   endif
-  let s:bin.preview = 'bash '.escape(s:bin.preview, '\')
+  let s:bin.preview = (executable('ruby') ? 'ruby' : 'bash').' '.escape(s:bin.preview, '\')
 endif
 
 function! s:extend_opts(dict, eopts, prepend)
@@ -1070,7 +1070,7 @@ function! s:commits(buffer_local, args)
     return s:warn('Not in git repository')
   endif
 
-  let source = 'git log '.get(g:, 'fzf_commits_log_options', '--graph --color=always '.fzf#shellescape('--format=%C(auto)%h%d %s %C(green)%cr'))
+  let source = 'git log '.get(g:, 'fzf_commits_log_options', '--color=always '.fzf#shellescape('--format=%C(auto)%h%d %s %C(green)%cr'))
   let current = expand('%')
   let managed = 0
   if !empty(current)
@@ -1083,6 +1083,8 @@ function! s:commits(buffer_local, args)
       return s:warn('The current buffer is not in the working tree')
     endif
     let source .= ' --follow '.fzf#shellescape(current)
+  else
+    let source .= ' --graph'
   endif
 
   let command = a:buffer_local ? 'BCommits' : 'Commits'
