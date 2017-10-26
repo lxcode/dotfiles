@@ -11,15 +11,15 @@ endif
 let colors_name = "lx-256-dark"
 
 " General colors
-hi Normal guifg=#d0d0d0 guibg=#242424 ctermfg=252 ctermbg=NONE
-hi NonText guifg=#070707 guibg=black ctermfg=0
+hi Normal guifg=#d0d0d0 guibg=NONE ctermfg=252 ctermbg=NONE
+hi NonText guifg=#070707 guibg=NONE ctermfg=0
 
 hi Cursor guifg=black guibg=#5fafff ctermfg=0 ctermbg=15
 hi LineNr ctermfg=102 ctermbg=237 guifg=#90908a guibg=#3c3d37
 
 hi VertSplit guifg=#000000 guibg=#202020 ctermfg=235 ctermbg=60
 hi StatusLine guifg=#1a1a1a guibg=#808080 ctermfg=232 ctermbg=60 cterm=reverse gui=reverse
-hi StatusLineNC guifg=#080808 guibg=#202020 ctermfg=233 ctermbg=235
+hi StatusLineNC guifg=#080808 guibg=#333333 ctermfg=233 ctermbg=235
 
 hi Folded guifg=#a0a8b0 guibg=#384048 ctermfg=grey ctermbg=60
 hi FoldColumn guibg=#202020 guifg=darkgrey
@@ -36,7 +36,6 @@ hi WildMenu guifg=black guibg=#cae682 ctermfg=0 ctermbg=195
 hi PmenuSbar guifg=black guibg=white ctermfg=0 ctermbg=15
 
 hi Error gui=undercurl ctermfg=203 ctermbg=NONE  cterm=underline guisp=#FF6C60
-"hi ErrorMsg guifg=white guibg=#FF6C60 gui=bold ctermfg=white ctermbg=203 cterm=bold
 hi ErrorMsg ctermfg=231 ctermbg=197 guifg=#f8f8f0 guibg=#f92672
 hi WarningMsg guifg=white guibg=#FF6C60 gui=bold ctermfg=white ctermbg=203 cterm=bold
 hi SpellBad cterm=underline ctermbg=none ctermfg=203
