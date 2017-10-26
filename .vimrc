@@ -183,7 +183,11 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
 " colors
 if has("termguicolors")
-    set termguicolors
+    if exists('$TMUX')
+        set t_Co=256
+    else
+        set termguicolors
+    endif
 else
     set t_Co=256
 endif
