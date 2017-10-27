@@ -38,7 +38,7 @@ hi PmenuSbar guifg=black guibg=white ctermfg=0 ctermbg=15
 hi Error gui=undercurl ctermfg=203 ctermbg=NONE  cterm=underline guisp=#FF6C60
 hi ErrorMsg ctermfg=231 ctermbg=197 guifg=#f8f8f0 guibg=#f92672
 hi WarningMsg guifg=white guibg=#FF6C60 gui=bold ctermfg=white ctermbg=203 cterm=bold
-hi SpellBad cterm=underline ctermbg=none ctermfg=203
+hi SpellBad cterm=underline guifg=#FF6C60 guibg=NONE ctermbg=NONE ctermfg=203
 hi SpellCap cterm=underline
 hi SpellRare cterm=underline
 hi SpellLocal cterm=underline
@@ -79,7 +79,6 @@ hi mailQuoted2 guifg=#585858 ctermfg=240
 hi Function guifg=#FFD2A7 ctermfg=223
 hi Type guifg=#FFDFFF ctermfg=225
 hi Statement guifg=#6699CC ctermfg=110
-"hi Statement ctermfg=197 guifg=#f92672
 
 hi Special guifg=#df8787 ctermfg=174
 hi Delimiter guifg=#00A0A0 ctermfg=37
