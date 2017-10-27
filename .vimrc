@@ -565,6 +565,7 @@ augroup markdown
     au BufWinEnter *.md,*.notes, silent loadview
     au BufWinEnter *.md,*.notes, imap <C-l> <C-t>
     au BufWinEnter *.md,*.notes, imap <C-h> <C-d>
+    au BufWinEnter *.md,*.notes, normal zR
     au BufWinEnter *.md,*.notes,*mutt*, imap >> <C-t>
     au BufWinEnter *.md,*.notes,*mutt*, imap << <C-d>
     au FileType markdown set spell
