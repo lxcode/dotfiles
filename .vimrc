@@ -592,6 +592,7 @@ augroup end
 
 augroup misc
     au FileType netrw silent! unmap <buffer> --
+    au FileType git set foldlevel=99
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.scala, set filetype=scala
