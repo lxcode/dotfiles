@@ -10,7 +10,6 @@ map <left> :bp<cr>
 map <home> :rewind<cr>
 map <end> :last<cr>
 map g<Tab> :bn<CR>
-nnoremap <C-Tab> gt
 " Make Y behave like C and D
 nnoremap Y y$
 " Use , in addition to \ for the leader
@@ -31,11 +30,12 @@ map <silent> <Leader>\ :noh<CR>
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
 nmap <Leader>fs [s1z=<C-o>
-" Poor man's cscope
+" Poor man's cscope - grep for symbol under cursor
 nnoremap gr :grep '\b<cword>\b' *<CR>
 " Clean up left side
 nmap <F2> :set nonu foldcolumn=0<CR>:QuickfixsignsToggle<CR>
 map <F8> :w<CR> :!make<CR>
+" Show netrw sidebar
 map <silent> <F9> :call ToggleVExplorer()<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 set pastetoggle=<F11>
@@ -43,6 +43,7 @@ set pastetoggle=<F11>
 map <F12> :cn<CR>
 " preview the tag under the cursor
 nmap <C-p> :exe "ptag" expand("<cword>")<CR>
+" Toggle the quickfix window
 nnoremap <silent> <C-c> :QFix<cr>
 " Window movement
 nnoremap <C-j> <C-w>j
@@ -52,24 +53,18 @@ nnoremap <C-l> <C-l>k
 " Keep selected blocks selected when shifting
 vmap > >gv
 vmap < <gv
-nmap <Leader>x :call system("cd `dirname %` && urxvt")<CR>
+" day+time / day+date
 nmap <Leader>dt "=strftime("%c")<CR>P"
 nmap <Leader>dd "=strftime("%y-%m-%d")<CR>P"
 " Change to the directory of the current file
 nmap cd :lcd %:h \| :pwd<CR>
-" Delete a vuln
-" This works when I type it, but not here...
-nmap dav ?%<CR>2d/%---\|\\vtitle<CR>
+" Fix whitespace
 nmap <Leader>fw :StripWhitespace<CR>
 " Base64 conversion
 vnoremap <leader>64 c<c-r>=system('base64',@")<cr><esc>
 vnoremap <leader>64d c<c-r>=system('base64 --decode',@")<cr><esc>
 " Quick exits
 nmap zz ZZ
-" Open a small terminal
-if has('nvim')
-    nnoremap <leader>o :below 10sp term://$SHELL<cr>i
-endif
 " }}}
 
 " Settings {{{
@@ -175,12 +170,6 @@ let &t_EI = "\<esc>[1 q"
 " Same in neovim
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
-"if exists('&autochdir')
-"    " Change directory to first open file
-"    set autochdir
-"    set noautochdir
-"endif
-
 " colors
 if has("termguicolors")
     if exists('$TMUX')
@@ -201,7 +190,6 @@ source ~/.vim/ftplugin/man.vim
 if !executable('task')
     let g:loaded_taskwarrior = 1
 endif
-
 
 if !has('python3')
     let g:loaded_pct = 1
