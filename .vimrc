@@ -92,7 +92,6 @@ if $DISPLAY != ""
     "set cursorline          " I like this, but damn is it slow
     set clipboard=unnamed
     set mouse=a             " Turn this off for console-only mode
-    set selectmode+=mouse	" Allow the mouse to select
     if !has('nvim')
         set ttymouse=xterm2
     endif
