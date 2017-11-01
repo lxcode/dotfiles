@@ -12,7 +12,7 @@ map <end> :last<cr>
 map g<Tab> :bn<CR>
 " Make Y behave like C and D
 nnoremap Y y$
-" Use , in addition to \ for the leader
+" Use , and space in addition to \ for the leader
 let mapleader = ","
 nmap \ ,
 nmap <space> ,
@@ -26,7 +26,7 @@ nnoremap * *<c-o>
 nnoremap # #<c-o>
 " Clear search pattern with \\
 map <silent> <Leader>\ :noh<CR>
-" correct spelling
+" fix spelling of last misspelled word
 nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
 nmap <Leader>fs [s1z=<C-o>
@@ -34,7 +34,6 @@ nmap <Leader>fs [s1z=<C-o>
 nnoremap gr :grep '\b<cword>\b' *<CR>
 " Clean up left side
 nmap <F2> :set nonu foldcolumn=0<CR>:QuickfixsignsToggle<CR>
-map <F8> :w<CR> :!make<CR>
 " Show netrw sidebar
 map <silent> <F9> :call ToggleVExplorer()<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
