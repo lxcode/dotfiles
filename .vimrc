@@ -138,6 +138,7 @@ set backspace=indent,eol,start
 set ruler                   " show position in file
 set title
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
+set titleold=""
 set ttimeout
 set ttimeoutlen=100         " Make it so Esc enters Normal mode right away
 if has('nvim')
