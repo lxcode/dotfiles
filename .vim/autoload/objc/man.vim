@@ -5,20 +5,28 @@
 " NOTE:         See http://tinyurl.com/remove-annoying-alert
 "               for removing the annoying security alert in Leopard.
 
+" Return all matches in for ":CocoaDoc <tab>" sorted by length.
+fun objc#man#Completion(ArgLead, CmdLine, CursorPos)
+	return system('grep -ho "^'.a:ArgLead.'\w*" ~/.vim/lib/cocoa_indexes/*.txt'.
+	            \ "| perl -e 'print sort {length $a <=> length $b} <>'")
+endf
+
 let s:docsets =  []
 let locations = [
-	\ {'path': '$HOME/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS7.0.iOSLibrary.docset/',
-	\ 'alias': 'iOS 7.0'}
-	\ ]
+			\	{'path': '/Developer/Documentation/DocSets/com.apple.ADC_Reference_Library.CoreReference.docset',
+			\	'alias': 'Leopard'},
+			\	{'path': '/Developer/Documentation/DocSets/com.apple.adc.documentation.AppleSnowLeopard.CoreReference.docset',
+			\	'alias': 'Snow Leopard'},
+			\	{'path': '/Developer/Platforms/iPhoneOS.platform/Developer/Documentation/DocSets/com.apple.adc.documentation.AppleiPhone3_0.iPhoneLibrary.docset',
+			\	'alias': 'iPhone 3.0'}
+			\	]
 for location in locations
-	let loc = { 'path': expand(location.path), 'alias': location.alias }
-
-	if isdirectory(loc.path)
-		call add(s:docsets, loc)
+	if isdirectory(location.path)
+		call add(s:docsets, location)
 	endif
 endfor
 
-let s:docset_cmd = '/Applications/Xcode.app/Contents/Developer/usr/bin/docsetutil search -skip-text -query '
+let s:docset_cmd = '/Developer/usr/bin/docsetutil search -skip-text -query '
 
 fun s:OpenFile(file)
 	if a:file =~ '/.*/man/'
@@ -61,7 +69,6 @@ fun objc#man#ShowDoc(...)
 	" First check Cocoa docs for word using docsetutil
 	for location in s:docsets
 		let docset = location.path
-
 		let response = split(system(s:docset_cmd.word.' '.docset), "\n")
 		let docset .= '/Contents/Resources/Documents/' " Actual path of files
 		for line in response

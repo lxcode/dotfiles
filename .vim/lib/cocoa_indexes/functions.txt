@@ -1,4 +1,6 @@
 NSAccessibilityActionDescription
+NSAccessibilityFrameInView
+NSAccessibilityPointInView
 NSAccessibilityPostNotification
 NSAccessibilityPostNotificationWithUserInfo
 NSAccessibilityRaiseBadArgumentException
@@ -84,6 +86,7 @@ NSDrawThreePartImage
 NSDrawTiledRects
 NSDrawWhiteBezel
 NSDrawWindowBackground
+NSEdgeInsetsEqual
 NSEdgeInsetsMake
 NSEnableScreenUpdates
 NSEndHashTableEnumeration
@@ -162,7 +165,6 @@ NSMouseInRect
 NSNextHashEnumeratorItem
 NSNextMapEnumeratorPair
 NSNumberOfColorComponents
-NSObjectFromCoder
 NSOffsetRect
 NSOpenStepRootDirectory
 NSPageSize
@@ -256,6 +258,7 @@ NSSwapLong
 NSSwapLongLong
 NSSwapShort
 NSTemporaryDirectory
+NSTouchTypeMaskFromType
 NSUnionRange
 NSUnionRect
 NSUnregisterServicesProvider
@@ -272,11 +275,12 @@ NSZoneMalloc
 NSZoneName
 NSZoneRealloc
 NS_AVAILABLE
-NS_AVAILABLE_IOS
 NS_AVAILABLE_MAC
 NS_CALENDAR_DEPRECATED
 NS_DEPRECATED
 NS_DEPRECATED_MAC
+NS_DEPRECATED_WITH_REPLACEMENT_MAC
+NS_SWIFT_UNAVAILABLE
 NSAssert
 NSAssert1
 NSAssert2
@@ -298,7 +302,6 @@ NSLocalizedStringFromTable
 NSLocalizedStringFromTableInBundle
 NSLocalizedStringWithDefaultValue
 NSParameterAssert
-NSStackViewSpacingUseDefault
 NSURLResponseUnknownLength
 NS_AVAILABLE
 NS_AVAILABLE_IOS
@@ -317,6 +320,7 @@ NS_DEPRECATED
 NS_DEPRECATED_IOS
 NS_DEPRECATED_IPHONE
 NS_DEPRECATED_MAC
+NS_DEPRECATED_WITH_REPLACEMENT_MAC
 NS_ENUM
 NS_ENUM_AVAILABLE
 NS_ENUM_AVAILABLE_IOS
@@ -324,5 +328,11 @@ NS_ENUM_AVAILABLE_MAC
 NS_ENUM_DEPRECATED
 NS_ENUM_DEPRECATED_IOS
 NS_ENUM_DEPRECATED_MAC
+NS_ERROR_ENUM
+NS_EXTENSION_UNAVAILABLE
+NS_EXTENSION_UNAVAILABLE_IOS
+NS_EXTENSION_UNAVAILABLE_MAC
 NS_OPTIONS
+NS_SWIFT_NAME
+NS_SWIFT_UNAVAILABLE
 NS_VALUERETURN
