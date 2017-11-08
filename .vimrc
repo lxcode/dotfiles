@@ -783,7 +783,7 @@ endfunction
 
 command! -nargs=1 Graudit call Graudit(<f-args>)
 function! Graudit(db)
-    call system("$HOME/Tools/graudit/graudit -x 'cscope.*' -c0 -d " . a:db . " . | awk 'length($0) < 200' > /tmp/graudit.out")
+    call system("$HOME/git/graudit/graudit -B -x 'cscope.*' -c0 -d " . a:db . " . | awk 'length($0) < 200' > /tmp/graudit.out")
     copen
     cf /tmp/graudit.out
 endfunction
