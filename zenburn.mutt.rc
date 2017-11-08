@@ -54,15 +54,15 @@ color body       color174 color237 "^Version: GnuPG.*"
 color body       color174 color237 "^Comment: .*"
 
 # url, email and web stuff
-color body       color174 color237 "(finger|ftp|http|https|news|telnet)://[^ >]*"
-color body       color174 color237 "<URL:[^ ]*>"
-color body       color174 color237 "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
-color body       color174 color237 "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
-color body       color174 color237 "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+color body       color174 default "(finger|ftp|http|https|news|telnet)://[^ >]*"
+color body       color174 default "<URL:[^ ]*>"
+color body       color174 default "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
+color body       color174 default "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
+color body       color174 default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
 
 # misc body stuff
-color attachment color174 color237 #Add-ons to the message
-color signature  color223 color237
+color attachment color174 default #Add-ons to the message
+color signature  color223 default
 
 # quote levels
 color quoted     color108 color237
