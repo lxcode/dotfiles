@@ -170,7 +170,7 @@ let &t_EI = "\<esc>[1 q"
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
 " colors
-if has("termguicolors")
+if $TERM == 'xterm-kitty'
     if exists('$TMUX')
         set t_Co=256
     else
