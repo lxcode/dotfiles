@@ -13,7 +13,7 @@
 " }}}
 "
 " License: {{{
-"   Copyright (c) 2002 - 2015
+"   Copyright (c) 2002 - 2016
 "   All rights reserved.
 "
 "   Redistribution and use of this software in source and binary forms, with
@@ -181,6 +181,12 @@ function! SuperTabSetDefaultCompletionType(type) " {{{
   " Globally available function that users can use to set the default
   " completion type for the current buffer, like in an ftplugin.
 
+  " don't allow overriding what SuperTabChain has set, otherwise chaining may
+  " not work.
+  if exists('b:SuperTabChain')
+    return
+  endif
+
   " init hack for <c-x><c-v> workaround.
   let b:complCommandLine = 0
 
@@ -201,6 +207,12 @@ function! SuperTabSetCompletionType(type) " {{{
   " buffer, use SuperTabDefaultCompletionType(type) instead.  Example mapping to
   " restore SuperTab default:
   "   nmap <F6> :call SetSuperTabCompletionType("<c-p>")<cr>
+
+  " don't allow overriding what SuperTabChain has set, otherwise chaining may
+  " not work.
+  if exists('b:SuperTabChain')
+    return
+  endif
 
   call s:InitBuffer()
   exec "let b:complType = \"" . escape(a:type, '<') . "\""
@@ -236,7 +248,7 @@ function! SuperTabLongestHighlight(dir) " {{{
   " When longest highlight is enabled, this function is used to do the actual
   " selection of the completion popup entry.
 
-  if !s:CompletionMode()
+  if !pumvisible()
     return ''
   endif
   return a:dir == -1 ? "\<up>" : "\<down>"
@@ -566,7 +578,9 @@ function! s:StartCompletionMode() " {{{
     let b:supertab_completion_mode = 1
     augroup supertab_completion_mode
       autocmd CompleteDone <buffer>
-        \ unlet b:supertab_completion_mode |
+        \ if exists('b:supertab_completion_mode') |
+          \ unlet b:supertab_completion_mode |
+        \ endif |
         \ autocmd! supertab_completion_mode
     augroup END
   endif
@@ -855,7 +869,7 @@ function! s:ContextText() " {{{
 
     " don't kick off file completion if the pattern is '</' (to account for
     " sgml languanges), that's what the following <\@<! pattern is doing.
-    if curline =~ '<\@<!/\w*\%' . cnum . 'c' ||
+    if curline =~ '<\@<!/\.\?\w*\%' . cnum . 'c' ||
       \ ((has('win32') || has('win64')) && curline =~ '\\\w*\%' . cnum . 'c')
 
       return "\<c-x>\<c-f>"
@@ -889,8 +903,16 @@ function! s:ExpandMap(map) " {{{
   return map
 endfunction " }}}
 
-function! SuperTabChain(completefunc, completekeys) " {{{
+function! SuperTabChain(completefunc, completekeys, ...) " {{{
   if a:completefunc != 'SuperTabCodeComplete'
+    call s:InitBuffer()
+    if (a:0 && a:1) || (!a:0 && b:SuperTabDefaultCompletionType == 'context')
+      let b:SuperTabContextTextOmniPrecedence = ['&completefunc', '&omnifunc']
+      call SuperTabSetDefaultCompletionType("context")
+    else
+      call SuperTabSetDefaultCompletionType("<c-x><c-u>")
+    endif
+
     let b:SuperTabChain = [a:completefunc, a:completekeys]
     setlocal completefunc=SuperTabCodeComplete
   endif
