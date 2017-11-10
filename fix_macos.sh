@@ -4,7 +4,10 @@
 # Re-enable chime
 sudo /usr/sbin/nvram 'BootAudio=%01'
 
-# I am a grownup, I can handle this knowledge
+# Don't show me a splash screen
+sudo nvram boot-args="-v"
+
+# Don't hide things
 defaults write com.apple.Finder AppleShowAllFiles TRUE
 defaults write com.apple.Finder ShowPathbar -bool true
 defaults write com.apple.Finder _FXShowPosixPathInTitle -bool true
@@ -14,7 +17,7 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.Finder WarnOnEmptyTrash -bool false
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
-# Stop doing the stupid desktop reordering thing
+# Don't do the stupid workspace reordering thing
 defaults write com.apple.dock mru-spaces -bool false
 
 # Disable the desktop, one of the most useless UI paradigms ever devised
