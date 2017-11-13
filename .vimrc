@@ -182,7 +182,7 @@ if $TERM == 'xterm-kitty'
 else
     set t_Co=256
 endif
-colorscheme lx-256-dark
+colorscheme lx-truecolor
 " }}}
 
 " Plugins

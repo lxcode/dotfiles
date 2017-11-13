@@ -8,7 +8,7 @@ if exists("syntax_on")
  syntax reset
 endif
 
-let colors_name = "lx-256-dark"
+let colors_name = "lx-truecolor"
 
 " General colors
 hi Normal guifg=#d0d0d0 guibg=NONE ctermfg=252 ctermbg=NONE
