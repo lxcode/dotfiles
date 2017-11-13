@@ -52,6 +52,9 @@ nnoremap <C-l> <C-l>k
 " Keep selected blocks selected when shifting
 vmap > >gv
 vmap < <gv
+" Move visual blocks up and down
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 " day+time / day+date
 nmap <Leader>dt "=strftime("%c")<CR>P"
 nmap <Leader>dd "=strftime("%y-%m-%d")<CR>P"
@@ -422,6 +425,7 @@ let g:statline_fugitive=1
 let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
 let g:statline_filename_relative=1
+let g:statline_show_encoding=0
 " }}}
 
 " clang {{{
