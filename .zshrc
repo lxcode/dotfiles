@@ -210,13 +210,8 @@ bindkey '^R' history-incremental-search-backward
 bindkey . rationalise-dot
 bindkey -M isearch . self-insert # history search fix
 bindkey -M vicmd v edit-command-line
-bindkey '^P' up-line-or-search
-bindkey '^N' down-line-or-search
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
-bindkey '' vi-cmd-mode
 
 ### Completion
 autoload -Uz compinit
@@ -253,9 +248,6 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # command for process lists
 zstyle ':completion:*:processes' command 'ps -o pid,s,nice,stime,args'
 
-# URL completion style...
-zstyle -e ':completion:*:urls' urls 'reply=($(cat $HOME/.w3m/history 2>/dev/null | sed -e "/^#/d" -e "s:http\://::g" ))'
-
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
@@ -268,8 +260,6 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 ### Source things
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f /usr/local/share/examples/fzf/shell/completion.zsh ] && \
-    source /usr/local/share/examples/fzf/shell/*.zsh
 
 export ANDROID_SDK=/opt/android_sdk
 export ANDROID_NDK_REPOSITORY=/opt/android_ndk
