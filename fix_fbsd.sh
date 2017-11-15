@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cat <<EOF >> /etc/rc.conf
+# Added by fix_fbsd
 syslogd_flags="-ss"
 virecover_enable="NO"
 ntpd_sync_on_start="YES"
@@ -17,9 +18,8 @@ keyrate="fast"
 EOF
 
 cat <<EOF >> /etc/make.conf
+OPTIONS_UNSET=CUPS PRINT DEBUG NLS HELP TEST
 WITH_XTERM_COLOR=1
-WITHOUT_CUPS=1
-WITHOUT_PRINT=1
 NO_FORTRAN=     true
 NO_IPFILTER=    true
 NO_LPR= true
@@ -47,13 +47,28 @@ DIFF_OPTIONS='-I$FreeBSD:.*[$]'
 EOF
 
 cat <<EOF >> /etc/sysctl.conf
+kern.ipc.shm_allow_removed=1
 net.inet.ip.portrange.reservedlow=0
 net.inet.ip.portrange.reservedhigh=0
 net.inet.tcp.blackhole=2
 net.inet.udp.blackhole=1
-security.jail.allow_raw_sockets=1
-kern.ipc.shm_allow_removed=1
 net.inet.ip.random_id=1
+security.jail.allow_raw_sockets=1
+security.bsd.stack_guard_page=1
 EOF
 
 sed -i -e "s/rw/rw,noatime/g" /etc/fstab
+
+read -p "Install packages?"
+pkg install vim-lite zsh fzf tmux mosh sudo portmaster git cscope \
+    w3m runit par ripgrep gnupg mutt
+
+read -p "Install GUI crap?"
+pkg install inconsolata-ttf dmenu metalock xautolock xorg sakura \
+    sourcecodepro-ttf xcape firefox cmus dbus autocutsel gnome-keyring \
+    ibus
+
+cat <<EOF >> /etc/rc.conf
+dbus_enable="YES"
+ibus_enable="YES"
+EOF
