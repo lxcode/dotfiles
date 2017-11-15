@@ -72,7 +72,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "urxvtc", NULL };
-static const char *lockcmd[]  = { "metalock", "-F", col_gray1, "-w", "1", "-P", "-f", dmenufont, NULL };
+static const char *lockcmd[]  = { "metalock", "-w", "1", "-P", "-f", dmenufont, NULL };
 static const char *cmusplaypause[]  = { "cmus-remote", "-u", NULL };
 
 //#include "tilemovemouse.c"
