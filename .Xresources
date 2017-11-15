@@ -1,14 +1,18 @@
+Xft*dpi: 96
+Xft*autohint: 0
+Xft*lcdfilter: lcddefault
+Xft*hinting: 1
+Xft*hintstyle: hintfull
+Xft*antialias: 1
+Xft*rgba: rgba
+
 XTerm*reverseVideo:   	    on
 XTerm*visualBell:   	    off
 XTerm*scrollLines:   	    10000
 XTerm*faceName: Inconsolata
 XTerm*faceSize: 13
 XTerm*termName:         xterm-256color
-Xft*antialias: 1
-Xft*dpi: 96
-Xft*hinting: 1
-Xft*hintstyle: hintfull
-Xft*rgba: rgba
+
 URxvt*reverseVideo:   	    on
 URxvt*iso14755: False
 URxvt*visualBell:   	    off
@@ -24,7 +28,6 @@ URxvt*shading:	10
 URxvt.font:             xft:Inconsolata-13:Medium:antialias=true:hinting=true xft:Meiryo Normal-13
 URxvt.boldfont:         xft:Inconsolata-13:Bold:antialias=true:hinting=true xft:Meiryo Bold-13
 URxvt.letterSpace:	 -1
-!URxvt.italicFont:       xft:Consolas-13:Italic
 URxvt.imLocale: ja_JP.UTF-8
 URxvt.preeditType: OnTheSpot,None
 URxvt.urgentOnBell:         true
@@ -35,9 +38,7 @@ URxvt.fading: 25
 URxvt.keysym.S-Insert: builtin:
 
 ! tango-ish
-!urxvt*foreground:		#000000
 urxvt*foreground:		#121212
-!urxvt*background:		#FFFFFF
 urxvt*background:		#dbded6
 urxvt*cursorColor:		#729fcf
 urxvt*pointerColorBackground:	#2e3436
@@ -58,31 +59,6 @@ urxvt*color12:			#729fcf
 urxvt*color13:			#ad7fa8
 urxvt*color14:			#34e2e2
 urxvt*color15:			#eeeeec
-
-
-!zenburn
-!URxvt.foreground: #dcdccc
-!URxvt*background: #3f3f3f
-!URxvt*colorUL: #c5f779
-!URxvt*underlineColor: #c5f779
-!URxvt*color0:#3f3f3f
-!URxvt*color1:       #705050
-!URxvt*color2:        #60b48a
-!URxvt*color3:    #dfaf8f
-!URxvt*color4:      #506070
-!URxvt*color5:   #dc8cc3
-!URxvt*color6:      #8cd0d3
-!URxvt*color7:     #DCDCCC
-!
-!URxvt*color8:      #709080
-!URxvt*color9:      #cc9393
-!URxvt*color10:    #7f9f7f
-!URxvt*color11:   #f0dfaf
-!URxvt*color12:     #94bff3
-!URxvt*color13:  #ec93d3
-!URxvt*color14:    #93e0e3
-!URxvt*color15:          #ffffff
-
 
 xmessage*background:            black
 xmessage*foreground:            white
