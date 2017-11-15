@@ -267,9 +267,9 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 ### Source things
-source ~/.zsh/zsh-history-substring-search.zsh
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f /usr/local/share/examples/fzf/shell/completion.zsh ] && \
+    source /usr/local/share/examples/fzf/shell/*.zsh
 
 export ANDROID_SDK=/opt/android_sdk
 export ANDROID_NDK_REPOSITORY=/opt/android_ndk
