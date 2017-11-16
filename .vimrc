@@ -43,7 +43,7 @@ map <F12> :cn<CR>
 " preview the tag under the cursor
 nmap <C-p> :exe "ptag" expand("<cword>")<CR>
 " Toggle the quickfix window
-nnoremap <silent> <C-c> :QFix<cr>
+nnoremap <silent> <C-c> :call ToggleQuickfix()<cr>
 " Window movement
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -62,9 +62,6 @@ nmap <Leader>dd "=strftime("%y-%m-%d")<CR>P"
 nmap cd :lcd %:h \| :pwd<CR>
 " Fix whitespace
 nmap <Leader>fw :StripWhitespace<CR>
-" Base64 conversion
-vnoremap <leader>64 c<c-r>=system('base64',@")<cr><esc>
-vnoremap <leader>64d c<c-r>=system('base64 --decode',@")<cr><esc>
 " Quick exits
 nmap zz ZZ
 " }}}
@@ -74,22 +71,6 @@ syntax on
 filetype plugin on
 filetype indent on
 helptags ~/.vim/doc
-
-if has('gui')
-    set gcr=n:blinkon0          " don't blink the cursor in normal mode
-    set guioptions=aAegiM       " get rid of useless stuff in the gui
-    if has("gui_macvim")
-        set guifont=Inconsolata:h18
-        noremap <Leader>zo :set guifont=Inconsolata:h4<CR>
-        noremap <Leader>zi :set guifont=Inconsolata:h18<CR>
-    else
-        set guifont=Inconsolata\ 14
-    endif
-endif
-if has('gui_running')
-    set ballooneval
-    set balloondelay=100
-endif
 
 if $DISPLAY != ""
     "set cursorline          " I like this, but damn is it slow
@@ -117,11 +98,7 @@ set encoding=utf-8          " always use utf-8
 set hlsearch                " highlight all search matches
 set foldcolumn=0            " I never use this.
 set nojoinspaces            " disallow two spaces after a period when joining
-if version >= 704
-    set formatoptions=qjnrtlmnc " auto-formatting style
-else
-    set formatoptions=qnrtlmnc  " auto-formatting style minus j
-endif
+set formatoptions=qjnrtlmnc " auto-formatting style
 set autoindent
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
@@ -151,9 +128,6 @@ set helpheight=0            " no minimum helpheight
 set incsearch               " search incrementally
 set showmatch               " show the matching terminating bracket
 set suffixes=.out           " set priority for tab completion
-set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls
-set wildignore+=*.loc,*.gz,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx,*.pdf
-set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log,*.latexmain,*.out
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
@@ -161,9 +135,9 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=0        " the default level of fold nesting on startup
 set autoread                " Disable warning about file change to writable
 set conceallevel=0          " Don't hide things by default
-if !has('nvim')
-    set cryptmethod=blowfish    " in case I ever decide to use vim -x
-endif
+set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls
+set wildignore+=*.loc,*.gz,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx,*.pdf
+set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log,*.latexmain,*.out
 
 " Use pipe cursor on insert
 let &t_SI = "\<esc>[5 q"
@@ -222,10 +196,6 @@ let g:quickfixsign_use_dummy = 0
 let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'ADD': 'QuickFixSignsDiffAddLx', 'CHANGE': 'QuickFixSignsDiffChangeLx'}   "{{{2}}}"
 " }}}
 
-" buftabs {{{
-let g:buftabs_only_basename=1
-" }}}
-
 " buftabline {{{
 let g:buftabline_show=1
 let g:buftabline_separators=1
@@ -237,7 +207,7 @@ let g:clever_f_smart_case=1
 " }}}
 
 " cscope {{{
-let g:cscope_interested_files = '\.java$\|\.php$\|\.h$\|\.hpp|\.cpp|\.c$|\.m$|\.swift$|\.py$'
+let g:cscope_interested_files = '\.java$\|\.php$\|\.h$\|\.hpp|\.cpp|\.c$|\.m$|\.swift$|\.py$|\.hs$'
 let g:cscope_split_threshold = 99999
 let g:cscope_auto_update = 0
 nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
@@ -266,10 +236,77 @@ let g:indentLine_faster = 1
 let g:indentLine_enabled = 0
 " }}}
 
-" Limelight {{{
-let g:limelight_conceal_ctermfg = 240
-let g:limelight_conceal_guifg = '#777777'
-let g:limelight_default_coefficient = 0.7
+" supertab {{{
+let g:SuperTabContextFileTypeExclusions = ['make']
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+let g:SuperTabContextDiscoverDiscovery =
+    \ ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+
+autocmd FileType *
+            \  if &omnifunc != '' |
+            \      let g:myfunc = &omnifunc |
+            \  elseif &completefunc != '' |
+            \      let g:myfunc = &completefunc |
+            \  else |
+            \      let g:myfunc = '' |
+            \  endif |
+            \  if g:myfunc != '' |
+            \      call SuperTabChain(g:myfunc, "<c-p>") |
+            \      call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+            \  endif
+" }}}
+
+" rainbow {{{
+map <Leader>r :RainbowToggle<CR>
+" }}}
+
+" ripgrep {{{
+let g:rg_highlight = 1
+" "}}}
+
+" FZF {{{
+set rtp+=~/.fzf
+set rtp+=/usr/local/opt/fzf
+nmap <C-e> :Files<CR>
+nmap <C-g> :GFiles<CR>
+nmap <leader>m :History<CR>
+nmap <leader>e :Files<CR>
+nmap <Leader>t :Tags<CR>
+nmap <Leader>b :BTags<CR>
+nmap <C-]> :call fzf#vim#tags(expand('<cword>'), {'options': '--exact --select-1 --exit-0'})<CR>
+
+let g:fzf_tags_command = '/usr/local/bin/ctags -R'
+
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+command! -bang -nargs=* F
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!tags" --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" }}}
+
+" statline {{{
+let g:statline_fugitive=1
+let g:statline_trailing_space=0
+let g:statline_mixed_indent=0
+let g:statline_filename_relative=1
+let g:statline_show_encoding=0
 " }}}
 
 " latex-box {{{
@@ -279,16 +316,6 @@ let g:tex_conceal= ""
 let g:tex_comment_nospell = 1
 "let g:LatexBox_latexmk_options = "--disable-write18 --file-line-error --interaction=batchmode -pdflatex=lualatex -latex=lualatex"
 let g:LatexBox_latexmk_options = "-xelatex --disable-write18 --file-line-error --interaction=batchmode"
-" Work around the fact that cmdline macvim doesn't support server mode
-if has("gui_macvim")
-    let g:LatexBox_latexmk_async = 1
-else
-    if has("macunix")
-        let g:LatexBox_latexmk_async = 1
-    else
-        let g:LatexBox_latexmk_async = 0
-    endif
-endif
 if has("macunix")
     let g:LatexBox_viewer = "open"
 else
@@ -328,7 +355,6 @@ augroup latex
         let g:LatexBox_fold_preamble = 1
         let g:LatexBox_fold_envs = 1
     endif
-"    au BufWritePost *.tex Latexmk
     au BufWinLeave *.tex,*.sty mkview
     au BufWinEnter *.tex,*.sty silent loadview
     au FileType tex syntax spell toplevel
@@ -340,102 +366,6 @@ augroup latex
     au FileType tex nmap tt i\texttt{<Esc>wEa}<Esc>
     au FileType tex source ~/.vim/ftplugin/quotes.vim
 augroup end
-" }}}
-
-" supertab {{{
-let g:SuperTabContextFileTypeExclusions = ['make']
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:SuperTabContextDiscoverDiscovery =
-    \ ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
-
-autocmd FileType *
-            \  if &omnifunc != '' |
-            \      let g:myfunc = &omnifunc |
-            \  elseif &completefunc != '' |
-            \      let g:myfunc = &completefunc |
-            \  else |
-            \      let g:myfunc = '' |
-            \  endif |
-            \  if g:myfunc != '' |
-            \      call SuperTabChain(g:myfunc, "<c-p>") |
-            \      call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-            \  endif
-" }}}
-
-" cctree {{{
-if has("macunix")
-    let g:CCTreeSplitProgCmd="/opt/local/bin/gsplit"
-else
-    let g:CCTreeSplitProgCmd="/usr/local/bin/gsplit"
-endif
-" }}}
-
-" rainbow {{{
-map <Leader>r :RainbowToggle<CR>
-" }}}
-
-" vimchat {{{
-let g:vimchat_otr = 1
-let g:vimchat_statusicon = 0
-let g:vimchat_showPresenceNotification = -1
-let g:vimchat_pync_enabled = 1
-"map g<Tab> gt
-" }}}
-
-" FZF {{{
-set rtp+=~/.fzf
-set rtp+=/usr/local/opt/fzf
-nmap <C-e> :Files<CR>
-nmap <C-g> :GFiles<CR>
-nmap <leader>m :History<CR>
-nmap <leader>e :Files<CR>
-nmap <Leader>t :Tags<CR>
-nmap <Leader>b :BTags<CR>
-nmap <C-]> :call fzf#vim#tags(expand('<cword>'), {'options': '--exact --select-1 --exit-0'})<CR>
-
-let g:fzf_tags_command = '/usr/local/bin/ctags -R'
-
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-
-let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-command! -bang -nargs=* F
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!tags" --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-" }}}
-
-
-" statline {{{
-let g:statline_fugitive=1
-let g:statline_trailing_space=0
-let g:statline_mixed_indent=0
-let g:statline_filename_relative=1
-let g:statline_show_encoding=0
-" }}}
-
-" clang {{{
-let g:clang_complete_enable = 1
-let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-let g:clang_user_options='-fblocks -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk -D__IPHONE_OS_VERSION_MIN_REQUIRED=40300'
-let g:clang_complete_copen = 1
-let g:clang_snippets = 1
-let g:clang_use_library = 1
-let g:clang_format#detect_style_file = 1
 " }}}
 
 " tagbar {{{
@@ -538,16 +468,11 @@ augroup html
     au BufWinEnter *.htm* silent loadview
 augroup end
 
-augroup python
+augroup pythonphp
     au FileType python set smartindent smarttab nospell number
-    au BufWinLeave *.py mkview
-    au BufWinEnter *.py silent loadview
-augroup end
-
-augroup php
     au FileType php set smartindent smarttab nospell number
-    au BufWinLeave *.php mkview
-    au BufWinEnter *.php silent loadview
+    au BufWinLeave *.py,*.php mkview
+    au BufWinEnter *.py,*.php silent loadview
 augroup end
 
 augroup markdown
@@ -621,7 +546,6 @@ augroup syntax
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 augroup end
@@ -630,45 +554,18 @@ augroup end
 " Custom functions {{{
 " Quickfix toggle
 
-function! GetBufferList()
-  redir =>buflist
-  silent! ls!
-  redir END
-  return buflist
-endfunction
+let g:quickfix_is_open = 0
 
-function! ToggleList(bufname, pfx)
-  let buflist = GetBufferList()
-  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
-    if bufwinnr(bufnum) != -1
-      exec(a:pfx.'close')
-      return
+function! ToggleQuickfix()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        execute g:quickfix_return_to_window . "wincmd w"
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
     endif
-  endfor
-  if a:pfx == 'l' && len(getloclist(0)) == 0
-      echohl ErrorMsg
-      echo "Location List is Empty."
-      return
-  endif
-  let winnr = winnr()
-  exec(a:pfx.'open')
-  if winnr() != winnr
-    wincmd p
-  endif
-endfunction
-
-"nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
-"nmap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
-
-command -bang -nargs=? QFix call QFixToggle(<bang>0)
-function! QFixToggle(forced)
-  if exists("g:qfix_win") && a:forced == 0
-    cclose
-    unlet g:qfix_win
-  else
-    copen 10
-    let g:qfix_win = bufnr("$")
-  endif
 endfunction
 
 " Toggle Vexplore
@@ -698,55 +595,11 @@ function! WrapMerge()
     set formatoptions+=w
 endfunction
 
-" clear quickfix
-command -bar Qfc call setqflist([])
-
 " Read in cookiefiles
 command -bar Cookies call ReadCookies()
 function ReadCookies()
     call system("cp Cookies.binarycookies /tmp/")
     %!python $HOME/bin/BinaryCookieReader.py /tmp/Cookies.binarycookies
-endfunction
-
-" ex command for toggling hex mode - define mapping if desired
-command -bar Hexmode call ToggleHex()
-
-" helper function to toggle hex mode
-function ToggleHex()
-  " hex mode should be considered a read-only operation
-  " save values for modified and read-only for restoration later,
-  " and clear the read-only flag for now
-  let l:modified=&mod
-  let l:oldreadonly=&readonly
-  let &readonly=0
-  let l:oldmodifiable=&modifiable
-  let &modifiable=1
-  if !exists("b:editHex") || !b:editHex
-    " save old options
-    let b:oldft=&ft
-    let b:oldbin=&bin
-    " set new options
-    setlocal binary " make sure it overrides any textwidth, etc.
-    let &ft="xxd"
-    " set status
-    let b:editHex=1
-    " switch to hex editor
-    %!xxd
-  else
-    " restore old options
-    let &ft=b:oldft
-    if !b:oldbin
-      setlocal nobinary
-    endif
-    " set status
-    let b:editHex=0
-    " return to normal editing
-    %!xxd -r
-  endif
-  " restore values for modified and read only state
-  let &mod=l:modified
-  let &readonly=l:oldreadonly
-  let &modifiable=l:oldmodifiable
 endfunction
 
 " I use this to highlight the match from grep, but keep quickfix syntax
@@ -793,16 +646,3 @@ function! Graudit(db)
     cf /tmp/graudit.out
 endfunction
 " }}}
-
-let $ADMIN_SCRIPTS = "/scripts"
-
-if filereadable($ADMIN_SCRIPTS . "/master.vimrc")
-    source $ADMIN_SCRIPTS/master.vimrc
-endif
-
-if filereadable($ADMIN_SCRIPTS . "/vim/biggrep.vim")
-    source $ADMIN_SCRIPTS/vim/biggrep.vim
-endif
-
-" Why do you turn this off
-set hlsearch

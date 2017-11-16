@@ -211,8 +211,6 @@ bindkey '^R' history-incremental-search-backward
 bindkey . rationalise-dot
 bindkey -M isearch . self-insert # history search fix
 bindkey -M vicmd v edit-command-line
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
 
 ### Completion
 autoload -Uz compinit
