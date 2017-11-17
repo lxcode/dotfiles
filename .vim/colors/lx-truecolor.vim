@@ -55,7 +55,7 @@ hi CursorColumn guibg=#1c1c1c gui=none ctermbg=234 cterm=none
 hi MatchParen guifg=#df00ff guibg=#242424 gui=bold ctermfg=magenta ctermbg=none
 hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242
 hi PmenuSel guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195
-hi Search guifg=#f6f3e8 guibg=#8700df ctermfg=white ctermbg=92
+hi Search guifg=#f6f3e8 guibg=#81599c ctermfg=white ctermbg=92
 hi SignColumn guibg=black ctermbg=232
 
 " Syntax highlighting
@@ -151,8 +151,8 @@ hi link csXmlTag Keyword
 hi MyTagListFileName guifg=#a0a8b0 guibg=#384048 ctermfg=grey ctermbg=60
 
 " For cctree
-highlight default link CCTreeHiSymbol  Title
-highlight default link CCTreeHiMarkers Visual
+hi default link CCTreeHiSymbol  Title
+hi default link CCTreeHiMarkers Visual
 
 " For quickfixsigns
 hi QuickFixSignsDiffAddLx    ctermfg=0 ctermbg=27 guifg=black  guibg=#0000ff
@@ -160,7 +160,7 @@ hi QuickFixSignsDiffDeleteLx ctermfg=0 ctermbg=161 guifg=black guibg=#df005f
 hi QuickFixSignsDiffChangeLx ctermfg=0 ctermbg=68 guifg=black  guibg=#5f87df
 
 " For whitespace
-highlight ExtraWhitespace ctermbg=236
+hi ExtraWhitespace ctermbg=236
 
 " For taskwarrior
 hi link taskwarrior_depends   Normal
