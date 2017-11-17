@@ -50,16 +50,13 @@ hi DiffChange ctermbg=55 guibg=#5f00af
 
 hi ModeMsg guifg=black guibg=#C6C5FE gui=bold ctermfg=0 ctermbg=189 cterm=bold
 
-if version >= 700 " Vim 7.x specific colors
-    " hi CursorLine guibg=#1c1c1c gui=none ctermbg=235 cterm=none
-    hi CursorLine ctermfg=NONE ctermbg=237 cterm=NONE guifg=NONE guibg=#3c3d37 gui=NONE
-    hi CursorColumn guibg=#1c1c1c gui=none ctermbg=234 cterm=none
-    hi MatchParen guifg=#df00ff guibg=#242424 gui=bold ctermfg=magenta ctermbg=none
-    hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242
-    hi PmenuSel guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195
-    hi Search guifg=#f6f3e8 guibg=#8700df ctermfg=white ctermbg=92
-    hi SignColumn guibg=black ctermbg=232
-endif
+hi CursorLine ctermfg=NONE ctermbg=237 cterm=NONE guifg=NONE guibg=#3c3d37 gui=NONE
+hi CursorColumn guibg=#1c1c1c gui=none ctermbg=234 cterm=none
+hi MatchParen guifg=#df00ff guibg=#242424 gui=bold ctermfg=magenta ctermbg=none
+hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242
+hi PmenuSel guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195
+hi Search guifg=#f6f3e8 guibg=#8700df ctermfg=white ctermbg=92
+hi SignColumn guibg=black ctermbg=232
 
 " Syntax highlighting
 " Hack for terms that don't support italics
@@ -166,10 +163,11 @@ hi QuickFixSignsDiffChangeLx ctermfg=0 ctermbg=68 guifg=black  guibg=#5f87df
 highlight ExtraWhitespace ctermbg=236
 
 " For taskwarrior
-hi link taskwarrior_depends   CursorLine
-hi link taskwarrior_due       CursorLine
-hi link taskwarrior_urgency   CursorLine
-hi link taskwarrior_tablehead CursorLine
+hi link taskwarrior_depends   Normal
+hi link taskwarrior_due       Constant
+hi link taskwarrior_urgency   Conditional
+hi link taskwarrior_tablehead Normal
+hi link taskwarrior_field     Visual
 
 " For buftabline
 hi BufTabLineActive ctermbg=0 guibg=black
