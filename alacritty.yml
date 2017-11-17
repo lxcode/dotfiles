@@ -282,7 +282,7 @@ key_bindings:
 # - PasteSelection
 # - Copy (TODO)
 mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
+  - { mouse: Middle, action: Paste }
 
 mouse:
   double_click: { threshold: 300 }
