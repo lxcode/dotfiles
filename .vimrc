@@ -70,7 +70,7 @@ nmap zz ZZ
 syntax on
 filetype plugin on
 filetype indent on
-helptags ~/.vim/doc
+"helptags ~/.vim/doc
 
 if $DISPLAY != ""
     "set cursorline          " I like this, but damn is it slow
@@ -160,7 +160,42 @@ colorscheme lx-truecolor
 " }}}
 
 " Plugins
-source ~/.vim/ftplugin/man.vim
+call plug#begin('~/.vim/plugged')
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-afterimage'
+Plug 'christianrondeau/vim-base64'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-characterize'
+Plug 'rhysd/clever-f.vim'
+Plug 'jceb/vim-editqf'
+Plug 'jamessan/vim-gnupg'
+Plug 'brookhong/cscope.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'will133/vim-dirdiff'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'fidian/hexmode'
+Plug 'kergoth/vim-hilinks'
+Plug 'AndrewRadev/id3.vim'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-surround'
+Plug 'd0c-s4vage/pct-vim'
+Plug 'tomtom/quickfixsigns_vim'
+Plug 'goldfeld/vim-seek'
+Plug 'gorkunov/smartpairs.vim'
+Plug 'millermedeiros/vim-statline'
+Plug 'ervandew/supertab'
+Plug 'majutsushi/tagbar'
+Plug 'blindFS/vim-taskwarrior'
+Plug 'jremmen/vim-ripgrep'
+Plug 'tpope/vim-vinegar'
+Plug 'guns/xterm-color-table.vim'
+Plug 'vim-utils/vim-man'
+call plug#end()
 
 " Don't load plugins that have unmet dependencies
 if !executable('task')
