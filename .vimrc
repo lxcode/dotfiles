@@ -19,8 +19,7 @@ nmap <space> ,
 " save my pinky
 nore ; :
 " auto-format the current paragraph
-nnoremap __ gwip
-nnoremap -- :call WrapMerge()<CR>
+nnoremap == :call WrapMerge()<CR>
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
 nnoremap # #<c-o>
@@ -381,8 +380,6 @@ augroup msdocs
 augroup end
 
 augroup misc
-    au FileType gitcommit silent! unmap --
-    au FileType netrw silent! unmap --
     au FileType git set foldlevel=99
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
