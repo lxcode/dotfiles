@@ -108,6 +108,10 @@ set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
 set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
 set cpoptions=BFt
 set completeopt=menuone,longest
+autocmd Filetype *
+        \	if &omnifunc == "" |
+        \		setlocal omnifunc=syntaxcomplete#Complete |
+        \	endif
 set tags=tags,./tags
 set nobackup                " ugh, stop making useless crap
 set nowritebackup           " same with overwriting
@@ -166,11 +170,11 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'Yggdroot/indentLine'
+Plug 'ajh17/VimCompletesMe'
 Plug 'blindFS/vim-taskwarrior'
 Plug 'brookhong/cscope.vim'
 Plug 'christianrondeau/vim-base64'
 Plug 'd0c-s4vage/pct-vim'
-Plug 'ervandew/supertab'
 Plug 'fidian/hexmode'
 Plug 'godlygeek/tabular'
 Plug 'goldfeld/vim-seek'
@@ -183,6 +187,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
 Plug 'kergoth/vim-hilinks'
+Plug 'lervag/vimtex', { 'for': 'latex' }
 Plug 'majutsushi/tagbar'
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
@@ -237,6 +242,10 @@ let g:clever_f_mark_char_color="PreProc"
 let g:clever_f_smart_case=1
 " }}}
 
+" ultisnips {{{
+let g:UltiSnipsExpandTrigger = "<C-l>"
+" }}}
+
 " cscope {{{
 let g:cscope_interested_files = '\.java$\|\.php$\|\.h$\|\.hpp|\.cpp|\.c$|\.m$|\.swift$|\.py$|\.hs$'
 let g:cscope_split_threshold = 99999
@@ -257,28 +266,6 @@ nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 nmap \|\| :IndentLinesToggle<CR>
 let g:indentLine_faster = 1
 let g:indentLine_enabled = 0
-" }}}
-
-" supertab {{{
-let g:SuperTabContextFileTypeExclusions = ['make']
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
-let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
-let g:SuperTabContextDiscoverDiscovery =
-    \ ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
-
-autocmd FileType *
-            \  if &omnifunc != '' |
-            \      let g:myfunc = &omnifunc |
-            \  elseif &completefunc != '' |
-            \      let g:myfunc = &completefunc |
-            \  else |
-            \      let g:myfunc = '' |
-            \  endif |
-            \  if g:myfunc != '' |
-            \      call SuperTabChain(g:myfunc, "<c-p>") |
-            \      call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-            \  endif
 " }}}
 
 " ripgrep {{{
@@ -361,6 +348,8 @@ augroup pythonphp
 augroup end
 
 augroup markdown
+    " Don't highlight underscores
+    syn match markdownError "\w\@<=\w\@="
     au BufWinEnter *.notes set filetype=markdown
     au BufWinLeave *.md,*.notes, mkview
     au BufWinEnter *.md,*.notes, silent loadview
@@ -392,7 +381,8 @@ augroup msdocs
 augroup end
 
 augroup misc
-    au FileType netrw silent! unmap <buffer> --
+    au FileType gitcommit silent! unmap --
+    au FileType netrw silent! unmap --
     au FileType git set foldlevel=99
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
