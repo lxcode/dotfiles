@@ -180,6 +180,7 @@ Plug 'jamessan/vim-gnupg'
 Plug 'jceb/vim-editqf'
 Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
 Plug 'kergoth/vim-hilinks'
 Plug 'majutsushi/tagbar'
@@ -223,7 +224,6 @@ let g:quickfixsigns_echo_balloon = 1
 " manually set marks or quickfix/diff info is present.
 let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
 let g:quickfixsign_use_dummy = 0
-" Aaaand we just found the limitations of manual fold markers
 let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'ADD': 'QuickFixSignsDiffAddLx', 'CHANGE': 'QuickFixSignsDiffChangeLx'}   "{{{2}}}"
 " }}}
 
@@ -281,10 +281,6 @@ autocmd FileType *
             \  endif
 " }}}
 
-" rainbow {{{
-map <Leader>r :RainbowToggle<CR>
-" }}}
-
 " ripgrep {{{
 let g:rg_highlight = 1
 " "}}}
@@ -334,70 +330,11 @@ let g:statline_show_encoding=0
 
 " tagbar {{{
 let g:tagbar_iconchars = ['▸', '▾']
-let g:tagbar_type_objc = {
-    \ 'ctagstype' : 'ObjectiveC',
-    \ 'kinds'     : [
-        \ 'i:interface',
-        \ 'I:implementation',
-        \ 'p:Protocol',
-        \ 'm:Object_method',
-        \ 'c:Class_method',
-        \ 'v:Global_variable',
-        \ 'F:Object field',
-        \ 'f:function',
-        \ 'p:property',
-        \ 't:type_alias',
-        \ 's:type_structure',
-        \ 'e:enumeration',
-        \ 'M:preprocessor_macro',
-    \ ],
-    \ 'sro'        : ' ',
-    \ 'kind2scope' : {
-        \ 'i' : 'interface',
-        \ 'I' : 'implementation',
-        \ 'p' : 'Protocol',
-        \ 's' : 'type_structure',
-        \ 'e' : 'enumeration'
-    \ },
-    \ 'scope2kind' : {
-        \ 'interface'      : 'i',
-        \ 'implementation' : 'I',
-        \ 'Protocol'       : 'p',
-        \ 'type_structure' : 's',
-        \ 'enumeration'    : 'e'
-    \ }
-\ }
-
-let g:tagbar_type_markdown = {
-        \ 'ctagstype' : 'markdown',
-        \ 'kinds' : [
-                \ 'h:Heading_L1',
-                \ 'i:Heading_L2',
-                \ 'k:Heading_L3'
-        \ ]
-\ }
-
-let g:tagbar_type_scala = {
-    \ 'ctagstype' : 'Scala',
-    \ 'kinds'     : [
-        \ 'p:packages:1',
-        \ 'V:values',
-        \ 'v:variables',
-        \ 'T:types',
-        \ 't:traits',
-        \ 'o:objects',
-        \ 'a:aclasses',
-        \ 'c:classes',
-        \ 'r:cclasses',
-        \ 'm:methods'
-    \ ]
-\ }
 " }}}
 
 " augroups {{{
 augroup cjava
     au!
-    au BufNewFile *.c r ~/.vim/templates/template.c
     au BufWinEnter *.[mCchly] set nospell number comments+=s1:/*,mb:*,ex:*/
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi setfiletype objc
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi let c_no_curly_error = 1
@@ -412,7 +349,6 @@ augroup html
     au!
     au FileType html set spell wrapmargin=5 wrapscan number
     au FileType html set wrapscan&
-    au BufNewFile *.html r ~/.vim/templates/template.html
     au BufWinLeave *.htm* mkview
     au BufWinEnter *.htm* silent loadview
 augroup end
@@ -472,7 +408,6 @@ augroup misc
     au FileType make set diffopt-=iwhite
     au FileType vim set nospell
     au FileType mail set spell complete+=k nonu
-    " par is much better at rewrapping mail
     au FileType mail if executable("par") | set formatprg=par | endif
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
     au FileType mail StripWhitespace
@@ -491,13 +426,6 @@ augroup misc
     au GUIEnter * set visualbell t_vb=
 augroup end
 
-augroup syntax
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-augroup end
 " }}}
 
 " Custom functions {{{
