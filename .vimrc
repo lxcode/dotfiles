@@ -161,40 +161,41 @@ colorscheme lx-truecolor
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'godlygeek/tabular'
-Plug 'tpope/vim-afterimage'
-Plug 'christianrondeau/vim-base64'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'tpope/vim-characterize'
-Plug 'rhysd/clever-f.vim'
-Plug 'jceb/vim-editqf'
-Plug 'jamessan/vim-gnupg'
-Plug 'brookhong/cscope.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'will133/vim-dirdiff'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
-Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'fidian/hexmode'
-Plug 'kergoth/vim-hilinks'
 Plug 'AndrewRadev/id3.vim'
-Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-surround'
+Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'Raimondi/delimitMate'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'Yggdroot/indentLine'
+Plug 'blindFS/vim-taskwarrior'
+Plug 'brookhong/cscope.vim'
+Plug 'christianrondeau/vim-base64'
 Plug 'd0c-s4vage/pct-vim'
-Plug 'tomtom/quickfixsigns_vim'
+Plug 'ervandew/supertab'
+Plug 'fidian/hexmode'
+Plug 'godlygeek/tabular'
 Plug 'goldfeld/vim-seek'
 Plug 'gorkunov/smartpairs.vim'
-Plug 'millermedeiros/vim-statline'
-Plug 'ervandew/supertab'
-Plug 'majutsushi/tagbar'
-Plug 'blindFS/vim-taskwarrior'
-Plug 'jremmen/vim-ripgrep'
-Plug 'tpope/vim-vinegar'
 Plug 'guns/xterm-color-table.vim'
+Plug 'jamessan/vim-gnupg'
+Plug 'jceb/vim-editqf'
+Plug 'jremmen/vim-ripgrep'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/gv.vim'
+Plug 'kergoth/vim-hilinks'
+Plug 'majutsushi/tagbar'
+Plug 'millermedeiros/vim-statline'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'rhysd/clever-f.vim'
+Plug 'tomtom/quickfixsigns_vim'
+Plug 'tpope/vim-afterimage'
+Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
 Plug 'vim-utils/vim-man'
+Plug 'will133/vim-dirdiff'
 call plug#end()
 
 " Don't load plugins that have unmet dependencies
@@ -206,18 +207,13 @@ if !has('python3')
     let g:loaded_pct = 1
 endif
 
-" taskwarrior {{{
-let g:task_rc_override = 'rc.defaultwidth=0'
-let g:task_report_name = '-home'
-" }}}
-
 " netrw {{{
 let g:netrw_liststyle=0
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
-let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' "hide files by default
-let g:netrw_sort_sequence = '[\/]$,*,\%(' . join(map(split(&suffixes, ','), 'escape(v:val, ".*$~")'), '\|') . '\)[*@]\=$'
+"let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' "hide files by default
+"let g:netrw_sort_sequence = '[\/]$,*,\%(' . join(map(split(&suffixes, ','), 'escape(v:val, ".*$~")'), '\|') . '\)[*@]\=$'
 " }}}
 
 " quickfixsigns {{{
@@ -247,21 +243,13 @@ let g:cscope_split_threshold = 99999
 let g:cscope_auto_update = 0
 nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
 nnoremap <leader>l :call ToggleLocationList()<CR>
-" s: Find this C symbol
 nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
-" g: Find this definition
 nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
-" d: Find functions called by this function
 nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
-" c: Find functions calling this function
 nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
-" t: Find this text string
 nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
-" e: Find this egrep pattern
 nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
-" f: Find this file
 nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
-" i: Find files #including this file
 nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 " }}}
 
@@ -344,65 +332,6 @@ let g:statline_filename_relative=1
 let g:statline_show_encoding=0
 " }}}
 
-" latex-box {{{
-let g:tex_flavor="latex"
-let g:tex_no_error = 1
-let g:tex_conceal= ""
-let g:tex_comment_nospell = 1
-"let g:LatexBox_latexmk_options = "--disable-write18 --file-line-error --interaction=batchmode -pdflatex=lualatex -latex=lualatex"
-let g:LatexBox_latexmk_options = "-xelatex --disable-write18 --file-line-error --interaction=batchmode"
-if has("macunix")
-    let g:LatexBox_viewer = "open"
-else
-    let g:LatexBox_viewer = "evince"
-endif
-let g:LatexBox_split_side = "rightbelow"
-let g:LatexBox_quickfix = 0
-let g:LatexBox_fold_automatic = 0
-let g:LatexBox_show_warnings = 0
-let g:LatexBox_ignore_warnings = [
-            \ 'Underfull',
-            \ 'Overfull',
-            \ 'specifier changed to',
-            \ 'Font shape',
-            \ 'epstopdf',
-            \ ]
-
-let g:LatexBox_fold_parts=[
-           \ "part",
-           \ "chapter",
-           \ "section",
-           \ "subsection",
-           \ "subsubsection",
-           \ "vtitle"
-           \ ]
-
-augroup latex
-    " The NoStarch style is a bit crufty and needs pdflatex
-    au BufWinEnter book.tex let g:LatexBox_latexmk_options = "-interaction=batchmode -draftmode"
-    au BufWinEnter book.tex let g:LatexBox_fold_envs = 1
-    if &diff
-        let g:LatexBox_Folding = 0
-        let g:LatexBox_fold_preamble = 0
-        let g:LatexBox_fold_envs = 0
-    else
-        let g:LatexBox_Folding = 1
-        let g:LatexBox_fold_preamble = 1
-        let g:LatexBox_fold_envs = 1
-    endif
-    au BufWinLeave *.tex,*.sty mkview
-    au BufWinEnter *.tex,*.sty silent loadview
-    au FileType tex syntax spell toplevel
-    au FileType tex set spell textwidth=78 smartindent
-    au FileType tex set formatoptions+=w
-    au FileType tex imap <buffer> [[ \begin{
-    au FileType tex imap <buffer> ]] <Plug>LatexCloseCurEnv
-    au FileType tex imap <S-Enter> \pagebreak
-    au FileType tex nmap tt i\texttt{<Esc>wEa}<Esc>
-    au FileType tex source ~/.vim/ftplugin/quotes.vim
-augroup end
-" }}}
-
 " tagbar {{{
 let g:tagbar_iconchars = ['▸', '▾']
 let g:tagbar_type_objc = {
@@ -437,21 +366,6 @@ let g:tagbar_type_objc = {
         \ 'type_structure' : 's',
         \ 'enumeration'    : 'e'
     \ }
-\ }
-
-let g:tagbar_type_tex = {
-    \ 'ctagstype' : 'latex',
-    \ 'kinds'     : [
-        \ 's:sections',
-        \ 'g:graphics',
-        \ 'l:labels',
-        \ 'r:refs:1',
-        \ 'p:pagerefs:1',
-        \ 'v:vulns',
-        \ 'r:strecs',
-        \ 'R:ltrecs'
-    \ ],
-    \ 'sort'    : 0,
 \ }
 
 let g:tagbar_type_markdown = {
