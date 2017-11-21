@@ -168,6 +168,7 @@ Plug 'AndrewRadev/id3.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'SolaWing/vim-objc-syntax'
 Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 Plug 'ajh17/VimCompletesMe'
 Plug 'blindFS/vim-taskwarrior'
