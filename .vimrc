@@ -168,9 +168,8 @@ colorscheme lx-truecolor
 call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/id3.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'SolaWing/vim-objc-syntax'
+Plug 'SolaWing/vim-objc-syntax', { 'for': 'objc' }
 Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 Plug 'ajh17/VimCompletesMe'
 Plug 'blindFS/vim-taskwarrior'
@@ -178,13 +177,12 @@ Plug 'brookhong/cscope.vim'
 Plug 'christianrondeau/vim-base64'
 Plug 'd0c-s4vage/pct-vim'
 Plug 'fidian/hexmode'
-Plug 'godlygeek/tabular'
 Plug 'goldfeld/vim-seek'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'guns/xterm-color-table.vim'
 Plug 'hhvm/vim-hack'
 Plug 'jamessan/vim-gnupg'
-Plug 'jceb/vim-editqf'
+Plug 'jiangmiao/auto-pairs'
 Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
