@@ -166,27 +166,26 @@ colorscheme lx-truecolor
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'AndrewRadev/id3.vim'
+Plug 'AndrewRadev/id3.vim', { 'for': 'audio.flac' }
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'SolaWing/vim-objc-syntax', { 'for': 'objc' }
 Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 Plug 'ajh17/VimCompletesMe'
-Plug 'blindFS/vim-taskwarrior'
+Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
 Plug 'brookhong/cscope.vim'
 Plug 'christianrondeau/vim-base64'
 Plug 'd0c-s4vage/pct-vim'
-Plug 'fidian/hexmode'
+Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'goldfeld/vim-seek'
 Plug 'gorkunov/smartpairs.vim'
-Plug 'guns/xterm-color-table.vim'
-Plug 'hhvm/vim-hack'
+Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
 Plug 'jamessan/vim-gnupg'
 Plug 'jiangmiao/auto-pairs'
-Plug 'jremmen/vim-ripgrep'
+Plug 'jremmen/vim-ripgrep', { 'on': 'Rg'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/gv.vim'
+Plug 'junegunn/gv.vim', { 'on': ['GV', 'GV!'] } 
 Plug 'junegunn/vim-fnr'
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-slash'
@@ -202,9 +201,7 @@ Plug 'tpope/vim-afterimage'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-utils/vim-man'
 Plug 'will133/vim-dirdiff'
