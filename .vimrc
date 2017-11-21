@@ -36,7 +36,7 @@ nnoremap gr :grep '\b<cword>\b' *<CR>
 " Clean up left side
 nmap <F2> :set nonu foldcolumn=0<CR>:QuickfixsignsToggle<CR>
 " Show netrw sidebar
-map <silent> <F9> :call ToggleVExplorer()<CR>
+map <silent> <F9> :Lexplore<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 set pastetoggle=<F11>
 " jump to next quickfix item
@@ -85,7 +85,7 @@ set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
 set noerrorbells vb t_vb=   " no bells
-set nonu                    " line numbers
+set number                  " line numbers
 set viewdir=$HOME/.views    " keep view states out of my .vim
 set pumheight=15            " trim down the completion popup menu
 set shortmess+=atIoT        " save space in status messages
@@ -328,10 +328,10 @@ let g:tagbar_iconchars = ['▸', '▾']
 " augroups {{{
 augroup cjava
     au!
-    au BufWinEnter *.[mCchly] set nospell number comments+=s1:/*,mb:*,ex:*/
+    au BufWinEnter *.[mCchly] set number comments+=s1:/*,mb:*,ex:*/
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi setfiletype objc
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi let c_no_curly_error = 1
-    au BufWinEnter *.cpp,*.java,*.hs set nospell number
+    au BufWinEnter *.cpp,*.java,*.hs set number
     au BufWinLeave *.[mchly] mkview
     au BufWinEnter *.[mchly] silent loadview
     au BufWinLeave *.cpp,*.java,*.hs mkview
@@ -347,8 +347,7 @@ augroup html
 augroup end
 
 augroup pythonphp
-    au FileType python set smartindent smarttab nospell number
-    au FileType php set smartindent smarttab nospell number
+    au FileType python,php set smartindent smarttab number
     au BufWinLeave *.py,*.php mkview
     au BufWinEnter *.py,*.php silent loadview
 augroup end
@@ -364,15 +363,14 @@ augroup markdown
     au BufWinEnter *.md,*.notes, normal zR
     au BufWinEnter *.md,*.notes,*mutt*, imap >> <C-t>
     au BufWinEnter *.md,*.notes,*mutt*, imap << <C-d>
-    au FileType markdown set spell
-    au FileType markdown set textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
+    au FileType markdown set spell textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
 
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow
 " keys
 augroup quickfix
+    au FileType qf, set number
     au FileType qf, noremap ' <CR><C-W><C-P>j
-    au FileType qf, set nospell number
     au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
     au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
     au FileType qf, setlocal statusline=\ %n\ \ %f%=L%l/%L\ %P
@@ -394,23 +392,19 @@ augroup misc
     au BufWinEnter *.proto, set filetype=proto
     au BufWinEnter *.dtrace, set filetype=D
     au BufWinEnter *.less, set filetype=css
-    au BufWinEnter *.fugitiveblame,*.diff, set nospell number
+    au BufWinEnter *.fugitiveblame,*.diff, set number
     au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
     au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
     au BufWinEnter .vimrc set foldmethod=marker
     au FileType json set conceallevel=0
     au FileType make set diffopt-=iwhite
-    au FileType vim set nospell
-    au FileType mail set spell complete+=k nonu
+    au FileType mail set spell complete+=k nonu comments+=b:-,b:+,b:*,b:+,n:>
     au FileType mail if executable("par") | set formatprg=par | endif
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
     au FileType mail StripWhitespace
-    au FileType mail,text let b:delimitMate_autoclose = 0
-    au BufWinEnter *vimChatRoster, set foldlevel=1
     au BufWinEnter *.nse set filetype=lua
     " If a JS file has only one line, unminify it
     au FileType javascript if line('$')==1 | call Unminify() | endif
-    au FileType help set nospell
     " What - like how does this even work
     au InsertLeave * hi! link CursorLine CursorLine
     au InsertEnter * hi! link CursorLine Normal
@@ -437,26 +431,6 @@ function! ToggleQuickfix()
         copen
         let g:quickfix_is_open = 1
     endif
-endfunction
-
-" Toggle Vexplore
-function! ToggleVExplorer()
-  if exists("t:expl_buf_num")
-      let expl_win_num = bufwinnr(t:expl_buf_num)
-      if expl_win_num != -1
-          let cur_win_nr = winnr()
-          exec expl_win_num . 'wincmd w'
-          close
-          exec cur_win_nr . 'wincmd w'
-          unlet t:expl_buf_num
-      else
-          unlet t:expl_buf_num
-      endif
-  else
-      exec '1wincmd w'
-      Vexplore
-      let t:expl_buf_num = bufnr("%")
-  endif
 endfunction
 
 " wrap nicely
