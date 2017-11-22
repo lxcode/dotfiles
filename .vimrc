@@ -91,6 +91,7 @@ set pumheight=15            " trim down the completion popup menu
 set shortmess+=atIoT        " save space in status messages
 set scrolloff=3             " 3 lines of buffer before scrolling
 set ignorecase              " case insensitive searches
+set wildignorecase          " same for directories and ex commands
 set smartcase               " unless you type uppercase explicitly
 set smarttab                " use shiftwidth instead of tab stops
 set wildmode=longest,list   " shows a list of candidates when tab-completing
