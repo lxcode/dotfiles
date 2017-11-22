@@ -96,7 +96,6 @@ set smarttab                " use shiftwidth instead of tab stops
 set wildmode=longest,list   " shows a list of candidates when tab-completing
 set wildmenu                " use a more functional completion menu when tab-completing
 set encoding=utf-8          " always use utf-8
-set hlsearch                " highlight all search matches
 set foldcolumn=0            " I never use this.
 set nojoinspaces            " disallow two spaces after a period when joining
 set formatoptions=qjnrtlmnc " auto-formatting style
