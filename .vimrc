@@ -71,7 +71,7 @@ nmap zz ZZ
 syntax on
 filetype plugin on
 filetype indent on
-"helptags ~/.vim/doc
+helptags ~/.vim/doc
 
 if $DISPLAY != ""
     "set cursorline          " I like this, but damn is it slow
@@ -175,7 +175,7 @@ Plug 'ajh17/VimCompletesMe'
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
 Plug 'brookhong/cscope.vim'
 Plug 'christianrondeau/vim-base64'
-Plug 'd0c-s4vage/pct-vim'
+Plug 'd0c-s4vage/pct-vim', { 'on': ['PctInit', 'PctAudit', 'PctNotes', 'PctReport'] }
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'goldfeld/vim-seek'
 Plug 'gorkunov/smartpairs.vim'
@@ -197,14 +197,13 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'rhysd/clever-f.vim'
 Plug 'solarnz/thrift.vim', { 'for': 'thrift'}
 Plug 'tomtom/quickfixsigns_vim'
-Plug 'tpope/vim-afterimage'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-utils/vim-man'
-Plug 'will133/vim-dirdiff'
+Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
 call plug#end()
 
 " Don't load plugins that have unmet dependencies
@@ -383,6 +382,7 @@ augroup end
 
 augroup misc
     au FileType git set foldlevel=99
+    au FileType taskreport set nonu
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.scala, set filetype=scala
@@ -488,3 +488,7 @@ function! Graudit(db)
     cf /tmp/graudit.out
 endfunction
 " }}}
+
+if filereadable("~/.vimrc-local")
+    source ~/.vimrc-local
+endif
