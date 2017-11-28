@@ -212,6 +212,9 @@ endif
 if !has('python3')
     let g:loaded_pct = 1
 endif
+
+" Load optional builtin extensions for %
+runtime! macros/matchit.vim
 " }}}
 
 " netrw {{{
