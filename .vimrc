@@ -187,8 +187,7 @@ Plug 'jremmen/vim-ripgrep', { 'on': 'Rg'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': ['GV', 'GV!'] } 
-Plug 'junegunn/vim-fnr'
-Plug 'junegunn/vim-pseudocl'
+Plug 'junegunn/vim-fnr' | Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-slash'
 Plug 'kergoth/vim-hilinks'
 Plug 'lervag/vimtex', { 'for': 'latex' }
