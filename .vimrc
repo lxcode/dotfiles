@@ -165,7 +165,7 @@ endif
 colorscheme lx-truecolor
 " }}}
 
-" Plugins
+" Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/id3.vim', { 'for': 'audio.flac' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -212,21 +212,17 @@ endif
 if !has('python3')
     let g:loaded_pct = 1
 endif
+" }}}
 
 " netrw {{{
 let g:netrw_liststyle=0
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
-"let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' "hide files by default
-"let g:netrw_sort_sequence = '[\/]$,*,\%(' . join(map(split(&suffixes, ','), 'escape(v:val, ".*$~")'), '\|') . '\)[*@]\=$'
 " }}}
 
 " quickfixsigns {{{
 let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
-let g:quickfixsigns_echo_balloon = 1
-" Disable display of the ' and . marks, so the gutter will be disabled until
-" manually set marks or quickfix/diff info is present.
 let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
 let g:quickfixsign_use_dummy = 0
 let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'ADD': 'QuickFixSignsDiffAddLx', 'CHANGE': 'QuickFixSignsDiffChangeLx'}   "{{{2}}}"
@@ -313,10 +309,6 @@ let g:statline_trailing_space=0
 let g:statline_mixed_indent=0
 let g:statline_filename_relative=1
 let g:statline_show_encoding=0
-" }}}
-
-" tagbar {{{
-let g:tagbar_iconchars = ['▸', '▾']
 " }}}
 
 " augroups {{{
