@@ -26,9 +26,10 @@ hi FoldColumn guibg=#202020 guifg=darkgrey
 hi Title guifg=#f6f3e8 gui=bold ctermfg=187 cterm=bold
 hi Visual guibg=#262D51 ctermbg=60
 
+hi TabLine ctermfg=102 ctermbg=237 guifg=#90908a guibg=#3c3d37
 hi TabLineSel ctermfg=blue
-hi TabLineFill ctermbg=black cterm=none guifg=#000000
-hi TabLine ctermfg=magenta ctermbg=black cterm=none
+hi TabLineFill ctermfg=237 ctermbg=102 guifg=#3c3d37 guibg=#90908a 
+hi TabLine ctermfg=magenta cterm=none
 
 hi SpecialKey guifg=#808080 guibg=#343434 ctermfg=8 ctermbg=236
 
@@ -56,7 +57,7 @@ hi MatchParen guifg=#df00ff guibg=#242424 gui=bold ctermfg=magenta ctermbg=none
 hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242
 hi PmenuSel guifg=#000000 guibg=#cae682 ctermfg=0 ctermbg=195
 hi Search guifg=#f6f3e8 guibg=#81599c ctermfg=white ctermbg=92
-hi SignColumn guibg=black ctermbg=232
+hi SignColumn guibg=NONE ctermbg=NONE
 
 " Syntax highlighting
 " Hack for terms that don't support italics
@@ -168,8 +169,3 @@ hi link taskwarrior_due       Constant
 hi link taskwarrior_urgency   Conditional
 hi link taskwarrior_tablehead Normal
 hi link taskwarrior_field     Visual
-
-" For buftabline
-hi BufTabLineActive ctermbg=0 guibg=black
-hi BufTabLineHidden ctermfg=242 guifg=#666666
-hi BufTabLineActive ctermfg=248
