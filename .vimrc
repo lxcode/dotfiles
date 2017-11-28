@@ -167,7 +167,6 @@ colorscheme lx-truecolor
 " Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/id3.vim', { 'for': 'audio.flac' }
-Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'SolaWing/vim-objc-syntax', { 'for': 'objc' }
 Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
@@ -203,7 +202,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
-Plug 'vim-utils/vim-man'
+Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] } 
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
 call plug#end()
 
@@ -237,7 +236,6 @@ let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'AD
 
 " buftabline {{{
 let g:buftabline_show=1
-"let g:buftabline_separators=1
 " }}}
 
 " clever-f {{{
