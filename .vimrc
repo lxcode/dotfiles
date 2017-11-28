@@ -172,6 +172,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'SolaWing/vim-objc-syntax', { 'for': 'objc' }
 Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 Plug 'ajh17/VimCompletesMe'
+Plug 'ap/vim-buftabline'
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
 Plug 'brookhong/cscope.vim'
 Plug 'christianrondeau/vim-base64'
@@ -236,7 +237,7 @@ let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'AD
 
 " buftabline {{{
 let g:buftabline_show=1
-let g:buftabline_separators=1
+"let g:buftabline_separators=1
 " }}}
 
 " clever-f {{{
@@ -246,6 +247,7 @@ let g:clever_f_smart_case=1
 
 " ultisnips {{{
 let g:UltiSnipsExpandTrigger = "<C-l>"
+let g:UltiSnipsNoPythonWarning=1
 " }}}
 
 " cscope {{{
