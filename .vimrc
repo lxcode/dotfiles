@@ -65,6 +65,7 @@ nmap cd :lcd %:h \| :pwd<CR>
 nmap <Leader>fw :StripWhitespace<CR>
 " Quick exits
 nmap zz ZZ
+cmap w!! w !sudo tee > /dev/null %
 " }}}
 
 " Settings {{{
@@ -198,7 +199,6 @@ Plug 'rhysd/clever-f.vim'
 Plug 'solarnz/thrift.vim', { 'for': 'thrift'}
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
