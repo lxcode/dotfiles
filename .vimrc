@@ -1,7 +1,7 @@
 " Abbreviations {{{
-abbr guys folks
-abbr shruggie ¯\_(ツ)_/¯
-abbr ty Thanks,
+iabbr guys folks
+iabbr shruggie ¯\_(ツ)_/¯
+iabbr ty Thanks,
             \<CR>David
 " }}}
 
@@ -21,7 +21,7 @@ nmap <space> ,
 " save my pinky
 nore ; :
 " auto-format the current paragraph
-nnoremap == :call WrapMerge()<CR>
+nnoremap == gwip
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
 nnoremap # #<c-o>
@@ -65,6 +65,8 @@ nmap cd :lcd %:h \| :pwd<CR>
 nmap <Leader>fw :StripWhitespace<CR>
 " Quick exits
 nmap zz ZZ
+nmap Q :q!<CR>
+" Write using sudo
 cmap w!! w !sudo tee > /dev/null %
 " }}}
 
@@ -97,7 +99,6 @@ set smartcase               " unless you type uppercase explicitly
 set smarttab                " use shiftwidth instead of tab stops
 set wildmode=longest,list   " shows a list of candidates when tab-completing
 set wildmenu                " use a more functional completion menu when tab-completing
-set encoding=utf-8          " always use utf-8
 set foldcolumn=0            " I never use this.
 set nojoinspaces            " disallow two spaces after a period when joining
 set formatoptions=qjnrtlmnc " auto-formatting style
@@ -115,16 +116,15 @@ autocmd Filetype *
         \		setlocal omnifunc=syntaxcomplete#Complete |
         \	endif
 set tags=tags,./tags
-set nobackup                " ugh, stop making useless crap
+set nobackup                " stop making useless crap
 set nowritebackup           " same with overwriting
 set directory=/tmp          " litter up /tmp, not the CWD
 set nomodeline              " modelines are dumb
 set tabstop=4 shiftwidth=4 softtabstop=4
 set backspace=indent,eol,start
-set ruler                   " show position in file
 set title
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
-set titleold=""
+set titleold=""             " avoid 'thanks for flying vim'
 set ttimeout
 set ttimeoutlen=100         " Make it so Esc enters Normal mode right away
 if has('nvim')
@@ -133,7 +133,6 @@ endif
 set helpheight=0            " no minimum helpheight
 set incsearch               " search incrementally
 set showmatch               " show the matching terminating bracket
-set suffixes=.out           " set priority for tab completion
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
@@ -315,50 +314,33 @@ let g:statline_show_encoding=0
 " }}}
 
 " augroups {{{
-augroup cjava
-    au!
-    au BufWinEnter *.[mCchly] set number comments+=s1:/*,mb:*,ex:*/
-    au BufWinEnter,BufNewFile *.m,*.xm,*.xmi setfiletype objc
-    au BufWinEnter,BufNewFile *.m,*.xm,*.xmi let c_no_curly_error = 1
-    au BufWinEnter *.cpp,*.java,*.hs set number
-    au BufWinLeave *.[mchly] mkview
-    au BufWinEnter *.[mchly] silent loadview
-    au BufWinLeave *.cpp,*.java,*.hs mkview
-    au BufWinEnter *.cpp,*.java,*.hs silent loadview
+"
+augroup filetypes
+    au BufWinEnter *.applescript set filetype=applescript
+    au BufWinEnter *.nmap, set syntax=nmap
+    au BufWinEnter *.scala, set filetype=scala
+    au BufWinEnter *.proto, set filetype=proto
+    au BufWinEnter *.dtrace, set filetype=D
+    au BufWinEnter *.less, set filetype=css
+    au BufWinEnter *.nse set filetype=lua
+    au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype objc
 augroup end
 
-augroup html
-    au!
-    au FileType html set spell wrapmargin=5 wrapscan number
-    au FileType html set wrapscan&
-    au BufWinLeave *.htm* mkview
-    au BufWinEnter *.htm* silent loadview
-augroup end
-
-augroup pythonphp
-    au FileType python,php set smartindent smarttab number
-    au BufWinLeave *.py,*.php mkview
-    au BufWinEnter *.py,*.php silent loadview
+augroup views
+    au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex mkview
+    au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex silent loadview
 augroup end
 
 augroup markdown
     " Don't highlight underscores
     syn match markdownError "\w\@<=\w\@="
-    au BufWinEnter *.notes set filetype=markdown
-    au BufWinLeave *.md,*.notes, mkview
-    au BufWinEnter *.md,*.notes, silent loadview
-    au BufWinEnter *.md,*.notes, imap <C-l> <C-t>
-    au BufWinEnter *.md,*.notes, imap <C-h> <C-d>
-    au BufWinEnter *.md,*.notes, normal zR
-    au BufWinEnter *.md,*.notes,*mutt*, imap >> <C-t>
-    au BufWinEnter *.md,*.notes,*mutt*, imap << <C-d>
+    au BufWinEnter *.md normal zR
     au FileType markdown set spell textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
 
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow
 " keys
 augroup quickfix
-    au FileType qf, set number
     au FileType qf, noremap ' <CR><C-W><C-P>j
     au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
     au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
@@ -373,26 +355,21 @@ augroup msdocs
     au BufReadCmd *.odt,*.ott,*.ods,*.ots,*.odp,*.otp,*.odg,*.otg call zip#Browse(expand("<amatch>"))
 augroup end
 
-augroup misc
-    au FileType git set foldlevel=99
-    au FileType taskreport set nonu
-    au BufWinEnter *.applescript set filetype=applescript
-    au BufWinEnter *.nmap, set syntax=nmap
-    au BufWinEnter *.scala, set filetype=scala
-    au BufWinEnter *.proto, set filetype=proto
-    au BufWinEnter *.dtrace, set filetype=D
-    au BufWinEnter *.less, set filetype=css
-    au BufWinEnter *.fugitiveblame,*.diff, set number
-    au BufWinLeave *.txt,*.conf,.vimrc,*.notes mkview
-    au BufWinEnter *.txt,*.conf,.vimrc,*.notes silent loadview
-    au BufWinEnter .vimrc set foldmethod=marker
-    au FileType json set conceallevel=0
-    au FileType make set diffopt-=iwhite
-    au FileType mail set spell complete+=k nonu comments+=b:-,b:+,b:*,b:+,n:>
+augroup mail
+    au FileType mail set spell nonu comments+=b:-,b:+,b:*,b:+,n:>
     au FileType mail if executable("par") | set formatprg=par | endif
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
     au FileType mail StripWhitespace
-    au BufWinEnter *.nse set filetype=lua
+augroup end
+
+augroup misc
+    au BufWinEnter,BufNewFile *.m,*.xm,*.xmi let c_no_curly_error = 1
+    au FileType python,php set smartindent
+    au FileType git set foldlevel=99
+    au FileType taskreport set nonu
+    au FileType json set conceallevel=0
+    au BufWinEnter .vimrc set foldmethod=marker
+    au FileType make set diffopt-=iwhite
     " If a JS file has only one line, unminify it
     au FileType javascript if line('$')==1 | call Unminify() | endif
     " What - like how does this even work
@@ -421,13 +398,6 @@ function! ToggleQuickfix()
         copen
         let g:quickfix_is_open = 1
     endif
-endfunction
-
-" wrap nicely
-function! WrapMerge()
-    set formatoptions-=w
-    exec "normal gwip"
-    set formatoptions+=w
 endfunction
 
 " Read in cookiefiles
