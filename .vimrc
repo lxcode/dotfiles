@@ -187,7 +187,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' } 
 Plug 'junegunn/vim-fnr' | Plug 'junegunn/vim-pseudocl'
 Plug 'kergoth/vim-hilinks'
-Plug 'lervag/vimtex', { 'for': 'latex' }
+Plug 'lervag/vimtex', { 'for': ['latex', 'tex'] }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
