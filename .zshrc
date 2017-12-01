@@ -88,28 +88,6 @@ setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
 
 freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
 
-brew-cask-upgrade() {
-  if [ "$1" != '--continue' ]; then
-    echo "Removing brew cache"
-    rm -rf "$(brew --cache)"
-    echo "Running brew update"
-    brew update
-  fi
-  for c in $(brew cask list); do
-    echo -e "\n\nInstalled versions of $c: "
-    ls /opt/homebrew-cask/Caskroom/$c
-    echo "Cask info for $c"
-    brew cask info $c
-    select ynx in "Yes" "No" "Exit"; do
-      case $ynx in
-        "Yes") echo "Uninstalling $c"; brew cask uninstall --force "$c"; echo "Re-installing $c"; brew cask install "$c"; break;;
-        "No") echo "Skipping $c"; break;;
-        "Exit") echo "Exiting brew-cask-upgrade"; return;;
-      esac
-    done
-  done
-}
-
 # Where to look for autoloaded function definitions
 fpath=(~/.zfunc $fpath)
 for func in $^fpath/*(N-.x:t); autoload $func
