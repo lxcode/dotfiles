@@ -45,7 +45,7 @@ set timeout=15			# poll the boxes every 15 seconds
 set postponed= =Drafts 	# Put unsent mail here
 set record= =Sent		# put sent mail here
 set mime_fwd=ask-no		# forward attachments
-set wait_key=no       # No "press any key"
+set wait_key=no         # No "press any key"
 set text_flowed=yes     # Play nice
 ignore *			    # weed all headers by default
 unignore from date subject to cc X-Face:	# don't weed important ones, though
