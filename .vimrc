@@ -177,7 +177,7 @@ Plug 'brookhong/cscope.vim'
 Plug 'christianrondeau/vim-base64'
 Plug 'd0c-s4vage/pct-vim', { 'on': ['PctInit', 'PctAudit', 'PctNotes', 'PctReport'] }
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
-Plug 'goldfeld/vim-seek'
+Plug 'justinmk/vim-sneak'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
 Plug 'jamessan/vim-gnupg'
@@ -186,13 +186,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': ['GV', 'GV!'] } 
 Plug 'junegunn/vim-fnr' | Plug 'junegunn/vim-pseudocl'
-Plug 'junegunn/vim-slash'
 Plug 'kergoth/vim-hilinks'
 Plug 'lervag/vimtex', { 'for': 'latex' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rhysd/clever-f.vim'
 Plug 'solarnz/thrift.vim', { 'for': 'thrift'}
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
@@ -233,9 +231,8 @@ let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'AD
 let g:buftabline_show=1
 " }}}
 
-" clever-f {{{
-let g:clever_f_mark_char_color="PreProc"
-let g:clever_f_smart_case=1
+" sneak {{{
+let g:sneak#s_next = 1
 " }}}
 
 " ultisnips {{{
