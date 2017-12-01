@@ -184,7 +184,7 @@ Plug 'jamessan/vim-gnupg'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/gv.vim', { 'on': ['GV', 'GV!', 'GV?'] } 
+Plug 'junegunn/gv.vim', { 'on': 'GV' } 
 Plug 'junegunn/vim-fnr' | Plug 'junegunn/vim-pseudocl'
 Plug 'kergoth/vim-hilinks'
 Plug 'lervag/vimtex', { 'for': 'latex' }
