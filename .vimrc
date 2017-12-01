@@ -178,14 +178,11 @@ Plug 'd0c-s4vage/pct-vim', { 'on': ['PctInit', 'PctAudit', 'PctNotes', 'PctRepor
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'justinmk/vim-sneak'
 Plug 'gorkunov/smartpairs.vim'
-Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
 Plug 'jamessan/vim-gnupg'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' } 
-Plug 'junegunn/vim-fnr' | Plug 'junegunn/vim-pseudocl'
-Plug 'kergoth/vim-hilinks'
 Plug 'lervag/vimtex', { 'for': ['latex', 'tex'] }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
@@ -197,6 +194,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] } 
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
+" Use these if debugging color themes/hightlighting
+" Plug 'kergoth/vim-hilinks'
+" Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
 call plug#end()
 
 " Don't load plugins that have unmet dependencies
