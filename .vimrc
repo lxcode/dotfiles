@@ -169,7 +169,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/id3.vim', { 'for': 'audio.flac' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'SolaWing/vim-objc-syntax', { 'for': 'objc' }
-Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesToggle' }
 Plug 'ajh17/VimCompletesMe'
 Plug 'ap/vim-buftabline'
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
@@ -256,15 +255,8 @@ nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
 nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 " }}}
 
-" Indentlines {{{
-nmap \|\| :IndentLinesToggle<CR>
-let g:indentLine_faster = 1
-let g:indentLine_enabled = 0
-" }}}
-
 " FZF {{{
 set rtp+=~/.fzf
-set rtp+=/usr/local/opt/fzf
 nmap <C-e> :Files<CR>
 nmap <C-g> :GFiles<CR>
 nmap <leader>m :History<CR>
