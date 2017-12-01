@@ -65,7 +65,7 @@ nmap cd :lcd %:h \| :pwd<CR>
 nmap <Leader>fw :StripWhitespace<CR>
 " Quick exits
 nmap zz ZZ
-nmap Q :q!<CR>
+nmap Q :qa!<CR>
 " Write using sudo
 cmap w!! w !sudo tee > /dev/null %
 " }}}
@@ -169,7 +169,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/id3.vim', { 'for': 'audio.flac' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'SolaWing/vim-objc-syntax', { 'for': 'objc' }
-Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesToggle' }
 Plug 'ajh17/VimCompletesMe'
 Plug 'ap/vim-buftabline'
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
@@ -182,7 +182,6 @@ Plug 'gorkunov/smartpairs.vim'
 Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
 Plug 'jamessan/vim-gnupg'
 Plug 'jiangmiao/auto-pairs'
-Plug 'jremmen/vim-ripgrep', { 'on': 'Rg'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': ['GV', 'GV!'] } 
@@ -266,10 +265,6 @@ let g:indentLine_faster = 1
 let g:indentLine_enabled = 0
 " }}}
 
-" ripgrep {{{
-let g:rg_highlight = 1
-" "}}}
-
 " FZF {{{
 set rtp+=~/.fzf
 set rtp+=/usr/local/opt/fzf
@@ -289,11 +284,7 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 
-let g:fzf_action = {
-  \ 'ctrl-q': function('s:build_quickfix_list'),
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
 
 command! -bang -nargs=* F
   \ call fzf#vim#grep(
@@ -301,6 +292,7 @@ command! -bang -nargs=* F
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
+
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " }}}
@@ -360,6 +352,8 @@ augroup mail
     au FileType mail if executable("par") | set formatprg=par | endif
     au FileType mail map <F8> :%g/^> >/d<CR>gg10j
     au FileType mail StripWhitespace
+    au FileType mail setlocal fo+=aw
+    au FileType mail setlocal tw=72
 augroup end
 
 augroup misc
