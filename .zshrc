@@ -76,6 +76,20 @@ bvimdiff() {
     vimdiff <(xxd $1) <(xxd $2)
 }
 
+v() {
+  local files
+  files=$(grep '^>' ~/.viminfo | cut -c3- |
+          while read line; do
+            [ -f "${line/\~/$HOME}" ] && echo "$line"
+          done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
+}
+
+fzf-cdr() {
+    local dir=$(cdr -l | fzf-tmux |cut -c6-) && zle -U "cd ${dir//\~/$HOME}"
+}
+zle -N fzf-cdr
+bindkey '^b' fzf-cdr
+
 mus() {
     sudo zpool import backup
     cmus
@@ -181,6 +195,11 @@ zmodload -a zsh/stat stat
 zmodload -a zsh/zpty zpty
 zmodload -a zsh/zprof zprof
 zmodload -ap zsh/mapfile mapfile
+
+### Keep recent directory list for use by cdr
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-pushd true  
 
 ### Bindings
 bindkey -v               # vi key bindings
