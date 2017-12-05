@@ -244,6 +244,7 @@ pip3 install peewee
 # Install casks
 read -p "Preparing to install casks"
 brew install caskroom/cask/brew-cask
+brew tap buo/cask-upgrade
 brew tap caskroom/fonts
 brew cask install font-inconsolata
 brew cask install font-source-code-pro
