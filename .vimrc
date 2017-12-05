@@ -232,6 +232,10 @@ let g:buftabline_show=1
 
 " sneak {{{
 let g:sneak#s_next = 1
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 " }}}
 
 " ultisnips {{{
@@ -322,6 +326,7 @@ augroup end
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow
 " keys
 augroup quickfix
+    au FileType qf set nospell
     au FileType qf, noremap ' <CR><C-W><C-P>j
     au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
     au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
