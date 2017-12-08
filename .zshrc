@@ -76,6 +76,7 @@ bvimdiff() {
     vimdiff <(xxd $1) <(xxd $2)
 }
 
+# fuzzy find recent vim files to edit
 v() {
   local files
   files=$(grep '^>' ~/.viminfo | cut -c3- |
@@ -84,6 +85,7 @@ v() {
           done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
 
+# list the cdr recent directories stack
 fzf-cdr() {
     local dir=$(cdr -l | fzf-tmux |cut -c6-) && zle -U "cd ${dir//\~/$HOME}"
 }
