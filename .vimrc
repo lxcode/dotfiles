@@ -77,7 +77,6 @@ filetype indent on
 helptags ~/.vim/doc
 
 if $DISPLAY != ""
-    "set cursorline          " I like this, but damn is it slow
     set clipboard=unnamed
     set mouse=a             " Turn this off for console-only mode
     if !has('nvim')
@@ -176,13 +175,14 @@ Plug 'brookhong/cscope.vim'
 Plug 'christianrondeau/vim-base64'
 Plug 'd0c-s4vage/pct-vim', { 'on': ['PctInit', 'PctAudit', 'PctNotes', 'PctReport'] }
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
-Plug 'justinmk/vim-sneak'
 Plug 'gorkunov/smartpairs.vim'
+Plug 'justinmk/vim-sneak'
 Plug 'jamessan/vim-gnupg'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' } 
+Plug 'lervag/vimtex'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
@@ -297,6 +297,24 @@ let g:statline_mixed_indent=0
 let g:statline_show_encoding=0
 " }}}
 
+" vimtex {{{
+    let g:vimtex_compiler_latexmk = {
+        \ 'backend' : 'jobs',
+        \ 'background' : 1,
+        \ 'build_dir' : '',
+        \ 'callback' : 0,
+        \ 'continuous' : 0,
+        \ 'executable' : 'latexmk',
+        \ 'options' : [
+        \   '-pdf',
+        \   '-verbose',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
+" }}}
+
 " augroups {{{
 
 augroup filetypes
@@ -353,7 +371,7 @@ augroup misc
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi let c_no_curly_error = 1
     au FileType python,php set smartindent
     au FileType git set foldlevel=99
-    au FileType taskreport set nonu
+    au FileType taskreport set nonu nocursorline
     au FileType json set conceallevel=0
     au BufWinEnter .vimrc set foldmethod=marker
     au FileType make set diffopt-=iwhite
