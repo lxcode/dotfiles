@@ -336,6 +336,7 @@ augroup end
 augroup markdown
     " Don't highlight underscores
     syn match markdownError "\w\@<=\w\@="
+    " Unfold
     au BufWinEnter *.md normal zR
     au FileType markdown set spell textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
