@@ -33,16 +33,14 @@ imap <F1> <Esc>[s1z=<C-o>a
 nmap <Leader>fs [s1z=<C-o>
 " Poor man's cscope - grep for symbol under cursor
 nnoremap gr :grep '\b<cword>\b' *<CR>
-" Clean up left side
-nmap <F2> :set nonu foldcolumn=0<CR>:QuickfixsignsToggle<CR>
 " Show netrw sidebar
 map <silent> <F9> :Lexplore<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
 set pastetoggle=<F11>
 " jump to next quickfix item
 map <F12> :cn<CR>
-" preview the tag under the cursor
-nmap <C-p> :exe "ptag" expand("<cword>")<CR>
+" use the g] behavior by default, i.e. list all tags if there are multiple
+nnoremap <C-]> g<C-]>
 " Toggle the quickfix window
 nnoremap <silent> <C-c> :call ToggleQuickfix()<cr>
 " Window movement
@@ -139,6 +137,7 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=0        " the default level of fold nesting on startup
 set autoread                " Disable warning about file change to writable
 set conceallevel=0          " Don't hide things by default
+set laststatus=2            " Always show a statusline
 set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls
 set wildignore+=*.loc,*.gz,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx,*.pdf
 set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log,*.latexmain,*.out
@@ -174,6 +173,7 @@ Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
 Plug 'brookhong/cscope.vim'
 Plug 'christianrondeau/vim-base64'
 Plug 'd0c-s4vage/pct-vim', { 'on': ['PctInit', 'PctAudit', 'PctNotes', 'PctReport'] }
+Plug 'darfink/vim-plist'
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'gorkunov/smartpairs.vim'
 Plug 'justinmk/vim-sneak'
@@ -235,6 +235,7 @@ map f <Plug>Sneak_f
 map F <Plug>Sneak_F
 map t <Plug>Sneak_t
 map T <Plug>Sneak_T
+map gS <Plug>Sneak_,
 " }}}
 
 " ultisnips {{{
@@ -266,7 +267,6 @@ nmap <leader>m :History<CR>
 nmap <leader>e :Files<CR>
 nmap <Leader>t :Tags<CR>
 nmap <Leader>b :BTags<CR>
-nmap <C-]> :call fzf#vim#tags(expand('<cword>'), {'options': '--exact --select-1 --exit-0'})<CR>
 
 let g:fzf_tags_command = '/usr/local/bin/ctags -R'
 
@@ -313,6 +313,13 @@ let g:statline_show_encoding=0
         \   '-interaction=nonstopmode',
         \ ],
         \}
+    
+    " Ignore usually useless messages
+    let g:vimtex_quickfix_latexlog = {
+                \ 'overfull' : 0,
+                \ 'references' : 0,
+                \ 'underfull' : 0,
+                \}
 " }}}
 
 " augroups {{{
@@ -458,6 +465,6 @@ function! Graudit(db)
 endfunction
 " }}}
 
-if filereadable("~/.vimrc-local")
+if filereadable(glob("~/.vimrc-local"))
     source ~/.vimrc-local
 endif
