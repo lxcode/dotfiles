@@ -129,6 +129,7 @@ if has('nvim')
 endif
 set helpheight=0            " no minimum helpheight
 set incsearch               " search incrementally
+set hlsearch                " show search matches
 set showmatch               " show the matching terminating bracket
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
