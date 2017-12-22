@@ -123,6 +123,27 @@ zstyle ':vcs_info:git*' actionformats "%s  %r/%S %b %m%u%c "
 PROMPT='[%B%n%b@%m %3~ %h ] '
 RPROMPT='${vcs_info_msg_0_}'
 
+# Change cursor shape in insert mode
+function zle-keymap-select zle-line-init
+{
+    case $KEYMAP in
+        vicmd)      print -n -- "\E[2 q";;  # block cursor
+        viins|main) print -n -- "\E[4 q";;  # underscore cursor
+    esac
+
+    zle reset-prompt
+    zle -R
+}
+
+function zle-line-finish
+{
+    print -n -- "\E[2 q"  # block cursor
+}
+
+zle -N zle-line-init
+zle -N zle-line-finish
+zle -N zle-keymap-select
+
 # set up cool things in xterm title bars
 function title {
 
