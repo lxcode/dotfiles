@@ -233,7 +233,7 @@ cd ~/git && \
 sudo xcodebuild -license
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
-brew install task tmux w3m apg bvi cscope daemontools djbdns runit mutt nvi \
+brew install task tmux w3m apg bvi cscope daemontools runit mutt nvi \
     nmap par python3 weechat wireshark youtube-dl bbe zsh vdirsyncer khal ag \
     fzf mosh tree ripgrep htop mtr
 brew install vim --with-override-system-vi --with-lua --with-python3
