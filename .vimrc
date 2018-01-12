@@ -191,7 +191,6 @@ Plug 'solarnz/thrift.vim', { 'for': 'thrift'}
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-vinegar'
 Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] } 
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
 " Use these if debugging color themes/hightlighting
