@@ -1,5 +1,5 @@
 [user]
-	email = david@isecpartners.com
+	email = lx
 [branch "master"]
     remote = origin
     merge = refs/heads/master
