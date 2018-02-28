@@ -163,6 +163,9 @@ hi QuickFixSignsDiffChangeLx ctermfg=0 ctermbg=68 guifg=black  guibg=#5f87df
 " For whitespace
 hi ExtraWhitespace ctermbg=236
 
+" For sneak
+hi Sneak ctermfg=197 ctermbg=237 guifg=#FF005F guibg=#3c3d37
+
 " For taskwarrior
 hi link taskwarrior_depends   Normal
 hi link taskwarrior_due       Constant
