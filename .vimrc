@@ -54,6 +54,8 @@ vmap < <gv
 " Move visual blocks up and down
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+" Keep the contents of the paste buffer when pasting in visual mode
+xnoremap p pgvy
 " day+time / day+date
 nmap <Leader>dt "=strftime("%c")<CR>P"
 nmap <Leader>dd "=strftime("%y-%m-%d")<CR>P"
