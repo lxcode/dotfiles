@@ -184,7 +184,7 @@ Plug 'jamessan/vim-gnupg'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/gv.vim', { 'on': 'GV' } 
+Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'lervag/vimtex'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
@@ -193,7 +193,7 @@ Plug 'solarnz/thrift.vim', { 'for': 'thrift'}
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] } 
+Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
 " Use these if debugging color themes/hightlighting
 " Plug 'kergoth/vim-hilinks'
@@ -315,7 +315,7 @@ let g:statline_show_encoding=0
         \   '-interaction=nonstopmode',
         \ ],
         \}
-    
+
     " Ignore usually useless messages
     let g:vimtex_quickfix_latexlog = {
                 \ 'overfull' : 0,
@@ -334,6 +334,7 @@ augroup filetypes
     au BufWinEnter *.dtrace, set filetype=D
     au BufWinEnter *.less, set filetype=css
     au BufWinEnter *.nse set filetype=lua
+    au BufWinEnter *.cki set filetype=json
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype objc
 augroup end
 
