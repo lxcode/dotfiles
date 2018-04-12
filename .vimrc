@@ -195,6 +195,7 @@ Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
+Plug 'natebosch/vim-lsc'
 " Use these if debugging color themes/hightlighting
 " Plug 'kergoth/vim-hilinks'
 " Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
@@ -218,6 +219,29 @@ let g:netrw_liststyle=0
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
+" }}}
+
+" lsc {{{
+let g:lsc_auto_map = v:true
+let g:lsc_server_commands = {
+            \ 'c': {
+            \    'command': 'cquery',
+            \    'message_hooks': {
+            \        'initialize': {
+            \            'initializationOptions': {'cacheDirectory': '/tmp/cquery'},
+            \            },
+            \        },
+            \    },
+            \ 'cpp': {
+            \    'command': 'cquery',
+            \    'message_hooks': {
+            \        'initialize': {
+            \            'initializationOptions': {'cacheDirectory': '/tmp/cquery'},
+            \            },
+            \        },
+            \    },
+            \ 'python': 'pyls',
+            \ 'go': 'go-langserver'}
 " }}}
 
 " quickfixsigns {{{
