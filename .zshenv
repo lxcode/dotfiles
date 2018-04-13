@@ -7,11 +7,14 @@ do
 	fi
 done
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-export FZF_DEFAULT_OPTS="--extended --bind ctrl-a:select-all"
-#export FZF_DEFAULT_COMMAND='ag -l -g ""'
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-export GOPATH=$HOME/go
 
+export FZF_DEFAULT_OPTS="--extended --bind ctrl-a:select-all --height 60%"
+if [ -x rg ]; then
+    export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
+
+export GOPATH=$HOME/go
 export FPATH=/usr/share/zsh/site-functions:$FPATH
 export GREP_COLORS="ms=01;31:mc=:sl=:cx=:fn=:ln=:bn=:se=:ne="
 export CLICOLOR=yes
@@ -23,7 +26,7 @@ export LESSHISTFILE="-"
 export X11HOME=/usr/local
 export MANPATH=/usr/man:/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/lang/man:/var/qmail/man:/usr/pkg/man:/opt/local/man
 
-path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /var/qmail/bin $X11HOME/bin /usr/local/9/bin $HOME/go/bin /usr/local/texlive/2017/bin/amd64-freebsd /usr/local/texlive/2017/bin/x86_64-darwin /usr/texbin ~/bin /opt/facebook/bin /home/lx/tools/graudit /usr/local/libexec/git-core /opt/android_sdk/platform-tools ~/.cabal/bin )
+path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /var/qmail/bin $X11HOME/bin /usr/local/9/bin $HOME/go/bin /usr/local/opt/go/libexec/bin /usr/local/texlive/2017/bin/amd64-freebsd /usr/local/texlive/2017/bin/x86_64-darwin /usr/texbin ~/bin /opt/facebook/bin /home/lx/tools/graudit /usr/local/libexec/git-core /opt/android_sdk/platform-tools ~/.cabal/bin )
 
 case $OSTYPE in
 	solaris*)
