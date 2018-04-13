@@ -69,6 +69,12 @@ alias ctags-objc='/usr/local/bin/ctags --languages=objectivec --langmap=objectiv
 alias vim="$EDITOR"
 alias sx="exec startx"
 
+if [ -x fd ]; then
+    _fzf_compgen_dir() {
+        fd --type d --hidden --follow --exclude ".git" . "$1"
+    }
+fi
+
 ### Functions
 bvimdiff() {
     vimdiff <(xxd $1) <(xxd $2)
