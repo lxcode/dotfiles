@@ -14,7 +14,6 @@ HISTSIZE=1336
 DIRSTACKSIZE=20
 HISTFILE=~/.zsh_history
 SAVEHIST=1336
-HIST_IGNORE_ALL_DUPS=1
 KEYTIMEOUT=0
 MAILCHECK=0
 
@@ -24,12 +23,10 @@ LOGCHECK=300                    # check every 5 min for login/logout activity
 WATCHFMT='%n %a %l from %m at %t.'
 
 ### Options
-setopt   notify globdots pushdtohome autolist
-setopt   autocd longlistjobs
-setopt   autoresume histignoredups pushdsilent
-setopt   autopushd pushdminus extendedglob rcquotes
-setopt   multios
-setopt nocorrect nocorrectall
+setopt   notify globdots pushdtohome autolist multios
+setopt   autocd longlistjobs autoresume histignorealldups
+setopt   autopushd pushdsilent pushdminus extendedglob rcquotes
+setopt   nocorrect nocorrectall
 unsetopt bgnice autoparamslash
 
 ### Aliases
@@ -223,7 +220,7 @@ zmodload -ap zsh/mapfile mapfile
 ### Keep recent directory list for use by cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
-zstyle ':chpwd:*' recent-dirs-pushd true  
+zstyle ':chpwd:*' recent-dirs-pushd true
 
 ### Bindings
 bindkey -v               # vi key bindings
