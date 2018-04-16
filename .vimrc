@@ -173,7 +173,6 @@ Plug 'SolaWing/vim-objc-syntax', { 'for': 'objc' }
 Plug 'ajh17/VimCompletesMe'
 Plug 'ap/vim-buftabline'
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
-Plug 'brookhong/cscope.vim'
 Plug 'christianrondeau/vim-base64'
 Plug 'd0c-s4vage/pct-vim', { 'on': ['PctInit', 'PctAudit', 'PctNotes', 'PctReport'] }
 Plug 'darfink/vim-plist'
@@ -267,22 +266,6 @@ map gS <Plug>Sneak_,
 " ultisnips {{{
 let g:UltiSnipsExpandTrigger = "<C-l>"
 let g:UltiSnipsNoPythonWarning=1
-" }}}
-
-" cscope {{{
-let g:cscope_interested_files = '\.java$\|\.php$\|\.h$\|\.hpp|\.cpp|\.c$|\.m$|\.swift$|\.py$|\.hs$'
-let g:cscope_split_threshold = 99999
-let g:cscope_auto_update = 0
-nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-nnoremap <leader>l :call ToggleLocationList()<CR>
-nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
-nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
-nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
-nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
-nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
-nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
-nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
-nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 " }}}
 
 " FZF {{{
