@@ -240,7 +240,7 @@ if executable('pyls')
     let g:lsc_server_commands.python = 'pyls'
 endif
 if executable('go-langserver')
-    let g:lsc_server_commands.python = 'go-langserver'
+    let g:lsc_server_commands.go = 'go-langserver'
 endif
 if executable('lua-lsp')
     let g:lsc_server_commands.lua = 'lua-lsp'
