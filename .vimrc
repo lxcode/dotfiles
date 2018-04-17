@@ -346,7 +346,7 @@ augroup filetypes
     au BufWinEnter *.less, set filetype=css
     au BufWinEnter *.nse set filetype=lua
     au BufWinEnter *.cki set filetype=json
-    au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype objc
+    au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc
 augroup end
 
 augroup views
