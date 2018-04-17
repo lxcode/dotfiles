@@ -167,7 +167,7 @@ colorscheme lx-truecolor
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
-Plug 'AndrewRadev/id3.vim', { 'for': 'audio.flac' }
+Plug 'AndrewRadev/id3.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'SolaWing/vim-objc-syntax', { 'for': 'objc' }
 Plug 'ajh17/VimCompletesMe'
@@ -180,7 +180,6 @@ Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'gorkunov/smartpairs.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'jamessan/vim-gnupg'
-Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
@@ -222,25 +221,30 @@ let g:netrw_banner=0
 
 " lsc {{{
 let g:lsc_auto_map = v:true
-let g:lsc_server_commands = {
-            \ 'c': {
+let g:lsc_server_commands = {}
+if executable('cquery')
+    let cpp_config = {
             \    'command': 'cquery',
             \    'message_hooks': {
             \        'initialize': {
             \            'initializationOptions': {'cacheDirectory': '/tmp/cquery'},
             \            },
             \        },
-            \    },
-            \ 'cpp': {
-            \    'command': 'cquery',
-            \    'message_hooks': {
-            \        'initialize': {
-            \            'initializationOptions': {'cacheDirectory': '/tmp/cquery'},
-            \            },
-            \        },
-            \    },
-            \ 'python': 'pyls',
-            \ 'go': 'go-langserver'}
+            \    }
+    let g:lsc_server_commands.c = cpp_config
+    let g:lsc_server_commands.cpp = cpp_config
+    let g:lsc_server_commands.objc = cpp_config
+    let g:lsc_server_commands.objcpp = cpp_config
+endif
+if executable('pyls')
+    let g:lsc_server_commands.python = 'pyls'
+endif
+if executable('go-langserver')
+    let g:lsc_server_commands.python = 'go-langserver'
+endif
+if executable('lua-lsp')
+    let g:lsc_server_commands.lua = 'lua-lsp'
+endif
 " }}}
 
 " quickfixsigns {{{
@@ -395,9 +399,6 @@ augroup misc
     au FileType make set diffopt-=iwhite
     " If a JS file has only one line, unminify it
     au FileType javascript if line('$')==1 | call Unminify() | endif
-    " What - like how does this even work
-    au InsertLeave * hi! link CursorLine CursorLine
-    au InsertEnter * hi! link CursorLine Normal
     " Disable the 'warning, editing a read-only file' thing that
     " hangs the UI
     au FileChangedRO * se noreadonly
