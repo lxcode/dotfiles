@@ -61,7 +61,7 @@ sed -i -e "s/rw/rw,noatime/g" /etc/fstab
 
 read -p "Install packages?"
 pkg install vim-lite zsh fzf tmux mosh sudo portmaster git cscope \
-    w3m curl runit par ripgrep gnupg mutt htop apg mtr
+    w3m curl runit par ripgrep fd gnupg mutt htop apg mtr
 
 read -p "Install GUI crap?"
 pkg install inconsolata-ttf dmenu metalock xautolock xorg sakura \
