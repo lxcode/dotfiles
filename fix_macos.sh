@@ -60,7 +60,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # ANIMATE MORE FASTER
 defaults write NSGlobalDomain NSWindowResizeTime .1
 
-# By default, you can't type things like "GAAAAAAAAAAAH". Unacceptable.
+# By default, you can't type things like "GAAAAAAAAAAAH".
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Fastest key repeat. Still too slow.
@@ -69,11 +69,6 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 # Lower right corner click is right click
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
-
-# I prefer to scroll in the perverted, unnatural direction
-# Actually nevermind, I'll try to adapt. Sigh.
-#defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
-
 
 # This is not an iPad.
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
@@ -135,7 +130,6 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 
 # Don't pop up the photos app when stuff gets plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
-
 
 # Disable sketchy spotlight options
 defaults write com.apple.spotlight orderedItems -array \
@@ -234,12 +228,12 @@ sudo xcodebuild -license
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
 brew install task tmux w3m apg bvi cscope daemontools runit mutt nvi \
-    nmap par python3 weechat wireshark youtube-dl bbe zsh vdirsyncer khal ag \
-    fzf mosh tree ripgrep htop mtr
+    nmap par python3 weechat youtube-dl bbe zsh vdirsyncer khal ag \
+    fzf mosh tree ripgrep fd htop mtr
 brew install vim --with-override-system-vi --with-lua --with-python3
 brew install ctags --HEAD
 brew linkapps
-pip3 install peewee
+pip3 install peewee python-language-server
 
 # Install casks
 read -p "Preparing to install casks"
@@ -251,9 +245,10 @@ brew cask install font-source-code-pro
 brew cask install font-m-plus
 brew cask install iterm2
 brew cask install kitty
-brew cask install google-chrome
 brew cask install spectacle
 brew cask install scroll-reverser
+brew cask install karabiner-elements
+brew cask install wireshark
 
 task
 /usr/local/opt/fzf/install
