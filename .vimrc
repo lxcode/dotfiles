@@ -174,6 +174,7 @@ Plug 'ajh17/VimCompletesMe'
 Plug 'ap/vim-buftabline'
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
 Plug 'christianrondeau/vim-base64'
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'd0c-s4vage/pct-vim', { 'on': ['PctInit', 'PctAudit', 'PctNotes', 'PctReport'] }
 Plug 'darfink/vim-plist'
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
@@ -244,6 +245,9 @@ if executable('go-langserver')
 endif
 if executable('lua-lsp')
     let g:lsc_server_commands.lua = 'lua-lsp'
+endif
+if executable('dart_language_server')
+    let g:lsc_server_commands.dart = 'dart_language_server'
 endif
 " }}}
 
