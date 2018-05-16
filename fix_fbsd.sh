@@ -7,6 +7,7 @@ ntpd_sync_on_start="YES"
 clear_tmp_enable="YES"
 keymap="us.pc-ctrl.kbd"
 keyrate="fast"
+allscreens_kbdflags="-b quiet.off"
 EOF
 
 cat <<EOF >> /etc/make.conf
