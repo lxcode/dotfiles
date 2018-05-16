@@ -5,7 +5,7 @@ cat <<EOF >> /etc/rc.conf
 virecover_enable="NO"
 ntpd_sync_on_start="YES"
 clear_tmp_enable="YES"
-keymap="us.pc-ctrl.kbd"
+keymap="us.ctrl"
 keyrate="fast"
 allscreens_kbdflags="-b quiet.off"
 EOF
