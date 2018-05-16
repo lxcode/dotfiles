@@ -11,7 +11,6 @@ export GNOME_KEYRING_CONTROL
 export GNOME_KEYRING_PID
 
 #export LC_CTYPE=ja_JP.UTF-8
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export XIM=ibus
 export GTK_IM_MODULE=ibus
 export QT_IM_MODULE=xim

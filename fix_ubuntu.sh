@@ -4,4 +4,5 @@
 update-alternatives --set /usr/bin/vim
 
 # pkgs
-apt-get install cscope zsh tmux mosh
+apt-get install zsh tmux mosh fzf ripgrep mutt htop mtr runit curl w3m \
+    xcape autocutsel cmus
