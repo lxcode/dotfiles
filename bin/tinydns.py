@@ -1,40 +1,41 @@
 #!/usr/local/bin/python
 
 
-#Reads log files from tinydns and/or dnscache and prints them out in
-#human-readable form.  Logs can be supplied on stdin, or listed on
-#the command line:
+# Reads log files from tinydns and/or dnscache and prints them out in
+# human-readable form.  Logs can be supplied on stdin, or listed on
+# the command line:
 
- # cat @*.s | parse_djbdns_log
- # parse_djbdns_log @*.s
- # tail -f current | parse_djbdns_log
+# cat @*.s | parse_djbdns_log
+# parse_djbdns_log @*.s
+# tail -f current | parse_djbdns_log
 
-#Pipes each log file through tai64nlocal, which must be on your path.
+# Pipes each log file through tai64nlocal, which must be on your path.
 
-#Requirements:
- # * tai64nlocal on the path
-  #* Python 2.2 or greater
+# Requirements:
+# * tai64nlocal on the path
+# * Python 2.2 or greater
 
-#Acknowledgments:
+# Acknowledgments:
 
- # * The log format descriptions by Rob Mayoff were invaluable:
-  #    http://dqd.com/~mayoff/notes/djbdns/tinydns-log.html
-   #   http://dqd.com/~mayoff/notes/djbdns/dnscache-log.html
+# * The log format descriptions by Rob Mayoff were invaluable:
+#   http://dqd.com/~mayoff/notes/djbdns/tinydns-log.html
+#   http://dqd.com/~mayoff/notes/djbdns/dnscache-log.html
 
- # * Faried Nawaz's dnscache log parser was the original inspiration:
-  #    http://www.hungry.com/~fn/dnscache-log.pl.txt
+# * Faried Nawaz's dnscache log parser was the original inspiration:
+#    http://www.hungry.com/~fn/dnscache-log.pl.txt
 
-#Written by Greg Ward <gward@python.net> 2001/12/13.
+# Written by Greg Ward <gward@python.net> 2001/12/13.
 
-#Modified to handle IPv6 addresses (as logged by djbdns with the patch at
-#http://www.fefe.de/dns/), 2003/05/03-04, prodded and tested by Jakob
-#Hirsch <jh@plonk.de>.
+# Modified to handle IPv6 addresses (as logged by djbdns with the patch at
+# http://www.fefe.de/dns/), 2003/05/03-04, prodded and tested by Jakob
+# Hirsch <jh@plonk.de>.
 
-#Modified to handle dnscache's AXFR request log lines by Malte Tancred
-#(http://tancred.com/malte.html), 2005/12/20.
-#"""
+# Modified to handle dnscache's AXFR request log lines by Malte Tancred
+# (http://tancred.com/malte.html), 2005/12/20.
+# """
 
-import sys, re
+import sys
+import re
 from popen2 import popen2
 from time import strftime, gmtime
 from struct import pack
@@ -55,17 +56,17 @@ query_type = {
       2: "ns",
       5: "cname",
       6: "soa",
-     12: "ptr",
-     13: "hinfo",
-     15: "mx",
-     16: "txt",
-     17: "rp",
-     24: "sig",
-     25: "key",
-     28: "aaaa",
-     38: "a6",
-    252: "axfr",
-    255: "any",
+      12: "ptr",
+      13: "hinfo",
+      15: "mx",
+      16: "txt",
+      17: "rp",
+      24: "sig",
+      25: "key",
+      28: "aaaa",
+      38: "a6",
+      252: "axfr",
+      255: "any",
 }
 
 # for tinydns only
@@ -76,10 +77,11 @@ query_drop_reason = {
     }
 
 
-def warn (filename, msg):
+def warn(filename, msg):
     sys.stderr.write("warning: %s: %s\n" % (filename, msg))
 
-def convert_ip (ip):
+
+def convert_ip(ip):
     """Convert a hex string representing an IP address to conventional
     human-readable form, ie. dotted-quad decimal for IPv4, and
     8 colon-separated hex shorts for IPv6.
@@ -94,13 +96,15 @@ def convert_ip (ip):
         return ":".join([ip[(4*i) : (4*i+4)] for i in range(8)])
 
 
-def _cvt_ip (match):
+def _cvt_ip(match):
     return convert_ip(match.group(1))
 
-def _cvt_port (match):
+
+def _cvt_port(match):
     return ":" + str(int(match.group(1), 16))
 
-def decode_client (words, i):
+
+def decode_client(words, i):
     chunks = words[i].split(":")
     if len(chunks) == 2:                # ip:port
         words[i] = "%s:%d" % (convert_ip(chunks[0]), int(chunks[1], 16))
@@ -109,21 +113,26 @@ def decode_client (words, i):
                                       int(chunks[1], 16),
                                       int(chunks[2], 16))
 
-def decode_ip (words, i):
+
+def decode_ip(words, i):
     words[i] = convert_ip(words[i])
 
-def decode_ttl (words, i):
+
+def decode_ttl(words, i):
     words[i] = "TTL=%s" % words[i]
 
-def decode_serial (words, i):
+
+def decode_serial(words, i):
     serial = int(words[i])
     words[i] = "#%d" % serial
 
-def decode_type (words, i):
+
+def decode_type(words, i):
     qt = words[i]
     words[i] = query_type.get(int(qt), qt)
 
-def handle_dnscache_log (line, match):
+
+def handle_dnscache_log(line, match):
     (timestamp, event, data) = match.groups()
 
     words = data.split()
@@ -195,7 +204,7 @@ def handle_dnscache_log (line, match):
     print timestamp, event, " ".join(words)
 
 
-def handle_tinydns_log (line, match):
+def handle_tinydns_log(line, match):
     (timestamp, ip, port, id, code, type, name) = match.groups()
     ip = convert_ip(ip)
     port = int(port, 16)
@@ -206,21 +215,21 @@ def handle_tinydns_log (line, match):
     print timestamp,
 
     if code == "+":
-        print ("sent response to %s:%s (id %s): %s %s"
+        print("sent response to %s:%s (id %s): %s %s"
                % (ip, port, id, type, name))
     elif code in ("-", "I", "C"):
         reason = query_drop_reason[code]
-        print ("dropped query (%s) from %s:%s (id %s): %s %s"
+        print("dropped query (%s) from %s:%s (id %s): %s %s"
                % (reason, ip, port, id, type, name))
     elif code == "/":
-        print ("dropped query (couldn't parse) from %s:%s"
+        print("dropped query (couldn't parse) from %s:%s"
                % (ip, port))
     else:
-        print ("%s from %s:%s (id %s): %s %s"
+        print("%s from %s:%s (id %s): %s %s"
                % (code, ip, port, id, type, name))
 
 
-def parse_logfile (file, filename):
+def parse_logfile(file, filename):
     # Open pipe to tai64nlocal: we will write lines of our input (the
     # raw log file) to it, and read log lines with readable timestamps
     # from it.
@@ -245,7 +254,7 @@ def parse_logfile (file, filename):
 # parse_logfile ()
 
 
-def main ():
+def main():
 
     if len(sys.argv) > 1:
         for filename in sys.argv[1:]:
@@ -259,9 +268,9 @@ def main ():
         parse_logfile(sys.stdin, "(stdin)")
 
 
-
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
         sys.exit("interrupted")
+
