@@ -21,15 +21,16 @@ export XDG_RUNTIME_DIR="/tmp"
 
 setxkbmap -option terminate:ctrl_alt_bksp
 setxkbmap -option ctrl:nocaps
-xcape -e 'Control_L=Escape'
-xsetroot -solid black&
 xset -b&
 xset r rate 400 80&
+xcape -e 'Control_L=Escape'
+redshift &
 wmname LG3D&
-#xrandr --output VGA1 --right-of LVDS 
 autocutsel &
 autocutsel -s PRIMARY&
 xautolock -time 7 -locker '/usr/local/bin/metalock -F "#404040" -f "-*-fixed-medium-r-normal-*-12-*-*-*-*-*-*-*" -w 1 -P'&
+
+xsetroot -solid black&
 
 $HOME/bin/dwmstatus.sh | while read line; do xsetroot -name "$line"; done&
 while true; do dwm; done
