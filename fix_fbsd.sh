@@ -14,13 +14,16 @@ cat <<EOF >> /etc/make.conf
 OPTIONS_UNSET=CUPS PRINT DEBUG NLS HELP TEST
 EOF
 
+cat <<EOF >> /etc/fstab
+tmpfs /tmp tmpfs rw,mode=1777 0 0
+EOF
+
 cat <<EOF >> /boot/loader.conf
 sem_load="YES"
 autoboot_delay="3"
 EOF
 
 cat <<EOF >> /etc/sysctl.conf
-kern.ipc.shm_allow_removed=1
 net.inet.ip.portrange.reservedlow=0
 net.inet.ip.portrange.reservedhigh=0
 net.inet.tcp.blackhole=2
@@ -28,6 +31,7 @@ net.inet.udp.blackhole=1
 net.inet.ip.random_id=1
 security.jail.allow_raw_sockets=1
 security.bsd.stack_guard_page=1
+kern.ipc.shm_allow_removed=1
 hw.syscons.bell=0
 EOF
 
@@ -50,7 +54,7 @@ pkg install vim-console zsh fzf tmux mosh sudo portmaster git \
 read -p "Install GUI crap?"
 pkg install inconsolata-ttf dmenu metalock xautolock xorg sakura \
     sourcecodepro-ttf xcape chromium cmus dbus autocutsel gnome-keyring \
-    ibus redshift
+    ibus redshift alacritty
 
 cat <<EOF >> /etc/rc.conf
 dbus_enable="YES"
@@ -58,4 +62,20 @@ ibus_enable="YES"
 webcamd_enable="YES"
 powerd_enable="YES"
 kld_list="/boot/modules/i915kms.ko"
+EOF
+
+cat <<EOF >> /boot/loader.conf
+cuse_load="YES"
+wmt_load="YES"
+acpi_video_load="YES"
+mmc_load="YES"
+mmcsd_load="YES"
+sdhci_load="YES"
+coretemp_load="YES"
+EOF
+
+cat <<EOF >> /etc/sysctl.conf
+hw.psm.tap_timeout=0
+hw.acpi.lid_switch_state=S3
+kern.sched.preempt_thresh=224
 EOF
