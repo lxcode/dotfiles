@@ -20,6 +20,7 @@ EOF
 
 cat <<EOF >> /boot/loader.conf
 sem_load="YES"
+tmpfs_load="YES"
 autoboot_delay="3"
 EOF
 
@@ -30,7 +31,6 @@ net.inet.tcp.blackhole=2
 net.inet.udp.blackhole=1
 net.inet.ip.random_id=1
 security.jail.allow_raw_sockets=1
-security.bsd.stack_guard_page=1
 kern.ipc.shm_allow_removed=1
 hw.syscons.bell=0
 EOF
@@ -49,7 +49,7 @@ EOF
 
 read -p "Install packages?"
 pkg install vim-console zsh fzf tmux mosh sudo portmaster git \
-    w3m curl runit par ripgrep fd-find gnupg mutt htop apg mtr
+    w3m curl runit par_format ripgrep fd-find gnupg mutt htop apg mtr
 
 read -p "Install GUI crap?"
 pkg install inconsolata-ttf dmenu metalock xautolock xorg sakura \
@@ -79,3 +79,5 @@ hw.psm.tap_timeout=0
 hw.acpi.lid_switch_state=S3
 kern.sched.preempt_thresh=224
 EOF
+
+cd dwm && make install
