@@ -29,6 +29,7 @@ wmname LG3D&
 autocutsel &
 autocutsel -s PRIMARY&
 xautolock -time 7 -locker '/usr/local/bin/metalock -F "#404040" -f "-*-fixed-medium-r-normal-*-12-*-*-*-*-*-*-*" -w 1 -P'&
+twmnd&
 
 xsetroot -solid black&
 
