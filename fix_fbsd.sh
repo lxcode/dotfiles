@@ -54,7 +54,7 @@ pkg install vim-console zsh fzf tmux mosh sudo portmaster git \
 read -p "Install GUI crap?"
 pkg install inconsolata-ttf dmenu metalock xautolock xorg sakura \
     sourcecodepro-ttf xcape chromium cmus dbus autocutsel gnome-keyring \
-    ibus redshift alacritty
+    ibus redshift alacritty symbola
 
 cat <<EOF >> /etc/rc.conf
 dbus_enable="YES"
