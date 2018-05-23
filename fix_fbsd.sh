@@ -60,7 +60,6 @@ cat <<EOF >> /etc/rc.conf
 dbus_enable="YES"
 ibus_enable="YES"
 webcamd_enable="YES"
-powerd_enable="YES"
 kld_list="/boot/modules/i915kms.ko"
 EOF
 
