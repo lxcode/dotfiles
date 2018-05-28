@@ -1,21 +1,21 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "monospace:size=14" };
+static const char dmenufont[]       = "monospace:size=14";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_cyan[]        = "#0076a5";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel] =  { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel] =  { col_gray4, col_gray2,  col_cyan  },
 };
 
 /* tagging */
@@ -27,16 +27,16 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     	NULL,       NULL,     0,         	True,       -1 },
+	{ "Gimp",     	NULL,       NULL,           0,      True,       -1 },
 	{ "MPlayer",    NULL,       NULL,       	0,      True,       -1 },
 	{ "Firefox",  	NULL,       NULL,       	1 << 2, False,      -1 },
-	{ "Opera",  	NULL,       NULL,       	1 << 2, False,      -1 },
+	{ "Thunderbird",  	NULL,   NULL,       	1 << 1, False,      -1 },
 	{ "rdesktop",  	NULL,       NULL,      		0,      True,       -1 },
 	{ "feh",		NULL,       NULL,      		0,      True,       -1 },
+	{ NULL,		    NULL,       "Signal",      	1 << 1, False,      -1 },
 	{ NULL,  		NULL,   	"Buddy List", 	1 << 8,	False,      -1 },
 	{ NULL,  		NULL,   	"Chromium", 	1 << 2,	False,      -1 },
 	{ NULL,  		NULL,   	"Page(s) Unresponsive", 	1 << 2,	False,      -1 },
-	{ "Workrave",	NULL,     	NULL,      		1 << 8, True,       -1 },
 	{ "pinentry",	NULL,     	NULL,      		0,      True,       -1 },
 };
 
@@ -71,6 +71,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "sakura", NULL };
 static const char *lockcmd[]  = { "metalock", "-w", "1", "-P", "-f", dmenufont, NULL };
 static const char *cmusplaypause[]  = { "cmus-remote", "-u", NULL };
+static const char *upvol[] =    { "mixer", "vol", "+1", NULL };
+static const char *downvol[] =  { "mixer", "vol", "-1", NULL };
 
 //#include "tilemovemouse.c"
 #include "focusurgent.c"
@@ -118,6 +120,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
     { MODKEY,                       XK_a,      incnmaster,     {.i = +1 } },
     { MODKEY,                       XK_z,      incnmaster,     {.i = -1 } },
+    { MODKEY,                       XK_F2,     spawn,          {.v = downvol } },
+    { MODKEY,                       XK_F3,     spawn,          {.v = upvol } },
 };
 
 /* button definitions */
