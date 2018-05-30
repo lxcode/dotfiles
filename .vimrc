@@ -195,6 +195,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
 Plug 'natebosch/vim-lsc'
+Plug 'Yggdroot/indentLine'
 " Use these if debugging color themes/hightlighting
 " Plug 'kergoth/vim-hilinks'
 " Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
@@ -350,6 +351,8 @@ augroup filetypes
     au BufWinEnter *.less, set filetype=css
     au BufWinEnter *.nse set filetype=lua
     au BufWinEnter *.cki set filetype=json
+    au BufWinEnter *.cinc set filetype=javascript
+    au BufWinEnter *.cconf set filetype=javascript
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc
 augroup end
 
