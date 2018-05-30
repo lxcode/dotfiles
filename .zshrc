@@ -26,7 +26,7 @@ WATCHFMT='%n %a %l from %m at %t.'
 setopt   notify globdots pushdtohome autolist multios
 setopt   autocd longlistjobs autoresume histignorealldups
 setopt   autopushd pushdsilent pushdminus extendedglob rcquotes
-setopt   nocorrect nocorrectall
+setopt   nocorrect nocorrectall inc_append_history share_history
 unsetopt bgnice autoparamslash
 
 ### Aliases
@@ -64,6 +64,7 @@ alias lsa='ls -ld .*'
 alias ctags-objc='/usr/local/bin/ctags --languages=objectivec --langmap=objectivec:.h.m -R .'
 alias vim="$EDITOR"
 alias sx="exec startx"
+alias vis="vise"
 
 if [ -x fd ]; then
     _fzf_compgen_dir() {
@@ -284,3 +285,4 @@ export ANDROID_SDK=/opt/android_sdk
 export ANDROID_NDK_REPOSITORY=/opt/android_ndk
 export ANDROID_HOME=${ANDROID_SDK}
 export PATH=${PATH}:${ANDROID_SDK}/tools:${ANDROID_SDK}/platform-tools
+export PATH=${PATH}:~/dev/flutter/bin:~/.pub-cache/bin
