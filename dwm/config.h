@@ -30,7 +30,7 @@ static const Rule rules[] = {
 	{ "Gimp",     	NULL,       NULL,           0,      True,       -1 },
 	{ "MPlayer",    NULL,       NULL,       	0,      True,       -1 },
 	{ "Firefox",  	NULL,       NULL,       	1 << 2, False,      -1 },
-	{ "Thunderbird",  	NULL,   NULL,       	1 << 1, False,      -1 },
+	{ "Thunderbird",  	NULL,   NULL,       	1 << 3, False,      -1 },
 	{ "rdesktop",  	NULL,       NULL,      		0,      True,       -1 },
 	{ "feh",		NULL,       NULL,      		0,      True,       -1 },
 	{ NULL,		    NULL,       "Signal",      	1 << 1, False,      -1 },
