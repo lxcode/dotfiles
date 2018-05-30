@@ -71,8 +71,11 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "sakura", NULL };
 static const char *lockcmd[]  = { "metalock", "-w", "1", "-P", "-f", dmenufont, NULL };
 static const char *cmusplaypause[]  = { "cmus-remote", "-u", NULL };
-static const char *upvol[] =    { "mixer", "vol", "+1", NULL };
-static const char *downvol[] =  { "mixer", "vol", "-1", NULL };
+static const char *volup[] = { "sh", "-c", "mixer vol +5; xsetroot -name \"`mixer vol`\"", NULL };
+static const char *voldown[] = { "sh", "-c", "mixer vol -5; xsetroot -name \"`mixer vol`\"", NULL };
+static const char *brightnessup[] = { "sudo", "intel_backlight", "incr", "5", NULL };
+static const char *brightnessdown[] = { "sudo", "intel_backlight", "decr", "5", NULL };
+
 
 //#include "tilemovemouse.c"
 #include "focusurgent.c"
@@ -120,8 +123,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
     { MODKEY,                       XK_a,      incnmaster,     {.i = +1 } },
     { MODKEY,                       XK_z,      incnmaster,     {.i = -1 } },
-    { MODKEY,                       XK_F2,     spawn,          {.v = downvol } },
-    { MODKEY,                       XK_F3,     spawn,          {.v = upvol } },
+    { MODKEY,                       XK_F2,     spawn,          {.v = voldown } },
+    { MODKEY,                       XK_F3,     spawn,          {.v = volup } },
+	{ 0,          XF86XK_AudioLowerVolume,     spawn,          {.v = voldown } },
+	{ 0,          XF86XK_AudioRaiseVolume,     spawn,          {.v = volup } },
 };
 
 /* button definitions */
