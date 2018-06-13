@@ -353,6 +353,7 @@ augroup filetypes
     au BufWinEnter *.cki set filetype=json
     au BufWinEnter *.cinc set filetype=javascript
     au BufWinEnter *.cconf set filetype=javascript
+    au BufWinEnter *.table set filetype=conf
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc
 augroup end
 
