@@ -1,5 +1,10 @@
 text/html; w3m -T text/html %s
 text/html; w3m -T text/html -dump %s; copiousoutput
+text/plain; view %s; needsterminal
+
+image/png; open -n %s; copiousoutput;
+image/jpeg; open -n %s; copiousoutput;
+video/*; open %s >/dev/null
 
 text/calendar; icalview.rb; copiousoutput
 application/octet-stream; less %s
@@ -32,10 +37,6 @@ audio/mpegurl; mutt_bgrun vlc %s; test=test -n "$DISPLAY"
 audio/mpeg;    mutt_bgrun vlc -q %s
 audio/*; mutt_bgrun vlc %s;
 
-image/*; mutt_bgrun feh %s >/dev/null 2>&1 ; test=test -n "$DISPLAY"
-image/*;  (anytopnm %s | pnmscale -xysize 80 46 | ppmtopgm | pgmtopbm | pbmtoascii -1x2 ) 2>&1 ; copiousoutput
-
-video/*; mplayer -xy 2 %s >/dev/null; test=test -n "$DISPLAY"
 
 application/x-cpio; cpio -tvF --quiet %s; copiousoutput
 application/x-tar; tar tvf %s; copiousoutput
@@ -43,4 +44,5 @@ application/x-tar-gz; tar tvfz %s; copiousoutput
 application/x-zip-compressed; unzip -v %s; copiousoutput
 application/zip; unzip -v %s; copiousoutput
 
-#text/calendar; ical2html %s
+text/calendar; mutt-ics; copiousoutput
+application/ics; mutt-ics; copiousoutput
