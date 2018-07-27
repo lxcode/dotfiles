@@ -285,6 +285,7 @@ nmap <leader>m :History<CR>
 nmap <leader>e :Files<CR>
 nmap <Leader>t :Tags<CR>
 nmap <Leader>b :BTags<CR>
+nmap <Leader>l :Lines<CR>
 
 let g:fzf_tags_command = '/usr/local/bin/ctags -R'
 
@@ -298,7 +299,7 @@ let g:fzf_action = { 'ctrl-q': function('s:build_quickfix_list') }
 
 command! -bang -nargs=* F
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!tags" --color=always '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --fixed-strings --smart-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!tags" --color=always '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
