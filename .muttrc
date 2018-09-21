@@ -80,12 +80,12 @@ my_hdr X-Face: %H~{\$1~NOw1y\#%mM6{|4:/<p]y9X%E+4%:1wo-M!re,zl.qH~yzbL-MWhtp\$3Q
 #my_hdr X-Processing-Key: 09 F9 11 02 9D 74 E3 5B D8 41 56 C5 63 56 88 C0
 
 # monitor these boxes
-mailboxes = =Plan =Lists.8lives =Lists.Security.Ctf =Lists.FreeBSD.Developers =Lists.FreeBSD.Security =Lists.FreeBSD.Hackers =Lists.FreeBSD.ppc =Lists.FreeBSD.Ports =Lists.FreeBSD.ports-bugs =Lists.FreeBSD.CVS =Lists.FreeBSD.Current =Lists.FreeBSD.Stable =Lists.FreeBSD.Security =Lists.IETF =Lists.Security.Vulnwatch =Lists.Security.Vuln-Dev =Lists.Security.Bugtraq =Lists.Security.Pen-Test =Lists.Security.Incidents =Lists.Security.FullDisclosure =Lists.Security.VulnDiscuss =Lists.Cocoa =Lists.Fish =Lists.XeTeX =Lists.Antzen =Spam
+mailboxes = =Lists.FreeBSD.Developers =Lists.FreeBSD.Ports =Lists.FreeBSD.Security =Spam
 
 # make mutt aware of our mailing lists
-subscribe ports freebsd-ports pen-test vuln-dev bugtraq freebsd-current current developers 8lives
+subscribe ports freebsd-ports
 
-macro index,pager A "<enter-command>unset resolve<enter><clear-flag>N<enter-command>set resolve<enter><save-message>=.Archives.2017\n"
+macro index,pager A "<enter-command>unset resolve<enter><clear-flag>N<enter-command>set resolve<enter><save-message>=.Archives.2018\n"
 
 macro index,pager w ": unset wait_key; set pipe_decode\n|w3m\n: set wait_key; unset pipe_decode\n" "call w3m to extract URLs out of a message"
 macro index \\ "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py<enter><change-folder-readonly>~/.cache/mutt_results<enter>" \
