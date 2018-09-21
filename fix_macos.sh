@@ -211,6 +211,9 @@ done
 mkdir ~/.w3m
 ln -s ~/git/dotfiles/w3m-config ~/.w3m/config
 
+mkdir -p ~/.config/kitty
+ln -s ~/git/dotfiles/kitty.conf ~/.config/kitty/kitty.conf
+
 # Install things
 read -p "Preparing to install apps"
 
@@ -227,9 +230,9 @@ cd ~/git && \
 sudo xcodebuild -license
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
-brew install task tmux w3m apg bvi cscope daemontools runit mutt nvi \
-    nmap par python3 weechat youtube-dl bbe zsh vdirsyncer khal ag \
-    fzf mosh tree ripgrep fd htop mtr
+brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
+    python3 weechat youtube-dl bbe zsh vdirsyncer khal \
+    fzf mosh tree ripgrep fd htop mtr cmus
 brew install vim --with-override-system-vi --with-lua --with-python3
 brew install ctags --HEAD
 brew linkapps
