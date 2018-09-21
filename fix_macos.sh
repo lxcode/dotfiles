@@ -235,7 +235,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew doctor
 brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
     python3 weechat youtube-dl bbe zsh vdirsyncer khal \
-    fzf mosh tree ripgrep fd htop mtr cmus
+    fzf mosh tree ripgrep fd htop mtr cmus notmuch isync
 brew install vim --with-override-system-vi --with-lua --with-python3
 brew install ctags --HEAD
 brew linkapps
