@@ -214,6 +214,9 @@ ln -s ~/git/dotfiles/w3m-config ~/.w3m/config
 mkdir -p ~/.config/kitty
 ln -s ~/git/dotfiles/kitty.conf ~/.config/kitty/kitty.conf
 
+mkdir -p ~/.config/karabiner
+ln -s ~/git/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
+
 # Install things
 read -p "Preparing to install apps"
 
