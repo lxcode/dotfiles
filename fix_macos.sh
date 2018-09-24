@@ -26,6 +26,10 @@ defaults write com.apple.finder CreateDesktop -bool false
 # ANIMATE FASTER
 defaults write com.apple.dock expose-animation-duration -float 0.15
 
+# Make things less transparent and get rid of nauseating desktop switching animation
+defaults write com.apple.universalaccess reduceTransparency -bool true
+defaults write com.apple.universalaccess reduceMotion -bool true
+
 # Use autohide but make it quick
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-time-modifier -float 0.17
@@ -84,10 +88,6 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Disable drop shadow on screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
-
-# Disable stupid semitransparent menubar
-# This is probably counterproductive with dark mode
-# defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
 # I do not need my documents to be cloud
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
@@ -234,7 +234,7 @@ brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
 brew install vim --with-override-system-vi --with-lua --with-python3
 brew install ctags --HEAD
 brew linkapps
-pip3 install peewee python-language-server
+pip3 install peewee python-language-server requests
 
 # Install casks
 read -p "Preparing to install casks"
