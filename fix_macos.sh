@@ -203,7 +203,7 @@ killall Finder
 
 read -p "Preparing to make symlinks"
 
-for file in .zshrc .zshenv .zsh .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf bin .config
+for file in .zshrc .zshenv .zsh .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf bin .config .mailcap
 do
     ln -s ~/git/dotfiles/$file ~/$file
 done
