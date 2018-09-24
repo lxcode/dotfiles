@@ -203,19 +203,13 @@ killall Finder
 
 read -p "Preparing to make symlinks"
 
-for file in .zshrc .zshenv .zsh .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf bin
+for file in .zshrc .zshenv .zsh .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf bin .config
 do
     ln -s ~/git/dotfiles/$file ~/$file
 done
 
 mkdir ~/.w3m
 ln -s ~/git/dotfiles/w3m-config ~/.w3m/config
-
-mkdir -p ~/.config/kitty
-ln -s ~/git/dotfiles/kitty.conf ~/.config/kitty/kitty.conf
-
-mkdir -p ~/.config/karabiner
-ln -s ~/git/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json
 
 # Install things
 read -p "Preparing to install apps"
@@ -235,7 +229,8 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew doctor
 brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
     python3 weechat youtube-dl bbe zsh vdirsyncer khal \
-    fzf mosh tree ripgrep fd htop mtr cmus notmuch isync
+    fzf mosh tree ripgrep fd htop mtr cmus notmuch isync \
+    bitlbee khard
 brew install vim --with-override-system-vi --with-lua --with-python3
 brew install ctags --HEAD
 brew linkapps
