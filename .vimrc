@@ -250,6 +250,9 @@ endif
 if executable('dart_language_server')
     let g:lsc_server_commands.dart = 'dart_language_server'
 endif
+if executable('javascript-typescript-stdio')
+    let g:lsc_server_commands.javascript = 'javascript-typescript-stdio'
+endif
 " }}}
 
 " quickfixsigns {{{
