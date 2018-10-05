@@ -230,7 +230,7 @@ brew doctor
 brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
     python3 weechat youtube-dl bbe zsh vdirsyncer khal \
     fzf mosh tree ripgrep fd htop mtr cmus notmuch isync \
-    bitlbee khard
+    bitlbee khard go
 brew install vim --with-override-system-vi --with-lua --with-python3
 brew install ctags --HEAD
 brew linkapps
@@ -253,3 +253,16 @@ brew cask install wireshark
 
 task
 /usr/local/opt/fzf/install
+xcode-select --install
+
+read -p "Preparing to install language servers"
+pip3 install 'python-language-server[all]'
+go get -u github.com/sourcegraph/go-langserver
+brew install cquery
+brew install luarocks
+luarocks install --server=https://luarocks.org/dev lua-lsp
+brew tap dart-lang/dart
+brew install dart
+pub global activate dart_language_server
+brew install node
+yarn global add javascript-typescript-langserver
