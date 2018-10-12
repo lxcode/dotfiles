@@ -27,8 +27,8 @@ defaults write com.apple.finder CreateDesktop -bool false
 defaults write com.apple.dock expose-animation-duration -float 0.15
 
 # Make things less transparent and get rid of nauseating desktop switching animation
-defaults write com.apple.universalaccess reduceTransparency -bool true
-defaults write com.apple.universalaccess reduceMotion -bool true
+sudo defaults write com.apple.universalaccess reduceTransparency -bool true
+sudo defaults write com.apple.universalaccess reduceMotion -bool true
 
 # Use autohide but make it quick
 defaults write com.apple.dock autohide -bool true
