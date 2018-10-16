@@ -16,13 +16,14 @@ set help=no
 set allow_ansi
 set editor="$EDITOR +'/^$/' -c'noh'"
 set charset="utf-8"
+set mark_old=no                     # Don't mark unread messages as 'old'
 set maildir_trash=no		        # set the trashed flag on maildir msgs
 set header_cache="~/.headercache"	# cache headers
 set alias_file=~/.muttalias         # alias storage
 set sort_browser=reverse-date       # default to newest first
 set sort_aux=reverse-last-date-received # show threads with newest message first
 set message_cachedir="~/.muttcache"
-set from=lx@redundancy.redundancy.org
+set from="lx@redundancy.redundancy.org"
 set hostname="redundancy.redundancy.org"
 set beep=no             # don't beep for silly reasons
 set beep_new=no         # beep when there's new mail
