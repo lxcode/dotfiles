@@ -208,6 +208,8 @@ do
     ln -s ~/git/dotfiles/$file ~/$file
 done
 
+chsh
+
 mkdir ~/.w3m
 ln -s ~/git/dotfiles/w3m-config ~/.w3m/config
 
@@ -222,6 +224,8 @@ cd ~/git && \
     sed -i bak 's/strip -s/strip/g' Makefile
     sudo make install clean
 
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+
 # Brews
 
 sudo xcodebuild -license
@@ -230,7 +234,7 @@ brew doctor
 brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
     python3 weechat youtube-dl bbe zsh vdirsyncer khal \
     fzf mosh tree ripgrep fd htop mtr cmus notmuch isync \
-    bitlbee khard go
+    bitlbee khard go pass
 brew install vim --with-override-system-vi --with-lua --with-python3
 brew install ctags --HEAD
 brew linkapps
