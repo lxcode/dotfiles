@@ -247,11 +247,8 @@ brew tap buo/cask-upgrade
 brew tap caskroom/fonts
 brew cask install font-inconsolata
 brew cask install font-source-code-pro
-brew cask install font-m-plus
-brew cask install iterm2
 brew cask install kitty
 brew cask install spectacle
-brew cask install scroll-reverser
 brew cask install karabiner-elements
 brew cask install wireshark
 
