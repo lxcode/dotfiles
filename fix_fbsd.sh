@@ -31,7 +31,6 @@ net.inet.tcp.blackhole=2
 net.inet.udp.blackhole=1
 net.inet.ip.random_id=1
 security.jail.allow_raw_sockets=1
-kern.ipc.shm_allow_removed=1
 hw.syscons.bell=0
 EOF
 
