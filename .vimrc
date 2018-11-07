@@ -189,9 +189,10 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'solarnz/thrift.vim', { 'for': 'thrift'}
-Plug 'tomtom/quickfixsigns_vim'
+"Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/icalendar.vim'
 Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
 Plug 'natebosch/vim-lsc'
@@ -358,6 +359,7 @@ augroup filetypes
     au BufWinEnter *.cinc set filetype=javascript
     au BufWinEnter *.cconf set filetype=javascript
     au BufWinEnter *.table set filetype=conf
+    au BufWinEnter *.ics set filetype=icalendar
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc
 augroup end
 
