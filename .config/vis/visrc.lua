@@ -27,4 +27,4 @@ require('plugins/number-inc-dec')
 -- local plugins
 plugin_vis_open =require('plugins/vis-fzf-open/fzf-open')
 require('plugins/vis-ctags/ctags')
---require('plugins/vis-cursors/cursors')
+require('plugins/vis-quickfix/quickfix')
