@@ -222,6 +222,11 @@ let g:netrw_winsize=25
 let g:netrw_banner=0
 " }}}
 
+" better-whitespace {{{
+let g:better_whitespace_ctermcolor=236
+let g:better_whitespace_guicolor="#303030"
+" }}}
+
 " lsc {{{
 let g:lsc_auto_map = v:true
 let g:lsc_server_commands = {}
@@ -242,8 +247,8 @@ endif
 if executable('pyls')
     let g:lsc_server_commands.python = 'pyls'
 endif
-if executable('go-langserver')
-    let g:lsc_server_commands.go = 'go-langserver'
+if executable('bingo')
+    let g:lsc_server_commands.go = 'bingo'
 endif
 if executable('lua-lsp')
     let g:lsc_server_commands.lua = 'lua-lsp'
