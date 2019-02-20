@@ -258,7 +258,6 @@ xcode-select --install
 
 read -p "Preparing to install language servers"
 pip3 install 'python-language-server[all]'
-go get -u github.com/sourcegraph/go-langserver
 brew install cquery
 brew install luarocks
 luarocks install --server=https://luarocks.org/dev lua-lsp
