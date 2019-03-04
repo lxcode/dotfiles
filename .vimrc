@@ -329,7 +329,7 @@ let g:statline_show_encoding=0
     let g:vimtex_compiler_latexmk = {
         \ 'backend' : 'jobs',
         \ 'background' : 1,
-        \ 'build_dir' : '',
+        \ 'build_dir' : 'aux',
         \ 'callback' : 0,
         \ 'continuous' : 0,
         \ 'executable' : 'latexmk',
