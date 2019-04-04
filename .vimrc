@@ -198,7 +198,7 @@ Plug 'vim-scripts/icalendar.vim'
 Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
 Plug 'natebosch/vim-lsc'
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 " Use these if debugging color themes/hightlighting
 " Plug 'kergoth/vim-hilinks'
 " Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
