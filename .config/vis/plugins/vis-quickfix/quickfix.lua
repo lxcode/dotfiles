@@ -152,17 +152,17 @@ vis:command_register("cf", function(argv, force, win, selection, range)
 	W.crewind(argv, force, win, selection, range)
 end)
 
-local function cexpr(argv, force, win, selection, range)
+local function cexpr(argv, force, win, selection, range, on_error)
 	if #argv == 0 then vis:info"Failed to detect command" return end
 	local code, stdout, stderr = vis:pipe(win.file, {start = 0, finish = 0}, table.concat(argv, " "))
-	if stdout then
+	if on_error and stderr or not on_error and stdout then
 		vis:command(string.format("open %s", M.errorfile))
 		vis.win.file:delete(0, vis.win.file.size)
 		vis.win.file:insert(0, format == M.errorformat and stderr or stdout)
 		setup(vis.win)
 		W.crewind(argv, force, win, selection, range)
-	elseif code ~= 0 and stderr then
-		vis:message(stderr)
+	elseif code ~= 0 then
+		vis:info(string.format("exit status: %d", code))
 	end
 end
 
@@ -181,7 +181,7 @@ vis:command_register("make", function(argv, force, win, selection, range)
 		table.insert(argv, i, arg)
 	end
 	format = M.errorformat
-	cexpr(argv, force, win, selection, range)
+	cexpr(argv, force, win, selection, range, true)
 end)
 
 M = {
