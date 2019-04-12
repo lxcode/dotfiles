@@ -261,6 +261,9 @@ endif
 if executable('javascript-typescript-stdio')
     let g:lsc_server_commands.javascript = 'javascript-typescript-stdio'
 endif
+if executable('hh_client')
+    let g:lsc_server_commands.php = 'hh_client lsp'
+endif
 " }}}
 
 " quickfixsigns {{{
