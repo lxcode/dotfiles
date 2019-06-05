@@ -73,8 +73,8 @@ cmap w!! w !sudo tee > /dev/null %
 " }}}
 
 " Settings {{{
-syntax on
 filetype plugin on
+syntax on
 filetype indent on
 helptags ~/.vim/doc
 
