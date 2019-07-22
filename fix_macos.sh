@@ -178,6 +178,9 @@ sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Curre
 killall Dock
 killall Finder
 
+# Index things for locate(1)
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+
 # Stop DHCP from twiddling names
 #scutil --set HostName local.foo.bar
 
@@ -215,16 +218,6 @@ ln -s ~/git/dotfiles/w3m-config ~/.w3m/config
 
 # Install things
 read -p "Preparing to install apps"
-
-cd ~/git && \
-    git clone git://repo.or.cz/dvtm.git && \
-    cd dvtm && \
-    cp ~/git/dotfiles/dvtm-config.h ./config.h && \
-    cp ~/git/dotfiles/dvtm-config.mk ./config.mk
-    sed -i bak 's/strip -s/strip/g' Makefile
-    sudo make install clean
-
-sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
 # Brews
 
