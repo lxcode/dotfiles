@@ -100,6 +100,7 @@ set smartcase               " unless you type uppercase explicitly
 set smarttab                " use shiftwidth instead of tab stops
 set wildmode=longest,list   " shows a list of candidates when tab-completing
 set wildmenu                " use a more functional completion menu when tab-completing
+set fillchars+=vert:│       " Prettier vertical splits
 set foldcolumn=0            " I never use this.
 set nojoinspaces            " disallow two spaces after a period when joining
 set formatoptions=qjnrtlmnc " auto-formatting style
@@ -277,6 +278,12 @@ let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'AD
 let g:buftabline_show=1
 " }}}
 
+" taskwarrior {{{
+let g:task_default_prompt = ['project', 'description', 'priority', 'due', 'tags']
+let g:task_info_vsplit = 1
+let g:task_rc_override = 'rc.defaultwidth=0'
+" }}}
+
 " sneak {{{
 let g:sneak#s_next = 1
 map f <Plug>Sneak_f
@@ -417,7 +424,7 @@ augroup misc
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi let c_no_curly_error = 1
     au FileType python,php set smartindent
     au FileType git set foldlevel=99
-    au FileType taskreport set nonu nocursorline
+    au FileType taskreport set nonu
     au FileType json set conceallevel=0
     au BufWinEnter .vimrc set foldmethod=marker
     au FileType make set diffopt-=iwhite
