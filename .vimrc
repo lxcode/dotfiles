@@ -199,6 +199,7 @@ Plug 'vim-scripts/icalendar.vim'
 Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
 Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
 "Plug 'Yggdroot/indentLine'
 " Use these if debugging color themes/hightlighting
 " Plug 'kergoth/vim-hilinks'
@@ -255,9 +256,6 @@ if executable('bingo')
 endif
 if executable('lua-lsp')
     let g:lsc_server_commands.lua = 'lua-lsp'
-endif
-if executable('dart_language_server')
-    let g:lsc_server_commands.dart = 'dart_language_server'
 endif
 if executable('javascript-typescript-stdio')
     let g:lsc_server_commands.javascript = 'javascript-typescript-stdio'
