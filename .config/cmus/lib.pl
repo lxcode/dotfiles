@@ -3328,6 +3328,16 @@
 /Users/det/Music/various/triunity/1_blut_aus_nord-de_librio_arbitrio.flac
 /Users/det/Music/various/triunity/2_blut_aus_nord-hùbris.flac
 /Users/det/Music/various/triunity/3_blut_aus_nord-némeïnn.flac
+/Users/det/Music/blut_aus_nord/Deus Salutis Meae [Explicit]/01 - Dêmiourgos.mp3
+/Users/det/Music/blut_aus_nord/Deus Salutis Meae [Explicit]/02 - Chorea Macchabeorum.mp3
+/Users/det/Music/blut_aus_nord/Deus Salutis Meae [Explicit]/03 - Impius.mp3
+/Users/det/Music/blut_aus_nord/Deus Salutis Meae [Explicit]/04 - Gnosis.mp3
+/Users/det/Music/blut_aus_nord/Deus Salutis Meae [Explicit]/05 - Apostasis.mp3
+/Users/det/Music/blut_aus_nord/Deus Salutis Meae [Explicit]/06 - Abisme.mp3
+/Users/det/Music/blut_aus_nord/Deus Salutis Meae [Explicit]/07 - Revelatio [Explicit].mp3
+/Users/det/Music/blut_aus_nord/Deus Salutis Meae [Explicit]/08 - Hésychia.mp3
+/Users/det/Music/blut_aus_nord/Deus Salutis Meae [Explicit]/09 - Ex Tenebrae Lucis.mp3
+/Users/det/Music/blut_aus_nord/Deus Salutis Meae [Explicit]/10 - Métanoïa.mp3
 /Users/det/Music/various/the_roots_of_captain_beefheart/03-bo_diddley-diddy_wah_diddy.flac
 /Users/det/Music/various/skampler/02-boards_of_canada-hi_scores.flac
 /Users/det/Music/various/skampler/13-boards_of_canada-everything_you_do_is_a_balloon.flac
@@ -4930,16 +4940,6 @@
 /Users/det/Music/cristian_vogel/absolute_time/06-round.flac
 /Users/det/Music/cristian_vogel/absolute_time/07-comes.flac
 /Users/det/Music/cristian_vogel/absolute_time/08-around.flac
-/Users/det/Music/cristian_vogel/beginning_to_understand/01-machine.flac
-/Users/det/Music/cristian_vogel/beginning_to_understand/02-sub-aqua_(scuba_dub).flac
-/Users/det/Music/cristian_vogel/beginning_to_understand/03-hupklap.flac
-/Users/det/Music/cristian_vogel/beginning_to_understand/04-alien_conversation.flac
-/Users/det/Music/cristian_vogel/beginning_to_understand/05-scorpio.flac
-/Users/det/Music/cristian_vogel/beginning_to_understand/06-beginning_to_understand.flac
-/Users/det/Music/cristian_vogel/beginning_to_understand/07-going_the_distance.flac
-/Users/det/Music/cristian_vogel/beginning_to_understand/08-space_between_stars.flac
-/Users/det/Music/cristian_vogel/beginning_to_understand/09-heartfelt.flac
-/Users/det/Music/cristian_vogel/beginning_to_understand/10-no_time_remaining_(00_-00).flac
 /Users/det/Music/joey_beltram/(B2) Bite (Joey Beltram Rmx).mp3
 /Users/det/Music/cristian_vogel/rescate_137/01-underwater_living.flac
 /Users/det/Music/cristian_vogel/rescate_137/02-whipaspank.flac
@@ -4951,6 +4951,16 @@
 /Users/det/Music/cristian_vogel/rescate_137/08-crater_8.flac
 /Users/det/Music/cristian_vogel/rescate_137/09-bursthead.flac
 /Users/det/Music/cristian_vogel/rescate_137/10-rescate_freeformed_giggles.flac
+/Users/det/Music/cristian_vogel/beginning_to_understand/01-machine.flac
+/Users/det/Music/cristian_vogel/beginning_to_understand/02-sub-aqua_(scuba_dub).flac
+/Users/det/Music/cristian_vogel/beginning_to_understand/03-hupklap.flac
+/Users/det/Music/cristian_vogel/beginning_to_understand/04-alien_conversation.flac
+/Users/det/Music/cristian_vogel/beginning_to_understand/05-scorpio.flac
+/Users/det/Music/cristian_vogel/beginning_to_understand/06-beginning_to_understand.flac
+/Users/det/Music/cristian_vogel/beginning_to_understand/07-going_the_distance.flac
+/Users/det/Music/cristian_vogel/beginning_to_understand/08-space_between_stars.flac
+/Users/det/Music/cristian_vogel/beginning_to_understand/09-heartfelt.flac
+/Users/det/Music/cristian_vogel/beginning_to_understand/10-no_time_remaining_(00_-00).flac
 /Users/det/Music/[Tresor 044] Cristian Vogel - Bite & Scratch [1996] [192]/01_Cristian_Vogel_-_Bite_&_Scratch.mp3
 /Users/det/Music/[Tresor 044] Cristian Vogel - Bite & Scratch [1996] [192]/02_Cristian_Vogel_-_Bite_(Blake_Baxter_Rmx).mp3
 /Users/det/Music/[Tresor 044] Cristian Vogel - Bite & Scratch [1996] [192]/03_Cristian_Vogel_-_Bite_(Joey_Beltram_Rmx).mp3
@@ -5246,8 +5256,6 @@
 /Users/det/Music/cylob/bounds_green/disc_2/02-marys_hall.flac
 /Users/det/Music/cylob/bounds_green/disc_2/03-ghost_ground.flac
 /Users/det/Music/cylob/bounds_green/disc_2/04-edge.flac
-/Users/det/Music/cylob/bells.mp3
-/Users/det/Music/cylob/japantrain.mp3
 /Users/det/Music/cylob/cylobindustries/csr003mf/01.flac
 /Users/det/Music/cylob/cylobindustries/csr003mf/02.flac
 /Users/det/Music/cylob/cylobindustries/csr003mf/03.flac
@@ -8352,6 +8360,17 @@
 /Users/det/Music/full_blast/black_hole/09-teilchencrash.flac
 /Users/det/Music/full_blast/black_hole/10-large_hadron_collider.flac
 /Users/det/Music/full_blast/black_hole/11-quarks_up___down.flac
+/Users/det/Music/full_of_hell/Trumpeting Ecstasy/01 - Deluminate.mp3
+/Users/det/Music/full_of_hell/Trumpeting Ecstasy/02 - Branches Of Yew.mp3
+/Users/det/Music/full_of_hell/Trumpeting Ecstasy/03 - Bound Sphinx.mp3
+/Users/det/Music/full_of_hell/Trumpeting Ecstasy/04 - The Cosmic Vein.mp3
+/Users/det/Music/full_of_hell/Trumpeting Ecstasy/05 - Digital Prison.mp3
+/Users/det/Music/full_of_hell/Trumpeting Ecstasy/06 - Crawling Back To God.mp3
+/Users/det/Music/full_of_hell/Trumpeting Ecstasy/07 - Fractured Quartz.mp3
+/Users/det/Music/full_of_hell/Trumpeting Ecstasy/08 - Gnawed Flesh.mp3
+/Users/det/Music/full_of_hell/Trumpeting Ecstasy/09 - Ashen Mesh.mp3
+/Users/det/Music/full_of_hell/Trumpeting Ecstasy/10 - Trumpeting Ecstasy.mp3
+/Users/det/Music/full_of_hell/Trumpeting Ecstasy/11 - At The Cauldron's Bottom.mp3
 /Users/det/Music/various/clicks_&_cuts_2_disc_2/09-full_swing-drive.flac
 /Users/det/Music/funeral_mist/devilry/01-the_devils_emissary.flac
 /Users/det/Music/funeral_mist/devilry/02-bringer_of_terror.flac
@@ -8632,18 +8651,6 @@
 /Users/det/Music/gorilla_mask/bite_my_blues/7-z.flac
 /Users/det/Music/various/âme_-_fabric_42/13-gowentgone_-_broken_compass-m.a.m._(marcel_dettmann_remix)_-_australiapella_2.flac
 /Users/det/Music/various/experiments_with_truth/18-grassrow_wiese_agthe-holy_domain_(extract).flac
-/Users/det/Music/green_velvet/walk_in_love/01-ufos.flac
-/Users/det/Music/green_velvet/walk_in_love/02-temptation.flac
-/Users/det/Music/green_velvet/walk_in_love/03-overcome_the_flesh.flac
-/Users/det/Music/green_velvet/walk_in_love/04-no_sex.flac
-/Users/det/Music/green_velvet/walk_in_love/05-walk_in_love.flac
-/Users/det/Music/green_velvet/walk_in_love/06-war_on_the_saints.flac
-/Users/det/Music/green_velvet/walk_in_love/07-other_side.flac
-/Users/det/Music/green_velvet/walk_in_love/08-bathroom.flac
-/Users/det/Music/green_velvet/walk_in_love/09-cuz_of_u.flac
-/Users/det/Music/green_velvet/walk_in_love/10-victory.flac
-/Users/det/Music/green_velvet/walk_in_love/11-come_back.flac
-/Users/det/Music/green_velvet/walk_in_love/12-pinup_girl.flac
 /Users/det/Music/green_velvet/green_velvet/01-flash.flac
 /Users/det/Music/green_velvet/green_velvet/02-answering_machine.flac
 /Users/det/Music/green_velvet/green_velvet/03-the_stalker.flac
@@ -8667,6 +8674,18 @@
 /Users/det/Music/green_velvet/whatever/09-waiting_4_the_day_2_end.flac
 /Users/det/Music/green_velvet/whatever/10-dank.flac
 /Users/det/Music/various/can_you_jack_(cd2)/06-green_velvet-explorer.flac
+/Users/det/Music/green_velvet/walk_in_love/01-ufos.flac
+/Users/det/Music/green_velvet/walk_in_love/02-temptation.flac
+/Users/det/Music/green_velvet/walk_in_love/03-overcome_the_flesh.flac
+/Users/det/Music/green_velvet/walk_in_love/04-no_sex.flac
+/Users/det/Music/green_velvet/walk_in_love/05-walk_in_love.flac
+/Users/det/Music/green_velvet/walk_in_love/06-war_on_the_saints.flac
+/Users/det/Music/green_velvet/walk_in_love/07-other_side.flac
+/Users/det/Music/green_velvet/walk_in_love/08-bathroom.flac
+/Users/det/Music/green_velvet/walk_in_love/09-cuz_of_u.flac
+/Users/det/Music/green_velvet/walk_in_love/10-victory.flac
+/Users/det/Music/green_velvet/walk_in_love/11-come_back.flac
+/Users/det/Music/green_velvet/walk_in_love/12-pinup_girl.flac
 /Users/det/Music/various/nwc/7/12. youre in control - Greg Horn.mp3
 /Users/det/Music/various/nwc/8/10. clone - Greg Vandike.mp3
 /Users/det/Music/various/maschinenfest_2004_cd_1/02-greyhound-spectral.flac
@@ -9553,6 +9572,14 @@
 /Users/det/Music/immortal/all_shall_fall/05-arctic_swarm.flac
 /Users/det/Music/immortal/all_shall_fall/06-mount_north.flac
 /Users/det/Music/immortal/all_shall_fall/07-unearthly_kingdom.flac
+/Users/det/Music/immortal/Northern Chaos Gods/01 - Northern Chaos Gods.mp3
+/Users/det/Music/immortal/Northern Chaos Gods/02 - Into Battle Ride.mp3
+/Users/det/Music/immortal/Northern Chaos Gods/03 - Gates to Blashyrkh.mp3
+/Users/det/Music/immortal/Northern Chaos Gods/04 - Grim and Dark.mp3
+/Users/det/Music/immortal/Northern Chaos Gods/05 - Called to Ice.mp3
+/Users/det/Music/immortal/Northern Chaos Gods/06 - Where Mountains Rise.mp3
+/Users/det/Music/immortal/Northern Chaos Gods/07 - Blacker of Worlds.mp3
+/Users/det/Music/immortal/Northern Chaos Gods/08 - Mighty Ravendark.mp3
 /Users/det/Music/imperial_floral_assault_unit/empress/02_track_02.ogg
 /Users/det/Music/imperial_floral_assault_unit/empress/03_track_03.ogg
 /Users/det/Music/imperial_floral_assault_unit/imperial_floral_assault_unit/01_three_needles_in_the_blanket.ogg
@@ -10036,6 +10063,23 @@
 /Users/det/Music/various/I_Never_Meta_Guitar_Three/14-Jim_McAuley-Mystery_Love_Company.flac
 /Users/det/Music/various/in_memoriam_gilles_deleuze_-_cd_2/01-jim_orourke-as_in.flac
 /Users/det/Music/Jimi Hendrix - Greatest Hits - Voodoo Chile.MP3
+/Users/det/Music/jimi_hendrix/Band Of Gypsys (Live)/01 - Who Knows (Live) (1997 Digital Remaster).mp3
+/Users/det/Music/jimi_hendrix/Band Of Gypsys (Live)/02 - Machine Gun (Live) (1997 Digital Remaster).mp3
+/Users/det/Music/jimi_hendrix/Band Of Gypsys (Live)/03 - Changes (Live) (1997 Digital Remaster).mp3
+/Users/det/Music/jimi_hendrix/Band Of Gypsys (Live)/04 - Power To Love (Live) (1997 Digital Remaster).mp3
+/Users/det/Music/jimi_hendrix/Band Of Gypsys (Live)/05 - Message To Love (Live) (1997 Digital Remaster).mp3
+/Users/det/Music/jimi_hendrix/Band Of Gypsys (Live)/06 - We Gotta Live Together (Live) (1997 Digital Remaster).mp3
+/Users/det/Music/jimi_hendrix/Machine Gun- Live at The Fillmore East 12-31-1969/01 - Power of Soul (Live at the Fillmore East, NY - 12_31_69 - 1st Set).mp3
+/Users/det/Music/jimi_hendrix/Machine Gun- Live at The Fillmore East 12-31-1969/02 - Lover Man (Live at the Fillmore East, NY - 12_31_69 - 1st Set).mp3
+/Users/det/Music/jimi_hendrix/Machine Gun- Live at The Fillmore East 12-31-1969/03 - Hear My Train a Comin' (Live at the Fillmore East, NY - 12_31_69 - 1st Set).mp3
+/Users/det/Music/jimi_hendrix/Machine Gun- Live at The Fillmore East 12-31-1969/04 - Changes (Live at the Fillmore East, NY - 12_31_69 - 1st Set).mp3
+/Users/det/Music/jimi_hendrix/Machine Gun- Live at The Fillmore East 12-31-1969/05 - Izabella (Live at the Fillmore East, NY - 12_31_69 - 1st Set).mp3
+/Users/det/Music/jimi_hendrix/Machine Gun- Live at The Fillmore East 12-31-1969/06 - Machine Gun (Live at the Fillmore East, NY - 12_31_69 - 1st Set).mp3
+/Users/det/Music/jimi_hendrix/Machine Gun- Live at The Fillmore East 12-31-1969/07 - Stop (Live at the Fillmore East, NY - 12_31_69 - 1st Set).mp3
+/Users/det/Music/jimi_hendrix/Machine Gun- Live at The Fillmore East 12-31-1969/08 - Ezy Ryder (Live at the Fillmore East, NY - 12_31_69 - 1st Set).mp3
+/Users/det/Music/jimi_hendrix/Machine Gun- Live at The Fillmore East 12-31-1969/09 - Bleeding Heart (Live at the Fillmore East, NY - 12_31_69 - 1st Set).mp3
+/Users/det/Music/jimi_hendrix/Machine Gun- Live at The Fillmore East 12-31-1969/10 - Earth Blues (Live at the Fillmore East, NY - 12_31_69 - 1st Set).mp3
+/Users/det/Music/jimi_hendrix/Machine Gun- Live at The Fillmore East 12-31-1969/11 - Burning Desire (Live at the Fillmore East, NY - 12_31_69 - 1st Set).mp3
 /Users/det/Music/jk_flesh/posthuman/01-knuckledragger.flac
 /Users/det/Music/jk_flesh/posthuman/02-idle_hands.flac
 /Users/det/Music/jk_flesh/posthuman/03-punchdrunk.flac
@@ -11116,6 +11160,18 @@
 /Users/det/Music/laurie_spiegel/the_expanding_universe_cd2/08-music_for_dance_part_ii.flac
 /Users/det/Music/laurie_spiegel/the_expanding_universe_cd2/09-keplers_harmony_of_the_worlds.flac
 /Users/det/Music/laurie_spiegel/the_expanding_universe_cd2/10-wandering_in_our_times.flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 01 Three Sonic Spaces I.flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 02 Three Sonic Spaces II.flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 03 Three Sonic Spaces III.flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 04 Finding Voice.flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 05 The Hollows.flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 06 Two Archetypes- Hall of Mirrors - I.flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 07 Two Archetypes- Hurricane's Eye – II.flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 08 Sound Zones.flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 09 Riding the Storm.flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 10 Strand of Life (-Viroid-).flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 11 From a Harmonic Algorithm.flac
+/Users/det/Music/laurie_spiegel/unseen_worlds/Laurie Spiegel - Unseen Worlds - 12 Passage.flac
 /Users/det/Music/various/maschinenfest_2001_[cd2-blue)/05-law_rah_collective-fourth_incarnation.flac
 /Users/det/Music/various/spectral_(cd_2)/02-lawrence-five_leaves.flac
 /Users/det/Music/various/overland/04-lawrence_english-a_summer_crush.flac
@@ -14047,6 +14103,12 @@
 /Users/det/Music/nerve_net_noise/dark_garden/11-party_in_the_dark_garden.flac
 /Users/det/Music/various/nwc/12/19. Fat Cow - Nervous Gender.mp3
 /Users/det/Music/various/cryosphere/08-netherworld-kryos.flac
+/Users/det/Music/neu/NEU!/01 - Hallogallo.mp3
+/Users/det/Music/neu/NEU!/02 - Sonderangebot.mp3
+/Users/det/Music/neu/NEU!/03 - Weissensee.mp3
+/Users/det/Music/neu/NEU!/04 - Im Glück.mp3
+/Users/det/Music/neu/NEU!/05 - Negativland.mp3
+/Users/det/Music/neu/NEU!/06 - Lieber Honig.mp3
 /Users/det/Music/neutral/font_translation_errors/01-i_love_you_a_lot.flac
 /Users/det/Music/neutral/font_translation_errors/02-blue_paper_(a_neutral_remix).flac
 /Users/det/Music/neutral/font_translation_errors/03-five.flac
@@ -14181,6 +14243,14 @@
 /Users/det/Music/nightbringer/ego_dominus_tuus/08-the_witchfires_of_tubal-qayin.flac
 /Users/det/Music/nightbringer/ego_dominus_tuus/09-salvation_is_the_son_of_leviathan_(alabas_in_memoriam).flac
 /Users/det/Music/nightbringer/ego_dominus_tuus/10-the_otherness_of_being.flac
+/Users/det/Music/nightbringer/Terra Damnata/01 - As Wolves Amongst Ruins.mp3
+/Users/det/Music/nightbringer/Terra Damnata/02 - Misrule.mp3
+/Users/det/Music/nightbringer/Terra Damnata/03 - Midnight's Crown.mp3
+/Users/det/Music/nightbringer/Terra Damnata/04 - Of the Key and Crossed Bones.mp3
+/Users/det/Music/nightbringer/Terra Damnata/05 - Let Silence Be His Sacred Name.mp3
+/Users/det/Music/nightbringer/Terra Damnata/06 - Inheritor of a Dying World.mp3
+/Users/det/Music/nightbringer/Terra Damnata/07 - The Lamp of Inverse Light.mp3
+/Users/det/Music/nightbringer/Terra Damnata/08 - Serpent Sun.mp3
 /Users/det/Music/nightmare_lodge/negative_planet/01-first_contrast.flac
 /Users/det/Music/nightmare_lodge/negative_planet/02-baby___death.flac
 /Users/det/Music/nightmare_lodge/negative_planet/03-become_visible.flac
@@ -14547,64 +14617,64 @@
 /Users/det/Music/omit/Omit (NZ) - Negative Pulse Logic/Omit (NZ) - Negative Pulse Logic - 09 LockBack.flac
 /Users/det/Music/omit/Omit (NZ) - Negative Pulse Logic/Omit (NZ) - Negative Pulse Logic - 10 PulseBlocker.flac
 /Users/det/Music/various/nwc/13/14. annuese - One Million Fuzztone Guitars.mp3
-/Users/det/Music/oph/SFT010 - MP3 (320)/01 Andro.mp3
-/Users/det/Music/oph/SFT010 - MP3 (320)/02 Power Of Persuasion.mp3
-/Users/det/Music/oph/SFT010 - MP3 (320)/03 Sleep Dealer.mp3
-/Users/det/Music/oph/SFT010 - MP3 (320)/04 Remember.mp3
-/Users/det/Music/oph/SFT010 - MP3 (320)/05 Replica.mp3
-/Users/det/Music/oph/SFT010 - MP3 (320)/06 Nassau.mp3
-/Users/det/Music/oph/SFT010 - MP3 (320)/07 Submersible.mp3
-/Users/det/Music/oph/SFT010 - MP3 (320)/08 Up.mp3
-/Users/det/Music/oph/SFT010 - MP3 (320)/09 Child Soldier.mp3
-/Users/det/Music/oph/SFT010 - MP3 (320)/10 Explain.mp3
-/Users/det/Music/oph/SFT031 - MP3/01 Lovergirls Precinct.mp3
-/Users/det/Music/oph/SFT031 - MP3/02 Ships Without Meaning.mp3
-/Users/det/Music/oph/SFT031 - MP3/03 Terminator Lake.mp3
-/Users/det/Music/oph/SFT031 - MP3/04 Transmat Memories.mp3
-/Users/det/Music/oph/SFT031 - MP3/05 A Pact Between Strangers.mp3
-/Users/det/Music/oph/SFT031 - MP3/06 When I Get Back From New York.mp3
-/Users/det/Music/oph/SFT031 - MP3/07 I Know It's Taking Pictures from Another Plane (Inside Your Sun).mp3
-/Users/det/Music/oph/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-001-Oneohtrix Point Never-Boring Angel.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-002-Oneohtrix Point Never-Americans.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-003-Oneohtrix Point Never-He She.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-004-Oneohtrix Point Never-Inside World.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-005-Oneohtrix Point Never-Zebra.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-006-Oneohtrix Point Never-Along.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-007-Oneohtrix Point Never-Problem Areas.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-008-Oneohtrix Point Never-Cryo.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-009-Oneohtrix Point Never-Still Life.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-010-Oneohtrix Point Never-Chrome Country.mp3
-/Users/det/Music/oph/SFT030 - MP3/01 Months.mp3
-/Users/det/Music/oph/SFT030 - MP3/02 Physical Memory.mp3
-/Users/det/Music/oph/SFT030 - MP3/03 Grief and Repetition.mp3
-/Users/det/Music/oph/SFT030 - MP3/04 Russian Mind.mp3
-/Users/det/Music/oph/SFT030 - MP3/05 Time Decanted.mp3
-/Users/det/Music/oph/SFT030 - MP3/06 Immanence.mp3
-/Users/det/Music/oph/SFT032 - MP3/01 Blue Drive.mp3
-/Users/det/Music/oph/SFT032 - MP3/02 The Trouble With Being Born.mp3
-/Users/det/Music/oph/SFT032 - MP3/03 Sand Partina.mp3
-/Users/det/Music/oph/SFT032 - MP3/04 Melancholy Descriptions of Simple 3D Environments.mp3
-/Users/det/Music/oph/SFT032 - MP3/05 Memory Vague.mp3
-/Users/det/Music/oph/SFT032 - MP3/06 KGB Nights.mp3
-/Users/det/Music/oph/SFT029 - MP3/01 Computer Vision.mp3
-/Users/det/Music/oph/SFT029 - MP3/02 Format & Journey North.mp3
-/Users/det/Music/oph/SFT029 - MP3/03 Zones Without People.mp3
-/Users/det/Music/oph/SFT029 - MP3/04 Learning to Control Myself.mp3
-/Users/det/Music/oph/SFT029 - MP3/05 Disconnecting Entirely.mp3
-/Users/det/Music/oph/SFT029 - MP3/06 Emil Cioran.mp3
-/Users/det/Music/oph/SFT029 - MP3/07 Hyperdawn.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-001-Oneohtrix Point Never-Intro.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-002-Oneohtrix Point Never-Ezra.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-003-Oneohtrix Point Never-ECCOJAMC1.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-004-Oneohtrix Point Never-Sticky Drama.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-005-Oneohtrix Point Never-SDFK.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-006-Oneohtrix Point Never-Mutant Standard.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-007-Oneohtrix Point Never-Child of Rage.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-008-Oneohtrix Point Never-Animals.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-009-Oneohtrix Point Never-I Bite Through It.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-010-Oneohtrix Point Never-Freaky Eyes.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-011-Oneohtrix Point Never-Lift.mp3
-/Users/det/Music/oph/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-012-Oneohtrix Point Never-No Good.mp3
+/Users/det/Music/opn/SFT010 - MP3 (320)/01 Andro.mp3
+/Users/det/Music/opn/SFT010 - MP3 (320)/02 Power Of Persuasion.mp3
+/Users/det/Music/opn/SFT010 - MP3 (320)/03 Sleep Dealer.mp3
+/Users/det/Music/opn/SFT010 - MP3 (320)/04 Remember.mp3
+/Users/det/Music/opn/SFT010 - MP3 (320)/05 Replica.mp3
+/Users/det/Music/opn/SFT010 - MP3 (320)/06 Nassau.mp3
+/Users/det/Music/opn/SFT010 - MP3 (320)/07 Submersible.mp3
+/Users/det/Music/opn/SFT010 - MP3 (320)/08 Up.mp3
+/Users/det/Music/opn/SFT010 - MP3 (320)/09 Child Soldier.mp3
+/Users/det/Music/opn/SFT010 - MP3 (320)/10 Explain.mp3
+/Users/det/Music/opn/SFT031 - MP3/01 Lovergirls Precinct.mp3
+/Users/det/Music/opn/SFT031 - MP3/02 Ships Without Meaning.mp3
+/Users/det/Music/opn/SFT031 - MP3/03 Terminator Lake.mp3
+/Users/det/Music/opn/SFT031 - MP3/04 Transmat Memories.mp3
+/Users/det/Music/opn/SFT031 - MP3/05 A Pact Between Strangers.mp3
+/Users/det/Music/opn/SFT031 - MP3/06 When I Get Back From New York.mp3
+/Users/det/Music/opn/SFT031 - MP3/07 I Know It's Taking Pictures from Another Plane (Inside Your Sun).mp3
+/Users/det/Music/opn/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-001-Oneohtrix Point Never-Boring Angel.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-002-Oneohtrix Point Never-Americans.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-003-Oneohtrix Point Never-He She.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-004-Oneohtrix Point Never-Inside World.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-005-Oneohtrix Point Never-Zebra.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-006-Oneohtrix Point Never-Along.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-007-Oneohtrix Point Never-Problem Areas.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-008-Oneohtrix Point Never-Cryo.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-009-Oneohtrix Point Never-Still Life.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - R Plus Seven - mp3/R Plus Seven-010-Oneohtrix Point Never-Chrome Country.mp3
+/Users/det/Music/opn/SFT030 - MP3/01 Months.mp3
+/Users/det/Music/opn/SFT030 - MP3/02 Physical Memory.mp3
+/Users/det/Music/opn/SFT030 - MP3/03 Grief and Repetition.mp3
+/Users/det/Music/opn/SFT030 - MP3/04 Russian Mind.mp3
+/Users/det/Music/opn/SFT030 - MP3/05 Time Decanted.mp3
+/Users/det/Music/opn/SFT030 - MP3/06 Immanence.mp3
+/Users/det/Music/opn/SFT032 - MP3/01 Blue Drive.mp3
+/Users/det/Music/opn/SFT032 - MP3/02 The Trouble With Being Born.mp3
+/Users/det/Music/opn/SFT032 - MP3/03 Sand Partina.mp3
+/Users/det/Music/opn/SFT032 - MP3/04 Melancholy Descriptions of Simple 3D Environments.mp3
+/Users/det/Music/opn/SFT032 - MP3/05 Memory Vague.mp3
+/Users/det/Music/opn/SFT032 - MP3/06 KGB Nights.mp3
+/Users/det/Music/opn/SFT029 - MP3/01 Computer Vision.mp3
+/Users/det/Music/opn/SFT029 - MP3/02 Format & Journey North.mp3
+/Users/det/Music/opn/SFT029 - MP3/03 Zones Without People.mp3
+/Users/det/Music/opn/SFT029 - MP3/04 Learning to Control Myself.mp3
+/Users/det/Music/opn/SFT029 - MP3/05 Disconnecting Entirely.mp3
+/Users/det/Music/opn/SFT029 - MP3/06 Emil Cioran.mp3
+/Users/det/Music/opn/SFT029 - MP3/07 Hyperdawn.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-001-Oneohtrix Point Never-Intro.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-002-Oneohtrix Point Never-Ezra.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-003-Oneohtrix Point Never-ECCOJAMC1.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-004-Oneohtrix Point Never-Sticky Drama.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-005-Oneohtrix Point Never-SDFK.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-006-Oneohtrix Point Never-Mutant Standard.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-007-Oneohtrix Point Never-Child of Rage.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-008-Oneohtrix Point Never-Animals.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-009-Oneohtrix Point Never-I Bite Through It.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-010-Oneohtrix Point Never-Freaky Eyes.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-011-Oneohtrix Point Never-Lift.mp3
+/Users/det/Music/opn/Oneohtrix Point Never - Garden of Delete - mp3/Garden of Delete-012-Oneohtrix Point Never-No Good.mp3
 /Users/det/Music/various/untitled/04-operation_cleansweep-japan.flac
 /Users/det/Music/various/untitled/05-operation_cleansweep-untitled.flac
 /Users/det/Music/various/nwc/8/16. nocturnal operations - Orbidoig.mp3
@@ -17379,6 +17449,7 @@
 /Users/det/Music/silk_saw/imaginary_landscapes/Silk Saw - Imaginary Landscapes - 06 Enough Slaps.flac
 /Users/det/Music/silk_saw/imaginary_landscapes/Silk Saw - Imaginary Landscapes - 07 The Decision to Exist (part 2).flac
 /Users/det/Music/silk_saw/imaginary_landscapes/Silk Saw - Imaginary Landscapes - 08 Pricks.flac
+/Users/det/Music/silk_saw/Silk-Saw-Secret-Thirteen-Mix-206/Silk-Saw-Secret-Thirteen-Mix-206.mp3
 /Users/det/Music/silk_saw_vs_jardin_dusure/electric_musical_chairs/01-this_machine_kills.flac
 /Users/det/Music/silk_saw_vs_jardin_dusure/electric_musical_chairs/02-antechamber.flac
 /Users/det/Music/silk_saw_vs_jardin_dusure/electric_musical_chairs/03-ineluctable.flac
@@ -19665,12 +19736,49 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/orphx_and_the_infant_cycle/interference/02-wrong_speed.flac
 /Users/det/Music/orphx_and_the_infant_cycle/interference/04-wrong_speed_(orphx_remix).flac
 /Users/det/Music/various/interstellar_fugitives_2_[destruction_of_order]_-_cd_2/13-the_infiltrator-mindsweeper.flac
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/01 - Exp.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/02 - Up From The Skies.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/03 - Spanish Castle Magic.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/04 - Wait Until Tomorrow.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/05 - Ain't No Telling.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/06 - Little Wing.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/07 - If 6 Was 9.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/08 - You Got Me Floatin'.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/09 - Castles Made Of Sand.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/10 - She's So Fine.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/11 - One Rainy Wish.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/12 - Little Miss Lover.mp3
+/Users/det/Music/jimi_hendrix/Axis- Bold As Love [+video]/13 - Bold As Love.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/01 - ...And The Gods Made Love.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/02 - Have You Evere Been (To Electric Ladyland).mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/03 - Crosstown Traffic.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/04 - Voodoo Chile.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/05 - Little Miss Strange.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/06 - Long Hot Summer Night.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/07 - Come On (Let The Good Times Roll).mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/08 - Gypsy Eyes.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/09 - Burning Of The Midnight Lamp.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/10 - Rainy Day, Dream Away.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/11 - 1983...(A Merman I Should Turn To Be).mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/12 - Moon, Turn The Tides...Gently Gently Away.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/13 - Still Raining, Still Dreaming.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/14 - House Burning Down.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/15 - All Along The Watchtower.mp3
+/Users/det/Music/jimi_hendrix/Electric Ladyland [+Video]/16 - Voodoo Child (Slight Return).mp3
 /Users/det/Music/various/nwc/16/13. Sugar Days - The Living Daylights.mp3
 /Users/det/Music/various/nocturbulous_behaviour_-_the_mix/07-the_martian-medicine_man.flac
 /Users/det/Music/various/nocturbulous_behaviour_-_the_mix/14-the_martian-particle_shower.flac
 /Users/det/Music/various/nocturbulous_behaviour_-_the_mix/15-the_martian-vortexual_conceptions.flac
 /Users/det/Music/various/nwc/7/15 A Circuit Like Me.mp3
 /Users/det/Music/various/nwc/6/01. Front - The Naughtiest Girl Was A Monitor.mp3
+/Users/det/Music/nels_cline_4/Currents, Constellations/01 - Furtive.mp3
+/Users/det/Music/nels_cline_4/Currents, Constellations/02 - Swing Ghost '59.mp3
+/Users/det/Music/nels_cline_4/Currents, Constellations/03 - Imperfect 10.mp3
+/Users/det/Music/nels_cline_4/Currents, Constellations/04 - As Close As That.mp3
+/Users/det/Music/nels_cline_4/Currents, Constellations/05 - Amenette.mp3
+/Users/det/Music/nels_cline_4/Currents, Constellations/06 - Temporarily.mp3
+/Users/det/Music/nels_cline_4/Currents, Constellations/07 - River Mouth (Parts 1 & 2).mp3
+/Users/det/Music/nels_cline_4/Currents, Constellations/08 - For Each, A Flower.mp3
 /Users/det/Music/the_nordic_miracle/compilation_tracks/ladies_only_from_hell_oh!!!_compilation.mp3
 /Users/det/Music/the_normal/warm_leatherette_/1-warm_leatherette.flac
 /Users/det/Music/the_normal/warm_leatherette_/2-t.v.o.d..flac
@@ -21492,6 +21600,10 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/various/International DeeJay Gigolos CD Eight/211 - Various Artists - International DeeJay Gigolos CD Eight - Leon Segka - Attached Theory.mp3
 /Users/det/Music/various/International DeeJay Gigolos CD Eight/212 - Various Artists - International DeeJay Gigolos CD Eight - Steril - Voodoo.mp3
 /Users/det/Music/various/International DeeJay Gigolos CD Eight/213 - Various Artists - International DeeJay Gigolos CD Eight - Mihai Popoviciu - Sexy Spenders.mp3
+/Users/det/Music/merzbow/Cuts of Guilt, Cuts Deeper/01 - Replaced by Shame, Only Two Left.mp3
+/Users/det/Music/merzbow/Cuts of Guilt, Cuts Deeper/02 - Divided by Steel. Falling Gracefully..mp3
+/Users/det/Music/merzbow/Cuts of Guilt, Cuts Deeper/03 - Too Late, Too Sharp - It Is Over.mp3
+/Users/det/Music/merzbow/Cuts of Guilt, Cuts Deeper/04 - All His Teeth in Hand, Asking Her Once More.mp3
 /Users/det/Music/various/nwc/16/11. Moi Et Mon Image - Variete Kontrast.mp3
 /Users/det/Music/various/the_sound_of_2am/06-vegas_soul-retrograde.flac
 /Users/det/Music/velvet_cacoon/genevieve/01-1.flac
@@ -22536,6 +22648,8 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/zu/carboniferous/08-mimosa_hostilis.flac
 /Users/det/Music/zu/carboniferous/09-obsidian.flac
 /Users/det/Music/zu/carboniferous/10-orc.flac
+/Users/det/Music/zu/Jhator/01 - Jhator_ A Sky Burial.mp3
+/Users/det/Music/zu/Jhator/02 - The Dawning Moon of the Mind.mp3
 /Users/det/Music/zu_&_mats_gustafsson/how_to_raise_an_ox/01-over_a_furnace.flac
 /Users/det/Music/zu_&_mats_gustafsson/how_to_raise_an_ox/02-how_to_raise_an_ox.flac
 /Users/det/Music/zu_&_mats_gustafsson/how_to_raise_an_ox/03-eating_the_landscape.flac
