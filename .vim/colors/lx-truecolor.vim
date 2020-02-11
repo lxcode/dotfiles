@@ -169,3 +169,6 @@ hi link taskwarrior_due       Constant
 hi link taskwarrior_urgency   Conditional
 hi link taskwarrior_tablehead Normal
 hi link taskwarrior_field     Visual
+
+hi link lscCurrentParameter Visual
+hi link lscReference Visual
