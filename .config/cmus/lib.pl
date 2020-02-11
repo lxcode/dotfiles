@@ -1173,13 +1173,17 @@
 /Users/det/Music/ammer_&_einheit/sie_sprechen_mit_der_stasi/11-untitled.flac
 /Users/det/Music/ammer_&_einheit/sie_sprechen_mit_der_stasi/12-untitled.flac
 /Users/det/Music/ammer_&_einheit/sie_sprechen_mit_der_stasi/13-untitled.flac
+/Users/det/Music/ammer_einheit/deutsche_krieger/01-kaiser_wilhelm_overdrive_(vorspiel,_das_fünfte).flac
 /Users/det/Music/ammer_einheit/deutsche_krieger/02-kaiser_wilhelm_overdrive_(sprechmaschine).flac
+/Users/det/Music/ammer_einheit/deutsche_krieger/03-kaiser_wilhelm_overdrive_(königsschloss_01.08.1914).flac
 /Users/det/Music/ammer_einheit/deutsche_krieger/04-kaiser_wilhelm_overdrive_(schlachtfeld).flac
 /Users/det/Music/ammer_einheit/deutsche_krieger/05-kaiser_wilhelm_overdrive_(09.11.1918).flac
+/Users/det/Music/ammer_einheit/deutsche_krieger/06-adolf_hitler_enterprise_(vorspiel,_der_fünfte).flac
 /Users/det/Music/ammer_einheit/deutsche_krieger/07-adolf_hitler_enterprise_(radio_30.01.1933).flac
 /Users/det/Music/ammer_einheit/deutsche_krieger/08-adolf_hitler_enterprise_(sender_1212).flac
 /Users/det/Music/ammer_einheit/deutsche_krieger/09-adolf_hitler_enterprise_(24.12.1941).flac
 /Users/det/Music/ammer_einheit/deutsche_krieger/10-adolf_hitler_enterprise_(bunker_08.05.1945).flac
+/Users/det/Music/ammer_einheit/deutsche_krieger/11-ulrike_meinhof_paradise_(vorspiel,_die_fünfte).flac
 /Users/det/Music/ammer_einheit/deutsche_krieger/12-ulrike_meinhof_paradise_(fernsehen_02.07.1967).flac
 /Users/det/Music/ammer_einheit/deutsche_krieger/13-ulrike_meinhof_paradise_(14.05.1970).flac
 /Users/det/Music/ammer_einheit/deutsche_krieger/14-ulrike_meinhof_paradise_(08.05.1970).flac
@@ -1209,10 +1213,6 @@
 /Users/det/Music/ammer_&_einheit/frost_79°40/23-things_still_at_one_ton_depot.flac
 /Users/det/Music/ammer_&_einheit/frost_79°40/24-tryggve_gran_remembers_(pt._2).flac
 /Users/det/Music/ammer_&_einheit/frost_79°40/25-frozen.flac
-/Users/det/Music/ammer_einheit/deutsche_krieger/01-kaiser_wilhelm_overdrive_(vorspiel,_das_fünfte).flac
-/Users/det/Music/ammer_einheit/deutsche_krieger/03-kaiser_wilhelm_overdrive_(königsschloss_01.08.1914).flac
-/Users/det/Music/ammer_einheit/deutsche_krieger/06-adolf_hitler_enterprise_(vorspiel,_der_fünfte).flac
-/Users/det/Music/ammer_einheit/deutsche_krieger/11-ulrike_meinhof_paradise_(vorspiel,_die_fünfte).flac
 /Users/det/Music/ammer,_einheit,_haage/apocalypse_live/01-himmelspforte_(sinfonia).flac
 /Users/det/Music/ammer,_einheit,_haage/apocalypse_live/02-i_will_survive_(rezitativ_&_introitus).flac
 /Users/det/Music/ammer,_einheit,_haage/apocalypse_live/03-john_meets_his_angel_(duett).flac
@@ -8371,6 +8371,17 @@
 /Users/det/Music/full_of_hell/Trumpeting Ecstasy/09 - Ashen Mesh.mp3
 /Users/det/Music/full_of_hell/Trumpeting Ecstasy/10 - Trumpeting Ecstasy.mp3
 /Users/det/Music/full_of_hell/Trumpeting Ecstasy/11 - At The Cauldron's Bottom.mp3
+/Users/det/Music/full_of_hell/Weeping Choir/01 - Burning Myrrh.mp3
+/Users/det/Music/full_of_hell/Weeping Choir/02 - Haunted Arches.mp3
+/Users/det/Music/full_of_hell/Weeping Choir/03 - Thundering Hammers.mp3
+/Users/det/Music/full_of_hell/Weeping Choir/04 - Rainbow Coil.mp3
+/Users/det/Music/full_of_hell/Weeping Choir/05 - Aria of Jeweled Tears.mp3
+/Users/det/Music/full_of_hell/Weeping Choir/06 - Downward.mp3
+/Users/det/Music/full_of_hell/Weeping Choir/07 - Armory of Obsidian Glass.mp3
+/Users/det/Music/full_of_hell/Weeping Choir/08 - Silmaril.mp3
+/Users/det/Music/full_of_hell/Weeping Choir/09 - Angels Gather Here.mp3
+/Users/det/Music/full_of_hell/Weeping Choir/10 - Ygramul the Many.mp3
+/Users/det/Music/full_of_hell/Weeping Choir/11 - Cellar of Doors.mp3
 /Users/det/Music/various/clicks_&_cuts_2_disc_2/09-full_swing-drive.flac
 /Users/det/Music/funeral_mist/devilry/01-the_devils_emissary.flac
 /Users/det/Music/funeral_mist/devilry/02-bringer_of_terror.flac
@@ -17664,6 +17675,25 @@
 /Users/det/Music/snakefinger/a_collection/18-save_me_from_dali.flac
 /Users/det/Music/snakefinger/a_collection/19-living_in_vain.flac
 /Users/det/Music/snakefinger/a_collection/20-the_picture_makers_vs._children_of_the_sea.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 01 Sophia's Playful Pipes.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 02 There's No Justice In Life.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 03 Bless Me For I Have Sinned.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 04 Jesus Gave Me Water.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 05 Move.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 06 The Golden King.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 07 Bad Day In Bombay (Parts I & II).flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 08 8 1-4.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 09 I Gave Myself To You.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 10 Sawney Bean-Sawney's Death Dance.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 11 This Is Not A Disco Song.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 12 You're A Can Of Gasoline (I'm A Lighted Match).flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 13 Artists In Bed.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 14 It Hurts Me, Too.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 15 Hidden Treasure.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 16 Mary Ann.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 17 Wanderers Return.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 18 Hollywood Blues.flac
+/Users/det/Music/snakefinger/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects/SNAKEFINGER'S VESTAL VIRGINS - Night Of Desirable Objects - 19 Desert Island Woman.flac
 /Users/det/Music/various/clicks_&_cuts_2_disc_1/01-snd-circa_1666.flac
 /Users/det/Music/snog/The Future/SNOG - The Future.mp3
 /Users/det/Music/snog/The Future/SNOG - The Meat Boutique.mp3
@@ -22832,29 +22862,16 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/ø_+_noto/wohltemperiert/13-struktur.flac
 /Users/det/Music/ø_+_noto/wohltemperiert/14-ems.flac
 /Users/det/Music/ø_+_noto/wohltemperiert/15-zwielichtmelodie.flac
-/Users/det/Music/ギターウルフ/狼惑星/01-kawasaki_zii750_rock_n_roll.flac
-/Users/det/Music/ギターウルフ/狼惑星/02-planet_of_the_wolves.flac
-/Users/det/Music/ギターウルフ/狼惑星/03-invader_ace.flac
-/Users/det/Music/ギターウルフ/狼惑星/04-motor_cycle_leather_boy.flac
-/Users/det/Music/ギターウルフ/狼惑星/05-far_east_man.flac
-/Users/det/Music/ギターウルフ/狼惑星/06-wild_zero.flac
-/Users/det/Music/ギターウルフ/狼惑星/07-planet_heart.flac
-/Users/det/Music/ギターウルフ/狼惑星/08-energy_joe.flac
-/Users/det/Music/ギターウルフ/狼惑星/09-jett_love.flac
-/Users/det/Music/ギターウルフ/狼惑星/10-(i_cant_get_no)_satisfaction.flac
-/Users/det/Music/ギターウルフ/狼惑星/11-kung_fu_ramones_passion.flac
-/Users/det/Music/ギターウルフ/狼惑星/12-lets_get_hurt.flac
-/Users/det/Music/ギターウルフ/狼惑星/13-all_through_the_night_buttobase!!.flac
-/Users/det/Music/ギターウルフ/狼惑星/14-rumble.flac
-/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc1/1-物狂1-1.flac
-/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/1-物狂2-1.flac
-/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc1/2-物狂1-2.flac
-/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/2-物狂2-2.flac
-/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc1/3-物狂1-3.flac
-/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/3-物狂2-3.flac
-/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/4-物狂2-4.flac
-/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/5-物狂2-5.flac
-/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/6-物狂2-6.flac
+/Users/det/Music/폐허/the_haunted_house/01-앞풀이_.flac
+/Users/det/Music/폐허/the_haunted_house/02-흉가에_얽힌_이야기_1.flac
+/Users/det/Music/폐허/the_haunted_house/03-흉가에_얽힌_이야기_2.flac
+/Users/det/Music/폐허/the_haunted_house/04-흉가에_얽힌_이야기_3.flac
+/Users/det/Music/폐허/the_haunted_house/05-노인의_노래.flac
+/Users/det/Music/폐허/the_haunted_house/06-서막.flac
+/Users/det/Music/폐허/the_haunted_house/07-흉가의_끝.flac
+/Users/det/Music/폐허/the_haunted_house/08-노인의_노래.flac
+/Users/det/Music/폐허/the_haunted_house/09-message_from_heaven.flac
+/Users/det/Music/폐허/the_haunted_house/10-나그네의_세월.flac
 /Users/det/Music/大友良英/we_insist/01-we_insist_a)_rinko-gun_b)_x-day.flac
 /Users/det/Music/大友良英/we_insist/02-replicant.flac
 /Users/det/Music/大友良英/we_insist/03-terminal-zero.flac
@@ -22935,26 +22952,6 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/大友良英/guitar_solo/08-cylinder.flac
 /Users/det/Music/大友良英/guitar_solo/09-lonely_woman.flac
 /Users/det/Music/大友良英/modulation_with_2_electric_guitars_and_2_amplifiers/01-modulation_with_2_electric_guitars_and_2_amplifiers.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/01-dragon_man.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/02-buddha_mask.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/03-concrete_music.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/04-ele-king.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/05-electric_bunch.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/06-forbidden_game.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/07-attack.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/08-metal_dub_soup.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/09-buddha_division.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/10-dead_angle.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/11-franken_guitar.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/12-dragon_vs_buddha.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/13-spark.flac
-/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/14-dragon_master.flac
-/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/1-double_helix.flac
-/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/2-nita.flac
-/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/3-chiasma.flac
-/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/4-horse_trip.flac
-/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/5-intoro_hachi.flac
-/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/6-hachi.flac
 /Users/det/Music/嶺川貴子/Cloudy_Cloud_Calculator/Takako_Minekawa-Cloudy_Cloud_Calculator-01-Micro_Mini_Cool.mp3
 /Users/det/Music/嶺川貴子/Cloudy_Cloud_Calculator/Takako_Minekawa-Cloudy_Cloud_Calculator-02-Milk_Rock.mp3
 /Users/det/Music/嶺川貴子/Cloudy_Cloud_Calculator/Takako_Minekawa-Cloudy_Cloud_Calculator-03-Phonobaloon_Song.mp3
@@ -22987,16 +22984,6 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/嶺川貴子/Maxi_On/Takako_Minekawa-Maxi_On-05-Picnic_At_Loose_Rock.mp3
 /Users/det/Music/嶺川貴子/Maxi_On/Takako_Minekawa-Maxi_On-06-Follow_My_Dreams.mp3
 /Users/det/Music/嶺川貴子/Maxi_On/Takako_Minekawa-Maxi_On-07-Sleeping_Bag.mp3
-/Users/det/Music/接触伝染性的絶頂感/源流/01-導入.flac
-/Users/det/Music/接触伝染性的絶頂感/源流/02-消失の方法.flac
-/Users/det/Music/接触伝染性的絶頂感/源流/03-深層部へ.flac
-/Users/det/Music/接触伝染性的絶頂感/源流/04-不可視的固体群.flac
-/Users/det/Music/接触伝染性的絶頂感/源流/05-奇妙な者.flac
-/Users/det/Music/接触伝染性的絶頂感/源流/06-メット・デス.flac
-/Users/det/Music/接触伝染性的絶頂感/源流/07-馬に殺された、そして．．．.flac
-/Users/det/Music/接触伝染性的絶頂感/源流/08-外部から、内部へ.flac
-/Users/det/Music/接触伝染性的絶頂感/源流/09-薄暗い空.flac
-/Users/det/Music/接触伝染性的絶頂感/源流/10-ファイヤーウォーカー（律動時代）.flac
 /Users/det/Music/池田亮司/1000_fragments/01-testone.flac
 /Users/det/Music/池田亮司/1000_fragments/02-trans-missions.flac
 /Users/det/Music/池田亮司/1000_fragments/03-this_is_a_recording.flac
@@ -23288,13 +23275,56 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/角田俊也/ridge_of_undulation/06-arrival,_kisarazu_bay_11_dec_97.flac
 /Users/det/Music/角田俊也/ridge_of_undulation/07-an_aluminum_plate_with_low_frequencies_2.flac
 /Users/det/Music/角田俊也/ridge_of_undulation/08-sine_waves_mixed_with_the_sound_of_a_vibrating_surface_2.flac
-/Users/det/Music/폐허/the_haunted_house/01-앞풀이_.flac
-/Users/det/Music/폐허/the_haunted_house/02-흉가에_얽힌_이야기_1.flac
-/Users/det/Music/폐허/the_haunted_house/03-흉가에_얽힌_이야기_2.flac
-/Users/det/Music/폐허/the_haunted_house/04-흉가에_얽힌_이야기_3.flac
-/Users/det/Music/폐허/the_haunted_house/05-노인의_노래.flac
-/Users/det/Music/폐허/the_haunted_house/06-서막.flac
-/Users/det/Music/폐허/the_haunted_house/07-흉가의_끝.flac
-/Users/det/Music/폐허/the_haunted_house/08-노인의_노래.flac
-/Users/det/Music/폐허/the_haunted_house/09-message_from_heaven.flac
-/Users/det/Music/폐허/the_haunted_house/10-나그네의_세월.flac
+/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/1-double_helix.flac
+/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/2-nita.flac
+/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/3-chiasma.flac
+/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/4-horse_trip.flac
+/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/5-intoro_hachi.flac
+/Users/det/Music/山下洋輔,_坂田明,_森山威男/chiasma/6-hachi.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/01-dragon_man.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/02-buddha_mask.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/03-concrete_music.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/04-ele-king.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/05-electric_bunch.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/06-forbidden_game.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/07-attack.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/08-metal_dub_soup.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/09-buddha_division.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/10-dead_angle.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/11-franken_guitar.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/12-dragon_vs_buddha.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/13-spark.flac
+/Users/det/Music/小野川浩幸__mach_1.67/electric_dragon_80000v/14-dragon_master.flac
+/Users/det/Music/ギターウルフ/狼惑星/01-kawasaki_zii750_rock_n_roll.flac
+/Users/det/Music/ギターウルフ/狼惑星/02-planet_of_the_wolves.flac
+/Users/det/Music/ギターウルフ/狼惑星/03-invader_ace.flac
+/Users/det/Music/ギターウルフ/狼惑星/04-motor_cycle_leather_boy.flac
+/Users/det/Music/ギターウルフ/狼惑星/05-far_east_man.flac
+/Users/det/Music/ギターウルフ/狼惑星/06-wild_zero.flac
+/Users/det/Music/ギターウルフ/狼惑星/07-planet_heart.flac
+/Users/det/Music/ギターウルフ/狼惑星/08-energy_joe.flac
+/Users/det/Music/ギターウルフ/狼惑星/09-jett_love.flac
+/Users/det/Music/ギターウルフ/狼惑星/10-(i_cant_get_no)_satisfaction.flac
+/Users/det/Music/ギターウルフ/狼惑星/11-kung_fu_ramones_passion.flac
+/Users/det/Music/ギターウルフ/狼惑星/12-lets_get_hurt.flac
+/Users/det/Music/ギターウルフ/狼惑星/13-all_through_the_night_buttobase!!.flac
+/Users/det/Music/ギターウルフ/狼惑星/14-rumble.flac
+/Users/det/Music/接触伝染性的絶頂感/源流/01-導入.flac
+/Users/det/Music/接触伝染性的絶頂感/源流/02-消失の方法.flac
+/Users/det/Music/接触伝染性的絶頂感/源流/03-深層部へ.flac
+/Users/det/Music/接触伝染性的絶頂感/源流/04-不可視的固体群.flac
+/Users/det/Music/接触伝染性的絶頂感/源流/05-奇妙な者.flac
+/Users/det/Music/接触伝染性的絶頂感/源流/06-メット・デス.flac
+/Users/det/Music/接触伝染性的絶頂感/源流/07-馬に殺された、そして．．．.flac
+/Users/det/Music/接触伝染性的絶頂感/源流/08-外部から、内部へ.flac
+/Users/det/Music/接触伝染性的絶頂感/源流/09-薄暗い空.flac
+/Users/det/Music/接触伝染性的絶頂感/源流/10-ファイヤーウォーカー（律動時代）.flac
+/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc1/1-物狂1-1.flac
+/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/1-物狂2-1.flac
+/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc1/2-物狂1-2.flac
+/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/2-物狂2-2.flac
+/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc1/3-物狂1-3.flac
+/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/3-物狂2-3.flac
+/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/4-物狂2-4.flac
+/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/5-物狂2-5.flac
+/Users/det/Music/一噌幸弘、原田依幸、吉田達也/物狂－セシル・テイラー追悼/disc2/6-物狂2-6.flac

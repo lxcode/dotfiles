@@ -67,6 +67,7 @@ set icecast_default_charset=ISO-8859-1
 set id3_default_charset=ISO-8859-1
 set input.aac.priority=50
 set input.cue.priority=50
+set input.ffmpeg.priority=30
 set input.flac.priority=50
 set input.mad.priority=55
 set input.mp4.priority=50
