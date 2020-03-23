@@ -1,7 +1,7 @@
 #!/bin/sh
 # Run this script as a regular user.
 
-# Re-enable chime
+# Re-enable chime on older macs
 sudo /usr/sbin/nvram 'BootAudio=%01'
 
 # Don't show me a splash screen
@@ -165,7 +165,6 @@ done
 # It's my library. Let me see it.
 chflags nohidden ~/Library/
 sudo chflags nohidden /tmp
-sudo chflags nohidden /usr
 
 # Kill parentalcontrolsd
 sudo rm -rf "/Library/Application Support/Apple/ParentalControls"
@@ -227,17 +226,16 @@ brew doctor
 brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
     python3 weechat youtube-dl bbe zsh vdirsyncer khal \
     fzf mosh tree ripgrep fd htop mtr cmus notmuch isync \
-    bitlbee khard go pass
-brew install vim --with-override-system-vi --with-lua --with-python3
+    bitlbee khard go pass rclone
+brew install vim --with-lua --with-python3
 brew install ctags --HEAD
-brew linkapps
 pip3 install peewee python-language-server requests
 
 # Install casks
 read -p "Preparing to install casks"
-brew install caskroom/cask/brew-cask
+brew install homebrew/cask-cask
 brew tap buo/cask-upgrade
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
 brew cask install font-inconsolata
 brew cask install font-source-code-pro
 brew cask install kitty
@@ -257,5 +255,5 @@ luarocks install --server=https://luarocks.org/dev lua-lsp
 brew tap dart-lang/dart
 brew install dart
 pub global activate dart_language_server
-brew install node
+brew install node yarn
 yarn global add javascript-typescript-langserver
