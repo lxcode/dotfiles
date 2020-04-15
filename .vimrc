@@ -78,18 +78,12 @@ syntax on
 filetype indent on
 helptags ~/.vim/doc
 
-if $DISPLAY != ""
-    set clipboard=unnamed
-    set mouse=a             " Turn this off for console-only mode
-    if !has('nvim')
-        set ttymouse=xterm2
-    endif
-endif
+set clipboard=unnamed
+set mouse=a             " Turn this off for console-only mode
 set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
 set noerrorbells vb t_vb=   " no bells
-set number                  " line numbers
 set viewdir=$HOME/.views    " keep view states out of my .vim
 set pumheight=15            " trim down the completion popup menu
 set shortmess+=atIoT        " save space in status messages
@@ -192,7 +186,7 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'solarnz/thrift.vim', { 'for': 'thrift'}
-"Plug 'tomtom/quickfixsigns_vim'
+Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/icalendar.vim'
@@ -200,6 +194,7 @@ Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
 Plug 'natebosch/vim-lsc'
 Plug 'natebosch/vim-lsc-dart'
+Plug 'goerz/jupytext.vim'
 "Plug 'Yggdroot/indentLine'
 " Use these if debugging color themes/hightlighting
 " Plug 'kergoth/vim-hilinks'
@@ -338,26 +333,10 @@ let g:statline_show_encoding=0
 " }}}
 
 " vimtex {{{
-    let g:vimtex_compiler_latexmk = {
-        \ 'backend' : 'jobs',
-        \ 'background' : 1,
-        \ 'build_dir' : 'aux',
-        \ 'callback' : 0,
-        \ 'continuous' : 0,
-        \ 'executable' : 'latexmk',
-        \ 'options' : [
-        \   '-pdf',
-        \   '-verbose',
-        \   '-file-line-error',
-        \   '-synctex=1',
-        \   '-interaction=nonstopmode',
-        \ ],
-        \}
-
     " Ignore usually useless messages
     let g:vimtex_quickfix_latexlog = {
-                \ 'overfull' : 0,
                 \ 'references' : 0,
+                \ 'overfull' : 0,
                 \ 'underfull' : 0,
                 \}
 " }}}

@@ -257,3 +257,4 @@ brew install dart
 pub global activate dart_language_server
 brew install node yarn
 yarn global add javascript-typescript-langserver
+GO111MODULE=on go get golang.org/x/tools/gopls@latest
