@@ -1,7 +1,7 @@
 [calendars]
 
 [[home]]
-    path = ~/.calendars/redundancy/
+    path = ~/.calendars/icloud/home/
     color = dark cyan
 
 [[facebook]]
@@ -11,10 +11,6 @@
 [[holidays]]
     path = ~/.calendars/holidays/
     color = dark magenta
-
-[[nicole]]
-    path = ~/.calendars/nicole/
-    color = dark green
 
 [[duedates]]
     path = ~/.calendars/duedates/
