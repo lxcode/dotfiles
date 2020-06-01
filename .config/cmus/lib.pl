@@ -1,29 +1,33 @@
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/215 - 0512 - CHEETAHT7 Teac.wav
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/231 - 0824 - Nqz3 Singing Chaos Montage+6.wav
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/232 - 0824 - Nqz11 Fucked Pwm Fb Edit+6 [ambient chillout, cafe del mar mix].wav
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/233 - 0826 - MODULART3 [schmoo Pulse]+e.aiff
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/234 - 0826 - MODULART4 [sprectral Modblur1].aiff
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/236 - 0826 - DIGISND80T2[digisound Modular VCDCO's (stereo)] Comp Examples1.wav
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/238 - 0826 - Lecce - Voltage Controlled Acoustic Resonators.wav
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/240 - 0826 - @FX - ChatterwavesTRIXT2.wav
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/242 - 0827 - Dx9 20 Afx Voices.wav
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/244 - 0828 - Casio Rz1 Sound Collection cassette SideB [DIGITAL SAMPLING RHYTHM COMPOSER] Twatcut.wav.aiff
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/245 - 0828 - Casio Rz1 Sound Collection SideA [DIGITAL SAMPLING RHYTHM COMPOSER] Twatcut.aiff
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/259 - 1014 - scspch.wav
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/259a - 1224 - sc3.wav
 /Users/det/Music/autechre/Warp Tapes 89-93/Warp Tapes 89-93 Part 1.wav
 /Users/det/Music/autechre/Warp Tapes 89-93/Warp Tapes 89-93 Part 2.wav
-/Users/det/Music/bad_sector/1.wav
-/Users/det/Music/bad_sector/10.wav
-/Users/det/Music/bad_sector/11.wav
-/Users/det/Music/bad_sector/12.wav
-/Users/det/Music/bad_sector/13.wav
-/Users/det/Music/bad_sector/14.wav
-/Users/det/Music/bad_sector/15.wav
-/Users/det/Music/bad_sector/2.wav
-/Users/det/Music/bad_sector/3.wav
-/Users/det/Music/bad_sector/4.wav
-/Users/det/Music/bad_sector/5.wav
-/Users/det/Music/bad_sector/6.wav
-/Users/det/Music/bad_sector/7.wav
-/Users/det/Music/bad_sector/8.wav
-/Users/det/Music/bad_sector/9.wav
+/Users/det/Music/bad_sector/sound_sources/1.wav
+/Users/det/Music/bad_sector/sound_sources/10.wav
+/Users/det/Music/bad_sector/sound_sources/11.wav
+/Users/det/Music/bad_sector/sound_sources/12.wav
+/Users/det/Music/bad_sector/sound_sources/13.wav
+/Users/det/Music/bad_sector/sound_sources/14.wav
+/Users/det/Music/bad_sector/sound_sources/15.wav
+/Users/det/Music/bad_sector/sound_sources/2.wav
+/Users/det/Music/bad_sector/sound_sources/3.wav
+/Users/det/Music/bad_sector/sound_sources/4.wav
+/Users/det/Music/bad_sector/sound_sources/5.wav
+/Users/det/Music/bad_sector/sound_sources/6.wav
+/Users/det/Music/bad_sector/sound_sources/7.wav
+/Users/det/Music/bad_sector/sound_sources/8.wav
+/Users/det/Music/bad_sector/sound_sources/9.wav
 /Users/det/Music/drudkh/tosdats/01 Nakryta Neba Burym Dakhom.wav
 /Users/det/Music/drudkh/tosdats/02 U Dakhiv Irzhavim Kolossyu.wav
 /Users/det/Music/drudkh/tosdats/03 Vechirniy Smerk Okutuye Kimnaty.wav
@@ -39,6 +43,10 @@
 /Users/det/Music/telepherique/soundsources/telepherique_ss_rm_we_0022_l7.wav
 /Users/det/Music/telepherique/soundsources/telepherique_ss_rm_we_0022_l8.wav
 /Users/det/Music/telepherique/soundsources/telepherique_ss_rm_we_0022_l9.wav
+/Users/det/Music/thomas_köner/the_futurist_manifesto/Thomas Koner - The Futurist Manifesto - Thomas_Koner_Futurist_Manifesto_piano_live_electronics_visuals 4.mp4
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/237 - 0826 - MODULART2 [tubeRezswirl2].aiff
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/259a - 1224 - sc3.wv
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/259 - 1014 - scspch.wv
 /Users/det/Music/mixtapes/Bad Boy Bill.mp3
 /Users/det/Music/mixtapes/Bad Boy Bill 86 Pt 1.mp3
 /Users/det/Music/mixtapes/Bad Boy Bill 86 Pt 2.mp3
@@ -227,6 +235,7 @@
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/214 - 0512 - Cheetah3 Teac.mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/215 - 0512 - CHEETAHT7 Teac.flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/215 - 0512 - CHEETAHT7 Teac.mp3
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/215 - 0512 - CHEETAHT7 Teac.wv
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/216 - 0512 - 3 Organ Velocity.mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/217 - 0512 - Nutcrapper.mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/218 - 0512 - Mulberry Bush.mp3
@@ -240,29 +249,41 @@
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/230 - 0522 - Nightmail 1.mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/231 - 0824 - nqz3 singing chaos montage+6.flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/231 - 0824 - nqz3 singing chaos montage+6.mp3
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/231 - 0824 - nqz3 singing chaos montage+6.wv
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/232 - 0824 - Nqz11 Fucked Pwm Fb Edit+6 [ambient chillout, cafe del mar mix].wv
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/232 - 0824 - Nqz11 Fucked Pwm Fb Edit+6 [ambient chillout, cafe del mar mix].flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/232 - 0824 - Nqz11 Fucked Pwm Fb Edit+6 [ambient chillout, cafe del mar mix].mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/233 - 0826 - MODULART3 [schmoo Pulse]+e.flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/233 - 0826 - MODULART3 [schmoo Pulse]+e.mp3
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/233 - 0826 - MODULART3 [schmoo Pulse]+e.wv
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/234 - 0826 - MODULART4 [sprectral Modblur1].flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/234 - 0826 - MODULART4 [sprectral Modblur1].mp3
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/234 - 0826 - MODULART4 [sprectral Modblur1].wv
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/236 - 0826 - DIGISND80T2[digisound Modular VCDCO's (stereo)] Comp Examples1.wv
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/236 - 0826 - DIGISND80T2[digisound Modular VCDCO's (stereo)] Comp Examples1.flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/236 - 0826 - DIGISND80T2[digisound Modular VCDCO's (stereo)] Comp Examples1.mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/237 - 0826 - MODULART2 [tubeRezswirl2].flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/237 - 0826 - MODULART2 [tubeRezswirl2].mp3
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/237 - 0826 - MODULART2 [tubeRezswirl2].wv
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/238 - 0826 - Lecce - Voltage Controlled Acoustic Resonators.wv
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/238 - 0826 - Lecce - Voltage Controlled Acoustic Resonators.flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/238 - 0826 - Lecce - Voltage Controlled Acoustic Resonators.mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/239 - 0826 - rebrab.mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/240 - 0826 - @FX - ChatterwavesTRIXT2.flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/240 - 0826 - @FX - ChatterwavesTRIXT2.mp3
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/240 - 0826 - @FX - ChatterwavesTRIXT2.wv
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/241 - 0826 - @FX - MATRIXT1.mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/242 - 0827 - Dx9 20 Afx Voices.flac
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/242 - 0827 - Dx9 20 Afx Voices.wv
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/242 - 0827 - Dx9 20 Afx Voices_mono.mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/242 - 0827 - Dx9 20 Afx Voices_stereo.mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/243 - 0827 - Casio Rz1 Sound Collection cassette SideA [DIGITAL SAMPLING RHYTHM COMPOSER].flac
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/243 - 0827 - Casio Rz1 Sound Collection cassette SideA [DIGITAL SAMPLING RHYTHM COMPOSER].m4a
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/243 - 0827 - Casio Rz1 Sound Collection cassette SideA [DIGITAL SAMPLING RHYTHM COMPOSER].mp3
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/244 - 0828 - Casio Rz1 Sound Collection cassette SideB [DIGITAL SAMPLING RHYTHM COMPOSER] Twatcut.wav.wv
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/244 - 0828 - Casio Rz1 Sound Collection cassette SideB [DIGITAL SAMPLING RHYTHM COMPOSER] Twatcut.wav.flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/244 - 0828 - Casio Rz1 Sound Collection cassette SideB [DIGITAL SAMPLING RHYTHM COMPOSER] Twatcut.wav.mp3
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/245 - 0828 - Casio Rz1 Sound Collection SideA [DIGITAL SAMPLING RHYTHM COMPOSER] Twatcut.wv
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/245 - 0828 - Casio Rz1 Sound Collection SideA [DIGITAL SAMPLING RHYTHM COMPOSER] Twatcut.flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/245 - 0828 - Casio Rz1 Sound Collection SideA [DIGITAL SAMPLING RHYTHM COMPOSER] Twatcut.mp3
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/246 - 0828 - Alien Fanny Farts AB2 q.mp3
@@ -2430,16 +2451,35 @@
 /Users/det/Music/various/music_should_hurt/04-bacillus-progressive_areas_of_necrosis.flac
 /Users/det/Music/various/music_should_hurt/09-bacillus-subcutaneous_infection.flac
 /Users/det/Music/various/angst__a_spectre_compilation/07-bad_sector-manned_unmanned.flac
-/Users/det/Music/bad_sector/01.mp3
-/Users/det/Music/bad_sector/02.mp3
-/Users/det/Music/bad_sector/03.mp3
-/Users/det/Music/bad_sector/04.mp3
-/Users/det/Music/bad_sector/05.mp3
-/Users/det/Music/bad_sector/06.mp3
-/Users/det/Music/bad_sector/07.mp3
-/Users/det/Music/bad_sector/08.mp3
-/Users/det/Music/bad_sector/09.mp3
-/Users/det/Music/bad_sector/10.mp3
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 01 Energiya.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 02 Telemetry.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 03 June 16, 1963.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 04 Baikonur.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 05 Extravehicular.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 06 Vjezna.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 07 Orbiter.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 08 Beacon.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 09 9 April, 1961.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 10 Kosmos.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 11 October 4, 1957.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 12 Extravehicular 2.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 13 Cosmos 69.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 14 Plesetsk.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 15 Almaz.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 16 Zvezdi.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 17 Kapustin Yar.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 18 xxxxxxxxxxxx.flac
+/Users/det/Music/bad_sector/kosmodrom/BAD SECTOR - Kosmodrom - 19 Extravehicular 3.flac
+/Users/det/Music/bad_sector/sound_sources/01.mp3
+/Users/det/Music/bad_sector/sound_sources/02.mp3
+/Users/det/Music/bad_sector/sound_sources/03.mp3
+/Users/det/Music/bad_sector/sound_sources/04.mp3
+/Users/det/Music/bad_sector/sound_sources/05.mp3
+/Users/det/Music/bad_sector/sound_sources/06.mp3
+/Users/det/Music/bad_sector/sound_sources/07.mp3
+/Users/det/Music/bad_sector/sound_sources/08.mp3
+/Users/det/Music/bad_sector/sound_sources/09.mp3
+/Users/det/Music/bad_sector/sound_sources/10.mp3
 /Users/det/Music/bad_sector/cmasa/01-entrance.flac
 /Users/det/Music/bad_sector/cmasa/02-cmasa_1_3.flac
 /Users/det/Music/bad_sector/cmasa/03-cmasa_2_3.flac
@@ -2457,6 +2497,18 @@
 /Users/det/Music/bad_sector/chronoland/10-2006-07-02t22_-40_-43+01_-00_-_beeps.flac
 /Users/det/Music/bad_sector/chronoland/11-1995-12-20t21_-34_-32+01_-00_-_leaks.flac
 /Users/det/Music/bad_sector/chronoland/12-1979-04-14t10_-24_-02+01_-00_-_gifts.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 01 A1.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 02 A2.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 03 A3.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 04 A4.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 05 A5.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 06 A6.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 07 B1.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 08 B2.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 09 B3.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 10 B4.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 11 B5.flac
+/Users/det/Music/bad_sector/absolute/Bad Sector - Absolute - 12 B6.flac
 /Users/det/Music/various/brazil_bossa_beat!/13-badem_powell-candomblé.flac
 /Users/det/Music/various/bossa_jazz_(2)/14-baden_powell-rosa_flor.flac
 /Users/det/Music/various/brazil_bossa_beat!/02-baden_powell-consolação.flac
@@ -2538,6 +2590,55 @@
 /Users/det/Music/basic_house/oats/18-la_coccinelle.flac
 /Users/det/Music/basic_house/oats/19-c-beat.flac
 /Users/det/Music/basic_house/oats/20-l-wave_and_comb.flac
+/Users/det/Music/basic_house/caim_in_bird_form/Basic House - Basic House - Caim In Bird Form (Digitalis Recordings) - 01 Aspirin Telepath.flac
+/Users/det/Music/basic_house/caim_in_bird_form/Basic House - Basic House - Caim In Bird Form (Digitalis Recordings) - 02 I Found U.flac
+/Users/det/Music/basic_house/caim_in_bird_form/Basic House - Basic House - Caim In Bird Form (Digitalis Recordings) - 03 I Don't Remember Acid.flac
+/Users/det/Music/basic_house/caim_in_bird_form/Basic House - Basic House - Caim In Bird Form (Digitalis Recordings) - 04 64 Bummer.flac
+/Users/det/Music/basic_house/caim_in_bird_form/Basic House - Basic House - Caim In Bird Form (Digitalis Recordings) - 05 Field 0.08.flac
+/Users/det/Music/basic_house/caim_in_bird_form/Basic House - Basic House - Caim In Bird Form (Digitalis Recordings) - 06 Ultra-Misted.flac
+/Users/det/Music/basic_house/caim_in_bird_form/Basic House - Basic House - Caim In Bird Form (Digitalis Recordings) - 07 Caim In Bird Form.flac
+/Users/det/Music/basic_house/caim_in_bird_form/Basic House - Basic House - Caim In Bird Form (Digitalis Recordings) - 08 TV Illness.flac
+/Users/det/Music/basic_house/caim_in_bird_form/Basic House - Basic House - Caim In Bird Form (Digitalis Recordings) - 09 In Illness Form (Scuba Death Remix).flac
+/Users/det/Music/basic_house/caim_in_bird_form/Basic House - Basic House - Caim In Bird Form (Digitalis Recordings) - 10 TV Found U (Josh Mason Rework).flac
+/Users/det/Music/basic_house/cryptid_binaries/Basic House - Cryptid Binaries - 01 Cryptid Binaries.flac
+/Users/det/Music/basic_house/cryptid_binaries/Basic House - Cryptid Binaries - 02 Nasss Dorc.flac
+/Users/det/Music/basic_house/cryptid_binaries/Basic House - Cryptid Binaries - 03 Unmaking.flac
+/Users/det/Music/basic_house/cryptid_binaries/Basic House - Cryptid Binaries - 04 Canc.flac
+/Users/det/Music/basic_house/cryptid_binaries/Basic House - Cryptid Binaries - 05 Barbar.flac
+/Users/det/Music/basic_house/visa_prick/Basic House - VISA Prick - 01 Roe.flac
+/Users/det/Music/basic_house/visa_prick/Basic House - VISA Prick - 02 Harlequin.flac
+/Users/det/Music/basic_house/visa_prick/Basic House - VISA Prick - 03 Cones.flac
+/Users/det/Music/basic_house/visa_prick/Basic House - VISA Prick - 04 Canon Lo.flac
+/Users/det/Music/basic_house/visa_prick/Basic House - VISA Prick - 05 P.G. Bruce.flac
+/Users/det/Music/basic_house/visa_prick/Basic House - VISA Prick - 06 Crawl Charm.flac
+/Users/det/Music/basic_house/government/Basic House - Government - 01 Headstalking.flac
+/Users/det/Music/basic_house/government/Basic House - Government - 02 AAOA.flac
+/Users/det/Music/basic_house/government/Basic House - Government - 03 Government.flac
+/Users/det/Music/basic_house/government/Basic House - Government - 04 Honey Eaters.flac
+/Users/det/Music/basic_house/government/Basic House - Government - 05 Cue 2.flac
+/Users/det/Music/basic_house/government/Basic House - Government - 06 Encase (Junked Edit).flac
+/Users/det/Music/basic_house/government/Basic House - Government - 07 C-Skin (Rupt Edit).flac
+/Users/det/Music/basic_house/government/Basic House - Government - 08 Take My Breath Away (Originally by Berlin).flac
+/Users/det/Music/basic_house/ictybtywhtbdbm/Basic House - I Could Tell You But Then You Would Have To Be Destroyed By Me - 01 Procul Este Profani.flac
+/Users/det/Music/basic_house/ictybtywhtbdbm/Basic House - I Could Tell You But Then You Would Have To Be Destroyed By Me - 02 Janet Terminal Blue.flac
+/Users/det/Music/basic_house/ictybtywhtbdbm/Basic House - I Could Tell You But Then You Would Have To Be Destroyed By Me - 03 Pyxis.flac
+/Users/det/Music/basic_house/ictybtywhtbdbm/Basic House - I Could Tell You But Then You Would Have To Be Destroyed By Me - 04 Scaled Composites.flac
+/Users/det/Music/basic_house/ictybtywhtbdbm/Basic House - I Could Tell You But Then You Would Have To Be Destroyed By Me - 05 I Could Tell You But Then You Would Have To Be Destroyed By Me.flac
+/Users/det/Music/basic_house/im_not_a_heaven_man/Basic House - I'm Not A Heaven Man - 01 I'm Not A Heaven Man.flac
+/Users/det/Music/basic_house/im_not_a_heaven_man/Basic House - I'm Not A Heaven Man - 02 Mothers Skull.flac
+/Users/det/Music/basic_house/im_not_a_heaven_man/Basic House - I'm Not A Heaven Man - 03 Teenage Dog.flac
+/Users/det/Music/basic_house/im_not_a_heaven_man/Basic House - I'm Not A Heaven Man - 04 Oort Cup.flac
+/Users/det/Music/basic_house/im_not_a_heaven_man/Basic House - I'm Not A Heaven Man - 05 Soft Cores.flac
+/Users/det/Music/basic_house/im_not_a_heaven_man/Basic House - I'm Not A Heaven Man - 06 Perishing.flac
+/Users/det/Music/basic_house/im_not_a_heaven_man/Basic House - I'm Not A Heaven Man - 07 Better Alone (Or In A Small Group).flac
+/Users/det/Music/basic_house/im_not_a_heaven_man/Basic House - I'm Not A Heaven Man - 08 Green Dome (Bottomless).flac
+/Users/det/Music/basic_house/im_not_a_heaven_man/Basic House - I'm Not A Heaven Man - 09 Larque No. 3.flac
+/Users/det/Music/basic_house/pathetique/Basic House - Pathetique - 01 Double XP.flac
+/Users/det/Music/basic_house/pathetique/Basic House - Pathetique - 02 Season Pass 4 D-Nest.flac
+/Users/det/Music/basic_house/pathetique/Basic House - Pathetique - 03 A Cat With A Throat.flac
+/Users/det/Music/basic_house/pathetique/Basic House - Pathetique - 04 Calc.flac
+/Users/det/Music/basic_house/pathetique/Basic House - Pathetique - 05 Towers Of Simple.flac
+/Users/det/Music/basic_house/pathetique/Basic House - Pathetique - 06 Still Life.flac
 /Users/det/Music/various/nwc/9/06. new industry - Basking Sharks.mp3
 /Users/det/Music/various/substantia_innominata/5_bass_communion-sisters_oregon_-_part_4_(extract).flac
 /Users/det/Music/various/VA 2009 Nu Electro Volume 1 - CD2- Mixed by Diplomat/10 - Bass Junkie - Sub-Mission (Controll the Bass).mp3
@@ -2740,18 +2841,6 @@
 /Users/det/Music/biosphere/cirque/10-algae_&_fungi_part_11.flac
 /Users/det/Music/biosphere/cirque/11-too_fragile_to_walk_on.flac
 /Users/det/Music/various/touch_00/19-biosphere-sun-baked.flac
-/Users/det/Music/biosphere/shenzhou/01-shenzhou.flac
-/Users/det/Music/biosphere/shenzhou/02-spindrift.flac
-/Users/det/Music/biosphere/shenzhou/03-ancient_campfire.flac
-/Users/det/Music/biosphere/shenzhou/04-heat_leak.flac
-/Users/det/Music/biosphere/shenzhou/05-houses_on_the_hill.flac
-/Users/det/Music/biosphere/shenzhou/06-two_ocean_plateau.flac
-/Users/det/Music/biosphere/shenzhou/07-thermal_motion.flac
-/Users/det/Music/biosphere/shenzhou/08-path_leading_to_the_high_grass.flac
-/Users/det/Music/biosphere/shenzhou/09-fast_atoms_escape.flac
-/Users/det/Music/biosphere/shenzhou/10-green_reflections.flac
-/Users/det/Music/biosphere/shenzhou/11-bose-einstein_condensation.flac
-/Users/det/Music/biosphere/shenzhou/12-gravity_assist.flac
 /Users/det/Music/biosphere/autour_de_la_lune/01-translation.flac
 /Users/det/Music/biosphere/autour_de_la_lune/02-rotation.flac
 /Users/det/Music/biosphere/autour_de_la_lune/03-modifié.flac
@@ -2799,6 +2888,52 @@
 /Users/det/Music/biosphere/departed_glories/15-tomorrow_then_we_will_attend.flac
 /Users/det/Music/biosphere/departed_glories/16-with_precious_benefits_to_both.flac
 /Users/det/Music/biosphere/departed_glories/17-fall_asleep_for_me.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 01 Shenzhou.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 02 Spindrift.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 03 Heat Leak.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 04 Ancient Campfire.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 05 Houses On The Hill.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 06 Two Ocean Plateau.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 07 Thermal Motion.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 08 Path Leading To The High Grass.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 09 Fast Atoms Escape.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 10 Green Reflections.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 11 Bose-Einstein Condensation.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 12 Gravity Assist.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 13 Griz Nez Windy.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 14 Dover Ferryport.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 15 Kent Country Train.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 16 Lorry Shuttle Shaft.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 17 Sea Cat.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 18 Shuttle Hiss Tunnel.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 19 Calais Ferryport.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 20 Shuttle.flac
+/Users/det/Music/biosphere/shenzhou_reissue/Biosphere - Shenzhou -Reissue with bonus album- - 21 The White Cliffs Of Dover.flac
+/Users/det/Music/biosphere/the_hilvarenbeek_recordings/Biosphere - The Hilvarenbeek Recordings -Remastered and expanded version- - 01 't Schop.flac
+/Users/det/Music/biosphere/the_hilvarenbeek_recordings/Biosphere - The Hilvarenbeek Recordings -Remastered and expanded version- - 02 Pipistrellus.flac
+/Users/det/Music/biosphere/the_hilvarenbeek_recordings/Biosphere - The Hilvarenbeek Recordings -Remastered and expanded version- - 03 Audax.flac
+/Users/det/Music/biosphere/the_hilvarenbeek_recordings/Biosphere - The Hilvarenbeek Recordings -Remastered and expanded version- - 04 Strigiformes.flac
+/Users/det/Music/biosphere/the_hilvarenbeek_recordings/Biosphere - The Hilvarenbeek Recordings -Remastered and expanded version- - 05 Rovertse Heide.flac
+/Users/det/Music/biosphere/the_hilvarenbeek_recordings/Biosphere - The Hilvarenbeek Recordings -Remastered and expanded version- - 06 De Doornboom.flac
+/Users/det/Music/biosphere/the_hilvarenbeek_recordings/Biosphere - The Hilvarenbeek Recordings -Remastered and expanded version- - 07 Hilsondis.flac
+/Users/det/Music/biosphere/the_hilvarenbeek_recordings/Biosphere - The Hilvarenbeek Recordings -Remastered and expanded version- - 08 Icoon.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 01 Sklbrekka.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 02 Strandby.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 03 Bergsbotn I.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 04 Bjorvika.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 05 Berg.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 06 Kyle.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 07 Fjgget.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 08 Stordjupta.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 09 Bergsbotn II.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 10 Bergsbotn III.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 11 Lysbotn.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 12 Straumen.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 13 Steinfjord.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 14 Gilberg.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 15 Alteret.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 16 Geatkejvri.flac
+/Users/det/Music/biosphere/the_senja_recordings/Biosphere - The Senja Recordings - 17 H.flac
 /Users/det/Music/various/nwc/15/07. plasticpuppen - Bizarre Leidenschaft.mp3
 /Users/det/Music/various/200_(disc_01)/07-bizzy_b_&_equinox-merda_style_2004.flac
 /Users/det/Music/bj_nilsen/fade_to_white/01-purple_phase.flac
@@ -3091,7 +3226,6 @@
 /Users/det/Music/various/the_roots_of_captain_beefheart/17-blind_willie_mctell-drive_away_blues.flac
 /Users/det/Music/various/1654_-_the_cave_ii/11-blink_twice-neutral_moment.flac
 /Users/det/Music/various/nwc/3/01. H.m.k. Grey - Blitz.mp3
-/Users/det/Music/various/psychotrance_2000/07-blockster-grooveline_(matt_darey_remix).flac
 /Users/det/Music/blood_duster/str8_outta_northcote/Blood_Duster-Str8_Outta_Northcote-01-Givin_stifftothestiff.mp3
 /Users/det/Music/blood_duster/str8_outta_northcote/Blood_Duster-Str8_Outta_Northcote-02-Hippie_Kill_Team.mp3
 /Users/det/Music/blood_duster/str8_outta_northcote/Blood_Duster-Str8_Outta_Northcote-03-Metalasfuck.mp3
@@ -3957,7 +4091,6 @@
 /Users/det/Music/captain_beefheart_&_his_magic_band/the_spotlight_kid_clear_spot/20-her_eyes_are_a_blue_million_miles.flac
 /Users/det/Music/captain_beefheart_&_his_magic_band/the_spotlight_kid_clear_spot/21-big_eyed_beans_from_venus.flac
 /Users/det/Music/captain_beefheart_&_his_magic_band/the_spotlight_kid_clear_spot/22-golden_birdies.flac
-/Users/det/Music/various/psychotrance_2000/08-carl_cox-phuture_2000_(deepsky_remix).flac
 /Users/det/Music/carlos_barretto/lokomotiv/1-lokomotiv_(barretto,_corneloup).flac
 /Users/det/Music/carlos_barretto/lokomotiv/2-eiró_(salgueiro).flac
 /Users/det/Music/carlos_barretto/lokomotiv/3-klinfrik_(barretto,_salgueiro,_corneloup).flac
@@ -4267,6 +4400,28 @@
 /Users/det/Music/various/input_64/disc_2/02-final_theme_from_baby_of_can_guru.flac
 /Users/det/Music/various/input_64/disc_2/07-theme_from_antics_chip_war.flac
 /Users/det/Music/various/input_64/disc_2/08-intro_theme_from_starball.flac
+/Users/det/Music/chris_korda/akoko_ajeji/01-vizyon.flac
+/Users/det/Music/chris_korda/akoko_ajeji/02-asiri.flac
+/Users/det/Music/chris_korda/akoko_ajeji/03-iyika.flac
+/Users/det/Music/chris_korda/akoko_ajeji/04-ala_aye.flac
+/Users/det/Music/chris_korda/akoko_ajeji/05-awose.flac
+/Users/det/Music/chris_korda/akoko_ajeji/06-ra_bayi.flac
+/Users/det/Music/chris_korda/akoko_ajeji/07-ra_mi.flac
+/Users/det/Music/chris_korda/akoko_ajeji/08-egungun.flac
+/Users/det/Music/chris_korda/akoko_ajeji/09-dek_sep_bluso.flac
+/Users/det/Music/chris_korda/akoko_ajeji/10-fazo_kanto.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 01 Low Pressure.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 02 Embleton Rookery.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 03 The Crossroads.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 04 River Mara at Dawn.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 05 River Mara at Night.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 06 A Passing View.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 07 Bosque Seco.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 08 Sunsets.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 09 The Blue Men of the Minch.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 10 High Pressure.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 11 Gahlitzerstrom.flac
+/Users/det/Music/chris_watson/stepping_into_the_dark/Chris Watson - Stepping into the Dark - 12 The Forest Path.flac
 /Users/det/Music/chris_watson/outside_the_circle_of_fire/01-adult_cheetah.flac
 /Users/det/Music/chris_watson/outside_the_circle_of_fire/02-southern_right_whale.flac
 /Users/det/Music/chris_watson/outside_the_circle_of_fire/03-male_capercallie_display.flac
@@ -4460,6 +4615,16 @@
 /Users/det/Music/cisfinitum/0_vs_0/top.37-08-cisfinitum-untitled.mp3
 /Users/det/Music/cisfinitum/0_vs_0/top.37-09-cisfinitum-untitled.mp3
 /Users/det/Music/cisfinitum/0_vs_0/top.37-10-cisfinitum-untitled.mp3
+/Users/det/Music/cisfinitum/rejection_from_symmetry/Cisfinitum - Rejection from Symmetry - 01 a(P1...Pm).flac
+/Users/det/Music/cisfinitum/rejection_from_symmetry/Cisfinitum - Rejection from Symmetry - 02 Sw a(P1...Pw).flac
+/Users/det/Music/cisfinitum/rejection_from_symmetry/Cisfinitum - Rejection from Symmetry - 03 k - m = 1.flac
+/Users/det/Music/cisfinitum/rejection_from_symmetry/Cisfinitum - Rejection from Symmetry - 04 k - m P1.flac
+/Users/det/Music/cisfinitum/rejection_from_symmetry/Cisfinitum - Rejection from Symmetry - 05 k - m - m1 Pw.flac
+/Users/det/Music/cisfinitum/rejection_from_symmetry/Cisfinitum - Rejection from Symmetry - 06 nhkn.flac
+/Users/det/Music/cisfinitum/rejection_from_symmetry/Cisfinitum - Rejection from Symmetry - 07 nh1...n.flac
+/Users/det/Music/cisfinitum/rejection_from_symmetry/Cisfinitum - Rejection from Symmetry - 08 nk w = 1.flac
+/Users/det/Music/cisfinitum/rejection_from_symmetry/Cisfinitum - Rejection from Symmetry - 09 Pk = nhkn - 1n.flac
+/Users/det/Music/cisfinitum/rejection_from_symmetry/Cisfinitum - Rejection from Symmetry - 10 xxx-xxx.flac
 /Users/det/Music/cisfinitum/landschaft/01-cisfinitum-inland.ogg
 /Users/det/Music/cisfinitum/landschaft/02-cisfinitum-landschaft_i.ogg
 /Users/det/Music/cisfinitum/landschaft/03-cisfinitum-landschaft_ii.ogg
@@ -4485,6 +4650,42 @@
 /Users/det/Music/cisfinitum/malgyl/07-cisfinitum-track_07.ogg
 /Users/det/Music/cisfinitum/malgyl/08-cisfinitum-track_08.ogg
 /Users/det/Music/various/[ans]werk/04-cisfinitum-tr[ans].flac
+/Users/det/Music/cisfinitum/devotio/Cisfinitum - Devotio - 01 Devotio.flac
+/Users/det/Music/cisfinitum/dissolutio/Cisfinitum - Dissolutio - 01 Dissolutio.flac
+/Users/det/Music/cisfinitum/dissolutio/Cisfinitum - Dissolutio - 02 Autumn ritual.flac
+/Users/det/Music/cisfinitum/dissolutio/Cisfinitum - Dissolutio - 03 Star Ticket.flac
+/Users/det/Music/cisfinitum/dissolutio/Cisfinitum - Dissolutio - 04 Oskolok.flac
+/Users/det/Music/cisfinitum/dissolutio/Cisfinitum - Dissolutio - 05 tr-ANS-.flac
+/Users/det/Music/cisfinitum/industriewerke/Cisfinitum - Industriewerke - 01 Slide.flac
+/Users/det/Music/cisfinitum/industriewerke/Cisfinitum - Industriewerke - 02 Unmoeglichkeit.flac
+/Users/det/Music/cisfinitum/industriewerke/Cisfinitum - Industriewerke - 03 Audiochemie.flac
+/Users/det/Music/cisfinitum/industriewerke/Cisfinitum - Industriewerke - 04 Curse.flac
+/Users/det/Music/cisfinitum/industriewerke/Cisfinitum - Industriewerke - 05 Curve.flac
+/Users/det/Music/cisfinitum/industriewerke/Cisfinitum - Industriewerke - 06 Satellite.flac
+/Users/det/Music/cisfinitum/industriewerke/Cisfinitum - Industriewerke - 07 Viderunt Omnes.flac
+/Users/det/Music/cisfinitum/industriewerke/Cisfinitum - Industriewerke - 08 Wolves.flac
+/Users/det/Music/cisfinitum/live_earth/Cisfinitum - Live Earth - 01 Comatose Dream - Siddhartha - Blueblack - Decaying Jackal - Cisnormativity.flac
+/Users/det/Music/cisfinitum/mayakovskiy/Cisfinitum - Mayakovskiy - 01 Mayakovskiy.flac
+/Users/det/Music/cisfinitum/metaprogramming/Cisfinitum - Metaprogramming - 01 Catalepsy.flac
+/Users/det/Music/cisfinitum/metaprogramming/Cisfinitum - Metaprogramming - 02 DNA Radio.flac
+/Users/det/Music/cisfinitum/metaprogramming/Cisfinitum - Metaprogramming - 03 Interference.flac
+/Users/det/Music/cisfinitum/metaprogramming/Cisfinitum - Metaprogramming - 04 Consensus.flac
+/Users/det/Music/cisfinitum/tactio/Cisfinitum - Tactio - 01 I.flac
+/Users/det/Music/cisfinitum/tactio/Cisfinitum - Tactio - 02 II.flac
+/Users/det/Music/cisfinitum/tactio/Cisfinitum - Tactio - 03 III.flac
+/Users/det/Music/cisfinitum/tactio/Cisfinitum - Tactio - 04 IV.flac
+/Users/det/Music/cisfinitum/tactio/Cisfinitum - Tactio - 05 V.flac
+/Users/det/Music/cisfinitum/tactio/Cisfinitum - Tactio - 06 VI.flac
+/Users/det/Music/cisfinitum/tactio/Cisfinitum - Tactio - 07 VII.flac
+/Users/det/Music/cisfinitum/the_bog/Cisfinitum - The Bog - 01 The Bog.flac
+/Users/det/Music/cisfinitum/v/Cisfinitum - V - 01 cf1.flac
+/Users/det/Music/cisfinitum/v/Cisfinitum - V - 02 cf2.flac
+/Users/det/Music/cisfinitum/v/Cisfinitum - V - 03 cf3.flac
+/Users/det/Music/cisfinitum/v/Cisfinitum - V - 04 cf4.flac
+/Users/det/Music/cisfinitum/dolmen/Cisfinitum - Dolmen.flac
+/Users/det/Music/cisfinitum/sad/Cisfinitum - Sad.flac
+/Users/det/Music/cisfinitum/qorantine/Cisfinitum - QOrantine - 01 QOrantine.flac
+/Users/det/Music/cisfinitum/qorantine/Cisfinitum - QOrantine - 02 xxx.flac
 /Users/det/Music/various/[ans]werk/05-cisfinitum___the_[law-rah]_collective-[ans]werk.flac
 /Users/det/Music/city_surgical/gray_panic/01-our_blood_will_roar_in_the_pipes.flac
 /Users/det/Music/city_surgical/gray_panic/02-pi_needle.flac
@@ -4603,7 +4804,6 @@
 /Users/det/Music/coh/iiron/6-all_lights_are_fire.flac
 /Users/det/Music/coh/iiron/7-satsugaii.flac
 /Users/det/Music/various/pyre/11_coil-fire_of_the_mind.flac
-/Users/det/Music/various/psychotrance_2000/04-cold_turkey-sunflower_(transa_remix).flac
 /Users/det/Music/colin_potter_&_the_hafler_trio/a_pressed_on_sandwich/01-a_pressed_on_sandwich.flac
 /Users/det/Music/various/nwc/14/02. Overseas - Comateens.mp3
 /Users/det/Music/sleeping_with_the_earth__-_combat_astronomy/split_compact_disc/06-tiat02.flac
@@ -4675,12 +4875,6 @@
 /Users/det/Music/contagious_orgasm/the_flow_of_sound_without_parameter/04-hacking_the_reality_myth.flac
 /Users/det/Music/contagious_orgasm/the_flow_of_sound_without_parameter/05-sketch_for_square.flac
 /Users/det/Music/contagious_orgasm/the_flow_of_sound_without_parameter/06-firewalker..._and_way_in_way_out.flac
-/Users/det/Music/contagious_orgasm/voltage_control_filter/1-guernica_theatre.flac
-/Users/det/Music/contagious_orgasm/voltage_control_filter/2-channel_4.flac
-/Users/det/Music/contagious_orgasm/voltage_control_filter/3-garden.flac
-/Users/det/Music/contagious_orgasm/voltage_control_filter/4-telephone_scatologia.flac
-/Users/det/Music/contagious_orgasm/voltage_control_filter/5-maria.flac
-/Users/det/Music/contagious_orgasm/voltage_control_filter/6-black_manifest.flac
 /Users/det/Music/contagious_orgasm/thin_skinned/1-side_show.flac
 /Users/det/Music/contagious_orgasm/thin_skinned/2-peep_show.flac
 /Users/det/Music/contagious_orgasm/the_examination_of_auditory_sense/01-daily_conversation.flac
@@ -4690,6 +4884,12 @@
 /Users/det/Music/contagious_orgasm/the_examination_of_auditory_sense/05-from_the_inside_crocked_machine.flac
 /Users/det/Music/contagious_orgasm/the_examination_of_auditory_sense/06-beyond_the_peaceful_window.flac
 /Users/det/Music/contagious_orgasm/the_examination_of_auditory_sense/07-untitled.flac
+/Users/det/Music/contagious_orgasm/voltage_control_filter/1-guernica_theatre.flac
+/Users/det/Music/contagious_orgasm/voltage_control_filter/2-channel_4.flac
+/Users/det/Music/contagious_orgasm/voltage_control_filter/3-garden.flac
+/Users/det/Music/contagious_orgasm/voltage_control_filter/4-telephone_scatologia.flac
+/Users/det/Music/contagious_orgasm/voltage_control_filter/5-maria.flac
+/Users/det/Music/contagious_orgasm/voltage_control_filter/6-black_manifest.flac
 /Users/det/Music/various/ant-hology/10-contagious_orgasm-in_my_heart.flac
 /Users/det/Music/various/maschinenfest_2001_[cd2-blue)/06-contagious_orgasm-the_gut-wringing_machine.flac
 /Users/det/Music/various/daruma/08-contagious_orgasm-hurricane_02.flac
@@ -5158,9 +5358,6 @@
 /Users/det/Music/cylob/cylobian_sunset/07-balzouf.flac
 /Users/det/Music/cylob/cylobian_sunset/08-i_left_my_heart_in_syntax_error.flac
 /Users/det/Music/cylob/cylobian_sunset/09-cylobian_sunset.flac
-/Users/det/Music/cylob/Cylob - Durftal.mp3
-/Users/det/Music/cylob/Cylob - Metel.mp3
-/Users/det/Music/cylob/cylob - Ktox.mp3
 /Users/det/Music/cylob/Loops And Breaks/Cylob - [Loops and Breaks] - 01 - Dope on a Rope.mp3
 /Users/det/Music/cylob/Loops And Breaks/Cylob - [Loops and Breaks] - 02 - Mudfoot.mp3
 /Users/det/Music/cylob/Loops And Breaks/Cylob - [Loops and Breaks] - 03 - Body Pop.mp3
@@ -5279,6 +5476,16 @@
 /Users/det/Music/cylob/late_in_the_day/4_swampy_lengthened.mp3
 /Users/det/Music/cylob/late_in_the_day/5_face_something.mp3
 /Users/det/Music/cylob/late_in_the_day/6_temple_clap.mp3
+/Users/det/Music/cylob/industrial_folk_songs/Cylob - Industrial Folk Songs - 01 Skraip.flac
+/Users/det/Music/cylob/industrial_folk_songs/Cylob - Industrial Folk Songs - 02 Thal.flac
+/Users/det/Music/cylob/industrial_folk_songs/Cylob - Industrial Folk Songs - 03 Durftal.flac
+/Users/det/Music/cylob/industrial_folk_songs/Cylob - Industrial Folk Songs - 04 Metel.flac
+/Users/det/Music/cylob/industrial_folk_songs/Cylob - Industrial Folk Songs - 05 Ktox.flac
+/Users/det/Music/cylob/industrial_folk_songs/Cylob - Industrial Folk Songs - 06 Flad.flac
+/Users/det/Music/cylob/industrial_folk_songs/Cylob - Industrial Folk Songs - 07 Sixed.flac
+/Users/det/Music/cylob/pepper_spray/Cylob - Pepper Spray - 01 Pepper Spray (Radio Mix).flac
+/Users/det/Music/cylob/pepper_spray/Cylob - Pepper Spray - 02 Pepper Spray (Extended Vocal Mix).flac
+/Users/det/Music/cylob/pepper_spray/Cylob - Pepper Spray - 03 Maced In The Face.flac
 /Users/det/Music/cylob/xltronic-radio-20060123-cylob-and-dmx-krew-live-part-01.mp3
 /Users/det/Music/cylob/xltronic-radio-20060123-cylob-and-dmx-krew-live-part-02.mp3
 /Users/det/Music/cylob/xltronic-radio-20051212-cylob-live.mp3
@@ -5472,6 +5679,10 @@
 /Users/det/Music/daphne_oram/daphne_oram_tapes_1_(cd_2)/17-birth_of_baby.flac
 /Users/det/Music/daphne_oram/daphne_oram_tapes_1_(cd_2)/18-speech_test.flac
 /Users/det/Music/various/a_retrospective_(cd1)/02-daphne_oram_&_desmond_briscoe-the_ocean_(main_theme).flac
+/Users/det/Music/dark_body_parameter/Dark Body Parameter - dark body analysis A.flac
+/Users/det/Music/dark_body_parameter/Dark Body Parameter - dark body analysis B.flac
+/Users/det/Music/dark_body_parameter/Dark Body Parameter - dark body analysis C.flac
+/Users/det/Music/dark_body_parameter/Dark Body Parameter - Nicht Ist.flac
 /Users/det/Music/various/nocturbulous_behaviour_-_the_mix/02-dark_energy-mind_of_a_panther.flac
 /Users/det/Music/various/nocturbulous_behaviour_-_the_mix/04-dark_energy-stargate.flac
 /Users/det/Music/various/nocturbulous_behaviour_-_the_mix/20-dark_energy-mau_mau_(the_spirit).flac
@@ -5574,6 +5785,22 @@
 /Users/det/Music/datassette/datassette - Cagney XOR Lacey/datassette - Cagney XOR Lacey - 02 Vacuform.flac
 /Users/det/Music/datassette/datassette - Cagney XOR Lacey/datassette - Cagney XOR Lacey - 03 Helvetica Calcium.flac
 /Users/det/Music/datassette/datassette - Cagney XOR Lacey/datassette - Cagney XOR Lacey - 04 Cagney XOR Lacey (Part 2).flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 01 Yield To The Wheel.flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 02 Nowhere.flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 03 Monorail Test Circuit.flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 04 Look At The Sky, Look At That Gradient.flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 05 Trouble At 'Satanic Mill.flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 06 Still Here - Pyramid Video.flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 07 When I'm Gone (w- M++cha).flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 08 Rachel Whiteread Acid.flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 09 Griddle Me This (Sausage).flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 10 Griddle Me That (Aubergine).flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 11 Original Crab Flavour.flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 12 Everythins Fuckin Bust.flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 13 Dog Chin - Fokkerblock (w- T-FLX).flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 14 Drizzle Fort.flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 15 Haze (w- T-FLX).flac
+/Users/det/Music/datassette/void_product/datassette - VOID FILL PRODUCT - 16 Swimming In The Wye (w- Linnley).flac
 /Users/det/Music/various/psychotrance_2/11-dave_angel-artech.flac
 /Users/det/Music/various/pyre/15_dave_ball_•_jon_savage-dead_neon.flac
 /Users/det/Music/aphex_twin/Aphex Twin - Heroes Symphony [Aphex Twin Remix].flac
@@ -5631,6 +5858,19 @@
 /Users/det/Music/dead_neanderthals/4-yamatsuka_eye.flac
 /Users/det/Music/dead_neanderthals/5-plissken.flac
 /Users/det/Music/dead_neanderthals/6-yolk.flac
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/01 Vox Dei.mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/02 Alucinacoes de Comando.mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/03 Pacto de Mascaras.mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/04 Mente Bicameral.mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/05 Estimulos Alucinatorios Verbauditivos I.mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/06 Templo do Caos.mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/07 Espirais da Loucura I.mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/08 Raiz Negativa (NaoVontade).mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/09 Camisa de Forca (Inferno ou Sem Saida_).mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/10 Virus da Imagem do Ser.mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/11 Estimulos Alucinatorios Verbauditivos II.mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/12 Espirais da Loucura II.mp3
+/Users/det/Music/deafkids/DEAFKIDS--METAPROGRAMACAO/13 A Experiencia Holotropica.mp3
 /Users/det/Music/death_grips/Exmilitary FLAC/Death Grips - Exmilitary - 01 Beware.flac
 /Users/det/Music/death_grips/Exmilitary FLAC/Death Grips - Exmilitary - 02 Guillotine (It Goes Yah).flac
 /Users/det/Music/death_grips/Exmilitary FLAC/Death Grips - Exmilitary - 03 Spread Eagle Cross the Block.flac
@@ -7073,7 +7313,6 @@
 /Users/det/Music/various/nwc/7/17. subliminal - Drinking Electricity.mp3
 /Users/det/Music/various/a_selection_of_drones_1993-2000_disc_two/03-dronaement-wassermond.flac
 /Users/det/Music/various/carbon/06_chump_killers.ogg
-/Users/det/Music/drudkh/tosdats/05 Bilyavyi Den Vtomyvsya I prytykh.mp3
 /Users/det/Music/drudkh/лебединий_шлях_(the_swan_road)/01-1648.flac
 /Users/det/Music/drudkh/лебединий_шлях_(the_swan_road)/02-вiчне_сонце___eternal_sun.flac
 /Users/det/Music/drudkh/лебединий_шлях_(the_swan_road)/03-кров___blood.flac
@@ -7108,6 +7347,7 @@
 /Users/det/Music/drudkh/tosdats/02 U Dakhiv Irzhavim Kolossyu.mp3
 /Users/det/Music/drudkh/tosdats/03 Vechirniy Smerk Okutuye Kimnaty.mp3
 /Users/det/Music/drudkh/tosdats/04 Za Zoreyu Scho Striloyu Syaye.mp3
+/Users/det/Music/drudkh/tosdats/05 Bilyavyi Den Vtomyvsya I prytykh.mp3
 /Users/det/Music/various/maschinenfest_2007_(cd2_-_gold)/12-drumcorps-down_(remix_by_the_teknoist).flac
 /Users/det/Music/dryft/cell/01-slalom.flac
 /Users/det/Music/dryft/cell/02-beatz&vapour.flac
@@ -7778,7 +8018,6 @@
 /Users/det/Music/various/nwc/13/02. 30 years - Executive Slacks.mp3
 /Users/det/Music/various/zod_sampler_volume_2/14_exiliongtanml.ogg
 /Users/det/Music/various/nwc/3/09. Warten - Exkurs.mp3
-/Users/det/Music/various/psychotrance_2000/06-expansion-listen_(jerry_bonham_vs._expansion_mix).flac
 /Users/det/Music/expansion_bay/star_obsolescence/01-lateral_drift_i.flac
 /Users/det/Music/expansion_bay/star_obsolescence/02-star_obsolescence.flac
 /Users/det/Music/expansion_bay/star_obsolescence/03-three_peaks.flac
@@ -8085,7 +8324,6 @@
 /Users/det/Music/foetus_inc./sink/18-wash_it_all_off.flac
 /Users/det/Music/foetus_inc./sink/19-today_i_started_slogging_again.flac
 /Users/det/Music/foetus_inc./sink/20-calamity_crush.flac
-/Users/det/Music/various/psychotrance_2000/02-force_mass_motion-lost_(in_time).flac
 /Users/det/Music/various/this_is_what_we_do!!!/07-forensic_entomology-divine_comedy_excerpt.flac
 /Users/det/Music/various/feedbackloop/06-form_alkaline-spade.flac
 /Users/det/Music/forma_tadre/Forma Tadre - La Cite.mp3
@@ -8935,6 +9173,14 @@
 /Users/det/Music/hate_forest/sorrow/07-chambers_of_the_winds.flac
 /Users/det/Music/various/touch_00/14-hazard-flood_gate.flac
 /Users/det/Music/various/schematics_for_power_vol._1/12-he_would_drown-premeditated_act_of_violence.flac
+/Users/det/Music/head_technician/Head Technician - Zones - 01 Divergent.flac
+/Users/det/Music/head_technician/Head Technician - Zones - 02 Exit Strategy.flac
+/Users/det/Music/head_technician/Head Technician - Zones - 03 A Future-.flac
+/Users/det/Music/head_technician/Head Technician - Zones - 04 Escape.flac
+/Users/det/Music/head_technician/Head Technician - Zones - 05 Zones.flac
+/Users/det/Music/head_technician/Head Technician - Zones - 06 Soar Door.flac
+/Users/det/Music/head_technician/Head Technician - Zones - 07 Echo Blooms.flac
+/Users/det/Music/head_technician/Head Technician - Zones - 08 Emerging.flac
 /Users/det/Music/various/zod_sampler_volume_2/18_hearts_of_darknessesskip_found_telihod_2_boiboi.ogg
 /Users/det/Music/various/expansion_-_contraction/2_heartthrob-roundabout.flac
 /Users/det/Music/various/nothing_much_(cd1)/06_heartthrob-baby_kate.flac
@@ -9263,6 +9509,13 @@
 /Users/det/Music/hwyl_nofio/hounded_by_fury/11-touched_by_fire.flac
 /Users/det/Music/hwyl_nofio/hounded_by_fury/12-chapter_27.flac
 /Users/det/Music/hwyl_nofio/christ_distort/01-christ_distort.flac
+/Users/det/Music/hwyl_nofio/isolate/Hwyl Nofio - Isolate - 01 The Road to Duggleby Howe.flac
+/Users/det/Music/hwyl_nofio/isolate/Hwyl Nofio - Isolate - 02 This Black and Red Land.flac
+/Users/det/Music/hwyl_nofio/isolate/Hwyl Nofio - Isolate - 03 Breath.flac
+/Users/det/Music/hwyl_nofio/isolate/Hwyl Nofio - Isolate - 04 The Ghosts of Bognor Regis.flac
+/Users/det/Music/hwyl_nofio/isolate/Hwyl Nofio - Isolate - 05 Womb Bird (for Vicky).flac
+/Users/det/Music/hwyl_nofio/isolate/Hwyl Nofio - Isolate - 06 Isolate - The Singing Room.flac
+/Users/det/Music/hwyl_nofio/isolate/Hwyl Nofio - Isolate - 07 Dolphins.flac
 /Users/det/Music/various/1654_-_the_cave_ii/07-hybrids-song_for_the_rozenbergs.flac
 /Users/det/Music/various/ant-hology/13-hybryds-i_walk_alone.flac
 /Users/det/Music/various/angst__a_spectre_compilation/02-hybryds-her_greatest_fear.flac
@@ -9976,6 +10229,15 @@
 /Users/det/Music/jazzkammer_&_sir_dupermann/duperkammer_remixes_ep/01-untitled_1.flac
 /Users/det/Music/jazzkammer_&_sir_dupermann/duperkammer_remixes_ep/02-untitled_2.flac
 /Users/det/Music/jazzkammer_&_sir_dupermann/duperkammer_remixes_ep/03-untitled_3.flac
+/Users/det/Music/jazzkammer/pancakes/Jazzkammer. - Pancakes (2002) - 01 No Place Like Home.flac
+/Users/det/Music/jazzkammer/pancakes/Jazzkammer. - Pancakes (2002) - 02 Vet ikke.flac
+/Users/det/Music/jazzkammer/pancakes/Jazzkammer. - Pancakes (2002) - 03 Random Lung.flac
+/Users/det/Music/jazzkammer/pancakes/Jazzkammer. - Pancakes (2002) - 04 Oolong.flac
+/Users/det/Music/jazzkammer/pancakes/Jazzkammer. - Pancakes (2002) - 05 Tape Out.flac
+/Users/det/Music/jazzkammer/pancakes/Jazzkammer. - Pancakes (2002) - 06 Pancakes.flac
+/Users/det/Music/jazzkammer/pancakes/Jazzkammer. - Pancakes (2002) - 07 Pancakes 2.flac
+/Users/det/Music/jazzkammer/pancakes/Jazzkammer. - Pancakes (2002) - 08 Your Disc is Ready.flac
+/Users/det/Music/jazzkammer/pulse/Jazzkammer. - Pulse (2003) - 01 Pulse.flac
 /Users/det/Music/jb3/close_grind/01-time.flac
 /Users/det/Music/jb3/close_grind/02-curb.flac
 /Users/det/Music/jb3/close_grind/03-back_porch.flac
@@ -10140,6 +10402,13 @@
 /Users/det/Music/joe_colley/waste_of_songs/07-the_last_audience.flac
 /Users/det/Music/joe_colley/hive/01-untitled.flac
 /Users/det/Music/joe_colley/hive/02-untitled.flac
+/Users/det/Music/joe_colley/lonely_microphone/Joe Colley - Lonely Microphone - 01 Side A.flac
+/Users/det/Music/joe_colley/lonely_microphone/Joe Colley - Lonely Microphone - 02 Side B.flac
+/Users/det/Music/joe_colley/psychic_stress_soundtracks/Joe Colley - Psychic Stress Soundtracks - 01 Future Screaming.flac
+/Users/det/Music/joe_colley/psychic_stress_soundtracks/Joe Colley - Psychic Stress Soundtracks - 02 Rehearsal For Highspeed Paralysis.flac
+/Users/det/Music/joe_colley/psychic_stress_soundtracks/Joe Colley - Psychic Stress Soundtracks - 03 All Of Us Are Monsters And All Of Us Think The Others Are Monsters.flac
+/Users/det/Music/joe_colley/psychic_stress_soundtracks/Joe Colley - Psychic Stress Soundtracks - 04 Melody Of Failure.flac
+/Users/det/Music/joe_colley/psychic_stress_soundtracks/Joe Colley - Psychic Stress Soundtracks - 05 Overgrown (At Last).flac
 /Users/det/Music/joe_colley_&_jason_lescalleet/annihilate_this_week/01-prayer.flac
 /Users/det/Music/joe_colley_&_jason_lescalleet/annihilate_this_week/02-nervous_laughter.flac
 /Users/det/Music/joe_colley_&_jason_lescalleet/annihilate_this_week/03-hazards_peculliar_to_the_night.flac
@@ -10410,7 +10679,6 @@
 /Users/det/Music/julio_resende_trio/you_taste_like_a_song/9-straight_no_chaser_(bonus_track).flac
 /Users/det/Music/various/the_sound_of_2am/01-junior_o_presents_the_story_of_o-echo_vibeappella.flac
 /Users/det/Music/various/min2MAX/cd1/08-justin_james-song_so_true.flac
-/Users/det/Music/various/psychotrance_2000/01-justin_o_brien_&_joy-andromeda.flac
 /Users/det/Music/various/touch_25/14-jóhann_jóhannsson-tu_non_mi_perderai_mai.flac
 /Users/det/Music/jóhann_jóhannsson/and_in_the_endless_pause_there_came_sound_of_bees/01-theme..flac
 /Users/det/Music/jóhann_jóhannsson/and_in_the_endless_pause_there_came_sound_of_bees/02-city_building..flac
@@ -11610,6 +11878,16 @@
 /Users/det/Music/luke_vibert/garave_vol_1/Luke Vibert - Luke Vibert Presents UK Garave Vol. 1 - 08 Clap Sing.flac
 /Users/det/Music/luke_vibert/garave_vol_1/Luke Vibert - Luke Vibert Presents UK Garave Vol. 1 - 09 Feel The Riddim.flac
 /Users/det/Music/luke_vibert/garave_vol_1/Luke Vibert - Luke Vibert Presents UK Garave Vol. 1 - 10 Pump.flac
+/Users/det/Music/luke_vibert/valvable/Luke Vibert - ILA020 - Valvable (Digital) - 01 A1- Valvable.flac
+/Users/det/Music/luke_vibert/valvable/Luke Vibert - ILA020 - Valvable (Digital) - 02 A2- Satan Oscillate My Metallic Sonatas.flac
+/Users/det/Music/luke_vibert/valvable/Luke Vibert - ILA020 - Valvable (Digital) - 03 B1- Whooda Thiunsquit.flac
+/Users/det/Music/luke_vibert/valvable/Luke Vibert - ILA020 - Valvable (Digital) - 04 B2- Sharon's Tone.flac
+/Users/det/Music/luke_vibert/valvable/Luke Vibert - ILA020 - Valvable (Digital) - 05 B3- Arse Conference.flac
+/Users/det/Music/luke_vibert/valvable/Luke Vibert - ILA020 - Valvable (Digital) - 06 C1- Armtits.flac
+/Users/det/Music/luke_vibert/valvable/Luke Vibert - ILA020 - Valvable (Digital) - 07 C2- Megamiga.flac
+/Users/det/Music/luke_vibert/valvable/Luke Vibert - ILA020 - Valvable (Digital) - 08 C3- I Will Always Hate You.flac
+/Users/det/Music/luke_vibert/valvable/Luke Vibert - ILA020 - Valvable (Digital) - 09 D1- Stockhousin'.flac
+/Users/det/Music/luke_vibert/valvable/Luke Vibert - ILA020 - Valvable (Digital) - 10 D2- Gay Zing.flac
 /Users/det/Music/luke_vibert_and_bj_cole/stop_the_panic/01-intro.flac
 /Users/det/Music/luke_vibert_and_bj_cole/stop_the_panic/02-swing_lite_-_alright.flac
 /Users/det/Music/luke_vibert_and_bj_cole/stop_the_panic/03-dischordzilla.flac
@@ -12215,7 +12493,6 @@
 /Users/det/Music/maldoror/she/11-the_white_tears_of_the_maggot.flac
 /Users/det/Music/maldoror/she/12-chiffon_lingerie.flac
 /Users/det/Music/maldoror/she/13-lullaby_(she_who_must_be_obeyed).flac
-/Users/det/Music/various/psychotrance_2000/11-mana-psionic_(arrakis_remix).flac
 /Users/det/Music/various/VA 2009 Nu Electro Volume 1 - CD1- Mixed by Freddy Fresh/09 - Mandroid - Anti-Gravity Machines [Morphogenetic Remix].mp3
 /Users/det/Music/various/dark_pathways_vol._2_-_eclipse/03-manherringbone-terraforming_empty_space.flac
 /Users/det/Music/various/nwc/7/05. Lied der machtigen - Mannschreck.mp3
@@ -14002,16 +14279,6 @@
 /Users/det/Music/various/2003_hands_(disc_1)/08-needle_sharing_vs_squaremeter-because_conspiracy_is....flac
 /Users/det/Music/various/2003_hands_(disc_1)/09-needle_sharing_vs_squaremeter-an_electrostatic_discharge.flac
 /Users/det/Music/various/Maschinenfest 2000/Disc 2/Various Artists - Maschinenfest 2000 - CD #2 (red) - 09 - Needle Sharing vs. M  HK-Style.mp3
-/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/01-only_you_can_rock_me.flac
-/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/02-pack_it_up.flac
-/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/03-arbory_hill.flac
-/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/04-aint_no_baby.flac
-/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/06-hot_&_ready.flac
-/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/07-cherry.flac
-/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/08-dont_fool_me.flac
-/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/10-one_more_for_the_rodeo.flac
-/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/11-born_to_loose.flac
-/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/12-when_they_ring_the_golden_bells.flac
 /Users/det/Music/various/nwc/13/23. negativland 10 - Negativland.mp3
 /Users/det/Music/negativland/helter_stupid/01-prologue.flac
 /Users/det/Music/negativland/helter_stupid/02-helter_stupid.flac
@@ -14046,8 +14313,18 @@
 /Users/det/Music/negativland/these_guys_are_from_england/09-deliberate_sabotage_(live).flac
 /Users/det/Music/negativland/these_guys_are_from_england/10-i_still_havent_found_what_im_looking_for_[a_capella_version_(live)].flac
 /Users/det/Music/negativland/these_guys_are_from_england/11-i_still_havent_found_what_im_looking_for_[edited_special_edit_radio_mix].flac
+/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/01-only_you_can_rock_me.flac
+/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/02-pack_it_up.flac
+/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/03-arbory_hill.flac
+/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/04-aint_no_baby.flac
 /Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/05-lookin_out_for_#1.flac
+/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/06-hot_&_ready.flac
+/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/07-cherry.flac
+/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/08-dont_fool_me.flac
 /Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/09-#1_rep.flac
+/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/10-one_more_for_the_rodeo.flac
+/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/11-born_to_loose.flac
+/Users/det/Music/negativland/deathsentences_of_the_polished_and_structurally_weak/12-when_they_ring_the_golden_bells.flac
 /Users/det/Music/various/ikebana_-_merzbows_amlux_rebuilt,_reused_&_recycled_(disc_2)/01-negativland-an_actual_attack.flac
 /Users/det/Music/negativland/no_business/01-old_is_new.flac
 /Users/det/Music/negativland/no_business/02-no_business.flac
@@ -14312,7 +14589,6 @@
 /Users/det/Music/nobuyasu_furuya_trio/bendowa/4-track4.flac
 /Users/det/Music/nobuyasu_furuya_trio/bendowa/5-track5.flac
 /Users/det/Music/various/experiments_with_truth/11-nocturnal_emissions-puchobongo.flac
-/Users/det/Music/various/psychotrance_2000/09-noel_w._sanger_presents_epectasis-the_first_love.flac
 /Users/det/Music/various/nwc/10/12. Twilight in tokyo - Noh Mask.mp3
 /Users/det/Music/noise_unit/drill/01-the_drain.flac
 /Users/det/Music/noise_unit/drill/02-dominator.flac
@@ -14627,6 +14903,36 @@
 /Users/det/Music/omit/Omit (NZ) - Negative Pulse Logic/Omit (NZ) - Negative Pulse Logic - 08 FlipBack.flac
 /Users/det/Music/omit/Omit (NZ) - Negative Pulse Logic/Omit (NZ) - Negative Pulse Logic - 09 LockBack.flac
 /Users/det/Music/omit/Omit (NZ) - Negative Pulse Logic/Omit (NZ) - Negative Pulse Logic - 10 PulseBlocker.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 01 Turner.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 02 Faller.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 03 Failer.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 04 Breaker.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 05 Construction -Front End System Loader-.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 06 Diffuser.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 07 Skull Lander -Enter The Compound-.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 08 Skinrow Lander -Channels Proceeding From The Idea Of Modulation Outside Circuit Architecture-.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 09 Mind Borrower.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 10 Releaser -Neglect The Way Forward-.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 11 Echo Dot FrameWork- One -Ekka Dot-.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 12 Echo Dot FrameWork- Two -Side Fall-.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 13 Echo Dot FrameWork- Three -Break Dot-.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 14 Echo Dot FrameWork- One -Repeat Frame-.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 15 Enclosures One.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 16 Enclosures Two.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 17 Enclosures Three.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 18 Enclosures Four.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 19 Ignition.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 20 Diffusion Point.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 21 Return.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 22 Black Hem Fear.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 23 Buster Pod.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 24 Back Swing.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 25 Indicator.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 26 Splitter.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 27 Dis Tan Cer.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 28 Toll Block.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 29 Contours parts 1 & 2.flac
+/Users/det/Music/omit/enclosures/Omit - Enclosures 2011-2016 - 30 CycleDrop.flac
 /Users/det/Music/various/nwc/13/14. annuese - One Million Fuzztone Guitars.mp3
 /Users/det/Music/opn/SFT010 - MP3 (320)/01 Andro.mp3
 /Users/det/Music/opn/SFT010 - MP3 (320)/02 Power Of Persuasion.mp3
@@ -15459,7 +15765,6 @@
 /Users/det/Music/paul_lytton_and_ken_vandermark/english_suites_-_disc_2/10-stage_3.flac
 /Users/det/Music/paul_lytton_and_ken_vandermark/english_suites_-_disc_2/11-stage_4.flac
 /Users/det/Music/paul_lytton_and_ken_vandermark/english_suites_-_disc_2/12-stage_5.flac
-/Users/det/Music/various/psychotrance_2000/10-paul_van_dyk-moonlighting_(nightclub_mix).flac
 /Users/det/Music/pauline_oliveros,_stuart_dempster,_panaiotis/deep_listening/01-lear.flac
 /Users/det/Music/pauline_oliveros,_stuart_dempster,_panaiotis/deep_listening/02-suiren.flac
 /Users/det/Music/pauline_oliveros,_stuart_dempster,_panaiotis/deep_listening/03-ione.flac
@@ -15662,7 +15967,6 @@
 /Users/det/Music/various/200_(disc_02)/04-pinch-pepper_spray.flac
 /Users/det/Music/various/dark_pathways_vol._1_-_force/11-pine_tree_state_mind_control-snap_(dizzy).flac
 /Users/det/Music/various/ant-hology/01-pineal_gland_zirbeldruese-intro.flac
-/Users/det/Music/various/psychotrance_2000/05-pinocchio-hypnotized_(kaystones_whoop!_remix).flac
 /Users/det/Music/merzbow/merzbow_frog_remixed_and_revisited_(disc_1)/02-pita-merzfrog473.flac
 /Users/det/Music/various/archiv_1.1/13-pixel-auslaufrille_ii.flac
 /Users/det/Music/pixel/set_your_center_between_your_parts_in_order_to/01-drum.flac
@@ -15762,6 +16066,12 @@
 /Users/det/Music/portamento_feat_bochum_welt/quadscreen/03-staccato.flac
 /Users/det/Music/portamento_feat_bochum_welt/quadscreen/04-bang.flac
 /Users/det/Music/portamento_feat_bochum_welt/quadscreen/01-profile.flac
+/Users/det/Music/porter_ricks/anguilla_electrica/tresor295-aiff/01 Anguilla Electrica.aif
+/Users/det/Music/porter_ricks/anguilla_electrica/tresor295-aiff/02 Shoal Beat.aif
+/Users/det/Music/porter_ricks/anguilla_electrica/tresor295-aiff/03 Prismatic Error.aif
+/Users/det/Music/porter_ricks/anguilla_electrica/tresor295-aiff/04 Scuba Rondo.aif
+/Users/det/Music/porter_ricks/anguilla_electrica/tresor295-aiff/05 Port Of Tangency.aif
+/Users/det/Music/porter_ricks/anguilla_electrica/tresor295-aiff/06 Sandy Ground.aif
 /Users/det/Music/porter_ricks/porter_ricks/01-explore.flac
 /Users/det/Music/porter_ricks/porter_ricks/02-redundance_5.flac
 /Users/det/Music/porter_ricks/porter_ricks/03-exposed.flac
@@ -16198,6 +16508,14 @@
 /Users/det/Music/various/nwc/15/14. drums - Red Wedding.mp3
 /Users/det/Music/various/clicks_&_cuts_2_disc_2/03-reinhard_voigt-personal.flac
 /Users/det/Music/various/touch_00/06-relationship_volume-relationship_volume.flac
+/Users/det/Music/repvblika/Repvblika - The Insurgent - 01 Void.flac
+/Users/det/Music/repvblika/Repvblika - The Insurgent - 02 The Insurgent.flac
+/Users/det/Music/repvblika/Repvblika - The Insurgent - 03 The Black Condor of Death.flac
+/Users/det/Music/repvblika/Repvblika - The Insurgent - 04 Destrvktivism.flac
+/Users/det/Music/repvblika/Repvblika - The Insurgent - 05 Snuff Democracy.flac
+/Users/det/Music/repvblika/Repvblika - The Insurgent - 06 Konstrvktivism.flac
+/Users/det/Music/repvblika/Repvblika - The Insurgent - 07 WWV (World Wide Void).flac
+/Users/det/Music/repvblika/Repvblika - The Insurgent - 08 Hyenas, Jackals, Vultures....flac
 /Users/det/Music/various/the_scariest_weapon/10-retrigger-barulitos_(strang_stab_remix).flac
 /Users/det/Music/various/dislocated_human_junction/04-reverence-inner_phaze.flac
 /Users/det/Music/various/dislocated_human_junction/05-reverence-sextasysm.flac
@@ -17566,6 +17884,12 @@
 /Users/det/Music/sleep_research_facility/deep_frieze/03-82ºs_62ºe.flac
 /Users/det/Music/sleep_research_facility/deep_frieze/04-86ºs_115ºw.flac
 /Users/det/Music/sleep_research_facility/deep_frieze/05-80ºs_96ºe.flac
+/Users/det/Music/sleep_research_facility/nostromo/Sleep Research Facility - Nostromo (CSR34CD) - 01 A-Deck.flac
+/Users/det/Music/sleep_research_facility/nostromo/Sleep Research Facility - Nostromo (CSR34CD) - 02 B-Deck.flac
+/Users/det/Music/sleep_research_facility/nostromo/Sleep Research Facility - Nostromo (CSR34CD) - 03 C-Deck.flac
+/Users/det/Music/sleep_research_facility/nostromo/Sleep Research Facility - Nostromo (CSR34CD) - 04 D-Deck.flac
+/Users/det/Music/sleep_research_facility/nostromo/Sleep Research Facility - Nostromo (CSR34CD) - 05 E-Deck.flac
+/Users/det/Music/sleep_research_facility/nostromo/Sleep Research Facility - Nostromo (CSR34CD) - 06 Narcissus.flac
 /Users/det/Music/sleep_research_facility/source/01-source1.flac
 /Users/det/Music/sleep_research_facility/source/02-source2.flac
 /Users/det/Music/sleep_research_facility/source/03-source3.flac
@@ -18010,6 +18334,7 @@
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/235 - 0826 - MODULART8 [spectralmodblur2].wav
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/235 - 0826 - MODULART8 [spectralmodblur2].flac
 /Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/235 - 0826 - MODULART8 [spectralmodblur2].mp3
+/Users/det/Music/afx/AFX SoundCloud Trax/user18081971/audio/235 - 0826 - MODULART8 [spectralmodblur2].wv
 /Users/det/Music/various/psychotrance_2/09-soundscape-darkside.flac
 /Users/det/Music/various/interiors/10-spacemarker-impossible_geometry.flac
 /Users/det/Music/spacetime_continuum/sea_biscuit/01-pressure.flac
@@ -18285,14 +18610,32 @@
 /Users/det/Music/squarepusher/ufabulum/08-dark_steering.flac
 /Users/det/Music/squarepusher/ufabulum/09-303_scopem_hard.flac
 /Users/det/Music/squarepusher/ufabulum/10-ecstatic_shock.flac
-/Users/det/Music/squarepusher/Squarepusher - Damogen Furies - mp3/Damogen Furies-001-Squarepusher-Stor Eiglass.mp3
-/Users/det/Music/squarepusher/Squarepusher - Damogen Furies - mp3/Damogen Furies-002-Squarepusher-Baltang Ort.mp3
-/Users/det/Music/squarepusher/Squarepusher - Damogen Furies - mp3/Damogen Furies-003-Squarepusher-Rayc Fire 2.mp3
-/Users/det/Music/squarepusher/Squarepusher - Damogen Furies - mp3/Damogen Furies-004-Squarepusher-Kontenjaz.mp3
-/Users/det/Music/squarepusher/Squarepusher - Damogen Furies - mp3/Damogen Furies-005-Squarepusher-Exjag Nives.mp3
-/Users/det/Music/squarepusher/Squarepusher - Damogen Furies - mp3/Damogen Furies-006-Squarepusher-Baltang Arg.mp3
-/Users/det/Music/squarepusher/Squarepusher - Damogen Furies - mp3/Damogen Furies-007-Squarepusher-Kwang Bass.mp3
-/Users/det/Music/squarepusher/Squarepusher - Damogen Furies - mp3/Damogen Furies-008-Squarepusher-D Frozent Aac.mp3
+/Users/det/Music/squarepusher/damogen_furies/Damogen Furies-001-Squarepusher-Stor Eiglass.mp3
+/Users/det/Music/squarepusher/damogen_furies/Damogen Furies-002-Squarepusher-Baltang Ort.mp3
+/Users/det/Music/squarepusher/damogen_furies/Damogen Furies-003-Squarepusher-Rayc Fire 2.mp3
+/Users/det/Music/squarepusher/damogen_furies/Damogen Furies-004-Squarepusher-Kontenjaz.mp3
+/Users/det/Music/squarepusher/damogen_furies/Damogen Furies-005-Squarepusher-Exjag Nives.mp3
+/Users/det/Music/squarepusher/damogen_furies/Damogen Furies-006-Squarepusher-Baltang Arg.mp3
+/Users/det/Music/squarepusher/damogen_furies/Damogen Furies-007-Squarepusher-Kwang Bass.mp3
+/Users/det/Music/squarepusher/damogen_furies/Damogen Furies-008-Squarepusher-D Frozent Aac.mp3
+/Users/det/Music/squarepusher/nts_mix/NTS Mix 22-06-19-001-Squarepusher-NTS Mix 22-06-19.flac
+/Users/det/Music/squarepusher/vicsynth13/Vicsynth13 Test Track 1-001-Squarepusher-Vicsynth13 Test Track 1.flac
+/Users/det/Music/squarepusher/vortrack/Squarepusher - Vortrack - flac/Vortrack-001-Squarepusher-Vortrack (Fracture Remix).flac
+/Users/det/Music/squarepusher/vortrack/Squarepusher - Vortrack - flac/Vortrack-002-Squarepusher-Vortrack.flac
+/Users/det/Music/squarepusher/be_up_a_hello/Be Up A Hello-001-Squarepusher-Oberlove.flac
+/Users/det/Music/squarepusher/be_up_a_hello/Be Up A Hello-002-Squarepusher-Hitsonu.flac
+/Users/det/Music/squarepusher/be_up_a_hello/Be Up A Hello-003-Squarepusher-Nervelevers.flac
+/Users/det/Music/squarepusher/be_up_a_hello/Be Up A Hello-004-Squarepusher-Speedcrank.flac
+/Users/det/Music/squarepusher/be_up_a_hello/Be Up A Hello-005-Squarepusher-Detroit People Mover.flac
+/Users/det/Music/squarepusher/be_up_a_hello/Be Up A Hello-006-Squarepusher-Vortrack.flac
+/Users/det/Music/squarepusher/be_up_a_hello/Be Up A Hello-007-Squarepusher-Terminal Slam.flac
+/Users/det/Music/squarepusher/be_up_a_hello/Be Up A Hello-008-Squarepusher-Mekrev Bass.flac
+/Users/det/Music/squarepusher/be_up_a_hello/Be Up A Hello-009-Squarepusher-80 Ondula.flac
+/Users/det/Music/squarepusher/lamental/Lamental EP-001-Squarepusher-The Paris Track.flac
+/Users/det/Music/squarepusher/lamental/Lamental EP-002-Squarepusher-Detroit People Mover.flac
+/Users/det/Music/squarepusher/lamental/Lamental EP-003-Squarepusher-Les Mains Dansent.flac
+/Users/det/Music/squarepusher/lamental/Lamental EP-004-Squarepusher-Midi Sans Frontieres (Avec Batterie).flac
+/Users/det/Music/squarepusher/lamental/Lamental EP-005-Squarepusher-Midi Sans Frontieres.flac
 /Users/det/Music/squarepusher/music_for_robots/Music For Robots-001-Squarepusher x Z-MACHINES-Remote Amber.mp3
 /Users/det/Music/squarepusher/music_for_robots/Music For Robots-002-Squarepusher x Z-MACHINES-Sad Robot Goes Funny.mp3
 /Users/det/Music/squarepusher/music_for_robots/Music For Robots-003-Squarepusher x Z-MACHINES-World Three.mp3
@@ -18398,6 +18741,16 @@
 /Users/det/Music/steve_lehman/manifold/7-interface_a.flac
 /Users/det/Music/steve_lehman/manifold/8-berceuse.flac
 /Users/det/Music/steve_lehman/manifold/9-for_evan_parker.flac
+/Users/det/Music/steve_lehman_trio_+_craig_taborn/the_people_i_love/01-prelude.flac
+/Users/det/Music/steve_lehman_trio_+_craig_taborn/the_people_i_love/02-ih_calam_&_ynnud.flac
+/Users/det/Music/steve_lehman_trio_+_craig_taborn/the_people_i_love/03-curse_fraction.flac
+/Users/det/Music/steve_lehman_trio_+_craig_taborn/the_people_i_love/04-qplay.flac
+/Users/det/Music/steve_lehman_trio_+_craig_taborn/the_people_i_love/05-interlude.flac
+/Users/det/Music/steve_lehman_trio_+_craig_taborn/the_people_i_love/06-a_shifting_design.flac
+/Users/det/Music/steve_lehman_trio_+_craig_taborn/the_people_i_love/07-beyond_all_limits.flac
+/Users/det/Music/steve_lehman_trio_+_craig_taborn/the_people_i_love/08-echoes__the_impaler.flac
+/Users/det/Music/steve_lehman_trio_+_craig_taborn/the_people_i_love/09-chance.flac
+/Users/det/Music/steve_lehman_trio_+_craig_taborn/the_people_i_love/10-postlude.flac
 /Users/det/Music/various/bbc_radiophonic_workshop_-_a_retrospective_[disc_2]/22-steve_marshall-slambash_wangs_of_a_compo_gormer_(titles_and_space_theme).flac
 /Users/det/Music/various/bbc_radiophonic_workshop_-_a_retrospective_[disc_2]/24-steve_marshall-kingdom_of_the_thunder_dragon_(titles)_.flac
 /Users/det/Music/various/bbc_radiophonic_workshop_-_a_retrospective_[disc_2]/25-steve_marshall-archery_and_cranes.flac
@@ -18569,6 +18922,15 @@
 /Users/det/Music/various/split/05-sudden_infant-prince_noir.flac
 /Users/det/Music/various/split/06-sudden_infant-nihil_pampers___höh.flac
 /Users/det/Music/various/split/07-sudden_infant-voice_3.flac
+/Users/det/Music/sudden_infant/holes_of_glory/sudden infant - holes of glory - 01 cabin or locker.flac
+/Users/det/Music/sudden_infant/holes_of_glory/sudden infant - holes of glory - 02 beat meat.flac
+/Users/det/Music/sudden_infant/holes_of_glory/sudden infant - holes of glory - 03 steam chamber.flac
+/Users/det/Music/sudden_infant/holes_of_glory/sudden infant - holes of glory - 04 who's here.flac
+/Users/det/Music/sudden_infant/holes_of_glory/sudden infant - holes of glory - 05 mantra 16.flac
+/Users/det/Music/sudden_infant/holes_of_glory/sudden infant - holes of glory - 06 dark sling.flac
+/Users/det/Music/sudden_infant/holes_of_glory/sudden infant - holes of glory - 07 afraid.flac
+/Users/det/Music/sudden_infant/holes_of_glory/sudden infant - holes of glory - 08 you made me do that.flac
+/Users/det/Music/sudden_infant/holes_of_glory/sudden infant - holes of glory - 09 cold heat.flac
 /Users/det/Music/sudden_infant/wölflis_nightmare/01-wölflis_nightmare.flac
 /Users/det/Music/sudden_infant/wölflis_nightmare/02-hold_me_-_prawn_version.flac
 /Users/det/Music/sudden_infant/wölflis_nightmare/03-crane_boy_ii_-_electric_version.flac
@@ -18789,6 +19151,8 @@
 /Users/det/Music/suzanne_ciani/lixiviation_(ciani_musica_inc._1969-1985)/14-eighth_wave.flac
 /Users/det/Music/suzanne_ciani/lixiviation_(ciani_musica_inc._1969-1985)/15-sound_of_wetness.flac
 /Users/det/Music/suzanne_ciani/lixiviation_(ciani_musica_inc._1969-1985)/16-second_breath.flac
+/Users/det/Music/svarte_greiner/depardieu/Svarte Greiner - Depardieu - 01 Boat Depardieu.flac
+/Users/det/Music/svarte_greiner/depardieu/Svarte Greiner - Depardieu - 02 Wind With Teeth.flac
 /Users/det/Music/svarte_greiner/knive/01-the_boat_was_my_friend.flac
 /Users/det/Music/svarte_greiner/knive/02-ocean_out_of_wood.flac
 /Users/det/Music/svarte_greiner/knive/03-my_feet,_over_there.flac
@@ -18798,12 +19162,42 @@
 /Users/det/Music/svarte_greiner/knive/07-ullsokk.flac
 /Users/det/Music/svarte_greiner/knive/08-the_dining_table.flac
 /Users/det/Music/svarte_greiner/knive/09-final_sleep.flac
+/Users/det/Music/svarte_greiner/raggsokk/Svarte Greiner - Raggsokk - 01 Forest In A Circle.flac
+/Users/det/Music/svarte_greiner/raggsokk/Svarte Greiner - Raggsokk - 02 Raggsokk.flac
+/Users/det/Music/svarte_greiner/man_bird_dress/Svarte Greiner - Man Bird Dress - 01 Man.flac
+/Users/det/Music/svarte_greiner/man_bird_dress/Svarte Greiner - Man Bird Dress - 02 Bird.flac
+/Users/det/Music/svarte_greiner/man_bird_dress/Svarte Greiner - Man Bird Dress - 03 Dress.flac
+/Users/det/Music/svarte_greiner/til_seters/Svarte Greiner - Til Seters - 01 Budeie Med Sigd.flac
+/Users/det/Music/svarte_greiner/til_seters/Svarte Greiner - Til Seters - 02 Kobbergruve, Endelig Jeg Fant.flac
+/Users/det/Music/svarte_greiner/til_seters/Svarte Greiner - Til Seters - 03 Baandspiller I Solnedgang.flac
 /Users/det/Music/svarte_greiner/happe/01-tunnel_of_love.flac
 /Users/det/Music/svarte_greiner/happe/02-where_am_i.flac
 /Users/det/Music/svarte_greiner/happe/03-candle_light_dinner_actress.flac
 /Users/det/Music/svarte_greiner/happe/04-last_light.flac
+/Users/det/Music/svarte_greiner/penpals_forever/Svarte Greiner - Penpals Forever - 01 A1.flac
+/Users/det/Music/svarte_greiner/penpals_forever/Svarte Greiner - Penpals Forever - 02 A2.flac
+/Users/det/Music/svarte_greiner/penpals_forever/Svarte Greiner - Penpals Forever - 03 B1.flac
+/Users/det/Music/svarte_greiner/penpals_forever/Svarte Greiner - Penpals Forever - 04 B2.flac
+/Users/det/Music/svarte_greiner/penpals_forever/Svarte Greiner - Penpals Forever - 05 B3.flac
 /Users/det/Music/svarte_greiner/black_tie/01-black_tie.flac
 /Users/det/Music/svarte_greiner/black_tie/02-white_noise.flac
+/Users/det/Music/svarte_greiner/drunk_road_tree/Svarte Greiner - Drunk, Road, Tree - 01 Drunk.flac
+/Users/det/Music/svarte_greiner/drunk_road_tree/Svarte Greiner - Drunk, Road, Tree - 02 Road.flac
+/Users/det/Music/svarte_greiner/drunk_road_tree/Svarte Greiner - Drunk, Road, Tree - 03 Tree.flac
+/Users/det/Music/svarte_greiner/moss_garden/Svarte Greiner - Moss Garden - 01 The Marble.flac
+/Users/det/Music/svarte_greiner/moss_garden/Svarte Greiner - Moss Garden - 02 Garden.flac
+/Users/det/Music/svarte_greiner/apart/Svarte Greiner - Apart - 01 Revival.flac
+/Users/det/Music/svarte_greiner/apart/Svarte Greiner - Apart - 02 Apart.flac
+/Users/det/Music/svarte_greiner/apart/Svarte Greiner - Apart - 03 Second.flac
+/Users/det/Music/svarte_greiner/apart/Svarte Greiner - Apart - 04 Passage.flac
+/Users/det/Music/svarte_greiner/apart/Svarte Greiner - Apart - 05 Separate.flac
+/Users/det/Music/svarte_greiner/apart/Svarte Greiner - Apart - 06 Floor.flac
+/Users/det/Music/svarte_greiner/apart/Svarte Greiner - Apart - 07 Barren.flac
+/Users/det/Music/svarte_greiner/twin/Svarte Greiner - Twin - 01 Twin Part 1.flac
+/Users/det/Music/svarte_greiner/twin/Svarte Greiner - Twin - 02 Twin Part 2.flac
+/Users/det/Music/svarte_greiner/five_hundred_fink_experience/Svarte Greiner - Five Hundred Fink Experience - 01 Syringa.flac
+/Users/det/Music/svarte_greiner/five_hundred_fink_experience/Svarte Greiner - Five Hundred Fink Experience - 02 Wisteria.flac
+/Users/det/Music/svarte_greiner/five_hundred_fink_experience/Svarte Greiner - Five Hundred Fink Experience - 03 Hellebore.flac
 /Users/det/Music/various/clicks_&_cuts_2_disc_1/08-swayzak-kisonga.flac
 /Users/det/Music/various/brazil_bossa_beat!/22-sylvia_telles-samba_de_uma_nota_só.flac
 /Users/det/Music/synapscape/rage/01-intravan.flac
@@ -19683,9 +20077,14 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/the_hafler_trio/seven_hours_sleep/06-six_hours.flac
 /Users/det/Music/the_hafler_trio/seven_hours_sleep/07-seven_hours.flac
 /Users/det/Music/the_hafler_trio/hljódmynd/01-hljódmynd.flac
+/Users/det/Music/the_hafler_trio/no_more_twain,_of_one_flesh_11_unequivocal_obsecrations/1-no_more_twain,_of_one_flesh_11_unequivocal_obsecrations.flac
 /Users/det/Music/the_hafler_trio/being_a_firefighter_isnt_just_about_squirting_water/01-being_a_firefighter_isnt_just_about_squirting_water.flac
 /Users/det/Music/the_hafler_trio/i_never_knew_thats_who_you_thought_you_were/01-i_never_knew_thats_who_you_thought_you_were.flac
 /Users/det/Music/the_hafler_trio/á_ég_að_halda_áfram/01-á_ég_að_halda_áfram.flac
+/Users/det/Music/the_hafler_trio/this_is_our_problem_what_will_our_joy_be_then/The Hafler Trio - This is Our Problem- What Will Our Joy Be Then- - 01 TRAILER.flac
+/Users/det/Music/the_hafler_trio/this_is_our_problem_what_will_our_joy_be_then/The Hafler Trio - This is Our Problem- What Will Our Joy Be Then- - 02 The Explanation..flac
+/Users/det/Music/the_hafler_trio/this_is_our_problem_what_will_our_joy_be_then/The Hafler Trio - This is Our Problem- What Will Our Joy Be Then- - 03 The Discussion..flac
+/Users/det/Music/the_hafler_trio/this_is_our_problem_what_will_our_joy_be_then/The Hafler Trio - This is Our Problem- What Will Our Joy Be Then- - 04 An Answer..flac
 /Users/det/Music/the_hafler_trio_&_the_sons_of_god/resurrection/01-resurrection.flac
 /Users/det/Music/the_hafler_trio,_colin_potter,_andrew_liles/three_eggs/01-false_soap.flac
 /Users/det/Music/the_hafler_trio,_colin_potter,_andrew_liles/three_eggs/02-sticky_tin.flac
@@ -19752,6 +20151,15 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/the_heliocentrics/A World of Masks/11 - The Uncertainty Principle.mp3
 /Users/det/Music/various/darkness_knows_no_boundaries/10-the_hidden_hand-someday_soon.flac
 /Users/det/Music/various/within_the_church_of_thee_overlords/01-the_hidden_hand-dark_horizons.flac
+/Users/det/Music/the_house_in_the_woods/The House In The Woods - Bucolica - 01 Severton Pathway.flac
+/Users/det/Music/the_house_in_the_woods/The House In The Woods - Bucolica - 02 Bucolica.flac
+/Users/det/Music/the_house_in_the_woods/The House In The Woods - Bucolica - 03 Untitled Blacknisss.flac
+/Users/det/Music/the_house_in_the_woods/The House In The Woods - Bucolica - 04 Sunlight on Rusting Hulk.flac
+/Users/det/Music/the_house_in_the_woods/The House In The Woods - Bucolica - 05 Dark Lanterns.flac
+/Users/det/Music/the_house_in_the_woods/The House In The Woods - Bucolica - 06 Favershell.flac
+/Users/det/Music/the_house_in_the_woods/The House In The Woods - Bucolica - 07 Mountains of the Sea.flac
+/Users/det/Music/the_house_in_the_woods/The House In The Woods - Bucolica - 08 Half Glimpsed.flac
+/Users/det/Music/the_house_in_the_woods/The House In The Woods - Bucolica - 09 The Rain Washed Away.flac
 /Users/det/Music/various/interstellar_fugitives_2_[destruction_of_order]_-_cd_2/08-the_illustrator-beautiful_boxer.flac
 /Users/det/Music/the_immortals/mortal_kombat-_the_album/01-johnny_cage_(prepare_yourself).flac
 /Users/det/Music/the_immortals/mortal_kombat-_the_album/02-kano_(use_your_might).flac
@@ -19916,7 +20324,6 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/various/repo_man_-_the_original_motion_picture_soundtrack/05-plugz-el_clavo_y_la_cruz.flac
 /Users/det/Music/various/repo_man_-_the_original_motion_picture_soundtrack/11-plugz-reel_ten.flac
 /Users/det/Music/The (old) Prodigy. - Goa.mp3
-/Users/det/Music/various/psychotrance_2000/03-the_project-meltdown_(od404_mix).flac
 /Users/det/Music/various/nwc/11/18. cry across the sea - The Protagonist 28 Nein.mp3
 /Users/det/Music/various/dont_touch_my_car!!/13-the_rage_box-thunder_and_lightning.flac
 /Users/det/Music/the_residents/The Residents - 1999.mp3
@@ -20355,6 +20762,7 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/thomas_brinkmann/klick_revolution/06-tilt.flac
 /Users/det/Music/various/audible_irregularities_1/06-thomas_dimuzio-nocturne.flac
 /Users/det/Music/various/night_passage_demixed/02-thomas_koner-kyros.flac
+/Users/det/Music/thomas_köner/the_futurist_manifesto/Thomas Koner - The Futurist Manifesto - 01 The Futurist Manifesto.flac
 /Users/det/Music/thomas_köner/nunatak/01-i.flac
 /Users/det/Music/thomas_köner/nunatak/02-ii.flac
 /Users/det/Music/thomas_köner/nunatak/03-iii.flac
@@ -20383,6 +20791,14 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/thomas_köner/novaya_zemlya/01-novaya_zemlya_1.flac
 /Users/det/Music/thomas_köner/novaya_zemlya/02-novaya_zemlya_2.flac
 /Users/det/Music/thomas_köner/novaya_zemlya/03-novaya_zemlya_3.flac
+/Users/det/Music/thomas_köner/motus/Motus - 01 Extension (Attack).flac
+/Users/det/Music/thomas_köner/motus/Motus - 02 Cogitation (Decay).flac
+/Users/det/Music/thomas_köner/motus/Motus - 03 Potential (Sustain).flac
+/Users/det/Music/thomas_köner/motus/Motus - 04 Expression (Release).flac
+/Users/det/Music/thomas_köner/motus/Motus - 05 Substrate (Binaural).flac
+/Users/det/Music/thomas_köner/motus/Motus - 06 Oscillator (Luminous).flac
+/Users/det/Music/thomas_köner/motus/Motus - 07 Substance (Suicide).flac
+/Users/det/Music/thomas_köner/motus/Motus - 08 Synthesis (Carnal).flac
 /Users/det/Music/Thomas Leer And Robert Rental - Lp - 1979 - UK/10-01 Attack Decay.mp3
 /Users/det/Music/Thomas Leer And Robert Rental - Lp - 1979 - UK/10-02 Monochrome Days 1.mp3
 /Users/det/Music/Thomas Leer And Robert Rental - Lp - 1979 - UK/10-03 Day Breaks, Night Heals 1.mp3
@@ -21955,6 +22371,12 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/vromb/noize_mélodia/10-dépeçage_par_le_son.flac
 /Users/det/Music/vromb/noize_mélodia/11-tempéte_solaire_suivie_de_-_écho_dune_terre_sans_hommes.flac
 /Users/det/Music/vromb/noize_mélodia/12-noize_mélodia_(_thématique_).flac
+/Users/det/Music/vromb/origami/Vromb - Origami - 01 Rythme Centrique.flac
+/Users/det/Music/vromb/origami/Vromb - Origami - 02 Extraction (Digital Bonus).flac
+/Users/det/Music/vromb/origami/Vromb - Origami - 03 Manoeuvre Tronique.flac
+/Users/det/Music/vromb/origami/Vromb - Origami - 04 Formation Triangule.flac
+/Users/det/Music/vromb/origami/Vromb - Origami - 05 Pliage Spirale.flac
+/Users/det/Music/vromb/origami/Vromb - Origami - 06 Deploiement Panoramique.flac
 /Users/det/Music/vromb__telepherique/paradigma/03-vromb_&_telepherique-paradigma-wechsel.flac
 /Users/det/Music/vromb__telepherique/paradigma/04-vromb_&_telepherique-paradigma-effeckt.flac
 /Users/det/Music/vsnares/2370894/01-underground_circus_jesus.flac
@@ -22062,6 +22484,14 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/various/bossa_jazz_(1)/06-walter_wanderley-capoeira.flac
 /Users/det/Music/various/bossa_nova_and_the_rise_of_brazilian_music_in_the_1960s/17-wanda_sá-adriana.flac
 /Users/det/Music/various/skweee_tooth/10-wankers_united-la_moulette_enchantée.flac
+/Users/det/Music/warfield/Warfield - HOSCO - 01 Intro.flac
+/Users/det/Music/warfield/Warfield - HOSCO - 02 Ascension.flac
+/Users/det/Music/warfield/Warfield - HOSCO - 03 Spiritual Entrance.flac
+/Users/det/Music/warfield/Warfield - HOSCO - 04 Dogmas.flac
+/Users/det/Music/warfield/Warfield - HOSCO - 05 Hosco.flac
+/Users/det/Music/warfield/Warfield - HOSCO - 06 Pantenica.flac
+/Users/det/Music/warfield/Warfield - HOSCO - 07 Pestilencia.flac
+/Users/det/Music/warfield/Warfield - HOSCO - 08 Black Constelation.flac
 /Users/det/Music/Warning - Warning Lp - 1982 - Germany/01 Why Can The Bodies Fly 1.mp3
 /Users/det/Music/Warning - Warning Lp - 1982 - Germany/02 Magic Castle 1.mp3
 /Users/det/Music/Warning - Warning Lp - 1982 - Germany/03 Wild Roses For The Exit 1.mp3
@@ -22403,6 +22833,12 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/x_marks_the_pedwalk/Retrospective/X Marks The Pedwalk - No Premonition.mp3
 /Users/det/Music/x_marks_the_pedwalk/Retrospective/X Marks The Pedwalk - Look On This Side.mp3
 /Users/det/Music/x_marks_the_pedwalk/Retrospective/X Marks The Pedwalk - Sweep Hand (Timeless).mp3
+/Users/det/Music/[Tresor 001] X-101 - X-101 [1991] [MPC 128]/01_Sonic_Destroyer.mpc
+/Users/det/Music/[Tresor 001] X-101 - X-101 [1991] [MPC 128]/02_Rave_New_World.mpc
+/Users/det/Music/[Tresor 001] X-101 - X-101 [1991] [MPC 128]/03_The_Final_Hour.mpc
+/Users/det/Music/[Tresor 001] X-101 - X-101 [1991] [MPC 128]/04_G-Force.mpc
+/Users/det/Music/[Tresor 001] X-101 - X-101 [1991] [MPC 128]/05_Whatever_Happen_To_Peace.mpc
+/Users/det/Music/[Tresor 001] X-101 - X-101 [1991] [MPC 128]/06_Mindpower.mpc
 /Users/det/Music/various/nocturbulous_behaviour_-_the_mix/09-x-101-g-force.flac
 /Users/det/Music/various/nocturbulous_behaviour_-_the_mix/11-x-102-obx-a.flac
 /Users/det/Music/x-102/rediscovers_the_rings_of_saturn/01-introduction_(original).flac
@@ -22602,6 +23038,7 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/various/carbon/12_16bit_golem.ogg
 /Users/det/Music/various/brazil_primitivo/05-xisto_bahia-isso_É_bom.flac
 /Users/det/Music/various/unwelcome_or_ignored_-_the_noisefest_2001_performance_compilation/14-xome-untitled.flac
+/Users/det/Music/xor_gate/conic_sections/XOR Gate - Conic Sections.aif
 /Users/det/Music/various/feedbackloop/13-xszi-confinedtoblinders.flac
 /Users/det/Music/various/nwc/15/19. computed man - Xynn.mp3
 /Users/det/Music/various/substantia_innominata/4_yannick_dauby_&_hitoshi_kojo-la_vie_dans_les_eaux.flac
