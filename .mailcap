@@ -2,41 +2,42 @@ text/html; w3m -T text/html %s
 text/html; w3m -T text/html -dump %s; copiousoutput
 text/plain; view %s; needsterminal
 
-image/png; open -n %s; copiousoutput;
-image/jpeg; open -n %s; copiousoutput;
-video/*; open %s >/dev/null
-
 text/calendar; icalview.rb; copiousoutput
-application/octet-stream; less %s
-application/excel;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/excel;  xlhtml %s |w3m -T text/html
-application/msexcel;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/msexcel;  xlhtml %s |w3m -T text/html
-application/x-msexcel;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/x-msexcel;  xlhtml %s |w3m -T text/html
-application/vnd.openxml;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/vnd.openxmlformats-officedocument.wordprocessingml.template;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/msword;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/x-msword;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/msword;   antiword %s; copiousoutput
-application/vnd.ms-excel;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/vnd.ms-excel;  xlhtml %s |w3m -T text/html
-application/vnd.ms-powerpoint;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/x-mspowerpoint;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/vnd.openxmlformats-officedocument.presentationml.presentation;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/vnd.ms-powerpoint;  ppthtml %s |w3m -T text/html
-application/vnd.openxmlformats-officedocument.wordprocessingml.document;   mutt_bgrun open %s; test=test -n "$DISPLAY"
-application/pdf;	mutt_bgrun open %s
+application/ics; icalview.rb; copiousoutput
+
+# MS Excel
+application/x-msexcel; ~/bin/view_attachment %s
+application/ms-exc; ~/bin/view_attachment %s
+application/excel; ~/bin/view_attachment %s
+application/msexcel; ~/bin/view_attachment %s
+application/vnd.ms-exc; ~/bin/view_attachment %s
+application/vnd.ms-excel; ~/bin/view_attachment %s
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; ~/bin/view_attachment %s
+
+# MS Word
+application/msword; ~/bin/view_attachment %s
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/bin/view_attachment %s
+
+# Images
+image/jpg; ~/bin/view_attachment %s jpg
+image/jpeg; ~/bin/view_attachment %s jpg
+image/pjpeg; ~/bin/view_attachment %s jpg
+image/png; ~/bin/view_attachment %s png
+image/gif; ~/bin/view_attachment %s gif
+image/webp; ~/bin/view_attachment %s webp
+
+# PDF
+application/pdf; ~/bin/view_attachment %s pdf
+
+# HTML
+text/html; ~/bin/view_attachment %s html
+
+# Unidentified.
+application/octet-stream; ~/bin/view_attachment %s "-"
+
+#application/octet-stream; less %s
+
 #application/pdf; pdftotext -htmlmeta %s - |w3m -T text/html; copiousoutput
-
-audio/x-pn-mp3; 	mutt_bgrun vlc %s; test=test -n "$DISPLAY"
-
-audio/mpeg;    mutt_bgrun vlc %s; test=test -n "$DISPLAY"
-audio/mpegurl; mutt_bgrun vlc %s; test=test -n "$DISPLAY"
-audio/mpeg;    mutt_bgrun vlc -q %s
-audio/*; mutt_bgrun vlc %s;
-
 
 application/x-cpio; cpio -tvF --quiet %s; copiousoutput
 application/x-tar; tar tvf %s; copiousoutput
@@ -44,5 +45,3 @@ application/x-tar-gz; tar tvfz %s; copiousoutput
 application/x-zip-compressed; unzip -v %s; copiousoutput
 application/zip; unzip -v %s; copiousoutput
 
-text/calendar; mutt-ics; copiousoutput
-application/ics; mutt-ics; copiousoutput
