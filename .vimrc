@@ -70,6 +70,9 @@ nmap zz ZZ
 nmap Q :qa!<CR>
 " Write using sudo
 cmap w!! w !sudo tee > /dev/null %
+" Reflow JSON
+nmap =j :%!python -m json.tool<CR>
+" %!python -c "import json, sys, collections; print json.dumps(json.load(sys.stdin, object_pairs_hook=collections.OrderedDict), indent=4)"
 " }}}
 
 " Settings {{{
@@ -194,7 +197,8 @@ Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
 Plug 'natebosch/vim-lsc'
 Plug 'natebosch/vim-lsc-dart'
-Plug 'goerz/jupytext.vim'
+Plug 'jpalardy/vim-slime', { 'for': 'python' }
+Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 "Plug 'Yggdroot/indentLine'
 " Use these if debugging color themes/hightlighting
 " Plug 'kergoth/vim-hilinks'
@@ -262,6 +266,15 @@ let g:lsc_server_commands.go = {
             \}
 " }}}
 
+" slime {{{
+let g:slime_target = "vimterminal"
+let g:slime_vimterminal_config = {"term_finish": "close"}
+let g:slime_no_mappings = 1
+nnoremap <Leader>s :SlimeSend1 ipython --matplotlib<CR>
+nnoremap <Leader>r :IPythonCellRun<CR>
+nnoremap <Leader>c :IPythonCellExecuteCellJump<CR>
+" }}}
+
 " quickfixsigns {{{
 let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
 let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
@@ -274,7 +287,7 @@ let g:buftabline_show=1
 " }}}
 
 " taskwarrior {{{
-let g:task_default_prompt = ['project', 'description', 'priority', 'due', 'tags']
+let g:task_default_prompt = ['project', 'description', 'priority', 'due']
 let g:task_info_vsplit = 1
 let g:task_rc_override = 'rc.defaultwidth=0'
 " }}}
