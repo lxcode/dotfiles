@@ -56,10 +56,7 @@ alias tl="task long"
 alias th="task +home"
 alias tw="task +work"
 alias wtr="curl 'wttr.in/SFO?m'"
-alias ws="python -m SimpleHTTPServer 8080"
-alias tws="twistd -no web --path=. --port=8080"
-alias tpush="pushd ~/.task && git add * && git commit -m 'Task update' && git push; popd"
-alias tpull="pushd ~/.task && git pull; popd"
+alias ws="python3 -m http.server"
 alias lsd='ls -ld *(-/DN)'
 alias lsa='ls -ld .*'
 alias ctags-objc='/usr/local/bin/ctags --languages=objectivec --langmap=objectivec:.h.m -R .'
@@ -275,10 +272,8 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 
 #zstyle -e ':completion:*:ports' ports 'reply=($(nmap $1 |grep open |awk -F / {print $1}))'
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
 ### Source things
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
