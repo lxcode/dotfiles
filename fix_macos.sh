@@ -203,7 +203,8 @@ brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
     python3 weechat youtube-dl bbe zsh vdirsyncer khal \
     fzf mosh tree ripgrep fd htop mtr cmus notmuch isync \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
-    automake libtool pkg-config json-glib gnupg pinentry-mac
+    automake libtool pkg-config json-glib gnupg pinentry-mac \
+    gawk
 pip3 install peewee python-language-server requests
 
 # Services
