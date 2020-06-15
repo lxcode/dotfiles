@@ -74,7 +74,7 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryCli
 # This is not an iPad.
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-# Do not ask me if I'm sure. I am always sure.
+# Do not ask me if I'm sure
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Do not leave crap all over my network shares
@@ -94,6 +94,13 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Disable candy colors
 defaults write -g AppleAquaColorVariant -int 6;
+
+# 24 hour clock, show date
+defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM HH:mm"
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool "YES"
+
+# Use proper temperature units
+defaults write NSGlobalDomain AppleTemperatureUnit -string "Celsius"
 
 # Turn on firewall, such as it is
 sudo defaults write /Library/Preferences/com.apple.sharing.firewall state -bool YES
@@ -170,6 +177,7 @@ sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Curre
 # The old Solaris admin in me still cringes when I see this command
 killall Dock
 killall Finder
+killall SystemUIServer
 
 # Index things for locate(1)
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
