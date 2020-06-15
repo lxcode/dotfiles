@@ -204,7 +204,7 @@ brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
     fzf mosh tree ripgrep fd htop mtr cmus notmuch isync \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
-    gawk
+    gawk cmusfm
 pip3 install peewee python-language-server requests
 
 # Services
@@ -220,7 +220,7 @@ brew tap homebrew/cask-fonts
 brew cask install font-inconsolata
 brew cask install font-source-code-pro
 brew cask install kitty
-brew cask install spectacle
+brew cask install rectangle
 brew cask install karabiner-elements
 brew cask install wireshark
 
