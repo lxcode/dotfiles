@@ -228,6 +228,7 @@ let g:netrw_banner=0
 " better-whitespace {{{
 let g:better_whitespace_ctermcolor=236
 let g:better_whitespace_guicolor="#303030"
+let g:better_whitespace_filetypes_blacklist=['mail']
 " }}}
 
 " lsc {{{
@@ -352,6 +353,8 @@ let g:statline_show_encoding=0
                 \ 'overfull' : 0,
                 \ 'underfull' : 0,
                 \}
+    " Ignore things like underscores, I use the underscore package
+    let g:tex_no_error=1
 " }}}
 
 " augroups {{{
