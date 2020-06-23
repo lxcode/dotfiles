@@ -4,6 +4,9 @@
 # Re-enable chime on older macs
 sudo /usr/sbin/nvram 'BootAudio=%01'
 
+# And newer ones?
+sudo nvram 'StartupMute=%00'
+
 # Don't show me a splash screen
 sudo nvram boot-args="-v"
 
