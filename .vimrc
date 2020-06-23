@@ -71,7 +71,7 @@ nmap Q :qa!<CR>
 " Write using sudo
 cmap w!! w !sudo tee > /dev/null %
 " Reflow JSON
-nmap =j :%!python -m json.tool<CR>
+nmap =j :%!jq .<CR>
 " %!python -c "import json, sys, collections; print json.dumps(json.load(sys.stdin, object_pairs_hook=collections.OrderedDict), indent=4)"
 " }}}
 
@@ -352,6 +352,8 @@ let g:statline_show_encoding=0
                 \ 'overfull' : 0,
                 \ 'underfull' : 0,
                 \}
+    let g:vimtex_quickfix_autoclose_after_keystrokes = 2
+    let g:vimtex_quickfix_open_on_warning = 0
 " }}}
 
 " augroups {{{
