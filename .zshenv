@@ -25,6 +25,11 @@ export LESSHISTFILE="-"
 export X11HOME=/usr/local
 export MANPATH=/usr/man:/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/lang/man:/usr/pkg/man
 
-path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin $X11HOME/bin $HOME/go/bin /usr/local/texlive/2017/bin/amd64-freebsd /usr/local/texlive/2017/bin/x86_64-darwin ~/bin /opt/facebook/bin /usr/local/libexec/git-core ~/.cabal/bin )
+path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin $X11HOME/bin $HOME/go/bin /usr/local/texlive/2019/bin/amd64-freebsd /usr/local/texlive/2019/bin/x86_64-darwin ~/bin /usr/local/libexec/git-core ~/.cabal/bin ~/.cargo/bin )
 
 export PATH=${PATH}:~/dev/flutter/bin:~/.pub-cache/bin
+export ANDROID_HOME=~/Library/Android/sdk
+export ANDROID_SDK_ROOT=$ANDROID_HOME
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+export PATH=$PATH:$ANDROID_HOME/emulator
