@@ -23,11 +23,8 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Don't do the stupid workspace reordering thing
 defaults write com.apple.dock mru-spaces -bool false
 
-# Disable the desktop, one of the most useless UI paradigms ever devised
+# Disable the desktop
 defaults write com.apple.finder CreateDesktop -bool false
-
-# ANIMATE FASTER
-defaults write com.apple.dock expose-animation-duration -float 0.15
 
 # Make things less transparent and get rid of nauseating desktop switching animation
 sudo defaults write com.apple.universalaccess reduceTransparency -bool true
@@ -37,7 +34,7 @@ sudo defaults write com.apple.universalaccess reduceMotion -bool true
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-time-modifier -float 0.17
 # On second thought, let's make it fast to animate but hard to trigger
-defaults write com.apple.dock autohide-delay -int 2
+defaults write com.apple.dock autohide-delay -int 1
 
 # Kill dashboard
 defaults write com.apple.dock "dashboard-in-overlay" -bool true
@@ -80,7 +77,7 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryCli
 # This is not an iPad.
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-# Do not ask me if I'm sure. I am always sure.
+# Do not ask me if I'm sure
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Do not leave crap all over my network shares
@@ -101,6 +98,13 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # Disable candy colors
 defaults write -g AppleAquaColorVariant -int 6;
 
+# 24 hour clock, show date
+defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM HH:mm"
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool "YES"
+
+# Use proper temperature units
+defaults write NSGlobalDomain AppleTemperatureUnit -string "Celsius"
+
 # Turn on firewall, such as it is
 sudo defaults write /Library/Preferences/com.apple.sharing.firewall state -bool YES
 
@@ -116,9 +120,6 @@ defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
-
-# DARK MODE
-sudo defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
 
 # Enable HiDPI display modes
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
@@ -179,30 +180,13 @@ sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Curre
 # The old Solaris admin in me still cringes when I see this command
 killall Dock
 killall Finder
+killall SystemUIServer
 
 # Index things for locate(1)
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
 # Stop DHCP from twiddling names
 #scutil --set HostName local.foo.bar
-
-# Disable "safe sleep", saving 8-16G of disk space. Doing so is basically no
-# less secure than the default behavior when it comes to cold boot attacks, as
-# Safe Sleep leaves the RAM powered for 24 hours anyway. You'd have to hibernate
-# every time you close the machine to prevent that. If you want to do that, use
-# this:
-#
-# sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25 autopoweroff 0
-#
-# You can also use autopoweroff and reduce the autopoweroffdelay if you want
-# to sleep -> hibernate after a period of time.
-#
-# Or you can do this to save space.
-# pmset -a hibernatemode 0
-# pmset -a autopoweroff 0
-# rm /private/var/vm/sleepimage
-# sudo touch /private/var/vm/sleepimage
-# sudo chflags uchg /private/var/vm/sleepimage
 
 # Make symlinks
 
@@ -223,16 +207,21 @@ read -p "Preparing to install apps"
 
 # Brews
 
-sudo xcodebuild -license
+sudo xcodebuild -license accept
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
 brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
     python3 weechat youtube-dl bbe zsh vdirsyncer khal \
     fzf mosh tree ripgrep fd htop mtr cmus notmuch isync \
-    bitlbee khard go pass rclone
-brew install vim --with-lua --with-python3
-brew install ctags --HEAD
+    bitlbee khard go pass rclone vim magic-wormhole ctags \
+    automake libtool pkg-config json-glib gnupg pinentry-mac \
+    gawk cmusfm
 pip3 install peewee python-language-server requests
+
+# Services
+brew services vdirsyncer start
+brew services isync start
+brew services bitlbee start
 
 # Install casks
 read -p "Preparing to install casks"
@@ -242,7 +231,7 @@ brew tap homebrew/cask-fonts
 brew cask install font-inconsolata
 brew cask install font-source-code-pro
 brew cask install kitty
-brew cask install spectacle
+brew cask install rectangle
 brew cask install karabiner-elements
 brew cask install wireshark
 
