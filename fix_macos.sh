@@ -216,7 +216,7 @@ brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
     gawk cmusfm
-pip3 install peewee python-language-server requests
+pip3 install peewee python-language-server requests pip-review
 
 # Services
 brew services vdirsyncer start
