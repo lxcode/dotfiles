@@ -275,5 +275,8 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 ### Source things
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+gcppath="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+gcpcomp="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
+[ -f $gcppath ] && source $gcppath
+[ -f $gcpcomp ] && source $gcpcomp
