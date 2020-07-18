@@ -188,6 +188,7 @@ Plug 'lervag/vimtex'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'psf/black'
 Plug 'solarnz/thrift.vim', { 'for': 'thrift'}
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
