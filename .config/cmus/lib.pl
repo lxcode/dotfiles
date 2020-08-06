@@ -2772,6 +2772,15 @@
 /Users/det/Music/horna__behexen/05-behexen-ritual_of_flesh_&_blood.flac
 /Users/det/Music/horna__behexen/06-behexen-beyond_the_shadow_of_my_lord.flac
 /Users/det/Music/horna__behexen/07-behexen-a_distant_call_from_darkness.flac
+/Users/det/Music/bella/hadron/bella - QTV036 – HADRON - 01 bug bites.flac
+/Users/det/Music/bella/hadron/bella - QTV036 – HADRON - 02 diamagnetismo.flac
+/Users/det/Music/bella/hadron/bella - QTV036 – HADRON - 03 nhii.flac
+/Users/det/Music/bella/hadron/bella - QTV036 – HADRON - 04 preenchimento transitório.flac
+/Users/det/Music/bella/hadron/bella - QTV036 – HADRON - 05 super strings.flac
+/Users/det/Music/bella/hadron/bella - QTV036 – HADRON - 06 high fi.flac
+/Users/det/Music/bella/hadron/bella - QTV036 – HADRON - 07 ubership.flac
+/Users/det/Music/bella/hadron/bella - QTV036 – HADRON - 08 prei-prei.flac
+/Users/det/Music/bella/hadron/bella - QTV036 – HADRON - 09 sting.flac
 /Users/det/Music/various/input_64/disc_1/06-the_last_ninja_theme.flac
 /Users/det/Music/various/nwc/3/04. You Can Dance , If You Want - Bene Gesserit.mp3
 /Users/det/Music/various/200_(disc_02)/11-benga-broken_dubstep.flac
@@ -10812,6 +10821,14 @@
 /Users/det/Music/julio_resende_trio/you_taste_like_a_song/8-who_did_you_think_i_was.flac
 /Users/det/Music/julio_resende_trio/you_taste_like_a_song/9-straight_no_chaser_(bonus_track).flac
 /Users/det/Music/various/min2MAX/cd1/08-justin_james-song_so_true.flac
+/Users/det/Music/juçara_marçal__cadu_tenório/anganga/Juçara Marçal & Cadu Tenório - QTV 013 – Anganga - 01 Eká.flac
+/Users/det/Music/juçara_marçal__cadu_tenório/anganga/Juçara Marçal & Cadu Tenório - QTV 013 – Anganga - 02 Canto II.flac
+/Users/det/Music/juçara_marçal__cadu_tenório/anganga/Juçara Marçal & Cadu Tenório - QTV 013 – Anganga - 03 Grande Anganga Muquixe.flac
+/Users/det/Music/juçara_marçal__cadu_tenório/anganga/Juçara Marçal & Cadu Tenório - QTV 013 – Anganga - 04 Canto III.flac
+/Users/det/Music/juçara_marçal__cadu_tenório/anganga/Juçara Marçal & Cadu Tenório - QTV 013 – Anganga - 05 Canto VI.flac
+/Users/det/Music/juçara_marçal__cadu_tenório/anganga/Juçara Marçal & Cadu Tenório - QTV 013 – Anganga - 06 Canto VII.flac
+/Users/det/Music/juçara_marçal__cadu_tenório/anganga/Juçara Marçal & Cadu Tenório - QTV 013 – Anganga - 07 Taio.flac
+/Users/det/Music/juçara_marçal__cadu_tenório/anganga/Juçara Marçal & Cadu Tenório - QTV 013 – Anganga - 08 Candombe.flac
 /Users/det/Music/various/touch_25/14-jóhann_jóhannsson-tu_non_mi_perderai_mai.flac
 /Users/det/Music/jóhann_jóhannsson/and_in_the_endless_pause_there_came_sound_of_bees/01-theme..flac
 /Users/det/Music/jóhann_jóhannsson/and_in_the_endless_pause_there_came_sound_of_bees/02-city_building..flac
@@ -13585,6 +13602,17 @@
 /Users/det/Music/metal_tastes_like_orange/secret_recording_1/07-orange.flac
 /Users/det/Music/various/nwc/1/new wave complex vol.1 - 18 - metal urbain - tango sudiste.mp3
 /Users/det/Music/various/nwc/2/14. Neue Strassen - Metro Pakt.mp3
+/Users/det/Music/metá_metá/metal_metal/Metá Metá - MetaL MetaL - 01 Exu.flac
+/Users/det/Music/metá_metá/metal_metal/Metá Metá - MetaL MetaL - 02 Orunmila.flac
+/Users/det/Music/metá_metá/metal_metal/Metá Metá - MetaL MetaL - 03 Man Feriman.flac
+/Users/det/Music/metá_metá/metal_metal/Metá Metá - MetaL MetaL - 04 Cobra Rasteira.flac
+/Users/det/Music/metá_metá/metal_metal/Metá Metá - MetaL MetaL - 05 São Jorge.flac
+/Users/det/Music/metá_metá/metal_metal/Metá Metá - MetaL MetaL - 06 Oya.flac
+/Users/det/Music/metá_metá/metal_metal/Metá Metá - MetaL MetaL - 07 São Paulo No Shaking.flac
+/Users/det/Music/metá_metá/metal_metal/Metá Metá - MetaL MetaL - 08 Logun.flac
+/Users/det/Music/metá_metá/metal_metal/Metá Metá - MetaL MetaL - 09 Rainha Das Cabeças.flac
+/Users/det/Music/metá_metá/metal_metal/Metá Metá - MetaL MetaL - 10 Alakorô.flac
+/Users/det/Music/metá_metá/metal_metal/Metá Metá - MetaL MetaL - 11 Tristeza Não.flac
 /Users/det/Music/mi3/we_will_make_a_home_for_you/1-gazzelloni.flac
 /Users/det/Music/mi3/we_will_make_a_home_for_you/2-ugly_beauty.flac
 /Users/det/Music/mi3/we_will_make_a_home_for_you/3-shuffle_boil.flac
@@ -17869,6 +17897,17 @@
 /Users/det/Music/sargeist/let_the_devil_in/08-sanguine_rituals.flac
 /Users/det/Music/sargeist/let_the_devil_in/09-twilight_breath_of_satan.flac
 /Users/det/Music/sargeist/let_the_devil_in/10-as_darkness_tears_the_world_apart.flac
+/Users/det/Music/saskia/pq/Saskia - QTV037 – Pq - 01 Pq.flac
+/Users/det/Music/saskia/pq/Saskia - QTV037 – Pq - 02 Pressssa feat. Leo Pianki.flac
+/Users/det/Music/saskia/pq/Saskia - QTV037 – Pq - 03 Tô Duvidando feat. Edgar.flac
+/Users/det/Music/saskia/pq/Saskia - QTV037 – Pq - 04 Na Cara feat. Nara-Vaez.flac
+/Users/det/Music/saskia/pq/Saskia - QTV037 – Pq - 05 Fuk U feat. Paal Nilssen-Love.flac
+/Users/det/Music/saskia/pq/Saskia - QTV037 – Pq - 06 Apagão feat. Tantão.flac
+/Users/det/Music/saskia/pq/Saskia - QTV037 – Pq - 07 27 Sabias fala Brasilês feat. Leo Pianki.flac
+/Users/det/Music/saskia/pq/Saskia - QTV037 – Pq - 08 Foda.flac
+/Users/det/Music/saskia/pq/Saskia - QTV037 – Pq - 09 Graça.flac
+/Users/det/Music/saskia/pq/Saskia - QTV037 – Pq - 10 Água.flac
+/Users/det/Music/saskia/pq/Saskia - QTV037 – Pq - 11 Mas Nada.flac
 /Users/det/Music/various/nwc/11/10. Boulevard Circulaire - Satellite & Atrom Cristal.mp3
 /Users/det/Music/savak/four.hundred.forty.four.days/01-savak.flac
 /Users/det/Music/savak/four.hundred.forty.four.days/02-claiming_responsibility.flac
@@ -18678,6 +18717,11 @@
 /Users/det/Music/sleeparchive/home/SLEEPARCHIVE - Home - 05 Tape.flac
 /Users/det/Music/sleeparchive/home/SLEEPARCHIVE - Home - 06 Water.flac
 /Users/det/Music/sleeparchive/home/SLEEPARCHIVE - Home - 07 Home.flac
+/Users/det/Music/sleeparchive/lines/SLEEPARCHIVE - Lines - 01 Line 3.flac
+/Users/det/Music/sleeparchive/lines/SLEEPARCHIVE - Lines - 02 Line 7.flac
+/Users/det/Music/sleeparchive/lines/SLEEPARCHIVE - Lines - 03 Line 5.flac
+/Users/det/Music/sleeparchive/lines/SLEEPARCHIVE - Lines - 04 Line 2.flac
+/Users/det/Music/sleeparchive/lines/SLEEPARCHIVE - Lines - 05 Line 9.flac
 /Users/det/Music/sleeparchive/similarities_and_differences/SLEEPARCHIVE - Similarities And Differences - 01 Similarities And Differences, First Recording.flac
 /Users/det/Music/sleeparchive/similarities_and_differences/SLEEPARCHIVE - Similarities And Differences - 02 Similarities And Differences, Second Recording.flac
 /Users/det/Music/sleeparchive/similarities_and_differences/SLEEPARCHIVE - Similarities And Differences - 03 Similarities And Differences, Third Recording.flac
