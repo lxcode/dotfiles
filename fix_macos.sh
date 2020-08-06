@@ -212,10 +212,10 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew doctor
 brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
     python3 weechat youtube-dl bbe zsh vdirsyncer khal \
-    fzf mosh tree ripgrep fd htop mtr cmus notmuch isync \
+    fzf mosh tree ripgrep fd sd htop mtr cmus notmuch isync \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
-    gawk cmusfm
+    gawk cmusfm black dust
 pip3 install peewee python-language-server requests pip-review
 
 # Services
@@ -241,6 +241,7 @@ xcode-select --install
 
 read -p "Preparing to install language servers"
 pip3 install 'python-language-server[all]'
+pip3 install pyls-black
 brew install cquery
 brew install luarocks
 luarocks install --server=https://luarocks.org/dev lua-lsp
