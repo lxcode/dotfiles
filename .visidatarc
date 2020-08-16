@@ -1,0 +1,3 @@
+options.use_default_colors=True
+options.clipboard_copy_cmd="pbcopy"
+options.clipboard_paste_cmd="pbpaste"
