@@ -178,6 +178,7 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'd0c-s4vage/pct-vim', { 'on': ['PctInit', 'PctAudit', 'PctNotes', 'PctReport'] }
 Plug 'darfink/vim-plist'
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
+Plug 'goerz/jupytext.vim'
 Plug 'gorkunov/smartpairs.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'jamessan/vim-gnupg'
@@ -269,12 +270,16 @@ let g:lsc_server_commands.go = {
 " }}}
 
 " slime {{{
-let g:slime_target = "vimterminal"
+let g:slime_target = "kitty"
 let g:slime_vimterminal_config = {"term_finish": "close"}
 let g:slime_no_mappings = 1
 nnoremap <Leader>s :SlimeSend1 ipython --matplotlib<CR>
 nnoremap <Leader>r :IPythonCellRun<CR>
 nnoremap <Leader>c :IPythonCellExecuteCellJump<CR>
+" }}}
+
+" jupytext {{{
+let g:jupytext_fmt = 'py'
 " }}}
 
 " quickfixsigns {{{
@@ -365,6 +370,7 @@ let g:statline_show_encoding=0
 augroup filetypes
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
+    au BufWinEnter *.jsonl, set filetype=json
     au BufWinEnter *.scala, set filetype=scala
     au BufWinEnter *.proto, set filetype=proto
     au BufWinEnter *.dtrace, set filetype=D
