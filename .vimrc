@@ -72,6 +72,7 @@ nmap Q :qa!<CR>
 cmap w!! w !sudo tee > /dev/null %
 " Reflow JSON
 nmap =j :%!jq .<CR>
+nmap =y :%!jq -r yamlify<CR>:set filetype=yaml<CR>
 " %!python -c "import json, sys, collections; print json.dumps(json.load(sys.stdin, object_pairs_hook=collections.OrderedDict), indent=4)"
 " }}}
 
@@ -371,6 +372,7 @@ augroup filetypes
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.jsonl, set filetype=json
+    au BufWinEnter *.jsonl, hi Error none
     au BufWinEnter *.scala, set filetype=scala
     au BufWinEnter *.proto, set filetype=proto
     au BufWinEnter *.dtrace, set filetype=D
