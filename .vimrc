@@ -187,7 +187,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'lervag/vimtex'
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle'}
+Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'psf/black'
@@ -364,6 +364,7 @@ let g:statline_show_encoding=0
     let g:vimtex_quickfix_open_on_warning = 0
     " Ignore things like underscores, I use the underscore package
     let g:tex_no_error=1
+    let g:tex_flavor='latex'
 " }}}
 
 " augroups {{{
