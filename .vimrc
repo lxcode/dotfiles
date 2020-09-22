@@ -186,20 +186,20 @@ Plug 'jamessan/vim-gnupg'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'psf/black'
-Plug 'solarnz/thrift.vim', { 'for': 'thrift'}
+Plug 'psf/black', { 'for': 'python' }
+Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/icalendar.vim'
 Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
-Plug 'will133/vim-dirdiff', { 'on': 'DirDiff'}
+Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
 Plug 'natebosch/vim-lsc'
-Plug 'natebosch/vim-lsc-dart'
+Plug 'natebosch/vim-lsc-dart', { 'for': 'dart' }
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 "Plug 'Yggdroot/indentLine'
