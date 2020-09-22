@@ -12,12 +12,25 @@ def nohtml(column):
     tag_re = re.compile(r'(<!--.*?-->|<[^>]*>)')
     return tag_re.sub('', column)
 
+def hashtags(column):
+    return re.findall(r'\B#\w\w+', column)
+
+def mentions(column):
+    return re.findall(r'\B@\w\w+', column)
+
+def urls(column):
+    regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
+    url = re.findall(regex, column)
+    return [x[0] for x in url]
+
 options.disp_column_sep = '│'
 options.disp_keycol_sep = '║'
 options.use_default_colors=True
 options.clipboard_copy_cmd="pbcopy"
 options.clipboard_paste_cmd="pbpaste"
 options.disp_date_fmt = '%Y-%m-%d %H:%M:%S'
+options.disp_date_fmt = '%Y-%m-%d %H:%M'
 options.force_valid_colnames = True
 
 bindkey('0', 'go-leftmost')
+bindkey('4', 'go-rightmost')
