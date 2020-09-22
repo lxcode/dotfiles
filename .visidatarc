@@ -1,3 +1,4 @@
+# Function defs
 import re
 import vdfec
 from dateutil import tz
@@ -6,7 +7,7 @@ from dateutil import parser
 to_zone = tz.tzlocal()
 
 def ltime(column):
-  return parser.parse(column).astimezone(to_zone)
+    return parser.parse(column).astimezone(to_zone)
 
 def nohtml(column):
     tag_re = re.compile(r'(<!--.*?-->|<[^>]*>)')
@@ -23,6 +24,7 @@ def urls(column):
     url = re.findall(regex, column)
     return [x[0] for x in url]
 
+# Options
 options.disp_column_sep = '│'
 options.disp_keycol_sep = '║'
 options.use_default_colors=True
@@ -31,6 +33,5 @@ options.clipboard_paste_cmd="pbpaste"
 options.disp_date_fmt = '%Y-%m-%d %H:%M:%S'
 options.disp_date_fmt = '%Y-%m-%d %H:%M'
 options.force_valid_colnames = True
-
 bindkey('0', 'go-leftmost')
 bindkey('4', 'go-rightmost')
