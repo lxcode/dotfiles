@@ -1,10 +1,14 @@
 # Function defs
 import re
 import vdfec
+import functools
 from dateutil import tz
 from dateutil import parser
+from geopy.geocoders import Nominatim
 
 to_zone = tz.tzlocal()
+geolocator = Nominatim(user_agent="SIO")
+geocode = functools.lru_cache(maxsize=65535)(functools.partial(geolocator.geocode, timeout=5))
 
 def ltime(column):
     return parser.parse(column).astimezone(to_zone)
@@ -23,6 +27,10 @@ def urls(column):
     regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
     url = re.findall(regex, column)
     return [x[0] for x in url]
+
+def coords(column):
+    location = geocode(column)
+    return str(location.latitude) + ' ' + str(location.longitude)
 
 # Options
 options.disp_column_sep = '│'
