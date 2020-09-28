@@ -60,7 +60,7 @@ vnoremap . :normal .<CR>
 xnoremap p pgvy
 " day+time / day+date
 nmap <Leader>dt "=strftime("%c")<CR>P"
-nmap <Leader>dd "=strftime("%y-%m-%d")<CR>P"
+nmap <Leader>dd "=strftime("%Y-%m-%d")<CR>P"
 " Change to the directory of the current file
 nmap cd :lcd %:h \| :pwd<CR>
 " Fix whitespace
@@ -73,7 +73,6 @@ cmap w!! w !sudo tee > /dev/null %
 " Reflow JSON
 nmap =j :%!jq .<CR>
 nmap =y :%!jq -r yamlify<CR>:set filetype=yaml<CR>
-" %!python -c "import json, sys, collections; print json.dumps(json.load(sys.stdin, object_pairs_hook=collections.OrderedDict), indent=4)"
 " }}}
 
 " Settings {{{
@@ -127,9 +126,6 @@ set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
 set titleold=""             " avoid 'thanks for flying vim'
 set ttimeout
 set ttimeoutlen=100         " Make it so Esc enters Normal mode right away
-if has('nvim')
-    set ttimeoutlen=-1
-endif
 set helpheight=0            " no minimum helpheight
 set incsearch               " search incrementally
 set hlsearch                " show search matches
@@ -150,8 +146,6 @@ set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log,*.latexmain,*.out
 let &t_SI = "\<esc>[5 q"
 let &t_SR = "\<esc>[3 q"
 let &t_EI = "\<esc>[1 q"
-" Same in neovim
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
 " colors
 if $TERM == 'xterm-kitty'
@@ -175,12 +169,10 @@ Plug 'ajh17/VimCompletesMe'
 Plug 'ap/vim-buftabline'
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
 Plug 'christianrondeau/vim-base64'
-Plug 'dart-lang/dart-vim-plugin'
 Plug 'd0c-s4vage/pct-vim', { 'on': ['PctInit', 'PctAudit', 'PctNotes', 'PctReport'] }
 Plug 'darfink/vim-plist'
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'goerz/jupytext.vim'
-Plug 'gorkunov/smartpairs.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'jamessan/vim-gnupg'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -191,6 +183,7 @@ Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'psf/black', { 'for': 'python' }
+Plug 'severin-lemaignan/vim-minimap'
 Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
@@ -199,10 +192,9 @@ Plug 'vim-scripts/icalendar.vim'
 Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
 Plug 'natebosch/vim-lsc'
-Plug 'natebosch/vim-lsc-dart', { 'for': 'dart' }
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
-"Plug 'Yggdroot/indentLine'
+
 " Use these if debugging color themes/hightlighting
 " Plug 'kergoth/vim-hilinks'
 " Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
@@ -211,10 +203,6 @@ call plug#end()
 " Don't load plugins that have unmet dependencies
 if !executable('task')
     let g:loaded_taskwarrior = 1
-endif
-
-if !has('python3')
-    let g:loaded_pct = 1
 endif
 
 " Load optional builtin extensions for %
@@ -259,9 +247,6 @@ if executable('lua-lsp')
 endif
 if executable('javascript-typescript-stdio')
     let g:lsc_server_commands.javascript = 'javascript-typescript-stdio'
-endif
-if executable('hh_client')
-    let g:lsc_server_commands.php = 'hh_client lsp'
 endif
 let g:lsc_server_commands.go = {
             \    "command": "gopls serve",
@@ -374,6 +359,7 @@ augroup filetypes
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.jsonl, set filetype=json
     au BufWinEnter *.jsonl, hi Error none
+    au BufWinEnter *.md, hi Error none
     au BufWinEnter *.scala, set filetype=scala
     au BufWinEnter *.proto, set filetype=proto
     au BufWinEnter *.dtrace, set filetype=D
@@ -394,9 +380,6 @@ augroup views
 augroup end
 
 augroup markdown
-    " Don't highlight underscores
-    syn match markdownError "\w\@<=\w\@="
-    " Unfold
     au BufWinEnter *.md normal zR
     au FileType markdown set spell textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
