@@ -271,7 +271,7 @@ let g:lsc_server_commands.go = {
 " }}}
 
 " slime {{{
-let g:slime_target = "kitty"
+let g:slime_target = "vimterminal"
 let g:slime_vimterminal_config = {"term_finish": "close"}
 let g:slime_no_mappings = 1
 nnoremap <Leader>s :SlimeSend1 ipython --matplotlib<CR>
@@ -384,6 +384,7 @@ augroup filetypes
     au BufWinEnter *.cconf set filetype=javascript
     au BufWinEnter *.table set filetype=conf
     au BufWinEnter *.ics set filetype=icalendar
+    au BufWinEnter .visidatarc set filetype=python
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc
 augroup end
 
