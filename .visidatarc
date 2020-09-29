@@ -30,7 +30,7 @@ def coords(column):
 def img(url):
     call("kitty +kitten icat --detection-timeout 1 --silent " + url, shell=True)
 
-def htags(column):
+def hashtags(column):
     return [hashtag['text'] for hashtag in column['hashtags']]
 
 def mentions(column):
