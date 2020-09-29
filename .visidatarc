@@ -1,7 +1,5 @@
 # Plugins
 import plugins.vdfec
-import plugins.sparkline
-import plugins.livesearch
 
 # Function defs
 import re
