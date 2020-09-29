@@ -23,18 +23,23 @@ def nohtml(column):
     tag_re = re.compile(r'(<!--.*?-->|<[^>]*>)')
     return tag_re.sub('', column)
 
+
 def coords(column):
     location = geocode(column)
     return str(location.latitude) + ' ' + str(location.longitude)
 
+
 def img(url):
     call("kitty +kitten icat --detection-timeout 1 --silent " + url, shell=True)
+
 
 def hashtags(column):
     return [hashtag['text'] for hashtag in column['hashtags']]
 
+
 def mentions(column):
     return [name['screen_name'] for name in column['user_mentions']]
+
 
 def urls(column):
     results = []
@@ -48,6 +53,21 @@ def urls(column):
 
     return results
 
+
+def rementions(column):
+    return re.findall(r'\B@\w\w+', column)
+
+
+def reurls(column):
+    regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
+    url = re.findall(regex, column)
+    return [x[0] for x in url]
+
+
+def hashtags(column):
+    return re.findall(r'\B#\w\w+', column)
+
+
 # Options
 options.disp_column_sep = '│'
 options.disp_keycol_sep = '║'
@@ -56,7 +76,6 @@ options.clipboard_copy_cmd="pbcopy"
 options.clipboard_paste_cmd="pbpaste"
 options.disp_date_fmt = '%Y-%m-%d %H:%M'
 options.force_valid_colnames = True
-options.min_memory_mb = 100
 
 bindkey('0', 'go-leftmost')
 bindkey('4', 'go-rightmost')
