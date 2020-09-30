@@ -62,7 +62,7 @@ def reurls(column):
     return [x[0] for x in url]
 
 
-def hashtags(column):
+def rehashtags(column):
     return re.findall(r'\B#\w\w+', column)
 
 
