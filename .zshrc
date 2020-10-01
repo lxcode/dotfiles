@@ -64,7 +64,8 @@ alias vim="$EDITOR"
 alias sx="exec startx"
 alias vis="vise"
 alias emo="emoji-fzf preview | fzf --preview 'emoji-fzf get --name {1}' | cut -d \" \" -f 1 | emoji-fzf get"
-alias plot="pbpaste | gnuplot ~/bin/gnuplot-commands.txt && open /tmp/output.png"
+alias plot="pbpaste | sort -n | gnuplot ~/bin/plot.gp && open /tmp/output.png"
+alias histo="pbpaste | sort -n | gnuplot ~/bin/hist.gp && open /tmp/output.png"
 
 if [ -x fd ]; then
     _fzf_compgen_dir() {
