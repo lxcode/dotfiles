@@ -371,6 +371,7 @@ augroup filetypes
     au BufWinEnter *.table set filetype=conf
     au BufWinEnter *.ics set filetype=icalendar
     au BufWinEnter .visidatarc set filetype=python
+    au BufWinEnter .jq set filetype=javascript
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc
 augroup end
 
