@@ -1,0 +1,3 @@
+#!/bin/sh
+pbcopy -pboard ruler < /dev/stdin
+pbpaste -pboard ruler | pbcopy

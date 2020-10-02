@@ -5,6 +5,7 @@ import plugins.vdfec
 import re
 import os
 import functools
+import tldextract
 from subprocess import call
 from dateutil import tz
 from dateutil import parser
@@ -39,6 +40,9 @@ def mentions(column):
     return [name['screen_name'] for name in column['user_mentions']]
 
 
+def domains(column):
+    return tldextract.extract(column).registered_domain
+
 def urls(column):
     results = []
     for url in column["urls"]:
@@ -70,7 +74,7 @@ def rehashtags(column):
 options.disp_column_sep = '│'
 options.disp_keycol_sep = '║'
 options.use_default_colors=True
-options.clipboard_copy_cmd="pbcopy"
+options.clipboard_copy_cmd="vdcopy"
 options.clipboard_paste_cmd="pbpaste"
 options.disp_date_fmt = '%Y-%m-%d %H:%M'
 options.force_valid_colnames = True
