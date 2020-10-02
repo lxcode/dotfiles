@@ -14,10 +14,13 @@ map <end> :last<cr>
 map g<Tab> :bn<CR>
 " Make Y behave like C and D
 nnoremap Y y$
+" Yank to OS clipboard
+vmap gy "*y
+nnoremap gY "*y$
 " Use , and space in addition to \ for the leader
 let mapleader = ","
-nmap \ ,
-nmap <space> ,
+map \ ,
+map <space> ,
 " save my pinky
 nore ; :
 " auto-format the current paragraph
@@ -81,7 +84,6 @@ syntax on
 filetype indent on
 helptags ~/.vim/doc
 
-set clipboard=unnamed
 set mouse=a             " Turn this off for console-only mode
 set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
