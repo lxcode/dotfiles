@@ -15,6 +15,9 @@ to_zone = tz.tzlocal()
 geolocator = Nominatim(user_agent="SIO")
 geocode = functools.lru_cache(maxsize=65535)(functools.partial(geolocator.geocode, timeout=5))
 
+def time(column):
+    return parser.parse(column)
+
 def ltime(column):
     return parser.parse(column).astimezone(to_zone)
 
@@ -76,7 +79,7 @@ options.disp_keycol_sep = '║'
 options.use_default_colors=True
 options.clipboard_copy_cmd="vdcopy"
 options.clipboard_paste_cmd="pbpaste"
-options.disp_date_fmt = '%Y-%m-%d %H:%M'
+#options.disp_date_fmt = '%Y-%m-%d %H:%M'
 options.force_valid_colnames = True
 
 bindkey('0', 'go-leftmost')
