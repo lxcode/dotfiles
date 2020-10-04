@@ -15,6 +15,9 @@ to_zone = tz.tzlocal()
 geolocator = Nominatim(user_agent="SIO")
 geocode = functools.lru_cache(maxsize=65535)(functools.partial(geolocator.geocode, timeout=5))
 
+def time(column):
+    return parser.parse(column)
+
 def ltime(column):
     return parser.parse(column).astimezone(to_zone)
 
