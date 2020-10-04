@@ -16,4 +16,4 @@ set border 1+2
 
 load "~/bin/gpsettings.gp"
 
-plot '< cat -' using 1:2 with boxes lt 6
+plot '< cat -' using 1:2 with boxes lt 6 linewidth 3

@@ -68,6 +68,7 @@ alias emo="emoji-fzf preview | fzf --preview 'emoji-fzf get --name {1}' | cut -d
 alias plot="pbpaste -pboard ruler | grep -v created | sort -n | gnuplot ~/bin/plot.gp && open /tmp/gpoutput.p*"
 alias hist="pbpaste -pboard ruler | grep -v created | sort -n | gnuplot ~/bin/hist.gp && open /tmp/gpoutput.p*"
 alias line="pbpaste -pboard ruler | grep -v created | sort -n | gnuplot ~/bin/line.gp && open /tmp/gpoutput.p*"
+alias bar="pbpaste -pboard ruler | sed 1d | tail -r | gnuplot ~/bin/bar.gp && open /tmp/gpoutput.p*"
 
 if [ -x fd ]; then
     _fzf_compgen_dir() {

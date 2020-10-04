@@ -1,2 +1,2 @@
-set terminal pdf
+set terminal pdf noenhanced
 set output "/tmp/gpoutput.pdf"
