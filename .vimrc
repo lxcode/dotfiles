@@ -24,7 +24,7 @@ map <space> ,
 " save my pinky
 nore ; :
 " auto-format the current paragraph
-nnoremap == gwip
+nnoremap == gqip<c-o>
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
 nnoremap # #<c-o>
@@ -342,13 +342,15 @@ let g:statline_show_encoding=0
 
 " vimtex {{{
     " Ignore usually useless messages
-    let g:vimtex_quickfix_latexlog = {
-                \ 'references' : 0,
-                \ 'overfull' : 0,
-                \ 'underfull' : 0,
-                \}
+    let g:vimtex_quickfix_ignore_filters = [
+                \ 'References',
+                \ 'Overfull',
+                \ 'Underfull',
+                \ 'polyglossia Warning',
+                \]
     let g:vimtex_quickfix_autoclose_after_keystrokes = 2
     let g:vimtex_quickfix_open_on_warning = 0
+    let g:vimtex_format_enabled = 1
     " Ignore things like underscores, I use the underscore package
     let g:tex_no_error=1
     let g:tex_flavor='latex'
