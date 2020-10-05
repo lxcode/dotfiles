@@ -23,6 +23,13 @@ map \ ,
 map <space> ,
 " save my pinky
 nore ; :
+" FINE I GIVE UP
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+" Performance seems to have improved
+set cursorline
 " auto-format the current paragraph
 nnoremap == gqip<c-o>
 " Get rid of jumping behavior when using these search functions
@@ -186,7 +193,7 @@ Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'psf/black', { 'for': 'python' }
-Plug 'severin-lemaignan/vim-minimap'
+Plug 'severin-lemaignan/vim-minimap', { 'on': 'Minimap' }
 Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
