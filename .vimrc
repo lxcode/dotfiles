@@ -174,6 +174,7 @@ Plug 'christianrondeau/vim-base64'
 Plug 'd0c-s4vage/pct-vim', { 'on': ['PctInit', 'PctAudit', 'PctNotes', 'PctReport'] }
 Plug 'darfink/vim-plist'
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
+Plug 'godlygeek/tabular', { 'for': 'tex' }
 Plug 'goerz/jupytext.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'jamessan/vim-gnupg'

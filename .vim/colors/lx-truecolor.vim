@@ -11,7 +11,8 @@ endif
 let colors_name = "lx-truecolor"
 
 " General colors
-hi Normal guifg=#d0d0d0 guibg=NONE ctermfg=252 ctermbg=NONE
+hi Normal guifg=#d0d0d0 guibg=#232323 ctermfg=252
+"hi Normal guifg=#d0d0d0 guibg=NONE ctermfg=252 ctermbg=NONE
 hi NonText guifg=#070707 guibg=NONE ctermfg=0
 
 hi Cursor guifg=black guibg=#5fafff ctermfg=0 ctermbg=15
