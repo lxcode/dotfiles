@@ -75,8 +75,6 @@ nmap <Leader>dd "=strftime("%Y-%m-%d")<CR>P"
 nmap cd :lcd %:h \| :pwd<CR>
 " Fix whitespace
 nmap <Leader>fw :StripWhitespace<CR>
-" Quick exits
-nmap zz ZZ
 nmap Q :qa!<CR>
 " Write using sudo
 cmap w!! w !sudo tee > /dev/null %
