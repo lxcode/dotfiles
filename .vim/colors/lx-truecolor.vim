@@ -53,6 +53,7 @@ hi DiffChange ctermbg=55 guibg=#5f00af
 hi ModeMsg guifg=black guibg=#C6C5FE gui=bold ctermfg=0 ctermbg=189 cterm=bold
 
 hi CursorLine ctermfg=NONE ctermbg=237 cterm=NONE guifg=NONE guibg=#3c3d37 gui=NONE
+hi CursorLineNr ctermfg=NONE ctermbg=237 cterm=NONE guifg=NONE guibg=#3c3d37 gui=NONE
 hi CursorColumn guibg=#1c1c1c gui=none ctermbg=234 cterm=none
 hi MatchParen guifg=#df00ff guibg=#242424 gui=bold ctermfg=magenta ctermbg=none
 hi Pmenu guifg=#f6f3e8 guibg=#444444 ctermfg=white ctermbg=242
