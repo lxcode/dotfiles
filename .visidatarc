@@ -79,8 +79,9 @@ options.disp_keycol_sep = '║'
 options.use_default_colors=True
 options.clipboard_copy_cmd="vdcopy"
 options.clipboard_paste_cmd="pbpaste"
+options.clean_names=True
+options.numeric_binning=False
 #options.disp_date_fmt = '%Y-%m-%d %H:%M'
-options.force_valid_colnames = True
 
 bindkey('0', 'go-leftmost')
 bindkey('4', 'go-rightmost')
