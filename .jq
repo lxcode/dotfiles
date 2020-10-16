@@ -40,3 +40,21 @@ walk(
     .
     end
 );
+
+def rmjunk:
+del(.display_text_range, 
+    .truncated, 
+    .id, 
+    .in_reply_to_status_id,
+    .in_reply_to_user_id,
+    .contributors,
+    .favorited,
+    .retweeted,
+    .quoted_status_id,
+    .quoted_status.id,
+    .quoted_status.quoted_status_id,
+    .quoted_status.conversation_id,
+    .conversation_id,
+    .user.user_id
+);
+
