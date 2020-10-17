@@ -53,11 +53,6 @@ map <F12> :cn<CR>
 nnoremap <C-]> g<C-]>
 " Toggle the quickfix window
 nnoremap <silent> <C-c> :call ToggleQuickfix()<cr>
-" Window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-l>k
 " Keep selected blocks selected when shifting
 vmap > >gv
 vmap < <gv
@@ -85,11 +80,11 @@ nmap =y :%!jq -r yamlify<CR>:set filetype=yaml<CR>
 
 " Settings {{{
 filetype plugin on
-syntax on
 filetype indent on
+syntax on
 helptags ~/.vim/doc
 
-set mouse=a             " Turn this off for console-only mode
+set mouse=a
 set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
@@ -112,7 +107,6 @@ set autoindent
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
 set comments-=s1:/*,mb:*,ex:*/
-set comments+=fb:*,b:\\item
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
 set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
 set cpoptions=BFt
@@ -367,32 +361,33 @@ let g:statline_show_encoding=0
 augroup filetypes
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
-    au BufWinEnter *.jsonl, set filetype=json
-    au BufWinEnter *.jsonl, hi Error none
-    au BufWinEnter *.md, hi Error none
-    au BufWinEnter *.scala, set filetype=scala
-    au BufWinEnter *.proto, set filetype=proto
-    au BufWinEnter *.dtrace, set filetype=D
-    au BufWinEnter *.less, set filetype=css
+    au BufWinEnter *.jsonl, set filetype=json | hi Error none
     au BufWinEnter *.nse set filetype=lua
     au BufWinEnter *.cki set filetype=json
-    au BufWinEnter *.cinc set filetype=javascript
-    au BufWinEnter *.cconf set filetype=javascript
-    au BufWinEnter *.table set filetype=conf
     au BufWinEnter *.ics set filetype=icalendar
     au BufWinEnter .visidatarc set filetype=python
     au BufWinEnter .jq set filetype=javascript
-    au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc
+    au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc | let c_no_curly_error = 1
+    au FileType python,php set smartindent
+    au FileType git set foldlevel=99
+    au FileType taskreport set nonu
+    au FileType vim set foldmethod=marker
+    au FileType make set diffopt-=iwhite
+    au FileType markdown set spell | hi Error none
+    au FileType mail set spell nonu | setlocal fo+=aw
+    au BufWinEnter *.md normal zR
+    " If a JS file has only one line, unminify it
+    au FileType javascript if line('$')==1 | call Unminify() | endif
+augroup end
+
+augroup misc
+    " Disable the 'warning, editing a read-only file' thing
+    au FileChangedRO * se noreadonly
 augroup end
 
 augroup views
     au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex mkview
     au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex silent loadview
-augroup end
-
-augroup markdown
-    au BufWinEnter *.md normal zR
-    au FileType markdown set spell textwidth=78 complete+=k comments+=b:-,b:+,b:*,b:+,n:>
 augroup end
 
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow
@@ -406,36 +401,6 @@ augroup quickfix
     au BufReadPost quickfix call GrepColors()
     au BufWinEnter quickfix call GrepColors()
     au BufWinEnter qf:list call GrepColors()
-augroup end
-
-augroup msdocs
-    au BufReadCmd *.docx,*.xlsx,*.pptx call zip#Browse(expand("<amatch>"))
-    au BufReadCmd *.odt,*.ott,*.ods,*.ots,*.odp,*.otp,*.odg,*.otg call zip#Browse(expand("<amatch>"))
-augroup end
-
-augroup mail
-    au FileType mail set spell nonu comments+=b:-,b:+,b:*,b:+,n:>
-    au FileType mail if executable("par") | set formatprg=par | endif
-    au FileType mail map <F8> :%g/^> >/d<CR>gg10j
-    au FileType mail StripWhitespace
-    au FileType mail setlocal fo+=aw
-    au FileType mail setlocal tw=72
-augroup end
-
-augroup misc
-    au BufWinEnter,BufNewFile *.m,*.xm,*.xmi let c_no_curly_error = 1
-    au FileType python,php set smartindent
-    au FileType git set foldlevel=99
-    au FileType taskreport set nonu
-    au FileType json set conceallevel=0
-    au BufWinEnter .vimrc set foldmethod=marker
-    au FileType make set diffopt-=iwhite
-    " If a JS file has only one line, unminify it
-    au FileType javascript if line('$')==1 | call Unminify() | endif
-    " Disable the 'warning, editing a read-only file' thing that
-    " hangs the UI
-    au FileChangedRO * se noreadonly
-    au GUIEnter * set visualbell t_vb=
 augroup end
 
 " }}}
@@ -457,20 +422,13 @@ function! ToggleQuickfix()
     endif
 endfunction
 
-" Read in cookiefiles
-command -bar Cookies call ReadCookies()
-function ReadCookies()
-    call system("cp Cookies.binarycookies /tmp/")
-    %!python $HOME/bin/BinaryCookieReader.py /tmp/Cookies.binarycookies
-endfunction
-
 " I use this to highlight the match from grep, but keep quickfix syntax
 " highlighting intact. Detects Linux due to the different escape sequences of
 " GNU grep.
 command -bar GrepColors call GrepColors()
 function GrepColors()
-    set conceallevel=3
-    set cocu=nv
+    setlocal conceallevel=3
+    setlocal cocu=nv
 
     if system('uname')=~'Linux'
         syn region ansiRed start="\e\[01;31m"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
