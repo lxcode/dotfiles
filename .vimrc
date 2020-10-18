@@ -106,7 +106,6 @@ set formatoptions=qjnrtlmnc " auto-formatting style
 set autoindent
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
-set comments-=s1:/*,mb:*,ex:*/
 set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
 set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
 set cpoptions=BFt
@@ -373,8 +372,9 @@ augroup filetypes
     au FileType taskreport set nonu
     au FileType vim set foldmethod=marker
     au FileType make set diffopt-=iwhite
-    au FileType markdown set spell | hi Error none
-    au FileType mail set spell nonu | setlocal fo+=aw
+    au FileType markdown set spell | hi Error none | setlocal fo+=aw1
+    au FileType mail set spell nonu | setlocal fo+=aw1
+    au FileType tex set spell | setlocal fo+=1p
     au BufWinEnter *.md normal zR
     " If a JS file has only one line, unminify it
     au FileType javascript if line('$')==1 | call Unminify() | endif
