@@ -31,6 +31,21 @@
 /Users/det/Music/drudkh/tosdats/04 Za Zoreyu Scho Striloyu Syaye.wav
 /Users/det/Music/drudkh/tosdats/05 Bilyavyi Den Vtomyvsya I prytykh.wav
 /Users/det/Music/oval/o/Oval - O - Oval - Ah! Music Video lo spec.mp4
+/Users/det/Music/primus/brown_album/brown_album/01 The Return Of Sathington Willoughby.wav
+/Users/det/Music/primus/brown_album/brown_album/02 Fisticuffs.wav
+/Users/det/Music/primus/brown_album/brown_album/03 Golden Boy.wav
+/Users/det/Music/primus/brown_album/brown_album/04 Over The Falls.wav
+/Users/det/Music/primus/brown_album/brown_album/05 Shake Hands With Beef.wav
+/Users/det/Music/primus/brown_album/brown_album/06 Camelback Cinema.wav
+/Users/det/Music/primus/brown_album/brown_album/07 Hats Off.wav
+/Users/det/Music/primus/brown_album/brown_album/08 Puddin' Taine.wav
+/Users/det/Music/primus/brown_album/brown_album/09 Bob's Party Time Lounge.wav
+/Users/det/Music/primus/brown_album/brown_album/10 Duchess And The Proverbial Mind Spread.wav
+/Users/det/Music/primus/brown_album/brown_album/11 Restin' Bones.wav
+/Users/det/Music/primus/brown_album/brown_album/12 Coddingtown.wav
+/Users/det/Music/primus/brown_album/brown_album/13 Kalamazoo.wav
+/Users/det/Music/primus/brown_album/brown_album/14 The Chastising Of Renegade.wav
+/Users/det/Music/primus/brown_album/brown_album/15 Arnie.wav
 /Users/det/Music/telepherique/soundsources/telepherique_ss_rm_we_0022_1.wav
 /Users/det/Music/telepherique/soundsources/telepherique_ss_rm_we_0022_4.wav
 /Users/det/Music/telepherique/soundsources/telepherique_ss_rm_we_0022_5.wav
@@ -2367,6 +2382,17 @@
 /Users/det/Music/autechre/Autechre - NTS Session 4 - flac/NTS Session 4-003-Autechre-column thirteen.flac
 /Users/det/Music/autechre/Autechre - NTS Session 4 - flac/NTS Session 4-004-Autechre-shimripl casual.flac
 /Users/det/Music/autechre/Autechre - NTS Session 4 - flac/NTS Session 4-005-Autechre-all end.flac
+/Users/det/Music/autechre/sign/Autechre - SIGN - 01 M4 Lema.flac
+/Users/det/Music/autechre/sign/Autechre - SIGN - 02 F7.flac
+/Users/det/Music/autechre/sign/Autechre - SIGN - 03 si00.flac
+/Users/det/Music/autechre/sign/Autechre - SIGN - 04 esc desc.flac
+/Users/det/Music/autechre/sign/Autechre - SIGN - 05 au14.flac
+/Users/det/Music/autechre/sign/Autechre - SIGN - 06 Metaz form8.flac
+/Users/det/Music/autechre/sign/Autechre - SIGN - 07 sch.mefd 2.flac
+/Users/det/Music/autechre/sign/Autechre - SIGN - 08 gr4.flac
+/Users/det/Music/autechre/sign/Autechre - SIGN - 09 th red a.flac
+/Users/det/Music/autechre/sign/Autechre - SIGN - 10 psin AM.flac
+/Users/det/Music/autechre/sign/Autechre - SIGN - 11 r cazt.flac
 /Users/det/Music/autechre_&_the_hafler_trio/³hæ/01-³hæ.flac
 /Users/det/Music/autechre_&_the_hafler_trio/æ3o/01-æ3o.flac
 /Users/det/Music/author_&_punisher/ursus_americanus_/1-terrorbird.flac
@@ -6002,8 +6028,10 @@
 /Users/det/Music/deafkids/configuracao_do_lamento/DEAFKIDS-01.flac
 /Users/det/Music/deafkids/configuracao_do_lamento/DEAFKIDS-02.flac
 /Users/det/Music/deafkids__petbrick/deafbrick/DEAFKIDS & PETBRICK - DEAFBRICK - 01 Primeval I.flac
+/Users/det/Music/deafkids__petbrick/deafbrick/DEAFKIDS & PETBRICK - Deafbrick - 02 Força Bruta.flac
 /Users/det/Music/deafkids__petbrick/deafbrick/DEAFKIDS & PETBRICK - DEAFBRICK - 03 Sweat-Drenched Wreck.flac
 /Users/det/Music/deafkids__petbrick/deafbrick/DEAFKIDS & PETBRICK - DEAFBRICK - 04 The Menace of the Dark Polar Night.flac
+/Users/det/Music/deafkids__petbrick/deafbrick/DEAFKIDS & PETBRICK - Deafbrick - 05 Máquina Obssessivo-Compulsiva.flac
 /Users/det/Music/deafkids__petbrick/deafbrick/DEAFKIDS & PETBRICK - DEAFBRICK - 06 O Antropoceno.flac
 /Users/det/Music/deafkids__petbrick/deafbrick/DEAFKIDS & PETBRICK - DEAFBRICK - 07 Mega-Ritual.flac
 /Users/det/Music/deafkids__petbrick/deafbrick/DEAFKIDS & PETBRICK - DEAFBRICK - 08 Hyperkinetic Mass Disorder.flac
@@ -6353,6 +6381,17 @@
 /Users/det/Music/various/a_retrospective_(cd1)/46-dick_mills-fanfare.flac
 /Users/det/Music/various/a_retrospective_(cd1)/67-dick_mills-seascape.flac
 /Users/det/Music/various/nwc/14/08. Stuhl, Kopf, Mann - Die 7 Besten Schlagersanger Der Welt.mp3
+/Users/det/Music/angel/entropien_i/die Angel - Entropien I - 01 Roha.flac
+/Users/det/Music/angel/entropien_i/die Angel - Entropien I - 02 Terminen Kevat.flac
+/Users/det/Music/angel/entropien_i/die Angel - Entropien I - 03 Kitka.flac
+/Users/det/Music/angel/entropien_i/die Angel - Entropien I - 04 Silvaticum.flac
+/Users/det/Music/angel/entropien_i/die Angel - Entropien I - 05 Papyrus.flac
+/Users/det/Music/angel/entropien_i/die Angel - Entropien I - 06 Entropia North.flac
+/Users/det/Music/angel/entropien_i/die Angel - Entropien I - 07 Entropia South.flac
+/Users/det/Music/angel/utopien_i/die ANGEL - Utopien I - 01 Epikouros.flac
+/Users/det/Music/angel/utopien_i/die ANGEL - Utopien I - 02 Cargo Cult.flac
+/Users/det/Music/angel/utopien_i/die ANGEL - Utopien I - 03 Coup d'État.flac
+/Users/det/Music/angel/utopien_i/die ANGEL - Utopien I - 04 Khormanoupka.flac
 /Users/det/Music/aphex_twin/26_mixes_for_cash_(disc_2)/01-die_fantastischen_vier-krieger_(aphex_twin_baldhu_mix).flac
 /Users/det/Music/various/a_selection_of_drones_1993-2000_disc_two/09-die_feinen_trinkers_bei_pinkels_daheim-froschdosis_-_a_o_b.flac
 /Users/det/Music/various/Die Form & Aube - Ukiyo Track 1.mp3
@@ -16502,6 +16541,7 @@
 /Users/det/Music/pharmakon/bestial_burden/06 Bestial Burden.mp3
 /Users/det/Music/pharoah_sanders/pharoahs_first/01-seven_by_seven.flac
 /Users/det/Music/pharoah_sanders/pharoahs_first/02-bethera.flac
+/Users/det/Music/phil_maguire/zeemijl/Phil Maguire - zeemijl - 01 zeemijl.flac
 /Users/det/Music/various/a_retrospective_(cd1)/06-phil_young-science_and_industry.flac
 /Users/det/Music/various/a_retrospective_(cd1)/07-phil_young-the_artist_speaks.flac
 /Users/det/Music/various/a_retrospective_(cd1)/08-phil_young-the_splendour_that_was_rome.flac
@@ -20554,6 +20594,22 @@ cue:///Users/det/Music/Telex - 1978 - Looking For Saint-Tropez/Telex - Looking F
 /Users/det/Music/the_bug/The Bug - Box - Iceman/The Bug - Box - Iceman - 02 Box (Instrumental).flac
 /Users/det/Music/the_bug/The Bug - Box - Iceman/The Bug - Box - Iceman - 03 Iceman ft. Riko Dan.flac
 /Users/det/Music/the_bug/The Bug - Box - Iceman/The Bug - Box - Iceman - 04 Iceman (Instrumental).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 01 Politicians & Paedophiles (Featuring Daddy Freddy).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 02 Beats, Bombs, Bass, Weapons (Featuring Toastie Taylor).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 03 Executor (Featuring Roger Robinson).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 04 Live & Learn (Featuring Paul St. Hilaire).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 05 Thief Of Dreams (Featuring Roger Robinson).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 06 Superbird (Featuring Singing Bird).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 07 Run The Place Red (Featuring Daddy Freddy).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 08 Night Steppa (Featuring Roger Robinson).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 09 Some Days (Featuring Paul St. Hilaire).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 10 Fuck Version.flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 11 Killer (Featuring He-man, The Rootsman).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 12 Living Dub (Featuring Paul St. Hilaire, Roger Robinson).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 13 Aktion Pak (Featuring Warrior Queen).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 14 World War 3 (Featuring Warrior Queen).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 15 Gun Disease (Featuring Cutty Ranks).flac
+/Users/det/Music/the_bug/pressure/The Bug - Pressure - 16 Riddim to your soul (Featuring Singing Bird).flac
 /Users/det/Music/the_caretaker/persistent_repetition_of_phrases/1-lacunar_amnesia.flac
 /Users/det/Music/the_caretaker/persistent_repetition_of_phrases/2-persistent_repetition_of_phrases.flac
 /Users/det/Music/the_caretaker/persistent_repetition_of_phrases/3-rosy_retrospection.flac
