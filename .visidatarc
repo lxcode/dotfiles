@@ -15,22 +15,29 @@ to_zone = tz.tzlocal()
 geolocator = Nominatim(user_agent="SIO")
 geocode = functools.lru_cache(maxsize=65535)(functools.partial(geolocator.geocode, timeout=5))
 
+# Convert to a more sensible datetime
 def time(column):
     return parser.parse(column)
 
+
+# Same but local time
 def ltime(column):
     return parser.parse(column).astimezone(to_zone)
 
+
+# Strip HTML tags
 def nohtml(column):
     tag_re = re.compile(r'(<!--.*?-->|<[^>]*>)')
     return tag_re.sub('', column)
 
 
+# Do a cached geocode lookup via Nominatim
 def coords(column):
     location = geocode(column)
     return str(location.latitude) + ' ' + str(location.longitude)
 
 
+# Take a URL to an image and display it on the terminal
 def img(url):
     call("kitty +kitten icat --detection-timeout 1 --silent " + url, shell=True)
 
@@ -45,6 +52,7 @@ def mentions(column):
 
 def domains(column):
     return tldextract.extract(column).registered_domain
+
 
 def urls(column):
     results = []
@@ -81,7 +89,11 @@ options.clipboard_copy_cmd="vdcopy"
 options.clipboard_paste_cmd="pbpaste"
 options.clean_names=True
 options.numeric_binning=False
-#options.disp_date_fmt = '%Y-%m-%d %H:%M'
 
+# Keybindings
 bindkey('0', 'go-leftmost')
 bindkey('4', 'go-rightmost')
+
+# I keep needing to switch date formats, so make z@ do a "zoom" and show date+time
+Sheet.addCommand('@', 'shortdate', 'options.disp_date_fmt = "%Y-%m-%d"; cursorCol.type=date')
+Sheet.addCommand('z@', 'longdate', 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date')
