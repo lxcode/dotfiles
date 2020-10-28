@@ -1,19 +1,12 @@
-### Limits
-unlimit
-limit stack 8192
-limit core unlimited
-limit -s
-
 umask 022
 
 ### Environment
 export MAIL=/home/$USERNAME/Maildir
-export HELPDIR=/usr/local/lib/zsh/help  # directory for run-help function to find docs
 
 HISTSIZE=1336
-DIRSTACKSIZE=20
 HISTFILE=~/.zsh_history
 SAVEHIST=1336
+DIRSTACKSIZE=20
 KEYTIMEOUT=0
 MAILCHECK=0
 
@@ -33,7 +26,6 @@ unsetopt bgnice autoparamslash
 alias j=jobs
 alias dis=disown
 alias pd=popd
-alias p=popd
 alias yt='cd /tmp; youtube-dl `sselp`'
 alias h=history
 alias grep=egrep
@@ -55,12 +47,13 @@ alias t="task"
 alias tl="task long"
 alias th="task +home"
 alias tw="task +work"
-alias wtr="curl 'wttr.in/SFO?m'"
+alias wtr="curl -s 'https://wttr.in/SFO?format=v2&m'|sed -e 's/☀️  /☀️ /g'|sed -e 's/☀️ │/☀️│/g'"
 alias ws="python3 -m http.server"
 alias lsd='ls -ld *(-/DN)'
 alias lsa='ls -ld .*'
 alias ctags-objc='/usr/local/bin/ctags --languages=objectivec --langmap=objectivec:.h.m -R .'
 alias vim="$EDITOR"
+alias gv="vim -c GV"
 alias sx="exec startx"
 alias vis="vise"
 alias emo="emoji-fzf preview | fzf --preview 'emoji-fzf get --name {1}' | cut -d \" \" -f 1 | emoji-fzf get"
