@@ -36,6 +36,8 @@ def rmidx:
 walk(
     if type == "object" and has("indices") then
     del(.indices)
+    elif type == "object" and has("display_text_range") then
+    del(.display_text_range)
     else
     .
     end
@@ -50,11 +52,13 @@ del(.display_text_range,
     .contributors,
     .favorited,
     .retweeted,
+    .retweeted_status.id,
     .quoted_status_id,
     .quoted_status.id,
     .quoted_status.quoted_status_id,
     .quoted_status.conversation_id,
     .conversation_id,
-    .user.user_id
+    .user.user_id,
+    .user_id
 );
 
