@@ -23,11 +23,6 @@ map \ ,
 map <space> ,
 " save my pinky
 nore ; :
-" FINE I GIVE UP
-noremap j gj
-noremap k gk
-noremap gj j
-noremap gk k
 " Performance seems to have improved
 set cursorline
 " auto-format the current paragraph
@@ -257,9 +252,10 @@ let g:lsc_server_commands.go = {
 " }}}
 
 " slime {{{
-let g:slime_target = "vimterminal"
+let g:slime_target = "dtach"
 let g:slime_vimterminal_config = {"term_finish": "close"}
 let g:slime_no_mappings = 1
+let g:ipython_cell_delimit_cells_by = 'marks'
 nnoremap <Leader>s :SlimeSend1 ipython --matplotlib<CR>
 nnoremap <Leader>r :IPythonCellRun<CR>
 nnoremap <Leader>c :IPythonCellExecuteCellJump<CR>
@@ -375,6 +371,10 @@ augroup filetypes
     au FileType markdown set spell | hi Error none | setlocal fo+=aw1
     au FileType mail set spell nonu | setlocal fo+=aw1
     au FileType tex set spell | setlocal fo+=1p
+    au FileType tex noremap j gj
+    au FileType tex noremap k gk
+    au FileType tex noremap gj j
+    au FileType tex noremap gk k
     au BufWinEnter *.md normal zR
     " If a JS file has only one line, unminify it
     au FileType javascript if line('$')==1 | call Unminify() | endif
@@ -386,8 +386,8 @@ augroup misc
 augroup end
 
 augroup views
-    au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex mkview
-    au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex silent loadview
+    au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.ipynb mkview
+    au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.ipynb silent loadview
 augroup end
 
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow
