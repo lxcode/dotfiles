@@ -26,7 +26,7 @@ defaults write com.apple.dock mru-spaces -bool false
 # Disable the desktop
 defaults write com.apple.finder CreateDesktop -bool false
 
-# Make things less transparent and get rid of nauseating desktop switching animation
+# Make things less transparent and less nauseating
 sudo defaults write com.apple.universalaccess reduceTransparency -bool true
 sudo defaults write com.apple.universalaccess reduceMotion -bool true
 
@@ -51,7 +51,7 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 defaults write com.apple.dock wvous-tl-corner -int 6
 defaults write com.apple.dock wvous-tl-modifier -int 0
 
-# Make the dock all NeXTy
+# Make the dock NeXTy
 defaults write com.apple.dock orientation left
 defaults write com.apple.dock pinning -string start
 
@@ -61,7 +61,7 @@ defaults write com.apple.dock persistent-apps -array
 # Allow keyboard navigation for modals
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-# ANIMATE MORE FASTER
+# Animate faster
 defaults write NSGlobalDomain NSWindowResizeTime .1
 
 # By default, you can't type things like "GAAAAAAAAAAAH".
@@ -74,16 +74,16 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
-# This is not an iPad.
+# No autocorrect
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-# Do not ask me if I'm sure
+# No asking if I'm sure
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
-# Do not leave crap all over my network shares
+# No littering on network shares
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# Time machine is great, but I don't need this prompt
+# Don't prompt to use a disk for Time Machine
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Disable drop shadow on screenshots
@@ -166,12 +166,15 @@ for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
         "/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
 done
 
-# It's my library. Let me see it.
+# Unhide things
 chflags nohidden ~/Library/
 sudo chflags nohidden /tmp
 
 # Kill parentalcontrolsd
 sudo rm -rf "/Library/Application Support/Apple/ParentalControls"
+
+# Disable horrible power-sucking nonsense
+launchctl disable user/$UID/com.apple.photoanalysisd
 
 # Link to the airport command
 sudo mkdir -p /usr/local/bin
@@ -184,9 +187,6 @@ killall SystemUIServer
 
 # Index things for locate(1)
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
-
-# Stop DHCP from twiddling names
-#scutil --set HostName local.foo.bar
 
 # Make symlinks
 
@@ -210,13 +210,13 @@ read -p "Preparing to install apps"
 sudo xcodebuild -license accept
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
-brew install task tmux w3m bvi cscope runit mutt nvi nmap par \
+brew install task tmux w3m bvi runit mutt nvi nmap par \
     python3 weechat youtube-dl bbe zsh vdirsyncer khal \
     fzf mosh tree ripgrep fd sd htop mtr cmus notmuch isync \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
     gawk cmusfm black dust
-pip3 install peewee python-language-server requests pip-review
+pip3 install peewee requests pip-review
 
 # Services
 brew services vdirsyncer start
