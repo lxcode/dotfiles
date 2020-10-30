@@ -1,5 +1,5 @@
 # Plugins
-import plugins.vdfec
+import plugins.fec
 import plugins.vfake
 import plugins.rownum
 
@@ -9,6 +9,7 @@ import os
 import functools
 import tldextract
 import emoji
+import ftfy
 from subprocess import call
 from dateutil import tz
 from dateutil import parser
@@ -16,7 +17,9 @@ from geopy.geocoders import Nominatim
 
 to_zone = tz.tzlocal()
 geolocator = Nominatim(user_agent="SIO")
-geocode = functools.lru_cache(maxsize=65535)(functools.partial(geolocator.geocode, timeout=5))
+geocode = functools.lru_cache(maxsize=65535)(
+    functools.partial(geolocator.geocode, timeout=5)
+)
 
 # Convert to a more sensible datetime
 def time(column):
@@ -30,13 +33,16 @@ def ltime(column):
 
 # Strip HTML tags
 def nohtml(column):
-    tag_re = re.compile(r'(<!--.*?-->|<[^>]*>)')
-    return tag_re.sub('', column)
+    tag_re = re.compile(r"(<!--.*?-->|<[^>]*>)")
+    return tag_re.sub("", column)
+
 
 def noemoji(column):
     allchars = [str for str in column]
     emoji_list = [c for c in allchars if c in emoji.UNICODE_EMOJI]
-    clean_text = ' '.join([str for str in column.split() if not any(i in str for i in emoji_list)])
+    clean_text = " ".join(
+        [str for str in column.split() if not any(i in str for i in emoji_list)]
+    )
 
     return clean_text
 
@@ -44,7 +50,7 @@ def noemoji(column):
 # Do a cached geocode lookup via Nominatim
 def coords(column):
     location = geocode(column)
-    return str(location.latitude) + ' ' + str(location.longitude)
+    return str(location.latitude) + " " + str(location.longitude)
 
 
 # Take a URL to an image and display it on the terminal
@@ -53,11 +59,11 @@ def img(url):
 
 
 def hashtags(column):
-    return [hashtag['text'] for hashtag in column['hashtags']]
+    return [hashtag["text"] for hashtag in column["hashtags"]]
 
 
 def mentions(column):
-    return [name['screen_name'] for name in column['user_mentions']]
+    return [name["screen_name"] for name in column["user_mentions"]]
 
 
 def domains(column):
@@ -67,18 +73,18 @@ def domains(column):
 def urls(column):
     results = []
     for url in column["urls"]:
-        if 'unwound_url' in url:
-            results.append(url['unwound_url'])
-        elif url.get('expanded_url'):
-            results.append(url['expanded_url'])
-        elif url.get('url'):
-            results.append(url['url'])
+        if "unwound_url" in url:
+            results.append(url["unwound_url"])
+        elif url.get("expanded_url"):
+            results.append(url["expanded_url"])
+        elif url.get("url"):
+            results.append(url["url"])
 
     return results
 
 
 def rementions(column):
-    return re.findall(r'\B@\w\w+', column)
+    return re.findall(r"\B@\w\w+", column)
 
 
 def reurls(column):
@@ -88,25 +94,30 @@ def reurls(column):
 
 
 def rehashtags(column):
-    return re.findall(r'\B#\w\w+', column)
+    return re.findall(r"\B#\w\w+", column)
 
 
 # Options
-options.disp_column_sep = '│'
-options.disp_keycol_sep = '║'
-options.use_default_colors=True
-options.clipboard_copy_cmd="vdcopy"
-options.clipboard_paste_cmd="pbpaste"
-options.clean_names=True
-options.numeric_binning=False
+options.disp_column_sep = "│"
+options.disp_keycol_sep = "║"
+options.use_default_colors = True
+options.clipboard_copy_cmd = "vdcopy"
+options.clipboard_paste_cmd = "pbpaste"
+options.clean_names = True
+options.numeric_binning = False
+options.disp_ambig_width = 2
 
 # Keybindings
-bindkey('0', 'go-leftmost')
-bindkey('4', 'go-rightmost')
+bindkey("0", "go-leftmost")
+bindkey("4", "go-rightmost")
 
-Sheet.addCommand('b', 'nobinning', 'options.numeric_binning=False')
-Sheet.addCommand('B', 'binning', 'options.numeric_binning=True')
+Sheet.addCommand("b", "nobinning", "options.numeric_binning=False")
+Sheet.addCommand("B", "binning", "options.numeric_binning=True")
 
 # I keep needing to switch date formats, so make z@ do a "zoom" and show date+time
-Sheet.addCommand('@', 'shortdate', 'options.disp_date_fmt = "%Y-%m-%d"; cursorCol.type=date')
-Sheet.addCommand('z@', 'longdate', 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date')
+Sheet.addCommand(
+    "@", "shortdate", 'options.disp_date_fmt = "%Y-%m-%d"; cursorCol.type=date'
+)
+Sheet.addCommand(
+    "z@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date'
+)
