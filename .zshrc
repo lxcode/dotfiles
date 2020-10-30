@@ -47,7 +47,7 @@ alias t="task"
 alias tl="task long"
 alias th="task +home"
 alias tw="task +work"
-alias wtr="curl -s 'https://wttr.in/San+Francisco?format=v2&m'|sed -e 's/☀️  /☀️ /g'|sed -e 's/☀️ │/☀️│/g'"
+alias wtr="curl -s 'https://wttr.in/San Francisco?format=v2&m'|sed -e 's/☀️  /☀️ /g'|sed -e 's/☀️ │/☀️│/g'"
 alias ws="python3 -m http.server"
 alias lsd='ls -ld *(-/DN)'
 alias lsa='ls -ld .*'
