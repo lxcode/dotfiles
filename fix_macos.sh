@@ -216,7 +216,7 @@ brew install task tmux w3m bvi runit mutt nvi nmap par \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
     gawk cmusfm black dust
-pip3 install peewee requests pip-review
+pip3 install peewee requests pip-review visidata
 
 # Services
 brew services vdirsyncer start
