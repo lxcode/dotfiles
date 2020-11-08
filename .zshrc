@@ -10,6 +10,9 @@ DIRSTACKSIZE=20
 KEYTIMEOUT=0
 MAILCHECK=0
 
+# Stop being weird about escape
+KEYTIMEOUT=1
+
 ### Watch
 watch=(notme)                   # watch for everybody but me
 LOGCHECK=300                    # check every 5 min for login/logout activity
