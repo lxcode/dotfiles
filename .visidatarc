@@ -9,7 +9,6 @@ import os
 import functools
 import tldextract
 import emoji
-import ftfy
 from subprocess import call
 from dateutil import tz
 from dateutil import parser
@@ -106,6 +105,8 @@ options.clipboard_paste_cmd = "pbpaste"
 options.clean_names = True
 options.numeric_binning = False
 options.disp_ambig_width = 2
+options.color_key_col = 110
+options.color_note_type = 8
 
 # Keybindings
 bindkey("0", "go-leftmost")
