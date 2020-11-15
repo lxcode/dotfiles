@@ -15,6 +15,7 @@ from dateutil import parser
 from geopy.geocoders import Nominatim
 
 to_zone = tz.tzlocal()
+
 geolocator = Nominatim(user_agent="SIO")
 geocode = functools.lru_cache(maxsize=65535)(
     functools.partial(geolocator.geocode, timeout=5)
@@ -107,6 +108,7 @@ options.numeric_binning = False
 options.disp_ambig_width = 2
 options.color_key_col = 110
 options.color_note_type = 8
+save_filetype = "csv"
 
 # Keybindings
 bindkey("0", "go-leftmost")
