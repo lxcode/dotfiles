@@ -66,10 +66,7 @@ def mentions(column):
     return [name["screen_name"] for name in column["user_mentions"]]
 
 
-def domains(column):
-    return tldextract.extract(column).registered_domain
-
-
+# Walk Twitter url arrays to extract the most verbose version of the url
 def urls(column):
     results = []
     for url in column["urls"]:
@@ -83,6 +80,12 @@ def urls(column):
     return results
 
 
+def domains(column):
+    return tldextract.extract(column).registered_domain
+
+
+# These re- functions are for plain text fields where we don't have
+# these as separate metadata/columns
 def rementions(column):
     return re.findall(r"\B@\w\w+", column)
 
@@ -97,10 +100,24 @@ def rehashtags(column):
     return re.findall(r"\B#\w\w+", column)
 
 
+def semis(column):
+    return column.split(";")
+
+# Convert abbreviated numbers like 1.1k to actual numbers
+def unk(x):
+    if x.isdigit():
+        return int(x)
+    else:
+        if len(x) > 1:
+            y = float(x[:-1]) * 1000
+    return int(y)
+
+
 # Options
 options.disp_column_sep = "│"
 options.disp_keycol_sep = "║"
 options.use_default_colors = True
+# This is is very specific to my workflow, you want to use pbcopy
 options.clipboard_copy_cmd = "vdcopy"
 options.clipboard_paste_cmd = "pbpaste"
 options.clean_names = True
@@ -114,6 +131,8 @@ save_filetype = "csv"
 bindkey("0", "go-leftmost")
 bindkey("4", "go-rightmost")
 
+# Whether you want binning is pretty context-specific, so these let
+# you switch modes
 Sheet.addCommand("b", "nobinning", "options.numeric_binning=False")
 Sheet.addCommand("B", "binning", "options.numeric_binning=True")
 
