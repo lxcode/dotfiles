@@ -143,3 +143,6 @@ Sheet.addCommand(
 Sheet.addCommand(
     "z@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date'
 )
+
+# See if I can make GitHub highlight properly
+/* vim: syntax=python */
