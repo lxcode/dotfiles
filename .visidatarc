@@ -145,4 +145,4 @@ Sheet.addCommand(
 )
 
 # See if I can make GitHub highlight properly
-/* vim: syntax=python */
+# vim: syntax=python
