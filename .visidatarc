@@ -126,9 +126,11 @@ def rehashtags(column):
 
 # Sloppy ngram filter
 def grams(column, n):
+    stop = stopwords.words("english")
+    stop.extend(["http", "https"])
     w = word_tokenize(column)
     alnum = [word for word in w if word.isalnum()]
-    clean = [word for word in alnum if not word in stopwords.words('english')]
+    clean = [word for word in alnum if not word in stop]
     tokens = ngrams(clean, n)
     return [" ".join(thegrams) for thegrams in tokens]
 
