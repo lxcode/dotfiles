@@ -9,6 +9,11 @@ import os
 import functools
 import tldextract
 import emoji
+import string
+import nltk
+from nltk import word_tokenize
+from nltk.util import ngrams
+from nltk.corpus import stopwords
 from subprocess import call
 from dateutil import tz
 from dateutil import parser
@@ -31,31 +36,47 @@ def ltime(column):
     return parser.parse(column).astimezone(to_zone)
 
 
-# Strip HTML tags
-def nohtml(column):
-    tag_re = re.compile(r"(<!--.*?-->|<[^>]*>)")
-    return tag_re.sub("", column)
-
-
-def noemoji(column):
-    allchars = [str for str in column]
-    emoji_list = [c for c in allchars if c in emoji.UNICODE_EMOJI]
-    clean_text = " ".join(
-        [str for str in column.split() if not any(i in str for i in emoji_list)]
-    )
-
-    return clean_text
-
-
 # Do a cached geocode lookup via Nominatim
 def coords(column):
     location = geocode(column)
     return str(location.latitude) + " " + str(location.longitude)
 
 
-# Take a URL to an image and display it on the terminal
-def img(url):
-    call("kitty +kitten icat --detection-timeout 1 --silent " + url, shell=True)
+# Strip HTML tags
+def nohtml(column):
+    tag_re = re.compile(r"(<!--.*?-->|<[^>]*>)")
+    return tag_re.sub("", column)
+
+
+# Convert abbreviated numbers like 1.1k to actual numbers
+def unk(x):
+    if x.isdigit():
+        return int(x)
+    else:
+        if len(x) > 1:
+            y = float(x[:-1]) * 1000
+    return int(y)
+
+
+# Convert emoji to :this: representation
+def noemoji(column):
+    text = emoji.demojize(column)
+    return text
+
+
+# Extract all actual emoji
+def gemoji(column):
+    text = emoji.demojize(column)
+    text = re.findall(r'(:[^:]*:)', text)
+    list_emoji = [emoji.emojize(x) for x in text]
+    return list_emoji
+
+
+# Extract text-based emoji
+def temoji(column):
+    text = emoji.demojize(column)
+    text = re.findall(r'(:[^:]*:)', text)
+    return text
 
 
 def hashtags(column):
@@ -78,6 +99,15 @@ def urls(column):
             results.append(url["url"])
 
     return results
+
+
+# Sloppy ngram filter
+def grams(column, n):
+    stop = set(stopwords.words('english'))
+    w = word_tokenize(column)
+    clean = [word for word in w if word.isalnum()]
+    tokens = ngrams(clean, n)
+    return [ ' '.join(grams) for grams in tokens]
 
 
 def domains(column):
@@ -103,22 +133,13 @@ def rehashtags(column):
 def semis(column):
     return column.split(";")
 
-# Convert abbreviated numbers like 1.1k to actual numbers
-def unk(x):
-    if x.isdigit():
-        return int(x)
-    else:
-        if len(x) > 1:
-            y = float(x[:-1]) * 1000
-    return int(y)
-
 
 # Options
 options.disp_column_sep = "│"
 options.disp_keycol_sep = "║"
 options.use_default_colors = True
-# This is is very specific to my workflow, you want to use pbcopy
-options.clipboard_copy_cmd = "vdcopy"
+options.confirm_overwrite = False
+options.clipboard_copy_cmd = "pbcopy"
 options.clipboard_paste_cmd = "pbpaste"
 options.clean_names = True
 options.numeric_binning = False
