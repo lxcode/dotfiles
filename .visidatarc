@@ -4,17 +4,13 @@ import plugins.vfake
 import plugins.rownum
 
 # Function defs
-import re
-import os
+import regex
 import functools
 import tldextract
 import emoji
-import string
-import nltk
 from nltk import word_tokenize
 from nltk.util import ngrams
 from nltk.corpus import stopwords
-from subprocess import call
 from dateutil import tz
 from dateutil import parser
 from geopy.geocoders import Nominatim
@@ -25,6 +21,7 @@ geolocator = Nominatim(user_agent="SIO")
 geocode = functools.lru_cache(maxsize=65535)(
     functools.partial(geolocator.geocode, timeout=5)
 )
+
 
 # Convert to a more sensible datetime
 def time(column):
@@ -44,7 +41,7 @@ def coords(column):
 
 # Strip HTML tags
 def nohtml(column):
-    tag_re = re.compile(r"(<!--.*?-->|<[^>]*>)")
+    tag_re = regex.compile(r"(<!--.*?-->|<[^>]*>)")
     return tag_re.sub("", column)
 
 
@@ -58,27 +55,34 @@ def unk(x):
     return int(y)
 
 
-# Convert emoji to :this: representation
+# Convert emoji to :this: representation, in memory of Chloe Price
 def noemoji(column):
     text = emoji.demojize(column)
     return text
 
 
-# Extract all actual emoji
+# Extract all emoji into a list
 def gemoji(column):
-    text = emoji.demojize(column)
-    text = re.findall(r"(:[^:]*:)", text)
-    list_emoji = [emoji.emojize(x) for x in text]
-    return list_emoji
+    emoji_list = []
+    data = regex.findall(r"\X", column)
+    for word in data:
+        if any(char in emoji.UNICODE_EMOJI for char in word):
+            emoji_list.append(word)
+
+    return emoji_list
 
 
-# Extract text-based emoji
+# Extract all emoji into a text-based list
 def temoji(column):
-    text = emoji.demojize(column)
-    text = re.findall(r"(:[^:]*:)", text)
-    return text
+    emoji_list = gemoji(column)
+    temoji_list = []
+    for char in emoji_list:
+        temoji = emoji.demojize(char)
+        temoji_list.append(temoji)
+    return temoji_list
 
 
+# Twitter helper functions
 def hashtags(column):
     return [hashtag["text"] for hashtag in column["hashtags"]]
 
@@ -87,7 +91,6 @@ def mentions(column):
     return [name["screen_name"] for name in column["user_mentions"]]
 
 
-# Walk Twitter url arrays to extract the most verbose version of the url
 def urls(column):
     results = []
     for url in column["urls"]:
@@ -101,15 +104,6 @@ def urls(column):
     return results
 
 
-# Sloppy ngram filter
-def grams(column, n):
-    stop = set(stopwords.words("english"))
-    w = word_tokenize(column)
-    clean = [word for word in w if word.isalnum()]
-    tokens = ngrams(clean, n)
-    return [" ".join(grams) for grams in tokens]
-
-
 def domains(column):
     return tldextract.extract(column).registered_domain
 
@@ -117,19 +111,29 @@ def domains(column):
 # These re- functions are for plain text fields where we don't have
 # these as separate metadata/columns
 def rementions(column):
-    return re.findall(r"\B@\w\w+", column)
+    return regex.findall(r"\B@\w\w+", column)
 
 
 def reurls(column):
     regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
-    url = re.findall(regex, column)
+    url = regex.findall(regex, column)
     return [x[0] for x in url]
 
 
 def rehashtags(column):
-    return re.findall(r"\B#\w\w+", column)
+    return regex.findall(r"\B#\w\w+", column)
 
 
+# Sloppy ngram filter
+def grams(column, n):
+    w = word_tokenize(column)
+    alnum = [word for word in w if word.isalnum()]
+    clean = [word for word in alnum if not word in stopwords.words('english')]
+    tokens = ngrams(clean, n)
+    return [" ".join(thegrams) for thegrams in tokens]
+
+
+# Temporary thing for a certain csv
 def semis(column):
     return column.split(";")
 
