@@ -255,7 +255,6 @@ let g:lsc_server_commands.go = {
 let g:slime_target = "dtach"
 let g:slime_vimterminal_config = {"term_finish": "close"}
 let g:slime_no_mappings = 1
-let g:ipython_cell_delimit_cells_by = 'marks'
 nnoremap <Leader>s :SlimeSend1 ipython --matplotlib<CR>
 nnoremap <Leader>r :IPythonCellRun<CR>
 nnoremap <Leader>c :IPythonCellExecuteCellJump<CR>
