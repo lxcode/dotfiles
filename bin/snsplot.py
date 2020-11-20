@@ -7,10 +7,17 @@ import seaborn as sns
 
 title = ""
 
+stanford = ["#175E54", "#279989", "#8F993E", "#6FA287", "#4298B5", "#007C92"]
+stlight = ["#2D716F", "#59B3A9", "#A6B168", "#8AB8A7", "#67AFD2", "#009AB4"]
+stdark = ["#014240", "#017E7C", "#7A863B", "#417865", "#016895", "#006B81"]
+stbright = ["#E98300", "#E04F39", "#FEDD5C", "#620059", "#651C32", "#5D4B3C"]
+
+
+lightdark = stlight + stdark
 
 sns.set(font="Noto Sans CJK TC")
 sns.set(font_scale=0.8)
-sns.set_palette("deep")
+sns.set_palette(sns.color_palette(lightdark), n_colors=100)
 plt.rcParams["axes.labelweight"] = "bold"
 plt.rcParams["axes.titleweight"] = "bold"
 plt.rcParams["axes.titlesize"] = 10
@@ -24,7 +31,7 @@ print(df.head())
 
 
 # %% Calculate top values, remove rest from a tmp dataframe
-top = 8
+top = 6
 toptags = df.tag.value_counts()[:top]
 threshold = toptags.values[top - 1:top][0]
 
@@ -37,13 +44,13 @@ tmpdf = tmpdf.loc[tmpdf.tag.isin(s[s].index)]
 # %% Horizontal bars
 plt.figure(figsize=(10, 6))
 plt.title(title)
-ylabel = "User"
+ylabel = "Hashtag"
 
 sns.countplot(
     y="tag", data=df, order=df.tag.value_counts().iloc[:top].index
 ).set_ylabel(ylabel)
 
-plt.savefig("/tmp/snsbar.png", dpi=300, transparent=True)
+plt.savefig("/tmp/snsbar.png", dpi=300)
 plt.savefig("/tmp/snsbar.pdf")
 
 
@@ -62,7 +69,7 @@ sns.scatterplot(
     linewidth=0,
 ).legend().set_title = (None)
 
-plt.savefig("/tmp/snsplot.png", dpi=300, transparent=True)
+plt.savefig("/tmp/snsplot.png", dpi=300)
 plt.savefig("/tmp/snsplot.pdf")
 
 
@@ -85,7 +92,7 @@ sns.lineplot(
     data=ldf,
 ).legend().set_title = (None)
 
-plt.savefig("/tmp/snsline.png", dpi=300, transparent=True)
+plt.savefig("/tmp/snsline.png", dpi=300)
 plt.savefig("/tmp/snsline.pdf")
 
 
@@ -97,5 +104,5 @@ plt.title(title)
 
 sns.histplot(x="date", data=df, kde=True, bins=666)
 
-plt.savefig("/tmp/snsdist.png", dpi=300, transparent=True)
+plt.savefig("/tmp/snsdist.png", dpi=300)
 plt.savefig("/tmp/snsdist.pdf")
