@@ -67,7 +67,7 @@ def noemoji(column):
 # Extract all actual emoji
 def gemoji(column):
     text = emoji.demojize(column)
-    text = re.findall(r'(:[^:]*:)', text)
+    text = re.findall(r"(:[^:]*:)", text)
     list_emoji = [emoji.emojize(x) for x in text]
     return list_emoji
 
@@ -75,7 +75,7 @@ def gemoji(column):
 # Extract text-based emoji
 def temoji(column):
     text = emoji.demojize(column)
-    text = re.findall(r'(:[^:]*:)', text)
+    text = re.findall(r"(:[^:]*:)", text)
     return text
 
 
@@ -103,11 +103,11 @@ def urls(column):
 
 # Sloppy ngram filter
 def grams(column, n):
-    stop = set(stopwords.words('english'))
+    stop = set(stopwords.words("english"))
     w = word_tokenize(column)
     clean = [word for word in w if word.isalnum()]
     tokens = ngrams(clean, n)
-    return [ ' '.join(grams) for grams in tokens]
+    return [" ".join(grams) for grams in tokens]
 
 
 def domains(column):
@@ -165,5 +165,4 @@ Sheet.addCommand(
     "z@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date'
 )
 
-# See if I can make GitHub highlight properly
 # vim: syntax=python
