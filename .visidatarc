@@ -51,7 +51,10 @@ def unk(x):
         return int(x)
     else:
         if len(x) > 1:
-            y = float(x[:-1]) * 1000
+            if x[-1] == 'k':
+                y = float(x[:-1]) * 1000
+            elif x[-1] == 'm':
+                y = float(x[:-1]) * 1000000
     return int(y)
 
 
@@ -115,8 +118,8 @@ def rementions(column):
 
 
 def reurls(column):
-    regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
-    url = regex.findall(regex, column)
+    r = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
+    url = regex.findall(r, column)
     return [x[0] for x in url]
 
 
