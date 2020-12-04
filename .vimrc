@@ -26,7 +26,7 @@ nore ; :
 " Performance seems to have improved
 set cursorline
 " auto-format the current paragraph
-nnoremap == gqip<c-o>
+nnoremap == gqip
 " Get rid of jumping behavior when using these search functions
 nnoremap * *<c-o>
 nnoremap # #<c-o>
@@ -362,7 +362,7 @@ augroup filetypes
     au BufWinEnter .visidatarc set filetype=python
     au BufWinEnter .jq set filetype=javascript
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc | let c_no_curly_error = 1
-    au FileType python,php set smartindent
+    au FileType python,php set smartindent | set number
     au FileType git set foldlevel=99
     au FileType taskreport set nonu
     au FileType vim set foldmethod=marker
