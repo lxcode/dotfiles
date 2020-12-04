@@ -7,8 +7,8 @@ sudo /usr/sbin/nvram 'BootAudio=%01'
 # And newer ones?
 sudo nvram 'StartupMute=%00'
 
-# Don't show me a splash screen
-sudo nvram boot-args="-v"
+# Verbose boot and ZFS compat
+sudo nvram boot-args="-v keepsyms=1"
 
 # Don't hide things
 defaults write com.apple.Finder AppleShowAllFiles TRUE
@@ -64,7 +64,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # Animate faster
 defaults write NSGlobalDomain NSWindowResizeTime .1
 
-# By default, you can't type things like "GAAAAAAAAAAAH".
+# Disable press-and-hold so we have proper key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Fastest key repeat. Still too slow.
