@@ -37,7 +37,7 @@ nmap <F1> [s1z=<C-o>
 imap <F1> <Esc>[s1z=<C-o>a
 nmap <Leader>fs [s1z=<C-o>
 " Poor man's cscope - grep for symbol under cursor
-nnoremap gr :grep '\b<cword>\b' *<CR>
+nnoremap rg :execute 'Rg' expand('<cword>')<CR>
 " Show netrw sidebar
 map <silent> <F9> :Lexplore<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
@@ -261,7 +261,7 @@ nnoremap <Leader>c :IPythonCellExecuteCellJump<CR>
 " }}}
 
 " jupytext {{{
-let g:jupytext_fmt = 'py'
+let g:jupytext_fmt = 'py:percent'
 " }}}
 
 " quickfixsigns {{{
