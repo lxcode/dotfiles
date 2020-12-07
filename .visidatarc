@@ -155,6 +155,8 @@ options.numeric_binning = False
 options.disp_ambig_width = 2
 options.color_key_col = 110
 options.color_note_type = 8
+options.disp_ambig_width = 2
+options.some_selected_rows = True
 save_filetype = "csv"
 
 # Keybindings
