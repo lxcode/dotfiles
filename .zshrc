@@ -3,14 +3,11 @@ umask 022
 ### Environment
 export MAIL=/home/$USERNAME/Maildir
 
-HISTSIZE=1336
+HISTSIZE=6666
+SAVEHIST=6666
 HISTFILE=~/.zsh_history
-SAVEHIST=1336
-DIRSTACKSIZE=20
-KEYTIMEOUT=0
-MAILCHECK=0
 
-# Stop being weird about escape
+DIRSTACKSIZE=20
 KEYTIMEOUT=1
 
 ### Watch
@@ -20,16 +17,17 @@ WATCHFMT='%n %a %l from %m at %t.'
 
 ### Options
 setopt   notify globdots pushdtohome autolist multios
-setopt   autocd longlistjobs autoresume histignorealldups histignorespace
 setopt   autopushd pushdsilent pushdminus extendedglob rcquotes
-setopt   nocorrect nocorrectall inc_append_history share_history
+setopt   autocd longlistjobs autoresume nocorrect nocorrectall
+setopt   histignoredups histfindnodups histignorespace
+setopt   histexpiredupsfirst inc_append_history share_history
 unsetopt bgnice autoparamslash
 
 ### Aliases
 alias j=jobs
 alias dis=disown
 alias pd=popd
-alias yt='cd /tmp; youtube-dl `sselp`'
+alias yt='cd /tmp; youtube-dl `pbpaste`'
 alias h=history
 alias grep=egrep
 alias ll='ls -l'
@@ -43,7 +41,6 @@ alias mu='sudo portsnap fetch update'
 alias mc='sudo make config'
 alias mcr="sudo make config-recursive"
 alias pwad='sudo portmaster -wad'
-alias pm="sudo portmaster"
 alias me="sudo make extract"
 alias k="khal"
 alias t="task"
@@ -66,6 +63,7 @@ alias hist="gnuplot ~/bin/hist.gp && open /tmp/gpoutput.p*"
 alias line="gnuplot ~/bin/line.gp && open /tmp/gpoutput.p*"
 alias bar="pbpaste -pboard ruler | sed 1d | tail -r | gnuplot ~/bin/bar.gp && open /tmp/gpoutput.p*"
 
+# Use fd for fzf
 if [ -x fd ]; then
     _fzf_compgen_dir() {
         fd --type d --hidden --follow --exclude ".git" . "$1"
@@ -100,10 +98,6 @@ mus() {
 }
 
 fpr() { openssl s_client -connect $1 < /dev/null 2>/dev/null | openssl x509 -fingerprint -noout -in /dev/stdin }
-
-setenv() { typeset -x "${1}${1:+=}${(@)argv[2,$#]}" }  # csh compatibility
-
-freload() { while (( $# )); do; unfunction $1; autoload -U $1; shift; done }
 
 # Where to look for autoloaded function definitions
 fpath=(~/.zfunc $fpath)
@@ -158,11 +152,6 @@ function title {
 	   print -nR $'\033]0;'$*$'\a'
 	;;
 
-	dvtm*)
-
-	   print -nR $'\033]0;'$*$'\a'
-	;;
-
 	screen*)
 
 	    print -nR $'\033k'$1$'\033'\\
@@ -190,10 +179,6 @@ xterm*)
 ;;
 
 rxvt*)
-    title `print -Pn %n@%m:` $cmd[1]:t "$cmd[2,-1]"
-;;
-
-dvtm*)
     title `print -Pn %n@%m:` $cmd[1]:t "$cmd[2,-1]"
 ;;
 
