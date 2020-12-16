@@ -12,11 +12,11 @@ let colors_name = "lx-truecolor"
 
 " General colors
 hi Normal guifg=#d0d0d0 guibg=#232323 ctermfg=252
-"hi Normal guifg=#d0d0d0 guibg=NONE ctermfg=252 ctermbg=NONE
 hi NonText guifg=#070707 guibg=NONE ctermfg=0
 
 hi Cursor guifg=black guibg=#5fafff ctermfg=0 ctermbg=15
 hi LineNr ctermfg=102 ctermbg=237 guifg=#90908a guibg=#3c3d37
+hi Conceal ctermfg=NONE ctermbg=237 guifg=NONE guibg=#3c3d37
 
 hi VertSplit guifg=#000000 guibg=#202020 ctermfg=235 ctermbg=60
 hi StatusLine guifg=#1a1a1a guibg=#808080 ctermfg=232 ctermbg=60 cterm=reverse gui=reverse
