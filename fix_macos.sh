@@ -216,7 +216,8 @@ brew install task tmux w3m bvi runit mutt nvi nmap par \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
     gawk cmusfm black dust
-pip3 install peewee requests pip-review visidata
+
+pip3 install peewee requests pip-review visidata nltk darker
 
 # Services
 brew services vdirsyncer start
@@ -241,7 +242,6 @@ xcode-select --install
 
 read -p "Preparing to install language servers"
 pip3 install 'python-language-server[all]'
-pip3 install pyls-black
 brew install cquery
 brew install luarocks
 luarocks install --server=https://luarocks.org/dev lua-lsp
