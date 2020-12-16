@@ -3,8 +3,8 @@ umask 022
 ### Environment
 export MAIL=/home/$USERNAME/Maildir
 
-HISTSIZE=6666
-SAVEHIST=6666
+HISTSIZE=6665
+SAVEHIST=6665
 HISTFILE=~/.zsh_history
 
 DIRSTACKSIZE=20
