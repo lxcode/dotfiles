@@ -345,6 +345,8 @@ let g:statline_show_encoding=0
     let g:vimtex_quickfix_autoclose_after_keystrokes = 2
     let g:vimtex_quickfix_open_on_warning = 0
     let g:vimtex_format_enabled = 1
+    let g:vimtex_fold_enabled=1
+    let g:vimtex_fold_manual=1
     " Ignore things like underscores, I use the underscore package
     let g:tex_no_error=1
     let g:tex_flavor='latex'
@@ -385,8 +387,8 @@ augroup misc
 augroup end
 
 augroup views
-    au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.ipynb mkview
-    au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.ipynb silent loadview
+    au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb mkview
+    au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb silent loadview
 augroup end
 
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow
