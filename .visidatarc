@@ -138,9 +138,13 @@ def grams(column, n):
     return [" ".join(thegrams) for thegrams in tokens]
 
 
-# Temporary thing for a certain csv
-def semis(column):
-    return column.split(";")
+def adormod(column):
+    if (column >> 6) & 1:
+        return "admin"
+    elif (column >> 5) & 1:
+        return "mod"
+    else:
+        return column
 
 
 # Options
@@ -156,8 +160,8 @@ options.disp_ambig_width = 2
 options.color_key_col = 110
 options.color_note_type = 8
 options.disp_ambig_width = 2
+options.scroll_incr = -3
 options.some_selected_rows = True
-save_filetype = "csv"
 
 # Keybindings
 bindkey("0", "go-leftmost")
