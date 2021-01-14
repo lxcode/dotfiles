@@ -8,6 +8,7 @@ import regex
 import functools
 import tldextract
 import emoji
+import langdetect
 from nltk import word_tokenize
 from nltk.util import ngrams
 from nltk.corpus import stopwords
@@ -22,6 +23,9 @@ geocode = functools.lru_cache(maxsize=65535)(
     functools.partial(geolocator.geocode, timeout=5)
 )
 
+cached_detect = functools.lru_cache(maxsize=65535)(
+    functools.partial(langdetect.detect)
+)
 
 # Convert to a more sensible datetime
 def time(column):
@@ -51,9 +55,9 @@ def unk(x):
         return int(x)
     else:
         if len(x) > 1:
-            if x[-1] == 'k':
+            if x[-1] == "k":
                 y = float(x[:-1]) * 1000
-            elif x[-1] == 'm':
+            elif x[-1] == "m":
                 y = float(x[:-1]) * 1000000
     return int(y)
 
@@ -67,10 +71,12 @@ def noemoji(column):
 # Extract all emoji into a list
 def gemoji(column):
     emoji_list = []
-    data = regex.findall(r"\X", column)
-    for word in data:
-        if any(char in emoji.UNICODE_EMOJI for char in word):
-            emoji_list.append(word)
+
+    if column:
+        data = regex.findall(r"\X", column)
+        for word in data:
+            if any(char in emoji.UNICODE_EMOJI for char in word):
+                emoji_list.append(word)
 
     return emoji_list
 
@@ -136,6 +142,11 @@ def grams(column, n):
     clean = [word for word in alnum if not word in stop]
     tokens = ngrams(clean, n)
     return [" ".join(thegrams) for thegrams in tokens]
+
+
+def lang(column):
+    if column:
+        return cached_detect(column)
 
 
 def adormod(column):
