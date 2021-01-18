@@ -9,22 +9,27 @@ import functools
 import tldextract
 import emoji
 import langdetect
+from urllib.parse import urlparse
 from nltk import word_tokenize
 from nltk.util import ngrams
 from nltk.corpus import stopwords
 from dateutil import tz
 from dateutil import parser
 from geopy.geocoders import Nominatim
+from langdetect.lang_detect_exception import LangDetectException
 
 to_zone = tz.tzlocal()
 
 geolocator = Nominatim(user_agent="SIO")
-geocode = functools.lru_cache(maxsize=65535)(
+
+cached_geocode = functools.lru_cache(maxsize=65535)(
     functools.partial(geolocator.geocode, timeout=5)
 )
-
 cached_detect = functools.lru_cache(maxsize=65535)(
-    functools.partial(langdetect.detect)
+        functools.partial(langdetect.detect)
+)
+cached_langprob = functools.lru_cache(maxsize=65535)(
+    functools.partial(langdetect.detect_langs)
 )
 
 # Convert to a more sensible datetime
@@ -39,7 +44,7 @@ def ltime(column):
 
 # Do a cached geocode lookup via Nominatim
 def coords(column):
-    location = geocode(column)
+    location = cached_geocode(column)
     return str(location.latitude) + " " + str(location.longitude)
 
 
@@ -125,8 +130,23 @@ def rementions(column):
 
 def reurls(column):
     r = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
-    url = regex.findall(r, column)
-    return [x[0] for x in url]
+    if column:
+        url = regex.findall(r, column)
+        return [x[0] for x in url]
+    else:
+        return ""
+
+
+def normurl(column):
+    if column:
+        url = urlparse(column)[1:]
+        url = "".join(url)
+        if url.endswith("/"):
+            url = url[:-1]
+        if url.startswith("www."):
+            url = url[4:]
+
+        return url
 
 
 def rehashtags(column):
@@ -145,8 +165,25 @@ def grams(column, n):
 
 
 def lang(column):
+    l = ""
     if column:
-        return cached_detect(column)
+        try:
+            l = cached_detect(column)
+        except LangDetectException:
+            pass
+
+        return l
+
+
+def langprob(column):
+    l = ""
+    if column:
+        try:
+            l = cached_langprob(column)
+        except LangDetectException:
+            pass
+
+        return l
 
 
 def adormod(column):
