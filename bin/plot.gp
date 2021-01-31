@@ -7,4 +7,4 @@ set xtics rotate by -55
 set yrange [0:*]
 load "~/bin/gpsettings.gp"
 
-plot '/tmp/in.csv' using 1:2 with points linetype 6 linewidth 2 pointsize 0.5
+plot '/tmp/in.tsv' skip 1 using 1:2 with points linetype 6 linewidth 1 pointsize 0.3
