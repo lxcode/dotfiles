@@ -7,17 +7,17 @@ import seaborn as sns
 
 title = ""
 
+cardinalred = "#8C1515"
 stanford = ["#175E54", "#279989", "#8F993E", "#6FA287", "#4298B5", "#007C92"]
 stlight = ["#2D716F", "#59B3A9", "#A6B168", "#8AB8A7", "#67AFD2", "#009AB4"]
 stdark = ["#014240", "#017E7C", "#7A863B", "#417865", "#016895", "#006B81"]
 stbright = ["#E98300", "#E04F39", "#FEDD5C", "#620059", "#651C32", "#5D4B3C"]
 
-
 lightdark = stlight + stdark
 
 sns.set(font="Noto Sans CJK TC")
 sns.set(font_scale=0.8)
-sns.set_palette(sns.color_palette(lightdark), n_colors=100)
+sns.set_palette(sns.color_palette(stanford), n_colors=100)
 plt.rcParams["axes.labelweight"] = "bold"
 plt.rcParams["axes.titleweight"] = "bold"
 plt.rcParams["axes.titlesize"] = 10
@@ -67,7 +67,7 @@ sns.scatterplot(
     data=tmpdf,
     s=5,
     linewidth=0,
-).legend().set_title = (None)
+).legend().set_title = None
 
 plt.savefig("/tmp/snsplot.png", dpi=300)
 plt.savefig("/tmp/snsplot.pdf")
@@ -75,6 +75,8 @@ plt.savefig("/tmp/snsplot.pdf")
 
 # %% Line plot
 # If dealing with minute resolution data, resample as desired
+tmpdf = df
+tmpdf = tmpdf.set_index("date")
 ldf = tmpdf
 ldf = tmpdf.groupby("tag").resample("H").mean()
 ldf["count"] = ldf["count"].fillna(0)
@@ -86,11 +88,11 @@ plt.title(title)
 sns.lineplot(
     x="date",
     y="count",
-    linewidth=1,
+    linewidth=2,
     hue_order=df.tag.value_counts().iloc[:top].index,
     hue="tag",
     data=ldf,
-).legend().set_title = (None)
+).legend().set_title = None
 
 plt.savefig("/tmp/snsline.png", dpi=300)
 plt.savefig("/tmp/snsline.pdf")
