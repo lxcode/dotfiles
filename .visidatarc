@@ -80,7 +80,7 @@ def gemoji(column):
     if column:
         data = regex.findall(r"\X", column)
         for word in data:
-            if any(char in emoji.UNICODE_EMOJI for char in word):
+            if any(char in emoji.UNICODE_EMOJI_ALIAS_ENGLISH for char in word):
                 emoji_list.append(word)
 
     return emoji_list
@@ -210,6 +210,7 @@ options.color_note_type = 8
 options.disp_ambig_width = 2
 options.scroll_incr = -3
 options.some_selected_rows = True
+options.input_history='previnputs'
 
 # Keybindings
 bindkey("0", "go-leftmost")
