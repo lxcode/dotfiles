@@ -86,6 +86,13 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 # Don't prompt to use a disk for Time Machine
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
+# Don't nag about Safari
+defaults write com.apple.coreservices.uiagent CSUIHasSafariBeenLaunched -bool YES
+defaults write com.apple.coreservices.uiagent CSUIRecommendSafariNextNotificationDate -date 2050-01-01T00:00:00Z
+defaults write com.apple.coreservices.uiagent CSUILastOSVersionWhereSafariRecommendationWasMade -float 10.99
+defaults write com.apple.Safari DefaultBrowserDateOfLastPrompt -date '2050-01-01T00:00:00Z'
+defaults write com.apple.Safari DefaultBrowserPromptingState -int 2
+
 # Disable drop shadow on screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
