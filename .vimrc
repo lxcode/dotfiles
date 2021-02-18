@@ -347,6 +347,7 @@ let g:statline_show_encoding=0
     let g:vimtex_format_enabled = 1
     let g:vimtex_fold_enabled=1
     let g:vimtex_fold_manual=1
+    let g:vimtex_view_method='skim'
     " Ignore things like underscores, I use the underscore package
     let g:tex_no_error=1
     let g:tex_flavor='latex'
@@ -370,7 +371,7 @@ augroup filetypes
     au FileType vim set foldmethod=marker
     au FileType make set diffopt-=iwhite
     au FileType markdown set spell | hi Error none | setlocal fo+=aw1
-    au FileType mail set spell nonu | setlocal fo+=aw1
+    au FileType mail set spell nonu
     au FileType tex set spell | setlocal fo+=1p
     au FileType tex noremap j gj
     au FileType tex noremap k gk
