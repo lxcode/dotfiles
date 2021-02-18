@@ -10,6 +10,7 @@ import tldextract
 import emoji
 import langdetect
 from urllib.parse import urlparse
+from ast import literal_eval
 from nltk import word_tokenize
 from nltk.util import ngrams
 from nltk.corpus import stopwords
@@ -120,6 +121,11 @@ def urls(column):
 
 def domains(column):
     return tldextract.extract(column).registered_domain
+
+
+def strtoarray(column):
+    if column:
+        return literal_eval(column)
 
 
 # These re- functions are for plain text fields where we don't have
