@@ -17,6 +17,8 @@ nnoremap Y y$
 " Yank to OS clipboard
 vmap gy "*y
 nnoremap gY "*y$
+" Delete to blackhole register
+nnoremap <leader>d "_d
 " Use , and space in addition to \ for the leader
 let mapleader = ","
 map \ ,
@@ -80,6 +82,7 @@ syntax on
 helptags ~/.vim/doc
 
 set mouse=a
+set ttymouse=sgr
 set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
@@ -184,6 +187,7 @@ Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 Plug 'vim-scripts/icalendar.vim'
 Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
@@ -249,6 +253,9 @@ let g:lsc_server_commands.go = {
             \    "log_level": -1,
             \    "suppress_stderr": v:true,
             \}
+"if executable('texlab')
+"    let g:lsc_server_commands.tex = 'texlab'
+"endif
 " }}}
 
 " slime {{{
@@ -291,7 +298,8 @@ map gS <Plug>Sneak_,
 " }}}
 
 " ultisnips {{{
-let g:UltiSnipsExpandTrigger = "<C-l>"
+let g:UltiSnipsExpandTrigger = "<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsNoPythonWarning=1
 " }}}
 
@@ -356,6 +364,9 @@ let g:statline_show_encoding=0
 " augroups {{{
 
 augroup filetypes
+    au BufReadPre *.docx silent set ro
+    au BufEnter *.docx silent set modifiable
+    au BufEnter *.docx silent  %!pandoc --columns=78 -f docx -t markdown "%"
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.jsonl, set filetype=json | hi Error none
@@ -377,6 +388,7 @@ augroup filetypes
     au FileType tex noremap k gk
     au FileType tex noremap gj j
     au FileType tex noremap gk k
+    au FileType tex imap [[ \begin{
     au BufWinEnter *.md normal zR
     " If a JS file has only one line, unminify it
     au FileType javascript if line('$')==1 | call Unminify() | endif
