@@ -219,10 +219,10 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew doctor
 brew install task tmux w3m bvi runit mutt nvi nmap par \
     python3 weechat youtube-dl bbe zsh vdirsyncer khal \
-    fzf mosh tree ripgrep fd sd htop mtr cmus notmuch isync \
+    fzf mosh tree ripgrep fd sd mtr cmus notmuch isync \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
-    gawk cmusfm black dust
+    gawk cmusfm black dust skim gotop
 
 pip3 install peewee requests pip-review visidata nltk darker
 
