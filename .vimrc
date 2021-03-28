@@ -381,13 +381,13 @@ augroup filetypes
     au FileType taskreport set nonu
     au FileType vim set foldmethod=marker
     au FileType make set diffopt-=iwhite
-    au FileType markdown set spell | hi Error none | setlocal fo+=aw1
+    au FileType markdown set spell | hi Error none
     au FileType mail set spell nonu
     au FileType tex set spell | setlocal fo+=1p
-    au FileType tex noremap j gj
-    au FileType tex noremap k gk
-    au FileType tex noremap gj j
-    au FileType tex noremap gk k
+    au FileType tex,markdown noremap j gj
+    au FileType tex,markdown noremap k gk
+    au FileType tex,markdown noremap gj j
+    au FileType tex,markdown noremap gk k
     au FileType tex imap [[ \begin{
     au BufWinEnter *.md normal zR
     " If a JS file has only one line, unminify it
