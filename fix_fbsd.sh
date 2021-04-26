@@ -8,6 +8,12 @@ clear_tmp_enable="YES"
 keymap="us.ctrl"
 keyrate="fast"
 allscreens_kbdflags="-b quiet.off"
+syslogd_flags="-ss"
+sendmail_enable="NO"
+sendmail_submit_enable="NO"
+sendmail_outbound_enable="NO"
+sendmail_msp_queue_enable="NO"
+local_unbound_enable="YES"
 EOF
 
 cat <<EOF >> /etc/make.conf
@@ -47,8 +53,8 @@ EOF
 
 
 read -p "Install packages?"
-pkg install vim-console zsh fzf tmux mosh sudo portmaster git \
-    w3m curl runit par_format ripgrep fd-find gnupg mutt htop apg mtr
+pkg install vim-console zsh fzf tmux mosh sudo portmaster git-lite \
+    w3m curl runit par_format ripgrep fd-find gnupg mutt gotop apg mtr-nox11
 
 read -p "Install GUI crap?"
 pkg install inconsolata-ttf dmenu metalock xautolock xorg sakura \
