@@ -109,7 +109,7 @@ typeset -U path cdpath fpath manpath
 ### Prompts
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git svn hg
-zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' check-for-changes false
 zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
 zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
 setopt prompt_subst
@@ -260,9 +260,11 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 
 ### Source things
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#source ~/git/agkozak-zsh-prompt/agkozak-zsh-prompt.plugin.zsh
 
 gcppath="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 gcpcomp="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 [ -f $gcppath ] && source $gcppath
 [ -f $gcpcomp ] && source $gcpcomp
+
