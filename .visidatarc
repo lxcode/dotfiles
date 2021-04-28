@@ -20,11 +20,9 @@ geolocator = Nominatim(user_agent="SIO")
 cached_geocode = functools.lru_cache(maxsize=65535)(
     functools.partial(geolocator.geocode, timeout=5)
 )
+
 cached_detect = functools.lru_cache(maxsize=65535)(
-        functools.partial(langdetect.detect)
-)
-cached_langprob = functools.lru_cache(maxsize=65535)(
-    functools.partial(langdetect.detect_langs)
+    functools.partial(langdetect.detect)
 )
 
 
@@ -133,7 +131,7 @@ def domains(column):
     return tldextract.extract(column).registered_domain
 
 
-# Sometimes we get data in a CSV or something that's a literal string, 
+# Sometimes we get data in a CSV or something that's a literal string,
 # but with array notation.
 def strtoarray(column):
     if column:
@@ -200,7 +198,7 @@ options.disp_keycol_sep = "║"
 options.confirm_overwrite = False
 options.clipboard_copy_cmd = "pbcopy"
 options.clipboard_paste_cmd = "pbpaste"
-options.color_default=""
+options.color_default = ""
 options.clean_names = True
 options.disp_ambig_width = 2
 options.color_key_col = 110
@@ -208,7 +206,7 @@ options.color_note_type = 8
 options.disp_ambig_width = 2
 options.scroll_incr = -3
 options.some_selected_rows = True
-options.input_history='previnputs'
+options.input_history = "previnputs"
 
 # Keybindings
 bindkey("0", "go-leftmost")
