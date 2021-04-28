@@ -27,12 +27,8 @@ cached_langprob = functools.lru_cache(maxsize=65535)(
     functools.partial(langdetect.detect_langs)
 )
 
-# Convert to a more sensible datetime
-def time(column):
-    return parser.parse(column)
 
-
-# Same but local time
+# Convert to local time
 def ltime(column):
     return parser.parse(column).astimezone(to_zone)
 
@@ -60,6 +56,16 @@ def unk(x):
             elif x[-1] == "m":
                 y = float(x[:-1]) * 1000000
     return int(y)
+
+
+# Parse interactions
+def adormod(column):
+    if (column >> 6) & 1:
+        return "admin"
+    elif (column >> 5) & 1:
+        return "mod"
+    else:
+        return column
 
 
 # Convert emoji to :this: representation, in memory of Chloe Price
@@ -93,24 +99,34 @@ def temoji(column):
 
 # Twitter helper functions
 def hashtags(column):
-    return [hashtag["text"] for hashtag in column["hashtags"]]
+    try:
+        return [hashtag["tag"] for hashtag in column["hashtags"]]
+    except:
+        return None
 
 
 def mentions(column):
-    return [name["screen_name"] for name in column["user_mentions"]]
+    try:
+        return [name["username"] for name in column["mentions"]]
+    except:
+        return None
 
 
 def urls(column):
     results = []
-    for url in column["urls"]:
-        if "unwound_url" in url:
-            results.append(url["unwound_url"])
-        elif url.get("expanded_url"):
-            results.append(url["expanded_url"])
-        elif url.get("url"):
-            results.append(url["url"])
+    try:
+        for url in column["urls"]:
+            if "unwound_url" in url:
+                results.append(url["unwound_url"])
+            elif url.get("expanded_url"):
+                results.append(url["expanded_url"])
+            elif url.get("url"):
+                results.append(url["url"])
 
-    return results
+        return results
+
+    except:
+        return None
 
 
 def domains(column):
@@ -176,26 +192,6 @@ def lang(column):
             pass
 
         return l
-
-
-def langprob(column):
-    l = ""
-    if column:
-        try:
-            l = cached_langprob(column)
-        except LangDetectException:
-            pass
-
-        return l
-
-
-def adormod(column):
-    if (column >> 6) & 1:
-        return "admin"
-    elif (column >> 5) & 1:
-        return "mod"
-    else:
-        return column
 
 
 # Options
