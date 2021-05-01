@@ -16,6 +16,12 @@ sendmail_msp_queue_enable="NO"
 local_unbound_enable="YES"
 EOF
 
+cat <<EOF >> /etc/periodic.conf >> /etc/periodic.conf
+daily_output=/dev/null
+weekly_output=/dev/null
+monthly_output=/dev/null
+EOF
+
 cat <<EOF >> /etc/make.conf
 OPTIONS_UNSET=CUPS PRINT DEBUG NLS HELP TEST
 EOF
