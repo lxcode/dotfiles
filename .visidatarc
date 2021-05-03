@@ -181,7 +181,7 @@ def grams(column, n):
         return [" ".join(thegrams) for thegrams in tokens]
 
 
-def lang(column):
+def ld(column):
     l = ""
     if column:
         try:
