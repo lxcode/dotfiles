@@ -7,7 +7,7 @@ HISTSIZE=6665
 SAVEHIST=6665
 HISTFILE=~/.zsh_history
 
-DIRSTACKSIZE=20
+DIRSTACKSIZE=50
 KEYTIMEOUT=1
 
 ### Watch
@@ -29,11 +29,9 @@ alias dis=disown
 alias pd=popd
 alias yt='cd /tmp; youtube-dl `pbpaste`'
 alias h=history
-alias grep=egrep
+alias grep=rg
 alias ll='ls -l'
 alias la='ls -a'
-alias be='sudo -s -H -u'
-alias wu='sudo sv stat /service/*'
 alias rmsvn="find . -type d -name '\.svn' |xargs rm -rf"
 alias rmgit="find . -type d -name '\.git' |xargs rm -rf"
 alias mic='sudo make install clean'
@@ -44,24 +42,26 @@ alias pwad='sudo portmaster -wad'
 alias me="sudo make extract"
 alias k="khal"
 alias t="task"
-alias tl="task long"
 alias th="task +home"
 alias tw="task +work"
 alias wtr="curl -s 'https://wttr.in/San Francisco?format=v2&m'|sed -e 's/☀️  /☀️ /g' -e 's/☀️ │/☀️│/g' -e 's/☁️  /☁️ /g'"
 alias ws="python3 -m http.server"
 alias lsd='ls -ld *(-/DN)'
 alias lsa='ls -ld .*'
-alias ctags-objc='/usr/local/bin/ctags --languages=objectivec --langmap=objectivec:.h.m -R .'
 alias vim="$EDITOR"
 alias gv="vim -c GV"
 alias sx="exec startx"
 alias vis="vise"
 alias emo="emoji-fzf preview | fzf --preview 'emoji-fzf get --name {1}' | cut -d \" \" -f 1 | emoji-fzf get"
-# Abuse the ruler pasteboard as a long term holder for plot data
+# Gnuplot aliases
 alias plot="gnuplot ~/bin/plot.gp && open /tmp/gpoutput.p*"
 alias hist="gnuplot ~/bin/hist.gp && open /tmp/gpoutput.p*"
 alias line="gnuplot ~/bin/line.gp && open /tmp/gpoutput.p*"
-alias bar="pbpaste -pboard ruler | sed 1d | tail -r | gnuplot ~/bin/bar.gp && open /tmp/gpoutput.p*"
+alias bar="gnuplot ~/bin/bar.gp && open /tmp/gpoutput.p*"
+
+if [ -x /usr/local/bin/w3mman ]; then
+    alias man=w3mman
+fi
 
 # Use fd for fzf
 if [ -x fd ]; then
@@ -91,13 +91,11 @@ fzf-cdr() {
 zle -N fzf-cdr
 bindkey '^b' fzf-cdr
 
-mus() {
-    sudo zpool import backup
-    cmus
-    sudo zpool export backup
-}
-
+# Get the fingerprint of a host's TLS cert
 fpr() { openssl s_client -connect $1 < /dev/null 2>/dev/null | openssl x509 -fingerprint -noout -in /dev/stdin }
+
+# Default options for twarc2
+twrc() { twarc2 --no-metadata $@ --flatten }
 
 # Where to look for autoloaded function definitions
 fpath=(~/.zfunc $fpath)
@@ -139,7 +137,7 @@ zle -N zle-line-init
 zle -N zle-line-finish
 zle -N zle-keymap-select
 
-# set up cool things in xterm title bars
+# set up terminal title bars
 function title {
 
 	case $TERM in
@@ -260,11 +258,9 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 
 ### Source things
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-#source ~/git/agkozak-zsh-prompt/agkozak-zsh-prompt.plugin.zsh
 
 gcppath="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 gcpcomp="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 [ -f $gcppath ] && source $gcppath
 [ -f $gcpcomp ] && source $gcpcomp
-
