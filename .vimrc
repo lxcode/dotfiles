@@ -162,12 +162,10 @@ colorscheme lx-truecolor
 call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/id3.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'SolaWing/vim-objc-syntax', { 'for': 'objc' }
 Plug 'ajh17/VimCompletesMe'
 Plug 'ap/vim-buftabline'
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
 Plug 'christianrondeau/vim-base64'
-Plug 'd0c-s4vage/pct-vim', { 'on': ['PctInit', 'PctAudit', 'PctNotes', 'PctReport'] }
 Plug 'darfink/vim-plist'
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'godlygeek/tabular', { 'for': 'tex' }
@@ -182,14 +180,10 @@ Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
 Plug 'millermedeiros/vim-statline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'psf/black', { 'for': 'python' }
-Plug 'severin-lemaignan/vim-minimap', { 'on': 'Minimap' }
-Plug 'solarnz/thrift.vim', { 'for': 'thrift' }
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/icalendar.vim'
-Plug 'vim-utils/vim-man', { 'on': ['Man', 'Mangrep'] }
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
 Plug 'natebosch/vim-lsc'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
@@ -280,6 +274,8 @@ let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'AD
 
 " buftabline {{{
 let g:buftabline_show=1
+let g:buftabline_indicators=1
+let g:buftabline_separators=1
 " }}}
 
 " taskwarrior {{{
