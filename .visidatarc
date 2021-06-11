@@ -3,6 +3,7 @@ import functools
 import tldextract
 import emoji
 import langdetect
+import requests
 from urllib.parse import urlparse
 from ast import literal_eval
 from nltk import word_tokenize
@@ -16,14 +17,19 @@ from langdetect.lang_detect_exception import LangDetectException
 to_zone = tz.tzlocal()
 
 geolocator = Nominatim(user_agent="SIO")
-
 cached_geocode = functools.lru_cache(maxsize=65535)(
     functools.partial(geolocator.geocode, timeout=5)
 )
 
-cached_detect = functools.lru_cache(maxsize=65535)(
-    functools.partial(langdetect.detect)
-)
+
+# Unshorten URLs with unshrtn
+@functools.lru_cache()
+def unshrtn(url):
+    resp = requests.get("http://localhost:3000", params={"url": url}).json()
+    for key in ["canonical", "long", "short"]:
+        if key in resp:
+            return (resp[key], resp["status"], resp["title"])
+    return None
 
 
 # Convert to local time
@@ -54,16 +60,6 @@ def unk(x):
             elif x[-1] == "m":
                 y = float(x[:-1]) * 1000000
     return int(y)
-
-
-# Parse interactions
-def adormod(column):
-    if (column >> 6) & 1:
-        return "admin"
-    elif (column >> 5) & 1:
-        return "mod"
-    else:
-        return column
 
 
 # Convert emoji to :this: representation, in memory of Chloe Price
@@ -144,6 +140,10 @@ def rementions(column):
     return regex.findall(r"\B@\w\w+", column)
 
 
+def rehashtags(column):
+    return regex.findall(r"\B#\w\w+", column)
+
+
 def reurls(column):
     r = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
     if column:
@@ -153,6 +153,7 @@ def reurls(column):
         return ""
 
 
+# Normalize URLs for cleaner freq analysis
 def normurl(column):
     if column:
         url = urlparse(column)[1:]
@@ -163,10 +164,6 @@ def normurl(column):
             url = url[4:]
 
         return url
-
-
-def rehashtags(column):
-    return regex.findall(r"\B#\w\w+", column)
 
 
 # Sloppy ngram filter
@@ -181,11 +178,12 @@ def grams(column, n):
         return [" ".join(thegrams) for thegrams in tokens]
 
 
+@functools.lru_cache()
 def ld(column):
     l = ""
     if column:
         try:
-            l = cached_detect(column)
+            l = langdetect.detect(column)
         except LangDetectException:
             pass
 
