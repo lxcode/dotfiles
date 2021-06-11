@@ -138,7 +138,7 @@ set conceallevel=0          " Don't hide things by default
 set laststatus=2            " Always show a statusline
 set wildignore+=*.bak,~*,*.o,*.aux,*.dvi,*.bbl,*.blg,*.orig,*.toc,*.fls
 set wildignore+=*.loc,*.gz,*.tv,*.ilg,*.lltr,*.lov,*.lstr,*.idx,*.pdf
-set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log,*.latexmain,*.out
+set wildignore+=*.fdb_latexmk,*.ind,*.cg,*.tdo,*.log,*.latexmain,*.out,*.toc
 
 " Use pipe cursor on insert
 let &t_SI = "\<esc>[5 q"
