@@ -8,10 +8,8 @@ do
 done
 
 export FZF_DEFAULT_OPTS="--extended --bind ctrl-a:select-all --height 60%"
-if [ -x rg ]; then
-    export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-fi
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export GOPATH=$HOME/go
 export FPATH=/usr/share/zsh/site-functions:$FPATH
