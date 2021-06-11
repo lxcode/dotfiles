@@ -162,7 +162,6 @@ colorscheme lx-truecolor
 call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/id3.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'ajh17/VimCompletesMe'
 Plug 'ap/vim-buftabline'
 Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
 Plug 'christianrondeau/vim-base64'
@@ -294,8 +293,8 @@ map gS <Plug>Sneak_,
 " }}}
 
 " ultisnips {{{
-let g:UltiSnipsExpandTrigger = "<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsNoPythonWarning=1
 " }}}
 
@@ -370,7 +369,8 @@ augroup filetypes
     au BufWinEnter *.cki set filetype=json
     au BufWinEnter *.ics set filetype=icalendar
     au BufWinEnter .visidatarc set filetype=python
-    au BufWinEnter .jq set filetype=javascript
+    au BufWinEnter *.jq set filetype=javascript
+    au BufWinEnter *.cls set filetype=tex
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc | let c_no_curly_error = 1
     au FileType python,php set smartindent | set number
     au FileType git set foldlevel=99
@@ -403,6 +403,7 @@ augroup end
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow
 " keys
 augroup quickfix
+    au FileType qf set nobuflisted
     au FileType qf set nospell
     au FileType qf, noremap ' <CR><C-W><C-P>j
     au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
