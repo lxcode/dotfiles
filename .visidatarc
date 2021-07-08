@@ -124,7 +124,8 @@ def urls(column):
 
 
 def domains(column):
-    return tldextract.extract(column).registered_domain
+    if column:
+        return tldextract.extract(column).registered_domain
 
 
 # Sometimes we get data in a CSV or something that's a literal string,
