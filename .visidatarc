@@ -194,12 +194,11 @@ def ld(column):
 
 
 # Options
-options.disp_column_sep = "│"
-options.disp_keycol_sep = "║"
 options.confirm_overwrite = False
 options.clipboard_copy_cmd = "pbcopy"
 options.clipboard_paste_cmd = "pbpaste"
 options.color_default = ""
+options.quitguard = True
 options.clean_names = True
 options.disp_ambig_width = 2
 options.color_key_col = 110
