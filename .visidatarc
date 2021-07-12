@@ -2,7 +2,7 @@ import regex
 import functools
 import tldextract
 import emoji
-import langdetect
+import gcld3
 import requests
 from urllib.parse import urlparse
 from ast import literal_eval
@@ -21,6 +21,7 @@ cached_geocode = functools.lru_cache(maxsize=65535)(
     functools.partial(geolocator.geocode, timeout=5)
 )
 
+detector = gcld3.NNetLanguageIdentifier(min_num_bytes=10, max_num_bytes=1000)
 
 # Unshorten URLs with unshrtn
 @functools.lru_cache()
@@ -185,25 +186,24 @@ def grams(column, n):
 def ld(column):
     l = ""
     if column:
-        try:
-            l = langdetect.detect(column)
-        except LangDetectException:
-            pass
-
-        return l
+        detect = detector.FindLanguage(text=column)
+        if detect.is_reliable:
+            l = detect.language
+    return l
 
 
 # Options
+options.disp_column_sep = "│"
+options.disp_keycol_sep = "║"
 options.confirm_overwrite = False
 options.clipboard_copy_cmd = "pbcopy"
 options.clipboard_paste_cmd = "pbpaste"
 options.color_default = ""
 options.quitguard = True
 options.clean_names = True
-options.disp_ambig_width = 2
 options.color_key_col = 110
 options.color_note_type = 8
-options.disp_ambig_width = 2
+#options.disp_ambig_width = 2
 options.scroll_incr = -3
 options.some_selected_rows = True
 options.input_history = "previnputs"
