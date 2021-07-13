@@ -39,11 +39,12 @@ def ltime(column):
 
 
 # Do a cached geocode lookup via Nominatim
-def coords(column):
-    if column:
+def geo(column):
+    if column and column != "null":
         location = cached_geocode(column)
         if location is not None:
-            return str(location.latitude) + " " + str(location.longitude)
+            latlong = str(location.latitude) + " " + str(location.longitude)
+            return (latlong, location.address, location.address.split(",")[-1].strip())
 
 
 # Strip HTML tags
@@ -203,7 +204,6 @@ options.quitguard = True
 options.clean_names = True
 options.color_key_col = 110
 options.color_note_type = 8
-#options.disp_ambig_width = 2
 options.scroll_incr = -3
 options.some_selected_rows = True
 options.input_history = "previnputs"
