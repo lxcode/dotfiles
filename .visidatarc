@@ -1,3 +1,4 @@
+import time
 import regex
 import functools
 import tldextract
@@ -12,19 +13,13 @@ from nltk.corpus import stopwords
 from dateutil import tz
 from dateutil import parser
 from geopy.geocoders import Nominatim
-from langdetect.lang_detect_exception import LangDetectException
 
 to_zone = tz.tzlocal()
-
-geolocator = Nominatim(user_agent="SIO")
-cached_geocode = functools.lru_cache(maxsize=65535)(
-    functools.partial(geolocator.geocode, timeout=5)
-)
 
 detector = gcld3.NNetLanguageIdentifier(min_num_bytes=10, max_num_bytes=1000)
 
 # Unshorten URLs with unshrtn
-@functools.lru_cache()
+@functools.lru_cache
 def unshrtn(url):
     resp = requests.get("http://localhost:3000", params={"url": url}).json()
     for key in ["canonical", "long", "short"]:
@@ -33,18 +28,20 @@ def unshrtn(url):
     return None
 
 
-# Convert to local time
-def ltime(column):
-    return parser.parse(column).astimezone(to_zone)
-
-
 # Do a cached geocode lookup via Nominatim
+@functools.lru_cache
 def geo(column):
+    geolocator = Nominatim(user_agent="SIO")
     if column and column != "null":
-        location = cached_geocode(column)
+        location = geolocator.geocode(column, timeout=5)
         if location is not None:
             latlong = str(location.latitude) + " " + str(location.longitude)
             return (latlong, location.address, location.address.split(",")[-1].strip())
+
+
+# Convert to local time
+def ltime(column):
+    return parser.parse(column).astimezone(to_zone)
 
 
 # Strip HTML tags
@@ -183,7 +180,7 @@ def grams(column, n):
         return [" ".join(thegrams) for thegrams in tokens]
 
 
-@functools.lru_cache()
+@functools.lru_cache
 def ld(column):
     l = ""
     if column:
