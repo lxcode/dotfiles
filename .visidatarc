@@ -33,7 +33,7 @@ def unshrtn(url):
 def geo(column):
     geolocator = Nominatim(user_agent="SIO")
     if column and column != "null":
-        location = geolocator.geocode(column, timeout=5)
+        location = geolocator.geocode(column, timeout=5, language="en")
         if location is not None:
             latlong = str(location.latitude) + " " + str(location.longitude)
             return (latlong, location.address, location.address.split(",")[-1].strip())
@@ -198,7 +198,6 @@ options.clipboard_copy_cmd = "pbcopy"
 options.clipboard_paste_cmd = "pbpaste"
 options.color_default = ""
 options.quitguard = True
-options.clean_names = True
 options.color_key_col = 110
 options.color_note_type = 8
 options.scroll_incr = -3
