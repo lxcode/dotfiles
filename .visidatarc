@@ -18,6 +18,10 @@ to_zone = tz.tzlocal()
 
 detector = gcld3.NNetLanguageIdentifier(min_num_bytes=10, max_num_bytes=1000)
 
+# In case you're running your own instance
+geolocator = Nominatim(user_agent="SIO", domain="localhost:8080", scheme="http")
+# geolocator = Nominatim(user_agent="SIO")
+
 # Unshorten URLs with unshrtn
 @functools.lru_cache
 def unshrtn(url):
@@ -31,11 +35,6 @@ def unshrtn(url):
 # Do a cached geocode lookup via Nominatim
 @functools.lru_cache
 def geo(column):
-    geolocator = Nominatim(user_agent="SIO")
-    # In case you're running your own instance
-    #geolocator = Nominatim(
-    #    user_agent="SIO", domain="localhost:8080/nominatim", scheme="http"
-    #)
     if column and column != "null":
         location = geolocator.geocode(column, timeout=5, language="en")
         if location is not None:
