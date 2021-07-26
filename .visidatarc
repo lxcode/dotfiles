@@ -32,6 +32,10 @@ def unshrtn(url):
 @functools.lru_cache
 def geo(column):
     geolocator = Nominatim(user_agent="SIO")
+    # In case you're running your own instance
+    #geolocator = Nominatim(
+    #    user_agent="SIO", domain="localhost:8080/nominatim", scheme="http"
+    #)
     if column and column != "null":
         location = geolocator.geocode(column, timeout=5, language="en")
         if location is not None:
