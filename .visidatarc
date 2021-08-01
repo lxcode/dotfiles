@@ -224,7 +224,7 @@ Sheet.addCommand(
     "@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date'
 )
 Sheet.addCommand(
-    "z@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"; cursorCol.type=date'
+    "z@", "longlongdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"; cursorCol.type=date'
 )
 
 # vim: syntax=python
