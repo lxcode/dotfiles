@@ -218,10 +218,13 @@ Sheet.addCommand("B", "binning", "options.numeric_binning=True")
 
 # I keep needing to switch date formats, so make z@ do a "zoom" and show date+time
 Sheet.addCommand(
-    "@", "shortdate", 'options.disp_date_fmt = "%Y-%m-%d"; cursorCol.type=date'
+    "2", "shortdate", 'options.disp_date_fmt = "%Y-%m-%d"; cursorCol.type=date'
 )
 Sheet.addCommand(
-    "z@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date'
+    "@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date'
+)
+Sheet.addCommand(
+    "z@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"; cursorCol.type=date'
 )
 
 # vim: syntax=python
