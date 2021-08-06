@@ -31,7 +31,6 @@ def unshrtn(url):
             return (resp[key], resp["status"], resp["title"])
     return None
 
-
 # Convert to local time
 def ltime(column):
     return parser.parse(column).astimezone(to_zone)
@@ -39,8 +38,9 @@ def ltime(column):
 
 # Do a cached geocode lookup via Nominatim
 def coords(column):
-    location = cached_geocode(column)
-    return str(location.latitude) + " " + str(location.longitude)
+    if column:
+        location = cached_geocode(column)
+        return str(location.latitude) + " " + str(location.longitude)
 
 
 # Strip HTML tags
@@ -64,8 +64,9 @@ def unk(x):
 
 # Convert emoji to :this: representation, in memory of Chloe Price
 def noemoji(column):
-    text = emoji.demojize(column)
-    return text
+    if column:
+        text = emoji.demojize(column)
+        return text
 
 
 # Extract all emoji into a list
@@ -188,7 +189,7 @@ def ld(column):
         except LangDetectException:
             pass
 
-        return l
+    return l
 
 
 # Options
