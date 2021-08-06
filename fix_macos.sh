@@ -222,7 +222,7 @@ brew install task tmux w3m bvi runit mutt nvi nmap par \
     fzf mosh tree ripgrep fd sd mtr cmus notmuch isync \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
-    gawk cmusfm black dust skim gotop
+    gawk cmusfm black dust skim gotop mitmproxy
 
 pip3 install peewee requests pip-review visidata nltk darker
 
