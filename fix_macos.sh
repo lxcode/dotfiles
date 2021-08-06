@@ -8,7 +8,7 @@ sudo /usr/sbin/nvram 'BootAudio=%01'
 sudo nvram 'StartupMute=%00'
 
 # Verbose boot and ZFS compat
-sudo nvram boot-args="-v keepsyms=1"
+sudo nvram boot-args="-v keepsyms=1 vm_compressor=2"
 
 # Don't hide things
 defaults write com.apple.Finder AppleShowAllFiles TRUE

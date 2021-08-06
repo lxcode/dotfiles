@@ -1,8 +1,9 @@
+import time
 import regex
 import functools
 import tldextract
 import emoji
-import langdetect
+import gcld3
 import requests
 from urllib.parse import urlparse
 from ast import literal_eval
@@ -12,18 +13,17 @@ from nltk.corpus import stopwords
 from dateutil import tz
 from dateutil import parser
 from geopy.geocoders import Nominatim
-from langdetect.lang_detect_exception import LangDetectException
 
 to_zone = tz.tzlocal()
 
-geolocator = Nominatim(user_agent="SIO")
-cached_geocode = functools.lru_cache(maxsize=65535)(
-    functools.partial(geolocator.geocode, timeout=5)
-)
+detector = gcld3.NNetLanguageIdentifier(min_num_bytes=10, max_num_bytes=1000)
 
+# In case you're running your own instance
+geolocator = Nominatim(user_agent="SIO", domain="localhost:8080", scheme="http")
+# geolocator = Nominatim(user_agent="SIO")
 
 # Unshorten URLs with unshrtn
-@functools.lru_cache()
+@functools.lru_cache
 def unshrtn(url):
     resp = requests.get("http://localhost:3000", params={"url": url}).json()
     for key in ["canonical", "long", "short"]:
@@ -31,16 +31,19 @@ def unshrtn(url):
             return (resp[key], resp["status"], resp["title"])
     return None
 
+# Do a cached geocode lookup via Nominatim
+@functools.lru_cache
+def geo(column):
+    if column and column != "null":
+        location = geolocator.geocode(column, timeout=5, language="en")
+        if location is not None:
+            latlong = str(location.latitude) + " " + str(location.longitude)
+            return (latlong, location.address, location.address.split(",")[-1].strip())
+
+
 # Convert to local time
 def ltime(column):
     return parser.parse(column).astimezone(to_zone)
-
-
-# Do a cached geocode lookup via Nominatim
-def coords(column):
-    if column:
-        location = cached_geocode(column)
-        return str(location.latitude) + " " + str(location.longitude)
 
 
 # Strip HTML tags
@@ -180,15 +183,13 @@ def grams(column, n):
         return [" ".join(thegrams) for thegrams in tokens]
 
 
-@functools.lru_cache()
+@functools.lru_cache
 def ld(column):
     l = ""
     if column:
-        try:
-            l = langdetect.detect(column)
-        except LangDetectException:
-            pass
-
+        detect = detector.FindLanguage(text=column)
+        if detect.is_reliable:
+            l = detect.language
     return l
 
 
@@ -199,11 +200,9 @@ options.confirm_overwrite = False
 options.clipboard_copy_cmd = "pbcopy"
 options.clipboard_paste_cmd = "pbpaste"
 options.color_default = ""
-options.clean_names = True
-options.disp_ambig_width = 2
+options.quitguard = True
 options.color_key_col = 110
 options.color_note_type = 8
-options.disp_ambig_width = 2
 options.scroll_incr = -3
 options.some_selected_rows = True
 options.input_history = "previnputs"
@@ -219,10 +218,13 @@ Sheet.addCommand("B", "binning", "options.numeric_binning=True")
 
 # I keep needing to switch date formats, so make z@ do a "zoom" and show date+time
 Sheet.addCommand(
-    "@", "shortdate", 'options.disp_date_fmt = "%Y-%m-%d"; cursorCol.type=date'
+    "2", "shortdate", 'options.disp_date_fmt = "%Y-%m-%d"; cursorCol.type=date'
 )
 Sheet.addCommand(
-    "z@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date'
+    "@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date'
+)
+Sheet.addCommand(
+    "z@", "longlongdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"; cursorCol.type=date'
 )
 
 # vim: syntax=python
