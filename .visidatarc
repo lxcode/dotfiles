@@ -183,6 +183,7 @@ def grams(column, n):
         return [" ".join(thegrams) for thegrams in tokens]
 
 
+# Detect language with CLD3
 @functools.lru_cache
 def ld(column):
     l = ""
@@ -192,6 +193,15 @@ def ld(column):
             l = detect.language
     return l
 
+
+# Detect language but return probability
+@functools.lru_cache
+def ldprob(column):
+    if column:
+        detect = detector.FindLanguage(text=column)
+        if detect.is_reliable:
+            return (detect.language, detect.probability)
+    return ""
 
 # Options
 options.disp_column_sep = "│"
