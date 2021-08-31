@@ -182,6 +182,7 @@ Plug 'psf/black', { 'for': 'python' }
 Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
 Plug 'natebosch/vim-lsc'
@@ -212,7 +213,7 @@ let g:netrw_banner=0
 " better-whitespace {{{
 let g:better_whitespace_ctermcolor=236
 let g:better_whitespace_guicolor="#303030"
-let g:better_whitespace_filetypes_blacklist=['mail']
+let g:better_whitespace_filetypes_blacklist=['mail', 'xxd']
 " }}}
 
 " lsc {{{
