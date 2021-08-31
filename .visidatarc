@@ -187,7 +187,7 @@ def grams(column, n):
 @functools.lru_cache
 def ld(column):
     l = ""
-    if column:
+    if column and len(column) >=10:
         detect = detector.FindLanguage(text=column)
         if detect.is_reliable:
             l = detect.language
@@ -197,7 +197,7 @@ def ld(column):
 # Detect language but return probability
 @functools.lru_cache
 def ldprob(column):
-    if column:
+    if column and len(column) >= 10:
         detect = detector.FindLanguage(text=column)
         if detect.is_reliable:
             return (detect.language, detect.probability)
