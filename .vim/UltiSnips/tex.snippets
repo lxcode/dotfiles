@@ -1,3 +1,5 @@
+priority 1
+
 # emph
 snippet em "Emph"
 \emph{$1} $0
@@ -23,6 +25,12 @@ snippet tcb "tcolorbox"
 \begin{tcolorbox}[breakable=true,parbox=false,title=${1}]
 	$0
 \end{tcolorbox}
+endsnippet
+
+snippet frame "frame"
+\begin{frame}{${1}}
+	$0
+\end{frame}
 endsnippet
 
 # vim:ft=snippets:
