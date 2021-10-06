@@ -207,6 +207,7 @@ def ldprob(column):
 options.disp_column_sep = "│"
 options.disp_keycol_sep = "║"
 options.confirm_overwrite = False
+options.disp_menu_fmt = ""
 options.clipboard_copy_cmd = "pbcopy"
 options.clipboard_paste_cmd = "pbpaste"
 options.color_default = ""
