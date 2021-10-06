@@ -36,8 +36,8 @@ defaults write com.apple.dock autohide-time-modifier -float 0.17
 # On second thought, let's make it fast to animate but hard to trigger
 defaults write com.apple.dock autohide-delay -int 1
 
-# Kill dashboard
-defaults write com.apple.dock "dashboard-in-overlay" -bool true
+# Make notifications go away faster
+defaults write com.apple.notificationcenterui bannerTime 3
 
 # Mission Control
 defaults write com.apple.dock wvous-br-corner -int 2
@@ -121,12 +121,6 @@ defaults write com.apple.screensaver askForPasswordDelay -int 5
 
 # Enable subpixel font rendering on non-Apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
-
-# Show icons for hard drives, servers, and removable media on the desktop
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Enable HiDPI display modes
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
@@ -222,9 +216,11 @@ brew install task tmux w3m bvi runit mutt nvi nmap par \
     fzf mosh tree ripgrep fd sd mtr cmus notmuch isync \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
-    gawk cmusfm black dust skim gotop mitmproxy
+    gawk cmusfm black dust skim gotop mitmproxy duf
 
-pip3 install peewee requests pip-review visidata nltk darker
+brew install saulpw/vd/visidata
+
+pip3 install peewee requests pip-review nltk darker
 
 # Services
 brew services vdirsyncer start
