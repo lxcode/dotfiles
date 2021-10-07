@@ -97,17 +97,19 @@ def temoji(column):
 
 # Twitter helper functions
 def hashtags(column):
-    try:
-        return [hashtag["tag"] for hashtag in column["hashtags"]]
-    except:
-        return None
+    if column:
+        try:
+            return [hashtag["tag"] for hashtag in column["hashtags"]]
+        except:
+            return [hashtag["text"] for hashtag in column["hashtags"]]
 
 
 def mentions(column):
-    try:
-        return [name["username"] for name in column["mentions"]]
-    except:
-        return None
+    if column:
+        try:
+            return [name["username"] for name in column["mentions"]]
+        except:
+            return [name["screen_name"] for name in column["user_mentions"]]
 
 
 def urls(column):
@@ -142,11 +144,13 @@ def strtoarray(column):
 # These re- functions are for plain text fields where we don't have
 # these as separate metadata/columns
 def rementions(column):
-    return regex.findall(r"\B@\w\w+", column)
+    if column:
+        return regex.findall(r"\B@\w\w+", column)
 
 
 def rehashtags(column):
-    return regex.findall(r"\B#\w\w+", column)
+    if column:
+        return regex.findall(r"\B#\w\w+", column)
 
 
 def reurls(column):
@@ -182,6 +186,17 @@ def grams(column, n):
         tokens = ngrams(clean, n)
         return [" ".join(thegrams) for thegrams in tokens]
 
+
+# Sloppy ngram filter
+def ptgrams(column, n):
+    if column:
+        stop = stopwords.words("portuguese")
+        stop.extend(["http", "https"])
+        w = word_tokenize(column)
+        alnum = [word for word in w if word.isalnum()]
+        clean = [word for word in alnum if not word in stop]
+        tokens = ngrams(clean, n)
+        return [" ".join(thegrams) for thegrams in tokens]
 
 # Detect language with CLD3
 @functools.lru_cache
