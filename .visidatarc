@@ -31,6 +31,7 @@ def unshrtn(url):
             return (resp[key], resp["status"], resp["title"])
     return None
 
+
 # Do a cached geocode lookup via Nominatim
 @functools.lru_cache
 def geo(column):
@@ -95,21 +96,43 @@ def temoji(column):
     return temoji_list
 
 
-# Twitter helper functions
+# Twitter helper functions (v1 or v2)
 def hashtags(column):
     if column:
-        try:
-            return [hashtag["tag"] for hashtag in column["hashtags"]]
-        except:
-            return [hashtag["text"] for hashtag in column["hashtags"]]
+        if column.get("hashtags", []):
+            try:
+                return [hashtag["tag"] for hashtag in column["hashtags"]]
+
+            except:
+                return [hashtag["text"] for hashtag in column["hashtags"]]
+
+        else:
+            return None
 
 
 def mentions(column):
     if column:
+        if column.get("mentions", []):
+            try:
+                return [name["username"] for name in column["mentions"]]
+
+            except:
+                return [name["screen_name"] for name in column["user_mentions"]]
+
+    else:
+        return None
+
+
+def annotations(column):
+    if column:
         try:
-            return [name["username"] for name in column["mentions"]]
+            return [
+                (anno["probability"], anno["type"], anno["normalized_text"])
+                for anno in column["annotations"]
+            ]
+
         except:
-            return [name["screen_name"] for name in column["user_mentions"]]
+            return None
 
 
 def urls(column):
@@ -198,11 +221,12 @@ def ptgrams(column, n):
         tokens = ngrams(clean, n)
         return [" ".join(thegrams) for thegrams in tokens]
 
+
 # Detect language with CLD3
 @functools.lru_cache
 def ld(column):
     l = ""
-    if column and len(column) >=10:
+    if column and len(column) >= 10:
         detect = detector.FindLanguage(text=column)
         if detect.is_reliable:
             l = detect.language
@@ -218,10 +242,12 @@ def ldprob(column):
             return (detect.language, detect.probability)
     return ""
 
+
 # Options
 options.disp_column_sep = "│"
 options.disp_keycol_sep = "║"
 options.confirm_overwrite = False
+options.clean_names = True
 options.disp_menu_fmt = ""
 options.clipboard_copy_cmd = "pbcopy"
 options.clipboard_paste_cmd = "pbpaste"
@@ -250,7 +276,9 @@ Sheet.addCommand(
     "@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date'
 )
 Sheet.addCommand(
-    "z@", "longlongdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"; cursorCol.type=date'
+    "z@",
+    "longlongdate",
+    'options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"; cursorCol.type=date',
 )
 
 # vim: syntax=python
