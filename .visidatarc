@@ -199,21 +199,9 @@ def normurl(column):
 
 
 # Sloppy ngram filter
-def grams(column, n):
+def grams(column, lang, n):
     if column:
-        stop = stopwords.words("english")
-        stop.extend(["http", "https"])
-        w = word_tokenize(column)
-        alnum = [word for word in w if word.isalnum()]
-        clean = [word for word in alnum if not word in stop]
-        tokens = ngrams(clean, n)
-        return [" ".join(thegrams) for thegrams in tokens]
-
-
-# Sloppy ngram filter
-def ptgrams(column, n):
-    if column:
-        stop = stopwords.words("portuguese")
+        stop = stopwords.words(lang)
         stop.extend(["http", "https"])
         w = word_tokenize(column)
         alnum = [word for word in w if word.isalnum()]
