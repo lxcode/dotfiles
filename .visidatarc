@@ -5,6 +5,7 @@ import tldextract
 import emoji
 import gcld3
 import requests
+import ucluster.vd.plugin
 from urllib.parse import urlparse
 from ast import literal_eval
 from nltk import word_tokenize
@@ -16,7 +17,7 @@ from geopy.geocoders import Nominatim
 
 to_zone = tz.tzlocal()
 
-detector = gcld3.NNetLanguageIdentifier(min_num_bytes=10, max_num_bytes=1000)
+#detector = gcld3.NNetLanguageIdentifier(min_num_bytes=10, max_num_bytes=1000)
 
 # In case you're running your own instance
 geolocator = Nominatim(user_agent="SIO", domain="localhost:8080", scheme="http")
