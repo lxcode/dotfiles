@@ -247,6 +247,7 @@ options.color_note_type = 8
 options.scroll_incr = -3
 options.some_selected_rows = True
 options.input_history = "previnputs"
+options.undo = True
 
 # Keybindings
 bindkey("0", "go-leftmost")
