@@ -73,6 +73,7 @@ cmap w!! w !sudo tee > /dev/null %
 " Reflow JSON
 nmap =j :%!jq .<CR>
 nmap =y :%!jq -r yamlify<CR>:set filetype=yaml<CR>
+cnoreabbrev git Git
 " }}}
 
 " Settings {{{
@@ -380,7 +381,7 @@ augroup filetypes
     au FileType make set diffopt-=iwhite
     au FileType markdown set spell | hi Error none
     au FileType mail set spell nonu
-    au FileType tex set spell | setlocal fo+=1p
+    au FileType tex,bib set number | set spell | setlocal fo+=1p
     au FileType tex,markdown noremap j gj
     au FileType tex,markdown noremap k gk
     au FileType tex,markdown noremap gj j
@@ -397,8 +398,8 @@ augroup misc
 augroup end
 
 augroup views
-    au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb mkview
-    au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb silent loadview
+    au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb,*.bib mkview
+    au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb,*.bib silent loadview
 augroup end
 
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow
