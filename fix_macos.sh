@@ -209,35 +209,34 @@ read -p "Preparing to install apps"
 # Brews
 
 sudo xcodebuild -license accept
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 brew doctor
 brew install task tmux w3m bvi runit mutt nvi nmap par \
     python3 weechat youtube-dl bbe zsh vdirsyncer khal \
     fzf mosh tree ripgrep fd sd mtr cmus notmuch isync \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
-    gawk cmusfm black dust skim gotop mitmproxy duf dmenu-mac
+    gawk cmusfm black dust skim gotop mitmproxy duf dmenu-mac \
+    svn
 
 brew install saulpw/vd/visidata
 
 pip3 install peewee requests pip-review nltk darker
 
 # Services
-brew services vdirsyncer start
-brew services isync start
-brew services bitlbee start
+brew services start vdirsyncer 
+brew services start isync 
+brew services start bitlbee
 
 # Install casks
 read -p "Preparing to install casks"
 brew install homebrew/cask-cask
 brew tap buo/cask-upgrade
 brew tap homebrew/cask-fonts
-brew cask install font-inconsolata
-brew cask install font-source-code-pro
-brew cask install kitty
-brew cask install rectangle
-brew cask install karabiner-elements
-brew cask install wireshark
+brew install font-inconsolata font-source-code-pro kitty rectangle karabiner-elements
 
 task
 /usr/local/opt/fzf/install
@@ -245,12 +244,6 @@ xcode-select --install
 
 read -p "Preparing to install language servers"
 pip3 install 'python-language-server[all]'
-brew install cquery
-brew install luarocks
-luarocks install --server=https://luarocks.org/dev lua-lsp
-brew tap dart-lang/dart
-brew install dart
-pub global activate dart_language_server
 brew install node yarn
 yarn global add javascript-typescript-langserver
 GO111MODULE=on go get golang.org/x/tools/gopls@latest
