@@ -6,6 +6,7 @@ import emoji
 import gcld3
 import requests
 import ucluster.vd.plugin
+import deepl
 from urllib.parse import urlparse
 from ast import literal_eval
 from nltk import word_tokenize
@@ -15,9 +16,12 @@ from dateutil import tz
 from dateutil import parser
 from geopy.geocoders import Nominatim
 
+
 to_zone = tz.tzlocal()
 
-#detector = gcld3.NNetLanguageIdentifier(min_num_bytes=10, max_num_bytes=1000)
+detector = gcld3.NNetLanguageIdentifier(min_num_bytes=10, max_num_bytes=1000)
+
+translator = deepl.Translator("apikey")
 
 # In case you're running your own instance
 geolocator = Nominatim(user_agent="SIO", domain="localhost:8080", scheme="http")
@@ -81,7 +85,7 @@ def gemoji(column):
     if column:
         data = regex.findall(r"\X", column)
         for word in data:
-            if any(char in emoji.UNICODE_EMOJI_ALIAS_ENGLISH for char in word):
+            if word in emoji.UNICODE_EMOJI['en']:
                 emoji_list.append(word)
 
     return emoji_list
@@ -95,6 +99,11 @@ def temoji(column):
         temoji = emoji.demojize(char)
         temoji_list.append(temoji)
     return temoji_list
+
+
+def otherchars(column):
+    if column:
+        return [c for c in column if re.match("[^\u0020-\u0370]", c)]
 
 
 # Twitter helper functions (v1 or v2)
@@ -229,6 +238,13 @@ def ldprob(column):
         detect = detector.FindLanguage(text=column)
         if detect.is_reliable:
             return (detect.language, detect.probability)
+    return ""
+
+
+@functools.lru_cache
+def tlate(column):
+    if column and len(column) >= 10:
+        return str(translator.translate_text(column, target_lang="EN-US"))
     return ""
 
 
