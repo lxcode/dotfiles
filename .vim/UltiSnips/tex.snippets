@@ -9,7 +9,7 @@ snippet tx "Tabularx environment" b
 \begin{table}[${1:htpb}]
 	\centering
 	\caption{${2:caption}}
-	\label{tab:${3:label}}
+	\label{tbl:${3:label}}
 	\begin{${4:t}${4/(t)$|(a)$|(.*)/(?1:abularx)(?2:rray)/}}{1.0\textwidth}{${5:c}}
 	$0${5/(?<=.)(c|l|r)|./(?1: & )/g}
 	\end{$4${4/(t)$|(a)$|(.*)/(?1:abularx)(?2:rray)/}}
