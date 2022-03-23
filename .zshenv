@@ -13,7 +13,7 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export GOPATH=$HOME/go
-export FPATH=/usr/share/zsh/site-functions:$FPATH
+export FPATH=/usr/share/zsh/site-functions:/opt/homebrew/share/zsh/site-functions:$FPATH
 export GREP_COLORS="ms=01;31:mc=:sl=:cx=:fn=:ln=:bn=:se=:ne="
 export CLICOLOR=yes
 
@@ -22,7 +22,7 @@ export LESSHISTFILE="-"
 export X11HOME=/usr/local
 export MANPATH=/usr/man:/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/lang/man:/usr/pkg/man
 
-path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin $X11HOME/bin $HOME/go/bin /usr/local/texlive/2021/bin/amd64-freebsd /usr/local/texlive/2021/bin/x86_64-darwin ~/bin /usr/local/libexec/git-core ~/.cabal/bin ~/.cargo/bin ~/.local/bin)
+path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /opt/homebrew/bin $X11HOME/bin $HOME/go/bin /usr/local/texlive/2021/bin/universal-darwin ~/bin /usr/local/libexec/git-core ~/.cabal/bin ~/.cargo/bin ~/.local/bin)
 
 export ANDROID_HOME=~/Library/Android/sdk
 export ANDROID_SDK_ROOT=$ANDROID_HOME
