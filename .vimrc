@@ -168,7 +168,7 @@ Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
 Plug 'christianrondeau/vim-base64'
 Plug 'darfink/vim-plist'
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
-Plug 'godlygeek/tabular', { 'for': 'tex' }
+Plug 'godlygeek/tabular'
 Plug 'goerz/jupytext.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'jamessan/vim-gnupg'
@@ -210,6 +210,11 @@ let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
 " }}}
+"
+" tagbar {{{
+let g:tagbar_ctags_bin="/opt/homebrew/bin/ctags"
+" }}}
+
 
 " better-whitespace {{{
 let g:better_whitespace_ctermcolor=236
@@ -310,7 +315,7 @@ nmap <Leader>t :Tags<CR>
 nmap <Leader>b :BTags<CR>
 nmap <Leader>l :Lines<CR>
 
-let g:fzf_tags_command = '/usr/local/bin/ctags -R'
+let g:fzf_tags_command = '/opt/homebrew/bin/ctags -R'
 
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
@@ -381,7 +386,8 @@ augroup filetypes
     au FileType make set diffopt-=iwhite
     au FileType markdown set spell | hi Error none
     au FileType mail set spell nonu
-    au FileType tex,bib set number | set spell | setlocal fo+=1p
+    au FileType tex,bib set number spell
+    au FileType tex,bib setlocal fo+=1p
     au FileType tex,markdown noremap j gj
     au FileType tex,markdown noremap k gk
     au FileType tex,markdown noremap gj j
