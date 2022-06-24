@@ -23,6 +23,14 @@ setopt   histignoredups histfindnodups histignorespace
 setopt   histexpiredupsfirst inc_append_history share_history
 unsetopt bgnice autoparamslash
 
+# Where to look for autoloaded function definitions
+fpath=(~/.zfunc ~/.zsh $fpath)
+fpath+=("$(brew --prefix)/share/zsh/site-functions")
+for func in $^fpath/*(N-.x:t); autoload $func
+
+# automatically remove duplicates from these arrays
+typeset -U path cdpath fpath manpath
+
 ### Aliases
 alias j=jobs
 alias dis=disown
@@ -30,8 +38,6 @@ alias pd=popd
 alias yt='cd /tmp; youtube-dl `pbpaste`'
 alias h=history
 alias grep=rg
-alias ll='ls -l'
-alias la='ls -a'
 alias rmsvn="find . -type d -name '\.svn' |xargs rm -rf"
 alias rmgit="find . -type d -name '\.git' |xargs rm -rf"
 alias mic='sudo make install clean'
@@ -44,15 +50,13 @@ alias k="khal"
 alias t="task"
 alias th="task +home"
 alias tw="task +work"
-alias wtr="curl -s 'https://wttr.in/San Francisco?format=v2&m'|sed -e 's/☀️  /☀️ /g' -e 's/☀️ │/☀️│/g' -e 's/☁️  /☁️ /g'"
+alias wtr="curl -s 'https://wttr.in/Lisbon?format=v2&m&F'|sed -e 's/☀️  /☀️ /g' -e 's/☀️ │/☀️│/g' -e 's/☁️  /☁️ /g'"
 alias ws="python3 -m http.server"
 alias lsd='ls -ld *(-/DN)'
-alias lsa='ls -ld .*'
 alias vim="$EDITOR"
 alias gv="vim -c GV"
-alias sx="exec startx"
 alias vis="vise"
-alias emo="emoji-fzf preview | fzf --preview 'emoji-fzf get --name {1}' | cut -d \" \" -f 1 | emoji-fzf get"
+alias emo="emoji-fzf preview --prepend | fzf | awk '{ print \$1 }'"
 # Gnuplot aliases
 alias plot="gnuplot ~/bin/plot.gp && open /tmp/gpoutput.p*"
 alias hist="gnuplot ~/bin/hist.gp && open /tmp/gpoutput.p*"
@@ -99,95 +103,6 @@ fpr() { openssl s_client -connect $1 < /dev/null 2>/dev/null | openssl x509 -fin
 # Default options for twarc2
 twrc() { twarc2 --no-metadata $@ --flatten }
 
-# Where to look for autoloaded function definitions
-fpath=(~/.zfunc $fpath)
-for func in $^fpath/*(N-.x:t); autoload $func
-
-# automatically remove duplicates from these arrays
-typeset -U path cdpath fpath manpath
-
-### Prompts
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn hg
-zstyle ':vcs_info:*' check-for-changes false
-zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-setopt prompt_subst
-zstyle ':vcs_info:git*' actionformats "%s  %r/%S %b %m%u%c "
-
-PROMPT='[%B%n%b@%m %3~ %h ] '
-RPROMPT='${vcs_info_msg_0_}'
-
-# Change cursor shape in insert mode
-function zle-keymap-select zle-line-init
-{
-    case $KEYMAP in
-        vicmd)      print -n -- "\E[2 q";;  # block cursor
-        viins|main) print -n -- "\E[4 q";;  # underscore cursor
-    esac
-
-    zle reset-prompt
-    zle -R
-}
-
-function zle-line-finish
-{
-    print -n -- "\E[2 q"  # block cursor
-}
-
-zle -N zle-line-init
-zle -N zle-line-finish
-zle -N zle-keymap-select
-
-# set up terminal title bars
-function title {
-
-	case $TERM in
-	xterm*)
-
-	   print -nR $'\033]0;'$*$'\a'
-	;;
-	rxvt*)
-
-	   print -nR $'\033]0;'$*$'\a'
-	;;
-
-	screen*)
-
-	    print -nR $'\033k'$1$'\033'\\
-	    print -nR $'\033]0;'$2$'\a'
-	;;
-	esac
-
-}
-
-function precmd {
-    vcs_info
-	case $TERM in
-	rxvt*|xterm*|screen*)
-	    print -Pn "\e]0;%n@%m: %~\a"
-	;;
-	esac
-}
-
-function preexec {
-    emulate -L zsh
-    local -a cmd; cmd=(${(z)1})
-case $TERM in
-xterm*)
-    title `print -Pn %n@%m:` $cmd[1]:t "$cmd[2,-1]"
-;;
-
-rxvt*)
-    title `print -Pn %n@%m:` $cmd[1]:t "$cmd[2,-1]"
-;;
-
-screen*)
-    title $cmd[1]:t "$cmd[2,-1]"
-;;
-esac
-}
-
 # typing ... expands to ../., ... to ../../., etc.
 rationalise-dot() {
     if [[ $LBUFFER = *.. ]]; then
@@ -196,14 +111,20 @@ rationalise-dot() {
         LBUFFER+=.
     fi
 }
+
 zle -N rationalise-dot
-zle -N edit-command-line
 
 ### Modules
 zmodload -a zsh/stat stat
 zmodload -a zsh/zpty zpty
 zmodload -a zsh/zprof zprof
 zmodload -ap zsh/mapfile mapfile
+
+### Completion
+autoload -Uz compinit
+compinit -u
+autoload -U edit-command-line
+zle -N edit-command-line
 
 ### Keep recent directory list for use by cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
@@ -218,10 +139,6 @@ bindkey . rationalise-dot
 bindkey -M isearch . self-insert # history search fix
 bindkey -M vicmd v edit-command-line
 
-### Completion
-autoload -Uz compinit
-compinit -u
-autoload -U edit-command-line
 
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zshcache
@@ -256,13 +173,18 @@ zstyle ':completion:*:processes' command 'ps -o pid,s,nice,stime,args'
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
-#zstyle -e ':completion:*:ports' ports 'reply=($(nmap $1 |grep open |awk -F / {print $1}))'
-
 ### Source things
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-gcppath="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-gcpcomp="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+autoload -U promptinit; promptinit
+prompt pure
+
+gcppath="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+gcpcomp="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 [ -f $gcppath ] && source $gcppath
 [ -f $gcpcomp ] && source $gcpcomp
+eval
+TWILIO_AC_ZSH_SETUP_PATH=/Users/det/.twilio-cli/autocomplete/zsh_setup && test -f $TWILIO_AC_ZSH_SETUP_PATH && source $TWILIO_AC_ZSH_SETUP_PATH; # twilio autocomplete setup
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
