@@ -25,7 +25,6 @@ unsetopt bgnice autoparamslash
 
 # Where to look for autoloaded function definitions
 fpath=(~/.zfunc ~/.zsh $fpath)
-fpath+=("$(brew --prefix)/share/zsh/site-functions")
 for func in $^fpath/*(N-.x:t); autoload $func
 
 # automatically remove duplicates from these arrays
