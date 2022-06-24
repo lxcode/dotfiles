@@ -285,8 +285,8 @@ let g:buftabline_separators=1
 " }}}
 
 " taskwarrior {{{
-let g:task_default_prompt = ['project', 'description', 'priority', 'due']
-let g:task_info_vsplit = 1
+let g:task_default_prompt = ['project', 'description', 'label', 'priority', 'due', 'depends']
+let g:task_info_size = 22
 let g:task_rc_override = 'rc.defaultwidth=0'
 " }}}
 
