@@ -17,6 +17,7 @@ vis:map(vis.modes.NORMAL, 'Q', ':q!<Enter>')
 vis:map(vis.modes.NORMAL, '<C-e>', ':fzf<Enter>')
 vis:map(vis.modes.NORMAL, ',m', ':fzfmru<Enter>')
 vis:map(vis.modes.NORMAL, '~', 'g~')
+vis:map(vis.modes.NORMAL, 'zz', 'ZZ')
 vis:map(vis.modes.VISUAL, 'gy', '"+y')
 end)
 
