@@ -24,7 +24,7 @@ setopt   histexpiredupsfirst inc_append_history share_history
 unsetopt bgnice autoparamslash
 
 # Where to look for autoloaded function definitions
-fpath=(~/.zfunc ~/.zsh $fpath)
+fpath=(~/.zfunc ~/.zsh/pure $fpath)
 for func in $^fpath/*(N-.x:t); autoload $func
 
 # automatically remove duplicates from these arrays
