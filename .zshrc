@@ -175,9 +175,6 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 ### Source things
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-autoload -U promptinit; promptinit
-prompt pure
-
 gcppath="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 gcpcomp="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
@@ -185,5 +182,8 @@ gcpcomp="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/complet
 [ -f $gcpcomp ] && source $gcpcomp
 eval
 TWILIO_AC_ZSH_SETUP_PATH=/Users/det/.twilio-cli/autocomplete/zsh_setup && test -f $TWILIO_AC_ZSH_SETUP_PATH && source $TWILIO_AC_ZSH_SETUP_PATH; # twilio autocomplete setup
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-#source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+autoload -U promptinit; promptinit
+prompt pure
