@@ -183,6 +183,7 @@ gcpcomp="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/complet
 eval
 TWILIO_AC_ZSH_SETUP_PATH=/Users/det/.twilio-cli/autocomplete/zsh_setup && test -f $TWILIO_AC_ZSH_SETUP_PATH && source $TWILIO_AC_ZSH_SETUP_PATH; # twilio autocomplete setup
 
+source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 autoload -U promptinit; promptinit
