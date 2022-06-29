@@ -118,6 +118,7 @@ zmodload -a zsh/stat stat
 zmodload -a zsh/zpty zpty
 zmodload -a zsh/zprof zprof
 zmodload -ap zsh/mapfile mapfile
+zmodload zsh/complist
 
 ### Completion
 autoload -Uz compinit
@@ -130,20 +131,11 @@ autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 zstyle ':chpwd:*' recent-dirs-pushd true
 
-### Bindings
-bindkey -v               # vi key bindings
-bindkey "\e[Z" reverse-menu-complete
-bindkey '^R' history-incremental-search-backward
-bindkey . rationalise-dot
-bindkey -M isearch . self-insert # history search fix
-bindkey -M vicmd v edit-command-line
-
-
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zshcache
 
 # list of completers to use
-zstyle ':completion:*::::' completer _expand _complete _ignored
+zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
 
 # allow one error for every three characters typed in approximate completer
 zstyle -e ':completion:*:approximate:*' max-errors \
@@ -156,12 +148,12 @@ zstyle ':completion:*:expand:*' tag-order all-expansions
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu select=long-list select=0
+zstyle ':completion:*' menu select=long-list select=0 search
 zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' group-name ''
 
-# match uppercase from lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# match uppercase from lowercase + partial names
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
@@ -171,6 +163,18 @@ zstyle ':completion:*:processes' command 'ps -o pid,s,nice,stime,args'
 
 # ignore completion functions (until the _ignored completer)
 zstyle ':completion:*:functions' ignored-patterns '_*'
+
+### Bindings
+bindkey -v               # vi key bindings
+bindkey "\e[Z" reverse-menu-complete
+bindkey '^R' history-incremental-search-backward
+bindkey . rationalise-dot
+bindkey -M isearch . self-insert # history search fix
+bindkey -M vicmd v edit-command-line
+bindkey -M menuselect '^h' vi-backward-char
+bindkey -M menuselect '^k' vi-up-line-or-history
+bindkey -M menuselect '^l' vi-forward-char
+bindkey -M menuselect '^j' vi-down-line-or-history
 
 ### Source things
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -183,8 +187,6 @@ gcpcomp="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/complet
 eval
 TWILIO_AC_ZSH_SETUP_PATH=/Users/det/.twilio-cli/autocomplete/zsh_setup && test -f $TWILIO_AC_ZSH_SETUP_PATH && source $TWILIO_AC_ZSH_SETUP_PATH; # twilio autocomplete setup
 
-source ~/.zsh/fzf-tab/fzf-tab.plugin.zsh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
+# Prompt
 autoload -U promptinit; promptinit
 prompt pure
