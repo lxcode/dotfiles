@@ -1,4 +1,4 @@
-for VI in /usr/local/bin/vim /opt/homebrew/bin/vim /usr/bin/vim /usr/local/bin/nvi /usr/bin/vi
+for VI in /usr/local/bin/vim /opt/homebrew/bin/vim /usr/bin/vim /opt/homebrew/bin/vise /usr/local/bin/nvi /usr/bin/vi
 
 do
 	if [ -x $VI ]; then
@@ -12,18 +12,17 @@ export FZF_DEFAULT_OPTS="--extended --bind ctrl-a:select-all --height 60%"
 export FZF_DEFAULT_COMMAND='fd --type f'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-export GOPATH=$HOME/go
 export FPATH=/usr/share/zsh/site-functions:/opt/homebrew/share/zsh/site-functions:$FPATH
 export GREP_COLORS="ms=01;31:mc=:sl=:cx=:fn=:ln=:bn=:se=:ne="
 export CLICOLOR=yes
 
 export LC_CTYPE=en_US.UTF-8
 export LESSHISTFILE="-"
-export X11HOME=/usr/local
 export MANPATH=/usr/man:/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/lang/man:/usr/pkg/man
 
-path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /opt/homebrew/bin $X11HOME/bin $HOME/go/bin /usr/local/texlive/2021/bin/universal-darwin ~/bin /usr/local/libexec/git-core ~/.cabal/bin ~/.cargo/bin ~/.local/bin)
+path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /opt/homebrew/bin $X11HOME/bin $HOME/go/bin /usr/local/texlive/2022/bin/universal-darwin ~/bin /usr/local/libexec/git-core ~/.cabal/bin ~/.cargo/bin ~/.local/bin)
 
+export GOPATH=$HOME/go
 export ANDROID_HOME=~/Library/Android/sdk
 export ANDROID_SDK_ROOT=$ANDROID_HOME
 export PATH=$PATH:$ANDROID_HOME/platform-tools
