@@ -380,6 +380,7 @@ augroup filetypes
     au BufWinEnter *.cls set filetype=tex
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc | let c_no_curly_error = 1
     au FileType python,php set smartindent | set number
+    au FileType c,cpp set number
     au FileType git set foldlevel=99
     au FileType taskreport set nonu
     au FileType vim set foldmethod=marker
@@ -469,14 +470,14 @@ endfunction
 
 " Simple re-format for minified Javascript
 command! Unminify call Unminify()
-function! Unminify()
+def Unminify()
     %s/{\ze[^\r\n]/{\r/g
     %s/){/) {/g
     %s/};\?\ze[^\r\n]/\0\r/g
     %s/;\ze[^\r\n]/;\r/g
     %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
     normal ggVG=
-endfunction
+enddef
 
 command! -nargs=1 Graudit call Graudit(<f-args>)
 function! Graudit(db)
