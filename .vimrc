@@ -84,6 +84,7 @@ helptags ~/.vim/doc
 
 set mouse=a
 set ttymouse=sgr
+set spelllang=en_us,cjk,pt
 set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
