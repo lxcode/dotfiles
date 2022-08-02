@@ -4,6 +4,7 @@ import functools
 import tldextract
 import emoji
 import gcld3
+import urlexpander
 import requests
 import ucluster.vd.plugin
 import deepl
@@ -27,14 +28,15 @@ translator = deepl.Translator("apikey")
 geolocator = Nominatim(user_agent="SIO", domain="localhost:8080", scheme="http")
 # geolocator = Nominatim(user_agent="SIO")
 
-# Unshorten URLs with unshrtn
+# Unshorten URLs with unshrtn (only if they're short URLs)
 @functools.lru_cache
 def unshrtn(url):
-    resp = requests.get("http://localhost:3000", params={"url": url}).json()
-    for key in ["canonical", "long", "short"]:
-        if key in resp:
-            return (resp[key], resp["status"], resp["title"])
-    return None
+    if urlexpander.is_short(url):
+        resp = requests.get("http://localhost:3000", params={"url": url}).json()
+        for key in ["canonical", "long", "short"]:
+            if resp.get(key) is not None:
+                return (resp[key], resp["status"], resp["title"])
+        return None
 
 
 # Do a cached geocode lookup via Nominatim
