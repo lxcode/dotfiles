@@ -43,7 +43,7 @@ hi WarningMsg guifg=white guibg=#FF6C60 gui=bold ctermfg=white ctermbg=203 cterm
 hi SpellBad cterm=underline guifg=#FF6C60 guibg=NONE ctermbg=NONE ctermfg=203
 hi SpellCap cterm=underline
 hi SpellRare cterm=underline
-hi SpellLocal cterm=underline
+hi clear SpellLocal
 
 hi DiffAdd ctermbg=17 guibg=#2a0d6a
 hi DiffDelete ctermfg=234 ctermbg=60 cterm=none	 guifg=#242424	guibg=#3e3969	gui=none
