@@ -70,7 +70,7 @@ nmap <Leader>fw :StripWhitespace<CR>
 nmap Q :qa!<CR>
 " Write using sudo
 cmap w!! w !sudo tee > /dev/null %
-" Reflow JSON
+" Reflow JSON / YAML
 nmap =j :%!jq .<CR>
 nmap =y :%!jq -r yamlify<CR>:set filetype=yaml<CR>
 cnoreabbrev git Git
@@ -162,6 +162,7 @@ colorscheme lx-truecolor
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
+Plug 'Aarleks/zettel.vim'
 Plug 'AndrewRadev/id3.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ap/vim-buftabline'
@@ -178,7 +179,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
-Plug 'millermedeiros/vim-statline'
+Plug 'md-img-paste-devs/md-img-paste.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'psf/black', { 'for': 'python' }
 Plug 'tomtom/quickfixsigns_vim'
@@ -211,11 +213,20 @@ let g:netrw_browse_split=4
 let g:netrw_winsize=25
 let g:netrw_banner=0
 " }}}
-"
+
 " tagbar {{{
 let g:tagbar_ctags_bin="/opt/homebrew/bin/ctags"
 " }}}
 
+" zettel {{{
+let g:zettelkasten = '~/Notes/'
+" }}}
+
+" md-img-paste {{{
+autocmd FileType markdown,tex nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+autocmd FileType markdown let g:PasteImageFunction = 'g:MarkdownPasteImage'
+autocmd FileType tex let g:PasteImageFunction = 'g:LatexPasteImage'
+" }}}
 
 " better-whitespace {{{
 let g:better_whitespace_ctermcolor=236
@@ -226,20 +237,6 @@ let g:better_whitespace_filetypes_blacklist=['mail', 'xxd']
 " lsc {{{
 let g:lsc_auto_map = v:true
 let g:lsc_server_commands = {}
-if executable('cquery')
-    let cpp_config = {
-            \    'command': 'cquery',
-            \    'message_hooks': {
-            \        'initialize': {
-            \            'initializationOptions': {'cacheDirectory': '/tmp/cquery'},
-            \            },
-            \        },
-            \    }
-    let g:lsc_server_commands.c = cpp_config
-    let g:lsc_server_commands.cpp = cpp_config
-    let g:lsc_server_commands.objc = cpp_config
-    let g:lsc_server_commands.objcpp = cpp_config
-endif
 if executable('pyls')
     let g:lsc_server_commands.python = 'pyls'
 endif
@@ -254,9 +251,6 @@ let g:lsc_server_commands.go = {
             \    "log_level": -1,
             \    "suppress_stderr": v:true,
             \}
-"if executable('texlab')
-"    let g:lsc_server_commands.tex = 'texlab'
-"endif
 " }}}
 
 " slime {{{
@@ -314,7 +308,7 @@ nmap <leader>m :History<CR>
 nmap <leader>e :Files<CR>
 nmap <Leader>t :Tags<CR>
 nmap <Leader>b :BTags<CR>
-nmap <Leader>l :Lines<CR>
+nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
 
 let g:fzf_tags_command = '/opt/homebrew/bin/ctags -R'
 
@@ -337,12 +331,20 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 " }}}
 
-" statline {{{
-let g:statline_fugitive=1
-let g:statline_filename_relative=1
-let g:statline_trailing_space=0
-let g:statline_mixed_indent=0
-let g:statline_show_encoding=0
+" lightline
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+    \   'right': [ [ 'lineinfo' ],
+    \              [ 'percent' ],
+    \              [ 'fileencoding', 'filetype' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'FugitiveHead',
+    \ },
+    \ }
 " }}}
 
 " vimtex {{{
@@ -358,6 +360,7 @@ let g:statline_show_encoding=0
     let g:vimtex_format_enabled = 1
     let g:vimtex_fold_enabled=1
     let g:vimtex_fold_manual=1
+    let g:tex_comment_nospell= 1
     let g:vimtex_view_method='skim'
     " Ignore things like underscores, I use the underscore package
     let g:tex_no_error=1
