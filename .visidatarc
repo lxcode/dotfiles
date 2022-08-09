@@ -28,15 +28,18 @@ translator = deepl.Translator("apikey")
 geolocator = Nominatim(user_agent="SIO", domain="localhost:8080", scheme="http")
 # geolocator = Nominatim(user_agent="SIO")
 
-# Unshorten URLs with unshrtn (only if they're short URLs)
+# Unshorten URLs with unshrtn. If the URL is shortened, return the best
+# expanded URL we have, along with a bool saying it was a shortened URL.
+# Otherwise, return the original, with bool and placeholders so we can compare
+# 1:1 with links that weren't short to begin with.
 @functools.lru_cache
 def unshrtn(url):
     if urlexpander.is_short(url):
         resp = requests.get("http://localhost:3000", params={"url": url}).json()
         for key in ["canonical", "long", "short"]:
             if resp.get(key) is not None:
-                return (resp[key], resp["status"], resp["title"])
-        return None
+                return (resp[key], True, resp["status"], resp["title"])
+    return (url, False, None, None)
 
 
 # Do a cached geocode lookup via Nominatim
@@ -87,7 +90,7 @@ def gemoji(column):
     if column:
         data = regex.findall(r"\X", column)
         for word in data:
-            if word in emoji.UNICODE_EMOJI['en']:
+            if word in emoji.EMOJI_DATA:
                 emoji_list.append(word)
 
     return emoji_list
