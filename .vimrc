@@ -162,11 +162,9 @@ colorscheme lx-truecolor
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
-Plug 'Aarleks/zettel.vim'
 Plug 'AndrewRadev/id3.vim'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ap/vim-buftabline'
-Plug 'blindFS/vim-taskwarrior', { 'on': 'TW'}
 Plug 'christianrondeau/vim-base64'
 Plug 'darfink/vim-plist'
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
@@ -198,11 +196,6 @@ Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 " Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
 call plug#end()
 
-" Don't load plugins that have unmet dependencies
-if !executable('task')
-    let g:loaded_taskwarrior = 1
-endif
-
 " Load optional builtin extensions for %
 runtime! macros/matchit.vim
 " }}}
@@ -216,10 +209,6 @@ let g:netrw_banner=0
 
 " tagbar {{{
 let g:tagbar_ctags_bin="/opt/homebrew/bin/ctags"
-" }}}
-
-" zettel {{{
-let g:zettelkasten = '~/Notes/'
 " }}}
 
 " md-img-paste {{{
@@ -277,12 +266,6 @@ let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'AD
 let g:buftabline_show=1
 let g:buftabline_indicators=1
 let g:buftabline_separators=1
-" }}}
-
-" taskwarrior {{{
-let g:task_default_prompt = ['project', 'description', 'label', 'priority', 'due', 'depends']
-let g:task_info_size = 22
-let g:task_rc_override = 'rc.defaultwidth=0'
 " }}}
 
 " sneak {{{
