@@ -169,7 +169,13 @@ def urls(column):
 
 def domains(column):
     if column:
-        return tldextract.extract(column).registered_domain
+        if type(column) is list:
+            doms = []
+            for elem in column:
+                doms.append(tldextract.extract(elem).registered_domain)
+            return doms
+        else:
+            return tldextract.extract(column).registered_domain
 
 
 # Sometimes we get data in a CSV or something that's a literal string,
@@ -217,7 +223,7 @@ def normurl(column):
 def grams(column, lang, n):
     if column:
         stop = stopwords.words(lang)
-        stop.extend(["http", "https"])
+        stop.extend(["http", "https", "RT"])
         w = word_tokenize(column)
         alnum = [word for word in w if word.isalnum()]
         clean = [word for word in alnum if not word in stop]
