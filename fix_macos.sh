@@ -177,6 +177,9 @@ sudo rm -rf "/Library/Application Support/Apple/ParentalControls"
 # Disable horrible power-sucking nonsense
 launchctl disable user/$UID/com.apple.photoanalysisd
 
+# Disable Power Nap
+pmset -a powernap 0
+
 # Link to the airport command
 sudo mkdir -p /usr/local/bin
 sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
