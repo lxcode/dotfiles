@@ -21,6 +21,7 @@ setopt   autopushd pushdsilent pushdminus extendedglob rcquotes
 setopt   autocd longlistjobs autoresume nocorrect nocorrectall
 setopt   histignoredups histfindnodups histignorespace
 setopt   histexpiredupsfirst inc_append_history share_history
+setopt   complete_in_word
 unsetopt bgnice autoparamslash
 
 # Where to look for autoloaded function definitions
@@ -78,6 +79,10 @@ _fzf_compgen_dir() {
 ### Functions
 bvimdiff() {
     vimdiff <(xxd $1) <(xxd $2)
+}
+
+icat() {
+    clear && kitty +kitten icat --hold --scale-up $1 && clear
 }
 
 # fuzzy find recent vim files to edit
