@@ -5,17 +5,19 @@ cursorline = true
 bufferline = "multiple"
 soft-wrap.enable = true
 color-modes = true
+auto-pairs = false
 
 [editor.statusline]
-left = ["mode", "spinner", "diagnostics"]
+left = ["mode", "spinner", "diagnostics", "version-control"]
 center = ["file-name"]
-right = [ "position-percentage", 
-          "spacer", 
-          "version-control", 
-          "file-type"]
+right = ["position", "position-percentage", "spacer", "file-type"]
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
 
 [keys.normal]
 C-h = "select_prev_sibling"
