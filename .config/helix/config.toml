@@ -1,0 +1,46 @@
+theme = "catppuccin_mocha"
+
+[editor]
+cursorline = true
+bufferline = "multiple"
+soft-wrap.enable = true
+color-modes = true
+
+[editor.statusline]
+left = ["mode", "spinner", "diagnostics"]
+center = ["file-name"]
+right = [ "position-percentage", 
+          "spacer", 
+          "version-control", 
+          "file-type"]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[keys.normal]
+C-h = "select_prev_sibling"
+C-j = "shrink_selection"
+C-k = "expand_selection"
+C-l = "select_next_sibling"
+C-r = "redo"
+left = ":buffer-previous"
+right = ":buffer-next"
+
+Z = { Z = ":wq" }
+
+# Muscle memory
+"{" = ["goto_prev_paragraph", "collapse_selection"]
+"}" = ["goto_next_paragraph", "collapse_selection"]
+0 = "goto_line_start"
+"$" = "goto_line_end"
+"^" = "goto_first_nonwhitespace"
+G = "goto_file_end"
+V = ["select_mode", "extend_to_line_bounds"]
+D = ["extend_to_line_end", "delete_selection"]
+
+[keys.select]
+G = "goto_file_end"
+
+# Make selecting lines in visual mode behave sensibly
+k = ["extend_line_up", "extend_to_line_bounds"]
+j = ["extend_line_down", "extend_to_line_bounds"]
