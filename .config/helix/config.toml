@@ -19,6 +19,7 @@ mode.select = "SELECT"
 insert = "bar"
 normal = "block"
 
+
 [keys.normal]
 C-h = "select_prev_sibling"
 C-j = "shrink_selection"
@@ -27,21 +28,41 @@ C-l = "select_next_sibling"
 C-r = "redo"
 left = ":buffer-previous"
 right = ":buffer-next"
-
+"C-]" = "goto_definition"
 Z = { Z = ":wq" }
-
-# Muscle memory
-"{" = ["goto_prev_paragraph", "collapse_selection"]
-"}" = ["goto_next_paragraph", "collapse_selection"]
+x = "delete_selection"
+"%" = "match_brackets"
+"{" = ["goto_prev_paragraph"]
+"}" = ["goto_next_paragraph"]
 0 = "goto_line_start"
 "$" = "goto_line_end"
 "^" = "goto_first_nonwhitespace"
 G = "goto_file_end"
 V = ["select_mode", "extend_to_line_bounds"]
 D = ["extend_to_line_end", "delete_selection"]
+C = ["extend_to_line_end", "delete_selection", "insert_mode"]
+"*" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
+i = ["insert_mode", "collapse_selection"]
+a = ["append_mode", "collapse_selection"]
+
+[keys.normal.d]
+d = ["extend_to_line_bounds", "delete_selection"]
+t = ["extend_till_char"]
+G = ["select_mode", "extend_to_line_bounds", "goto_last_line", "extend_to_line_bounds", "delete_selection", "normal_mode"]
+w = ["move_next_word_start", "delete_selection"]
+W = ["move_next_long_word_start", "delete_selection"]
+g = { g = ["select_mode", "extend_to_line_bounds", "goto_file_start", "extend_to_line_bounds", "delete_selection", "normal_mode"] }
+
+[keys.normal.y]
+y = ["extend_to_line_bounds", "yank", "normal_mode", "collapse_selection"]
+G = ["select_mode", "extend_to_line_bounds", "goto_last_line", "extend_to_line_bounds", "yank", "collapse_selection", "normal_mode"]
+w = ["move_next_word_start", "yank", "collapse_selection", "normal_mode"]
+W = ["move_next_long_word_start", "yank", "collapse_selection", "normal_mode"]
 
 [keys.select]
 G = "goto_file_end"
+i = "select_textobject_inner"
+a = "select_textobject_around"
 
 # Make selecting lines in visual mode behave sensibly
 k = ["extend_line_up", "extend_to_line_bounds"]
