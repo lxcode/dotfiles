@@ -20,7 +20,7 @@ setopt   notify globdots pushdtohome autolist multios
 setopt   autopushd pushdsilent pushdminus extendedglob rcquotes
 setopt   autocd longlistjobs autoresume nocorrect nocorrectall
 setopt   histignoredups histfindnodups histignorespace
-setopt   histexpiredupsfirst inc_append_history share_history
+setopt   histexpiredupsfirst inc_append_history
 setopt   complete_in_word
 unsetopt bgnice autoparamslash
 

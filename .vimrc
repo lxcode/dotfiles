@@ -85,7 +85,6 @@ helptags ~/.vim/doc
 set mouse=a
 set ttymouse=sgr
 set spelllang=en_us,cjk,pt
-set et                      " expand tabs
 set diffopt+=iwhite,vertical,filler   " ignore whitespace in diffs
 set hidden                  " allow hidden buffers
 set noerrorbells vb t_vb=   " no bells
@@ -119,7 +118,7 @@ set nobackup                " stop making useless crap
 set nowritebackup           " same with overwriting
 set directory=/tmp          " litter up /tmp, not the CWD
 set nomodeline              " modelines are dumb
-set tabstop=4 shiftwidth=4 softtabstop=4
+set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 set backspace=indent,eol,start
 set title
 set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
@@ -153,11 +152,12 @@ if $TERM == 'xterm-kitty'
         set t_Co=256
     else
         set termguicolors
+        let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+        let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
     endif
 else
-    set t_Co=256
+set t_Co=256
 endif
-colorscheme lx-truecolor
 " }}}
 
 " Plugins {{{
@@ -190,11 +190,14 @@ Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
 Plug 'natebosch/vim-lsc'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
+Plug 'zah/nim.vim'
 
 " Use these if debugging color themes/hightlighting
 " Plug 'kergoth/vim-hilinks'
 " Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
 call plug#end()
+
+colorscheme lx-truecolor
 
 " Load optional builtin extensions for %
 runtime! macros/matchit.vim
@@ -253,6 +256,21 @@ nnoremap <Leader>c :IPythonCellExecuteCellJump<CR>
 
 " jupytext {{{
 let g:jupytext_fmt = 'py:percent'
+" }}}
+
+
+" nim {{{
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+
+" Jump to tag
+nn <M-g> :call JumpToDef()<cr>
+ino <M-g> <esc>:call JumpToDef()<cr>i
 " }}}
 
 " quickfixsigns {{{

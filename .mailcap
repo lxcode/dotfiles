@@ -19,7 +19,7 @@ application/msword; ~/bin/view_attachment %s
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/bin/view_attachment %s
 
 # Images
-image/*; (clear && kitty +kitten icat --hold --scale-up %s); needsterminal
+image/*; (clear && kitty +kitten icat --hold --scale-up %s && clear); needsterminal
 
 # PDF
 application/pdf; ~/bin/view_attachment %s pdf

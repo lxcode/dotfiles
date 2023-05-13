@@ -1,0 +1,24 @@
+[[language]]
+name = "latex"
+file-types = ["tex", "sty", "cls"]
+
+[language.config.texlab]
+auxDirectory = "build"
+
+[language.config.texlab.forwardSearch]
+executable = "/Applications/Skim.app/Contents/SharedSupport/displayline" 
+args = ["%l", "%p", "%f"]
+
+[language.config.texlab.build]
+onSave = true
+
+executable = "latexmk"
+args = [
+ "-pdflatex=lualatex",
+ "-pdf",
+ "-interaction=nonstopmode",
+ "-synctex=1",
+ "-file-line-error",
+ "-output-directory=build",
+ "%f"
+ ]
