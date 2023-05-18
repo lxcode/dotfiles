@@ -22,3 +22,8 @@ args = [
  "-output-directory=build",
  "%f"
  ]
+
+ [[language]]
+name = "python"
+formatter = { command = "black", args = ["--quiet", "-"] }
+auto-format = true

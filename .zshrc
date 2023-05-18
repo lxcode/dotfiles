@@ -35,6 +35,7 @@ typeset -U path cdpath fpath manpath
 alias j=jobs
 alias dis=disown
 alias pd=popd
+alias lg=lazygit
 alias yt='cd /tmp; youtube-dl `pbpaste`'
 alias h=history
 alias grep=rg
