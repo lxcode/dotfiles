@@ -6,6 +6,7 @@ bufferline = "multiple"
 soft-wrap.enable = true
 color-modes = true
 auto-pairs = false
+true-color = true
 
 [editor.statusline]
 left = ["mode", "spinner", "diagnostics", "version-control"]
