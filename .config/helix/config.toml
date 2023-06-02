@@ -25,12 +25,15 @@ C-h = "shrink_selection"
 C-l = "expand_selection"
 C-k = "select_prev_sibling"
 C-j = "select_next_sibling"
-
+# I match brackets a lot more than I select the whole file
+"%" = "match_brackets"
+esc = ["collapse_selection", "keep_primary_selection"]
 C-r = "redo"
 left = ":buffer-previous"
 right = ":buffer-next"
 "C-]" = "goto_definition"
 Z = { Z = ":wq" }
+z = { z = ":q!" }
 "{" = ["goto_prev_paragraph"]
 "}" = ["goto_next_paragraph"]
 0 = "goto_line_start"
@@ -39,9 +42,17 @@ G = "goto_file_end"
 V = ["select_mode", "extend_to_line_bounds"]
 D = ["extend_to_line_end", "delete_selection"]
 
+[keys.normal.g]
+v = "repeat_last_motion"
+
 [keys.select]
 0 = "goto_line_start"
+"$" = "goto_line_end"
 G = "goto_file_end"
 i = "select_textobject_inner"
 a = "select_textobject_around"
 "=" = ":reflow"
+esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
+
+[keys.insert]
+esc = ["collapse_selection", "normal_mode"]
