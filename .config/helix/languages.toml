@@ -1,6 +1,8 @@
 [[language]]
 name = "latex"
+formatter = { command = "latexindent" }
 file-types = ["tex", "sty", "cls"]
+auto-format = true
 
 [language.config.texlab]
 auxDirectory = "build"

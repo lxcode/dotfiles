@@ -41,6 +41,13 @@ z = { z = ":q!" }
 G = "goto_file_end"
 V = ["select_mode", "extend_to_line_bounds"]
 D = ["extend_to_line_end", "delete_selection"]
+# This will be future default behavior
+"*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
+
+# Using the alt key is ergonomically awful, use control instead
+"C-." = ["repeat_last_motion"]
+"C-d" = ["delete_selection_noyank"]
+"C-;" = ["flip_selections"]
 
 [keys.normal.g]
 v = "repeat_last_motion"
@@ -51,7 +58,7 @@ v = "repeat_last_motion"
 G = "goto_file_end"
 i = "select_textobject_inner"
 a = "select_textobject_around"
-"=" = ":reflow"
+"=" = [":reflow", "open_below", "normal_mode"]
 esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
 
 [keys.insert]
