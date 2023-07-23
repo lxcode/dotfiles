@@ -48,8 +48,6 @@ set pastetoggle=<F11>
 map <F12> :cn<CR>
 " use the g] behavior by default, i.e. list all tags if there are multiple
 nnoremap <C-]> g<C-]>
-" Toggle the quickfix window
-nnoremap <silent> <C-c> :call ToggleQuickfix()<cr>
 " Keep selected blocks selected when shifting
 vmap > >gv
 vmap < <gv
@@ -188,6 +186,7 @@ Plug 'natebosch/vim-lsc'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 Plug 'zah/nim.vim'
+Plug 'romainl/vim-qf'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
 " Use these if debugging color themes/hightlighting
@@ -202,16 +201,21 @@ colorscheme catppuccin_macchiato
 runtime! macros/matchit.vim
 " }}}
 
-" netrw {{{
-let g:netrw_liststyle=0
-let g:netrw_browse_split=4
-let g:netrw_winsize=25
-let g:netrw_banner=0
-" }}}
-
 " tagbar {{{
 let g:tagbar_ctags_bin="/opt/homebrew/bin/ctags"
 " }}}
+
+" vim-qf {{{
+nnoremap <C-c> <Plug>(qf_qf_toggle)
+" }}}
+"
+" quickfixsigns {{{
+let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
+let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
+let g:quickfixsign_use_dummy = 0
+let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'ADD': 'QuickFixSignsDiffAddLx', 'CHANGE': 'QuickFixSignsDiffChangeLx'}   "{{{2}}}"
+" }}}
+
 
 " md-img-paste {{{
 autocmd FileType markdown,tex nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
@@ -273,13 +277,6 @@ endf
 " Jump to tag
 nn <M-g> :call JumpToDef()<cr>
 ino <M-g> <esc>:call JumpToDef()<cr>i
-" }}}
-
-" quickfixsigns {{{
-let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
-let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
-let g:quickfixsign_use_dummy = 0
-let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'ADD': 'QuickFixSignsDiffAddLx', 'CHANGE': 'QuickFixSignsDiffChangeLx'}   "{{{2}}}"
 " }}}
 
 " buftabline {{{
@@ -420,35 +417,15 @@ augroup end
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow
 " keys
 augroup quickfix
-    au FileType qf set nobuflisted
     au FileType qf set nospell
-    au FileType qf, noremap ' <CR><C-W><C-P>j
     au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
     au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
-    au FileType qf, setlocal statusline=\ %n\ \ %f%=L%l/%L\ %P
     au BufReadPost quickfix call GrepColors()
     au BufWinEnter quickfix call GrepColors()
     au BufWinEnter qf:list call GrepColors()
 augroup end
 
 " }}}
-
-" Custom functions {{{
-" Quickfix toggle
-
-let g:quickfix_is_open = 0
-
-function! ToggleQuickfix()
-    if g:quickfix_is_open
-        cclose
-        let g:quickfix_is_open = 0
-        execute g:quickfix_return_to_window . "wincmd w"
-    else
-        let g:quickfix_return_to_window = winnr()
-        copen
-        let g:quickfix_is_open = 1
-    endif
-endfunction
 
 " I use this to highlight the match from grep, but keep quickfix syntax
 " highlighting intact. Detects Linux due to the different escape sequences of
