@@ -144,17 +144,17 @@ let &t_SR = "\<esc>[3 q"
 let &t_EI = "\<esc>[1 q"
 
 " colors
-if $TERM == 'xterm-kitty'
-    if exists('$TMUX')
-        set t_Co=256
-    else
-        set termguicolors
-        let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-        let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
-    endif
-else
-set t_Co=256
-endif
+" if $TERM == 'xterm-kitty'
+"    if exists('$TMUX')
+"        set t_Co=256
+"    else
+set termguicolors
+let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+"    endif
+"else
+"set t_Co=256
+"endif
 " }}}
 
 " Plugins {{{
@@ -336,7 +336,7 @@ command! -bang -nargs=? -complete=dir Files
 
 " lightline
 let g:lightline = {
-    \ 'colorscheme': 'wombat',
+    \ 'colorscheme': 'catppuccin_macchiato',
     \ 'active': {
     \   'left': [ [ 'mode', 'paste' ],
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
