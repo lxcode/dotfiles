@@ -2,7 +2,7 @@
 require('vis')
 
 vis.events.subscribe(vis.events.INIT, function()
-vis:command('set theme base16-onedark')
+vis:command('set theme base16-nord')
 end)
 
 vis.events.subscribe(vis.events.WIN_OPEN, function(win)
@@ -40,7 +40,11 @@ local plugins = {
 	{ 'https://git.sr.ht/~mcepl/vis-fzf-open' },
 	{ 'https://gitlab.com/muhq/vis-spellcheck' },
 	{ 'https://repo.or.cz/vis-quickfix.git' },
+	{ 'machinedgod/vis-ultisnips', alias = 'snips' },
 }
 
 -- require and optionally install plugins on init
 plug.init(plugins, true)
+
+plug.plugins.snips.snipmate  = '$HOME/.vim/plugged/vim-snippets/snippets/'
+plug.plugins.snips.ultisnips = '$HOME/.vim/plugged/vim-snippets/UltiSnips/'

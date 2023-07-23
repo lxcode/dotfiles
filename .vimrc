@@ -60,9 +60,6 @@ vnoremap K :m '<-2<CR>gv=gv
 vnoremap . :normal .<CR>
 " Keep the contents of the paste buffer when pasting in visual mode
 xnoremap p pgvy
-" day+time / day+date
-nmap <Leader>dt "=strftime("%c")<CR>P"
-nmap <Leader>dd "=strftime("%Y-%m-%d")<CR>P"
 " Change to the directory of the current file
 nmap cd :lcd %:h \| :pwd<CR>
 " Fix whitespace
@@ -191,13 +188,15 @@ Plug 'natebosch/vim-lsc'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 Plug 'zah/nim.vim'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
 " Use these if debugging color themes/hightlighting
 " Plug 'kergoth/vim-hilinks'
 " Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
 call plug#end()
 
-colorscheme lx-truecolor
+"colorscheme lx-truecolor
+colorscheme catppuccin_macchiato
 
 " Load optional builtin extensions for %
 runtime! macros/matchit.vim
@@ -229,6 +228,9 @@ let g:better_whitespace_filetypes_blacklist=['mail', 'xxd']
 " lsc {{{
 let g:lsc_auto_map = v:true
 let g:lsc_server_commands = {}
+if executable('texlab')
+    let g:lsc_server_commands.tex = 'texlab'
+endif
 if executable('pyls')
     let g:lsc_server_commands.python = 'pyls'
 endif
@@ -362,6 +364,7 @@ let g:lightline = {
     let g:vimtex_fold_enabled=1
     let g:vimtex_fold_manual=1
     let g:tex_comment_nospell= 1
+    let g:vimtex_complete_enabled = 1
     let g:vimtex_view_method='skim'
     " Ignore things like underscores, I use the underscore package
     let g:tex_no_error=1
@@ -384,15 +387,15 @@ augroup filetypes
     au BufWinEnter *.jq set filetype=javascript
     au BufWinEnter *.cls set filetype=tex
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc | let c_no_curly_error = 1
-    au FileType python,php set smartindent | set number
-    au FileType c,cpp set number
+    au FileType python,php set smartindent | set number relativenumber
+    au FileType c,cpp set number relativenumber
     au FileType git set foldlevel=99
     au FileType taskreport set nonu
     au FileType vim set foldmethod=marker
     au FileType make set diffopt-=iwhite
     au FileType markdown set spell | hi Error none
     au FileType mail set spell nonu
-    au FileType tex,bib set number spell
+    au FileType tex,bib set number relativenumber spell
     au FileType tex,bib setlocal fo+=1p
     au FileType tex,markdown noremap j gj
     au FileType tex,markdown noremap k gk
@@ -483,14 +486,6 @@ def Unminify()
     %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
     normal ggVG=
 enddef
-
-command! -nargs=1 Graudit call Graudit(<f-args>)
-function! Graudit(db)
-    call system("$HOME/git/graudit/graudit -B -x 'cscope.*' -c0 -d " . a:db . " . | awk 'length($0) < 200' > /tmp/graudit.out")
-    copen
-    cf /tmp/graudit.out
-endfunction
-" }}}
 
 if filereadable(glob("~/.vimrc-local"))
     source ~/.vimrc-local

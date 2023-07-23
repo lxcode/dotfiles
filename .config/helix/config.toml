@@ -7,6 +7,7 @@ soft-wrap.enable = true
 color-modes = true
 auto-pairs = false
 true-color = true
+line-number = "relative"
 
 [editor.statusline]
 left = ["mode", "spinner", "diagnostics", "version-control"]
@@ -51,6 +52,7 @@ D = ["extend_to_line_end", "delete_selection"]
 
 [keys.normal.g]
 v = "repeat_last_motion"
+";" = "goto_last_modification"
 
 [keys.select]
 0 = "goto_line_start"

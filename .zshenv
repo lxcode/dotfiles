@@ -1,4 +1,4 @@
-for VI in /usr/local/bin/hx /opt/homebrew/bin/hx /usr/local/bin/vim /opt/homebrew/bin/vim /usr/bin/vim /opt/homebrew/bin/vise /usr/local/bin/nvi /usr/bin/vi
+for VI in /usr/local/bin/vim /opt/homebrew/bin/vim /usr/bin/vim /opt/homebrew/bin/vise /usr/local/bin/nvi /usr/bin/vi
 
 do
 	if [ -x $VI ]; then
