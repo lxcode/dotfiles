@@ -141,18 +141,10 @@ let &t_SI = "\<esc>[5 q"
 let &t_SR = "\<esc>[3 q"
 let &t_EI = "\<esc>[1 q"
 
-" colors
-" if $TERM == 'xterm-kitty'
-"    if exists('$TMUX')
-"        set t_Co=256
-"    else
+" truecolor
 set termguicolors
 let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
 let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
-"    endif
-"else
-"set t_Co=256
-"endif
 " }}}
 
 " Plugins {{{
@@ -165,28 +157,26 @@ Plug 'darfink/vim-plist'
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'godlygeek/tabular'
 Plug 'goerz/jupytext.vim'
-Plug 'justinmk/vim-sneak'
+Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
+Plug 'itchyny/lightline.vim'
 Plug 'jamessan/vim-gnupg'
+Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
+Plug 'justinmk/vim-sneak'
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
-Plug 'md-img-paste-devs/md-img-paste.vim'
-Plug 'itchyny/lightline.vim'
+Plug 'natebosch/vim-lsc'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'md-img-paste-devs/md-img-paste.vim'
+Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
 Plug 'psf/black', { 'for': 'python' }
+Plug 'romainl/vim-qf'
 Plug 'tomtom/quickfixsigns_vim'
-Plug 'tpope/vim-characterize'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
-Plug 'natebosch/vim-lsc'
-Plug 'jpalardy/vim-slime', { 'for': 'python' }
-Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
-Plug 'zah/nim.vim'
-Plug 'romainl/vim-qf'
+
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
 " Use these if debugging color themes/hightlighting
@@ -213,7 +203,6 @@ nnoremap <C-c> <Plug>(qf_qf_toggle)
 let g:quickfixsigns_classes=['qfl', 'loc', 'marks', 'vcsdiff', 'breakpoints']
 let g:quickfixsigns#marks#buffer = split('abcdefghijklmnopqrstuvwxyz', '\zs')
 let g:quickfixsign_use_dummy = 0
-let g:quickfixsigns#vcsdiff#highlight = {'DEL': 'QuickFixSignsDiffDeleteLx', 'ADD': 'QuickFixSignsDiffAddLx', 'CHANGE': 'QuickFixSignsDiffChangeLx'}   "{{{2}}}"
 " }}}
 
 
@@ -262,21 +251,6 @@ nnoremap <Leader>c :IPythonCellExecuteCellJump<CR>
 
 " jupytext {{{
 let g:jupytext_fmt = 'py:percent'
-" }}}
-
-
-" nim {{{
-fun! JumpToDef()
-  if exists("*GotoDefinition_" . &filetype)
-    call GotoDefinition_{&filetype}()
-  else
-    exe "norm! \<C-]>"
-  endif
-endf
-
-" Jump to tag
-nn <M-g> :call JumpToDef()<cr>
-ino <M-g> <esc>:call JumpToDef()<cr>i
 " }}}
 
 " buftabline {{{
@@ -348,24 +322,24 @@ let g:lightline = {
 " }}}
 
 " vimtex {{{
-    " Ignore usually useless messages
-    let g:vimtex_quickfix_ignore_filters = [
-                \ 'References',
-                \ 'Overfull',
-                \ 'Underfull',
-                \ 'polyglossia Warning',
-                \]
-    let g:vimtex_quickfix_autoclose_after_keystrokes = 2
-    let g:vimtex_quickfix_open_on_warning = 0
-    let g:vimtex_format_enabled = 1
-    let g:vimtex_fold_enabled=1
-    let g:vimtex_fold_manual=1
-    let g:tex_comment_nospell= 1
-    let g:vimtex_complete_enabled = 1
-    let g:vimtex_view_method='skim'
-    " Ignore things like underscores, I use the underscore package
-    let g:tex_no_error=1
-    let g:tex_flavor='latex'
+" Ignore usually useless messages
+let g:vimtex_quickfix_ignore_filters = [
+            \ 'References',
+            \ 'Overfull',
+            \ 'Underfull',
+            \ 'polyglossia Warning',
+            \]
+let g:vimtex_quickfix_autoclose_after_keystrokes = 2
+let g:vimtex_quickfix_open_on_warning = 0
+let g:vimtex_format_enabled = 1
+let g:vimtex_fold_enabled=1
+let g:vimtex_fold_manual=1
+let g:tex_comment_nospell= 1
+let g:vimtex_complete_enabled = 1
+let g:vimtex_view_method='skim'
+" Ignore things like underscores, I use the underscore package
+let g:tex_no_error=1
+let g:tex_flavor='latex'
 " }}}
 
 " augroups {{{
