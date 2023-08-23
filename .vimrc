@@ -6,6 +6,10 @@ iabbr ty Thanks,
 " }}}
 
 " Keymappings {{{
+" Use , and space in addition to \ for the leader
+let mapleader = ","
+map \ ,
+map <space> ,
 "left/right arrows to switch buffers in normal mode
 map <right> :bn<cr>
 map <left> :bp<cr>
@@ -15,14 +19,10 @@ map g<Tab> :bn<CR>
 " Make Y behave like C and D
 nnoremap Y y$
 " Yank to OS clipboard
-vmap gy "*y
-nnoremap gY "*y$
+vmap <Leader>y "*y
+nnoremap <Leader>Y "*y$
 " Delete to blackhole register
 nnoremap <leader>d "_d
-" Use , and space in addition to \ for the leader
-let mapleader = ","
-map \ ,
-map <space> ,
 " save my pinky
 nore ; :
 " Performance seems to have improved
@@ -43,7 +43,6 @@ nnoremap rg :execute 'Rg' expand('<cword>')<CR>
 " Show netrw sidebar
 map <silent> <F9> :Lexplore<CR>
 nnoremap <silent> <F10> :TagbarToggle<CR>
-set pastetoggle=<F11>
 " jump to next quickfix item
 map <F12> :cn<CR>
 " use the g] behavior by default, i.e. list all tags if there are multiple
@@ -62,12 +61,14 @@ xnoremap p pgvy
 nmap cd :lcd %:h \| :pwd<CR>
 " Fix whitespace
 nmap <Leader>fw :StripWhitespace<CR>
+" Fast quit
 nmap Q :qa!<CR>
 " Write using sudo
 cmap w!! w !sudo tee > /dev/null %
 " Reflow JSON / YAML
 nmap =j :%!jq .<CR>
 nmap =y :%!jq -r yamlify<CR>:set filetype=yaml<CR>
+" Faster fugitive
 cnoreabbrev git Git
 " }}}
 
@@ -98,9 +99,9 @@ set foldcolumn=0            " I never use this.
 set nojoinspaces            " disallow two spaces after a period when joining
 set formatoptions=qjnrtlmnc " auto-formatting style
 set autoindent
+set breakindent briopt+=list:2 " Visually indent wrapped lines in bullet lists etc
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
-set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
 set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
 set cpoptions=BFt
 set completeopt=menuone,longest
@@ -145,7 +146,16 @@ let &t_EI = "\<esc>[1 q"
 set termguicolors
 let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
 let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
+"
+
+" lists
+
+"set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
+set formatlistpat=^\\s*[\\[({]\\?=\\([0-9]\\+\\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\\|^\\s*[-–+o*•]\\s\\+
 " }}}
+
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
@@ -161,7 +171,6 @@ Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 Plug 'itchyny/lightline.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'justinmk/vim-sneak'
@@ -184,8 +193,10 @@ Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 " Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
 call plug#end()
 
-"colorscheme lx-truecolor
 colorscheme catppuccin_macchiato
+" Use undercurls
+hi SpellLocal ctermbg=NONE cterm=undercurl ctermul=blue
+hi SpellBad ctermbg=NONE cterm=undercurl ctermul=red
 
 " Load optional builtin extensions for %
 runtime! macros/matchit.vim
@@ -358,16 +369,15 @@ augroup filetypes
     au BufWinEnter *.jq set filetype=javascript
     au BufWinEnter *.cls set filetype=tex
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc | let c_no_curly_error = 1
-    au FileType python,php set smartindent | set number relativenumber
-    au FileType c,cpp set number relativenumber
+    au FileType python,php set smartindent | set number
+    au FileType c,cpp set number
     au FileType git set foldlevel=99
     au FileType taskreport set nonu
     au FileType vim set foldmethod=marker
     au FileType make set diffopt-=iwhite
     au FileType markdown set spell | hi Error none
     au FileType mail set spell nonu
-    au FileType tex,bib set number relativenumber spell
-    au FileType tex,bib setlocal fo+=1p
+    au FileType tex,bib set number spell | setlocal fo+=1p
     au FileType tex,markdown noremap j gj
     au FileType tex,markdown noremap k gk
     au FileType tex,markdown noremap gj j
