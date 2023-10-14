@@ -1,12 +1,13 @@
-import time
 import regex
 import functools
 import tldextract
 import emoji
-import gcld3
 import urlexpander
 import requests
-import ucluster.vd.plugin
+import datetime
+import fugashi
+
+# import ucluster.vd.plugin
 import deepl
 from urllib.parse import urlparse
 from ast import literal_eval
@@ -16,17 +17,15 @@ from nltk.corpus import stopwords
 from dateutil import tz
 from dateutil import parser
 from geopy.geocoders import Nominatim
+from snownlp import SnowNLP
+from ftlangdetect import detect
 
-
-to_zone = tz.tzlocal()
-
-detector = gcld3.NNetLanguageIdentifier(min_num_bytes=10, max_num_bytes=1000)
-
-translator = deepl.Translator("apikey")
+translator = deepl.Translator("")
 
 # In case you're running your own instance
 geolocator = Nominatim(user_agent="SIO", domain="localhost:8080", scheme="http")
 # geolocator = Nominatim(user_agent="SIO")
+
 
 # Unshorten URLs with unshrtn. If the URL is shortened, return the best
 # expanded URL we have, along with a bool saying it was a shortened URL.
@@ -54,7 +53,7 @@ def geo(column):
 
 # Convert to local time
 def ltime(column):
-    return parser.parse(column).astimezone(to_zone)
+    return parser.parse(column).astimezone(tz.tzlocal())
 
 
 # Strip HTML tags
@@ -108,7 +107,7 @@ def temoji(column):
 
 def otherchars(column):
     if column:
-        return [c for c in column if re.match("[^\u0020-\u0370]", c)]
+        return [c for c in column if regex.match("[^\u0020-\u0370]", c)]
 
 
 # Twitter helper functions (v1 or v2)
@@ -231,29 +230,51 @@ def grams(column, lang, n):
         return [" ".join(thegrams) for thegrams in tokens]
 
 
-# Detect language with CLD3
+# Chinese language helper to pull out words
+@functools.lru_cache
+def cnwords(column):
+    if column:
+        s = SnowNLP(column)
+        return s.words
+
+
+# or sentences
+@functools.lru_cache
+def cnsent(column):
+    if column:
+        s = SnowNLP(column)
+        return s.sentences
+
+
+# or keywords
+@functools.lru_cache
+def cnkw(column, count):
+    if column:
+        s = SnowNLP(column)
+        return s.keywords(count)
+
+
+# And now for jp
+tagger = fugashi.Tagger()
+@functools.lru_cache
+def jpgrams(column):
+    if column:
+        s = [word.surface for word in tagger(column)]
+        return s
+
+
+# Detect language and probability
 @functools.lru_cache
 def ld(column):
-    l = ""
     if column and len(column) >= 10:
-        detect = detector.FindLanguage(text=column)
-        if detect.is_reliable:
-            l = detect.language
-    return l
-
-
-# Detect language but return probability
-@functools.lru_cache
-def ldprob(column):
-    if column and len(column) >= 10:
-        detect = detector.FindLanguage(text=column)
-        if detect.is_reliable:
-            return (detect.language, detect.probability)
+        column = column.replace("\n", " ")  # workaround for fasttext
+        result = detect(text=column)
+        return (result["lang"], result["score"])
     return ""
 
 
 @functools.lru_cache
-def tlate(column):
+def translate(column):
     if column and len(column) >= 10:
         return str(translator.translate_text(column, target_lang="EN-US"))
     return ""
@@ -274,7 +295,9 @@ options.color_note_type = 8
 options.scroll_incr = -3
 options.some_selected_rows = True
 options.input_history = "previnputs"
+options.disp_histogram = "*"
 options.undo = True
+options.motd_url = ""
 
 # Keybindings
 bindkey("0", "go-leftmost")
@@ -282,8 +305,8 @@ bindkey("4", "go-rightmost")
 
 # Whether you want binning is pretty context-specific, so these let
 # you switch modes
-Sheet.addCommand("b", "nobinning", "options.numeric_binning=False")
-Sheet.addCommand("B", "binning", "options.numeric_binning=True")
+Sheet.addCommand("B", "nobinning", "options.numeric_binning=False")
+Sheet.addCommand("zb", "binning", "options.numeric_binning=True")
 
 # I keep needing to switch date formats, so make z@ do a "zoom" and show date+time
 Sheet.addCommand(
