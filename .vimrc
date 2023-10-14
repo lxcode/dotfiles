@@ -244,11 +244,18 @@ endif
 if executable('javascript-typescript-stdio')
     let g:lsc_server_commands.javascript = 'javascript-typescript-stdio'
 endif
+if executable('typescript-language-server')
+    let g:lsc_server_commands.typescriptreact = 'javascript-typescript-stdio'
+endif
 let g:lsc_server_commands.go = {
             \    "command": "gopls serve",
             \    "log_level": -1,
             \    "suppress_stderr": v:true,
             \}
+if executable('sourcekit-lsp')
+    let g:lsc_server_commands.swift = 'sourcekit-lsp'
+endif
+
 " }}}
 
 " slime {{{
@@ -369,15 +376,15 @@ augroup filetypes
     au BufWinEnter *.jq set filetype=javascript
     au BufWinEnter *.cls set filetype=tex
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc | let c_no_curly_error = 1
-    au FileType python,php set smartindent | set number
-    au FileType c,cpp set number
+    au FileType python,php set smartindent | set number relativenumber
+    au FileType c,cpp set number relativenumber 
     au FileType git set foldlevel=99
     au FileType taskreport set nonu
     au FileType vim set foldmethod=marker
     au FileType make set diffopt-=iwhite
     au FileType markdown set spell | hi Error none
     au FileType mail set spell nonu
-    au FileType tex,bib set number spell | setlocal fo+=1p
+    au FileType tex,bib set number relativenumber spell | setlocal fo+=1p
     au FileType tex,markdown noremap j gj
     au FileType tex,markdown noremap k gk
     au FileType tex,markdown noremap gj j
