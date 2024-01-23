@@ -95,6 +95,16 @@ v() {
           done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
 
+img() {
+    fzf --preview='
+    if file --mime-type {} | grep -qF image/; then
+        kitty icat --clear --transfer-mode=memory --unicode-placeholder --stdin=no --place=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0 {} | sed \$d
+    else
+        bat --color=always {}
+    fi
+    '
+}
+
 # list the cdr recent directories stack
 fzf-cdr() {
     local dir=$(cdr -l | fzf-tmux |cut -c6-) && zle -U "cd ${dir//\~/$HOME}"
@@ -104,9 +114,6 @@ bindkey '^b' fzf-cdr
 
 # Get the fingerprint of a host's TLS cert
 fpr() { openssl s_client -connect $1 < /dev/null 2>/dev/null | openssl x509 -fingerprint -noout -in /dev/stdin }
-
-# Default options for twarc2
-twrc() { twarc2 --no-metadata $@ --flatten }
 
 # typing ... expands to ../., ... to ../../., etc.
 rationalise-dot() {
