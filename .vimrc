@@ -164,6 +164,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ap/vim-buftabline'
 Plug 'christianrondeau/vim-base64'
 Plug 'darfink/vim-plist'
+Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'godlygeek/tabular'
 Plug 'goerz/jupytext.vim'
@@ -255,6 +256,17 @@ let g:lsc_server_commands.go = {
 if executable('sourcekit-lsp')
     let g:lsc_server_commands.swift = 'sourcekit-lsp'
 endif
+
+let g:copilot_filetypes = {
+        \ '*': v:false,
+        \ 'python': v:true,
+        \ 'tex': v:true,
+        \ 'bib': v:true,
+        \ 'go': v:true,
+        \ 'javascript': v:true,
+        \ 'typescriptreact': v:true,
+        \ 'lua': v:true,
+        \ }
 
 " }}}
 
@@ -369,22 +381,21 @@ augroup filetypes
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.jsonl, set filetype=json | hi Error none
-    au BufWinEnter *.nse set filetype=lua
-    au BufWinEnter *.cki set filetype=json
+    au BufWinEnter *.cki,*.vdj set filetype=json number
     au BufWinEnter *.ics set filetype=icalendar
     au BufWinEnter .visidatarc set filetype=python
     au BufWinEnter *.jq set filetype=javascript
     au BufWinEnter *.cls set filetype=tex
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc | let c_no_curly_error = 1
-    au FileType python,php set smartindent | set number relativenumber
-    au FileType c,cpp set number relativenumber 
+    au FileType python,php set smartindent | set number
+    au FileType c,cpp,go set number
     au FileType git set foldlevel=99
     au FileType taskreport set nonu
     au FileType vim set foldmethod=marker
     au FileType make set diffopt-=iwhite
     au FileType markdown set spell | hi Error none
     au FileType mail set spell nonu
-    au FileType tex,bib set number relativenumber spell | setlocal fo+=1p
+    au FileType tex,bib set number spell | setlocal fo+=1p
     au FileType tex,markdown noremap j gj
     au FileType tex,markdown noremap k gk
     au FileType tex,markdown noremap gj j
@@ -401,8 +412,8 @@ augroup misc
 augroup end
 
 augroup views
-    au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb,*.bib mkview
-    au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb,*.bib silent loadview
+    au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb,*.bib,*.go mkview
+    au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb,*.bib,*.go silent loadview
 augroup end
 
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow
