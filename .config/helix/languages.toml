@@ -1,17 +1,14 @@
 [[language]]
 name = "latex"
-formatter = { command = "latexindent" }
 file-types = ["tex", "sty", "cls"]
-auto-format = true
+auto-format = false
+language-servers = [ "texlab", { name = "ltex-ls", only-features = [ "code-action", "diagnostics" ] } ] 
+indent = { tab-width = 4, unit = "    " }
 
-[language.config.texlab]
-auxDirectory = "build"
+[language-server.texlab]
+config = { auxDirectory = "build" }
 
-[language.config.texlab.forwardSearch]
-executable = "/Applications/Skim.app/Contents/SharedSupport/displayline" 
-args = ["%l", "%p", "%f"]
-
-[language.config.texlab.build]
+[language-server.texlab.build]
 onSave = true
 
 executable = "latexmk"
@@ -25,7 +22,18 @@ args = [
  "%f"
  ]
 
- [[language]]
+[language-server.texlab.forwardSearch]
+executable = "/Applications/Skim.app/Contents/SharedSupport/displayline" 
+args = ["%l", "%p", "%f"]
+
+[[language]]
 name = "python"
 formatter = { command = "black", args = ["--quiet", "-"] }
 auto-format = true
+
+[[language]]
+name = "markdown"
+language-servers = [ "ltex-ls" ]
+file-types = ["md", "txt"]
+scope = "source.markdown"
+roots = []
