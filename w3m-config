@@ -120,8 +120,8 @@ show_cookie 1
 accept_cookie 1
 accept_bad_cookie 0
 cookie_reject_domains 
-cookie_accept_domains 
-cookie_avoid_wrong_number_of_dots 
+cookie_accept_domains kagi.com
+cookie_avoid_wrong_number_of_dots kagi.com
 display_charset UTF-8
 document_charset UTF-8
 auto_detect 2
