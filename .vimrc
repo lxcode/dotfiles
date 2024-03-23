@@ -236,7 +236,7 @@ let lspServers = [
         \ #{name: 'js', filetype: ['javascript', 'typescript'], path: 'javascript-typescript-stdio' },
         \ #{name: 'gopls', filetype: ['go', 'gomod'], path: 'gopls', args: ['serve'], syncInit: v:true },
         \ #{name: 'sourcekit', filetype: 'swift', path: 'sourcekit-lsp'},
-        \ #{name: 'texlab', filetype: 'tex', path: 'texlab'},
+        \ #{name: 'texlab', filetype: ['tex', 'bib'], path: 'texlab'},
         \ #{name: 'rustlang', filetype: 'rust', path: 'rust-analyzer', syncInit: v:true },
 \]
 
