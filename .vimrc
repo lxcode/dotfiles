@@ -233,7 +233,7 @@ autocmd User LspSetup call LspOptionsSet(lspOpts)
 let lspServers = [
         \ #{name: 'clangd', filetype: ['c', 'cpp'], path: 'clangd', args: ['--background-index', '--clang-tidy'] },
         \ #{name: 'pyls', filetype: ['python'], path: 'pyls'},
-        \ #{name: 'js', filetype: ['javascript', 'typescript'], path: 'javascript-typescript-stdio', args: [''] },
+        \ #{name: 'js', filetype: ['javascript', 'typescript'], path: 'javascript-typescript-stdio' },
         \ #{name: 'gopls', filetype: 'go', path: 'gopls', args: ['serve'] },
         \ #{name: 'sourcekit', filetype: 'swift', path: 'sourcekit-lsp'},
         \ #{name: 'texlab', filetype: 'tex', path: 'texlab'},
