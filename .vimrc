@@ -232,11 +232,11 @@ autocmd User LspSetup call LspOptionsSet(lspOpts)
 
 let lspServers = [
         \ #{name: 'clangd', filetype: ['c', 'cpp'], path: 'clangd', args: ['--background-index', '--clang-tidy'] },
-        \ #{name: 'pyls', filetype: ['python'], path: 'pyls', args: [''] },
+        \ #{name: 'pyls', filetype: ['python'], path: 'pyls'},
         \ #{name: 'js', filetype: ['javascript', 'typescript'], path: 'javascript-typescript-stdio', args: [''] },
         \ #{name: 'gopls', filetype: 'go', path: 'gopls', args: ['serve'] },
-        \ #{name: 'sourcekit', filetype: 'swift', path: 'sourcekit-lsp', args: [''] },
-        \ #{name: 'texlab', filetype: 'tex', path: 'texlab', args: [''] },
+        \ #{name: 'sourcekit', filetype: 'swift', path: 'sourcekit-lsp'},
+        \ #{name: 'texlab', filetype: 'tex', path: 'texlab'},
 \]
 
 autocmd User LspSetup call LspAddServer(lspServers)
