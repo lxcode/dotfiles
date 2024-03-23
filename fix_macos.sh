@@ -2,7 +2,7 @@
 # Run this script as a regular user.
 
 # Re-enable chime on older macs
-sudo /usr/sbin/nvram 'BootAudio=%01'
+sudo nvram 'BootAudio=%01'
 
 # And newer ones?
 sudo nvram 'StartupMute=%00'
@@ -196,7 +196,7 @@ sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
 read -p "Preparing to make symlinks"
 
-for file in .zshrc .zshenv .zsh .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf bin .config .mailcap
+for file in .zshrc .zshenv .zsh .zlogin .vimrc .vim .ctags .editrc .inputrc .nexrc .tmux.conf bin .config .mailcap
 do
     ln -s ~/git/dotfiles/$file ~/$file
 done
@@ -223,15 +223,15 @@ brew install task tmux w3m bvi runit mutt nvi nmap par \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
     gawk cmusfm black dust skim gotop mitmproxy duf dmenu-mac \
-    svn
+    svn bluesnooze
 
 brew install saulpw/vd/visidata
 
 pip3 install peewee requests pip-review nltk darker
 
 # Services
-brew services start vdirsyncer 
-brew services start isync 
+brew services start vdirsyncer
+brew services start isync
 brew services start bitlbee
 
 # Install casks
