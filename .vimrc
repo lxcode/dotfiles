@@ -117,10 +117,6 @@ set nomodeline              " modelines are dumb
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 set backspace=indent,eol,start
 set title
-set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:p:h\")})%)%(\ %a%)
-set titleold=""             " avoid 'thanks for flying vim'
-set ttimeout
-set ttimeoutlen=100         " Make it so Esc enters Normal mode right away
 set helpheight=0            " no minimum helpheight
 set incsearch               " search incrementally
 set hlsearch                " show search matches
@@ -128,7 +124,6 @@ set showmatch               " show the matching terminating bracket
 set sidescroll=1            " soft wrap long lines
 set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
-set cscopequickfix=s-,c-,d-,i-,t-,e-        " omfg so much nicer
 set foldlevelstart=0        " the default level of fold nesting on startup
 set autoread                " Disable warning about file change to writable
 set conceallevel=0          " Don't hide things by default
@@ -142,15 +137,15 @@ let &t_SI = "\<esc>[5 q"
 let &t_SR = "\<esc>[3 q"
 let &t_EI = "\<esc>[1 q"
 
-" truecolor
+" truecolor {{{
 set termguicolors
 let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
 let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
 let &t_Cs = "\e[4:3m"
 let &t_Ce = "\e[4:0m"
-"
+" }}}
 
-" lists
+" lists {{{
 
 "set formatlistpat=^\\s*\\([0-9]\\+\\\|[a-z]\\)[\\].:)}]\\s\\+
 set formatlistpat=^\\s*[\\[({]\\?=\\([0-9]\\+\\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\\|^\\s*[-–+o*•]\\s\\+
@@ -160,6 +155,7 @@ set formatlistpat=^\\s*[\\[({]\\?=\\([0-9]\\+\\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'AndrewRadev/id3.vim'
+Plug 'andymass/vim-matchup'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ap/vim-buftabline'
 Plug 'christianrondeau/vim-base64'
@@ -176,7 +172,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'justinmk/vim-sneak'
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'natebosch/vim-lsc'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'md-img-paste-devs/md-img-paste.vim'
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
@@ -186,6 +181,7 @@ Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
+Plug 'yegappan/lsp'
 
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
@@ -199,8 +195,8 @@ colorscheme catppuccin_macchiato
 hi SpellLocal ctermbg=NONE cterm=undercurl ctermul=blue
 hi SpellBad ctermbg=NONE cterm=undercurl ctermul=red
 
-" Load optional builtin extensions for %
-runtime! macros/matchit.vim
+" black {{{
+let g:black_use_virtualenv = 0
 " }}}
 
 " tagbar {{{
@@ -230,44 +226,31 @@ let g:better_whitespace_guicolor="#303030"
 let g:better_whitespace_filetypes_blacklist=['mail', 'xxd']
 " }}}
 
-" lsc {{{
-let g:lsc_auto_map = v:true
-let g:lsc_server_commands = {}
-if executable('texlab')
-    let g:lsc_server_commands.tex = 'texlab'
-endif
-if executable('pyls')
-    let g:lsc_server_commands.python = 'pyls'
-endif
-if executable('lua-lsp')
-    let g:lsc_server_commands.lua = 'lua-lsp'
-endif
-if executable('javascript-typescript-stdio')
-    let g:lsc_server_commands.javascript = 'javascript-typescript-stdio'
-endif
-if executable('typescript-language-server')
-    let g:lsc_server_commands.typescriptreact = 'javascript-typescript-stdio'
-endif
-let g:lsc_server_commands.go = {
-            \    "command": "gopls serve",
-            \    "log_level": -1,
-            \    "suppress_stderr": v:true,
-            \}
-if executable('sourcekit-lsp')
-    let g:lsc_server_commands.swift = 'sourcekit-lsp'
-endif
+" lsp {{{
+let lspOpts = #{autoHighlightDiags: v:true, showDiagOnStatusLine: v:true, ignoreMissingServer: v:true}
+autocmd User LspSetup call LspOptionsSet(lspOpts)
 
+let lspServers = [
+        \ #{name: 'clangd', filetype: ['c', 'cpp'], path: 'clangd', args: ['--background-index', '--clang-tidy'] },
+        \ #{name: 'pyls', filetype: ['python'], path: 'pyls', args: [''] },
+        \ #{name: 'js', filetype: ['javascript', 'typescript'], path: 'javascript-typescript-stdio', args: [''] },
+        \ #{name: 'gopls', filetype: 'go', path: 'gopls', args: ['serve'] },
+        \ #{name: 'sourcekit', filetype: 'swift', path: 'sourcekit-lsp', args: [''] },
+        \ #{name: 'texlab', filetype: 'tex', path: 'texlab', args: [''] },
+\]
+
+autocmd User LspSetup call LspAddServer(lspServers)
+" }}}
+
+" copilot {{{
 let g:copilot_filetypes = {
         \ '*': v:false,
         \ 'python': v:true,
-        \ 'tex': v:true,
-        \ 'bib': v:true,
         \ 'go': v:true,
         \ 'javascript': v:true,
         \ 'typescriptreact': v:true,
         \ 'lua': v:true,
         \ }
-
 " }}}
 
 " slime {{{
@@ -354,21 +337,20 @@ let g:lightline = {
 " vimtex {{{
 " Ignore usually useless messages
 let g:vimtex_quickfix_ignore_filters = [
-            \ 'References',
-            \ 'Overfull',
-            \ 'Underfull',
+            \ 'soulutf8',
             \ 'polyglossia Warning',
             \]
 let g:vimtex_quickfix_autoclose_after_keystrokes = 2
 let g:vimtex_quickfix_open_on_warning = 0
 let g:vimtex_format_enabled = 1
-let g:vimtex_fold_enabled=1
-let g:vimtex_fold_manual=1
-let g:tex_comment_nospell= 1
+let g:vimtex_fold_enabled = 1
+let g:vimtex_fold_manual = 1
+let g:tex_comment_nospell = 1
+let g:matchup_override_vimtex = 1
+let g:vimtex_view_skim_reading_bar = 1
 let g:vimtex_complete_enabled = 1
 let g:vimtex_view_method='skim'
-" Ignore things like underscores, I use the underscore package
-let g:tex_no_error=1
+let g:tex_no_error = 1
 let g:tex_flavor='latex'
 " }}}
 
@@ -385,7 +367,7 @@ augroup filetypes
     au BufWinEnter *.ics set filetype=icalendar
     au BufWinEnter .visidatarc set filetype=python
     au BufWinEnter *.jq set filetype=javascript
-    au BufWinEnter *.cls set filetype=tex
+    au BufWinEnter *.cls,*.cbx,*.bbx set filetype=tex
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc | let c_no_curly_error = 1
     au FileType python,php set smartindent | set number
     au FileType c,cpp,go set number
@@ -402,8 +384,6 @@ augroup filetypes
     au FileType tex,markdown noremap gk k
     au FileType tex imap [[ \begin{
     au BufWinEnter *.md normal zR
-    " If a JS file has only one line, unminify it
-    au FileType javascript if line('$')==1 | call Unminify() | endif
 augroup end
 
 augroup misc
@@ -454,17 +434,6 @@ function GrepColors()
     hi ansiRed    ctermfg=197   guifg=#FF005F  cterm=none         gui=none
     hi! link ansiStop NONE
 endfunction
-
-" Simple re-format for minified Javascript
-command! Unminify call Unminify()
-def Unminify()
-    %s/{\ze[^\r\n]/{\r/g
-    %s/){/) {/g
-    %s/};\?\ze[^\r\n]/\0\r/g
-    %s/;\ze[^\r\n]/;\r/g
-    %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
-    normal ggVG=
-enddef
 
 if filereadable(glob("~/.vimrc-local"))
     source ~/.vimrc-local
