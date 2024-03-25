@@ -246,7 +246,6 @@ task
 xcode-select --install
 
 read -p "Preparing to install language servers"
-pip3 install 'python-language-server[all]'
-brew install node yarn
+brew install node yarn python-lsp-server
 yarn global add javascript-typescript-langserver
 GO111MODULE=on go get golang.org/x/tools/gopls@latest

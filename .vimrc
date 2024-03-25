@@ -231,16 +231,18 @@ let lspOpts = #{autoHighlightDiags: v:true, showDiagOnStatusLine: v:true, ignore
 autocmd User LspSetup call LspOptionsSet(lspOpts)
 
 let lspServers = [
-        \ #{name: 'clangd', filetype: ['c', 'cpp'], path: 'clangd', args: ['--background-index', '--clang-tidy'] },
-        \ #{name: 'pyls', filetype: 'python', path: 'pyls'},
-        \ #{name: 'js', filetype: ['javascript', 'typescript'], path: 'javascript-typescript-stdio' },
-        \ #{name: 'gopls', filetype: ['go', 'gomod'], path: 'gopls', args: ['serve'], syncInit: v:true },
-        \ #{name: 'sourcekit', filetype: 'swift', path: 'sourcekit-lsp'},
-        \ #{name: 'texlab', filetype: ['tex', 'bib'], path: 'texlab'},
-        \ #{name: 'rustlang', filetype: 'rust', path: 'rust-analyzer', syncInit: v:true },
+        \ #{ filetype: ['c', 'cpp'], path: 'clangd', args: ['--background-index', '--clang-tidy'] },
+        \ #{ filetype: 'python', path: 'pylsp' },
+        \ #{ filetype: ['javascript', 'typescript'], path: 'javascript-typescript-stdio' },
+        \ #{ filetype: ['go', 'gomod'], path: 'gopls', args: ['serve'], syncInit: v:true },
+        \ #{ filetype: 'swift', path: 'sourcekit-lsp'},
+        \ #{ filetype: ['tex', 'bib'], path: 'texlab'},
+        \ #{ filetype: 'rust', path: 'rust-analyzer', syncInit: v:true },
 \]
 
 autocmd User LspSetup call LspAddServer(lspServers)
+map gr :LspPeekReferences<cr>
+map <C-]> :LspGotoDefinition<cr>
 " }}}
 
 " copilot {{{
