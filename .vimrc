@@ -154,9 +154,9 @@ set formatlistpat=^\\s*[\\[({]\\?=\\([0-9]\\+\\\|[a-zA-Z]\\+\\)[\\]:.)}]\\s\\+\\
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-gitgutter'
 Plug 'AndrewRadev/id3.vim'
 Plug 'andymass/vim-matchup'
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ap/vim-buftabline'
 Plug 'christianrondeau/vim-base64'
 Plug 'darfink/vim-plist'
@@ -165,6 +165,8 @@ Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'godlygeek/tabular'
 Plug 'goerz/jupytext.vim'
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'itchyny/lightline.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
@@ -176,8 +178,9 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'md-img-paste-devs/md-img-paste.vim'
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
 Plug 'psf/black', { 'for': 'python' }
+Plug 'rafamadriz/friendly-snippets'
 Plug 'romainl/vim-qf'
-Plug 'tomtom/quickfixsigns_vim'
+"Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
@@ -190,7 +193,7 @@ Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 " Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
 call plug#end()
 
-colorscheme catppuccin_macchiato
+colorscheme catppuccin_mocha
 " Use undercurls
 hi SpellLocal ctermbg=NONE cterm=undercurl ctermul=blue
 hi SpellBad ctermbg=NONE cterm=undercurl ctermul=red
@@ -227,7 +230,14 @@ let g:better_whitespace_filetypes_blacklist=['mail', 'xxd']
 " }}}
 
 " lsp {{{
-let lspOpts = #{autoHighlightDiags: v:true, showDiagOnStatusLine: v:true, ignoreMissingServer: v:true}
+let lspOpts = #{autoHighlightDiags: v:true,
+    \ diagSignErrorText: '🔺',
+    \ diagSignHintText: '●',
+    \ showDiagOnStatusLine: v:true,
+    \ ignoreMissingServer: v:true,
+    \ snippetSupport: v:true,
+    \ vsnipSupport: v:true,
+    \ autoPopulateDiags: v:true}
 autocmd User LspSetup call LspOptionsSet(lspOpts)
 
 let lspServers = [
@@ -237,11 +247,15 @@ let lspServers = [
         \ #{ filetype: ['go', 'gomod'], path: 'gopls', args: ['serve'], syncInit: v:true },
         \ #{ filetype: 'swift', path: 'sourcekit-lsp'},
         \ #{ filetype: ['tex', 'bib'], path: 'texlab'},
+        \ #{ filetype: 'vim', path: 'vim-language-server', args: ['--stdio'] },
         \ #{ filetype: 'rust', path: 'rust-analyzer', syncInit: v:true },
 \]
 
 autocmd User LspSetup call LspAddServer(lspServers)
 map gr :LspPeekReferences<cr>
+map gs :LspHover<cr>
+map gR :LspRename<cr>
+map gl :LspDiagShow<cr>
 map <C-]> :LspGotoDefinition<cr>
 " }}}
 
@@ -282,12 +296,6 @@ map F <Plug>Sneak_F
 map t <Plug>Sneak_t
 map T <Plug>Sneak_T
 map gS <Plug>Sneak_,
-" }}}
-
-" ultisnips {{{
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsNoPythonWarning=1
 " }}}
 
 " FZF {{{
