@@ -1,3 +1,34 @@
+# Options
+options.disp_column_sep = "│"
+options.disp_keycol_sep = "║"
+options.clean_names = True
+options.disp_menu_fmt = ""
+options.disp_sidebar = False
+options.clipboard_copy_cmd = "pbcopy"
+options.clipboard_paste_cmd = "pbpaste"
+options.color_default = ""
+options.quitguard = True
+options.color_key_col = 110
+options.color_note_type = 8
+options.scroll_incr = -3
+options.some_selected_rows = True
+options.disp_histogram = "*"
+options.undo = True
+options.motd_url = ""
+options.save_filetype = "jsonl"
+options.motd_url=''
+
+# Keybindings
+bindkey("0", "go-leftmost")
+bindkey("4", "go-rightmost")
+unbindkey("Up")
+unbindkey("Down")
+bindkey("Up", "setcol-precision-more")
+bindkey("Down", "setcol-precision-less")
+
+# Toggle numeric binning
+Sheet.addCommand("B", "toggle-binning", "options.numeric_binning = not options.numeric_binning")
+
 import regex
 import functools
 import tldextract
@@ -6,7 +37,6 @@ import urlexpander
 import requests
 import datetime
 import fugashi
-
 # import ucluster.vd.plugin
 import deepl
 from urllib.parse import urlparse
@@ -18,7 +48,8 @@ from dateutil import tz
 from dateutil import parser
 from geopy.geocoders import Nominatim
 from snownlp import SnowNLP
-from ftlangdetect import detect
+from lingua import Language, LanguageDetectorBuilder
+detector = LanguageDetectorBuilder.from_all_languages().with_preloaded_language_models().build()
 
 translator = deepl.Translator("")
 
@@ -266,10 +297,9 @@ def jpgrams(column):
 # Detect language and probability
 @functools.lru_cache
 def ld(column):
-    if column and len(column) >= 10:
-        column = column.replace("\n", " ")  # workaround for fasttext
-        result = detect(text=column)
-        return (result["lang"], result["score"])
+    if column and len(column) >= 5:
+        confidence_values = detector.compute_language_confidence_values(column)
+        return (confidence_values[0][0].iso_code_639_1.name, confidence_values[0][1])
     return ""
 
 
@@ -279,46 +309,5 @@ def translate(column):
         return str(translator.translate_text(column, target_lang="EN-US"))
     return ""
 
-
-# Options
-options.disp_column_sep = "│"
-options.disp_keycol_sep = "║"
-options.confirm_overwrite = False
-options.clean_names = True
-options.disp_menu_fmt = ""
-options.clipboard_copy_cmd = "pbcopy"
-options.clipboard_paste_cmd = "pbpaste"
-options.color_default = ""
-options.quitguard = True
-options.color_key_col = 110
-options.color_note_type = 8
-options.scroll_incr = -3
-options.some_selected_rows = True
-options.input_history = "previnputs"
-options.disp_histogram = "*"
-options.undo = True
-options.motd_url = ""
-
-# Keybindings
-bindkey("0", "go-leftmost")
-bindkey("4", "go-rightmost")
-
-# Whether you want binning is pretty context-specific, so these let
-# you switch modes
-Sheet.addCommand("B", "nobinning", "options.numeric_binning=False")
-Sheet.addCommand("zb", "binning", "options.numeric_binning=True")
-
-# I keep needing to switch date formats, so make z@ do a "zoom" and show date+time
-Sheet.addCommand(
-    "2", "shortdate", 'options.disp_date_fmt = "%Y-%m-%d"; cursorCol.type=date'
-)
-Sheet.addCommand(
-    "@", "longdate", 'options.disp_date_fmt = "%Y-%m-%d %H:%M"; cursorCol.type=date'
-)
-Sheet.addCommand(
-    "z@",
-    "longlongdate",
-    'options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"; cursorCol.type=date',
-)
 
 # vim: syntax=python
