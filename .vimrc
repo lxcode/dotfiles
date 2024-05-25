@@ -157,6 +157,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'AndrewRadev/id3.vim'
 Plug 'andymass/vim-matchup'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ap/vim-buftabline'
 Plug 'christianrondeau/vim-base64'
 Plug 'darfink/vim-plist'
@@ -165,8 +166,8 @@ Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'godlygeek/tabular'
 Plug 'goerz/jupytext.vim'
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
+"Plug 'hrsh7th/vim-vsnip'
+"Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'itchyny/lightline.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
@@ -178,7 +179,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'md-img-paste-devs/md-img-paste.vim'
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
 Plug 'psf/black', { 'for': 'python' }
-Plug 'rafamadriz/friendly-snippets'
+"Plug 'rafamadriz/friendly-snippets'
 Plug 'romainl/vim-qf'
 "Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-fugitive'
@@ -234,15 +235,16 @@ let lspOpts = #{autoHighlightDiags: v:true,
     \ diagSignErrorText: '🔺',
     \ diagSignHintText: '●',
     \ showDiagOnStatusLine: v:true,
-    \ ignoreMissingServer: v:true,
+    \ ultisnipsSupport: v:true,
     \ snippetSupport: v:true,
-    \ vsnipSupport: v:true,
+    \ ignoreMissingServer: v:true,
     \ autoPopulateDiags: v:true}
 autocmd User LspSetup call LspOptionsSet(lspOpts)
 
 let lspServers = [
         \ #{ filetype: ['c', 'cpp'], path: 'clangd', args: ['--background-index', '--clang-tidy'] },
         \ #{ filetype: 'python', path: 'pylsp' },
+        \ #{ filetype: 'ruby', path: 'solargraph', args: ['stdio'] },
         \ #{ filetype: ['javascript', 'typescript'], path: 'javascript-typescript-stdio' },
         \ #{ filetype: ['go', 'gomod'], path: 'gopls', args: ['serve'], syncInit: v:true },
         \ #{ filetype: 'swift', path: 'sourcekit-lsp'},
@@ -380,7 +382,7 @@ augroup filetypes
     au BufWinEnter *.jq set filetype=javascript
     au BufWinEnter *.cls,*.cbx,*.bbx set filetype=tex
     au BufWinEnter,BufNewFile *.m,*.xm,*.xmi set filetype=objc | let c_no_curly_error = 1
-    au FileType python,php set smartindent | set number
+    au FileType python,php,ruby set smartindent | set number
     au FileType c,cpp,go set number
     au FileType git set foldlevel=99
     au FileType taskreport set nonu
