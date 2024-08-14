@@ -87,6 +87,7 @@ set noerrorbells vb t_vb=   " no bells
 set viewdir=$HOME/.views    " keep view states out of my .vim
 set pumheight=15            " trim down the completion popup menu
 set shortmess+=atIoT        " save space in status messages
+set titleold=""             " avoid 'thanks for flying vim'
 set scrolloff=3             " 3 lines of buffer before scrolling
 set ignorecase              " case insensitive searches
 set wildignorecase          " same for directories and ex commands
@@ -405,8 +406,8 @@ augroup misc
 augroup end
 
 augroup views
-    au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb,*.bib,*.go mkview
-    au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb,*.bib,*.go silent loadview
+    au BufWinLeave *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb,*.bib,*.go,*.rb mkview
+    au BufWinEnter *.[mchly],*.cpp,*.java,*.hs,*.htm*,*.py,*.php,*.md,*.txt,*.conf,.vimrc,*.tex,*.sty,*.ipynb,*.bib,*.go,*.rb silent loadview
 augroup end
 
 " Disable spellcheck on quickfix, switch between quickfix lists with the arrow
