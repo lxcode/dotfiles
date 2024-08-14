@@ -8,6 +8,7 @@ color-modes = true
 auto-pairs = false
 true-color = true
 line-number = "relative"
+persist-old-files = true
 
 [editor.statusline]
 left = ["mode", "spinner", "diagnostics", "version-control"]
