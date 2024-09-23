@@ -197,8 +197,10 @@ call plug#end()
 
 colorscheme catppuccin_mocha
 " Use undercurls
-hi SpellLocal ctermbg=NONE cterm=undercurl ctermul=blue
-hi SpellBad ctermbg=NONE cterm=undercurl ctermul=red
+hi clear SpellLocal
+hi clear SpellBad
+hi SpellLocal ctermbg=NONE cterm=undercurl guisp=blue ctermul=blue
+hi SpellBad ctermbg=NONE cterm=undercurl guisp=red ctermul=red
 
 " black {{{
 let g:black_use_virtualenv = 0
