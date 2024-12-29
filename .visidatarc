@@ -19,12 +19,12 @@ options.save_filetype = "jsonl"
 options.motd_url=''
 
 # Keybindings
-bindkey("0", "go-leftmost")
-bindkey("4", "go-rightmost")
-unbindkey("Up")
-unbindkey("Down")
-bindkey("Up", "setcol-precision-more")
-bindkey("Down", "setcol-precision-less")
+vd.bindkey("0", "go-leftmost")
+vd.bindkey("4", "go-rightmost")
+vd.unbindkey("Up")
+vd.unbindkey("Down")
+vd.bindkey("Up", "setcol-precision-more")
+vd.bindkey("Down", "setcol-precision-less")
 
 # Toggle numeric binning
 Sheet.addCommand("B", "toggle-binning", "options.numeric_binning = not options.numeric_binning")
@@ -37,7 +37,7 @@ import urlexpander
 import requests
 import datetime
 import fugashi
-# import ucluster.vd.plugin
+#import ucluster.vd.plugin
 import deepl
 from urllib.parse import urlparse
 from ast import literal_eval
@@ -226,6 +226,9 @@ def rehashtags(column):
     if column:
         return regex.findall(r"\B#\w\w+", column)
 
+def loras(column):
+    if column:
+        return regex.findall(r"(<[Ll]ora:.*:???>)", column)
 
 def reurls(column):
     r = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
@@ -248,6 +251,32 @@ def normurl(column):
 
         return url
 
+
+# Detect language and probability
+@functools.lru_cache
+def ld(column):
+    if column and len(column) >= 5:
+        confidence_values = detector.compute_language_confidence_values(column)
+        return (confidence_values[0].language.iso_code_639_1.name, confidence_values[0].value)
+    return ""
+
+
+@functools.lru_cache
+def translate(column):
+    if column and len(column) >= 10:
+        return str(translator.translate_text(column, target_lang="EN-US"))
+    return ""
+
+# read in stubs.txt from tmp. If the stub matches the first part of string passed in as column followed by a capital letter, return True.
+
+def stubs(column):
+    if column:
+        with open("/tmp/stubs.txt") as f:
+            stubs = f.read().splitlines()
+            for stub in stubs:
+                if column.startswith(stub) and column[len(stub)].isupper():
+                    return True
+    return False
 
 # Sloppy ngram filter
 def grams(column, lang, n):
@@ -292,22 +321,6 @@ def jpgrams(column):
     if column:
         s = [word.surface for word in tagger(column)]
         return s
-
-
-# Detect language and probability
-@functools.lru_cache
-def ld(column):
-    if column and len(column) >= 5:
-        confidence_values = detector.compute_language_confidence_values(column)
-        return (confidence_values[0][0].iso_code_639_1.name, confidence_values[0][1])
-    return ""
-
-
-@functools.lru_cache
-def translate(column):
-    if column and len(column) >= 10:
-        return str(translator.translate_text(column, target_lang="EN-US"))
-    return ""
 
 
 # vim: syntax=python
