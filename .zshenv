@@ -22,6 +22,8 @@ export MANPATH=/usr/man:/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/
 
 path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /opt/homebrew/bin $X11HOME/bin $HOME/go/bin /usr/local/texlive/2022/bin/universal-darwin ~/bin /usr/local/libexec/git-core ~/.cabal/bin ~/.cargo/bin ~/.local/bin /opt/homebrew/opt/llvm/bin)
 
+export SVDIR=/var/service
+
 export GOPATH=$HOME/go
 export ANDROID_HOME=~/Library/Android/sdk
 export ANDROID_SDK_ROOT=$ANDROID_HOME
