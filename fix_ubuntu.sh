@@ -5,4 +5,6 @@ update-alternatives --set /usr/bin/vim
 
 # pkgs
 apt-get install zsh tmux mosh fzf ripgrep mutt htop mtr runit curl w3m \
-    xcape autocutsel cmus
+    rust websocat zstd git build-essential
+
+cargo install fd-find duf dust bottom pv
