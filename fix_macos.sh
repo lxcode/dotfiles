@@ -16,11 +16,11 @@ defaults write com.apple.Finder ShowPathbar -bool true
 defaults write com.apple.Finder _FXShowPosixPathInTitle -bool true
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
-# Don't ask stupid questions
+# Don't ask questions
 defaults write com.apple.Finder WarnOnEmptyTrash -bool false
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
-# Don't do the stupid workspace reordering thing
+# Don't do the workspace reordering thing
 defaults write com.apple.dock mru-spaces -bool false
 
 # Disable the desktop
@@ -85,6 +85,10 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # Don't prompt to use a disk for Time Machine
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Faster refresh and CPU graph for activity monitor
+defaults write com.apple.ActivityMonitor "IconType" -int "6"
+defaults write com.apple.ActivityMonitor "UpdatePeriod" -int "2"
 
 # Don't nag about Safari
 defaults write com.apple.coreservices.uiagent CSUIHasSafariBeenLaunched -bool YES
@@ -161,6 +165,9 @@ defaults write com.apple.spotlight orderedItems -array \
     '{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
     '{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
 
+# Actually just disable Spotlight
+sudo mdutil -ai off
+
 # Disable Time Machine icon
 for domain in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*; do
     defaults write "${domain}" dontAutoLoad -array \
@@ -174,7 +181,7 @@ sudo chflags nohidden /tmp
 # Kill parentalcontrolsd
 sudo rm -rf "/Library/Application Support/Apple/ParentalControls"
 
-# Disable horrible power-sucking nonsense
+# Disable power-sucking nonsense
 launchctl disable user/$UID/com.apple.photoanalysisd
 
 # Disable Power Nap
@@ -223,29 +230,33 @@ brew install task tmux w3m bvi runit mutt nvi nmap par \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
     gawk cmusfm black dust skim gotop mitmproxy duf dmenu-mac \
-    svn bluesnooze
+    bluesnooze bottom sleepwatcher tor gnuplot jq gron helix \
+    nvi rsync vis
+
 
 brew install saulpw/vd/visidata
+brew install pirj/noclamshell/noclamshell
 
-pip3 install peewee requests pip-review nltk darker
 
 # Services
 brew services start vdirsyncer
 brew services start isync
-brew services start bitlbee
+brew services start black
+brew services start noclamshell
+brew services start tor
 
 # Install casks
 read -p "Preparing to install casks"
 brew install homebrew/cask-cask
 brew tap buo/cask-upgrade
 brew tap homebrew/cask-fonts
-brew install font-inconsolata font-source-code-pro kitty rectangle karabiner-elements
+brew install font-inconsolata font-source-code-pro font-ibm-plex kitty rectangle karabiner-elements vlc signal whatsapp
 
 task
 /usr/local/opt/fzf/install
 xcode-select --install
 
 read -p "Preparing to install language servers"
-brew install node yarn python-lsp-server
+brew install node yarn python-lsp-server bash-language-server texlab
 yarn global add javascript-typescript-langserver
 GO111MODULE=on go get golang.org/x/tools/gopls@latest
