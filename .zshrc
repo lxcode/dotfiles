@@ -187,7 +187,8 @@ bindkey -M menuselect '^l' vi-forward-char
 bindkey -M menuselect '^j' vi-down-line-or-history
 
 ### Source things
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 gcppath="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 gcpcomp="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"

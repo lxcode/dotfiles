@@ -4,6 +4,7 @@ do
 	if [ -x $VI ]; then
 		export EDITOR=$VI
 		export VISUAL=$VI
+		export SUDO_EDITOR=$VI
 		break
 	fi
 done
