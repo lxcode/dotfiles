@@ -185,7 +185,7 @@ sudo rm -rf "/Library/Application Support/Apple/ParentalControls"
 launchctl disable user/$UID/com.apple.photoanalysisd
 
 # Disable Power Nap
-pmset -a powernap 0
+sudo pmset -a powernap 0
 
 # Link to the airport command
 sudo mkdir -p /usr/local/bin
@@ -208,8 +208,6 @@ do
     ln -s ~/git/dotfiles/$file ~/$file
 done
 
-chsh
-
 mkdir ~/.w3m
 ln -s ~/git/dotfiles/w3m-config ~/.w3m/config
 
@@ -225,14 +223,15 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 brew doctor
 brew install task tmux w3m bvi runit mutt nvi nmap par \
-    python3 weechat youtube-dl bbe zsh vdirsyncer khal \
-    fzf mosh tree ripgrep fd sd mtr cmus notmuch isync \
+    python3 weechat yt-dlp bbe zsh vdirsyncer khal \
+    fzf mosh tree ripgrep fd sd mtr notmuch isync \
     bitlbee khard go pass rclone vim magic-wormhole ctags \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
-    gawk cmusfm black dust skim gotop mitmproxy duf dmenu-mac \
+    gawk black dust skim gotop mitmproxy duf dmenu-mac \
     bluesnooze bottom sleepwatcher tor gnuplot jq gron helix \
     nvi rsync vis
 
+chsh
 
 brew install saulpw/vd/visidata
 brew install pirj/noclamshell/noclamshell
@@ -249,11 +248,9 @@ brew services start tor
 read -p "Preparing to install casks"
 brew install homebrew/cask-cask
 brew tap buo/cask-upgrade
-brew tap homebrew/cask-fonts
 brew install font-inconsolata font-source-code-pro font-ibm-plex kitty rectangle karabiner-elements vlc signal whatsapp
 
 task
-/usr/local/opt/fzf/install
 xcode-select --install
 
 read -p "Preparing to install language servers"
