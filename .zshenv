@@ -21,11 +21,11 @@ export LC_CTYPE=en_US.UTF-8
 export LESSHISTFILE="-"
 export MANPATH=/usr/man:/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/lang/man:/usr/pkg/man
 
-path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /opt/homebrew/bin $X11HOME/bin $HOME/go/bin /usr/local/texlive/2022/bin/universal-darwin ~/bin /usr/local/libexec/git-core ~/.cabal/bin ~/.cargo/bin ~/.local/bin /opt/homebrew/opt/llvm/bin)
+path=( /usr/bin /bin /usr/sbin /sbin /usr/local/bin /usr/local/sbin /opt/homebrew/bin $X11HOME/bin $HOME/go/bin /usr/local/texlive/2024/bin/* ~/bin /usr/local/libexec/git-core ~/.cabal/bin ~/.cargo/bin ~/.local/bin /opt/homebrew/opt/llvm/bin)
 
 export SVDIR=/var/service
 
-export GOPATH=$HOME/go
+export GOPATH=$HOME
 export ANDROID_HOME=~/Library/Android/sdk
 export ANDROID_SDK_ROOT=$ANDROID_HOME
 export PATH=$PATH:$ANDROID_HOME/platform-tools
