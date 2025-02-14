@@ -172,6 +172,7 @@ Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 Plug 'itchyny/lightline.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'justinmk/vim-sneak'
