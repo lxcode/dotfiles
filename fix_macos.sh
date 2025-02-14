@@ -229,7 +229,7 @@ brew install task tmux w3m bvi runit mutt nvi nmap par \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
     gawk black dust skim gotop mitmproxy duf dmenu-mac \
     bluesnooze bottom sleepwatcher tor gnuplot jq gron helix \
-    nvi rsync vis
+    nvi rsync vis translate-shell
 
 chsh
 
