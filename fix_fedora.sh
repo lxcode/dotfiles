@@ -7,7 +7,7 @@ sudo dnf -y remove nano-default-editor
 sudo dnf install zsh tmux mosh fzf ripgrep mutt mtr curl w3m \
     rust git fd-find khal khard vdirsyncer isync notmuch \
     glibc-static bat helix vis vim keyd ibm-plex-sans-fonts \
-    adobe-source-code-pro-fonts
+    adobe-source-code-pro-fonts translate-shell
 
 cargo install duf dust bottom pv
 pip3 install --user visidata tldextract emoji urlexpander fugashi deepl geopy snownlp lingua-language-detector
