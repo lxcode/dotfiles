@@ -123,7 +123,6 @@ set incsearch               " search incrementally
 set hlsearch                " show search matches
 set showmatch               " show the matching terminating bracket
 set sidescroll=1            " soft wrap long lines
-set lazyredraw ttyfast      " go fast
 set errorfile=/tmp/errors.vim
 set foldlevelstart=0        " the default level of fold nesting on startup
 set autoread                " Disable warning about file change to writable
@@ -162,6 +161,7 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ap/vim-buftabline'
 Plug 'christianrondeau/vim-base64'
 Plug 'darfink/vim-plist'
+Plug 'DanBradbury/copilot-chat.vim'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'godlygeek/tabular'
@@ -208,7 +208,13 @@ let g:black_use_virtualenv = 0
 " }}}
 
 " tagbar {{{
-let g:tagbar_ctags_bin="/opt/homebrew/bin/ctags"
+if executable('/opt/homebrew/bin/ctags')
+    let g:tagbar_ctags_bin='/opt/homebrew/bin/ctags'
+elseif executable('ctags')
+    let g:tagbar_ctags_bin='ctags'
+else
+    let g:tagbar_ctags_bin=''
+endif
 " }}}
 
 " vim-qf {{{
@@ -314,7 +320,13 @@ nmap <Leader>t :Tags<CR>
 nmap <Leader>b :BTags<CR>
 nnoremap <localleader>lt :call vimtex#fzf#run()<cr>
 
-let g:fzf_tags_command = '/opt/homebrew/bin/ctags -R'
+if executable('/opt/homebrew/bin/ctags')
+    let g:fzf_tags_command = '/opt/homebrew/bin/ctags -R'
+elseif executable('ctags')
+    let g:fzf_tags_command = 'ctags -R'
+else
+    let g:fzf_tags_command = ''
+endif
 
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
