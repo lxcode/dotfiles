@@ -103,7 +103,7 @@ set autoindent
 set breakindent briopt+=list:2 " Visually indent wrapped lines in bullet lists etc
 set shiftround              " Round to the nearest shiftwidth when shifting
 set linebreak               " When soft-wrapping long lines, break at a word
-set grepprg=grep\ -R\ --exclude=\"*.aux\"\ --exclude=\"tags\"\ --exclude=\"*scope.out\"\ --color=always\ -nIH\ $*
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 set cpoptions=BFt
 set completeopt=menuone,longest
 autocmd Filetype *
@@ -169,6 +169,7 @@ Plug 'goerz/jupytext.vim'
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 "Plug 'hrsh7th/vim-vsnip'
 "Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'ahalbert/vim-gbq-syntax'
 Plug 'itchyny/lightline.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
@@ -391,6 +392,7 @@ augroup filetypes
     au BufEnter *.docx silent  %!pandoc --columns=78 -f docx -t markdown "%"
     au BufWinEnter *.applescript set filetype=applescript
     au BufWinEnter *.nmap, set syntax=nmap
+    au BufWinEnter *.sqlx, set syntax=sql
     au BufWinEnter *.jsonl, set filetype=json | hi Error none
     au BufWinEnter *.cki,*.vdj set filetype=json number
     au BufWinEnter *.ics set filetype=icalendar
@@ -431,38 +433,9 @@ augroup quickfix
     au FileType qf set nospell
     au FileType qf, nnoremap <silent> <buffer> <right> :cnew<CR>
     au FileType qf, nnoremap <silent> <buffer> <left> :col<CR>
-    au BufReadPost quickfix call GrepColors()
-    au BufWinEnter quickfix call GrepColors()
-    au BufWinEnter qf:list call GrepColors()
 augroup end
 
 " }}}
-
-" I use this to highlight the match from grep, but keep quickfix syntax
-" highlighting intact. Detects Linux due to the different escape sequences of
-" GNU grep.
-command -bar GrepColors call GrepColors()
-function GrepColors()
-    setlocal conceallevel=3
-    setlocal cocu=nv
-
-    if system('uname')=~'Linux'
-        syn region ansiRed start="\e\[01;31m"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
-        syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m"
-        syn match ansiStop		conceal "\e\[m"
-   elseif system('uname')=~'FreeBSD'
-       syn region ansiRed start="\e\[01;31m"me=e-2 end="\e\[00m"me=e-5 contains=ansiConceal
-       syn match ansiConceal contained conceal    "\e\[\(\d*;\)*\d*m"
-       syn match ansiStop        conceal "\e\[00m\e\[K"
-    else
-        syn region ansiRed start="\e\[01;31m\e\[K"me=e-2 end="\e\[m"me=e-3 contains=ansiConceal
-        syn match ansiConceal contained conceal	"\e\[\(\d*;\)*\d*m\e\[K"
-        syn match ansiStop		conceal "\e\[m\e\[K"
-    endif
-
-    hi ansiRed    ctermfg=197   guifg=#FF005F  cterm=none         gui=none
-    hi! link ansiStop NONE
-endfunction
 
 if filereadable(glob("~/.vimrc-local"))
     source ~/.vimrc-local
