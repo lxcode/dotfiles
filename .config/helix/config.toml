@@ -1,6 +1,7 @@
 theme = "catppuccin_mocha"
 
 [editor]
+evil = true
 cursorline = true
 bufferline = "multiple"
 soft-wrap.enable = true
@@ -8,7 +9,7 @@ color-modes = true
 auto-pairs = false
 true-color = true
 line-number = "relative"
-persist-old-files = true
+#persist-old-files = true
 
 [editor.statusline]
 left = ["mode", "spinner", "diagnostics", "version-control"]
@@ -27,39 +28,39 @@ C-h = "shrink_selection"
 C-l = "expand_selection"
 C-k = "select_prev_sibling"
 C-j = "select_next_sibling"
-# I match brackets a lot more than I select the whole file
-"%" = "match_brackets"
+## I match brackets a lot more than I select the whole file
+#"%" = "match_brackets"
 esc = ["collapse_selection", "keep_primary_selection"]
 C-r = "redo"
 left = ":buffer-previous"
 right = ":buffer-next"
 "C-]" = "goto_definition"
 Z = { Z = ":wq" }
-z = { z = ":q!" }
+#z = { z = ":q!" }
 "{" = ["goto_prev_paragraph"]
 "}" = ["goto_next_paragraph"]
-0 = "goto_line_start"
-"$" = "goto_line_end"
-G = "goto_file_end"
+#0 = "goto_line_start"
+#"$" = "goto_line_end"
+#G = "goto_file_end"
 V = ["select_mode", "extend_to_line_bounds"]
-D = ["extend_to_line_end", "delete_selection"]
+#D = ["extend_to_line_end", "delete_selection"]
 # This will be future default behavior
 "*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
 
 # Using the alt key is ergonomically awful, use control instead
-"C-." = ["repeat_last_motion"]
-"C-d" = ["delete_selection_noyank"]
-"C-;" = ["flip_selections"]
+#"C-." = ["repeat_last_motion"]
+#"C-d" = ["delete_selection_noyank"]
+#"C-;" = ["flip_selections"]
 
 [keys.normal.g]
-v = "repeat_last_motion"
+#v = "repeat_last_motion"
 ";" = "goto_last_modification"
 
 [keys.select]
-0 = "goto_line_start"
-"$" = "goto_line_end"
-G = "goto_file_end"
-i = "select_textobject_inner"
+#0 = "goto_line_start"
+#"$" = "goto_line_end"
+#G = "goto_file_end"
+#i = "select_textobject_inner"
 a = "select_textobject_around"
 "=" = [":reflow", "open_below", "normal_mode"]
 esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]

@@ -37,3 +37,7 @@ language-servers = [ "ltex-ls" ]
 file-types = ["md", "txt"]
 scope = "source.markdown"
 roots = []
+
+[[language]]
+name = "xml"
+file-types = ["xml", "gpx"]
