@@ -40,4 +40,4 @@ roots = []
 
 [[language]]
 name = "xml"
-file-types = ["xml", "gpx"]
+file-types = ["xml", "gpx", "kml"]
