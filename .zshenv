@@ -22,13 +22,12 @@ export LESSHISTFILE="-"
 export MANPATH=/usr/man:/usr/share/man:/usr/local/man:/usr/local/share/man:/usr/lang/man:/usr/pkg/man
 
 # PATH configuration
-path=( 
+path=(
     /usr/bin /bin /usr/sbin /sbin
     /usr/local/bin /usr/local/sbin
     /opt/homebrew/bin /opt/homebrew/opt/llvm/bin
     $X11HOME/bin
     $HOME/go/bin
-    /usr/local/texlive/20*/bin/*
     ~/bin
     /usr/local/libexec/git-core
     ~/.cabal/bin
@@ -40,6 +39,12 @@ path=(
     ~/Library/Android/sdk/cmdline-tools/latest/bin
     ~/Library/Android/sdk/emulator
 )
+
+# Add texlive to PATH if it exists (use the latest version)
+texlive_dirs=(/usr/local/texlive/20*/bin/*(N))
+if [[ ${#texlive_dirs[@]} -gt 0 ]]; then
+    path+=(${texlive_dirs[-1]})  # Add the last (most recent) matching directory
+fi
 
 # For runit
 export SVDIR=/var/service
