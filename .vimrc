@@ -161,7 +161,6 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ap/vim-buftabline'
 Plug 'christianrondeau/vim-base64'
 Plug 'darfink/vim-plist'
-Plug 'DanBradbury/copilot-chat.vim'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'godlygeek/tabular'
