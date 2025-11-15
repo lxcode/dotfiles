@@ -38,7 +38,6 @@ alias pd=popd
 alias lg=lazygit
 alias yt='cd /tmp; youtube-dl `pbpaste`'
 alias h=history
-alias grep=rg
 alias rmsvn="find . -type d -name '\.svn' |xargs rm -rf"
 alias rmgit="find . -type d -name '\.git' |xargs rm -rf"
 alias mic='sudo make install clean'
@@ -51,7 +50,8 @@ alias k="khal"
 alias t="task"
 alias th="task +home"
 alias tw="task +work"
-alias wtr="curl -s 'https://wttr.in/Lisbon?format=v2&m&F'|sed -e 's/☀️  /☀️ /g' -e 's/☀️ │/☀️│/g' -e 's/☁️  /☁️ /g'"
+alias wtr="curl -s 'https://wttr.in/Lisbon?format=v2d&m&F'"
+#"|sed -e 's/☀️  /☀️ /g' -e 's/☀️ │/☀️│/g' -e 's/☁️  /☁️ /g'"
 alias ws="python3 -m http.server"
 alias lsd='ls -ld *(-/DN)'
 alias vim="$EDITOR"
@@ -201,3 +201,4 @@ TWILIO_AC_ZSH_SETUP_PATH=/Users/det/.twilio-cli/autocomplete/zsh_setup && test -
 # Prompt
 autoload -U promptinit; promptinit
 prompt pure
+
