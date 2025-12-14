@@ -107,7 +107,7 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Disable candy colors
-defaults write -g AppleAquaColorVariant -int 6;
+defaults write -g AppleAquaColorVariant -int 6
 
 # 24 hour clock, show date
 defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM HH:mm"
@@ -229,13 +229,15 @@ brew install task tmux w3m bvi runit mutt nvi nmap par \
     automake libtool pkg-config json-glib gnupg pinentry-mac \
     gawk black dust skim gotop mitmproxy duf dmenu-mac \
     bluesnooze bottom sleepwatcher tor gnuplot jq gron helix \
-    nvi rsync vis translate-shell xsv
+    nvi rsync vis translate-shell xsv firefox font-inconsolata \
+    font-source-code-pro font-ibm-plex kitty rectangle karabiner-elements \
+    vlc signal stats mac-mouse-fix visidata mapscii speedtest-cli
 
 chsh
 
-brew install saulpw/vd/visidata
+brew tap deskflow/tap
+brew install deskflow
 brew install pirj/noclamshell/noclamshell
-
 
 # Services
 brew services start vdirsyncer
@@ -243,12 +245,6 @@ brew services start isync
 brew services start black
 brew services start noclamshell
 brew services start tor
-
-# Install casks
-read -p "Preparing to install casks"
-brew install homebrew/cask-cask
-brew tap buo/cask-upgrade
-brew install font-inconsolata font-source-code-pro font-ibm-plex kitty rectangle karabiner-elements vlc signal whatsapp
 
 task
 xcode-select --install
