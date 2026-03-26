@@ -44,6 +44,7 @@ Z = { Z = ":wq" }
 #G = "goto_file_end"
 V = ["select_mode", "extend_to_line_bounds"]
 #D = ["extend_to_line_end", "delete_selection"]
+D = ["evil_characterwise_select_mode", "goto_line_end", "evil_delete"]
 # This will be future default behavior
 "*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
 
@@ -64,6 +65,7 @@ V = ["select_mode", "extend_to_line_bounds"]
 a = "select_textobject_around"
 "=" = [":reflow", "open_below", "normal_mode"]
 esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
+D = "evil_delete"
 
 [keys.insert]
 esc = ["collapse_selection", "normal_mode"]
