@@ -53,3 +53,4 @@ export SVDIR=/var/service
 export GOPATH=$HOME
 export ANDROID_HOME=~/Library/Android/sdk
 export ANDROID_SDK_ROOT=$ANDROID_HOME
+. "$HOME/.cargo/env"
