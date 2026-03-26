@@ -27,6 +27,7 @@ path=(
     /usr/local/bin /usr/local/sbin
     /opt/homebrew/bin /opt/homebrew/opt/llvm/bin
     $X11HOME/bin
+    /usr/local/go/bin
     $HOME/go/bin
     ~/bin
     /usr/local/libexec/git-core

@@ -202,3 +202,6 @@ TWILIO_AC_ZSH_SETUP_PATH=/Users/det/.twilio-cli/autocomplete/zsh_setup && test -
 autoload -U promptinit; promptinit
 prompt pure
 
+
+# opencode
+export PATH=/home/det/.opencode/bin:$PATH
