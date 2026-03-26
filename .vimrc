@@ -188,6 +188,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
 Plug 'yegappan/lsp'
+Plug 'larsks/vim-64tass'
 
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 
@@ -390,6 +391,7 @@ augroup filetypes
     au BufEnter *.docx silent set modifiable
     au BufEnter *.docx silent  %!pandoc --columns=78 -f docx -t markdown "%"
     au BufWinEnter *.applescript set filetype=applescript
+    au BufWinEnter *.tass set filetype=64tass
     au BufWinEnter *.nmap, set syntax=nmap
     au BufWinEnter *.sqlx, set syntax=sql
     au BufWinEnter *.jsonl, set filetype=json | hi Error none
