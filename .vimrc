@@ -164,29 +164,20 @@ Plug 'darfink/vim-plist'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'fidian/hexmode', { 'on': 'Hexmode' }
 Plug 'godlygeek/tabular'
-Plug 'goerz/jupytext.vim'
-Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
-"Plug 'hrsh7th/vim-vsnip'
-"Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'ahalbert/vim-gbq-syntax'
 Plug 'itchyny/lightline.vim'
 Plug 'jamessan/vim-gnupg'
-Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'justinmk/vim-sneak'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'md-img-paste-devs/md-img-paste.vim'
 Plug 'preservim/tagbar', { 'on': 'TagbarToggle'}
-Plug 'psf/black', { 'for': 'python' }
-"Plug 'rafamadriz/friendly-snippets'
 Plug 'romainl/vim-qf'
 "Plug 'tomtom/quickfixsigns_vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
-Plug 'will133/vim-dirdiff', { 'on': 'DirDiff' }
 Plug 'yegappan/lsp'
 
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
@@ -202,10 +193,6 @@ hi clear SpellLocal
 hi clear SpellBad
 hi SpellLocal ctermbg=NONE cterm=undercurl guisp=blue ctermul=blue
 hi SpellBad ctermbg=NONE cterm=undercurl guisp=red ctermul=red
-
-" black {{{
-let g:black_use_virtualenv = 0
-" }}}
 
 " tagbar {{{
 if executable('/opt/homebrew/bin/ctags')
