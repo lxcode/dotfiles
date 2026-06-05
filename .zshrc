@@ -50,7 +50,7 @@ alias k="khal"
 alias t="task"
 alias th="task +home"
 alias tw="task +work"
-alias wtr="curl -s 'https://wttr.in/Lisbon?format=v2d&m&F'"
+alias wtr="curl -s 'https://wttr.in/Lisbon?format=v2&m&F'"
 #"|sed -e 's/☀️  /☀️ /g' -e 's/☀️ │/☀️│/g' -e 's/☁️  /☁️ /g'"
 alias ws="python3 -m http.server"
 alias lsd='ls -ld *(-/DN)'
@@ -199,3 +199,7 @@ prompt pure
 
 # gcloud shell completion (PATH is set in ~/.zshenv)
 [ -f "$HOME/.local/share/google-cloud-sdk/completion.zsh.inc" ] && . "$HOME/.local/share/google-cloud-sdk/completion.zsh.inc"
+
+# opencode
+export PATH=$HOME/.opencode/bin:$PATH
+[ -f ~/.vibe/.env ] && { set -a; source ~/.vibe/.env; set +a; }

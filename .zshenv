@@ -27,6 +27,7 @@ path=(
     /usr/local/bin /usr/local/sbin
     /opt/homebrew/bin /opt/homebrew/opt/llvm/bin
     $X11HOME/bin
+    /usr/local/go/bin
     $HOME/go/bin
     ~/bin
     /usr/local/libexec/git-core
@@ -54,7 +55,6 @@ export SVDIR=/var/service
 export GOPATH=$HOME
 export ANDROID_HOME=~/Library/Android/sdk
 export ANDROID_SDK_ROOT=$ANDROID_HOME
-. "$HOME/.cargo/env"
 
 # sigh
 DISABLE_TELEMETRY=YES

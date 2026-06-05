@@ -2358,6 +2358,22 @@ function! s:system_job(cmd) abort
   return result
 endfunction
 
+function! s:system_job(cmd) abort
+  let tmp = tempname()
+  let job = job_start(['/bin/sh', '-c', a:cmd], {
+  \ 'out_io': 'file',
+  \ 'out_name': tmp,
+  \ 'err_io': 'out',
+  \})
+  while job_status(job) ==# 'run'
+    sleep 1m
+  endwhile
+  let s:shell_error = job_info(job).exitval
+  let result = filereadable(tmp) ? join(readfile(tmp, 'b'), "\n") : ''
+  silent! call delete(tmp)
+  return result
+endfunction
+
 function! s:system(cmd, ...)
   let batchfile = ''
   try
