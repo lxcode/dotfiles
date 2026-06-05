@@ -50,7 +50,7 @@ alias k="khal"
 alias t="task"
 alias th="task +home"
 alias tw="task +work"
-alias wtr="curl -s 'https://wttr.in/Lisbon?format=v2d&m&F'"
+alias wtr="curl -s 'https://wttr.in/Lisbon?format=v2&m&F'"
 #"|sed -e 's/☀️  /☀️ /g' -e 's/☀️ │/☀️│/g' -e 's/☁️  /☁️ /g'"
 alias ws="python3 -m http.server"
 alias lsd='ls -ld *(-/DN)'
@@ -205,3 +205,4 @@ prompt pure
 
 # opencode
 export PATH=/home/det/.opencode/bin:$PATH
+set -a; source ~/.vibe/.env; set +a
