@@ -190,15 +190,12 @@ bindkey -M menuselect '^j' vi-down-line-or-history
 source <(fzf --zsh)
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-gcppath="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-gcpcomp="/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-
-[ -f $gcppath ] && source $gcppath
-[ -f $gcpcomp ] && source $gcpcomp
-eval
 TWILIO_AC_ZSH_SETUP_PATH=/Users/det/.twilio-cli/autocomplete/zsh_setup && test -f $TWILIO_AC_ZSH_SETUP_PATH && source $TWILIO_AC_ZSH_SETUP_PATH; # twilio autocomplete setup
 
 # Prompt
 autoload -U promptinit; promptinit
 prompt pure
+#source /Users/det/.pymobiledevice3.zsh
 
+# gcloud shell completion (PATH is set in ~/.zshenv)
+[ -f "$HOME/.local/share/google-cloud-sdk/completion.zsh.inc" ] && . "$HOME/.local/share/google-cloud-sdk/completion.zsh.inc"
