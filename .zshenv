@@ -38,6 +38,7 @@ path=(
     ~/Library/Android/sdk/platform-tools
     ~/Library/Android/sdk/cmdline-tools/latest/bin
     ~/Library/Android/sdk/emulator
+    ~/.local/share/google-cloud-sdk/bin
 )
 
 # Add texlive to PATH if it exists (use the latest version)
@@ -54,3 +55,6 @@ export GOPATH=$HOME
 export ANDROID_HOME=~/Library/Android/sdk
 export ANDROID_SDK_ROOT=$ANDROID_HOME
 . "$HOME/.cargo/env"
+
+# sigh
+DISABLE_TELEMETRY=YES
