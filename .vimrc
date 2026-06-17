@@ -370,6 +370,10 @@ let g:tex_no_error = 1
 let g:tex_flavor='latex'
 " }}}
 
+" typst preview lives in its own auto-loaded files (no source needed):
+"   ~/.vim/after/ftplugin/typst.vim    -- the <localleader>l mappings
+"   ~/.vim/autoload/typst_preview.vim  -- the functions
+
 " augroups {{{
 
 augroup filetypes
