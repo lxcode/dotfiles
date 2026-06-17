@@ -42,3 +42,5 @@ Thumbs.db
 .netrwbook
 plugged
 spell
+# gcloud state: credentials, tokens, caches, rebuildable virtualenv
+/.config/gcloud/
