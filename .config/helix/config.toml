@@ -24,7 +24,7 @@ insert = "bar"
 normal = "block"
 
 [keys.normal]
-"semicolon" = "command_mode" # Not ":"
+";" = "command_mode" # Not ":"
 C-h = "shrink_selection"
 C-l = "expand_selection"
 C-k = "select_prev_sibling"
