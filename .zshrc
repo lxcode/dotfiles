@@ -35,7 +35,7 @@ typeset -U path cdpath fpath manpath
 alias j=jobs
 alias dis=disown
 alias pd=popd
-alias lg=lazygit
+alias gu=gitu
 alias yt='cd /tmp; youtube-dl `pbpaste`'
 alias h=history
 alias rmsvn="find . -type d -name '\.svn' |xargs rm -rf"
@@ -203,3 +203,7 @@ prompt pure
 # opencode
 export PATH=$HOME/.opencode/bin:$PATH
 [ -f ~/.vibe/.env ] && { set -a; source ~/.vibe/.env; set +a; }
+
+# npm global bin (typescript-language-server, etc.) on PATH when present.
+# Guarded so it is a no-op on machines with a different npm prefix (shared dotfile).
+[ -d "$HOME/.node/bin" ] && export PATH="$HOME/.node/bin:$PATH"
