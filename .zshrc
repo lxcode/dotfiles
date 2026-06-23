@@ -17,7 +17,7 @@ WATCHFMT='%n %a %l from %m at %t.'
 
 ### Options
 setopt   notify globdots pushdtohome autolist multios
-setopt   autopushd pushdsilent pushdminus extendedglob rcquotes
+setopt   autopushd pushdsilent pushdminus rcquotes
 setopt   autocd longlistjobs autoresume nocorrect nocorrectall
 setopt   histignoredups histfindnodups histignorespace
 setopt   histexpiredupsfirst inc_append_history
