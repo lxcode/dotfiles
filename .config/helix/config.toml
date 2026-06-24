@@ -1,7 +1,7 @@
 theme = "catppuccin_mocha"
 
 [editor]
-#evil = true
+evil = true
 cursorline = true
 bufferline = "multiple"
 soft-wrap.enable = true
@@ -40,10 +40,10 @@ Z = { Z = ":wq" }
 #z = { z = ":q!" }
 "{" = ["goto_prev_paragraph"]
 "}" = ["goto_next_paragraph"]
-0 = "goto_line_start"
-"$" = "goto_line_end"
+#0 = "goto_line_start"   # redundant: evil default
+#"$" = "goto_line_end"   # redundant: evil default
 G = "goto_file_end"
-V = ["select_mode", "extend_to_line_bounds"]
+#V = ["select_mode", "extend_to_line_bounds"]   # overrides evil's linewise V; without evil's V, V->G extends charwise (only grabs the first char of the last line)
 D = ["extend_to_line_end", "delete_selection"]
 #D = ["evil_characterwise_select_mode", "goto_line_end", "evil_delete"]
 # This will be future default behavior
@@ -59,11 +59,11 @@ D = ["extend_to_line_end", "delete_selection"]
 ";" = "goto_last_modification"
 
 [keys.select]
-#0 = "goto_line_start"
-"$" = "goto_line_end"
-G = "goto_file_end"
-i = "select_textobject_inner"
-a = "select_textobject_around"
+#0 = "goto_line_start"   # redundant: evil default
+#"$" = "goto_line_end"   # redundant: evil default
+#G = "goto_file_end"     # broke V->G (goto_file_end only moves, never extends); evil default extends to last line
+#i = "select_textobject_inner"    # redundant: evil default
+#a = "select_textobject_around"   # redundant: evil default
 "=" = [":reflow", "open_below", "normal_mode"]
 esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
 #D = "evil_delete"
