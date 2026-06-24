@@ -1,5 +1,5 @@
 # Editor selection
-for VI in /usr/bin/hx /usr/local/bin/vim /opt/homebrew/bin/vim /usr/bin/vim /opt/homebrew/bin/vise /usr/local/bin/nvi /usr/bin/vi; do
+for VI in /usr/bin/hx /usr/local/bin/hx /usr/local/bin/vim /opt/homebrew/bin/vim /usr/bin/vim /opt/homebrew/bin/vise /usr/local/bin/nvi /usr/bin/vi; do
 	if [ -x $VI ]; then
 		export EDITOR=$VI
 		export VISUAL=$VI
