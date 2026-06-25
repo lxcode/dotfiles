@@ -31,7 +31,7 @@ C-k = "select_prev_sibling"
 C-j = "select_next_sibling"
 ## I match brackets a lot more than I select the whole file
 "%" = "match_brackets"
-esc = ["collapse_selection", "keep_primary_selection"]
+#esc = ["collapse_selection", "keep_primary_selection"]
 C-r = "redo"
 left = ":buffer-previous"
 right = ":buffer-next"
@@ -65,8 +65,8 @@ D = ["extend_to_line_end", "delete_selection"]
 #i = "select_textobject_inner"    # redundant: evil default
 #a = "select_textobject_around"   # redundant: evil default
 "=" = [":reflow", "open_below", "normal_mode"]
-esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
+#esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
 #D = "evil_delete"
 
 [keys.insert]
-esc = ["collapse_selection", "normal_mode"]
+#esc = ["collapse_selection", "normal_mode"]
