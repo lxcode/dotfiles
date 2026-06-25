@@ -31,42 +31,20 @@ C-k = "select_prev_sibling"
 C-j = "select_next_sibling"
 ## I match brackets a lot more than I select the whole file
 "%" = "match_brackets"
-#esc = ["collapse_selection", "keep_primary_selection"]
 C-r = "redo"
 left = ":buffer-previous"
 right = ":buffer-next"
 "C-]" = "goto_definition"
 Z = { Z = ":wq" }
-#z = { z = ":q!" }
 "{" = ["goto_prev_paragraph"]
 "}" = ["goto_next_paragraph"]
-#0 = "goto_line_start"   # redundant: evil default
-#"$" = "goto_line_end"   # redundant: evil default
 G = "goto_file_end"
-#V = ["select_mode", "extend_to_line_bounds"]   # overrides evil's linewise V; without evil's V, V->G extends charwise (only grabs the first char of the last line)
 D = ["extend_to_line_end", "delete_selection"]
-#D = ["evil_characterwise_select_mode", "goto_line_end", "evil_delete"]
 # This will be future default behavior
 "*" = ["move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
 
-# Using the alt key is ergonomically awful, use control instead
-#"C-." = ["repeat_last_motion"]
-#"C-d" = ["delete_selection_noyank"]
-#"C-;" = ["flip_selections"]
-
 [keys.normal.g]
-#v = "repeat_last_motion"
 ";" = "goto_last_modification"
 
 [keys.select]
-#0 = "goto_line_start"   # redundant: evil default
-#"$" = "goto_line_end"   # redundant: evil default
-#G = "goto_file_end"     # broke V->G (goto_file_end only moves, never extends); evil default extends to last line
-#i = "select_textobject_inner"    # redundant: evil default
-#a = "select_textobject_around"   # redundant: evil default
 "=" = [":reflow", "open_below", "normal_mode"]
-#esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
-#D = "evil_delete"
-
-[keys.insert]
-#esc = ["collapse_selection", "normal_mode"]
